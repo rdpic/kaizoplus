@@ -1,0 +1,61 @@
+.equ LOCALID_MOM, 1
+
+PalletTown_PlayersHouse_1F_MapScripts::
+	.byte 0
+
+PalletTown_PlayersHouse_1F_EventScript_Mom::
+	lock
+	faceplayer
+	goto_if_set FLAG_BEAT_RIVAL_IN_OAKS_LAB, PalletTown_PlayersHouse_1F_EventScript_MomHeal
+	applymovement LOCALID_MOM, Common_Movement_FaceOriginalDirection
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
+	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
+	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 1
+	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN
+	setflag FLAG_DONT_TRANSITION_MUSIC
+	setflag FLAG_SYS_B_DASH
+	giveitem_msg PalletTown_PlayersHouse_1F_Text_Potion, ITEM_POTION, 1
+	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6, 12
+	waitmovement 0
+	waitstate
+	releaseall
+	end
+
+PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale::
+	msgbox PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou
+	return
+
+PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale::
+	msgbox PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou
+	return
+
+PalletTown_PlayersHouse_1F_EventScript_MomHeal::
+	msgbox PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest
+	closemessage
+	call EventScript_OutOfCenterPartyHeal
+	msgbox PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare
+	release
+	end
+
+@ Displays special text if interacted with from side or back (which are normally inaccessible)
+PalletTown_PlayersHouse_1F_EventScript_TV::
+	lockall
+	goto_if_eq VAR_FACING, DIR_NORTH, PalletTown_PlayersHouse_1F_EventScript_TVScreen
+	msgbox PalletTown_PlayersHouse_1F_Text_OopsWrongSide
+	releaseall
+	end
+
+PalletTown_PlayersHouse_1F_EventScript_TVScreen::
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_TVScreenMale
+	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale
+	releaseall
+	end
+
+PalletTown_PlayersHouse_1F_EventScript_TVScreenMale::
+	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad
+	return
+
+PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale::
+	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad
+	return
