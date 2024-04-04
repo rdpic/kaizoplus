@@ -5082,4 +5082,108 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 256,
         .trainerOffset = 0,
     },
+
+    [NATIONAL_DEX_MONFERNO] =
+    {
+        .categoryName = _("PLAYFUL"),
+        .height = 9,
+        .weight = 220,
+        .description = gMonfernoPokedexText,
+        .unusedDescription = gMonfernoPokedexTextUnused,
+        .pokemonScale = 338,
+        .pokemonOffset = 9,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_INFERNAPE] =
+    {
+        .categoryName = _("FLAME"),
+        .height = 12,
+        .weight = 550,
+        .description = gInfernapePokedexText,
+        .unusedDescription = gInfernapePokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PIPLUP] =
+    {
+        .categoryName = _("PENGUIN"),
+        .height = 4,
+        .weight = 52,
+        .description = gPiplupPokedexText,
+        .unusedDescription = gPiplupPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PRINPLUP] =
+    {
+        .categoryName = _("PENGUIN"),
+        .height = 8,
+        .weight = 230,
+        .description = gPrinplupPokedexText,
+        .unusedDescription = gPrinplupPokedexTextUnused,
+        .pokemonScale = 366,
+        .pokemonOffset = 10,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_EMPOLEON] =
+    {
+        .categoryName = _("EMPEROR"),
+        .height = 17,
+        .weight = 845,
+        .description = gEmpoleonPokedexText,
+        .unusedDescription = gEmpoleonPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 0,
+        .trainerScale = 290,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_STARLY] =
+    {
+        .categoryName = _("STARLING"),
+        .height = 3,
+        .weight = 20,
+        .description = gStarlyPokedexText,
+        .unusedDescription = gStarlyPokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_STARAPTOR] =
+    {
+        .categoryName = _("PREDATOR"),
+        .height = 12,
+        .weight = 249,
+        .description = gStaraviaPokedexText,
+        .unusedDescription = gStaraviaPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_BIDOOF] =
+    {
+        .categoryName = _("PLUMP MOUSE"),
+        .height = 5,
+        .weight = 200,
+        .description = gStaraviaPokedexText,
+        .unusedDescription = gStaraviaPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 16,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
 };

@@ -2750,3 +2750,75 @@ const u8 gChimcharPokedexText[] = _(
     "tails to prevent fires.");
 
 const u8 gChimcharPokedexTextUnused[] = _("");
+
+const u8 gMonfernoPokedexText[] = _(
+    "It carefully controls the intensity of\n"
+    "the flame on its tail, so as to keep its\n"
+    "foes at an adequate distance.\n"
+    "Its fiery tail is but one weapon.");
+
+const u8 gMonfernoPokedexTextUnused[] = _("");
+
+const u8 gInfernapePokedexText[] = _(
+    "Its crown of fire is indicative of its\n"
+    "fiery nature. It uses a special kind of\n"
+    "martial arts involving all of its limbs to\n"
+    "take on any opponent.");
+
+const u8 gInfernapePokedexTextUnused[] = _("");
+
+const u8 gPiplupPokedexText[] = _(
+    "A poor walker, it often falls down. However,\n"
+            "its strong pride makes it puff up its chest\n"
+            "without a care. It's difficult to bond with\n"
+            "since it won't listen to its Trainer.");
+
+const u8 gPiplupPokedexTextUnused[] = _("");
+
+const u8 gPrinplupPokedexText[] = _(
+    "Because every Prinplup considers itself\n"
+            "to be the most important, they can never\n"
+            "form a group. It searches for prey in\n"
+            "icy seas.");
+
+const u8 gPrinplupPokedexTextUnused[] = _("");
+
+const u8 gEmpoleonPokedexText[] = _(
+    "The three horns that extend from its beak\n"
+            "attest to its power. It avoids unnecessary\n"
+            "disputes, but it will decimate anything\n"
+            "that threatens its pride.");
+
+const u8 gEmpoleonPokedexTextUnused[] = _("");
+
+const u8 gStarlyPokedexText[] = _(
+    "They flock around mountains and fields,\n"
+            "chasing after bug Pokémon. However,\n"
+            "they bicker if the group grows too big.\n"
+            "Their singing is noisy and annoying.");
+
+const u8 gStarlyPokedexTextUnused[] = _("");
+
+const u8 gStaraviaPokedexText[] = _(
+    "Recognizing their own weakness, they\n"
+            "maintain huge flocks. Fierce scuffles\n"
+            "break out between various flocks.\n"
+            "When alone, a Staravia cries noisily.");
+
+const u8 gStaraviaPokedexTextUnused[] = _("");
+
+const u8 gStaraptorPokedexText[] = _(
+    "When Staravia evolve into Staraptor,\n"
+            "they leave the flock to live alone. It has\n"
+            "a savage nature. It will courageously\n"
+            "challenge foes that are much larger.");
+
+const u8 gStaraptorPokedexTextUnused[] = _("");
+
+const u8 gBidoofPokedexText[] = _(
+    "A comparison revealed that Bidoof's front\n"
+            "teeth grow at the same rate as Rattata's.\n"
+            "It constantly gnaws on logs and rocks to\n"
+            "whittle down its front teeth.");
+
+const u8 gBidoofPokedexTextUnused[] = _("");
