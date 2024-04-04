@@ -97,3 +97,15 @@ Route24_Movement_RocketWalkBackToPos::
 Route24_Movement_WalkDown::
 	walk_down
 	step_end
+
+Route24_EventScript_NurseJoy::
+	lock
+	faceplayer
+	special HealPlayerParty
+	msgbox Text_RestoredPkmnToFullHealth
+	closemessage
+	nurse_joy_bow
+	delay_4
+	step_end
+	release
+	end

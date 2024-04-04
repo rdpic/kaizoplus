@@ -30,3 +30,15 @@ Route20_EventScript_ResetSeafoamBouldersForB4F::
 Route20_EventScript_SeafoamIslandsSign::
 	msgbox Route20_Text_SeafoamIslands, MSGBOX_SIGN
 	end
+
+Route20_EventScript_NurseJoy::
+	lock
+	faceplayer
+	special HealPlayerParty
+	msgbox Text_RestoredPkmnToFullHealth
+	closemessage
+	nurse_joy_bow
+	delay_4
+	step_end
+	release
+	end

@@ -80,6 +80,7 @@ Route16_EventScript_NurseJoy::
 	faceplayer
 	special HealPlayerParty
 	msgbox Text_RestoredPkmnToFullHealth
+	closemessage
 	nurse_joy_bow
 	delay_4
 	step_end

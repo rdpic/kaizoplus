@@ -234,3 +234,15 @@ Route22_Movement_LateRivalExit::
 Route22_EventScript_LeagueGateSign::
 	msgbox Route22_Text_LeagueGateSign, MSGBOX_SIGN
 	end
+
+Route22_EventScript_NurseJoy::
+	lock
+	faceplayer
+	special HealPlayerParty
+	msgbox Text_RestoredPkmnToFullHealth
+	closemessage
+	nurse_joy_bow
+	delay_4
+	step_end
+	release
+	end

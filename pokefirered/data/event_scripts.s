@@ -897,8 +897,7 @@ Text_WeHopeToSeeYouAgain::
 	.string "We hope to see you again!$"
 
 Text_RestoredPkmnToFullHealth::
-	.string "Thank you for waiting.\n"
-	.string "We've restored your POKéMON to\l"
+	.string "I've restored your POKéMON to\n"
 	.string "full health.$"
 
 	.include "data/text/surf.inc"
