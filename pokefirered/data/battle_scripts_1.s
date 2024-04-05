@@ -4015,12 +4015,22 @@ BattleScript_DoCastformChangeAnim::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_AbilityPopUpTarget:
+	copybyte gBattlerAbility, gBattlerTarget
+BattleScript_AbilityPopUp:
+	showabilitypopup BS_ABILITY_BATTLER
+	pause 40
+	recordlastability BS_ABILITY_BATTLER
+	sethword sABILITY_OVERWRITE, 0
+	return
+
 BattleScript_IntimidateActivatesEnd3::
 	call BattleScript_DoIntimidateActivationAnim
 	end3
 
 BattleScript_DoIntimidateActivationAnim::
 	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
 BattleScript_IntimidateActivates::
 	setbyte gBattlerTarget, 0
 	setstatchanger STAT_ATK, 1, TRUE

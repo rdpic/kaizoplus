@@ -1,3 +1,14 @@
 {
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "vector": "c",
+        "xstring": "c",
+        "xutility": "c",
+        "system_error": "c",
+        "xlocale": "c",
+        "global.h": "c",
+        "item.h": "c",
+        "abilities.h": "c",
+        "ctime": "c"
+    }
 }

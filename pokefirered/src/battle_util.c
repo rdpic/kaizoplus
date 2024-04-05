@@ -66,6 +66,9 @@ u8 GetBattlerForBattleScript(u8 caseId)
     case BS_OPPONENT1:
         ret = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         break;
+    case BS_ABILITY_BATTLER:
+        ret = gBattlerAbility;
+        break;
     case BS_ATTACKER_WITH_PARTNER:
     case BS_FAINTED_LINK_MULTIPLE_2:
     case BS_ATTACKER_SIDE:
@@ -200,7 +203,7 @@ void MarkBattlerReceivedLinkData(u8 battlerId)
     gBattleControllerExecFlags &= ~((1 << 28) << battlerId);
 }
 
-void CancelMultiTurnMoves(u8 battler)
+const u8* CancelMultiTurnMoves(u32 battler)
 {
     gBattleMons[battler].status2 &= ~STATUS2_MULTIPLETURNS;
     gBattleMons[battler].status2 &= ~STATUS2_LOCK_CONFUSE;
@@ -2218,7 +2221,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
             for (i = 0; i < gBattlersCount; i++)
             {
                 if (gBattleMons[i].ability == ABILITY_INTIMIDATE && gStatuses3[i] & STATUS3_INTIMIDATE_POKES)
-                {
+                {   
                     gLastUsedAbility = ABILITY_INTIMIDATE;
                     gStatuses3[i] &= ~STATUS3_INTIMIDATE_POKES;
                     BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivatesEnd3);

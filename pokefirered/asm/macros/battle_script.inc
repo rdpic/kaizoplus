@@ -1378,4 +1378,15 @@
 	.macro jumpifnotbattletype flags:req, jumpptr:req
 	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm
-	
+
+	.macro showabilitypopup battler:req
+	various \battler, VARIOUS_ABILITY_POPUP
+	.endm
+
+	.macro updateabilitypopup battler:req
+	various \battler, VARIOUS_UPDATE_ABILITY_POPUP
+	.endm
+
+	.macro destroyabilitypopup
+	various BS_ABILITY_BATTLER, VARIOUS_DESTROY_ABILITY_POPUP
+	.endm

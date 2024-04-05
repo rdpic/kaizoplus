@@ -219,6 +219,7 @@ EWRAM_DATA struct MonSpritesGfx *gMonSpritesGfxPtr = NULL;
 EWRAM_DATA u16 gBattleMovePower = 0;
 EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBattlerAbility = 0;
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
@@ -2254,6 +2255,7 @@ static void BattleStartClearSetData(void)
 
     gBattlerAttacker = 0;
     gBattlerTarget = 0;
+    gBattlerAbility = 0;
     gBattleWeather = 0;
 
     dataPtr = (u8 *)&gWishFutureKnock;

@@ -8,6 +8,7 @@
 #include "battle_util.h"
 #include "battle_script_commands.h"
 #include "battle_main.h"
+#include "battle_message.h"
 #include "battle_ai_switch_items.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_util2.h"
@@ -228,7 +229,7 @@ struct SpecialStatus
     s32 specialDmg;
     u8 physicalBattlerId;
     u8 specialBattlerId;
-    u8 field12;
+    u8 switchInAbilityDone:1;
     u8 field13;
 };
 
@@ -374,12 +375,12 @@ struct BattleStruct
 {
     u8 turnEffectsTracker;
     u8 turnEffectsBattlerId;
-    u8 filler2; // unused
+    u8 activeAbilityPopUps; // as bits for each battler
+    u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][2];    // two per battler
     u8 turnCountersTracker;
     u8 wrappedMove[MAX_BATTLERS_COUNT * 2]; // Leftover from Ruby's ewram access.
     u8 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
-    u8 field_11; // unused
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[MAX_BATTLERS_COUNT];
@@ -522,6 +523,9 @@ struct BattleScripting
     u8 reshowMainState;
     u8 reshowHelperState;
     u8 levelUpHP;
+    u16 abilityPopupOverwrite;
+    u8 savedBattler;
+    bool8 fixedPopup;   // Force ability popup to stick until manually called back
 };
 
 struct BattleSpriteInfo
@@ -723,5 +727,26 @@ extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 gRandomTurnNumber;
+extern u8 gBattlerAbility;
+
+static inline u32 GetBattlerPosition(u32 battler)
+{
+    return gBattlerPositions[battler];
+}
+
+static inline u32 GetBattlerSide(u32 battler)
+{
+    return GetBattlerPosition(battler) & BIT_SIDE;
+}
+
+static inline struct Pokemon *GetSideParty(u32 side)
+{
+    return (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+}
+
+static inline struct Pokemon *GetBattlerParty(u32 battler)
+{
+    return GetSideParty(GetBattlerSide(battler));
+}
 
 #endif // GUARD_BATTLE_H
