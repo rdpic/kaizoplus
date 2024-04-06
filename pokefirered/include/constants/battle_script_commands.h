@@ -29,6 +29,7 @@
 #define sABILITY_OVERWRITE           gBattleScripting + 0x24 // abilityPopupOverwrite
 #define sSAVED_BATTLER               gBattleScripting + 0x25 // savedBattler
 #define sFIXED_ABILITY_POPUP         gBattleScripting + 0x26 // fixedPopup
+#define sSAVED_STRINID               gBattleScripting + 0x27 // savedStringId
 
 // Array entries for battle communication
 #define MULTIUSE_STATE          0

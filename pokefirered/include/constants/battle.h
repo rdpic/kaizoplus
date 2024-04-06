@@ -214,8 +214,20 @@
 #define B_WEATHER_SUN_PERMANENT       (1 << 6)
 #define B_WEATHER_SUN                 (B_WEATHER_SUN_TEMPORARY | B_WEATHER_SUN_PERMANENT)
 #define B_WEATHER_HAIL_TEMPORARY      (1 << 7)
-#define B_WEATHER_HAIL                (B_WEATHER_HAIL_TEMPORARY)
+#define B_WEATHER_HAIL_PERMANENT      (1 << 8)
+#define B_WEATHER_HAIL                (B_WEATHER_HAIL_TEMPORARY | B_WEATHER_HAIL_PERMANENT)
 #define B_WEATHER_ANY                 (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL)
+
+// Battle Weather as enum
+#define ENUM_WEATHER_NONE                 0
+#define ENUM_WEATHER_RAIN                 1
+#define ENUM_WEATHER_SUN                  2
+#define ENUM_WEATHER_SANDSTORM            3
+#define ENUM_WEATHER_HAIL                 4
+#define ENUM_WEATHER_SUN_PRIMAL           5
+#define ENUM_WEATHER_RAIN_PRIMAL          6
+#define ENUM_WEATHER_STRONG_WINDS         7
+#define ENUM_WEATHER_SNOW                 8
 
 // Move Effects
 #define MOVE_EFFECT_SLEEP               1

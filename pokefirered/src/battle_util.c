@@ -2428,6 +2428,79 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
     return effect;
 }
 
+u32 GetBattlerAbility(u32 battler)
+{
+    /* if (gAbilitiesInfo[gBattleMons[battler].ability].cantBeSuppressed)
+        return gBattleMons[battler].ability;
+
+    if (gStatuses3[battler] & STATUS3_GASTRO_ACID)
+        return ABILITY_NONE;
+
+    if (IsNeutralizingGasOnField() && gBattleMons[battler].ability != ABILITY_NEUTRALIZING_GAS)
+        return ABILITY_NONE;
+
+    if (IsMyceliumMightOnField())
+        return ABILITY_NONE;
+
+    if (((IsMoldBreakerTypeAbility(gBattleMons[gBattlerAttacker].ability)
+            && !(gStatuses3[gBattlerAttacker] & STATUS3_GASTRO_ACID))
+            || gMovesInfo[gCurrentMove].ignoresTargetAbility)
+            && gAbilitiesInfo[gBattleMons[battler].ability].breakable
+            && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
+            && gActionsByTurnOrder[gBattlerByTurnOrder[gBattlerAttacker]] == B_ACTION_USE_MOVE
+            && gCurrentTurnActionNumber < gBattlersCount)
+        return ABILITY_NONE; */
+
+    return gBattleMons[battler].ability;
+}
+
+u32 IsAbilityOnSide(u32 battler, u32 ability)
+{
+    if (GetBattlerAbility(battler) == ability)
+        return battler + 1;
+    else if (GetBattlerAbility(BATTLE_PARTNER(battler)) == ability)
+        return BATTLE_PARTNER(battler) + 1;
+    else
+        return 0;
+}
+
+u32 IsAbilityOnOpposingSide(u32 battler, u32 ability)
+{
+    return IsAbilityOnSide(BATTLE_OPPOSITE(battler), ability);
+}
+
+u32 IsAbilityPreventingEscape(u32 battler)
+{
+    u32 id;
+    if (IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+        return 0;
+    if ((id = IsAbilityOnOpposingSide(battler, ABILITY_SHADOW_TAG))
+        && (GetBattlerAbility(battler) != ABILITY_SHADOW_TAG))
+        return id;
+    if ((id = IsAbilityOnOpposingSide(battler, ABILITY_ARENA_TRAP)))
+        return id;
+    if ((id = IsAbilityOnOpposingSide(battler, ABILITY_MAGNET_PULL)) && IS_BATTLER_OF_TYPE(battler, TYPE_STEEL))
+        return id;
+
+    return 0;
+}
+
+bool32 CanBattlerEscape(u32 battler) // no ability check
+{
+    if (IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+        return TRUE;
+    else if (gBattleMons[battler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
+        return FALSE;
+    else if (gStatuses3[battler] & STATUS3_ROOTED)
+        return FALSE;
+    /* else if (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK)
+        return FALSE;
+    else if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
+        return FALSE; */
+    else
+        return TRUE;
+}
+
 void BattleScriptExecute(const u8 *BS_ptr)
 {
     gBattlescriptCurrInstr = BS_ptr;

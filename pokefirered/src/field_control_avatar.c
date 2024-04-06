@@ -55,7 +55,7 @@ static bool8 TryStartCoordEventScript(struct MapPosition * position);
 static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior);
 static bool8 TryStartStepCountScript(u16 metatileBehavior);
 static void UpdateHappinessStepCounter(void);
-static bool8 UpdatePoisonStepCounter(void);
+/* static bool8 UpdatePoisonStepCounter(void); */
 static bool8 CheckStandardWildEncounter(u32 metatileAttributes);
 static bool8 TrySetUpWalkIntoSignpostScript(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
 static void SetUpWalkIntoSignScript(const u8 *script, u8 playerDirection);
@@ -662,11 +662,11 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             ScriptContext_SetupScript(EventScript_VsSeekerChargingDone);
             return TRUE;
         }
-        else if (UpdatePoisonStepCounter() == TRUE)
+       /*  else if (UpdatePoisonStepCounter() == TRUE)
         {
             ScriptContext_SetupScript(EventScript_FieldPoison);
             return TRUE;
-        }
+        } */
         else if (ShouldEggHatch())
         {
             IncrementGameStat(GAME_STAT_HATCHED_EGGS);
@@ -707,7 +707,7 @@ void ClearPoisonStepCounter(void)
     VarSet(VAR_POISON_STEP_COUNTER, 0);
 }
 
-static bool8 UpdatePoisonStepCounter(void)
+/* static bool8 UpdatePoisonStepCounter(void)
 {
     u16 *ptr;
 
@@ -730,7 +730,7 @@ static bool8 UpdatePoisonStepCounter(void)
         }
     }
     return FALSE;
-}
+} */
 
 void RestartWildEncounterImmunitySteps(void)
 {

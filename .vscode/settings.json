@@ -9,6 +9,7 @@
         "global.h": "c",
         "item.h": "c",
         "abilities.h": "c",
-        "ctime": "c"
+        "ctime": "c",
+        "item_effects.h": "c"
     }
 }

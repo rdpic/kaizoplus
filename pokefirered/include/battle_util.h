@@ -93,5 +93,10 @@ void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
+u32 GetBattlerAbility(u32 battler);
+u32 IsAbilityOnSide(u32 battler, u32 ability);
+u32 IsAbilityOnOpposingSide(u32 battler, u32 ability);
+u32 IsAbilityPreventingEscape(u32 battler);
+bool32 CanBattlerEscape(u32 battler); // no ability check
 
 #endif // GUARD_BATTLE_UTIL_H

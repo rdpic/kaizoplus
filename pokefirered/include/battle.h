@@ -526,6 +526,7 @@ struct BattleScripting
     u16 abilityPopupOverwrite;
     u8 savedBattler;
     bool8 fixedPopup;   // Force ability popup to stick until manually called back
+    u16 savedStringId;
 };
 
 struct BattleSpriteInfo
