@@ -422,6 +422,7 @@
 // gAbsorbDrainStringIds
 #define B_MSG_ABSORB      0
 #define B_MSG_ABSORB_OOZE 1
+#define B_MSG_MOVE_ABSORBED 2
 
 // gLeechSeedStringIds
 #define B_MSG_LEECH_SEED_SET   0

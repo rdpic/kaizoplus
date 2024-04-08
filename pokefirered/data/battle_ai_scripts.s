@@ -773,7 +773,6 @@ AI_CheckViability::
 	if_effect EFFECT_WATER_SPORT, AI_CV_WaterSport
 	if_effect EFFECT_CALM_MIND, AI_CV_SpDefUp
 	if_effect EFFECT_DRAGON_DANCE, AI_CV_DragonDance
-	if_effect EFFECT_QUIVER_DANCE, AI_CV_QuiverDance
 	end
 
 AI_CV_Sleep::
@@ -1871,7 +1870,6 @@ AI_CV_Encore_EncouragedMovesToEncore::
 	.byte EFFECT_MUD_SPORT
 	.byte EFFECT_WATER_SPORT
 	.byte EFFECT_DRAGON_DANCE
-	.byte EFFECT_QUIVER_DANCE
 	.byte EFFECT_CAMOUFLAGE
 	.byte -1
 
@@ -2766,20 +2764,6 @@ AI_CV_DragonDance2::
 AI_CV_DragonDance_End::
 	end
 
-AI_CV_QuiverDance::
-	if_target_faster AI_CV_QuiverDance2
-	if_hp_more_than AI_USER, 50, AI_CV_QuiverDance_End
-	if_random_less_than 70, AI_CV_QuiverDance_End
-	score -1
-	goto AI_CV_QuiverDance_End
-
-AI_CV_QuiverDance2::
-	if_random_less_than 128, AI_CV_QuiverDance_End
-	score +1
-
-AI_CV_QuiverDance_End::
-	end
-
 AI_TryToFaint::
 	if_can_faint AI_TryToFaint_TryToEncourageQuickAttack
 	get_how_powerful_move_is
@@ -3070,7 +3054,6 @@ AI_HPAware_DiscouragedEffectsWhenMediumHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
-	.byte EFFECT_QUIVER_DANCE
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenLowHP::
@@ -3121,7 +3104,6 @@ AI_HPAware_DiscouragedEffectsWhenLowHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
-	.byte EFFECT_QUIVER_DANCE
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenTargetHighHP::
@@ -3167,7 +3149,6 @@ AI_HPAware_DiscouragedEffectsWhenTargetMediumHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
-	.byte EFFECT_QUIVER_DANCE
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenTargetLowHP::
@@ -3230,7 +3211,6 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
-	.byte EFFECT_QUIVER_DANCE
 	.byte -1
 
 AI_Unknown::

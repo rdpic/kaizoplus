@@ -2622,7 +2622,7 @@ void UpdateAbilityPopup(u8 battlerId)
     RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32));
 }
 
-#define FRAMES_TO_WAIT 48
+#define FRAMES_TO_WAIT 100
 
 static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
 {

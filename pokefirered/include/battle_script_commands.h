@@ -18,8 +18,6 @@ void BattleCreateYesNoCursorAt(void);
 void BufferMoveToLearnIntoBattleTextBuff2(void);
 void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags);
 bool8 UproarWakeUpCheck(u8 battlerId);
-bool32 NoAliveMonsForEitherParty(void);
-/* bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType); */
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 

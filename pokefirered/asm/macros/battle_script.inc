@@ -1390,11 +1390,3 @@
 	.macro destroyabilitypopup
 	various BS_ABILITY_BATTLER, VARIOUS_DESTROY_ABILITY_POPUP
 	.endm
-
-	.macro settracedability battler:req
-	various \battler, VARIOUS_TRACE_ABILITY
-	.endm
-
-	.macro switchinabilities battler:req
-	various \battler, VARIOUS_SWITCHIN_ABILITIES
-	.endm

@@ -4,7 +4,6 @@
 #include "config.h"
 #include "gba/gba.h"
 #include <string.h>
-#include "metaprogram.h"
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/vars.h"

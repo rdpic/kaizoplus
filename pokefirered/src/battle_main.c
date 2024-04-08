@@ -220,7 +220,6 @@ EWRAM_DATA u16 gBattleMovePower = 0;
 EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerAbility = 0;
-EWRAM_DATA s32 gBideDmg[MAX_BATTLERS_COUNT] = {0};
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
@@ -2486,7 +2485,6 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].flag2Unknown = FALSE;
     gProtectStructs[gActiveBattler].flinchImmobility = FALSE;
     gProtectStructs[gActiveBattler].notFirstStrike = FALSE;
-    gProtectStructs[gActiveBattler].usesBouncedMove = FALSE;
 
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
 
@@ -2895,6 +2893,8 @@ static void TryDoEventsBeforeFirstTurn(void)
         if (effect != 0)
             return;
     }
+    if (AbilityBattleEffects(ABILITYEFFECT_INTIMIDATE1, 0, 0, 0, 0) != 0)
+        return;
     if (AbilityBattleEffects(ABILITYEFFECT_TRACE, 0, 0, 0, 0) != 0)
         return;
     // Check all switch in items having effect from the fastest mon to slowest.
@@ -3007,37 +3007,60 @@ void BattleTurnPassed(void)
     gRandomTurnNumber = Random();
 }
 
-u8 IsRunningFromBattleImpossible(u32 battler)
+u8 IsRunningFromBattleImpossible(void)
 {
-    u32 holdEffect, i;
+    u8 holdEffect;
+    u8 side;
+    s32 i;
 
-    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY)
-        holdEffect = gEnigmaBerries[battler].holdEffect;
+    if (gBattleMons[gActiveBattler].item == ITEM_ENIGMA_BERRY)
+        holdEffect = gEnigmaBerries[gActiveBattler].holdEffect;
     else
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item);
-
-    gPotentialItemEffectBattler = battler;
-
-    if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item);
+    gPotentialItemEffectBattler = gActiveBattler;
+    if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN
+     || (gBattleTypeFlags & BATTLE_TYPE_LINK)
+     || gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY)
         return BATTLE_RUN_SUCCESS;
-    if (IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
-        return BATTLE_RUN_SUCCESS;
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        return BATTLE_RUN_SUCCESS;
-    if (GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
-        return BATTLE_RUN_SUCCESS;
-
-    if ((i = IsAbilityPreventingEscape(battler)))
+    side = GetBattlerSide(gActiveBattler);
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (side != GetBattlerSide(i)
+         && gBattleMons[i].ability == ABILITY_SHADOW_TAG)
+        {
+            gBattleScripting.battler = i;
+            gLastUsedAbility = gBattleMons[i].ability;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+            return BATTLE_RUN_FAILURE;
+        }
+        if (side != GetBattlerSide(i)
+         && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE
+         && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
+         && gBattleMons[i].ability == ABILITY_ARENA_TRAP)
+        {
+            gBattleScripting.battler = i;
+            gLastUsedAbility = gBattleMons[i].ability;
+            gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+            return BATTLE_RUN_FAILURE;
+        }
+    }
+    i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, gActiveBattler, ABILITY_MAGNET_PULL, 0, 0);
+    if (i != 0 && IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_STEEL))
     {
         gBattleScripting.battler = i - 1;
         gLastUsedAbility = gBattleMons[i - 1].ability;
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PREVENTS_ESCAPE;
+        gBattleCommunication[MULTISTRING_CHOOSER] = 2;
         return BATTLE_RUN_FAILURE;
     }
-
-    if (!CanBattlerEscape(battler))
+    if ((gBattleMons[gActiveBattler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
+     || (gStatuses3[gActiveBattler] & STATUS3_ROOTED))
     {
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
+        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        return BATTLE_RUN_FORBIDDEN;
+    }
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    {
+        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
         return BATTLE_RUN_FORBIDDEN;
     }
     return BATTLE_RUN_SUCCESS;
@@ -3228,7 +3251,7 @@ static void HandleTurnActionSelectionState(void)
                     BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
                     gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                 }
-                else if (IsRunningFromBattleImpossible(gActiveBattler) != BATTLE_RUN_SUCCESS
+                else if (IsRunningFromBattleImpossible() != BATTLE_RUN_SUCCESS
                       && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
                     gSelectionBattleScripts[gActiveBattler] = BattleScript_PrintCantEscapeFromBattle;
