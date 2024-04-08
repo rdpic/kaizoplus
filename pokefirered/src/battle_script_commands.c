@@ -299,7 +299,7 @@ static void Cmd_weightdamagecalculation(void);
 static void Cmd_assistattackselect(void);
 static void Cmd_trysetmagiccoat(void);
 static void Cmd_trysetsnatch(void);
-static void Cmd_trygetintimidatetarget(void);
+/* static void Cmd_trygetintimidatetarget(void); */
 static void Cmd_switchoutabilities(void);
 static void Cmd_jumpifhasnohp(void);
 static void Cmd_getsecretpowereffect(void);
@@ -550,7 +550,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_assistattackselect,                      //0xDE
     Cmd_trysetmagiccoat,                         //0xDF
     Cmd_trysetsnatch,                            //0xE0
-    Cmd_trygetintimidatetarget,                  //0xE1
+    /* Cmd_trygetintimidatetarget,  */                 //0xE1
     Cmd_switchoutabilities,                      //0xE2
     Cmd_jumpifhasnohp,                           //0xE3
     Cmd_getsecretpowereffect,                    //0xE4
@@ -6305,7 +6305,6 @@ static void Cmd_various(void)
     case VARIOUS_RESET_INTIMIDATE_TRACE_BITS:
     {
         VARIOUS_ARGS();
-        gSpecialStatuses[battler].intimidatedMon = 0;
         gSpecialStatuses[battler].traced = 0;
         break;
     }
@@ -6404,6 +6403,20 @@ static void Cmd_various(void)
         VARIOUS_ARGS();
         DestroyAbilityPopUp(battler);
         break;
+    }
+    case VARIOUS_TRACE_ABILITY:
+    {
+        VARIOUS_ARGS();
+        gBattleMons[battler].ability = gBattleStruct->overwrittenAbilities[battler] = gBattleStruct->tracedAbility[battler];
+        break;
+    }
+    case VARIOUS_SWITCHIN_ABILITIES:
+    {
+        VARIOUS_ARGS();
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, 0, 0, 0);
+        AbilityBattleEffects(ABILITYEFFECT_TRACE, battler, 0, 0, 0);
+        return;
     }
     }
 
@@ -9357,7 +9370,7 @@ static void Cmd_trysetsnatch(void)
     }
 }
 
-static void Cmd_trygetintimidatetarget(void)
+/* static void Cmd_trygetintimidatetarget(void)
 {
     u8 side;
 
@@ -9378,7 +9391,7 @@ static void Cmd_trygetintimidatetarget(void)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     else
         gBattlescriptCurrInstr += 5;
-}
+} */
 
 static void Cmd_switchoutabilities(void)
 {

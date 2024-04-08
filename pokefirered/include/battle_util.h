@@ -20,17 +20,15 @@
 #define ABILITYEFFECT_FORECAST                   6
 #define ABILITYEFFECT_SYNCHRONIZE                7
 #define ABILITYEFFECT_ATK_SYNCHRONIZE            8
-#define ABILITYEFFECT_INTIMIDATE1                9
-#define ABILITYEFFECT_INTIMIDATE2                10
-#define ABILITYEFFECT_TRACE                      11
-#define ABILITYEFFECT_CHECK_OTHER_SIDE           12
-#define ABILITYEFFECT_CHECK_BATTLER_SIDE         13
-#define ABILITYEFFECT_FIELD_SPORT                14
-#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER 15
-#define ABILITYEFFECT_COUNT_OTHER_SIDE           16
-#define ABILITYEFFECT_COUNT_BATTLER_SIDE         17
-#define ABILITYEFFECT_COUNT_ON_FIELD             18
-#define ABILITYEFFECT_CHECK_ON_FIELD             19
+#define ABILITYEFFECT_TRACE                      9
+#define ABILITYEFFECT_CHECK_OTHER_SIDE           10
+#define ABILITYEFFECT_CHECK_BATTLER_SIDE         11
+#define ABILITYEFFECT_FIELD_SPORT                12
+#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER 13
+#define ABILITYEFFECT_COUNT_OTHER_SIDE           14
+#define ABILITYEFFECT_COUNT_BATTLER_SIDE         15
+#define ABILITYEFFECT_COUNT_ON_FIELD             16
+#define ABILITYEFFECT_CHECK_ON_FIELD             17
 #define ABILITYEFFECT_MUD_SPORT                  253
 #define ABILITYEFFECT_WATER_SPORT                254
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          255
@@ -101,5 +99,6 @@ u32 IsAbilityPreventingEscape(u32 battler);
 bool32 CanBattlerEscape(u32 battler); // no ability check
 u8 CopyAbility(u8 bank);
 u8 MarkBufferBankForExecution(u8 bank);
+bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind);
 
 #endif // GUARD_BATTLE_UTIL_H

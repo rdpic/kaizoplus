@@ -218,7 +218,6 @@ struct SpecialStatus
     u8 statLowered:1;             // 0x1
     u8 lightningRodRedirected:1;  // 0x2
     u8 restoredBattlerSprite:1;   // 0x4
-    u8 intimidatedMon:1;          // 0x8
     u8 traced:1;                  // 0x10
     u8 ppNotAffectedByPressure:1;
     u8 faintedHasReplacement:1;
@@ -412,8 +411,8 @@ struct BattleStruct
     u8 formToChangeInto;
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
-    u8 field_88; // unused
-    u8 field_89; // unused
+    u16 overwrittenAbilities[MAX_BATTLERS_COUNT]; 
+    u16 tracedAbility[MAX_BATTLERS_COUNT];
     u8 field_8A; // unused
     u8 playerPartyIdx;
     u8 field_8C; // unused
@@ -440,7 +439,6 @@ struct BattleStruct
     u8 AI_itemFlags[2];
     u16 choicedMove[MAX_BATTLERS_COUNT];
     u16 changedItems[MAX_BATTLERS_COUNT];
-    u8 intimidateBattler;
     u8 switchInItemsCounter;
     u8 field_DA; // battle tower related
     u8 turnSideTracker;
