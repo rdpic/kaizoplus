@@ -198,7 +198,7 @@ struct ProtectStruct
     u32 flag2Unknown:1;         // 0x2
     u32 flinchImmobility:1;     // 0x4
     u32 notFirstStrike:1;       // 0x8
-    u32 flag_x10 : 1;           // 0x10
+    u32 usesBouncedMove:1;
     u32 flag_x20 : 1;           // 0x20
     u32 flag_x40 : 1;           // 0x40
     u32 flag_x80 : 1;           // 0x80
@@ -451,6 +451,7 @@ struct BattleStruct
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
     u8 lastAttackerToFaintOpponent;
+    u8 abilityPopUpIds[MAX_BATTLERS_COUNT][2];
     // align 4
     union {
         struct LinkBattlerHeader linkBattlerHeader;
@@ -511,6 +512,7 @@ struct BattleScripting
     u8 battlerWithAbility;
     u8 multihitMoveEffect;
     u8 battler;
+    u8 bank;
     u8 animTurn;
     u8 animTargetsHit;
     u8 statChanger;
@@ -729,6 +731,8 @@ extern u8 gBattleTerrain;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 gRandomTurnNumber;
 extern u8 gBattlerAbility;
+extern s32 gBideDmg[MAX_BATTLERS_COUNT];
+
 
 static inline u32 GetBattlerPosition(u32 battler)
 {

@@ -3963,6 +3963,7 @@ BattleScript_DrizzleActivates::
 	end3
 
 BattleScript_SpeedBoostActivates::
+	call BattleScript_AbilityPopUp
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	printstring STRINGID_PKMNRAISEDSPEED
 	waitmessage B_WAIT_TIME_LONG
@@ -4029,8 +4030,8 @@ BattleScript_IntimidateActivatesEnd3::
 	end3
 
 BattleScript_DoIntimidateActivationAnim::
-	pause B_WAIT_TIME_SHORT
 	call BattleScript_AbilityPopUp
+	pause B_WAIT_TIME_SHORT
 BattleScript_IntimidateActivates::
 	setbyte gBattlerTarget, 0
 	setstatchanger STAT_ATK, 1, TRUE
@@ -4060,6 +4061,7 @@ BattleScript_IntimidateAbilityFail::
 	goto BattleScript_IntimidateFail
 
 BattleScript_DroughtActivates::
+	call BattleScript_AbilityPopUp
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_PKMNSXINTENSIFIEDSUN
 	waitstate

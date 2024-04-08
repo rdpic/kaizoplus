@@ -82,7 +82,8 @@ u8 DoBattlerEndTurnEffects(void);
 bool8 HandleWishPerishSongOnTurnEnd(void);
 bool8 HandleFaintedMonActions(void);
 void TryClearRageStatuses(void);
-u8 AtkCanceller_UnableToUseMove(void);
+u8 AtkCanceller_UnableToUseMove(u32 moveType);
+/* u8 AtkCanceller_UnableToUseMove2(void); */
 bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2);
 u8 CastformDataTypeChange(u8 battler);
 u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveArg);
@@ -98,5 +99,7 @@ u32 IsAbilityOnSide(u32 battler, u32 ability);
 u32 IsAbilityOnOpposingSide(u32 battler, u32 ability);
 u32 IsAbilityPreventingEscape(u32 battler);
 bool32 CanBattlerEscape(u32 battler); // no ability check
+u8 CopyAbility(u8 bank);
+u8 MarkBufferBankForExecution(u8 bank);
 
 #endif // GUARD_BATTLE_UTIL_H
