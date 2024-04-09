@@ -22,8 +22,8 @@ MtMoon_1F_EventScript_ItemParalyzeHeal::
 	finditem ITEM_PARALYZE_HEAL
 	end
 
-MtMoon_1F_EventScript_ItemTM09::
-	finditem ITEM_TM09
+MtMoon_1F_EventScript_ItemDuskStone::
+	finditem ITEM_DUSK_STONE
 	end
 
 MtMoon_1F_EventScript_ItemPotion::
@@ -42,6 +42,30 @@ MtMoon_1F_EventScript_ItemMoonStone::
 	finditem ITEM_MOON_STONE
 	end
 
+MtMoon_B1F_EventScript_ItemEther::
+	finditem ITEM_ETHER
+	end
+
+MtMoon_B1F_EventScript_ItemElixir::
+	finditem ITEM_ELIXIR
+	end
+
+MtMoon_B1F_EventScript_ItemStardust::
+	finditem ITEM_STARDUST
+	end
+
+MtMoon_B1F_EventScript_ItemStarPiece::
+	finditem ITEM_STAR_PIECE
+	end
+
+MtMoon_B1F_EventScript_ItemSuperPotion::
+	finditem ITEM_SUPER_POTION
+	end
+
+MtMoon_B1F_EventScript_ItemFullHeal::
+	finditem ITEM_FULL_HEAL
+	end
+
 MtMoon_B2F_EventScript_ItemStarPiece::
 	finditem ITEM_STAR_PIECE
 	end
@@ -54,16 +78,16 @@ Route4_EventScript_ItemTM05::
 	finditem ITEM_TM05
 	end
 
-Route24_EventScript_ItemTM45::
-	finditem ITEM_TM45
+Route24_EventScript_LavaCookie::
+	finditem ITEM_LAVA_COOKIE
 	end
 
 Route25_EventScript_ItemTM43::
 	finditem ITEM_TM43
 	end
 
-SSAnne_1F_Room2_EventScript_ItemTM31::
-	finditem ITEM_TM31
+SSAnne_1F_Room2_EventScript_ItemXDefend::
+	finditem ITEM_X_DEFEND
 	end
 
 SSAnne_2F_Room2_EventScript_ItemStardust::
@@ -88,6 +112,34 @@ SSAnne_B1F_Room5_EventScript_ItemSuperPotion::
 
 SSAnne_Kitchen_EventScript_ItemGreatBall::
 	finditem ITEM_GREAT_BALL
+	end
+
+UndergroundPath_NorthSouthTunnel_EventScript_ItemPotion::
+	finditem ITEM_POTION
+	end
+
+UndergroundPath_NorthSouthTunnel_EventScript_ItemAntidote::
+	finditem ITEM_ANTIDOTE
+	end
+
+UndergroundPath_NorthSouthTunnel_EventScript_ItemParalyzeHeal::
+	finditem ITEM_PARALYZE_HEAL
+	end
+
+UndergroundPath_NorthSouthTunnel_EventScript_ItemBurnHeal::
+	finditem ITEM_BURN_HEAL
+	end
+
+UndergroundPath_NorthSouthTunnel_EventScript_ItemIceHeal::
+	finditem ITEM_ICE_HEAL
+	end
+
+UndergroundPath_NorthSouthTunnel_EventScript_ItemAwakening::
+	finditem ITEM_AWAKENING
+	end
+
+UndergroundPath_NorthSouthTunnel_EventScript_ItemPPUp::
+	finditem ITEM_PP_UP
 	end
 
 Route9_EventScript_ItemTM40::
@@ -166,16 +218,16 @@ PokemonTower_6F_EventScript_ItemXAccuracy::
 	finditem ITEM_X_ACCURACY
 	end
 
-Route12_EventScript_ItemTM48::
-	finditem ITEM_TM48
+Route12_EventScript_ItemHyperPotion::
+	finditem ITEM_HYPER_POTION
 	end
 
 Route12_EventScript_ItemIron::
 	finditem ITEM_IRON
 	end
 
-Route15_EventScript_ItemTM18::
-	finditem ITEM_TM18
+Route15_EventScript_ItemPPMax::
+	finditem ITEM_PP_MAX
 	end
 
 SafariZone_Center_EventScript_ItemNugget::

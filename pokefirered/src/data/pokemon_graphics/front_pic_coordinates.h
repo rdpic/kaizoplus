@@ -2125,6 +2125,86 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(40, 40),
         .y_offset = 12,
     },
+    [SPECIES_BIBAREL] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 8,
+    },
+    [SPECIES_KRICKETOT] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_KRICKETUNE] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_SHINX] =
+    {
+        .size = MON_COORDS_SIZE(48, 40),
+        .y_offset = 13,
+    },
+    [SPECIES_LUXIO] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_LUXRAY] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 2,
+    },
+    [SPECIES_CRANIDOS] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_RAMPARDOS] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_SHIELDON] =
+    {
+        .size = MON_COORDS_SIZE(40, 40),
+        .y_offset = 15,
+    },
+    [SPECIES_BASTIODON] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_BURMY] =
+    {
+        .size = MON_COORDS_SIZE(32, 56),
+        .y_offset = 13,
+    },
+    [SPECIES_WORMADAM] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 10,
+    },
+    [SPECIES_MOTHIM] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 12,
+    },
+    [SPECIES_COMBEE] =
+    {
+        .size = MON_COORDS_SIZE(64, 40),
+        .y_offset = 16,
+    },
+    [SPECIES_VESPIQUEN] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 4,
+    },
+    [SPECIES_PACHIRISU] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 12,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 24),

@@ -1908,6 +1908,70 @@ Cry_Bidoof::
 	.incbin "sound/direct_sound_samples/cries/bidoof.bin"
 
 	.align 2
+Cry_Bibarel::
+	.incbin "sound/direct_sound_samples/cries/bibarel.bin"
+
+	.align 2
+Cry_Kricketot::
+	.incbin "sound/direct_sound_samples/cries/kricketot.bin"
+
+	.align 2
+Cry_Kricketune::
+	.incbin "sound/direct_sound_samples/cries/kricketune.bin"
+
+	.align 2
+Cry_Shinx::
+	.incbin "sound/direct_sound_samples/cries/shinx.bin"
+
+	.align 2
+Cry_Luxio::
+	.incbin "sound/direct_sound_samples/cries/luxio.bin"
+
+	.align 2
+Cry_Luxray::
+	.incbin "sound/direct_sound_samples/cries/luxray.bin"
+
+	.align 2
+Cry_Cranidos::
+	.incbin "sound/direct_sound_samples/cries/cranidos.bin"
+
+	.align 2
+Cry_Rampardos::
+	.incbin "sound/direct_sound_samples/cries/rampardos.bin"
+
+	.align 2
+Cry_Shieldon::
+	.incbin "sound/direct_sound_samples/cries/shieldon.bin"
+
+	.align 2
+Cry_Bastiodon::
+	.incbin "sound/direct_sound_samples/cries/bastiodon.bin"
+
+	.align 2
+Cry_Burmy::
+	.incbin "sound/direct_sound_samples/cries/burmy.bin"
+
+	.align 2
+Cry_Wormadam::
+	.incbin "sound/direct_sound_samples/cries/wormadam.bin"
+
+	.align 2
+Cry_Mothim::
+	.incbin "sound/direct_sound_samples/cries/mothim.bin"
+
+	.align 2
+Cry_Combee::
+	.incbin "sound/direct_sound_samples/cries/combee.bin"
+
+	.align 2
+Cry_Vespiquen::
+	.incbin "sound/direct_sound_samples/cries/vespiquen.bin"
+
+	.align 2
+Cry_Pachirisu::
+	.incbin "sound/direct_sound_samples/cries/pachirisu.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

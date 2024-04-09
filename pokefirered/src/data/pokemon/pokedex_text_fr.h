@@ -2822,3 +2822,131 @@ const u8 gBidoofPokedexText[] = _(
             "whittle down its front teeth.");
 
 const u8 gBidoofPokedexTextUnused[] = _("");
+
+const u8 gBibarelPokedexText[] = _(
+    "It makes its nest by damming streams\n"
+            "with bark and mud. A river dammed by\n"
+            "Bibarel will never overflow its banks,\n"
+            "which is appreciated by people nearby.");
+
+const u8 gBibarelPokedexTextUnused[] = _("");
+
+const u8 gKricketotPokedexText[] = _(
+    "It shakes its head back to front,\n"
+            "causing its antennae to hit each other\n"
+            "and sound like a xylophone.\n"
+            "These sounds are fall hallmarks.");
+
+const u8 gKricketotPokedexTextUnused[] = _("");
+
+const u8 gKricketunePokedexText[] = _(
+    "It signals its emotions with its melodies.\n"
+            "There is a village that hosts a contest\n"
+            "based on the amazingly variable cries\n"
+            "of this Pokémon.");
+
+const u8 gKricketunePokedexTextUnused[] = _("");
+
+const u8 gShinxPokedexText[] = _(
+    "It rapidly contracts and relaxes its\n"
+            "muscles to generate electricity. Its\n"
+            "body shines if endangered. It flees\n"
+            "while the foe is momentarily blinded.");
+
+const u8 gShinxPokedexTextUnused[] = _("");
+
+const u8 gLuxioPokedexText[] = _(
+    "Strong electricity courses through the\n"
+            "tips of its sharp claws. A light scratch\n"
+            "has enough amperage to cause fainting\n"
+            "in foes.");
+
+const u8 gLuxioPokedexTextUnused[] = _("");
+
+const u8 gLuxrayPokedexText[] = _(
+    "It has eyes which can see through\n"
+            "anything. Luxray's ability to see\n"
+            "through objects comes in handy when\n"
+            "it's scouting for danger.");
+
+const u8 gLuxrayPokedexTextUnused[] = _("");
+
+const u8 gCranidosPokedexText[] = _(
+    "A lifelong jungle dweller from 100 million\n"
+            "years ago, its skull is as hard as iron. \n"
+            "It would snap obstructing trees with\n"
+            "headbutts.");
+
+const u8 gCranidosPokedexTextUnused[] = _("");
+
+const u8 gRampardosPokedexText[] = _(
+    "The result of repeated headbutts\n"
+            "is a skull grown thick and hard.\n"
+            "However, its brain has shrunk in size\n"
+            "compared with Cranidos's.");
+
+const u8 gRampardosPokedexTextUnused[] = _("");
+
+const u8 gShieldonPokedexText[] = _(
+    "This Pokémon lived in primeval jungles.\n"
+            "Few enemies would have been willing to\n"
+            "square off against its heavily armored\n"
+            "face, so it's thought.");
+
+const u8 gShieldonPokedexTextUnused[] = _("");
+
+const u8 gBastiodonPokedexText[] = _(
+    "Their rock-hard faces serve to protect\n"
+            "them from any frontral attacks.\n"
+            "When attacked, they form a wall.\n"
+            "They shielded their young in that way.");
+
+const u8 gBastiodonPokedexTextUnused[] = _("");
+
+const u8 gBurmyPokedexText[] = _(
+    "If its cloak is even slightly damaged, it\n"
+            "will immediately repair it with whatever is\n"
+            "near at hand. The Pokémon within the cloak\n"
+            "is scrawny and vulnerable to the cold.");
+
+const u8 gBurmyPokedexTextUnused[] = _("");
+
+const u8 gWormadamPokedexText[] = _(
+    "Its appearance changes depending\n"
+            "on where Burmy evolved. The materials\n"
+            "on hand become a part of its body.\n"
+            "The cloak is never shed.");
+
+const u8 gWormadamPokedexTextUnused[] = _("");
+
+const u8 gMothimPokedexText[] = _(
+    "It does not keep a nest. While it\n"
+    "loves floral honey, it won't gather\n"
+    "any itself. Instead, it plots to steal\n"
+    "honey collected by Combee.");
+
+const u8 gMothimPokedexTextUnused[] = _("");
+
+const u8 gCombeePokedexText[] = _(
+    "A Pokémon formed by three others.\n"
+            "It constantly gathers honey from flowers\n"
+            "to please Vespiquen. At night, they\n"
+            "cluster to form a beehive and sleep.");
+
+const u8 gCombeePokedexTextUnused[] = _("");
+
+const u8 gVespiquenPokedexText[] = _(
+    "It houses its colony in cells in its body\n"
+            "and releases various pheromones to\n"
+            "make those grubs do its bidding.\n"
+            "There is only one in a colony.");
+
+const u8 gVespiquenPokedexTextUnused[] = _("");
+
+const u8 gPachirisuPokedexText[] = _(
+    "A pair may be seen rubbing their cheek\n"
+            "pouches together in an effort to share\n"
+            "stored electricity. It stores them with\n"
+            "berries in tree holes.");
+
+const u8 gPachirisuPokedexTextUnused[] = _("");

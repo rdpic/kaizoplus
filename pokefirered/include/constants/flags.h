@@ -363,7 +363,7 @@
 #define FLAG_HIDE_VIRIDIAN_FOREST_ANTIDOTE                      0x157
 #define FLAG_HIDE_VIRIDIAN_FOREST_POTION                        0x158
 #define FLAG_HIDE_MT_MOON_1F_PARALYZE_HEAL                      0x159
-#define FLAG_HIDE_MT_MOON_1F_TM09                               0x15A
+#define FLAG_HIDE_MT_MOON_1F_DUSK_STONE                         0x15A
 #define FLAG_HIDE_MT_MOON_1F_POTION                             0x15B
 #define FLAG_HIDE_MT_MOON_1F_RARE_CANDY                         0x15C
 #define FLAG_HIDE_MT_MOON_1F_ESCAPE_ROPE                        0x15D
@@ -371,9 +371,9 @@
 #define FLAG_HIDE_MT_MOON_B2F_STAR_PIECE                        0x15F
 #define FLAG_HIDE_MT_MOON_B2F_TM46                              0x160
 #define FLAG_HIDE_ROUTE4_TM05                                   0x161
-#define FLAG_HIDE_ROUTE24_TM45                                  0x162
+#define FLAG_HIDE_ROUTE24_LAVA_COOKIE                           0x162
 #define FLAG_HIDE_ROUTE25_TM43                                  0x163
-#define FLAG_HIDE_SSANNE_1F_ROOM2_TM31                          0x164
+#define FLAG_HIDE_SSANNE_1F_ROOM2_X_DEFEND                      0x164
 #define FLAG_HIDE_SSANNE_2F_ROOM2_STARDUST                      0x165
 #define FLAG_HIDE_SSANNE_2F_ROOM4_X_ATTACK                      0x166
 #define FLAG_HIDE_SSANNE_B1F_ROOM2_TM44                         0x167
@@ -399,9 +399,9 @@
 #define FLAG_HIDE_POKEMON_TOWER_5F_NUGGET                       0x17B
 #define FLAG_HIDE_POKEMON_TOWER_6F_RARE_CANDY                   0x17C
 #define FLAG_HIDE_POKEMON_TOWER_6F_X_ACCURACY                   0x17D
-#define FLAG_HIDE_ROUTE12_TM48                                  0x17E
+#define FLAG_HIDE_ROUTE12_HYPER_POTION                          0x17E
 #define FLAG_HIDE_ROUTE12_IRON                                  0x17F
-#define FLAG_HIDE_ROUTE15_TM18                                  0x180
+#define FLAG_HIDE_ROUTE15_PP_MAX                                0x180
 #define FLAG_HIDE_SAFARI_ZONE_CENTER_NUGGET                     0x181
 #define FLAG_HIDE_SAFARI_ZONE_EAST_MAX_POTION                   0x182
 #define FLAG_HIDE_SAFARI_ZONE_EAST_FULL_RESTORE                 0x183
@@ -530,19 +530,19 @@
 #define FLAG_HIDE_SILPH_CO_4F_TM41                              0x1FE
 
 // Unused?
-#define FLAG_0x1FF               0x1FF
-#define FLAG_0x200               0x200
-#define FLAG_0x201               0x201
-#define FLAG_0x202               0x202
-#define FLAG_0x203               0x203
-#define FLAG_0x204               0x204
-#define FLAG_0x205               0x205
-#define FLAG_0x206               0x206
-#define FLAG_0x207               0x207
-#define FLAG_0x208               0x208
-#define FLAG_0x209               0x209
-#define FLAG_0x20A               0x20A
-#define FLAG_0x20B               0x20B
+#define FLAG_HIDE_MT_MOON_B1F_ETHER                             0x1FF
+#define FLAG_HIDE_MT_MOON_B1F_ELIXIR                            0x200
+#define FLAG_HIDE_MT_MOON_B1F_STARDUST                          0x201
+#define FLAG_HIDE_MT_MOON_B1F_STAR_PIECE                        0x202
+#define FLAG_HIDE_MT_MOON_B1F_SUPER_POTION                      0x203
+#define FLAG_HIDE_MT_MOON_B1F_FULL_HEAL                         0x204
+#define FLAG_HIDE_UNDERGROUNDPATH_NORTHSOUTHTUNNEL_POTION       0x205
+#define FLAG_HIDE_UNDERGROUNDPATH_NORTHSOUTHTUNNEL_ANTIDOTE     0x206
+#define FLAG_HIDE_UNDERGROUNDPATH_NORTHSOUTHTUNNEL_PARALYZE_HEAL 0x207
+#define FLAG_HIDE_UNDERGROUNDPATH_NORTHSOUTHTUNNEL_BURN_HEAL    0x208
+#define FLAG_HIDE_UNDERGROUNDPATH_NORTHSOUTHTUNNEL_ICE_HEAL     0x209
+#define FLAG_HIDE_UNDERGROUNDPATH_NORTHSOUTHTUNNEL_AWAKENING    0x20A
+#define FLAG_HIDE_UNDERGROUNDPATH_NORTHSOUTHTUNNEL_PP_UP        0x20B
 #define FLAG_0x20C               0x20C
 #define FLAG_0x20D               0x20D
 #define FLAG_0x20E               0x20E

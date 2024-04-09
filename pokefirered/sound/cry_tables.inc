@@ -401,6 +401,22 @@ gCryTable::
 	cry Cry_Staravia
 	cry Cry_Staraptor
 	cry Cry_Bidoof
+	cry Cry_Bibarel
+	cry Cry_Kricketot
+	cry Cry_Kricketune
+	cry Cry_Shinx
+	cry Cry_Luxio
+	cry Cry_Luxray
+	cry Cry_Cranidos
+	cry Cry_Rampardos
+	cry Cry_Shieldon
+	cry Cry_Bastiodon
+	cry Cry_Burmy
+	cry Cry_Wormadam
+	cry Cry_Mothim
+	cry Cry_Combee
+	cry Cry_Vespiquen
+	cry Cry_Pachirisu
 
 	.align 2
 gCryTable_Reverse::
@@ -805,3 +821,19 @@ gCryTable_Reverse::
 	cry_reverse Cry_Staravia
 	cry_reverse Cry_Staraptor
 	cry_reverse Cry_Bidoof
+	cry_reverse Cry_Bibarel
+	cry_reverse Cry_Kricketot
+	cry_reverse Cry_Kricketune
+	cry_reverse Cry_Shinx
+	cry_reverse Cry_Luxio
+	cry_reverse Cry_Luxray
+	cry_reverse Cry_Cranidos
+	cry_reverse Cry_Rampardos
+	cry_reverse Cry_Shieldon
+	cry_reverse Cry_Bastiodon
+	cry_reverse Cry_Burmy
+	cry_reverse Cry_Wormadam
+	cry_reverse Cry_Mothim
+	cry_reverse Cry_Combee
+	cry_reverse Cry_Vespiquen
+	cry_reverse Cry_Pachirisu
