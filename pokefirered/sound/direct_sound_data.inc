@@ -2228,6 +2228,50 @@ Cry_Rotom::
 	.incbin "sound/direct_sound_samples/cries/rotom.bin"
 
 	.align 2
+Cry_Uxie::
+	.incbin "sound/direct_sound_samples/cries/uxie.bin"
+
+	.align 2
+Cry_Mesprit::
+	.incbin "sound/direct_sound_samples/cries/mesprit.bin"
+
+	.align 2
+Cry_Azelf::
+	.incbin "sound/direct_sound_samples/cries/azelf.bin"
+
+	.align 2
+Cry_Dialga::
+	.incbin "sound/direct_sound_samples/cries/dialga.bin"
+
+	.align 2
+Cry_Palkia::
+	.incbin "sound/direct_sound_samples/cries/palkia.bin"
+
+	.align 2
+Cry_Heatran::
+	.incbin "sound/direct_sound_samples/cries/heatran.bin"
+
+	.align 2
+Cry_Regigigas::
+	.incbin "sound/direct_sound_samples/cries/regigigas.bin"
+
+	.align 2
+Cry_Giratina::
+	.incbin "sound/direct_sound_samples/cries/giratina.bin"
+
+	.align 2
+Cry_Cresselia::
+	.incbin "sound/direct_sound_samples/cries/cresselia.bin"
+
+	.align 2
+Cry_Phione::
+	.incbin "sound/direct_sound_samples/cries/phione.bin"
+
+	.align 2
+Cry_Manaphy::
+	.incbin "sound/direct_sound_samples/cries/manaphy.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

@@ -6240,4 +6240,147 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_UXIE] =
+    {
+        .categoryName = _("KNOWLEDGE"),
+        .height = 3,
+        .weight = 3,
+        .description = gUxiePokedexText,
+        .unusedDescription = gUxiePokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_MESPRIT] =
+    {
+        .categoryName = _("EMOTION"),
+        .height = 3,
+        .weight = 3,
+        .description = gMespritPokedexText,
+        .unusedDescription = gMespritPokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_AZELF] =
+    {
+        .categoryName = _("WILLPOWER"),
+        .height = 3,
+        .weight = 3,
+        .description = gAzelfPokedexText,
+        .unusedDescription = gAzelfPokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DIALGA] =
+    {
+        .categoryName = _("TEMPORAL"),
+        .height = 54,
+        .weight = 6830,
+        .description = gDialgaPokedexText,
+        .unusedDescription = gDialgaPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 721,
+        .trainerOffset = 19,
+    },
+
+    [NATIONAL_DEX_PALKIA] =
+    {
+        .categoryName = _("SPATIAL"),
+        .height = 42,
+        .weight = 3360,
+        .description = gPalkiaPokedexText,
+        .unusedDescription = gPalkiaPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 650,
+        .trainerOffset = 16,
+    },
+
+    [NATIONAL_DEX_HEATRAN] =
+    {
+        .categoryName = _("LAVA DOME"),
+        .height = 17,
+        .weight = 4300,
+        .description = gHeatranPokedexText,
+        .unusedDescription = gHeatranPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 1,
+        .trainerScale = 290,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_REGIGIGAS] =
+    {
+        .categoryName = _("COLOSSAL"),
+        .height = 37,
+        .weight = 4200,
+        .description = gRegigigasPokedexText,
+        .unusedDescription = gRegigigasPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 2,
+        .trainerScale = 610,
+        .trainerOffset = 17,
+    },
+
+    [NATIONAL_DEX_GIRATINA] =
+    {
+        .categoryName = _("RENEGADE"),
+        .height = 69,
+        .weight = 6500,
+        .description = gGiratinaPokedexText,
+        .unusedDescription = gGiratinaPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 614,
+        .trainerOffset = 13,
+    },
+
+    [NATIONAL_DEX_CRESSELIA] =
+    {
+        .categoryName = _("LUNAR"),
+        .height = 15,
+        .weight = 856,
+        .description = gCresseliaPokedexText,
+        .unusedDescription = gCresseliaPokedexTextUnused,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PHIONE] =
+    {
+        .categoryName = _("SEA DRIFTER"),
+        .height = 4,
+        .weight = 31,
+        .description = gPhionePokedexText,
+        .unusedDescription = gPhionePokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_MANAPHY] =
+    {
+        .categoryName = _("SEAFARING"),
+        .height = 3,
+        .weight = 14,
+        .description = gManaphyPokedexText,
+        .unusedDescription = gManaphyPokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
 };

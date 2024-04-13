@@ -481,6 +481,17 @@ gCryTable::
 	cry Cry_Dusknoir
 	cry Cry_Froslass
 	cry Cry_Rotom
+	cry Cry_Uxie
+	cry Cry_Mesprit
+	cry Cry_Azelf
+	cry Cry_Dialga
+	cry Cry_Palkia
+	cry Cry_Heatran
+	cry Cry_Regigigas
+	cry Cry_Giratina
+	cry Cry_Cresselia
+	cry Cry_Phione
+	cry Cry_Manaphy
 
 	.align 2
 gCryTable_Reverse::
@@ -965,3 +976,14 @@ gCryTable_Reverse::
 	cry_reverse Cry_Dusknoir
 	cry_reverse Cry_Froslass
 	cry_reverse Cry_Rotom
+	cry_reverse Cry_Uxie
+	cry_reverse Cry_Mesprit
+	cry_reverse Cry_Azelf
+	cry_reverse Cry_Dialga
+	cry_reverse Cry_Palkia
+	cry_reverse Cry_Heatran
+	cry_reverse Cry_Regigigas
+	cry_reverse Cry_Giratina
+	cry_reverse Cry_Cresselia
+	cry_reverse Cry_Phione
+	cry_reverse Cry_Manaphy

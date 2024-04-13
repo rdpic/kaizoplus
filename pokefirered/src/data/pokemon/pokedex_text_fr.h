@@ -3462,3 +3462,91 @@ const u8 gRotomPokedexText[] = _(
             "can use of Rotom's unique capabilities.");
 
 const u8 gRotomPokedexTextUnused[] = _("");
+
+const u8 gUxiePokedexText[] = _(
+    "Known as ”The Being of Knowledge,”\n"
+            "according to some sources, this Pokémon\n"
+            "provided people with the intelligence\n"
+            "necessary to solve various problems.");
+
+const u8 gUxiePokedexTextUnused[] = _("");
+
+const u8 gMespritPokedexText[] = _(
+    "Although it slumbers at the bottom of a\n"
+            "lake, its spirit is said to leave its body\n"
+            "and flitter on the water surface. It\n"
+            "taught humans of sorrow, pain, and joy.");
+
+const u8 gMespritPokedexTextUnused[] = _("");
+
+const u8 gAzelfPokedexText[] = _(
+    "This Pokémon is said to have endowed\n"
+            "humans with the determination needed to\n"
+            "do things. It is thought that Uxie, Mesprit\n"
+            "and Azelf all came from the same egg.");
+
+const u8 gAzelfPokedexTextUnused[] = _("");
+
+const u8 gDialgaPokedexText[] = _(
+    "A Pokémon spoken of in legend.\n"
+            "It completely controls the flow of time.\n"
+            "It uses its power to travel at will\n"
+            "through the past and future.");
+
+const u8 gDialgaPokedexTextUnused[] = _("");
+
+const u8 gPalkiaPokedexText[] = _(
+    "Palkia has the ability to distort space.\n"
+            "Its total control over the boundaries of\n"
+            "space enable it to transport itself to\n"
+            "faraway places and other dimensions.");
+
+const u8 gPalkiaPokedexTextUnused[] = _("");
+
+const u8 gHeatranPokedexText[] = _(
+    "Boiling blood, like magma, circulates\n"
+            "through its body. It dwells in volcanic\n"
+            "caves, using its cross-shaped feet\n"
+            "to crawl on ceilings and walls.");
+
+const u8 gHeatranPokedexTextUnused[] = _("");
+
+const u8 gRegigigasPokedexText[] = _(
+    "There is an enduring legend that\n"
+            "states this Pokémon shaped Regirock,\n"
+            "Regice, and Registeel out of clay, ice,\n"
+            "and magma.");
+
+const u8 gRegigigasPokedexTextUnused[] = _("");
+
+const u8 gGiratinaPokedexText[] = _(
+    "Giratina loses its legs upon changing into\n"
+            "this form. It's believed it hails from a\n"
+            "world where the heavens and the earth\n"
+            "are as one.");
+
+const u8 gGiratinaPokedexTextUnused[] = _("");
+
+const u8 gCresseliaPokedexText[] = _(
+    "Those who sleep holding one of\n"
+            "Cresselia's feathers are assured of\n"
+            "joyful dreams. It is said to represent\n"
+            "the crescent moon.");
+
+const u8 gCresseliaPokedexTextUnused[] = _("");
+
+const u8 gPhionePokedexText[] = _(
+    "When the water warms, they inflate the\n"
+            "flotation sac on their heads and drift\n"
+            "languidly on the sea in packs.\n"
+            "It always returns to where it was born.");
+
+const u8 gPhionePokedexTextUnused[] = _("");
+
+const u8 gManaphyPokedexText[] = _(
+    "Water makes up 80 percent of its body.\n"
+            "It starts its life with a wondrous power\n"
+            "that permits it to bond with any kind\n"
+            "of Pokémon."); 
+
+const u8 gManaphyPokedexTextUnused[] = _("");

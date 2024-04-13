@@ -116,6 +116,7 @@ static const u16 sEasyChatWordsByLetter_A[] = {
     EC_WORD_AWFUL,
     EC_WORD_AWFULLY,
     EC_WORD_AWW,
+    EC_POKEMON2(AZELF),
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(AZUMARILL),
     EC_POKEMON(AZUMARILL),
@@ -327,6 +328,7 @@ static const u16 sEasyChatWordsByLetter_C[] = {
     EC_POKEMON2(CRADILY),
     EC_POKEMON2(CRANIDOS),
     EC_POKEMON2(CRAWDAUNT),
+    EC_POKEMON2(CRESSELIA),
     EC_WORD_CRIES,
     EC_POKEMON2(CROAGUNK),
     -1, 2, // Doubled pokemon species name
@@ -375,6 +377,7 @@ static const u16 sEasyChatWordsByLetter_D[] = {
     EC_WORD_DESTROYED,
     EC_MOVE2(DETECT),
     EC_POKEMON(DEWGONG),
+    EC_POKEMON2(DIALGA),
     EC_WORD_DID,
     EC_WORD_DIDN_T,
     EC_WORD_DIET,
@@ -617,6 +620,7 @@ static const u16 sEasyChatWordsByLetter_G[] = {
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(GIRAFARIG),
     EC_POKEMON(GIRAFARIG),
+    EC_POKEMON2(GIRATINA),
     EC_WORD_GIRL,
     EC_WORD_GIVE,
     EC_WORD_GIVE_ME,
@@ -722,6 +726,7 @@ static const u16 sEasyChatWordsByLetter_H[] = {
     EC_WORD_HEARING,
     EC_WORD_HEARS,
     EC_WORD_HEART,
+    EC_POKEMON2(HEATRAN),
     EC_MOVE2(HEAT_WAVE),
     EC_WORD_HEH,
     EC_WORD_HEHE,
@@ -1031,6 +1036,7 @@ static const u16 sEasyChatWordsByLetter_M[] = {
     EC_POKEMON2(MAKUHITA),
     EC_POKEMON2(MAMOSWINE),
     EC_WORD_MAN,
+    EC_POKEMON2(MANAPHY),
     EC_POKEMON2(MANECTRIC),
     EC_POKEMON(MANKEY),
     EC_POKEMON(MANTINE),
@@ -1066,6 +1072,7 @@ static const u16 sEasyChatWordsByLetter_M[] = {
     EC_POKEMON(MEGANIUM),
     EC_MOVE(MEMENTO),
     EC_POKEMON(MEOWTH),
+    EC_POKEMON2(MESPRIT),
     EC_WORD_MESSAGE,
     EC_POKEMON2(METAGROSS),
     EC_MOVE2(METAL_CLAW),
@@ -1240,6 +1247,7 @@ static const u16 sEasyChatWordsByLetter_O[] = {
 static const u16 sEasyChatWordsByLetter_P[] = {
     EC_POKEMON2(PACHIRISU),
     EC_MOVE(PAIN_SPLIT),
+    EC_POKEMON2(PALKIA),
     EC_POKEMON(PARAS),
     EC_POKEMON(PARASECT),
     EC_WORD_PARDON,
@@ -1260,6 +1268,7 @@ static const u16 sEasyChatWordsByLetter_P[] = {
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(PHANPY),
     EC_POKEMON(PHANPY),
+    EC_POKEMON2(PHIONE),
     EC_WORD_PHONE,
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(PICHU),
@@ -1385,6 +1394,7 @@ static const u16 sEasyChatWordsByLetter_R[] = {
     EC_WORD_REFRESHING,
     EC_WORD_REFUSE,
     EC_POKEMON2(REGICE),
+    EC_POKEMON2(REGIGIGAS),
     EC_POKEMON2(REGIROCK),
     EC_POKEMON2(REGISTEEL),
     EC_WORD_REJECT,
@@ -1868,6 +1878,7 @@ static const u16 sEasyChatWordsByLetter_U[] = {
     EC_WORD_USELESS,
     EC_WORD_USES,
     EC_WORD_USING,
+    EC_POKEMON2(UXIE),
 };
 
 static const u16 sEasyChatWordsByLetter_V[] = {

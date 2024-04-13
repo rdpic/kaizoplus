@@ -83,4 +83,11 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_DUSKNOIR] = 6,
     [SPECIES_FROSLASS] = 7,
     [SPECIES_ROTOM] = 10,
+    [SPECIES_UXIE] = 6,
+    [SPECIES_MESPRIT] = 6,
+    [SPECIES_AZELF] = 6,
+    [SPECIES_GIRATINA] = 7,
+    [SPECIES_CRESSELIA] = 3,
+    [SPECIES_PHIONE] = 8,
+    [SPECIES_MANAPHY] = 8,
 };
