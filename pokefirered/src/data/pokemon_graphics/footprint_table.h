@@ -501,5 +501,9 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_MAMOSWINE] = gMonFootprint_Mamoswine,
     [SPECIES_PORYGON_Z] = gMonFootprint_Porygon_Z,
     [SPECIES_GALLADE] = gMonFootprint_Gallade,
+    [SPECIES_PROBOPASS] = gMonFootprint_Probopass,
+    [SPECIES_DUSKNOIR] = gMonFootprint_Dusknoir,
+    [SPECIES_FROSLASS] = gMonFootprint_Froslass,
+    [SPECIES_ROTOM] = gMonFootprint_Rotom,
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

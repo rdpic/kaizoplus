@@ -227,6 +227,10 @@ enum
     CRY_MAMOSWINE = 474,
     CRY_PORYGON_Z = 475,
     CRY_GALLADE = 476,
+    CRY_PROBOPASS = 477,
+    CRY_DUSKNOIR = 478,
+    CRY_FROSLASS = 479,
+    CRY_ROTOM = 480,
 };
 
 #endif

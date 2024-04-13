@@ -477,6 +477,10 @@ gCryTable::
 	cry Cry_Mamoswine
 	cry Cry_Porygon_Z
 	cry Cry_Gallade
+	cry Cry_Probopass
+	cry Cry_Dusknoir
+	cry Cry_Froslass
+	cry Cry_Rotom
 
 	.align 2
 gCryTable_Reverse::
@@ -957,3 +961,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Mamoswine
 	cry_reverse Cry_Porygon_Z
 	cry_reverse Cry_Gallade
+	cry_reverse Cry_Probopass
+	cry_reverse Cry_Dusknoir
+	cry_reverse Cry_Froslass
+	cry_reverse Cry_Rotom

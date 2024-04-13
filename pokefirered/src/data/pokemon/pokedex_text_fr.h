@@ -3430,3 +3430,35 @@ const u8 gGalladePokedexText[] = _(
             "It can sense what its foe is thinking.");
 
 const u8 gGalladePokedexTextUnused[] = _("");
+
+const u8 gProbopassPokedexText[] = _(
+    "It freely controls three units called\n"
+            "Mini-Noses using magnetic force.\n"
+            "With them, it can attack its foes from\n"
+            "three directions.");
+
+const u8 gProbopassPokedexTextUnused[] = _("");
+
+const u8 gDusknoirPokedexText[] = _(
+    "This feared Pokémon is said to travel to\n"
+            "worlds unknown. Some even believe that\n"
+            "it takes lost spirits into its pliant body\n"
+            "and guides them home.");
+
+const u8 gDusknoirPokedexTextUnused[] = _("");
+
+const u8 gFroslassPokedexText[] = _(
+    "When it finds people or Pokémon it likes,\n"
+            "it freezes them and takes them to its\n"
+            "chilly den, where they become its\n"
+            "decorations.");
+
+const u8 gFroslassPokedexTextUnused[] = _("");
+
+const u8 gRotomPokedexText[] = _(
+    "Its body is composed of plasma and loves\n"
+            "to surprise others. One boy's invention led\n"
+            "to the development of many machines that\n"
+            "can use of Rotom's unique capabilities.");
+
+const u8 gRotomPokedexTextUnused[] = _("");
