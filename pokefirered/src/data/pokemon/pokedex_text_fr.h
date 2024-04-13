@@ -3190,3 +3190,59 @@ const u8 gGarchompPokedexText[] = _(
             "enabling it to fly at high speeds.");
 
 const u8 gGarchompPokedexTextUnused[] = _("");
+
+const u8 gMunchlaxPokedexText[] = _(
+    "When it finds something that looks like\n"
+            "it might be edible, it goes right ahead\n"
+            "and swallows it whole. That's why it gets\n"
+            "fatter day by day.");
+
+const u8 gMunchlaxPokedexTextUnused[] = _("");
+
+const u8 gRioluPokedexText[] = _(
+    "It can discern the physical and emotional\n"
+            "states of people, Pokémon, and other\n"
+            "natural things from the shape of their\n"
+            "aura waves.");
+
+const u8 gRioluPokedexTextUnused[] = _("");
+
+const u8 gLucarioPokedexText[] = _(
+    "It understands human speech.\n"
+            "It is said that no foe can remain invisible\n"
+            "to Lucario, since it can detect Auras.\n"
+            "Even foes it could not otherwise see.");
+
+const u8 gLucarioPokedexTextUnused[] = _("");
+
+const u8 gHippopotasPokedexText[] = _(
+    "Hippopotas shuts its nostrils tight when\n"
+            "travelling through sand. Instead of\n"
+            "perspiration, it expels grains of sand\n"
+            "from its body.");
+
+const u8 gHippopotasPokedexTextUnused[] = _("");
+
+const u8 gHippowdonPokedexText[] = _(
+    "It is surprisingly quick to anger.\n"
+            "It brandishes its gaping mouth in a\n"
+            "display of fearsome strength and raises\n"
+            "vast quantities of sand while attacking.");
+
+const u8 gHippowdonPokedexTextUnused[] = _("");
+
+const u8 gSkorupiPokedexText[] = _(
+    "It grips prey with its tail claws and\n"
+            "injects poison. It tenaciously hangs\n"
+            "on until the poison takes.\n"
+            "It can survive a year without food.");
+
+const u8 gSkorupiPokedexTextUnused[] = _("");
+
+const u8 gDrapionPokedexText[] = _(
+    "Possessing a sturdy build, it takes\n"
+            "pride in its strength. It has the power\n"
+            "in its clawed arms to make scrap\n"
+            "out of a car.");
+
+const u8 gDrapionPokedexTextUnused[] = _("");

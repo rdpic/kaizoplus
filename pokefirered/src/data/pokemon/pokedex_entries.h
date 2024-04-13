@@ -5798,4 +5798,95 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 4,
     },
 
+    [NATIONAL_DEX_MUNCHLAX] =
+    {
+        .categoryName = _("BIG EATER"),
+        .height = 6,
+        .weight = 1050,
+        .description = gMunchlaxPokedexText,
+        .unusedDescription = gMunchlaxPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_RIOLU] =
+    {
+        .categoryName = _("EMANATION"),
+        .height = 7,
+        .weight = 202,
+        .description = gRioluPokedexText,
+        .unusedDescription = gRioluPokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_LUCARIO] =
+    {
+        .categoryName = _("AURA"),
+        .height = 12,
+        .weight = 540,
+        .description = gLucarioPokedexText,
+        .unusedDescription = gLucarioPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_HIPPOPOTAS] =
+    {
+        .categoryName = _("HIPPO"),
+        .height = 8,
+        .weight = 495,
+        .description = gHippopotasPokedexText,
+        .unusedDescription = gHippopotasPokedexTextUnused,
+        .pokemonScale = 366,
+        .pokemonOffset = 11,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_HIPPOWDON] =
+    {
+        .categoryName = _("HEAVYWEIGHT"),
+        .height = 20,
+        .weight = 3000,
+        .description = gHippowdonPokedexText,
+        .unusedDescription = gHippowdonPokedexTextUnused,
+        .pokemonScale = 261,
+        .pokemonOffset = 2,
+        .trainerScale = 334,
+        .trainerOffset = 4,
+    },
+
+    [NATIONAL_DEX_SKORUPI] =
+    {
+        .categoryName = _("SCORPION"),
+        .height = 8,
+        .weight = 120,
+        .description = gSkorupiPokedexText,
+        .unusedDescription = gSkorupiPokedexTextUnused,
+        .pokemonScale = 366,
+        .pokemonOffset = 12,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DRAPION] =
+    {
+        .categoryName = _("OGRE SCORP"),
+        .height = 13,
+        .weight = 615,
+        .description = gDrapionPokedexText,
+        .unusedDescription = gDrapionPokedexTextUnused,
+        .pokemonScale = 272,
+        .pokemonOffset = 5,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
 };

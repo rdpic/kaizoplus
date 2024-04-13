@@ -471,4 +471,11 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_GIBLE] = sGibleLevelUpLearnset,
     [SPECIES_GABITE] = sGabiteLevelUpLearnset,
     [SPECIES_GARCHOMP] = sGarchompLevelUpLearnset,
+    [SPECIES_MUNCHLAX] = sMunchlaxLevelUpLearnset,
+    [SPECIES_RIOLU] = sRioluLevelUpLearnset,
+    [SPECIES_LUCARIO] = sLucarioLevelUpLearnset,
+    [SPECIES_HIPPOPOTAS] = sHippopotasLevelUpLearnset,
+    [SPECIES_HIPPOWDON] = sHippowdonLevelUpLearnset,
+    [SPECIES_SKORUPI] = sSkorupiLevelUpLearnset,
+    [SPECIES_DRAPION] = sDrapionLevelUpLearnset,
 };

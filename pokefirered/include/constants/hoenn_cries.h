@@ -197,6 +197,13 @@ enum
     CRY_GIBLE = 444,
     CRY_GABITE = 445,
     CRY_GARCHOMP = 446,
+    CRY_MUNCHLAX = 447,
+    CRY_RIOLU = 448,
+    CRY_LUCARIO = 449,
+    CRY_HIPPOPOTAS = 450,
+    CRY_HIPPOWDON = 451,
+    CRY_SKORUPI = 452,
+    CRY_DRAPION = 453,
 };
 
 #endif

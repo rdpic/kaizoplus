@@ -2092,6 +2092,34 @@ Cry_Garchomp::
 	.incbin "sound/direct_sound_samples/cries/garchomp.bin"
 
 	.align 2
+Cry_Munchlax::
+	.incbin "sound/direct_sound_samples/cries/munchlax.bin"
+
+	.align 2
+Cry_Riolu::
+	.incbin "sound/direct_sound_samples/cries/riolu.bin"
+
+	.align 2
+Cry_Lucario::
+	.incbin "sound/direct_sound_samples/cries/lucario.bin"
+
+	.align 2
+Cry_Hippopotas::
+	.incbin "sound/direct_sound_samples/cries/hippopotas.bin"
+
+	.align 2
+Cry_Hippowdon::
+	.incbin "sound/direct_sound_samples/cries/hippowdon.bin"
+
+	.align 2
+Cry_Skorupi::
+	.incbin "sound/direct_sound_samples/cries/skorupi.bin"
+
+	.align 2
+Cry_Drapion::
+	.incbin "sound/direct_sound_samples/cries/drapion.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 
