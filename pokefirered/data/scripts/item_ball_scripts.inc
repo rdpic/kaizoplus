@@ -142,6 +142,34 @@ UndergroundPath_NorthSouthTunnel_EventScript_ItemPPUp::
 	finditem ITEM_PP_UP
 	end
 
+UndergroundPath_EastWestTunnel_EventScript_ItemPotion::
+	finditem ITEM_POTION
+	end
+
+UndergroundPath_EastWestTunnel_EventScript_ItemAntidote::
+	finditem ITEM_ANTIDOTE
+	end
+
+UndergroundPath_EastWestTunnel_EventScript_ItemParalyzeHeal::
+	finditem ITEM_PARALYZE_HEAL
+	end
+
+UndergroundPath_EastWestTunnel_EventScript_ItemBurnHeal::
+	finditem ITEM_BURN_HEAL
+	end
+
+UndergroundPath_EastWestTunnel_EventScript_ItemIceHeal::
+	finditem ITEM_ICE_HEAL
+	end
+
+UndergroundPath_EastWestTunnel_EventScript_ItemAwakening::
+	finditem ITEM_AWAKENING
+	end
+
+UndergroundPath_EastWestTunnel_EventScript_ItemPPMax::
+	finditem ITEM_PP_MAX
+	end
+
 Route9_EventScript_ItemTM40::
 	finditem ITEM_TM40
 	end
@@ -242,8 +270,8 @@ SafariZone_East_EventScript_ItemFullRestore::
 	finditem ITEM_FULL_RESTORE
 	end
 
-SafariZone_East_EventScript_ItemTM11::
-	finditem ITEM_TM11
+SafariZone_East_EventScript_ItemHM03::
+	finditem ITEM_HM03
 	end
 
 SafariZone_East_EventScript_ItemLeafStone::
