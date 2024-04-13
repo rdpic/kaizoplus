@@ -457,6 +457,9 @@ gCryTable::
 	cry Cry_Croagunk
 	cry Cry_Toxicroak
 	cry Cry_Carnivine
+	cry Cry_Finneon
+	cry Cry_Lumineon
+	cry Cry_Mantyke
 
 	.align 2
 gCryTable_Reverse::
@@ -917,3 +920,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Croagunk
 	cry_reverse Cry_Toxicroak
 	cry_reverse Cry_Carnivine
+	cry_reverse Cry_Finneon
+	cry_reverse Cry_Lumineon
+	cry_reverse Cry_Mantyke

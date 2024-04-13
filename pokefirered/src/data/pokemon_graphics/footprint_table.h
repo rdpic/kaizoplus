@@ -481,5 +481,8 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_CROAGUNK] = gMonFootprint_Croagunk,
     [SPECIES_TOXICROAK] = gMonFootprint_Toxicroak,
     [SPECIES_CARNIVINE] = gMonFootprint_Carnivine,
+    [SPECIES_FINNEON] = gMonFootprint_Finneon,
+    [SPECIES_LUMINEON] = gMonFootprint_Lumineon,
+    [SPECIES_MANTYKE] = gMonFootprint_Mantyke,
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

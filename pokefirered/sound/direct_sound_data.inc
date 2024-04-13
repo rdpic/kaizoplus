@@ -2132,6 +2132,18 @@ Cry_Carnivine::
 	.incbin "sound/direct_sound_samples/cries/carnivine.bin"
 
 	.align 2
+Cry_Finneon::
+	.incbin "sound/direct_sound_samples/cries/finneon.bin"
+
+	.align 2
+Cry_Lumineon::
+	.incbin "sound/direct_sound_samples/cries/lumineon.bin"
+
+	.align 2
+Cry_Mantyke::
+	.incbin "sound/direct_sound_samples/cries/mantyke.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

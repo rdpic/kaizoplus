@@ -537,6 +537,7 @@ static const u16 sEasyChatWordsByLetter_F[] = {
     EC_WORD_FINAL,
     EC_WORD_FINALLY,
     EC_WORD_FINISH,
+    EC_POKEMON2(FINNEON),
     EC_WORD_FIRE,
     EC_MOVE2(FIRE_BLAST),
     EC_MOVE2(FIRE_PUNCH),
@@ -973,6 +974,7 @@ static const u16 sEasyChatWordsByLetter_L[] = {
     EC_POKEMON2(LUDICOLO),
     EC_POKEMON(LUGIA),
     EC_WORD_LUKEWARM,
+    EC_POKEMON2(LUMINEON),
     EC_POKEMON2(LUNATONE),
     EC_MOVE2(LUSTER_PURGE),
     EC_POKEMON2(LUVDISC),
@@ -1020,6 +1022,7 @@ static const u16 sEasyChatWordsByLetter_M[] = {
     EC_POKEMON2(MANECTRIC),
     EC_POKEMON(MANKEY),
     EC_POKEMON(MANTINE),
+    EC_POKEMON(MANTYKE),
     EC_POKEMON(MAREEP),
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(MARILL),

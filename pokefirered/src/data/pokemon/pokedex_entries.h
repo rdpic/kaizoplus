@@ -5928,4 +5928,43 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_FINNEON] =
+    {
+        .categoryName = _("WING FISH"),
+        .height = 4,
+        .weight = 70,
+        .description = gFinneonPokedexText,
+        .unusedDescription = gFinneonPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_LUMINEON] =
+    {
+        .categoryName = _("NEON"),
+        .height = 12,
+        .weight = 240,
+        .description = gLumineonPokedexText,
+        .unusedDescription = gLumineonPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_MANTYKE] =
+    {
+        .categoryName = _("KITE"),
+        .height = 10,
+        .weight = 650,
+        .description = gMantykePokedexText,
+        .unusedDescription = gMantykePokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
 };

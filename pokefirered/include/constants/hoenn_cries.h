@@ -207,6 +207,9 @@ enum
     CRY_CROAGUNK = 454,
     CRY_TOXICROAK = 455,
     CRY_CARNIVINE = 456,
+    CRY_FINNEON = 457,
+    CRY_LUMINEON = 458,
+    CRY_MANTYKE = 459,
 };
 
 #endif

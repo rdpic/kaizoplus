@@ -3270,3 +3270,27 @@ const u8 gCarnivinePokedexText[] = _(
             "saliva, then chomps down.");
 
 const u8 gCarnivinePokedexTextUnused[] = _("");
+
+const u8 gFinneonPokedexText[] = _(
+    "Its double tail fins propel its energetic\n"
+            "jumps. When it breaks the surface of the\n"
+            "sea, Wingull swoop down to grab it on\n"
+            "the fly.");
+
+const u8 gFinneonPokedexTextUnused[] = _("");
+
+const u8 gLumineonPokedexText[] = _(
+    "Lumineon swimming in the darkness\n"
+            "of the deep sea look like stars shining\n"
+            "in the night sky. It competes for food\n"
+            "with Lanturn.");
+
+const u8 gLumineonPokedexTextUnused[] = _("");
+
+const u8 gMantykePokedexText[] = _(
+    "When it swims close to the surface\n"
+            "of the ocean, people aboard ships are\n"
+            "able to observe the pattern on its back.\n"
+            "It often swims in a school of Remoraid.");
+
+const u8 gMantykePokedexTextUnused[] = _("");
