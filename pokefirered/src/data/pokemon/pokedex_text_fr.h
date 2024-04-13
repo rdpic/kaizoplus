@@ -3366,3 +3366,35 @@ const u8 gMagmortarPokedexText[] = _(
             "fireballs hotter than 3,600ºF.");
 
 const u8 gMagmortarPokedexTextUnused[] = _("");
+
+const u8 gTogekissPokedexText[] = _(
+    "As everyone knows, it visits peaceful\n"
+            "regions, bringing them gifts of kindness\n"
+            "and sweet blessings. It will never appear\n"
+            "where there is strife.");
+
+const u8 gTogekissPokedexTextUnused[] = _("");
+
+const u8 gYanmegaPokedexText[] = _(
+    "This six-legged Pokémon is easily capable\n"
+            "of transporting an adult in flight. It is\n"
+            "adept at biting apart foes while flying\n"
+            "by at high speed.");
+
+const u8 gYanmegaPokedexTextUnused[] = _("");
+
+const u8 gLeafeonPokedexText[] = _(
+    "Its cellular composition is closer to\n"
+            "that of a plant than an animal. It uses\n"
+            "photosynthesis to produce its energy\n"
+            "supply without eating food.");
+
+const u8 gLeafeonPokedexTextUnused[] = _("");
+
+const u8 gGlaceonPokedexText[] = _(
+    "It can control its body temperature\n"
+            "at will. This enables it to freeze the\n"
+            "moisture in the atmosphere, creating\n"
+            "flurries of diamond dust.");
+
+const u8 gGlaceonPokedexTextUnused[] = _("");

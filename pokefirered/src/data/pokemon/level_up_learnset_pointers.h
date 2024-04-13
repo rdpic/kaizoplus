@@ -493,4 +493,8 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_TANGROWTH] = sTangrowthLevelUpLearnset,
     [SPECIES_ELECTIVIRE] = sElectivireLevelUpLearnset,
     [SPECIES_MAGMORTAR] = sMagmortarLevelUpLearnset,
+    [SPECIES_TOGEKISS] = sTogekissLevelUpLearnset,
+    [SPECIES_YANMEGA] = sYanmegaLevelUpLearnset,
+    [SPECIES_LEAFEON] = sLeafeonLevelUpLearnset,
+    [SPECIES_GLACEON] = sGlaceonLevelUpLearnset,
 };

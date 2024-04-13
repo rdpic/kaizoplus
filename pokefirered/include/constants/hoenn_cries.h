@@ -219,6 +219,10 @@ enum
     CRY_TANGROWTH = 466,
     CRY_ELECTIVIRE = 467,
     CRY_MAGMORTAR = 468,
+    CRY_TOGEKISS = 469,
+    CRY_YANMEGA = 470,
+    CRY_LEAFEON = 471,
+    CRY_GLACEON = 472,
 };
 
 #endif

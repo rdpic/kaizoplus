@@ -75,4 +75,6 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_BRONZONG] = 7,
     [SPECIES_CARNIVINE] = 8,
     [SPECIES_MAGNEZONE] = 4,
+    [SPECIES_TOGEKISS] = 14,
+    [SPECIES_YANMEGA] = 6,
 };
