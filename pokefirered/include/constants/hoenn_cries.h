@@ -223,6 +223,10 @@ enum
     CRY_YANMEGA = 470,
     CRY_LEAFEON = 471,
     CRY_GLACEON = 472,
+    CRY_GLISCOR = 473,
+    CRY_MAMOSWINE = 474,
+    CRY_PORYGON_Z = 475,
+    CRY_GALLADE = 476,
 };
 
 #endif

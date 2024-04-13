@@ -473,6 +473,10 @@ gCryTable::
 	cry Cry_Yanmega
 	cry Cry_Leafeon
 	cry Cry_Glaceon
+	cry Cry_Gliscor
+	cry Cry_Mamoswine
+	cry Cry_Porygon_Z
+	cry Cry_Gallade
 
 	.align 2
 gCryTable_Reverse::
@@ -949,3 +953,7 @@ gCryTable_Reverse::
 	cry_reverse Cry_Yanmega
 	cry_reverse Cry_Leafeon
 	cry_reverse Cry_Glaceon
+	cry_reverse Cry_Gliscor
+	cry_reverse Cry_Mamoswine
+	cry_reverse Cry_Porygon_Z
+	cry_reverse Cry_Gallade

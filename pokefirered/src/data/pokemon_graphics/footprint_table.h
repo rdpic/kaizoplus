@@ -497,5 +497,9 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_YANMEGA] = gMonFootprint_Yanmega,
     [SPECIES_LEAFEON] = gMonFootprint_Leafeon,
     [SPECIES_GLACEON] = gMonFootprint_Glaceon,
+    [SPECIES_GLISCOR] = gMonFootprint_Gliscor,
+    [SPECIES_MAMOSWINE] = gMonFootprint_Mamoswine,
+    [SPECIES_PORYGON_Z] = gMonFootprint_Porygon_Z,
+    [SPECIES_GALLADE] = gMonFootprint_Gallade,
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

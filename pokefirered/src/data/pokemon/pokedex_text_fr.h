@@ -3398,3 +3398,35 @@ const u8 gGlaceonPokedexText[] = _(
             "flurries of diamond dust.");
 
 const u8 gGlaceonPokedexTextUnused[] = _("");
+
+const u8 gGliscorPokedexText[] = _(
+    "Gliscor observes prey while hanging\n"
+            "upside down from branches. Its flight is\n"
+            "soundless. When the chance presents\n"
+            "itself, it swoops!");
+
+const u8 gGliscorPokedexTextUnused[] = _("");
+
+const u8 gMamoswinePokedexText[] = _(
+    "A frozen Mamoswine was dug from ice\n"
+            "dating back 10,000 years. It woke up to\n"
+            "much amazement. This Pokémon has been\n"
+            "around for a long, long, long time.");
+
+const u8 gMamoswinePokedexTextUnused[] = _("");
+
+const u8 gPorygon_ZPokedexText[] = _(
+    "In order to create a more advanced\n"
+            "Pokémon, an additional program was\n"
+            "installed, but apparently it contained a\n"
+            "defect that made it move oddly.");
+
+const u8 gPorygon_ZPokedexTextUnused[] = _("");
+
+const u8 gGalladePokedexText[] = _(
+    "A master of courtesy and swordsmanship,\n"
+            "it fights using extending swords on its\n"
+            "elbows when trying to protect someone.\n"
+            "It can sense what its foe is thinking.");
+
+const u8 gGalladePokedexTextUnused[] = _("");

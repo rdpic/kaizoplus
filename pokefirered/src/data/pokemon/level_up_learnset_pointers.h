@@ -497,4 +497,8 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_YANMEGA] = sYanmegaLevelUpLearnset,
     [SPECIES_LEAFEON] = sLeafeonLevelUpLearnset,
     [SPECIES_GLACEON] = sGlaceonLevelUpLearnset,
+    [SPECIES_GLISCOR] = sGliscorLevelUpLearnset,
+    [SPECIES_MAMOSWINE] = sMamoswineLevelUpLearnset,
+    [SPECIES_PORYGON_Z] = sPorygon_ZLevelUpLearnset,
+    [SPECIES_GALLADE] = sGalladeLevelUpLearnset,
 };

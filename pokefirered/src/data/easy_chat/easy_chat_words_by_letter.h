@@ -593,6 +593,7 @@ static const u16 sEasyChatWordsByLetter_F[] = {
 
 static const u16 sEasyChatWordsByLetter_G[] = {
     EC_POKEMON2(GABITE),
+    EC_POKEMON2(GALLADE),
     EC_WORD_GAME,
     EC_POKEMON2(GARCHOMP),
     EC_POKEMON2(GARDEVOIR),
@@ -624,6 +625,7 @@ static const u16 sEasyChatWordsByLetter_G[] = {
     EC_POKEMON2(GLAMEOW),
     EC_MOVE2(GLARE),
     EC_POKEMON(GLIGAR),
+    EC_POKEMON2(GLISCOR),
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(GLOOM),
     EC_POKEMON(GLOOM),
@@ -1025,6 +1027,7 @@ static const u16 sEasyChatWordsByLetter_M[] = {
     EC_WORD_MAKE,
     EC_WORD_MAKING,
     EC_POKEMON2(MAKUHITA),
+    EC_POKEMON2(MAMOSWINE),
     EC_WORD_MAN,
     EC_POKEMON2(MANECTRIC),
     EC_POKEMON(MANKEY),
@@ -1303,6 +1306,7 @@ static const u16 sEasyChatWordsByLetter_P[] = {
     EC_POKEMON2(POOCHYENA),
     EC_WORD_POPULAR,
     EC_POKEMON(PORYGON),
+    EC_POKEMON2(PORYGON_Z),
     EC_POKEMON(PORYGON2),
     EC_MOVE2(POUND),
     EC_MOVE(POWDER_SNOW),

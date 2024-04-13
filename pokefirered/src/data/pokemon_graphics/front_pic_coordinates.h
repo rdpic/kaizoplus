@@ -2485,6 +2485,26 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 10,
     },
+    [SPECIES_GLISCOR] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_MAMOSWINE] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 4,
+    },
+    [SPECIES_PORYGON_Z] =
+    {
+        .size = MON_COORDS_SIZE(40, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_GALLADE] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 1,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 24),

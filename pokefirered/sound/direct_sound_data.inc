@@ -2196,6 +2196,22 @@ Cry_Glaceon::
 	.incbin "sound/direct_sound_samples/cries/glaceon.bin"
 
 	.align 2
+Cry_Gliscor::
+	.incbin "sound/direct_sound_samples/cries/gliscor.bin"
+
+	.align 2
+Cry_Mamoswine::
+	.incbin "sound/direct_sound_samples/cries/mamoswine.bin"
+
+	.align 2
+Cry_Porygon_Z::
+	.incbin "sound/direct_sound_samples/cries/porygon_z.bin"
+
+	.align 2
+Cry_Gallade::
+	.incbin "sound/direct_sound_samples/cries/gallade.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 
