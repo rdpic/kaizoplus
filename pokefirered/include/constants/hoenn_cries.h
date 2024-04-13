@@ -182,6 +182,11 @@ enum
     CRY_LOPUNNY = 429,
     CRY_MISMAGIUS = 430,
     CRY_HONCHKROW = 431,
+    CRY_GLAMEOW = 432,
+    CRY_PURUGLY = 433,
+    CRY_CHINGLING = 434,
+    CRY_STUNKY = 435,
+    CRY_SKUNTANK = 436,
 };
 
 #endif

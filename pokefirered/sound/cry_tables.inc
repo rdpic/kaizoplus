@@ -432,6 +432,11 @@ gCryTable::
 	cry Cry_Lopunny
 	cry Cry_Mismagius
 	cry Cry_Honchkrow
+	cry Cry_Glameow
+	cry Cry_Purugly
+	cry Cry_Chingling
+	cry Cry_Stunky
+	cry Cry_Skuntank
 
 	.align 2
 gCryTable_Reverse::
@@ -867,3 +872,8 @@ gCryTable_Reverse::
 	cry_reverse Cry_Lopunny
 	cry_reverse Cry_Mismagius
 	cry_reverse Cry_Honchkrow
+	cry_reverse Cry_Glameow
+	cry_reverse Cry_Purugly
+	cry_reverse Cry_Chingling
+	cry_reverse Cry_Stunky
+	cry_reverse Cry_Skuntank

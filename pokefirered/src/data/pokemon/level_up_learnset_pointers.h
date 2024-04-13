@@ -456,4 +456,9 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_LOPUNNY] = sLopunnyLevelUpLearnset,
     [SPECIES_MISMAGIUS] = sMismagiusLevelUpLearnset,
     [SPECIES_HONCHKROW] = sHonchkrowLevelUpLearnset,
+    [SPECIES_GLAMEOW] = sGlameowLevelUpLearnset,
+    [SPECIES_PURUGLY] = sPuruglyLevelUpLearnset,
+    [SPECIES_CHINGLING] = sChinglingLevelUpLearnset,
+    [SPECIES_STUNKY] = sStunkyLevelUpLearnset,
+    [SPECIES_SKUNTANK] = sSkuntankLevelUpLearnset,
 };

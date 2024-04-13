@@ -2032,6 +2032,26 @@ Cry_Honchkrow::
 	.incbin "sound/direct_sound_samples/cries/honchkrow.bin"
 
 	.align 2
+Cry_Glameow::
+	.incbin "sound/direct_sound_samples/cries/glameow.bin"
+
+	.align 2
+Cry_Purugly::
+	.incbin "sound/direct_sound_samples/cries/purugly.bin"
+
+	.align 2
+Cry_Chingling::
+	.incbin "sound/direct_sound_samples/cries/chingling.bin"
+
+	.align 2
+Cry_Stunky::
+	.incbin "sound/direct_sound_samples/cries/stunky.bin"
+
+	.align 2
+Cry_Skuntank::
+	.incbin "sound/direct_sound_samples/cries/skuntank.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

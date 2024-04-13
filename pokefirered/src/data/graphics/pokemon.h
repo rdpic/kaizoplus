@@ -3029,6 +3029,41 @@ const u32 gMonShinyPalette_Honchkrow[] = INCBIN_U32("graphics/pokemon/honchkrow/
 const u8 gMonIcon_Honchkrow[] = INCBIN_U8("graphics/pokemon/honchkrow/icon.4bpp");
 const u8 gMonFootprint_Honchkrow[] = INCBIN_U8("graphics/pokemon/honchkrow/footprint.1bpp");
 
+const u32 gMonFrontPic_Glameow[] = INCBIN_U32("graphics/pokemon/glameow/front.4bpp.lz");
+const u32 gMonPalette_Glameow[] = INCBIN_U32("graphics/pokemon/glameow/normal.gbapal.lz");
+const u32 gMonBackPic_Glameow[] = INCBIN_U32("graphics/pokemon/glameow/back.4bpp.lz");
+const u32 gMonShinyPalette_Glameow[] = INCBIN_U32("graphics/pokemon/glameow/shiny.gbapal.lz");
+const u8 gMonIcon_Glameow[] = INCBIN_U8("graphics/pokemon/glameow/icon.4bpp");
+const u8 gMonFootprint_Glameow[] = INCBIN_U8("graphics/pokemon/glameow/footprint.1bpp");
+
+const u32 gMonFrontPic_Purugly[] = INCBIN_U32("graphics/pokemon/purugly/front.4bpp.lz");
+const u32 gMonPalette_Purugly[] = INCBIN_U32("graphics/pokemon/purugly/normal.gbapal.lz");
+const u32 gMonBackPic_Purugly[] = INCBIN_U32("graphics/pokemon/purugly/back.4bpp.lz");
+const u32 gMonShinyPalette_Purugly[] = INCBIN_U32("graphics/pokemon/purugly/shiny.gbapal.lz");
+const u8 gMonIcon_Purugly[] = INCBIN_U8("graphics/pokemon/purugly/icon.4bpp");
+const u8 gMonFootprint_Purugly[] = INCBIN_U8("graphics/pokemon/purugly/footprint.1bpp");
+
+const u32 gMonFrontPic_Chingling[] = INCBIN_U32("graphics/pokemon/chingling/front.4bpp.lz");
+const u32 gMonPalette_Chingling[] = INCBIN_U32("graphics/pokemon/chingling/normal.gbapal.lz");
+const u32 gMonBackPic_Chingling[] = INCBIN_U32("graphics/pokemon/chingling/back.4bpp.lz");
+const u32 gMonShinyPalette_Chingling[] = INCBIN_U32("graphics/pokemon/chingling/shiny.gbapal.lz");
+const u8 gMonIcon_Chingling[] = INCBIN_U8("graphics/pokemon/chingling/icon.4bpp");
+const u8 gMonFootprint_Chingling[] = INCBIN_U8("graphics/pokemon/chingling/footprint.1bpp");
+
+const u32 gMonFrontPic_Stunky[] = INCBIN_U32("graphics/pokemon/stunky/front.4bpp.lz");
+const u32 gMonPalette_Stunky[] = INCBIN_U32("graphics/pokemon/stunky/normal.gbapal.lz");
+const u32 gMonBackPic_Stunky[] = INCBIN_U32("graphics/pokemon/stunky/back.4bpp.lz");
+const u32 gMonShinyPalette_Stunky[] = INCBIN_U32("graphics/pokemon/stunky/shiny.gbapal.lz");
+const u8 gMonIcon_Stunky[] = INCBIN_U8("graphics/pokemon/stunky/icon.4bpp");
+const u8 gMonFootprint_Stunky[] = INCBIN_U8("graphics/pokemon/stunky/footprint.1bpp");
+
+const u32 gMonFrontPic_Skuntank[] = INCBIN_U32("graphics/pokemon/skuntank/front.4bpp.lz");
+const u32 gMonPalette_Skuntank[] = INCBIN_U32("graphics/pokemon/skuntank/normal.gbapal.lz");
+const u32 gMonBackPic_Skuntank[] = INCBIN_U32("graphics/pokemon/skuntank/back.4bpp.lz");
+const u32 gMonShinyPalette_Skuntank[] = INCBIN_U32("graphics/pokemon/skuntank/shiny.gbapal.lz");
+const u8 gMonIcon_Skuntank[] = INCBIN_U8("graphics/pokemon/skuntank/icon.4bpp");
+const u8 gMonFootprint_Skuntank[] = INCBIN_U8("graphics/pokemon/skuntank/footprint.1bpp");
+
 const u32 gMonFrontPic_Egg[] = INCBIN_U32("graphics/pokemon/egg/front.4bpp.lz");
 const u32 gMonPalette_Egg[] = INCBIN_U32("graphics/pokemon/egg/normal.gbapal.lz");
 

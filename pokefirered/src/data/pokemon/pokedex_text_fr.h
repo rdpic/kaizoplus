@@ -3070,3 +3070,43 @@ const u8 gHonchkrowPokedexText[] = _(
             "mistakes of its cronies.");
 
 const u8 gHonchkrowPokedexTextUnused[] = _("");
+
+const u8 gGlameowPokedexText[] = _(
+    "It is a very fickle Pokémon, which is \n"
+            "very popular among some. It claws its\n"
+            "Trainer's nose if it isn't fed and\n"
+            "purrs when affectionate.");
+
+const u8 gGlameowPokedexTextUnused[] = _("");
+
+const u8 gPuruglyPokedexText[] = _(
+    "It is a brazen brute that barges its way\n"
+            "into another Pokémon's nest and claims\n"
+            "it as its own. It binds its body with its\n"
+            "tails to make itself look bigger.");
+
+const u8 gPuruglyPokedexTextUnused[] = _("");
+
+const u8 gChinglingPokedexText[] = _(
+    "There is an orb inside its mouth.\n"
+            "When it hops, the orb bounces all\n"
+            "over and makes a ringing sound.\n"
+            "It can cry for an awfully long time.");
+
+const u8 gChinglingPokedexTextUnused[] = _("");
+
+const u8 gStunkyPokedexText[] = _(
+    "It protects itself by spraying a\n"
+            "nose-curling, stinky fluid from its rear\n"
+            "to repel attackers. The stench lingers\n"
+            "for 24 hours.");
+
+const u8 gStunkyPokedexTextUnused[] = _("");
+
+const u8 gSkuntankPokedexText[] = _(
+    "It attacks by spraying a horribly smelly\n"
+            "fluid from the tip of its tail. The fluid\n"
+            "smells worse the longer it is allowed\n"
+            "to fester.");
+
+const u8 gSkuntankPokedexTextUnused[] = _("");

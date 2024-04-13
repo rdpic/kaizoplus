@@ -2280,6 +2280,31 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 6,
     },
+    [SPECIES_GLAMEOW] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 8,
+    },
+    [SPECIES_PURUGLY] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 5,
+    },
+    [SPECIES_CHINGLING] =
+    {
+        .size = MON_COORDS_SIZE(40, 40),
+        .y_offset = 15,
+    },
+    [SPECIES_STUNKY] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 13,
+    },
+    [SPECIES_SKUNTANK] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 7,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 24),

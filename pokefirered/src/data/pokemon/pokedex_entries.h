@@ -5603,6 +5603,71 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_GLAMEOW] =
+    {
+        .categoryName = _("CATTY"),
+        .height = 5,
+        .weight = 39,
+        .description = gGlameowPokedexText,
+        .unusedDescription = gGlameowPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PURUGLY] =
+    {
+        .categoryName = _("TIGER CAT"),
+        .height = 10,
+        .weight = 438,
+        .description = gPuruglyPokedexText,
+        .unusedDescription = gPuruglyPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_CHINGLING] =
+    {
+        .categoryName = _("BELL"),
+        .height = 2,
+        .weight = 6,
+        .description = gChinglingPokedexText,
+        .unusedDescription = gChinglingPokedexTextUnused,
+        .pokemonScale = 682,
+        .pokemonOffset = 24,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_STUNKY] =
+    {
+        .categoryName = _("SKUNK"),
+        .height = 4,
+        .weight = 192,
+        .description = gStunkyPokedexText,
+        .unusedDescription = gStunkyPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SKUNTANK] =
+    {
+        .categoryName = _("SKUNK"),
+        .height = 10,
+        .weight = 380,
+        .description = gSkuntankPokedexText,
+        .unusedDescription = gSkuntankPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 9,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
 
 
 };

@@ -261,6 +261,7 @@ static const u16 sEasyChatWordsByLetter_C[] = {
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(CHINCHOU),
     EC_POKEMON(CHINCHOU),
+    EC_POKEMON2(CHINGLING),
     EC_WORD_CHLOROPHYLL,
     EC_WORD_CHOICE,
     EC_WORD_CHOOSE,
@@ -606,6 +607,7 @@ static const u16 sEasyChatWordsByLetter_G[] = {
     EC_WORD_GIVE_UP,
     EC_WORD_GIVES,
     EC_POKEMON2(GLALIE),
+    EC_POKEMON2(GLAMEOW),
     EC_MOVE2(GLARE),
     EC_POKEMON(GLIGAR),
     -1, 2, // Doubled pokemon species name
@@ -1303,6 +1305,7 @@ static const u16 sEasyChatWordsByLetter_P[] = {
     EC_POKEMON(PUPITAR),
     EC_WORD_PURE_POWER,
     EC_MOVE(PURSUIT),
+    EC_POKEMON2(PURUGLY),
     EC_WORD_PUSHOVER,
 };
 
@@ -1511,6 +1514,7 @@ static const u16 sEasyChatWordsByLetter_S[] = {
     EC_POKEMON(SKIPLOOM),
     EC_POKEMON2(SKITTY),
     EC_MOVE2(SKULL_BASH),
+    EC_POKEMON2(SKUNTANK),
     EC_MOVE(SKY_ATTACK),
     EC_MOVE(SKY_UPPERCUT),
     EC_MOVE2(SLACK_OFF),
@@ -1622,6 +1626,7 @@ static const u16 sEasyChatWordsByLetter_S[] = {
     EC_MOVE2(STRUGGLE),
     EC_WORD_STUDY,
     EC_MOVE(STUN_SPORE),
+    EC_POKEMON2(STUNKY),
     EC_WORD_STURDY,
     EC_MOVE(SUBMISSION),
     EC_MOVE2(SUBSTITUTE),
