@@ -3342,3 +3342,27 @@ const u8 gRhyperiorPokedexText[] = _(
             "Geodude are shot at rare times.");
 
 const u8 gRhyperiorPokedexTextUnused[] = _("");
+
+const u8 gTangrowthPokedexText[] = _(
+    "It ensnares prey by extending arms made\n"
+            "of vines. Even if one of its arms is eaten,\n"
+            "it's fine. The Pokémon regenerates quickly\n"
+            "and will go right back to normal.");
+
+const u8 gTangrowthPokedexTextUnused[] = _("");
+
+const u8 gElectivirePokedexText[] = _(
+    "When it gets excited, it thumps its chest.\n"
+            "With every thud, thunder roars, electric\n"
+            "sparks shower all around and blue sparks\n"
+            "begin to crackle between its horns.");
+
+const u8 gElectivirePokedexTextUnused[] = _("");
+
+const u8 gMagmortarPokedexText[] = _(
+    "According to what is known, a single pair\n"
+            "of male and female Magmortar lives in\n"
+            "one volcano. From its arm, it launches\n"
+            "fireballs hotter than 3,600ºF.");
+
+const u8 gMagmortarPokedexTextUnused[] = _("");

@@ -490,5 +490,8 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_MAGNEZONE] = gMonFootprint_Magnezone,
     [SPECIES_LICKILICKY] = gMonFootprint_Lickilicky,
     [SPECIES_RHYPERIOR] = gMonFootprint_Rhyperior,
+    [SPECIES_TANGROWTH] = gMonFootprint_Tangrowth,
+    [SPECIES_ELECTIVIRE] = gMonFootprint_Electivire,
+    [SPECIES_MAGMORTAR] = gMonFootprint_Magmortar,
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

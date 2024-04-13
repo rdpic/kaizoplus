@@ -466,6 +466,9 @@ gCryTable::
 	cry Cry_Magnezone
 	cry Cry_Lickilicky
 	cry Cry_Rhyperior
+	cry Cry_Tangrowth
+	cry Cry_Electivire
+	cry Cry_Magmortar
 
 	.align 2
 gCryTable_Reverse::
@@ -935,3 +938,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Magnezone
 	cry_reverse Cry_Lickilicky
 	cry_reverse Cry_Rhyperior
+	cry_reverse Cry_Tangrowth
+	cry_reverse Cry_Electivire
+	cry_reverse Cry_Magmortar

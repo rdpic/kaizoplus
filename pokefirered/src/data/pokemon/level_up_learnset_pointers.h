@@ -490,4 +490,7 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_MAGNEZONE] = sMagnezoneLevelUpLearnset,
     [SPECIES_LICKILICKY] = sLickilickyLevelUpLearnset,
     [SPECIES_RHYPERIOR] = sRhyperiorLevelUpLearnset,
+    [SPECIES_TANGROWTH] = sTangrowthLevelUpLearnset,
+    [SPECIES_ELECTIVIRE] = sElectivireLevelUpLearnset,
+    [SPECIES_MAGMORTAR] = sMagmortarLevelUpLearnset,
 };

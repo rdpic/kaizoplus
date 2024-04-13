@@ -461,6 +461,7 @@ static const u16 sEasyChatWordsByLetter_E[] = {
     EC_WORD_EHEHE,
     EC_POKEMON(EKANS),
     EC_POKEMON(ELECTABUZZ),
+    EC_POKEMON2(ELECTIVIRE),
     EC_WORD_ELECTRIC,
     EC_POKEMON2(ELECTRIKE),
     -1, 2, // Doubled pokemon species name
@@ -1008,6 +1009,7 @@ static const u16 sEasyChatWordsByLetter_M[] = {
     EC_POKEMON(MAGIKARP),
     EC_WORD_MAGMA_ARMOR,
     EC_POKEMON(MAGMAR),
+    EC_POKEMON2(MAGMORTAR),
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(MAGNEMITE),
     EC_POKEMON(MAGNEMITE),
@@ -1704,6 +1706,7 @@ static const u16 sEasyChatWordsByLetter_T[] = {
     EC_WORD_TALK,
     EC_WORD_TALKING,
     EC_POKEMON(TANGELA),
+    EC_POKEMON2(TANGROWTH),
     EC_WORD_TASTY,
     EC_MOVE2(TAUNT),
     EC_POKEMON(TAUROS),
