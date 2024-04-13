@@ -3246,6 +3246,27 @@ const u32 gMonShinyPalette_Weavile[] = INCBIN_U32("graphics/pokemon/weavile/shin
 const u8 gMonIcon_Weavile[] = INCBIN_U8("graphics/pokemon/weavile/icon.4bpp");
 const u8 gMonFootprint_Weavile[] = INCBIN_U8("graphics/pokemon/weavile/footprint.1bpp");
 
+const u32 gMonFrontPic_Magnezone[] = INCBIN_U32("graphics/pokemon/magnezone/front.4bpp.lz");
+const u32 gMonPalette_Magnezone[] = INCBIN_U32("graphics/pokemon/magnezone/normal.gbapal.lz");
+const u32 gMonBackPic_Magnezone[] = INCBIN_U32("graphics/pokemon/magnezone/back.4bpp.lz");
+const u32 gMonShinyPalette_Magnezone[] = INCBIN_U32("graphics/pokemon/magnezone/shiny.gbapal.lz");
+const u8 gMonIcon_Magnezone[] = INCBIN_U8("graphics/pokemon/magnezone/icon.4bpp");
+const u8 gMonFootprint_Magnezone[] = INCBIN_U8("graphics/pokemon/magnezone/footprint.1bpp");
+
+const u32 gMonFrontPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/front.4bpp.lz");
+const u32 gMonPalette_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/normal.gbapal.lz");
+const u32 gMonBackPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/back.4bpp.lz");
+const u32 gMonShinyPalette_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/shiny.gbapal.lz");
+const u8 gMonIcon_Lickilicky[] = INCBIN_U8("graphics/pokemon/lickilicky/icon.4bpp");
+const u8 gMonFootprint_Lickilicky[] = INCBIN_U8("graphics/pokemon/lickilicky/footprint.1bpp");
+
+const u32 gMonFrontPic_Rhyperior[] = INCBIN_U32("graphics/pokemon/rhyperior/front.4bpp.lz");
+const u32 gMonPalette_Rhyperior[] = INCBIN_U32("graphics/pokemon/rhyperior/normal.gbapal.lz");
+const u32 gMonBackPic_Rhyperior[] = INCBIN_U32("graphics/pokemon/rhyperior/back.4bpp.lz");
+const u32 gMonShinyPalette_Rhyperior[] = INCBIN_U32("graphics/pokemon/rhyperior/shiny.gbapal.lz");
+const u8 gMonIcon_Rhyperior[] = INCBIN_U8("graphics/pokemon/rhyperior/icon.4bpp");
+const u8 gMonFootprint_Rhyperior[] = INCBIN_U8("graphics/pokemon/rhyperior/footprint.1bpp");
+
 const u32 gMonFrontPic_Egg[] = INCBIN_U32("graphics/pokemon/egg/front.4bpp.lz");
 const u32 gMonPalette_Egg[] = INCBIN_U32("graphics/pokemon/egg/normal.gbapal.lz");
 

@@ -3318,3 +3318,27 @@ const u8 gWeavilePokedexText[] = _(
             "with coordinated attacks.");
 
 const u8 gWeavilePokedexTextUnused[] = _("");
+
+const u8 gMagnezonePokedexText[] = _(
+    "As it zooms through the sky, this\n"
+            "Pokémon seems to be receiving signals\n"
+            "of unknown origin, while transmitting its\n"
+            "own signals of unknown purpose.");
+
+const u8 gMagnezonePokedexTextUnused[] = _("");
+
+const u8 gLickilickyPokedexText[] = _(
+    "The long tongue is always soggy with\n"
+            "slobber. The saliva contains a solvent\n"
+            "that causes numbness. Getting too close\n"
+            "to it will leave you soaked with drool.");
+
+const u8 gLickilickyPokedexTextUnused[] = _("");
+
+const u8 gRhyperiorPokedexText[] = _(
+    "It can launch a rock held in its hand\n"
+            "like a missile by tightening and then\n"
+            "expanding its muscles instantaneously.\n"
+            "Geodude are shot at rare times.");
+
+const u8 gRhyperiorPokedexTextUnused[] = _("");

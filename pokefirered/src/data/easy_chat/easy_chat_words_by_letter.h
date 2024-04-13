@@ -932,6 +932,7 @@ static const u16 sEasyChatWordsByLetter_L[] = {
     EC_WORD_LEVEL,
     EC_WORD_LEVITATE,
     EC_MOVE(LICK),
+    EC_POKEMON2(LICKILICKY),
     EC_POKEMON(LICKITUNG),
     EC_WORD_LIE,
     EC_WORD_LIFE,
@@ -1014,6 +1015,7 @@ static const u16 sEasyChatWordsByLetter_M[] = {
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(MAGNETON),
     EC_POKEMON(MAGNETON),
+    EC_POKEMON2(MAGNEZONE),
     EC_MOVE2(MAGNITUDE),
     EC_WORD_MAIL,
     EC_WORD_MAKE,
@@ -1390,6 +1392,7 @@ static const u16 sEasyChatWordsByLetter_R[] = {
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(RHYHORN),
     EC_POKEMON(RHYHORN),
+    EC_POKEMON2(RHYPERIOR),
     EC_WORD_RIBBON,
     EC_WORD_RICKETY,
     EC_WORD_RIGHT,

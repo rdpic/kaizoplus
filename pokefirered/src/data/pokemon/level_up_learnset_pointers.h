@@ -487,4 +487,7 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_SNOVER] = sSnoverLevelUpLearnset,
     [SPECIES_ABOMASNOW] = sAbomasnowLevelUpLearnset,
     [SPECIES_WEAVILE] = sWeavileLevelUpLearnset,
+    [SPECIES_MAGNEZONE] = sMagnezoneLevelUpLearnset,
+    [SPECIES_LICKILICKY] = sLickilickyLevelUpLearnset,
+    [SPECIES_RHYPERIOR] = sRhyperiorLevelUpLearnset,
 };

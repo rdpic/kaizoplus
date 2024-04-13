@@ -213,6 +213,9 @@ enum
     CRY_SNOVER = 460,
     CRY_ABOMASNOW = 461,
     CRY_WEAVILE = 462,
+    CRY_MAGNEZONE = 463,
+    CRY_LICKILICKY = 464,
+    CRY_RHYPERIOR = 465,
 };
 
 #endif

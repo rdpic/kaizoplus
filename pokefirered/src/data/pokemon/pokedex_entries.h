@@ -6006,4 +6006,43 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_MAGNEZONE] =
+    {
+        .categoryName = _("MAGNET AREA"),
+        .height = 12,
+        .weight = 1800,
+        .description = gMagnezonePokedexText,
+        .unusedDescription = gMagnezonePokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_LICKILICKY] =
+    {
+        .categoryName = _("LICKING"),
+        .height = 17,
+        .weight = 1400,
+        .description = gLickilickyPokedexText,
+        .unusedDescription = gLickilickyPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 0,
+        .trainerScale = 290,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_RHYPERIOR] =
+    {
+        .categoryName = _("DRILL"),
+        .height = 24,
+        .weight = 2828,
+        .description = gRhyperiorPokedexText,
+        .unusedDescription = gRhyperiorPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 3,
+        .trainerScale = 369,
+        .trainerOffset = 7,
+    },
+
 };
