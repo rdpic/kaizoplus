@@ -2155,6 +2155,16 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+    [SPECIES_BUDEW] =
+    {
+        .size = MON_COORDS_SIZE(40, 56),
+        .y_offset = 11,
+    },
+    [SPECIES_ROSERADE] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 6,
+    },
     [SPECIES_CRANIDOS] =
     {
         .size = MON_COORDS_SIZE(64, 56),
@@ -2204,6 +2214,71 @@ const struct MonCoords gMonBackPicCoords[] =
     {
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 3,
+    },
+    [SPECIES_BUIZEL] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 9,
+    },
+    [SPECIES_FLOATZEL] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 6,
+    },
+    [SPECIES_CHERUBI] =
+    {
+        .size = MON_COORDS_SIZE(48, 40),
+        .y_offset = 13,
+    },
+    [SPECIES_CHERRIM] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_SHELLOS] =
+    {
+        .size = MON_COORDS_SIZE(40, 56),
+        .y_offset = 8,
+    },
+    [SPECIES_GASTRODON] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_AMBIPOM] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_DRIFLOON] =
+    {
+        .size = MON_COORDS_SIZE(40, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_DRIFBLIM] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 6,
+    },
+    [SPECIES_BUNEARY] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 4,
+    },
+    [SPECIES_LOPUNNY] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 5,
+    },
+    [SPECIES_MISMAGIUS] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_HONCHKROW] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 8,
     },
     [SPECIES_EGG] =
     {

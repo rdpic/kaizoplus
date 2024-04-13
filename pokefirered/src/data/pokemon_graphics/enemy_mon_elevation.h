@@ -68,4 +68,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_MOTHIM] = 10,
     [SPECIES_COMBEE] = 15,
     [SPECIES_VESPIQUEN] = 4,
+    [SPECIES_DRIFLOON] = 5,
+    [SPECIES_DRIFBLIM] = 7,
+    [SPECIES_MISMAGIUS] = 3,
 };

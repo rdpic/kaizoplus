@@ -2871,6 +2871,22 @@ const u8 gLuxrayPokedexText[] = _(
 
 const u8 gLuxrayPokedexTextUnused[] = _("");
 
+const u8 gBudewPokedexText[] = _(
+    "Over the winter, it closes its bud and\n"
+            "endures the cold. Sensitive to changing\n"
+            "temperature, the bud is said to bloom\n"
+            "when it feels the sun's warm touch.");
+
+const u8 gBudewPokedexTextUnused[] = _("");
+
+const u8 gRoseradePokedexText[] = _(
+    "Its sweet aroma attracts prey.\n"
+            "With the movements of a dancer,\n"
+            "it strikes with whips that are densely\n"
+            "lined with poison thorns.");
+
+const u8 gRoseradePokedexTextUnused[] = _("");
+
 const u8 gCranidosPokedexText[] = _(
     "A lifelong jungle dweller from 100 million\n"
             "years ago, its skull is as hard as iron. \n"
@@ -2950,3 +2966,107 @@ const u8 gPachirisuPokedexText[] = _(
             "berries in tree holes.");
 
 const u8 gPachirisuPokedexTextUnused[] = _("");
+
+const u8 gBuizelPokedexText[] = _(
+    "It inflates its flotation sac, keeping its\n"
+            "face above water in order to watch for\n"
+            "prey movement. It swims by rotating its\n"
+            "two tails like a screw.");
+
+const u8 gBuizelPokedexTextUnused[] = _("");
+
+const u8 gFloatzelPokedexText[] = _(
+    "Its flotation sac developed as a result\n"
+            "of pursuing aquatic prey. It can double\n"
+            "as a rubber raft. It assists in the rescues\n"
+            "of drowning people.");
+
+const u8 gFloatzelPokedexTextUnused[] = _("");
+
+const u8 gCherubiPokedexText[] = _(
+    "The small ball holds the nutrients needed\n"
+            "for evolution. Apparently, it is also very\n"
+            "sweet and tasty. Pokémon like Starly and\n"
+            "Taillow try to peck it off.");
+
+const u8 gCherubiPokedexTextUnused[] = _("");
+
+const u8 gCherrimPokedexText[] = _(
+    "Cherrim takes this form on sunny days.\n"
+            "Its faint scent entices bug Pokémon to it.\n"
+            "It immediately closes its petals and\n"
+            "becomes immobile once the sun hides.");
+
+const u8 gCherrimPokedexTextUnused[] = _("");
+
+const u8 gShellosPokedexText[] = _(
+    "It's capable of spending a limited amount\n"
+            "of time on land until their skin dries out.\n"
+            "One theory suggests that living in cold\n"
+            "seas causes Shellos to take on this form.");
+
+const u8 gShellosPokedexTextUnused[] = _("");
+
+const u8 gGastrodonPokedexText[] = _(
+    "Found more often on land than in the sea.\n"
+            "They normally live in rocky seashores, but\n"
+            "when cloudy or rainy, they can sometimes\n"
+            "be found on mountains, far from the sea.");
+
+const u8 gGastrodonPokedexTextUnused[] = _("");
+
+const u8 gAmbipomPokedexText[] = _(
+    "They live on large trees. Split into two,\n"
+            "the tails are so adept at handling and\n"
+            "doing things, Ambipom rarely uses\n"
+            "its hands now.");
+
+const u8 gAmbipomPokedexTextUnused[] = _("");
+
+const u8 gDrifloonPokedexText[] = _(
+    "Because of the way it floats aimlessly,\n"
+            "an old folktale calls it a “Signpost for\n"
+            "Wandering Spirits.” Children holding\n"
+            "them sometimes vanish.");
+
+const u8 gDrifloonPokedexTextUnused[] = _("");
+
+const u8 gDrifblimPokedexText[] = _(
+    "Even while under careful observation,\n"
+            "large flocks of Drifblim flying at dusk\n"
+            "will inexplicably disappear from view.\n"
+            "No one knows where they go.");
+
+const u8 gDrifblimPokedexTextUnused[] = _("");
+
+const u8 gBunearyPokedexText[] = _(
+    "You can tell how it feels by the way\n"
+            "it rolls its ears. When it's scared,\n"
+            "both ears are rolled up. When it senses\n"
+            "danger, it perks them up.");
+
+const u8 gBunearyPokedexTextUnused[] = _("");
+
+const u8 gLopunnyPokedexText[] = _(
+    "An extremely cautious Pokémon.\n"
+            "It is very conscious of its looks and\n"
+            "never fails to groom its ears.\n"
+            "It runs with sprightly jumps.");
+
+const u8 gLopunnyPokedexTextUnused[] = _("");
+
+const u8 gMismagiusPokedexText[] = _(
+    "Its cries sound like incantations.\n"
+            "Those hearing it are tormented by\n"
+            "headaches and hallucinations.\n"
+            "It appears where you least expect it.");
+
+const u8 gMismagiusPokedexTextUnused[] = _("");
+
+const u8 gHonchkrowPokedexText[] = _(
+    "Becoming active at night, it is known\n"
+            "to swarm with numerous Murkrow in tow.\n"
+            "It is said that it never forgives the\n"
+            "mistakes of its cronies.");
+
+const u8 gHonchkrowPokedexTextUnused[] = _("");

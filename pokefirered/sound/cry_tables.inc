@@ -407,6 +407,8 @@ gCryTable::
 	cry Cry_Shinx
 	cry Cry_Luxio
 	cry Cry_Luxray
+	cry Cry_Budew
+	cry Cry_Roserade
 	cry Cry_Cranidos
 	cry Cry_Rampardos
 	cry Cry_Shieldon
@@ -417,6 +419,19 @@ gCryTable::
 	cry Cry_Combee
 	cry Cry_Vespiquen
 	cry Cry_Pachirisu
+	cry Cry_Buizel
+	cry Cry_Floatzel
+	cry Cry_Cherubi
+	cry Cry_Cherrim
+	cry Cry_Shellos
+	cry Cry_Gastrodon
+	cry Cry_Ambipom
+	cry Cry_Drifloon
+	cry Cry_Drifblim
+	cry Cry_Buneary
+	cry Cry_Lopunny
+	cry Cry_Mismagius
+	cry Cry_Honchkrow
 
 	.align 2
 gCryTable_Reverse::
@@ -827,6 +842,8 @@ gCryTable_Reverse::
 	cry_reverse Cry_Shinx
 	cry_reverse Cry_Luxio
 	cry_reverse Cry_Luxray
+	cry_reverse Cry_Budew
+	cry_reverse Cry_Roserade
 	cry_reverse Cry_Cranidos
 	cry_reverse Cry_Rampardos
 	cry_reverse Cry_Shieldon
@@ -837,3 +854,16 @@ gCryTable_Reverse::
 	cry_reverse Cry_Combee
 	cry_reverse Cry_Vespiquen
 	cry_reverse Cry_Pachirisu
+	cry_reverse Cry_Buizel
+	cry_reverse Cry_Floatzel
+	cry_reverse Cry_Cherubi
+	cry_reverse Cry_Cherrim
+	cry_reverse Cry_Shellos
+	cry_reverse Cry_Gastrodon
+	cry_reverse Cry_Ambipom
+	cry_reverse Cry_Drifloon
+	cry_reverse Cry_Drifblim
+	cry_reverse Cry_Buneary
+	cry_reverse Cry_Lopunny
+	cry_reverse Cry_Mismagius
+	cry_reverse Cry_Honchkrow
