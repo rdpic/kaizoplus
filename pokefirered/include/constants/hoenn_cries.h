@@ -204,6 +204,9 @@ enum
     CRY_HIPPOWDON = 451,
     CRY_SKORUPI = 452,
     CRY_DRAPION = 453,
+    CRY_CROAGUNK = 454,
+    CRY_TOXICROAK = 455,
+    CRY_CARNIVINE = 456,
 };
 
 #endif

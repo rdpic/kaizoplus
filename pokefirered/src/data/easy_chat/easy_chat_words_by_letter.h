@@ -236,6 +236,7 @@ static const u16 sEasyChatWordsByLetter_C[] = {
     EC_WORD_CARDS,
     EC_WORD_CARE,
     EC_WORD_CARES,
+    EC_POKEMON2(CARNIVINE),
     EC_POKEMON2(CARVANHA),
     EC_POKEMON2(CASCOON),
     EC_WORD_CASE,
@@ -326,6 +327,7 @@ static const u16 sEasyChatWordsByLetter_C[] = {
     EC_POKEMON2(CRANIDOS),
     EC_POKEMON2(CRAWDAUNT),
     EC_WORD_CRIES,
+    EC_POKEMON2(CROAGUNK),
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(CROBAT),
     EC_POKEMON(CROBAT),
@@ -1785,6 +1787,7 @@ static const u16 sEasyChatWordsByLetter_T[] = {
     EC_WORD_TOURNAMENT,
     EC_WORD_TOWER,
     EC_MOVE2(TOXIC),
+    EC_POKEMON2(TOXICROAK),
     EC_WORD_TOYS,
     EC_WORD_TRACE,
     EC_WORD_TRADE,

@@ -5889,4 +5889,43 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_CROAGUNK] =
+    {
+        .categoryName = _("TOXIC MOUTH"),
+        .height = 7,
+        .weight = 230,
+        .description = gCroagunkPokedexText,
+        .unusedDescription = gCroagunkPokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_TOXICROAK] =
+    {
+        .categoryName = _("TOXIC MOUTH"),
+        .height = 13,
+        .weight = 444,
+        .description = gToxicroakPokedexText,
+        .unusedDescription = gToxicroakPokedexTextUnused,
+        .pokemonScale = 272,
+        .pokemonOffset = 3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_CARNIVINE] =
+    {
+        .categoryName = _("BUG CATCHER"),
+        .height = 14,
+        .weight = 270,
+        .description = gCarnivinePokedexText,
+        .unusedDescription = gCarnivinePokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 2,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
 };

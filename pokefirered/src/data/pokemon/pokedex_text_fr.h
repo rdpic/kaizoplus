@@ -3246,3 +3246,27 @@ const u8 gDrapionPokedexText[] = _(
             "out of a car.");
 
 const u8 gDrapionPokedexTextUnused[] = _("");
+
+const u8 gCroagunkPokedexText[] = _(
+    "Croagunk rarely fights fairly. Inflating\n"
+            "its poison sacs, it fills the area with\n"
+            "an odd sound and hits flinching\n"
+            "opponents with a poison jab.");
+
+const u8 gCroagunkPokedexTextUnused[] = _("");
+
+const u8 gToxicroakPokedexText[] = _(
+    "Swaying and dodging the attacks\n"
+            "of its foes, it weaves its flexible body\n"
+            "in close, then lunges out with its\n"
+            "poisonous claws.");
+
+const u8 gToxicroakPokedexTextUnused[] = _("");
+
+const u8 gCarnivinePokedexText[] = _(
+    "Hanging from branches using its\n"
+            "tentacles, it looks like a plant.\n"
+            "It attracts prey with its sweet-smelling\n"
+            "saliva, then chomps down.");
+
+const u8 gCarnivinePokedexTextUnused[] = _("");
