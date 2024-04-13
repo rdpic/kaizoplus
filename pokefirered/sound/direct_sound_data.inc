@@ -2052,6 +2052,46 @@ Cry_Skuntank::
 	.incbin "sound/direct_sound_samples/cries/skuntank.bin"
 
 	.align 2
+Cry_Bronzor::
+	.incbin "sound/direct_sound_samples/cries/bronzor.bin"
+
+	.align 2
+Cry_Bronzong::
+	.incbin "sound/direct_sound_samples/cries/bronzong.bin"
+
+	.align 2
+Cry_Bonsly::
+	.incbin "sound/direct_sound_samples/cries/bonsly.bin"
+
+	.align 2
+Cry_MimeJr::
+	.incbin "sound/direct_sound_samples/cries/mimejr.bin"
+
+	.align 2
+Cry_Happiny::
+	.incbin "sound/direct_sound_samples/cries/happiny.bin"
+
+	.align 2
+Cry_Chatot::
+	.incbin "sound/direct_sound_samples/cries/chatot.bin"
+
+	.align 2
+Cry_Spiritomb::
+	.incbin "sound/direct_sound_samples/cries/spiritomb.bin"
+
+	.align 2
+Cry_Gible::
+	.incbin "sound/direct_sound_samples/cries/gible.bin"
+
+	.align 2
+Cry_Gabite::
+	.incbin "sound/direct_sound_samples/cries/gabite.bin"
+
+	.align 2
+Cry_Garchomp::
+	.incbin "sound/direct_sound_samples/cries/garchomp.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

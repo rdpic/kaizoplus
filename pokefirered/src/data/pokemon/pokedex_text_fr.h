@@ -3110,3 +3110,83 @@ const u8 gSkuntankPokedexText[] = _(
             "to fester.");
 
 const u8 gSkuntankPokedexTextUnused[] = _("");
+
+const u8 gBronzorPokedexText[] = _(
+    "Implements shaped like it were discovered\n"
+            "in ancient tombs. There are researchers\n"
+            "who believe this Pokémon reflected like a\n"
+            "mirror in the distant past.");
+
+const u8 gBronzorPokedexTextUnused[] = _("");
+
+const u8 gBronzongPokedexText[] = _(
+    "In ages past, this Pokémon was revered as\n"
+            "a bringer of rain. One caused a news stir\n"
+            "when it was dug up at a construction site\n"
+            "after a 2000-year sleep.");
+
+const u8 gBronzongPokedexTextUnused[] = _("");
+
+const u8 gBonslyPokedexText[] = _(
+    "Bonsly prefers an arid atmosphere.\n"
+            "In order to adjust the level of fluids\n"
+            "in its body, it exudes water from its eyes.\n"
+            "This makes it appear to be crying.");
+
+const u8 gBonslyPokedexTextUnused[] = _("");
+
+const u8 gMimeJrPokedexText[] = _(
+    "In an attempt to confuse its enemy,\n"
+            "it mimics the enemy's movements.\n"
+            "Once mimicked, the foe cannot take\n"
+            "its eyes off this Pokémon.");
+
+const u8 gMimeJrPokedexTextUnused[] = _("");
+
+const u8 gHappinyPokedexText[] = _(
+    "It carries a round white rock in its\n"
+            "belly pouch. If it gets along well with\n"
+            "someone, it will sometimes give that\n"
+            "person the rock.");
+
+const u8 gHappinyPokedexTextUnused[] = _("");
+
+const u8 gChatotPokedexText[] = _(
+    "It mimics the cries of other Pokémon to\n"
+            "trick them into thinking it's one of them.\n"
+            "This way they won't attack it. It can\n"
+            "also learn and speak human words.");
+
+const u8 gChatotPokedexTextUnused[] = _("");
+
+const u8 gSpiritombPokedexText[] = _(
+    "A Pokémon that was formed by 108 spirits.\n"
+            "Its constant mischief and misdeeds\n"
+            "resulted in it being bound to an\n"
+            "Odd Keystone by a mysterious spell.");
+
+const u8 gSpiritombPokedexTextUnused[] = _("");
+
+const u8 gGiblePokedexText[] = _(
+    "It nests in horizontal holes warmed by\n"
+            "geothermal heat. Foes who stray too\n"
+            "close can expect to be pounced on\n"
+            "and bitten.");
+
+const u8 gGiblePokedexTextUnused[] = _("");
+
+const u8 gGabitePokedexText[] = _(
+    "Shiny objects are its passion. It can be\n"
+            "found in its cave, scarcely moving,\n"
+            "its gaze fixed on the jewels it's amassed\n"
+            "or Carbink it has caught.");
+
+const u8 gGabitePokedexTextUnused[] = _("");
+
+const u8 gGarchompPokedexText[] = _(
+    "When it folds up its body and extends its\n"
+            "wings, it looks like a jet plane. It is\n"
+            "covered in fine scales that reduce drag,\n"
+            "enabling it to fly at high speeds.");
+
+const u8 gGarchompPokedexTextUnused[] = _("");

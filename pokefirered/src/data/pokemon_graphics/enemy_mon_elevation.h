@@ -71,4 +71,6 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_DRIFLOON] = 5,
     [SPECIES_DRIFBLIM] = 7,
     [SPECIES_MISMAGIUS] = 3,
+    [SPECIES_BRONZOR] = 9,
+    [SPECIES_BRONZONG] = 7,
 };

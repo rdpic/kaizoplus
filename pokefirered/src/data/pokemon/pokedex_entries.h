@@ -5668,6 +5668,134 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_BRONZOR] =
+    {
+        .categoryName = _("BRONZE"),
+        .height = 5,
+        .weight = 605,
+        .description = gBronzorPokedexText,
+        .unusedDescription = gBronzorPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
 
+    [NATIONAL_DEX_BRONZONG] =
+    {
+        .categoryName = _("BRONZE BELL"),
+        .height = 13,
+        .weight = 1870,
+        .description = gBronzongPokedexText,
+        .unusedDescription = gBronzongPokedexTextUnused,
+        .pokemonScale = 272,
+        .pokemonOffset = 3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_BONSLY] =
+    {
+        .categoryName = _("BONSAI"),
+        .height = 5,
+        .weight = 150,
+        .description = gBonslyPokedexText,
+        .unusedDescription = gBonslyPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_MIME_JR] =
+    {
+        .categoryName = _("MIME"),
+        .height = 6,
+        .weight = 130,
+        .description = gMimeJrPokedexText,
+        .unusedDescription = gMimeJrPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_HAPPINY] =
+    {
+        .categoryName = _("PLAYHOUSE"),
+        .height = 6,
+        .weight = 244,
+        .description = gHappinyPokedexText,
+        .unusedDescription = gHappinyPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_CHATOT] =
+    {
+        .categoryName = _("MUSIC NOTE"),
+        .height = 5,
+        .weight = 19,
+        .description = gChatotPokedexText,
+        .unusedDescription = gChatotPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SPIRITOMB] =
+    {
+        .categoryName = _("FORBIDDEN"),
+        .height = 10,
+        .weight = 1080,
+        .description = gSpiritombPokedexText,
+        .unusedDescription = gSpiritombPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GIBLE] =
+    {
+        .categoryName = _("LAND SHARK"),
+        .height = 7,
+        .weight = 205,
+        .description = gGiblePokedexText,
+        .unusedDescription = gGiblePokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GABITE] =
+    {
+        .categoryName = _("CAVE"),
+        .height = 14,
+        .weight = 560,
+        .description = gGabitePokedexText,
+        .unusedDescription = gGabitePokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 2,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GARCHOMP] =
+    {
+        .categoryName = _("MACH"),
+        .height = 19,
+        .weight = 950,
+        .description = gGarchompPokedexText,
+        .unusedDescription = gGarchompPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 1,
+        .trainerScale = 326,
+        .trainerOffset = 4,
+    },
 
 };

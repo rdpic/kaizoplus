@@ -2305,6 +2305,56 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 4,
     },
+    [SPECIES_BRONZOR] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 9,
+    },
+    [SPECIES_BRONZONG] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_BONSLY] =
+    {
+        .size = MON_COORDS_SIZE(40, 64),
+        .y_offset = 6,
+    },
+    [SPECIES_MIME_JR] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 1,
+    },
+    [SPECIES_HAPPINY] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 9,
+    },
+    [SPECIES_CHATOT] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 9,
+    },
+    [SPECIES_SPIRITOMB] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 5,
+    },
+    [SPECIES_GIBLE] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 9,
+    },
+    [SPECIES_GABITE] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_GARCHOMP] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 4,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 48),
