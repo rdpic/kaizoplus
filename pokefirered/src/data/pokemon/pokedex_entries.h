@@ -5967,4 +5967,43 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_SNOVER] =
+    {
+        .categoryName = _("FROST TREE"),
+        .height = 10,
+        .weight = 505,
+        .description = gSnoverPokedexText,
+        .unusedDescription = gSnoverPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_ABOMASNOW] =
+    {
+        .categoryName = _("FROST TREE"),
+        .height = 22,
+        .weight = 1355,
+        .description = gAbomasnowPokedexText,
+        .unusedDescription = gAbomasnowPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 348,
+        .trainerOffset = 6,
+    },
+
+    [NATIONAL_DEX_WEAVILE] =
+    {
+        .categoryName = _("SHARP CLAW"),
+        .height = 11,
+        .weight = 340,
+        .description = gWeavilePokedexText,
+        .unusedDescription = gWeavilePokedexTextUnused,
+        .pokemonScale = 320,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
 };

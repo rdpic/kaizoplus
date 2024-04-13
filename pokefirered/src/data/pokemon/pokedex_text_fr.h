@@ -3294,3 +3294,27 @@ const u8 gMantykePokedexText[] = _(
             "It often swims in a school of Remoraid.");
 
 const u8 gMantykePokedexTextUnused[] = _("");
+
+const u8 gSnoverPokedexText[] = _(
+    "During cold seasons, it migrates to the\n"
+            "mountain's lower reaches. Seemingly\n"
+            "curious about people, they gather around\n"
+            "footsteps they find on snowy mountains.");
+
+const u8 gSnoverPokedexTextUnused[] = _("");
+
+const u8 gAbomasnowPokedexText[] = _(
+    "It lives a quiet life on mountains that\n"
+            "are perpetually covered in snow. It hides\n"
+            "itself by whipping up blizzards.\n"
+            "It is also known as The Ice Monster.");
+
+const u8 gAbomasnowPokedexTextUnused[] = _("");
+
+const u8 gWeavilePokedexText[] = _(
+    "They travel in groups of four or five,\n"
+            "leaving signs for one another on trees\n"
+            "and rocks. They bring down their prey\n"
+            "with coordinated attacks.");
+
+const u8 gWeavilePokedexTextUnused[] = _("");

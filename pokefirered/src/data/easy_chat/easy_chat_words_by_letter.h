@@ -19,6 +19,7 @@ static const u16 sEasyChatWordsByLetter_A[] = {
     EC_WORD_A_LITTLE,
     EC_WORD_A_LOT,
     EC_WORD_A_TINY_BIT,
+    EC_POKEMON2(ABOMASNOW),
     EC_WORD_ABOUT,
     EC_WORD_ABOVE,
     -1, 2, // Doubled pokemon species name
@@ -1576,6 +1577,7 @@ static const u16 sEasyChatWordsByLetter_S[] = {
     EC_POKEMON(SNORLAX),
     EC_WORD_SNORT,
     EC_POKEMON2(SNORUNT),
+    EC_POKEMON2(SNOVER),
     EC_POKEMON(SNUBBULL),
     EC_WORD_SO,
     EC_MOVE2(SOFT_BOILED),
@@ -1919,6 +1921,7 @@ static const u16 sEasyChatWordsByLetter_W[] = {
     EC_WORD_WEAK,
     EC_WORD_WEAKENED,
     EC_MOVE(WEATHER_BALL),
+    EC_POKEMON2(WEAVILE),
     EC_WORD_WEDNESDAY,
     EC_POKEMON(WEEDLE),
     EC_WORD_WEEK,

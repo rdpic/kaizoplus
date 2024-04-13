@@ -210,6 +210,9 @@ enum
     CRY_FINNEON = 457,
     CRY_LUMINEON = 458,
     CRY_MANTYKE = 459,
+    CRY_SNOVER = 460,
+    CRY_ABOMASNOW = 461,
+    CRY_WEAVILE = 462,
 };
 
 #endif

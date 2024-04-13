@@ -1001,6 +1001,9 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(FINNEON),
     SPECIES_TO_NATIONAL(LUMINEON),
     SPECIES_TO_NATIONAL(MANTYKE),
+    SPECIES_TO_NATIONAL(SNOVER),
+    SPECIES_TO_NATIONAL(ABOMASNOW),
+    SPECIES_TO_NATIONAL(WEAVILE),
 };
 
 // Assigns all Hoenn Dex Indexes to a National Dex Index

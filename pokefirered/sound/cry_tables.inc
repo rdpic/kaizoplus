@@ -460,6 +460,9 @@ gCryTable::
 	cry Cry_Finneon
 	cry Cry_Lumineon
 	cry Cry_Mantyke
+	cry Cry_Snover
+	cry Cry_Abomasnow
+	cry Cry_Weavile
 
 	.align 2
 gCryTable_Reverse::
@@ -923,3 +926,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Finneon
 	cry_reverse Cry_Lumineon
 	cry_reverse Cry_Mantyke
+	cry_reverse Cry_Snover
+	cry_reverse Cry_Abomasnow
+	cry_reverse Cry_Weavile
