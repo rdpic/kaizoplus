@@ -6721,4 +6721,95 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_MUNNA] =
+    {
+        .categoryName = _("DROWSING"),
+        .height = 6,
+        .weight = 233,
+        .description = gMunnaPokedexText,
+        .unusedDescription = gMunnaPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_MUSHARNA] =
+    {
+        .categoryName = _("DROWSING"),
+        .height = 11,
+        .weight = 605,
+        .description = gMusharnaPokedexText,
+        .unusedDescription = gMusharnaPokedexTextUnused,
+        .pokemonScale = 320,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PIDOVE] =
+    {
+        .categoryName = _("PIGEON"),
+        .height = 3,
+        .weight = 21,
+        .description = gPidovePokedexText,
+        .unusedDescription = gPidovePokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_TRANQUILL] =
+    {
+        .categoryName = _("PIGEON"),
+        .height = 6,
+        .weight = 150,
+        .description = gTranquillPokedexText,
+        .unusedDescription = gTranquillPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_UNFEZANT] =
+    {
+        .categoryName = _("PROUD"),
+        .height = 12,
+        .weight = 290,
+        .description = gUnfezantPokedexText,
+        .unusedDescription = gUnfezantPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_BLITZLE] =
+    {
+        .categoryName = _("ELECTRIFIED"),
+        .height = 8,
+        .weight = 298,
+        .description = gBlitzlePokedexText,
+        .unusedDescription = gBlitzlePokedexTextUnused,
+        .pokemonScale = 366,
+        .pokemonOffset = 8,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_ZEBSTRIKA] =
+    {
+        .categoryName = _("THUNDERBOLT"),
+        .height = 16,
+        .weight = 795,
+        .description = gZebstrikaPokedexText,
+        .unusedDescription = gZebstrikaPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 1,
+        .trainerScale = 296,
+        .trainerOffset = 1,
+    },
+
 };

@@ -518,6 +518,13 @@ gCryTable::
 	cry Cry_Simisear
 	cry Cry_Panpour
 	cry Cry_Simipour
+	cry Cry_Munna
+	cry Cry_Musharna
+	cry Cry_Pidove
+	cry Cry_Tranquill
+	cry Cry_Unfezant
+	cry Cry_Blitzle
+	cry Cry_Zebstrika
 
 	.align 2
 gCryTable_Reverse::
@@ -1039,3 +1046,10 @@ gCryTable_Reverse::
 	cry_reverse Cry_Simisear
 	cry_reverse Cry_Panpour
 	cry_reverse Cry_Simipour
+	cry_reverse Cry_Munna
+	cry_reverse Cry_Musharna
+	cry_reverse Cry_Pidove
+	cry_reverse Cry_Tranquill
+	cry_reverse Cry_Unfezant
+	cry_reverse Cry_Blitzle
+	cry_reverse Cry_Zebstrika

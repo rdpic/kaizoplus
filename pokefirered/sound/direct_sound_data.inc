@@ -2376,6 +2376,34 @@ Cry_Simipour::
 	.incbin "sound/direct_sound_samples/cries/simipour.bin"
 
 	.align 2
+Cry_Munna::
+	.incbin "sound/direct_sound_samples/cries/munna.bin"
+
+	.align 2
+Cry_Musharna::
+	.incbin "sound/direct_sound_samples/cries/musharna.bin"
+
+	.align 2
+Cry_Pidove::
+	.incbin "sound/direct_sound_samples/cries/pidove.bin"
+
+	.align 2
+Cry_Tranquill::
+	.incbin "sound/direct_sound_samples/cries/tranquill.bin"
+
+	.align 2
+Cry_Unfezant::
+	.incbin "sound/direct_sound_samples/cries/unfezant.bin"
+
+	.align 2
+Cry_Blitzle::
+	.incbin "sound/direct_sound_samples/cries/blitzle.bin"
+
+	.align 2
+Cry_Zebstrika::
+	.incbin "sound/direct_sound_samples/cries/zebstrika.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

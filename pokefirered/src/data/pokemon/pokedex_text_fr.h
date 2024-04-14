@@ -3758,3 +3758,59 @@ const u8 gSimipourPokedexText[] = _(
             "It prefers places with clean water."); 
 
 const u8 gSimipourPokedexTextUnused[] = _("");
+
+const u8 gMunnaPokedexText[] = _(
+    "This Pokémon appears before people\n"
+            "and Pokémon who are having nightmares\n"
+            "and eats those dreams. Munna always\n"
+            "float in the air."); 
+
+const u8 gMunnaPokedexTextUnused[] = _("");
+
+const u8 gMusharnaPokedexText[] = _(
+    "The mist emanating from their foreheads\n"
+            "is packed with the dreams of people and\n"
+            "Pokémon. It changes into different colors\n"
+            "depending on the dream that was eaten."); 
+
+const u8 gMusharnaPokedexTextUnused[] = _("");
+
+const u8 gPidovePokedexText[] = _(
+    "This very forgetful Pokémon will wait for\n"
+            "a new order from its Trainer even though\n"
+            "it already has one. Flocks often gather\n"
+            "in parks and plazas."); 
+
+const u8 gPidovePokedexTextUnused[] = _("");
+
+const u8 gTranquillPokedexText[] = _(
+    "No matter where in the world it goes,\n"
+            "it knows where its nest is, so it can\n"
+            "always return to its Trainer's location\n"
+            "regardless of the distance."); 
+
+const u8 gTranquillPokedexTextUnused[] = _("");
+
+const u8 gUnfezantPokedexText[] = _(
+    "Males have plumage on their heads.\n"
+            "The females' flying abilities surpass\n"
+            "those of the males. They will only let\n"
+            "themselves feel close to their Trainers."); 
+
+const u8 gUnfezantPokedexTextUnused[] = _("");
+
+const u8 gBlitzlePokedexText[] = _(
+    "Its mane shines when it discharges\n"
+            "electricity. They use the frequency and\n"
+            "rhythm of these flashes to communicate\n"
+            "with one another."); 
+
+const u8 gBlitzlePokedexTextUnused[] = _("");
+
+const u8 gZebstrikaPokedexText[] = _(
+    "When Zebstrika run at full speed, the\n"
+            "sound of thunder reverberates. It is\n"
+            "dangerous when it's angry as it shoots\n"
+            "lightning from its mane in all directions."); 
+
+const u8 gZebstrikaPokedexTextUnused[] = _("");

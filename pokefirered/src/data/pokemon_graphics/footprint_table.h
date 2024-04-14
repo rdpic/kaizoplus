@@ -542,5 +542,12 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_SIMISEAR] = gMonFootprint_Simisear,
     [SPECIES_PANPOUR] = gMonFootprint_Panpour,
     [SPECIES_SIMIPOUR] = gMonFootprint_Simipour,
+    [SPECIES_MUNNA] = gMonFootprint_Munna,
+    [SPECIES_MUSHARNA] = gMonFootprint_Musharna,
+    [SPECIES_PIDOVE] = gMonFootprint_Pidove,
+    [SPECIES_TRANQUILL] = gMonFootprint_Tranquill,
+    [SPECIES_UNFEZANT] = gMonFootprint_Unfezant,
+    [SPECIES_BLITZLE] = gMonFootprint_Blitzle,
+    [SPECIES_ZEBSTRIKA] = gMonFootprint_Zebstrika,
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

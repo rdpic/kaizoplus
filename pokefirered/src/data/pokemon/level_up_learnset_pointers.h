@@ -542,4 +542,11 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_SIMISEAR] = sSimisearLevelUpLearnset,
     [SPECIES_PANPOUR] = sPanpourLevelUpLearnset,
     [SPECIES_SIMIPOUR] = sSimipourLevelUpLearnset,
+    [SPECIES_MUNNA] = sMunnaLevelUpLearnset,
+    [SPECIES_MUSHARNA] = sMusharnaLevelUpLearnset,
+    [SPECIES_PIDOVE] = sPidoveLevelUpLearnset,
+    [SPECIES_TRANQUILL] = sTranquillLevelUpLearnset,
+    [SPECIES_UNFEZANT] = sUnfezantLevelUpLearnset,
+    [SPECIES_BLITZLE] = sBlitzleLevelUpLearnset,
+    [SPECIES_ZEBSTRIKA] = sZebstrikaLevelUpLearnset,
 };
