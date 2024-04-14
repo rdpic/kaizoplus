@@ -3550,3 +3550,83 @@ const u8 gManaphyPokedexText[] = _(
             "of Pokémon."); 
 
 const u8 gManaphyPokedexTextUnused[] = _("");
+
+const u8 gDarkraiPokedexText[] = _(
+    "It chases people and Pokémon from its\n"
+            "territory by causing them to experience\n"
+            "deep, nightmarish slumbers. However,\n"
+            "it means no harm."); 
+
+const u8 gDarkraiPokedexTextUnused[] = _("");
+
+const u8 gShayminPokedexText[] = _(
+    "Upon taking in the scent of a particular\n"
+            "rare flower, Shaymin is enveloped in light\n"
+            "and its tiny body transforms, confering\n"
+            "the power of flight upon it."); 
+
+const u8 gShayminPokedexTextUnused[] = _("");
+
+const u8 gArceusPokedexText[] = _(
+    "It is told in mythology that this Pokémon\n"
+    "emerged from an egg and shaped all there\n"
+    "is in this world, before the universe\n"
+    "even existed."); 
+
+const u8 gArceusPokedexTextUnused[] = _("");
+
+const u8 gVictiniPokedexText[] = _(
+    "This Pokémon brings victory.\n"
+            "It is said that Trainers with Victini\n"
+            "always win, regardless of the type\n"
+            "of encounter."); 
+
+const u8 gVictiniPokedexTextUnused[] = _("");
+
+const u8 gSnivyPokedexText[] = _(
+    "It is very intelligent and calm.\n"
+            "Being exposed to lots of sunlight makes\n"
+            "its movements swifter. When they are\n"
+            "not feeling well, their tails droop."); 
+
+const u8 gSnivyPokedexTextUnused[] = _("");
+
+const u8 gServinePokedexText[] = _(
+    "When it gets dirty, its leaves can't be\n"
+            "used in photosynthesis, so it always keeps\n"
+            "clean. They avoid attacks by sinking into\n"
+            "the shadows of thick foliage."); 
+
+const u8 gServinePokedexTextUnused[] = _("");
+
+const u8 gSerperiorPokedexText[] = _(
+    "They raise their heads to intimidate foes,\n"
+            "but only give it their all when fighting\n"
+            "powerful opponents who are not fazed\n"
+            "by the glare from its noble eyes."); 
+
+const u8 gSerperiorPokedexTextUnused[] = _("");
+
+const u8 gTepigPokedexText[] = _(
+    "It loves to eat roasted berries, but\n"
+            "sometimes it gets too excited and burns\n"
+            "them to a crisp. It blows fire through\n"
+            "its nose."); 
+
+const u8 gTepigPokedexTextUnused[] = _("");
+
+const u8 gPignitePokedexText[] = _(
+     "The more it eats, the more fuel it has\n"
+            "to make the fire in its stomach stronger.\n"
+            "When it is angered, the intensity of the\n"
+            "flame increases."); 
+
+const u8 gPignitePokedexTextUnused[] = _("");
+
+const u8 gEmboarPokedexText[] = _(
+    "It is adept at using many different moves.\n"
+            "It can throw a fire punch by setting its\n"
+            "fists on fire with its fiery chin.\n"
+            "It cares deeply about its friends."); 
+
+const u8 gEmboarPokedexTextUnused[] = _("");

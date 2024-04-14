@@ -90,4 +90,5 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_CRESSELIA] = 3,
     [SPECIES_PHIONE] = 8,
     [SPECIES_MANAPHY] = 8,
+    [SPECIES_DARKRAI] = 4,
 };

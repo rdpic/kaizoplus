@@ -492,6 +492,16 @@ gCryTable::
 	cry Cry_Cresselia
 	cry Cry_Phione
 	cry Cry_Manaphy
+	cry Cry_Darkrai
+	cry Cry_Shaymin
+	cry Cry_Arceus
+	cry Cry_Victini
+	cry Cry_Snivy
+	cry Cry_Servine
+	cry Cry_Serperior
+	cry Cry_Tepig
+	cry Cry_Pignite
+	cry Cry_Emboar
 
 	.align 2
 gCryTable_Reverse::
@@ -987,3 +997,13 @@ gCryTable_Reverse::
 	cry_reverse Cry_Cresselia
 	cry_reverse Cry_Phione
 	cry_reverse Cry_Manaphy
+	cry_reverse Cry_Darkrai
+	cry_reverse Cry_Shaymin
+	cry_reverse Cry_Arceus
+	cry_reverse Cry_Victini
+	cry_reverse Cry_Snivy
+	cry_reverse Cry_Servine
+	cry_reverse Cry_Serperior
+	cry_reverse Cry_Tepig
+	cry_reverse Cry_Pignite
+	cry_reverse Cry_Emboar

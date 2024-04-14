@@ -2272,6 +2272,46 @@ Cry_Manaphy::
 	.incbin "sound/direct_sound_samples/cries/manaphy.bin"
 
 	.align 2
+Cry_Darkrai::
+	.incbin "sound/direct_sound_samples/cries/darkrai.bin"
+
+	.align 2
+Cry_Shaymin::
+	.incbin "sound/direct_sound_samples/cries/shaymin.bin"
+
+	.align 2
+Cry_Arceus::
+	.incbin "sound/direct_sound_samples/cries/arceus.bin"
+
+	.align 2
+Cry_Victini::
+	.incbin "sound/direct_sound_samples/cries/victini.bin"
+
+	.align 2
+Cry_Snivy::
+	.incbin "sound/direct_sound_samples/cries/snivy.bin"
+
+	.align 2
+Cry_Servine::
+	.incbin "sound/direct_sound_samples/cries/servine.bin"
+
+	.align 2
+Cry_Serperior::
+	.incbin "sound/direct_sound_samples/cries/serperior.bin"
+
+	.align 2
+Cry_Tepig::
+	.incbin "sound/direct_sound_samples/cries/tepig.bin"
+
+	.align 2
+Cry_Pignite::
+	.incbin "sound/direct_sound_samples/cries/pignite.bin"
+
+	.align 2
+Cry_Emboar::
+	.incbin "sound/direct_sound_samples/cries/emboar.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

@@ -6383,4 +6383,134 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_DARKRAI] =
+    {
+        .categoryName = _("PITCH BLACK"),
+        .height = 15,
+        .weight = 505,
+        .description = gDarkraiPokedexText,
+        .unusedDescription = gDarkraiPokedexTextUnused,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SHAYMIN] =
+    {
+        .categoryName = _("GRATITUDE"),
+        .height = 4,
+        .weight = 52,
+        .description = gShayminPokedexText,
+        .unusedDescription = gShayminPokedexTextUnused,
+        .pokemonScale = 682,
+        .pokemonOffset = 24,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_ARCEUS] =
+    {
+        .categoryName = _("ALPHA"),
+        .height = 32,
+        .weight = 3200,
+        .description = gArceusPokedexText,
+        .unusedDescription = gArceusPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 495,
+        .trainerOffset = 10,
+    },
+
+    [NATIONAL_DEX_VICTINI] =
+    {
+        .categoryName = _("VICTORY"),
+        .height = 4,
+        .weight = 40,
+        .description = gVictiniPokedexText,
+        .unusedDescription = gVictiniPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 16,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SNIVY] =
+    {
+        .categoryName = _("GRASS SNAKE"),
+        .height = 6,
+        .weight = 81,
+        .description = gSnivyPokedexText,
+        .unusedDescription = gSnivyPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SERVINE] =
+    {
+        .categoryName = _("GRASS SNAKE"),
+        .height = 8,
+        .weight = 160,
+        .description = gServinePokedexText,
+        .unusedDescription = gServinePokedexTextUnused,
+        .pokemonScale = 366,
+        .pokemonOffset = 9,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SERPERIOR] =
+    {
+        .categoryName = _("REGAL"),
+        .height = 33,
+        .weight = 630,
+        .description = gSerperiorPokedexText,
+        .unusedDescription = gSerperiorPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 405,
+        .trainerOffset = 8,
+    },
+
+    [NATIONAL_DEX_TEPIG] =
+    {
+        .categoryName = _("FIRE PIG"),
+        .height = 5,
+        .weight = 99,
+        .description = gTepigPokedexText,
+        .unusedDescription = gTepigPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PIGNITE] =
+    {
+        .categoryName = _("FIRE PIG"),
+        .height = 10,
+        .weight = 555,
+        .description = gPignitePokedexText,
+        .unusedDescription = gPignitePokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 8,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_EMBOAR] =
+    {
+        .categoryName = _("FIRE PIG"),
+        .height = 16,
+        .weight = 1500,
+        .description = gEmboarPokedexText,
+        .unusedDescription = gEmboarPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 1,
+        .trainerScale = 296,
+        .trainerOffset = 1,
+    },
+
 };
