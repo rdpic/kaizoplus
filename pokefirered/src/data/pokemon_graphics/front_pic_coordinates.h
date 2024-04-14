@@ -2745,6 +2745,61 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+    [SPECIES_ROGGENROLA] =
+    {
+        .size = MON_COORDS_SIZE(24, 40),
+        .y_offset = 14,
+    },
+    [SPECIES_BOLDORE] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_GIGALITH] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 2,
+    },
+    [SPECIES_WOOBAT] =
+    {
+        .size = MON_COORDS_SIZE(64, 32),
+        .y_offset = 16,
+    },
+    [SPECIES_SWOOBAT] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 4,
+    },
+    [SPECIES_DRILBUR] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_EXCADRILL] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 5,
+    },
+    [SPECIES_AUDINO] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 6,
+    },
+    [SPECIES_TIMBURR] =
+    {
+        .size = MON_COORDS_SIZE(48, 40),
+        .y_offset = 12,
+    },
+    [SPECIES_GURDURR] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_CONKELDURR] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 6,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 24),

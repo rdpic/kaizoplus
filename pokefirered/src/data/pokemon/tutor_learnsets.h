@@ -3625,6 +3625,72 @@ static const u16 sTutorLearnsets[] =
                         | TUTOR(MOVE_BODY_SLAM)
                         | TUTOR(MOVE_DOUBLE_EDGE)
                         | TUTOR(MOVE_MIMIC)
-                        | TUTOR(MOVE_SUBSTITUTE),               
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_ROGGENROLA]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),       
+
+    [SPECIES_BOLDORE]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_GIGALITH]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE), 
+
+    [SPECIES_WOOBAT]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_SWOOBAT]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),       
+
+    [SPECIES_DRILBUR]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_EXCADRILL]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_AUDINO]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_TIMBURR]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),       
+
+    [SPECIES_GURDURR]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_CONKELDURR]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),                  
 
 };

@@ -93,4 +93,6 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_DARKRAI] = 4,
     [SPECIES_MUNNA] = 7,
     [SPECIES_MUSHARNA] = 5,
+    [SPECIES_WOOBAT] = 19,
+    [SPECIES_SWOOBAT] = 10,
 };

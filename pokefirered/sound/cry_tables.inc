@@ -525,6 +525,17 @@ gCryTable::
 	cry Cry_Unfezant
 	cry Cry_Blitzle
 	cry Cry_Zebstrika
+	cry Cry_Roggenrola
+	cry Cry_Boldore
+	cry Cry_Gigalith
+	cry Cry_Woobat
+	cry Cry_Swoobat
+	cry Cry_Drilbur
+	cry Cry_Excadrill
+	cry Cry_Audino
+	cry Cry_Timburr
+	cry Cry_Gurdurr
+	cry Cry_Conkeldurr
 
 	.align 2
 gCryTable_Reverse::
@@ -1053,3 +1064,14 @@ gCryTable_Reverse::
 	cry_reverse Cry_Unfezant
 	cry_reverse Cry_Blitzle
 	cry_reverse Cry_Zebstrika
+	cry_reverse Cry_Roggenrola
+	cry_reverse Cry_Boldore
+	cry_reverse Cry_Gigalith
+	cry_reverse Cry_Woobat
+	cry_reverse Cry_Swoobat
+	cry_reverse Cry_Drilbur
+	cry_reverse Cry_Excadrill
+	cry_reverse Cry_Audino
+	cry_reverse Cry_Timburr
+	cry_reverse Cry_Gurdurr
+	cry_reverse Cry_Conkeldurr

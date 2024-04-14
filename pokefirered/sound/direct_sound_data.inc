@@ -2404,6 +2404,50 @@ Cry_Zebstrika::
 	.incbin "sound/direct_sound_samples/cries/zebstrika.bin"
 
 	.align 2
+Cry_Roggenrola::
+	.incbin "sound/direct_sound_samples/cries/roggenrola.bin"
+
+	.align 2
+Cry_Boldore::
+	.incbin "sound/direct_sound_samples/cries/boldore.bin"
+
+	.align 2
+Cry_Gigalith::
+	.incbin "sound/direct_sound_samples/cries/gigalith.bin"
+
+	.align 2
+Cry_Woobat::
+	.incbin "sound/direct_sound_samples/cries/woobat.bin"
+
+	.align 2
+Cry_Swoobat::
+	.incbin "sound/direct_sound_samples/cries/swoobat.bin"
+
+	.align 2
+Cry_Drilbur::
+	.incbin "sound/direct_sound_samples/cries/drilbur.bin"
+
+	.align 2
+Cry_Excadrill::
+	.incbin "sound/direct_sound_samples/cries/excadrill.bin"
+
+	.align 2
+Cry_Audino::
+	.incbin "sound/direct_sound_samples/cries/audino.bin"
+
+	.align 2
+Cry_Timburr::
+	.incbin "sound/direct_sound_samples/cries/timburr.bin"
+
+	.align 2
+Cry_Gurdurr::
+	.incbin "sound/direct_sound_samples/cries/gurdurr.bin"
+
+	.align 2
+Cry_Conkeldurr::
+	.incbin "sound/direct_sound_samples/cries/conkeldurr.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

@@ -3814,3 +3814,91 @@ const u8 gZebstrikaPokedexText[] = _(
             "lightning from its mane in all directions."); 
 
 const u8 gZebstrikaPokedexTextUnused[] = _("");
+
+const u8 gRoggenrolaPokedexText[] = _(
+    "The hexagonal cavity is its ear.\n"
+            "It walks in the direction of sounds it\n"
+            "hears, but if the sounds cease, it panics\n"
+            "and topples over."); 
+
+const u8 gRoggenrolaPokedexTextUnused[] = _("");
+
+const u8 gBoldorePokedexText[] = _(
+    "Its orange crystal is a mass of energy.\n"
+            "Just one crystal fragment would provide\n"
+            "enough fuel for a hundred dump trucks.\n"
+            "When it is healthy, its core sticks out."); 
+
+const u8 gBoldorePokedexTextUnused[] = _("");
+
+const u8 gGigalithPokedexText[] = _(
+    "The blasts of energy it makes from\n"
+            "sunbeams have terrifying power.\n"
+            "However, it's not able to fire its blasts\n"
+            "at night or on rainy days."); 
+
+const u8 gGigalithPokedexTextUnused[] = _("");
+
+const u8 gWoobatPokedexText[] = _(
+    "Its habitat is dark forests and caves.\n"
+            "Suction from its nostrils enables it\n"
+            "to stick to cave walls during sleep.\n"
+            "It leaves a heart-shaped mark behind.");
+
+const u8 gWoobatPokedexTextUnused[] = _("");
+
+const u8 gSwoobatPokedexText[] = _(
+    "Anyone who comes into contact with\n"
+            "the ultrasonic waves emitted by a\n"
+            "courting male experiences a positive\n"
+            "mood shift.");
+
+const u8 gSwoobatPokedexTextUnused[] = _("");
+
+const u8 gDrilburPokedexText[] = _(
+    "It can dig through the ground at a\n"
+            "speed of 30 mph by spinning its body.\n"
+            "It could give a car running aboveground\n"
+            "a good race."); 
+
+const u8 gDrilburPokedexTextUnused[] = _("");
+
+const u8 gExcadrillPokedexText[] = _(
+    "More than 300 feet below the surface,\n"
+            "they build mazelike nests. Their activity\n"
+            "can be destructive to subway tunnels,\n"
+            "but it can also help with construction."); 
+
+const u8 gExcadrillPokedexTextUnused[] = _("");
+
+const u8 gAudinoPokedexText[] = _(
+    "Audino emits a soothing pulse from\n"
+            "its body that reduces hostility in others.\n"
+            "Anything that comes into contact with its\n"
+            "second feelers will fall into a deep sleep.");
+
+const u8 gAudinoPokedexTextUnused[] = _("");
+
+const u8 gTimburrPokedexText[] = _(
+    "These Pokémon appear at building\n"
+            "sites and help out with construction.\n"
+            "They always carry squared logs.\n"
+            "As they grow, they carry bigger logs.");
+
+const u8 gTimburrPokedexTextUnused[] = _("");
+
+const u8 gGurdurrPokedexText[] = _(
+    "They strengthen their bodies by carrying\n"
+            "steel beams. This Pokémon is so muscular\n"
+            "and strongly built that even a group of\n"
+            "wrestlers could not make it budge an inch."); 
+
+const u8 gGurdurrPokedexTextUnused[] = _("");
+
+const u8 gConkeldurrPokedexText[] = _(
+    "They use concrete pillars as walking\n"
+            "canes. Rather than rely solely on force,\n"
+            "they master moves that utilize the\n"
+            "centrifugal force of spinning concrete."); 
+
+const u8 gConkeldurrPokedexTextUnused[] = _("");

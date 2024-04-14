@@ -6812,4 +6812,147 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 1,
     },
 
+    [NATIONAL_DEX_ROGGENROLA] =
+    {
+        .categoryName = _("MANTLE"),
+        .height = 4,
+        .weight = 180,
+        .description = gRoggenrolaPokedexText,
+        .unusedDescription = gRoggenrolaPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 16,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_BOLDORE] =
+    {
+        .categoryName = _("ORE"),
+        .height = 9,
+        .weight = 1020,
+        .description = gBoldorePokedexText,
+        .unusedDescription = gBoldorePokedexTextUnused,
+        .pokemonScale = 338,
+        .pokemonOffset = 8,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GIGALITH] =
+    {
+        .categoryName = _("COMPRESSED"),
+        .height = 17,
+        .weight = 2600,
+        .description = gGigalithPokedexText,
+        .unusedDescription = gGigalithPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 0,
+        .trainerScale = 290,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_WOOBAT] =
+    {
+        .categoryName = _("BAT"),
+        .height = 4,
+        .weight = 21,
+        .description = gWoobatPokedexText,
+        .unusedDescription = gWoobatPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SWOOBAT] =
+    {
+        .categoryName = _("COURTING"),
+        .height = 9,
+        .weight = 105,
+        .description = gSwoobatPokedexText,
+        .unusedDescription = gSwoobatPokedexTextUnused,
+        .pokemonScale = 338,
+        .pokemonOffset = 8,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DRILBUR] =
+    {
+        .categoryName = _("MOLE"),
+        .height = 3,
+        .weight = 85,
+        .description = gDrilburPokedexText,
+        .unusedDescription = gDrilburPokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_EXCADRILL] =
+    {
+        .categoryName = _("SUBTERRENE"),
+        .height = 7,
+        .weight = 404,
+        .description = gExcadrillPokedexText,
+        .unusedDescription = gExcadrillPokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_AUDINO] =
+    {
+        .categoryName = _("HEARING"),
+        .height = 15,
+        .weight = 320,
+        .description = gAudinoPokedexText,
+        .unusedDescription = gAudinoPokedexTextUnused,
+        .pokemonScale = 320,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_TIMBURR] =
+    {
+        .categoryName = _("MUSCULAR"),
+        .height = 6,
+        .weight = 125,
+        .description = gTimburrPokedexText,
+        .unusedDescription = gTimburrPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GURDURR] =
+    {
+        .categoryName = _("MUSCULAR"),
+        .height = 12,
+        .weight = 400,
+        .description = gGurdurrPokedexText,
+        .unusedDescription = gGurdurrPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_CONKELDURR] =
+    {
+        .categoryName = _("MUSCULAR"),
+        .height = 14,
+        .weight = 870,
+        .description = gConkeldurrPokedexText,
+        .unusedDescription = gConkeldurrPokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 3,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
 };
