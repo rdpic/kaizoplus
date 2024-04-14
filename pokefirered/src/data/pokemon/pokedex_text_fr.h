@@ -3694,3 +3694,67 @@ const u8 gStoutlandPokedexText[] = _(
             "trust it to babysit."); 
 
 const u8 gStoutlandPokedexTextUnused[] = _("");
+
+const u8 gPurrloinPokedexText[] = _(
+    "Their deceptively cute act is the\n"
+            "perfect ruse. They steal from people for\n"
+            "fun, but their victims can't help but\n"
+            "forgive them."); 
+
+const u8 gPurrloinPokedexTextUnused[] = _("");
+
+const u8 gLiepardPokedexText[] = _(
+    "Many Trainers are drawn to their\n"
+            "beautiful form and fur. These Pokémon\n"
+            "vanish and appear unexpectedly.\n"
+            "They run silently in the night."); 
+
+const u8 gLiepardPokedexTextUnused[] = _("");
+
+const u8 gPansagePokedexText[] = _(
+    "This Pokémon dwells deep in the forest.\n"
+            "It's good at finding berries and gathers\n"
+            "them from all over. It's kind enough to\n"
+            "share them with friends."); 
+
+const u8 gPansagePokedexTextUnused[] = _("");
+
+const u8 gSimisagePokedexText[] = _(
+    "Ill tempered, it attacks enemies by\n"
+            "swinging its barbed tail around wildly.\n"
+            "The leaf growing on its head is\n"
+            "very bitter."); 
+
+const u8 gSimisagePokedexTextUnused[] = _("");
+
+const u8 gPansearPokedexText[] = _(
+    "The fire within the tuft on its head can\n"
+            "reach up to 600ºF. Very intelligent,\n"
+            "it roasts berries before eating them.\n"
+            "It likes to help people."); 
+
+const u8 gPansearPokedexTextUnused[] = _("");
+
+const u8 gSimisearPokedexText[] = _(
+    "It loves sweets because they become\n"
+            "energy for the fire burning inside its\n"
+            "body. It scatters embers from its head\n"
+            "and tail to sear its opponents."); 
+
+const u8 gSimisearPokedexTextUnused[] = _("");
+
+const u8 gPanpourPokedexText[] = _(
+    "The water stored inside the tuft of its\n"
+            "head is rich in nutrients. It waters\n"
+            "plants using its tail, plants that\n"
+            "receive its water grow large."); 
+
+const u8 gPanpourPokedexTextUnused[] = _("");
+
+const u8 gSimipourPokedexText[] = _(
+    "It can shoot highly-pressurised water\n"
+            "from its tail with enough power to\n"
+            "break through a solid concrete wall.\n"
+            "It prefers places with clean water."); 
+
+const u8 gSimipourPokedexTextUnused[] = _("");

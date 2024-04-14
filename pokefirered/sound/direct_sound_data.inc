@@ -2344,6 +2344,38 @@ Cry_Stoutland::
 	.incbin "sound/direct_sound_samples/cries/stoutland.bin"
 
 	.align 2
+Cry_Purrloin::
+	.incbin "sound/direct_sound_samples/cries/purrloin.bin"
+
+	.align 2
+Cry_Liepard::
+	.incbin "sound/direct_sound_samples/cries/liepard.bin"
+
+	.align 2
+Cry_Pansage::
+	.incbin "sound/direct_sound_samples/cries/pansage.bin"
+
+	.align 2
+Cry_Simisage::
+	.incbin "sound/direct_sound_samples/cries/simisage.bin"
+
+	.align 2
+Cry_Pansear::
+	.incbin "sound/direct_sound_samples/cries/pansear.bin"
+
+	.align 2
+Cry_Simisear::
+	.incbin "sound/direct_sound_samples/cries/simisear.bin"
+
+	.align 2
+Cry_Panpour::
+	.incbin "sound/direct_sound_samples/cries/panpour.bin"
+
+	.align 2
+Cry_Simipour::
+	.incbin "sound/direct_sound_samples/cries/simipour.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

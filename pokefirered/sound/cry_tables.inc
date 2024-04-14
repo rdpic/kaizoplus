@@ -510,6 +510,14 @@ gCryTable::
 	cry Cry_Lillipup
 	cry Cry_Herdier
 	cry Cry_Stoutland
+	cry Cry_Purrloin
+	cry Cry_Liepard
+	cry Cry_Pansage
+	cry Cry_Simisage
+	cry Cry_Pansear
+	cry Cry_Simisear
+	cry Cry_Panpour
+	cry Cry_Simipour
 
 	.align 2
 gCryTable_Reverse::
@@ -1023,3 +1031,11 @@ gCryTable_Reverse::
 	cry_reverse Cry_Lillipup
 	cry_reverse Cry_Herdier
 	cry_reverse Cry_Stoutland
+	cry_reverse Cry_Purrloin
+	cry_reverse Cry_Liepard
+	cry_reverse Cry_Pansage
+	cry_reverse Cry_Simisage
+	cry_reverse Cry_Pansear
+	cry_reverse Cry_Simisear
+	cry_reverse Cry_Panpour
+	cry_reverse Cry_Simipour

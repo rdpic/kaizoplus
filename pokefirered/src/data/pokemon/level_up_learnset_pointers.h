@@ -534,4 +534,12 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_LILLIPUP] = sLillipupLevelUpLearnset,
     [SPECIES_HERDIER] = sHerdierLevelUpLearnset,
     [SPECIES_STOUTLAND] = sStoutlandLevelUpLearnset,
+    [SPECIES_PURRLOIN] = sPurrloinLevelUpLearnset,
+    [SPECIES_LIEPARD] = sLiepardLevelUpLearnset,
+    [SPECIES_PANSAGE] = sPansageLevelUpLearnset,
+    [SPECIES_SIMISAGE] = sSimisageLevelUpLearnset,
+    [SPECIES_PANSEAR] = sPansearLevelUpLearnset,
+    [SPECIES_SIMISEAR] = sSimisearLevelUpLearnset,
+    [SPECIES_PANPOUR] = sPanpourLevelUpLearnset,
+    [SPECIES_SIMIPOUR] = sSimipourLevelUpLearnset,
 };

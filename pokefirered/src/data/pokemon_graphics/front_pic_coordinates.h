@@ -2670,6 +2670,46 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 1,
     },
+    [SPECIES_PURRLOIN] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_LIEPARD] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 4,
+    },
+    [SPECIES_PANSAGE] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_SIMISAGE] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 4,
+    },
+    [SPECIES_PANSEAR] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_SIMISEAR] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_PANPOUR] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_SIMIPOUR] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 24),

@@ -6617,4 +6617,108 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_PURRLOIN] =
+    {
+        .categoryName = _("DEVIOUS"),
+        .height = 4,
+        .weight = 101,
+        .description = gPurrloinPokedexText,
+        .unusedDescription = gPurrloinPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_LIEPARD] =
+    {
+        .categoryName = _("CRUEL"),
+        .height = 11,
+        .weight = 375,
+        .description = gLiepardPokedexText,
+        .unusedDescription = gLiepardPokedexTextUnused,
+        .pokemonScale = 320,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PANSAGE] =
+    {
+        .categoryName = _("GRASS"),
+        .height = 6,
+        .weight = 105,
+        .description = gPansagePokedexText,
+        .unusedDescription = gPansagePokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SIMISAGE] =
+    {
+        .categoryName = _("THORN"),
+        .height = 11,
+        .weight = 305,
+        .description = gSimisagePokedexText,
+        .unusedDescription = gSimisagePokedexTextUnused,
+        .pokemonScale = 320,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PANSEAR] =
+    {
+        .categoryName = _("HIGH TEMP"),
+        .height = 6,
+        .weight = 110,
+        .description = gPansearPokedexText,
+        .unusedDescription = gPansearPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SIMISEAR] =
+    {
+        .categoryName = _("EMBER"),
+        .height = 10,
+        .weight = 280,
+        .description = gSimisearPokedexText,
+        .unusedDescription = gSimisearPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PANPOUR] =
+    {
+        .categoryName = _("SPRAY"),
+        .height = 6,
+        .weight = 135,
+        .description = gPanpourPokedexText,
+        .unusedDescription = gPanpourPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SIMIPOUR] =
+    {
+        .categoryName = _("GEYSER"),
+        .height = 10,
+        .weight = 290,
+        .description = gSimipourPokedexText,
+        .unusedDescription = gSimipourPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
 };
