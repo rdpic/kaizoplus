@@ -3630,3 +3630,67 @@ const u8 gEmboarPokedexText[] = _(
             "It cares deeply about its friends."); 
 
 const u8 gEmboarPokedexTextUnused[] = _("");
+
+const u8 gOshawottPokedexText[] = _(
+    "The scalchop on its stomach isn't just\n"
+            "used for battle, it can be used to break\n"
+            "open hard berries as well. It is made\n"
+            "from the same element as its claws."); 
+
+const u8 gOshawottPokedexTextUnused[] = _("");
+
+const u8 gDewottPokedexText[] = _(
+    "Strict training and disclipine leads it\n"
+            "to master its flowing double-scalchop\n"
+            "technique. Scalchop techniques differ\n"
+            "from one Dewott to another."); 
+
+const u8 gDewottPokedexTextUnused[] = _("");
+
+const u8 gSamurottPokedexText[] = _(
+    "One swing of the seamitars attached\n"
+            "to its armor can fell an opponent.\n"
+            "A simple glare from one of them is\n"
+            "enough to intimidate most enemies."); 
+
+const u8 gSamurottPokedexTextUnused[] = _("");
+
+const u8 gPatratPokedexText[] = _(
+    "Extremely cautious, they take shifts to\n"
+            "maintain a constant watch of their nest.\n"
+            "Using food stored in cheek pouches,\n"
+            "they can keep watch for days."); 
+
+const u8 gPatratPokedexTextUnused[] = _("");
+
+const u8 gWatchogPokedexText[] = _(
+    "Using luminescent matter, it makes its\n"
+            "eyes and body glow and stuns attacking\n"
+            "opponents. Keen eyesight lets them see\n"
+            "in the dark."); 
+
+const u8 gWatchogPokedexTextUnused[] = _("");
+
+const u8 gLillipupPokedexText[] = _(
+    "It faces strong opponents with great\n"
+            "courage. Because it doesn't yelp, it's\n"
+            "extremely popular with Trainers who live\n"
+            "in apartment buildings."); 
+
+const u8 gLillipupPokedexTextUnused[] = _("");
+
+const u8 gHerdierPokedexText[] = _(
+    "Its dense black fur grows continuously.\n"
+            "The high cost of keeping its hard fur\n"
+            "properly groomed makes this a\n"
+            "troublesome Pokémon to train."); 
+
+const u8 gHerdierPokedexTextUnused[] = _("");
+
+const u8 gStoutlandPokedexText[] = _(
+    "Intelligent, good-natured, and valiant,\n"
+            "there could be no concern that it would\n"
+            "ever attack people. Some parents even\n"
+            "trust it to babysit."); 
+
+const u8 gStoutlandPokedexTextUnused[] = _("");

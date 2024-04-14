@@ -502,6 +502,14 @@ gCryTable::
 	cry Cry_Tepig
 	cry Cry_Pignite
 	cry Cry_Emboar
+	cry Cry_Oshawott
+	cry Cry_Dewott
+	cry Cry_Samurott
+	cry Cry_Patrat
+	cry Cry_Watchog
+	cry Cry_Lillipup
+	cry Cry_Herdier
+	cry Cry_Stoutland
 
 	.align 2
 gCryTable_Reverse::
@@ -1007,3 +1015,11 @@ gCryTable_Reverse::
 	cry_reverse Cry_Tepig
 	cry_reverse Cry_Pignite
 	cry_reverse Cry_Emboar
+	cry_reverse Cry_Oshawott
+	cry_reverse Cry_Dewott
+	cry_reverse Cry_Samurott
+	cry_reverse Cry_Patrat
+	cry_reverse Cry_Watchog
+	cry_reverse Cry_Lillipup
+	cry_reverse Cry_Herdier
+	cry_reverse Cry_Stoutland

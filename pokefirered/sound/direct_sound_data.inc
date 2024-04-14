@@ -2312,6 +2312,38 @@ Cry_Emboar::
 	.incbin "sound/direct_sound_samples/cries/emboar.bin"
 
 	.align 2
+Cry_Oshawott::
+	.incbin "sound/direct_sound_samples/cries/oshawott.bin"
+
+	.align 2
+Cry_Dewott::
+	.incbin "sound/direct_sound_samples/cries/dewott.bin"
+
+	.align 2
+Cry_Samurott::
+	.incbin "sound/direct_sound_samples/cries/samurott.bin"
+
+	.align 2
+Cry_Patrat::
+	.incbin "sound/direct_sound_samples/cries/patrat.bin"
+
+	.align 2
+Cry_Watchog::
+	.incbin "sound/direct_sound_samples/cries/watchog.bin"
+
+	.align 2
+Cry_Lillipup::
+	.incbin "sound/direct_sound_samples/cries/lillipup.bin"
+
+	.align 2
+Cry_Herdier::
+	.incbin "sound/direct_sound_samples/cries/herdier.bin"
+
+	.align 2
+Cry_Stoutland::
+	.incbin "sound/direct_sound_samples/cries/stoutland.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

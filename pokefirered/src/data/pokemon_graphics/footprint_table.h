@@ -526,5 +526,13 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_TEPIG] = gMonFootprint_Tepig,
     [SPECIES_PIGNITE] = gMonFootprint_Pignite,
     [SPECIES_EMBOAR] = gMonFootprint_Emboar,
+    [SPECIES_OSHAWOTT] = gMonFootprint_Oshawott,
+    [SPECIES_DEWOTT] = gMonFootprint_Dewott,
+    [SPECIES_SAMUROTT] = gMonFootprint_Samurott,
+    [SPECIES_PATRAT] = gMonFootprint_Patrat,
+    [SPECIES_WATCHOG] = gMonFootprint_Watchog,
+    [SPECIES_LILLIPUP] = gMonFootprint_Lillipup,
+    [SPECIES_HERDIER] = gMonFootprint_Herdier,
+    [SPECIES_STOUTLAND] = gMonFootprint_Stoutland,
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

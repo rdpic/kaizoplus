@@ -252,6 +252,14 @@ enum
     CRY_TEPIG = 499,
     CRY_PIGNITE = 500,
     CRY_EMBOAR = 501,
+    CRY_OSHAWOTT = 502,
+    CRY_DEWOTT = 503,
+    CRY_SAMUROTT = 504,
+    CRY_PATRAT = 505,
+    CRY_WATCHOG = 506,
+    CRY_LILLIPUP = 507,
+    CRY_HERDIER = 508,
+    CRY_STOUTLAND = 509,
 };
 
 #endif

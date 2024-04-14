@@ -526,4 +526,12 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_TEPIG] = sTepigLevelUpLearnset,
     [SPECIES_PIGNITE] = sPigniteLevelUpLearnset,
     [SPECIES_EMBOAR] = sEmboarLevelUpLearnset,
+    [SPECIES_OSHAWOTT] = sOshawottLevelUpLearnset,
+    [SPECIES_DEWOTT] = sDewottLevelUpLearnset,
+    [SPECIES_SAMUROTT] = sSamurottLevelUpLearnset,
+    [SPECIES_PATRAT] = sPatratLevelUpLearnset,
+    [SPECIES_WATCHOG] = sWatchogLevelUpLearnset,
+    [SPECIES_LILLIPUP] = sLillipupLevelUpLearnset,
+    [SPECIES_HERDIER] = sHerdierLevelUpLearnset,
+    [SPECIES_STOUTLAND] = sStoutlandLevelUpLearnset,
 };

@@ -6513,4 +6513,108 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 1,
     },
 
+    [NATIONAL_DEX_OSHAWOTT] =
+    {
+        .categoryName = _("SEA OTTER"),
+        .height = 5,
+        .weight = 59,
+        .description = gOshawottPokedexText,
+        .unusedDescription = gOshawottPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DEWOTT] =
+    {
+        .categoryName = _("DISCIPLINE"),
+        .height = 8,
+        .weight = 245,
+        .description = gDewottPokedexText,
+        .unusedDescription = gDewottPokedexTextUnused,
+        .pokemonScale = 366,
+        .pokemonOffset = 9,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SAMUROTT] =
+    {
+        .categoryName = _("FORMIDABLE"),
+        .height = 15,
+        .weight = 946,
+        .description = gSamurottPokedexText,
+        .unusedDescription = gSamurottPokedexTextUnused,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PATRAT] =
+    {
+        .categoryName = _("SCOUT"),
+        .height = 5,
+        .weight = 116,
+        .description = gPatratPokedexText,
+        .unusedDescription = gPatratPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_WATCHOG] =
+    {
+        .categoryName = _("LOOKOUT"),
+        .height = 11,
+        .weight = 270,
+        .description = gWatchogPokedexText,
+        .unusedDescription = gWatchogPokedexTextUnused,
+        .pokemonScale = 320,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_LILLIPUP] =
+    {
+        .categoryName = _("PUPPY"),
+        .height = 4,
+        .weight = 41,
+        .description = gLillipupPokedexText,
+        .unusedDescription = gLillipupPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_HERDIER] =
+    {
+        .categoryName = _("LOYAL DOG"),
+        .height = 9,
+        .weight = 147,
+        .description = gHerdierPokedexText,
+        .unusedDescription = gHerdierPokedexTextUnused,
+        .pokemonScale = 338,
+        .pokemonOffset = 9,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_STOUTLAND] =
+    {
+        .categoryName = _("BIG-HEARTED"),
+        .height = 12,
+        .weight = 610,
+        .description = gStoutlandPokedexText,
+        .unusedDescription = gStoutlandPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
 };

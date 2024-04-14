@@ -2630,6 +2630,46 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 1,
     },
+    [SPECIES_OSHAWOTT] =
+    {
+        .size = MON_COORDS_SIZE(32, 40),
+        .y_offset = 14,
+    },
+    [SPECIES_DEWOTT] =
+    {
+        .size = MON_COORDS_SIZE(40, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_SAMUROTT] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_PATRAT] =
+    {
+        .size = MON_COORDS_SIZE(48, 40),
+        .y_offset = 12,
+    },
+    [SPECIES_WATCHOG] =
+    {
+        .size = MON_COORDS_SIZE(32, 64),
+        .y_offset = 2,
+    },
+    [SPECIES_LILLIPUP] =
+    {
+        .size = MON_COORDS_SIZE(32, 40),
+        .y_offset = 12,
+    },
+    [SPECIES_HERDIER] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 8,
+    },
+    [SPECIES_STOUTLAND] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 1,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 24),
