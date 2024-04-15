@@ -3902,3 +3902,43 @@ const u8 gConkeldurrPokedexText[] = _(
             "centrifugal force of spinning concrete."); 
 
 const u8 gConkeldurrPokedexTextUnused[] = _("");
+
+const u8 gTympolePokedexText[] = _(
+    "By vibrating its cheeks, it emits sound\n"
+            "waves imperceptible to humans. It uses\n"
+            "the rhythm of these sounds to talk and\n"
+            "warns others of danger.");
+
+const u8 gTympolePokedexTextUnused[] = _("");
+
+const u8 gPalpitoadPokedexText[] = _(
+    "It lives in the water and on land.\n"
+            "When they vibrate the bumps on their\n"
+            "heads, they can make waves in water\n"
+            "or earthquake-like vibrations on land."); 
+
+const u8 gPalpitoadPokedexTextUnused[] = _("");
+
+const u8 gSeismitoadPokedexText[] = _(
+    "It increases the power of its punches\n"
+            "by vibrating the bumps on its fists.\n"
+            "They can also shoot paralyzing liquid\n"
+            "from their head bumps."); 
+
+const u8 gSeismitoadPokedexTextUnused[] = _("");
+
+const u8 gThrohPokedexText[] = _(
+    "When it tightens its belt, it becomes\n"
+            "stronger. Wild Throh use vines to weave\n"
+            "their own belts. It changes belts as it\n"
+            "gets more powerful."); 
+
+const u8 gThrohPokedexTextUnused[] = _("");
+
+const u8 gSawkPokedexText[] = _(
+     "The sound of Sawk punching boulders\n"
+            "and trees can be heard all the way from\n"
+            "the mountains where they train.\n"
+            "Disturbing their training angers them."); 
+
+const u8 gSawkPokedexTextUnused[] = _("");

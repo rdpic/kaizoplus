@@ -2448,6 +2448,26 @@ Cry_Conkeldurr::
 	.incbin "sound/direct_sound_samples/cries/conkeldurr.bin"
 
 	.align 2
+Cry_Tympole::
+	.incbin "sound/direct_sound_samples/cries/tympole.bin"
+
+	.align 2
+Cry_Palpitoad::
+	.incbin "sound/direct_sound_samples/cries/palpitoad.bin"
+
+	.align 2
+Cry_Seismitoad::
+	.incbin "sound/direct_sound_samples/cries/seismitoad.bin"
+
+	.align 2
+Cry_Throh::
+	.incbin "sound/direct_sound_samples/cries/throh.bin"
+
+	.align 2
+Cry_Sawk::
+	.incbin "sound/direct_sound_samples/cries/sawk.bin" 
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

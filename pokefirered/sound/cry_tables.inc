@@ -536,6 +536,11 @@ gCryTable::
 	cry Cry_Timburr
 	cry Cry_Gurdurr
 	cry Cry_Conkeldurr
+	cry Cry_Tympole
+	cry Cry_Palpitoad
+	cry Cry_Seismitoad
+	cry Cry_Throh
+	cry Cry_Sawk
 
 	.align 2
 gCryTable_Reverse::
@@ -1075,3 +1080,8 @@ gCryTable_Reverse::
 	cry_reverse Cry_Timburr
 	cry_reverse Cry_Gurdurr
 	cry_reverse Cry_Conkeldurr
+	cry_reverse Cry_Tympole
+	cry_reverse Cry_Palpitoad
+	cry_reverse Cry_Seismitoad
+	cry_reverse Cry_Throh
+	cry_reverse Cry_Sawk

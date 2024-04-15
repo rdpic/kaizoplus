@@ -2800,6 +2800,31 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 13,
     },
+    [SPECIES_TYMPOLE] =
+    {
+        .size = MON_COORDS_SIZE(40, 32),
+        .y_offset = 17,
+    },
+    [SPECIES_PALPITOAD] =
+    {
+        .size = MON_COORDS_SIZE(56, 40),
+        .y_offset = 12,
+    },
+    [SPECIES_SEISMITOAD] =
+    {
+        .size = MON_COORDS_SIZE(64, 40),
+        .y_offset = 12,
+    },
+    [SPECIES_THROH] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_SAWK] =
+    {
+        .size = MON_COORDS_SIZE(64, 40),
+        .y_offset = 13,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 48),

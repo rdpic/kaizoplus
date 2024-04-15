@@ -560,5 +560,10 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_TIMBURR] = gMonFootprint_Timburr,
     [SPECIES_GURDURR] = gMonFootprint_Gurdurr,
     [SPECIES_CONKELDURR] = gMonFootprint_Conkeldurr,
+    [SPECIES_TYMPOLE] = gMonFootprint_Tympole,
+    [SPECIES_PALPITOAD] = gMonFootprint_Palpitoad,
+    [SPECIES_SEISMITOAD] = gMonFootprint_Seismitoad,
+    [SPECIES_THROH] = gMonFootprint_Throh,
+    [SPECIES_SAWK] = gMonFootprint_Sawk,
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

@@ -560,4 +560,9 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_TIMBURR] = sTimburrLevelUpLearnset,
     [SPECIES_GURDURR] = sGurdurrLevelUpLearnset,
     [SPECIES_CONKELDURR] = sConkeldurrLevelUpLearnset,
+    [SPECIES_TYMPOLE] = sTympoleLevelUpLearnset,
+    [SPECIES_PALPITOAD] = sPalpitoadLevelUpLearnset,
+    [SPECIES_SEISMITOAD] = sSeismitoadLevelUpLearnset,
+    [SPECIES_THROH] = sThrohLevelUpLearnset,
+    [SPECIES_SAWK] = sSawkLevelUpLearnset,
 };

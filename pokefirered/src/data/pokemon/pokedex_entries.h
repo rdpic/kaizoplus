@@ -6955,4 +6955,69 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_TYMPOLE] =
+    {
+        .categoryName = _("TADPOLE"),
+        .height = 5,
+        .weight = 45,
+        .description = gTympolePokedexText,
+        .unusedDescription = gTympolePokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PALPITOAD] =
+    {
+        .categoryName = _("VIBRATION"),
+        .height = 8,
+        .weight = 170,
+        .description = gPalpitoadPokedexText,
+        .unusedDescription = gPalpitoadPokedexTextUnused,
+        .pokemonScale = 366,
+        .pokemonOffset = 10,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SEISMITOAD] =
+    {
+        .categoryName = _("VIBRATION"),
+        .height = 15,
+        .weight = 620,
+        .description = gSeismitoadPokedexText,
+        .unusedDescription = gSeismitoadPokedexTextUnused,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_THROH] =
+    {
+        .categoryName = _("JUDO"),
+        .height = 13,
+        .weight = 555,
+        .description = gThrohPokedexText,
+        .unusedDescription = gThrohPokedexTextUnused,
+        .pokemonScale = 272,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SAWK] =
+    {
+        .categoryName = _("KARATE"),
+        .height = 14,
+        .weight = 510,
+        .description = gSawkPokedexText,
+        .unusedDescription = gSawkPokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 4,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
 };

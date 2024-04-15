@@ -286,6 +286,11 @@ enum
     CRY_TIMBURR = 533,
     CRY_GURDURR = 534,
     CRY_CONKELDURR = 535,
+    CRY_TYMPOLE = 536,
+    CRY_PALPITOAD = 537,
+    CRY_SEISMITOAD = 538,
+    CRY_THROH = 539,
+    CRY_SAWK= 540,
 };
 
 #endif
