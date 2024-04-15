@@ -7020,4 +7020,134 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_SEWADDLE] =
+    {
+        .categoryName = _("SEWING"),
+        .height = 3,
+        .weight = 25,
+        .description = gSewaddlePokedexText,
+        .unusedDescription = gSewaddlePokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SWADLOON] =
+    {
+        .categoryName = _("LEAF-WRAP"),
+        .height = 5,
+        .weight = 73,
+        .description = gSwadloonPokedexText,
+        .unusedDescription = gSwadloonPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_LEAVANNY] =
+    {
+        .categoryName = _("NURTURING"),
+        .height = 12,
+        .weight = 205,
+        .description = gLeavannyPokedexText,
+        .unusedDescription = gLeavannyPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_VENIPEDE] =
+    {
+        .categoryName = _("CENTIPEDE"),
+        .height = 4,
+        .weight = 53,
+        .description = gVenipedePokedexText,
+        .unusedDescription = gVenipedePokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 16,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_WHIRLIPEDE] =
+    {
+        .categoryName = _("CURLIPEDE"),
+        .height = 12,
+        .weight = 585,
+        .description = gWhirlipedePokedexText,
+        .unusedDescription = gWhirlipedePokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SCOLIPEDE] =
+    {
+        .categoryName = _("MEGAPEDE"),
+        .height = 25,
+        .weight = 2005,
+        .description = gScolipedePokedexText,
+        .unusedDescription = gScolipedePokedexTextUnused,
+        .pokemonScale = 257,
+        .pokemonOffset = 2,
+        .trainerScale = 423,
+        .trainerOffset = 8,
+    },
+
+    [NATIONAL_DEX_COTTONEE] =
+    {
+        .categoryName = _("COTTON"),
+        .height = 3,
+        .weight = 6,
+        .description = gCottoneePokedexText,
+        .unusedDescription = gCottoneePokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_WHIMSICOTT] =
+    {
+        .categoryName = _("WINDVEILED"),
+        .height = 7,
+        .weight = 66,
+        .description = gWhimsicottPokedexText,
+        .unusedDescription = gWhimsicottPokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PETILIL] =
+    {
+        .categoryName = _("BULB"),
+        .height = 5,
+        .weight = 66,
+        .description = gPetililPokedexText,
+        .unusedDescription = gPetililPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_LILLIGANT] =
+    {
+        .categoryName = _("FLOWERING"),
+        .height = 11,
+        .weight = 163,
+        .description = gLilligantPokedexText,
+        .unusedDescription = gLilligantPokedexTextUnused,
+        .pokemonScale = 320,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
 };

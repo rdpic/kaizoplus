@@ -2825,6 +2825,56 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(56, 56),
         .y_offset = 7,
     },
+    [SPECIES_SEWADDLE] =
+    {
+        .size = MON_COORDS_SIZE(40, 40),
+        .y_offset = 14,
+    },
+    [SPECIES_SWADLOON] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 12,
+    },
+    [SPECIES_LEAVANNY] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_VENIPEDE] =
+    {
+        .size = MON_COORDS_SIZE(48, 32),
+        .y_offset = 16,
+    },
+    [SPECIES_WHIRLIPEDE] =
+    {
+        .size = MON_COORDS_SIZE(56, 40),
+        .y_offset = 13,
+    },
+    [SPECIES_SCOLIPEDE] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_COTTONEE] =
+    {
+        .size = MON_COORDS_SIZE(48, 32),
+        .y_offset = 18,
+    },
+    [SPECIES_WHIMSICOTT] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_PETILIL] =
+    {
+        .size = MON_COORDS_SIZE(32, 48),
+        .y_offset = 12,
+    },
+    [SPECIES_LILLIGANT] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 1,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 24),

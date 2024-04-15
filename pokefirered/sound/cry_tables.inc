@@ -541,6 +541,16 @@ gCryTable::
 	cry Cry_Seismitoad
 	cry Cry_Throh
 	cry Cry_Sawk
+	cry Cry_Sewaddle
+	cry Cry_Swadloon
+	cry Cry_Leavanny
+	cry Cry_Venipede
+	cry Cry_Whirlipede
+	cry Cry_Scolipede
+	cry Cry_Cottonee
+	cry Cry_Whimsicott
+	cry Cry_Petilil
+	cry Cry_Lilligant
 
 	.align 2
 gCryTable_Reverse::
@@ -1085,3 +1095,13 @@ gCryTable_Reverse::
 	cry_reverse Cry_Seismitoad
 	cry_reverse Cry_Throh
 	cry_reverse Cry_Sawk
+	cry_reverse Cry_Sewaddle
+	cry_reverse Cry_Swadloon
+	cry_reverse Cry_Leavanny
+	cry_reverse Cry_Venipede
+	cry_reverse Cry_Whirlipede
+	cry_reverse Cry_Scolipede
+	cry_reverse Cry_Cottonee
+	cry_reverse Cry_Whimsicott
+	cry_reverse Cry_Petilil
+	cry_reverse Cry_Lilligant

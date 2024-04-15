@@ -3942,3 +3942,83 @@ const u8 gSawkPokedexText[] = _(
             "Disturbing their training angers them."); 
 
 const u8 gSawkPokedexTextUnused[] = _("");
+
+const u8 gSewaddlePokedexText[] = _(
+    "It chews up leaves and sews them with\n"
+            "sticky thread extruded from its mouth.\n"
+            "Since this Pokémon makes its own clothes,\n"
+            "it is a mascot for fashion designers."); 
+
+const u8 gSewaddlePokedexTextUnused[] = _("");
+
+const u8 gSwadloonPokedexText[] = _(
+    "Forests where Swadloon live have\n"
+            "superb foliage because the nutrients\n"
+            "they make from fallen leaves nourish\n"
+            "the plant life."); 
+
+const u8 gSwadloonPokedexTextUnused[] = _("");
+
+const u8 gLeavannyPokedexText[] = _(
+    "It keeps its eggs warm with heat from\n"
+            "fermenting leaves. It also uses leaves to\n"
+            "weave warm wrappings for Sewaddle by\n"
+            "using the silk secreted from its mouth."); 
+
+const u8 gLeavannyPokedexTextUnused[] = _("");
+
+const u8 gVenipedePokedexText[] = _(
+    "Using the feelers on its head and tail,\n"
+            "it picks up vibrations in the air to\n"
+            "determine its prey's location and state.\n"
+            "It is brutally aggressive."); 
+
+const u8 gVenipedePokedexTextUnused[] = _("");
+
+const u8 gWhirlipedePokedexText[] = _(
+    "Storing energy for evolution, it sits.\n"
+            "But when attacked, it spins its body at\n"
+            "high speed like a wheel and then\n"
+            "crashes furiously into its opponent."); 
+
+const u8 gWhirlipedePokedexTextUnused[] = _("");
+
+const u8 gScolipedePokedexText[] = _(
+    "With quick movements, it chases down\n"
+            "its foes, attacking relentlessly with its\n"
+            "horns until it prevails. Then it finishes\n"
+            "them off with deadly poison."); 
+
+const u8 gScolipedePokedexTextUnused[] = _("");
+
+const u8 gCottoneePokedexText[] = _(
+    "When it finds others of its kind, they all\n"
+            "stick together. When enough of them\n"
+            "have collected, the mass resembles a\n"
+            "cumulonimbus cloud."); 
+
+const u8 gCottoneePokedexTextUnused[] = _("");
+
+const u8 gWhimsicottPokedexText[] = _(
+    "It rides on the wind and slips into\n"
+            "people's homes. After it has turned a\n"
+            "room into a cotton-filled mess, it giggles\n"
+            "to itself and takes off."); 
+
+const u8 gWhimsicottPokedexTextUnused[] = _("");
+
+const u8 gPetililPokedexText[] = _(
+    "By pruning the leaves on its head with\n"
+            "regularity, this Pokémon can be grown\n"
+            "into a fine plump shape. These bitter\n"
+            "leaves refresh those who eat them."); 
+
+const u8 gPetililPokedexTextUnused[] = _("");
+
+const u8 gLilligantPokedexText[] = _(
+    "Even veteran Trainers face a challenge\n"
+            "in getting its beautiful flower to bloom.\n"
+            "It withers away if a trainer does not\n"
+            "take good care of it."); 
+
+const u8 gLilligantPokedexTextUnused[] = _("");

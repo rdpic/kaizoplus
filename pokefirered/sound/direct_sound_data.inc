@@ -2468,6 +2468,46 @@ Cry_Sawk::
 	.incbin "sound/direct_sound_samples/cries/sawk.bin" 
 
 	.align 2
+Cry_Sewaddle::
+	.incbin "sound/direct_sound_samples/cries/sewaddle.bin"
+
+	.align 2
+Cry_Swadloon::
+	.incbin "sound/direct_sound_samples/cries/swadloon.bin"
+
+	.align 2
+Cry_Leavanny::
+	.incbin "sound/direct_sound_samples/cries/leavanny.bin" 
+
+	.align 2
+Cry_Venipede::
+	.incbin "sound/direct_sound_samples/cries/venipede.bin"
+
+	.align 2
+Cry_Whirlipede::
+	.incbin "sound/direct_sound_samples/cries/whirlipede.bin"
+
+	.align 2
+Cry_Scolipede::
+	.incbin "sound/direct_sound_samples/cries/scolipede.bin" 
+
+	.align 2
+Cry_Cottonee::
+	.incbin "sound/direct_sound_samples/cries/cottonee.bin" 
+
+	.align 2
+Cry_Whimsicott::
+	.incbin "sound/direct_sound_samples/cries/whimsicott.bin"
+
+	.align 2
+Cry_Petilil::
+	.incbin "sound/direct_sound_samples/cries/petilil.bin"
+
+	.align 2
+Cry_Lilligant::
+	.incbin "sound/direct_sound_samples/cries/lilligant.bin" 
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 
