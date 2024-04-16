@@ -2508,6 +2508,50 @@ Cry_Lilligant::
 	.incbin "sound/direct_sound_samples/cries/lilligant.bin" 
 
 	.align 2
+Cry_Basculin::
+	.incbin "sound/direct_sound_samples/cries/basculin.bin" 
+
+	.align 2
+Cry_Sandile::
+	.incbin "sound/direct_sound_samples/cries/sandile.bin"
+
+	.align 2
+Cry_Krokorok::
+	.incbin "sound/direct_sound_samples/cries/krokorok.bin"
+
+	.align 2
+Cry_Krookodile::
+	.incbin "sound/direct_sound_samples/cries/krookodile.bin" 
+
+	.align 2
+Cry_Darumaka::
+	.incbin "sound/direct_sound_samples/cries/darumaka.bin"
+
+	.align 2
+Cry_Darmanitan::
+	.incbin "sound/direct_sound_samples/cries/darmanitan.bin"
+
+	.align 2
+Cry_Maractus::
+	.incbin "sound/direct_sound_samples/cries/maractus.bin" 
+
+	.align 2
+Cry_Dwebble::
+	.incbin "sound/direct_sound_samples/cries/dwebble.bin" 
+
+	.align 2
+Cry_Crustle::
+	.incbin "sound/direct_sound_samples/cries/crustle.bin"
+
+	.align 2
+Cry_Scraggy::
+	.incbin "sound/direct_sound_samples/cries/scraggy.bin"
+
+	.align 2
+Cry_Scrafty::
+	.incbin "sound/direct_sound_samples/cries/scrafty.bin" 
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

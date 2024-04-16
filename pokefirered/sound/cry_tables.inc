@@ -551,6 +551,17 @@ gCryTable::
 	cry Cry_Whimsicott
 	cry Cry_Petilil
 	cry Cry_Lilligant
+	cry Cry_Basculin
+	cry Cry_Sandile
+	cry Cry_Krokorok
+	cry Cry_Krookodile
+	cry Cry_Darumaka
+	cry Cry_Darmanitan
+	cry Cry_Maractus
+	cry Cry_Dwebble
+	cry Cry_Crustle
+	cry Cry_Scraggy
+	cry Cry_Scrafty
 
 	.align 2
 gCryTable_Reverse::
@@ -1105,3 +1116,14 @@ gCryTable_Reverse::
 	cry_reverse Cry_Whimsicott
 	cry_reverse Cry_Petilil
 	cry_reverse Cry_Lilligant
+	cry_reverse Cry_Basculin
+	cry_reverse Cry_Sandile
+	cry_reverse Cry_Krokorok
+	cry_reverse Cry_Krookodile
+	cry_reverse Cry_Darumaka
+	cry_reverse Cry_Darmanitan
+	cry_reverse Cry_Maractus
+	cry_reverse Cry_Dwebble
+	cry_reverse Cry_Crustle
+	cry_reverse Cry_Scraggy
+	cry_reverse Cry_Scrafty

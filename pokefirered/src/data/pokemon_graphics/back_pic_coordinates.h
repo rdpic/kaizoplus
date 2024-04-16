@@ -2875,6 +2875,61 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 8,
     },
+    [SPECIES_BASCULIN] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 16,
+    },
+    [SPECIES_SANDILE] =
+    {
+        .size = MON_COORDS_SIZE(64, 32),
+        .y_offset = 18,
+    },
+    [SPECIES_KROKOROK] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_KROOKODILE] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_DARUMAKA] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 12,
+    },
+    [SPECIES_DARMANITAN] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 2,
+    },
+    [SPECIES_MARACTUS] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 2,
+    },
+    [SPECIES_DWEBBLE] =
+    {
+        .size = MON_COORDS_SIZE(56, 32),
+        .y_offset = 17,
+    },
+    [SPECIES_CRUSTLE] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 9,
+    },
+    [SPECIES_SCRAGGY] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_SCRAFTY] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 5,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 48),

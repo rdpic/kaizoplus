@@ -140,6 +140,7 @@ static const u16 sEasyChatWordsByLetter_B[] = {
     EC_POKEMON2(BARBOACH),
     EC_MOVE2(BARRAGE),
     EC_MOVE2(BARRIER),
+    EC_POKEMON2(BASCULIN),
     EC_POKEMON2(BASTIODON),
     EC_WORD_BATH,
     EC_MOVE2(BATON_PASS),
@@ -345,6 +346,7 @@ static const u16 sEasyChatWordsByLetter_C[] = {
     EC_MOVE(CRUNCH),
     EC_WORD_CRUSH,
     EC_MOVE2(CRUSH_CLAW),
+    EC_POKEMON2(CRUSTLE),
     EC_WORD_CRY,
     EC_POKEMON(CUBONE),
     EC_WORD_CURRENT,
@@ -363,7 +365,9 @@ static const u16 sEasyChatWordsByLetter_D[] = {
     EC_WORD_DANGER,
     EC_WORD_DARK,
     EC_POKEMON2(DARKRAI),
+    EC_POKEMON2(DARMANITAN),
     EC_WORD_DARN,
+    EC_POKEMON2(DARUMAKA),
     EC_WORD_DATE,
     EC_WORD_DAUGHTER,
     EC_WORD_DAY,
@@ -455,6 +459,7 @@ static const u16 sEasyChatWordsByLetter_D[] = {
     EC_POKEMON2(DUSKNOIR),
     EC_POKEMON2(DUSKULL),
     EC_POKEMON2(DUSTOX),
+    EC_POKEMON2(DWEBBLE),
     EC_MOVE2(DYNAMIC_PUNCH),
 };
 
@@ -915,6 +920,8 @@ static const u16 sEasyChatWordsByLetter_K[] = {
     EC_POKEMON(KRABBY),
     EC_POKEMON2(KRICKETOT),
     EC_POKEMON2(KRICKETUNE),
+    EC_POKEMON2(KROKOROK),
+    EC_POKEMON2(KROOKODILE),
     EC_WORD_KTHX_BYE,
     EC_POKEMON2(KYOGRE),
 };
@@ -1059,6 +1066,7 @@ static const u16 sEasyChatWordsByLetter_M[] = {
     EC_POKEMON(MANKEY),
     EC_POKEMON(MANTINE),
     EC_POKEMON(MANTYKE),
+    EC_POKEMON2(MARACTUS),
     EC_POKEMON(MAREEP),
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(MARILL),
@@ -1490,6 +1498,7 @@ static const u16 sEasyChatWordsByLetter_S[] = {
     EC_MOVE(SAND_TOMB),
     EC_WORD_SAND_VEIL,
     EC_MOVE(SAND_ATTACK),
+    EC_POKEMON2(SANDILE),
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(SANDSHREW),
     EC_POKEMON(SANDSHREW),
@@ -1509,6 +1518,8 @@ static const u16 sEasyChatWordsByLetter_S[] = {
     EC_WORD_SCHOOL,
     EC_POKEMON(SCIZOR),
     EC_POKEMON2(SCOLIPEDE),
+    EC_POKEMON2(SCRAFTY),
+    EC_POKEMON2(SCRAGGY),
     EC_MOVE2(SCRATCH),
     EC_MOVE(SCREECH),
     EC_POKEMON(SCYTHER),

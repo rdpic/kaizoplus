@@ -4022,3 +4022,91 @@ const u8 gLilligantPokedexText[] = _(
             "take good care of it."); 
 
 const u8 gLilligantPokedexTextUnused[] = _("");
+
+const u8 gBasculinPokedexText[] = _(
+    "It used to be a common food source. The\n"
+            "meat of red Basculin is on the fatty side\n"
+            "and it's more popular with the youth.\n"
+            "Its temperament is vicious and aggressive."); 
+
+const u8 gBasculinPokedexTextUnused[] = _("");
+
+const u8 gSandilePokedexText[] = _(
+    "It conceals itself in the sand and\n"
+            "chomps down on the legs of any prey\n"
+            "that unwarily walk over it. Its favorite\n"
+            "food is Trapinch."); 
+
+const u8 gSandilePokedexTextUnused[] = _("");
+
+const u8 gKrokorokPokedexText[] = _(
+    "They move in groups of a few individuals.\n"
+            "Thanks to the special membrane covering\n"
+            "its eyes, it can see its surroundings\n"
+            "clearly, even in the dead of night."); 
+
+const u8 gKrokorokPokedexTextUnused[] = _("");
+
+const u8 gKrookodilePokedexText[] = _(
+    "Very violent Pokémon, they never allow\n"
+            "their prey to escape. Their jaws are so\n"
+            "powerful, they can crush the body of\n"
+            "an automobile."); 
+
+const u8 gKrookodilePokedexTextUnused[] = _("");
+
+const u8 gDarumakaPokedexText[] = _(
+    "When its internal fire is burning, it\n"
+            "cannot calm down and it runs around.\n"
+            "When the fire diminishes, it pulls its\n"
+            "limbs into its body and falls asleep."); 
+
+const u8 gDarumakaPokedexTextUnused[] = _("");
+
+const u8 gDarmanitanPokedexText[] = _(
+    "When one is injured in a fierce battle,\n"
+            "it transforms into a stone statue.\n"
+            "Then it meditates and sharpens its\n"
+            "mind and fights on mentally."); 
+
+const u8 gDarmanitanPokedexTextUnused[] = _("");
+
+const u8 gMaractusPokedexText[] = _(
+    "Arid regions are their habitat.\n"
+            "When it moves rhythmically, it makes a\n"
+            "sound similar to maracas, making the\n"
+            "surprised Pokémon flee."); 
+
+const u8 gMaractusPokedexTextUnused[] = _("");
+
+const u8 gDwebblePokedexText[] = _(
+    "Very violent Pokémon, they never allow\n"
+            "their prey to escape. Their jaws are so\n"
+            "powerful, they can crush the body of\n"
+            "an automobile."); 
+
+const u8 gDwebblePokedexTextUnused[] = _("");
+
+const u8 gCrustlePokedexText[] = _(
+    "When its internal fire is burning, it\n"
+            "cannot calm down and it runs around.\n"
+            "When the fire diminishes, it pulls its\n"
+            "limbs into its body and falls asleep."); 
+
+const u8 gCrustlePokedexTextUnused[] = _("");
+
+const u8 gScraggyPokedexText[] = _(
+    "When one is injured in a fierce battle,\n"
+            "it transforms into a stone statue.\n"
+            "Then it meditates and sharpens its\n"
+            "mind and fights on mentally."); 
+
+const u8 gScraggyPokedexTextUnused[] = _("");
+
+const u8 gScraftyPokedexText[] = _(
+    "Arid regions are their habitat.\n"
+            "When it moves rhythmically, it makes a\n"
+            "sound similar to maracas, making the\n"
+            "surprised Pokémon flee."); 
+
+const u8 gScraftyPokedexTextUnused[] = _("");

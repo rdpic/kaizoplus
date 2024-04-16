@@ -7150,4 +7150,147 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_BASCULIN] =
+    {
+        .categoryName = _("HOSTILE"),
+        .height = 10,
+        .weight = 180,
+        .description = gBasculinPokedexText,
+        .unusedDescription = gBasculinPokedexTextUnused,
+        .pokemonScale = 316,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SANDILE] =
+    {
+        .categoryName = _("SAND CROC"),
+        .height = 7,
+        .weight = 152,
+        .description = gSandilePokedexText,
+        .unusedDescription = gSandilePokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_KROKOROK] =
+    {
+        .categoryName = _("SAND CROC"),
+        .height = 10,
+        .weight = 334,
+        .description = gKrokorokPokedexText,
+        .unusedDescription = gKrokorokPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_KROOKODILE] =
+    {
+        .categoryName = _("INTIMIDATE"),
+        .height = 15,
+        .weight = 963,
+        .description = gKrookodilePokedexText,
+        .unusedDescription = gKrookodilePokedexTextUnused,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DARUMAKA] =
+    {
+        .categoryName = _("ZEN CHARM"),
+        .height = 6,
+        .weight = 375,
+        .description = gDarumakaPokedexText,
+        .unusedDescription = gDarumakaPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DARMANITAN] =
+    {
+        .categoryName = _("BLAZING"),
+        .height = 13,
+        .weight = 929,
+        .description = gDarmanitanPokedexText,
+        .unusedDescription = gDarmanitanPokedexTextUnused,
+        .pokemonScale = 272,
+        .pokemonOffset = 3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_MARACTUS] =
+    {
+        .categoryName = _("CACTUS"),
+        .height = 10,
+        .weight = 280,
+        .description = gMaractusPokedexText,
+        .unusedDescription = gMaractusPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 6,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DWEBBLE] =
+    {
+        .categoryName = _("ROCK INN"),
+        .height = 3,
+        .weight = 145,
+        .description = gDwebblePokedexText,
+        .unusedDescription = gDwebblePokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_CRUSTLE] =
+    {
+        .categoryName = _("STONE HOME"),
+        .height = 14,
+        .weight = 2000,
+        .description = gCrustlePokedexText,
+        .unusedDescription = gCrustlePokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 2,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SCRAGGY] =
+    {
+        .categoryName = _("SHEDDING"),
+        .height = 6,
+        .weight = 118,
+        .description = gScraggyPokedexText,
+        .unusedDescription = gScraggyPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SCRAFTY] =
+    {
+        .categoryName = _("HOODLUM"),
+        .height = 11,
+        .weight = 300,
+        .description = gScraftyPokedexText,
+        .unusedDescription = gScraftyPokedexTextUnused,
+        .pokemonScale = 320,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
 };
