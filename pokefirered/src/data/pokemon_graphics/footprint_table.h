@@ -586,5 +586,12 @@ const u8 *const gMonFootprintTable[] =
     [SPECIES_CRUSTLE] = gMonFootprint_Crustle,
     [SPECIES_SCRAGGY] = gMonFootprint_Scraggy,
     [SPECIES_SCRAFTY] = gMonFootprint_Scrafty,
+    [SPECIES_SIGILYPH] = gMonFootprint_Sigilyph,
+    [SPECIES_YAMASK] = gMonFootprint_Yamask,
+    [SPECIES_COFAGRIGUS] = gMonFootprint_Cofagrigus,
+    [SPECIES_TIRTOUGA] = gMonFootprint_Tirtouga,
+    [SPECIES_CARRACOSTA] = gMonFootprint_Carracosta,
+    [SPECIES_ARCHEN] = gMonFootprint_Archen,
+    [SPECIES_ARCHEOPS] = gMonFootprint_Archeops,
     [SPECIES_EGG] = gMonFootprint_Bulbasaur,
 };

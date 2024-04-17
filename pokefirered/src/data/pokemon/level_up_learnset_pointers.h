@@ -586,4 +586,11 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_CRUSTLE] = sCrustleLevelUpLearnset,
     [SPECIES_SCRAGGY] = sScraggyLevelUpLearnset,
     [SPECIES_SCRAFTY] = sScraftyLevelUpLearnset,
+    [SPECIES_SIGILYPH] = sSigilyphLevelUpLearnset,
+    [SPECIES_YAMASK] = sYamaskLevelUpLearnset,
+    [SPECIES_COFAGRIGUS] = sCofagrigusLevelUpLearnset,
+    [SPECIES_TIRTOUGA] = sTirtougaLevelUpLearnset,
+    [SPECIES_CARRACOSTA] = sCarracostaLevelUpLearnset,
+    [SPECIES_ARCHEN] = sArchenLevelUpLearnset,
+    [SPECIES_ARCHEOPS] = sArcheopsLevelUpLearnset,
 };

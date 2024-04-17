@@ -2930,6 +2930,41 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(48, 64),
         .y_offset = 5,
     },
+    [SPECIES_SIGILYPH] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 7,
+    },
+    [SPECIES_YAMASK] =
+    {
+        .size = MON_COORDS_SIZE(40, 40),
+        .y_offset = 14,
+    },
+    [SPECIES_COFAGRIGUS] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_TIRTOUGA] =
+    {
+        .size = MON_COORDS_SIZE(64, 32),
+        .y_offset = 16,
+    },
+    [SPECIES_CARRACOSTA] =
+    {
+        .size = MON_COORDS_SIZE(64, 40),
+        .y_offset = 13,
+    },
+    [SPECIES_ARCHEN] =
+    {
+        .size = MON_COORDS_SIZE(64, 32),
+        .y_offset = 16,
+    },
+    [SPECIES_ARCHEOPS] =
+    {
+        .size = MON_COORDS_SIZE(64, 40),
+        .y_offset = 12,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 48),

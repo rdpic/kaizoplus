@@ -2552,6 +2552,34 @@ Cry_Scrafty::
 	.incbin "sound/direct_sound_samples/cries/scrafty.bin" 
 
 	.align 2
+Cry_Sigilyph::
+	.incbin "sound/direct_sound_samples/cries/sigilyph.bin"
+
+	.align 2
+Cry_Yamask::
+	.incbin "sound/direct_sound_samples/cries/yamask.bin"
+
+	.align 2
+Cry_Cofagrigus::
+	.incbin "sound/direct_sound_samples/cries/cofagrigus.bin" 
+
+	.align 2
+Cry_Tirtouga::
+	.incbin "sound/direct_sound_samples/cries/tirtouga.bin" 
+
+	.align 2
+Cry_Carracosta::
+	.incbin "sound/direct_sound_samples/cries/carracosta.bin"
+
+	.align 2
+Cry_Archen::
+	.incbin "sound/direct_sound_samples/cries/archen.bin"
+
+	.align 2
+Cry_Archeops::
+	.incbin "sound/direct_sound_samples/cries/archeops.bin" 
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

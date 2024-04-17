@@ -7293,4 +7293,95 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_SIGILYPH] =
+    {
+        .categoryName = _("AVIANOID"),
+        .height = 14,
+        .weight = 140,
+        .description = gSigilyphPokedexText,
+        .unusedDescription = gSigilyphPokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 2,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_YAMASK] =
+    {
+        .categoryName = _("SPIRIT"),
+        .height = 5,
+        .weight = 15,
+        .description = gYamaskPokedexText,
+        .unusedDescription = gYamaskPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_COFAGRIGUS] =
+    {
+        .categoryName = _("COFFIN"),
+        .height = 17,
+        .weight = 765,
+        .description = gCofagrigusPokedexText,
+        .unusedDescription = gCofagrigusPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 0,
+        .trainerScale = 290,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_TIRTOUGA] =
+    {
+        .categoryName = _("PROTOTURTLE"),
+        .height = 7,
+        .weight = 165,
+        .description = gTirtougaPokedexText,
+        .unusedDescription = gTirtougaPokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_CARRACOSTA] =
+    {
+        .categoryName = _("PROTOTURTLE"),
+        .height = 12,
+        .weight = 810,
+        .description = gCarracostaPokedexText,
+        .unusedDescription = gCarracostaPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_ARCHEN] =
+    {
+        .categoryName = _("FIRST BIRD"),
+        .height = 5,
+        .weight = 95,
+        .description = gArchenPokedexText,
+        .unusedDescription = gArchenPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_ARCHEOPS] =
+    {
+        .categoryName = _("FIRST BIRD"),
+        .height = 14,
+        .weight = 320,
+        .description = gArcheopsPokedexText,
+        .unusedDescription = gArcheopsPokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 2,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
 };

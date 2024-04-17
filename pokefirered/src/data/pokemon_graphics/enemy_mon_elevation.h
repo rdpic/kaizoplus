@@ -96,4 +96,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_WOOBAT] = 19,
     [SPECIES_SWOOBAT] = 10,
     [SPECIES_BASCULIN] = 6,
+    [SPECIES_SIGILYPH] = 7,
+    [SPECIES_YAMASK] = 10,
+    [SPECIES_ARCHEOPS] = 11,
 };

@@ -562,6 +562,13 @@ gCryTable::
 	cry Cry_Crustle
 	cry Cry_Scraggy
 	cry Cry_Scrafty
+	cry Cry_Sigilyph
+	cry Cry_Yamask
+	cry Cry_Cofagrigus
+	cry Cry_Tirtouga
+	cry Cry_Carracosta
+	cry Cry_Archen
+	cry Cry_Archeops
 
 	.align 2
 gCryTable_Reverse::
@@ -1127,3 +1134,10 @@ gCryTable_Reverse::
 	cry_reverse Cry_Crustle
 	cry_reverse Cry_Scraggy
 	cry_reverse Cry_Scrafty
+	cry_reverse Cry_Sigilyph
+	cry_reverse Cry_Yamask
+	cry_reverse Cry_Cofagrigus
+	cry_reverse Cry_Tirtouga
+	cry_reverse Cry_Carracosta
+	cry_reverse Cry_Archen
+	cry_reverse Cry_Archeops

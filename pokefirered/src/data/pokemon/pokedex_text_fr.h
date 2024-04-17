@@ -4110,3 +4110,59 @@ const u8 gScraftyPokedexText[] = _(
             "surprised Pokémon flee."); 
 
 const u8 gScraftyPokedexTextUnused[] = _("");
+
+const u8 gSigilyphPokedexText[] = _(
+    "The guardians of an ancient city, they\n"
+            "always fly the same route while keeping\n"
+            "watch for invaders. They use their\n"
+            "psychic power to attack enemies."); 
+
+const u8 gSigilyphPokedexTextUnused[] = _("");
+
+const u8 gYamaskPokedexText[] = _(
+    "These Pokémon arose from the spirits\n"
+            "of people interred in graves in past ages.\n"
+            "Each of them carries a mask that used\n"
+            "to be its face when it was human."); 
+
+const u8 gYamaskPokedexTextUnused[] = _("");
+
+const u8 gCofagrigusPokedexText[] = _(
+    "Grave robbers who mistake them for\n"
+            "real coffins and get too close end up\n"
+            "trapped inside their bodies. Their bodies\n"
+            "are covered in pure gold."); 
+
+const u8 gCofagrigusPokedexTextUnused[] = _("");
+
+const u8 gTirtougaPokedexText[] = _(
+    "Reputed to be the ancestor of most\n"
+            "turtle Pokémon, it lived in warm seas\n"
+            "about a hundred million years ago.\n"
+            "It was restored from a fossil."); 
+
+const u8 gTirtougaPokedexTextUnused[] = _("");
+
+const u8 gCarracostaPokedexText[] = _(
+    "They can live both in the ocean and\n"
+            "on land. Incredible jaw strength enables\n"
+            "them to chew up steel beams and rocks\n"
+            "along with their prey."); 
+
+const u8 gCarracostaPokedexTextUnused[] = _("");
+
+const u8 gArchenPokedexText[] = _(
+    "Said to be the ancestor of all bird\n"
+            "Pokémon, Archen itself could not actually\n"
+            "fly but moved by hopping from treetop\n"
+            "to treetop."); 
+
+const u8 gArchenPokedexTextUnused[] = _("");
+
+const u8 gArcheopsPokedexText[] = _(
+    "They are intelligent and will cooperate\n"
+            "to catch prey. When one Archeops\n"
+            "had the prey cornered, another would\n"
+            "swoop on it."); 
+
+const u8 gArcheopsPokedexTextUnused[] = _("");
