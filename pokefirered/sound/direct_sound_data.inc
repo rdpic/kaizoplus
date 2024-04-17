@@ -2676,6 +2676,34 @@ Cry_Amoonguss::
 	.incbin "sound/direct_sound_samples/cries/amoonguss.bin" 
 
 	.align 2
+Cry_Frillish::
+	.incbin "sound/direct_sound_samples/cries/frillish.bin" 
+
+	.align 2
+Cry_Jellicent::
+	.incbin "sound/direct_sound_samples/cries/jellicent.bin"
+
+	.align 2
+Cry_Alomomola::
+	.incbin "sound/direct_sound_samples/cries/alomomola.bin" 
+
+	.align 2
+Cry_Joltik::
+	.incbin "sound/direct_sound_samples/cries/joltik.bin" 
+
+	.align 2
+Cry_Galvantula::
+	.incbin "sound/direct_sound_samples/cries/galvantula.bin" 
+
+	.align 2
+Cry_Ferroseed::
+	.incbin "sound/direct_sound_samples/cries/ferroseed.bin"
+
+	.align 2
+Cry_Ferrothorn::
+	.incbin "sound/direct_sound_samples/cries/ferrothorn.bin" 
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

@@ -103,4 +103,5 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_DUOSION] = 7,
     [SPECIES_REUNICLUS] = 8,
     [SPECIES_EMOLGA] = 19,
+    [SPECIES_FERROTHORN] = 10,
 };

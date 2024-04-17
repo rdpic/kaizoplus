@@ -593,6 +593,13 @@ gCryTable::
 	cry Cry_Escavalier
 	cry Cry_Foongus
 	cry Cry_Amoonguss
+	cry Cry_Frillish
+	cry Cry_Jellicent
+	cry Cry_Alomomola
+	cry Cry_Joltik
+	cry Cry_Galvantula
+	cry Cry_Ferroseed
+	cry Cry_Ferrothorn
 
 	.align 2
 gCryTable_Reverse::
@@ -1189,3 +1196,10 @@ gCryTable_Reverse::
 	cry_reverse Cry_Escavalier
 	cry_reverse Cry_Foongus
 	cry_reverse Cry_Amoonguss
+	cry_reverse Cry_Frillish
+	cry_reverse Cry_Jellicent
+	cry_reverse Cry_Alomomola
+	cry_reverse Cry_Joltik
+	cry_reverse Cry_Galvantula
+	cry_reverse Cry_Ferroseed
+	cry_reverse Cry_Ferrothorn

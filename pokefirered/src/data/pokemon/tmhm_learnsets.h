@@ -10593,4 +10593,39 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(TM11_SUNNY_DAY)
                                         | TMHM(HM06_ROCK_SMASH)),
 
+    [SPECIES_FRILLISH]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_JELLICENT]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_ALOMOMOLA]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_JOLTIK]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_GALVANTULA]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_FERROSEED]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_FERROTHORN]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
 };

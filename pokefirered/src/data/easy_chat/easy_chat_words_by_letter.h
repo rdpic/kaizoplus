@@ -58,6 +58,7 @@ static const u16 sEasyChatWordsByLetter_A[] = {
     EC_WORD_ALLOWANCE,
     EC_WORD_ALLY,
     EC_WORD_ALMOST,
+    EC_POKEMON2(ALOMOMOLA),
     EC_WORD_ALONE,
     EC_WORD_ALSO,
     EC_WORD_ALT_COLOR,
@@ -561,6 +562,8 @@ static const u16 sEasyChatWordsByLetter_F[] = {
     EC_POKEMON2(FEEBAS),
     EC_WORD_FEELING,
     EC_POKEMON(FERALIGATR),
+    EC_POKEMON2(FERROSEED),
+    EC_POKEMON2(FERROTHORN),
     EC_WORD_FESTIVAL,
     EC_WORD_FEVER,
     EC_WORD_FIERY,
@@ -610,6 +613,7 @@ static const u16 sEasyChatWordsByLetter_F[] = {
     EC_MOVE2(FRENZY_PLANT),
     EC_WORD_FRIDAY,
     EC_WORD_FRIEND,
+    EC_POKEMON2(FRILLISH),
     EC_WORD_FROM,
     EC_WORD_FRONT,
     EC_POKEMON2(FROSLASS),
@@ -627,6 +631,7 @@ static const u16 sEasyChatWordsByLetter_F[] = {
 static const u16 sEasyChatWordsByLetter_G[] = {
     EC_POKEMON2(GABITE),
     EC_POKEMON2(GALLADE),
+    EC_POKEMON2(GALVANTULA),
     EC_WORD_GAME,
     EC_POKEMON2(GARBODOR),
     EC_POKEMON2(GARCHOMP),
@@ -892,11 +897,13 @@ static const u16 sEasyChatWordsByLetter_I[] = {
 
 static const u16 sEasyChatWordsByLetter_J[] = {
     -1, 2, // Doubled pokemon species name
+    EC_POKEMON2(JELLICENT),
     EC_POKEMON2(JIGGLYPUFF),
     EC_POKEMON(JIGGLYPUFF),
     EC_POKEMON2(JIRACHI),
     EC_WORD_JOKING,
     EC_POKEMON(JOLTEON),
+    EC_POKEMON2(JOLTIK),
     EC_WORD_JOY,
     EC_WORD_JUDGE,
     EC_MOVE2(JUMP_KICK),

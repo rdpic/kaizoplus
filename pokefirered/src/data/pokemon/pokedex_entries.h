@@ -7696,4 +7696,95 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_FRILLISH] =
+    {
+        .categoryName = _("FLOATING"),
+        .height = 12,
+        .weight = 330,
+        .description = gFrillishPokedexText,
+        .unusedDescription = gFrillishPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_JELLICENT] =
+    {
+        .categoryName = _("FLOATING"),
+        .height = 22,
+        .weight = 1350,
+        .description = gJellicentPokedexText,
+        .unusedDescription = gJellicentPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 348,
+        .trainerOffset = 6,
+    },
+
+    [NATIONAL_DEX_ALOMOMOLA] =
+    {
+        .categoryName = _("CARING"),
+        .height = 12,
+        .weight = 316,
+        .description = gAlomomolaPokedexText,
+        .unusedDescription = gAlomomolaPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_JOLTIK] =
+    {
+        .categoryName = _("ATTACHING"),
+        .height = 1,
+        .weight = 6,
+        .description = gJoltikPokedexText,
+        .unusedDescription = gJoltikPokedexTextUnused,
+        .pokemonScale = 682,
+        .pokemonOffset = 24,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GALVANTULA] =
+    {
+        .categoryName = _("ELESPIDER"),
+        .height = 8,
+        .weight = 143,
+        .description = gGalvantulaPokedexText,
+        .unusedDescription = gGalvantulaPokedexTextUnused,
+        .pokemonScale = 366,
+        .pokemonOffset = 10,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_FERROSEED] =
+    {
+        .categoryName = _("THORN SEED"),
+        .height = 6,
+        .weight = 188,
+        .description = gFerroseedPokedexText,
+        .unusedDescription = gFerroseedPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_FERROTHORN] =
+    {
+        .categoryName = _("THORN POD"),
+        .height = 10,
+        .weight = 1100,
+        .description = gFerrothornPokedexText,
+        .unusedDescription = gFerrothornPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
 };

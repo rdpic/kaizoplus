@@ -4358,3 +4358,59 @@ const u8 gAmoongussPokedexText[] = _(
             "are fooled by this.");
 
 const u8 gAmoongussPokedexTextUnused[] = _("");
+
+const u8 gFrillishPokedexText[] = _(
+    "If its veil-like arms stun and wrap an\n"
+            "opponent, that foe will be dragged\n"
+            "five miles below the surface to its lair,\n"
+            "never to return.");
+
+const u8 gFrillishPokedexTextUnused[] = _("");
+
+const u8 gJellicentPokedexText[] = _(
+    "They propel themselves by expelling\n"
+            "absorbed seawater from their bodies.\n"
+            "It's said there's a castle of ships\n"
+            "Jellicent have sunk on the seafloor."); 
+
+const u8 gJellicentPokedexTextUnused[] = _("");
+
+const u8 gAlomomolaPokedexText[] = _(
+    "When they find a wounded Pokémon,\n"
+            "they embrace it and bring it to shore.\n"
+            "The special membrane enveloping\n"
+            "Alomomola has the ability to heal wounds.");
+
+const u8 gAlomomolaPokedexTextUnused[] = _("");
+
+const u8 gJoltikPokedexText[] = _(
+    "Since they can't generate their own\n"
+            "electricity, they attach themselves to\n"
+            "large-bodied Pokémon and absorb static\n"
+            "electricity, which they store in a pouch.");
+
+const u8 gJoltikPokedexTextUnused[] = _("");
+
+const u8 gGalvantulaPokedexText[] = _(
+    "It creates barriers from electrified silk\n"
+            "that stun foes. This works as a weapon as\n"
+            "well as a defense. While it is immobilized\n"
+            "by shock, they leisurely consume it.");
+
+const u8 gGalvantulaPokedexTextUnused[] = _("");
+
+const u8 gFerroseedPokedexText[] = _(
+    "It absorbs the iron it finds in the rock\n"
+            "while clinging to the ceiling of caves.\n"
+            "When threatened, it attacks by shooting\n"
+            "a barrage of spikes."); 
+
+const u8 gFerroseedPokedexTextUnused[] = _("");
+
+const u8 gFerrothornPokedexText[] = _(
+    "It fights by swinging around its three\n"
+            "spiky feelers and shooting spikes.\n"
+            "A hit from these steel spikes can reduce\n"
+            "a boulder to rubble.");
+
+const u8 gFerrothornPokedexTextUnused[] = _("");

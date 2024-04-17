@@ -617,4 +617,12 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_ESCAVALIER] = sEscavalierLevelUpLearnset,
     [SPECIES_FOONGUS] = sFoongusLevelUpLearnset,
     [SPECIES_AMOONGUSS] = sAmoongussLevelUpLearnset,
+    [SPECIES_FRILLISH] = sFrillishLevelUpLearnset,
+    [SPECIES_JELLICENT] = sJellicentLevelUpLearnset,
+    [SPECIES_ALOMOMOLA] = sAlomomolaLevelUpLearnset,
+    [SPECIES_JOLTIK] = sJoltikLevelUpLearnset,
+    [SPECIES_GALVANTULA] = sGalvantulaLevelUpLearnset,
+    [SPECIES_FERROSEED] = sFerroseedLevelUpLearnset,
+    [SPECIES_FERROTHORN] = sFerrothornLevelUpLearnset,
+    
 };
