@@ -2628,6 +2628,54 @@ Cry_Reuniclus::
 	.incbin "sound/direct_sound_samples/cries/reuniclus.bin" 
 
 	.align 2
+Cry_Ducklett::
+	.incbin "sound/direct_sound_samples/cries/ducklett.bin"
+
+	.align 2
+Cry_Swanna::
+	.incbin "sound/direct_sound_samples/cries/swanna.bin" 
+
+	.align 2
+Cry_Vanillite::
+	.incbin "sound/direct_sound_samples/cries/vanillite.bin" 
+
+	.align 2
+Cry_Vanillish::
+	.incbin "sound/direct_sound_samples/cries/vanillish.bin"
+
+	.align 2
+Cry_Vanilluxe::
+	.incbin "sound/direct_sound_samples/cries/vanilluxe.bin" 
+
+	.align 2
+Cry_Deerling::
+	.incbin "sound/direct_sound_samples/cries/deerling.bin" 
+
+	.align 2
+Cry_Sawsbuck::
+	.incbin "sound/direct_sound_samples/cries/sawsbuck.bin"
+
+	.align 2
+Cry_Emolga::
+	.incbin "sound/direct_sound_samples/cries/emolga.bin" 
+
+	.align 2
+Cry_Karrablast::
+	.incbin "sound/direct_sound_samples/cries/karrablast.bin" 
+
+	.align 2
+Cry_Escavalier::
+	.incbin "sound/direct_sound_samples/cries/escavalier.bin" 
+
+	.align 2
+Cry_Foongus::
+	.incbin "sound/direct_sound_samples/cries/foongus.bin"
+
+	.align 2
+Cry_Amoonguss::
+	.incbin "sound/direct_sound_samples/cries/amoonguss.bin" 
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

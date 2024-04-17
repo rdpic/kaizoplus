@@ -581,6 +581,18 @@ gCryTable::
 	cry Cry_Solosis
 	cry Cry_Duosion
 	cry Cry_Reuniclus
+	cry Cry_Ducklett
+	cry Cry_Swanna
+	cry Cry_Vanillite
+	cry Cry_Vanillish
+	cry Cry_Vanilluxe
+	cry Cry_Deerling
+	cry Cry_Sawsbuck
+	cry Cry_Emolga
+	cry Cry_Karrablast
+	cry Cry_Escavalier
+	cry Cry_Foongus
+	cry Cry_Amoonguss
 
 	.align 2
 gCryTable_Reverse::
@@ -1165,3 +1177,15 @@ gCryTable_Reverse::
 	cry_reverse Cry_Solosis
 	cry_reverse Cry_Duosion
 	cry_reverse Cry_Reuniclus
+	cry_reverse Cry_Ducklett
+	cry_reverse Cry_Swanna
+	cry_reverse Cry_Vanillite
+	cry_reverse Cry_Vanillish
+	cry_reverse Cry_Vanilluxe
+	cry_reverse Cry_Deerling
+	cry_reverse Cry_Sawsbuck
+	cry_reverse Cry_Emolga
+	cry_reverse Cry_Karrablast
+	cry_reverse Cry_Escavalier
+	cry_reverse Cry_Foongus
+	cry_reverse Cry_Amoonguss

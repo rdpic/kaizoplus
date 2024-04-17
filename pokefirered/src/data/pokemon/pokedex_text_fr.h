@@ -4262,3 +4262,99 @@ const u8 gReuniclusPokedexText[] = _(
             "forms between their brains.");
 
 const u8 gReuniclusPokedexTextUnused[] = _("");
+
+const u8 gDucklettPokedexText[] = _(
+    "These bird Pokémon are excellent divers.\n"
+            "They are better at swimming than flying,\n"
+            "and they happily eat their favorite food,\n"
+            "peat moss, as they dive underwater."); 
+
+const u8 gDucklettPokedexTextUnused[] = _("");
+
+const u8 gSwannaPokedexText[] = _(
+    "Despite their elegant appearance, they\n"
+            "can flap their wings strongly and fly for\n"
+            "thousands of miles. The one in the middle\n"
+            "is the leader of the flock.");
+
+const u8 gSwannaPokedexTextUnused[] = _("");
+
+const u8 gVanillitePokedexText[] = _(
+    "The temperature of their breath is -58ºF.\n"
+            "They create snow crystals and make snow\n"
+            "fall in the areas around them. Vanillite is\n"
+            "treasured by households in warm regions.");
+
+const u8 gVanillitePokedexTextUnused[] = _("");
+
+const u8 gVanillishPokedexText[] = _(
+    "Vanillish has existed since the Ice Age.\n"
+            "It controls particles of ice, freezes its\n"
+            "opponents, and then shatters them with\n"
+            "a headbutt."); 
+
+const u8 gVanillishPokedexTextUnused[] = _("");
+
+const u8 gVanilluxePokedexText[] = _(
+    "Each of its two heads has a brain, and\n"
+            "when they are in agreement, it attacks\n"
+            "its enemies by exhaling a violent blizzard.\n"
+            "It makes snow clouds inside its body.");
+
+const u8 gVanilluxePokedexTextUnused[] = _("");
+
+const u8 gDeerlingPokedexText[] = _(
+    "Deerling have different scents\n"
+            "depending on the season. In early\n"
+            "spring, these Pokémon give off a\n"
+            "delicate, sweet, and calming scent.");
+
+const u8 gDeerlingPokedexTextUnused[] = _("");
+
+const u8 gSawsbuckPokedexText[] = _(
+    "Some people call Sawsbuck the harbingers\n"
+            "of spring because the plants growing on\n"
+            "its horns change according to the season.\n"
+            "The leader possesses magnificent horns."); 
+
+const u8 gSawsbuckPokedexTextUnused[] = _("");
+
+const u8 gEmolgaPokedexText[] = _(
+    "It glides using its cape-like membrane.\n"
+            "It grills berries and bug Pokémon with\n"
+            "electric shocks from the pouches on its\n"
+            "cheeks and makes a meal of them.");
+
+const u8 gEmolgaPokedexTextUnused[] = _("");
+
+const u8 gKarrablastPokedexText[] = _(
+    "When they feel threatened, they spit an\n"
+            "acidic liquid to drive attackers away.\n"
+            "For some reason they evolve while they\n"
+            "are in the same place as Shelmet.");
+
+const u8 gKarrablastPokedexTextUnused[] = _("");
+
+const u8 gEscavalierPokedexText[] = _(
+    "Wearing the shell covering they stole\n"
+            "from Shelmet, they defend themselves and\n"
+            "attack with two lances. The steel armor\n"
+            "protects their whole body.");
+
+const u8 gEscavalierPokedexTextUnused[] = _("");
+
+const u8 gFoongusPokedexText[] = _(
+    "It lures Pokémon in with its pattern that\n"
+            "looks just like a Poké Ball, then releases\n"
+            "its poison spores. Why it resembles a\n"
+            "Poké Ball is unknown."); 
+
+const u8 gFoongusPokedexTextUnused[] = _("");
+
+const u8 gAmoongussPokedexText[] = _(
+    "It lures prey close by dancing and waving\n"
+            "its arm caps, which resemble Poké Balls,\n"
+            "in a swaying motion, but very few Pokémon\n"
+            "are fooled by this.");
+
+const u8 gAmoongussPokedexTextUnused[] = _("");

@@ -7540,4 +7540,160 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_DUCKLETT] =
+    {
+        .categoryName = _("WATER BIRD"),
+        .height = 5,
+        .weight = 55,
+        .description = gDucklettPokedexText,
+        .unusedDescription = gDucklettPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SWANNA] =
+    {
+        .categoryName = _("WHITE BIRD"),
+        .height = 13,
+        .weight = 242,
+        .description = gSwannaPokedexText,
+        .unusedDescription = gSwannaPokedexTextUnused,
+        .pokemonScale = 272,
+        .pokemonOffset = 3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_VANILLITE] =
+    {
+        .categoryName = _("SNOW"),
+        .height = 4,
+        .weight = 57,
+        .description = gVanillitePokedexText,
+        .unusedDescription = gVanillitePokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_VANILLISH] =
+    {
+        .categoryName = _("SNOW"),
+        .height = 11,
+        .weight = 410,
+        .description = gVanillishPokedexText,
+        .unusedDescription = gVanillishPokedexTextUnused,
+        .pokemonScale = 320,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_VANILLUXE] =
+    {
+        .categoryName = _("SNOWSTORM"),
+        .height = 13,
+        .weight = 575,
+        .description = gVanilluxePokedexText,
+        .unusedDescription = gVanilluxePokedexTextUnused,
+        .pokemonScale = 272,
+        .pokemonOffset = 3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DEERLING] =
+    {
+        .categoryName = _("SEASON"),
+        .height = 6,
+        .weight = 195,
+        .description = gDeerlingPokedexText,
+        .unusedDescription = gDeerlingPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SAWSBUCK] =
+    {
+        .categoryName = _("SEASON"),
+        .height = 19,
+        .weight = 925,
+        .description = gSawsbuckPokedexText,
+        .unusedDescription = gSawsbuckPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 1,
+        .trainerScale = 326,
+        .trainerOffset = 4,
+    },
+
+    [NATIONAL_DEX_EMOLGA] =
+    {
+        .categoryName = _("SKYSQUIRREL"),
+        .height = 4,
+        .weight = 50,
+        .description = gEmolgaPokedexText,
+        .unusedDescription = gEmolgaPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_KARRABLAST] =
+    {
+        .categoryName = _("CLAMPING"),
+        .height = 5,
+        .weight = 59,
+        .description = gKarrablastPokedexText,
+        .unusedDescription = gKarrablastPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_ESCAVALIER] =
+    {
+        .categoryName = _("CAVALRY"),
+        .height = 10,
+        .weight = 330,
+        .description = gEscavalierPokedexText,
+        .unusedDescription = gEscavalierPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_FOONGUS] =
+    {
+        .categoryName = _("MUSHROOM"),
+        .height = 2,
+        .weight = 10,
+        .description = gFoongusPokedexText,
+        .unusedDescription = gFoongusPokedexTextUnused,
+        .pokemonScale = 682,
+        .pokemonOffset = 24,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_AMOONGUSS] =
+    {
+        .categoryName = _("MUSHROOM"),
+        .height = 6,
+        .weight = 105,
+        .description = gAmoongussPokedexText,
+        .unusedDescription = gAmoongussPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
 };

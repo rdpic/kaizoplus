@@ -3025,6 +3025,66 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 48),
         .y_offset = 11,
     },
+    [SPECIES_DUCKLETT] =
+    {
+        .size = MON_COORDS_SIZE(32, 40),
+        .y_offset = 12,
+    },
+    [SPECIES_SWANNA] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 2,
+    },
+    [SPECIES_VANILLITE] =
+    {
+        .size = MON_COORDS_SIZE(32, 40),
+        .y_offset = 14,
+    },
+    [SPECIES_VANILLISH] =
+    {
+        .size = MON_COORDS_SIZE(32, 56),
+        .y_offset = 5,
+    },
+    [SPECIES_VANILLUXE] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 4,
+    },
+    [SPECIES_DEERLING] =
+    {
+        .size = MON_COORDS_SIZE(32, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_SAWSBUCK] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_EMOLGA] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 17,
+    },
+    [SPECIES_KARRABLAST] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 13,
+    },
+    [SPECIES_ESCAVALIER] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_FOONGUS] =
+    {
+        .size = MON_COORDS_SIZE(32, 32),
+        .y_offset = 16,
+    },
+    [SPECIES_AMOONGUSS] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 8,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 24),
