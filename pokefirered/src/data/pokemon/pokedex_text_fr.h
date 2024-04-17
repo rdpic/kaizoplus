@@ -4166,3 +4166,99 @@ const u8 gArcheopsPokedexText[] = _(
             "swoop on it."); 
 
 const u8 gArcheopsPokedexTextUnused[] = _("");
+
+const u8 gTrubbishPokedexText[] = _(
+    "It gorges on trash until its stomach\n"
+            "is full. Then it belches toxic gas.\n"
+            "An unlucky whiff of this gas will put\n"
+            "a person in the hospital."); 
+
+const u8 gTrubbishPokedexTextUnused[] = _("");
+
+const u8 gGarbodorPokedexText[] = _(
+    "Beware the poisonous liquid it shoots\n"
+            "from its right arm. If even a little of it\n"
+            "gets on you, you'll experience the full\n"
+            "effects of this unidentified toxin."); 
+
+const u8 gGarbodorPokedexTextUnused[] = _("");
+
+const u8 gZoruaPokedexText[] = _(
+    "To protect themselves from danger, they\n"
+            "hide their true identities by transforming\n"
+            "into people and Pokémon. Apparently, it\n"
+            "often transforms into a silent child."); 
+
+const u8 gZoruaPokedexTextUnused[] = _("");
+
+const u8 gZoroarkPokedexText[] = _(
+    "Bonds between these Pokémon are very\n"
+            "strong. It protects the safety of its\n"
+            "pack by tricking its opponents. They\n"
+            "defend their lair with illusory scenery."); 
+
+const u8 gZoroarkPokedexTextUnused[] = _("");
+
+const u8 gMinccinoPokedexText[] = _(
+    "These Pokémon prefer a tidy habitat.\n"
+            "They greet one another by rubbing each\n"
+            "other with their tails, which are always\n"
+            "kept well groomed and clean."); 
+
+const u8 gMinccinoPokedexTextUnused[] = _("");
+
+const u8 gCinccinoPokedexText[] = _(
+    "Their white fur feels amazing to touch.\n"
+            "Cinccino's body is coated in a special\n"
+            "oil that repels dust and helps it deflect\n"
+            "attacks, such as punches."); 
+
+const u8 gCinccinoPokedexTextUnused[] = _("");
+
+const u8 gGothitaPokedexText[] = _(
+    "They intently observe both Trainers and\n"
+            "Pokémon. Apparently, Gothita are looking\n"
+            "at something that only they can see. Their\n"
+            "ribbonlike feelers increase their power."); 
+
+const u8 gGothitaPokedexTextUnused[] = _("");
+
+const u8 gGothoritaPokedexText[] = _(
+    "Starlight is the source of their power.\n"
+            "They use hypnosis to control people and\n"
+            "Pokémon. Tales of Gothorita leading them\n"
+            "astray are told in every corner."); 
+
+const u8 gGothoritaPokedexTextUnused[] = _("");
+
+const u8 gGothitellePokedexText[] = _(
+    "Starry skies thousands of light-years\n"
+            "away are visible in the space distorted by\n"
+            "their intense psychic power. When it learns\n"
+            "its Trainer's life span, it cries in sadness."); 
+
+const u8 gGothitellePokedexTextUnused[] = _("");
+
+const u8 gSolosisPokedexText[] = _(
+    "Because their bodies are enveloped\n"
+            "in a special liquid, they are fine in any\n"
+            "environment, no matter how severe. They\n"
+            "can use telepathy to talk with others."); 
+
+const u8 gSolosisPokedexTextUnused[] = _("");
+
+const u8 gDuosionPokedexText[] = _(
+    "When their brains, now divided in two,\n"
+            "are thinking the same thoughts,\n"
+            "these Pokémon exhibit their maximized\n"
+            "psychic power."); 
+
+const u8 gDuosionPokedexTextUnused[] = _("");
+
+const u8 gReuniclusPokedexText[] = _(
+    "They use psychic power to control their\n"
+            "arms, which are made of a special liquid.\n"
+            "When Reuniclus shake hands, a network\n"
+            "forms between their brains.");
+
+const u8 gReuniclusPokedexTextUnused[] = _("");

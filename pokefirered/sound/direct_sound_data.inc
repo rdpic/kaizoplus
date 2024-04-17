@@ -2580,6 +2580,54 @@ Cry_Archeops::
 	.incbin "sound/direct_sound_samples/cries/archeops.bin" 
 
 	.align 2
+Cry_Trubbish::
+	.incbin "sound/direct_sound_samples/cries/trubbish.bin" 
+
+	.align 2
+Cry_Garbodor::
+	.incbin "sound/direct_sound_samples/cries/garbodor.bin"
+
+	.align 2
+Cry_Zorua::
+	.incbin "sound/direct_sound_samples/cries/zorua.bin"
+
+	.align 2
+Cry_Zoroark::
+	.incbin "sound/direct_sound_samples/cries/zoroark.bin" 
+
+	.align 2
+Cry_Minccino::
+	.incbin "sound/direct_sound_samples/cries/minccino.bin"
+
+	.align 2
+Cry_Cinccino::
+	.incbin "sound/direct_sound_samples/cries/cinccino.bin" 
+
+	.align 2
+Cry_Gothita::
+	.incbin "sound/direct_sound_samples/cries/gothita.bin" 
+
+	.align 2
+Cry_Gothorita::
+	.incbin "sound/direct_sound_samples/cries/gothorita.bin"
+
+	.align 2
+Cry_Gothitelle::
+	.incbin "sound/direct_sound_samples/cries/gothitelle.bin" 
+
+	.align 2
+Cry_Solosis::
+	.incbin "sound/direct_sound_samples/cries/solosis.bin" 
+
+	.align 2
+Cry_Duosion::
+	.incbin "sound/direct_sound_samples/cries/duosion.bin"
+
+	.align 2
+Cry_Reuniclus::
+	.incbin "sound/direct_sound_samples/cries/reuniclus.bin" 
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

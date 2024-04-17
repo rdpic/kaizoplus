@@ -7384,4 +7384,160 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_TRUBBISH] =
+    {
+        .categoryName = _("TRASH"),
+        .height = 6,
+        .weight = 310,
+        .description = gTrubbishPokedexText,
+        .unusedDescription = gTrubbishPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GARBODOR] =
+    {
+        .categoryName = _("GARBAGE"),
+        .height = 19,
+        .weight = 1073,
+        .description = gGarbodorPokedexText,
+        .unusedDescription = gGarbodorPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 1,
+        .trainerScale = 326,
+        .trainerOffset = 4,
+    },
+
+    [NATIONAL_DEX_ZORUA] =
+    {
+        .categoryName = _("ILLUSION"),
+        .height = 7,
+        .weight = 125,
+        .description = gZoruaPokedexText,
+        .unusedDescription = gZoruaPokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_ZOROARK] =
+    {
+        .categoryName = _("ILLUSION"),
+        .height = 16,
+        .weight = 811,
+        .description = gZoroarkPokedexText,
+        .unusedDescription = gZoroarkPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 1,
+        .trainerScale = 296,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_MINCCINO] =
+    {
+        .categoryName = _("CHINCHILLA"),
+        .height = 4,
+        .weight = 58,
+        .description = gMinccinoPokedexText,
+        .unusedDescription = gMinccinoPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_CINCCINO] =
+    {
+        .categoryName = _("SCARF"),
+        .height = 5,
+        .weight = 75,
+        .description = gCinccinoPokedexText,
+        .unusedDescription = gCinccinoPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GOTHITA] =
+    {
+        .categoryName = _("FIXATION"),
+        .height = 4,
+        .weight = 58,
+        .description = gGothitaPokedexText,
+        .unusedDescription = gGothitaPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GOTHORITA] =
+    {
+        .categoryName = _("MANIPULATE"),
+        .height = 7,
+        .weight = 180,
+        .description = gGothoritaPokedexText,
+        .unusedDescription = gGothoritaPokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GOTHITELLE] =
+    {
+        .categoryName = _("ASTRAL BODY"),
+        .height = 15,
+        .weight = 440,
+        .description = gGothitellePokedexText,
+        .unusedDescription = gGothitellePokedexTextUnused,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SOLOSIS] =
+    {
+        .categoryName = _("CELL"),
+        .height = 3,
+        .weight = 10,
+        .description = gSolosisPokedexText,
+        .unusedDescription = gSolosisPokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DUOSION] =
+    {
+        .categoryName = _("MITOSIS"),
+        .height = 6,
+        .weight = 80,
+        .description = gDuosionPokedexText,
+        .unusedDescription = gDuosionPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_REUNICLUS] =
+    {
+        .categoryName = _("MULTIPLYING"),
+        .height = 10,
+        .weight = 201,
+        .description = gReuniclusPokedexText,
+        .unusedDescription = gReuniclusPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
 };

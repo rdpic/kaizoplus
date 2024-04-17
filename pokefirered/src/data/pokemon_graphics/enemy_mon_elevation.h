@@ -99,4 +99,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_SIGILYPH] = 7,
     [SPECIES_YAMASK] = 10,
     [SPECIES_ARCHEOPS] = 11,
+    [SPECIES_SOLOSIS] = 14,
+    [SPECIES_DUOSION] = 7,
+    [SPECIES_REUNICLUS] = 8,
 };

@@ -569,6 +569,18 @@ gCryTable::
 	cry Cry_Carracosta
 	cry Cry_Archen
 	cry Cry_Archeops
+	cry Cry_Trubbish
+	cry Cry_Garbodor
+	cry Cry_Zorua
+	cry Cry_Zoroark
+	cry Cry_Minccino
+	cry Cry_Cinccino
+	cry Cry_Gothita
+	cry Cry_Gothorita
+	cry Cry_Gothitelle
+	cry Cry_Solosis
+	cry Cry_Duosion
+	cry Cry_Reuniclus
 
 	.align 2
 gCryTable_Reverse::
@@ -1141,3 +1153,15 @@ gCryTable_Reverse::
 	cry_reverse Cry_Carracosta
 	cry_reverse Cry_Archen
 	cry_reverse Cry_Archeops
+	cry_reverse Cry_Trubbish
+	cry_reverse Cry_Garbodor
+	cry_reverse Cry_Zorua
+	cry_reverse Cry_Zoroark
+	cry_reverse Cry_Minccino
+	cry_reverse Cry_Cinccino
+	cry_reverse Cry_Gothita
+	cry_reverse Cry_Gothorita
+	cry_reverse Cry_Gothitelle
+	cry_reverse Cry_Solosis
+	cry_reverse Cry_Duosion
+	cry_reverse Cry_Reuniclus

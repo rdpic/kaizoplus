@@ -2965,6 +2965,66 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 40),
         .y_offset = 12,
     },
+    [SPECIES_TRUBBISH] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 13,
+    },
+    [SPECIES_GARBODOR] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 5,
+    },
+    [SPECIES_ZORUA] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_ZOROARK] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 10,
+    },
+    [SPECIES_MINCCINO] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_CINCCINO] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_GOTHITA] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_GOTHORITA] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_GOTHITELLE] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_SOLOSIS] =
+    {
+        .size = MON_COORDS_SIZE(48, 32),
+        .y_offset = 19,
+    },
+    [SPECIES_DUOSION] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 13,
+    },
+    [SPECIES_REUNICLUS] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 13,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 48),
