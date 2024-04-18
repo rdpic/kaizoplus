@@ -3120,6 +3120,76 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 40),
         .y_offset = 14,
     },
+    [SPECIES_KLINK] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 17,
+    },
+    [SPECIES_KLANG] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 7,
+    },
+    [SPECIES_KLINKLANG] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 7,
+    },
+    [SPECIES_TYNAMO] =
+    {
+        .size = MON_COORDS_SIZE(64, 24),
+        .y_offset = 21,
+    },
+    [SPECIES_EELEKTRIK] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 4,
+    },
+    [SPECIES_EELEKTROSS] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_ELGYEM] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 10,
+    },
+    [SPECIES_BEHEEYEM] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_LITWICK] =
+    {
+        .size = MON_COORDS_SIZE(40, 40),
+        .y_offset = 14,
+    },
+    [SPECIES_LAMPENT] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 12,
+    },
+    [SPECIES_CHANDELURE] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_AXEW] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 8,
+    },
+    [SPECIES_FRAXURE] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 13,
+    },
+    [SPECIES_HAXORUS] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 8,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 48),

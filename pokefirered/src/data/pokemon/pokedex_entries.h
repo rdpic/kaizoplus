@@ -7787,4 +7787,186 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_KLINK] =
+    {
+        .categoryName = _("GEAR"),
+        .height = 3,
+        .weight = 210,
+        .description = gKlinkPokedexText,
+        .unusedDescription = gKlinkPokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_KLANG] =
+    {
+        .categoryName = _("GEAR"),
+        .height = 6,
+        .weight = 510,
+        .description = gKlangPokedexText,
+        .unusedDescription = gKlangPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_KLINKLANG] =
+    {
+        .categoryName = _("GEAR"),
+        .height = 6,
+        .weight = 810,
+        .description = gKlinklangPokedexText,
+        .unusedDescription = gKlinklangPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_TYNAMO] =
+    {
+        .categoryName = _("ELEFISH"),
+        .height = 2,
+        .weight = 3,
+        .description = gTynamoPokedexText,
+        .unusedDescription = gTynamoPokedexTextUnused,
+        .pokemonScale = 682,
+        .pokemonOffset = 24,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_EELEKTRIK] =
+    {
+        .categoryName = _("ELEFISH"),
+        .height = 12,
+        .weight = 220,
+        .description = gEelektrikPokedexText,
+        .unusedDescription = gEelektrikPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_EELEKTROSS] =
+    {
+        .categoryName = _("ELEFISH"),
+        .height = 21,
+        .weight = 805,
+        .description = gEelektrossPokedexText,
+        .unusedDescription = gEelektrossPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 1,
+        .trainerScale = 365,
+        .trainerOffset = 7,
+    },
+
+    [NATIONAL_DEX_ELGYEM] =
+    {
+        .categoryName = _("CEREBRAL"),
+        .height = 5,
+        .weight = 90,
+        .description = gEelektrikPokedexText,
+        .unusedDescription = gEelektrikPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_BEHEEYEM] =
+    {
+        .categoryName = _("CEREBRAL"),
+        .height = 10,
+        .weight = 345,
+        .description = gBeheeyemPokedexText,
+        .unusedDescription = gBeheeyemPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_LITWICK] =
+    {
+        .categoryName = _("CANDLE"),
+        .height = 3,
+        .weight = 31,
+        .description = gLitwickPokedexText,
+        .unusedDescription = gLitwickPokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_LAMPENT] =
+    {
+        .categoryName = _("LAMP"),
+        .height = 6,
+        .weight = 130,
+        .description = gLampentPokedexText,
+        .unusedDescription = gLampentPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_CHANDELURE] =
+    {
+        .categoryName = _("LURING"),
+        .height = 10,
+        .weight = 343,
+        .description = gChandelurePokedexText,
+        .unusedDescription = gChandelurePokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_AXEW] =
+    {
+        .categoryName = _("TUSK"),
+        .height = 6,
+        .weight = 180,
+        .description = gAxewPokedexText,
+        .unusedDescription = gAxewPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_FRAXURE] =
+    {
+        .categoryName = _("AXE JAW"),
+        .height = 10,
+        .weight = 360,
+        .description = gFraxurePokedexText,
+        .unusedDescription = gFraxurePokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_HAXORUS] =
+    {
+        .categoryName = _("AXE JAW"),
+        .height = 18,
+        .weight = 1055,
+        .description = gHaxorusPokedexText,
+        .unusedDescription = gHaxorusPokedexTextUnused,
+        .pokemonScale = 267,
+        .pokemonOffset = 2,
+        .trainerScale = 286,
+        .trainerOffset = 1,
+    },
+
 };

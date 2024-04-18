@@ -4075,6 +4075,72 @@ static const u16 sTutorLearnsets[] =
                         | TUTOR(MOVE_BODY_SLAM)
                         | TUTOR(MOVE_DOUBLE_EDGE)
                         | TUTOR(MOVE_MIMIC)
-                        | TUTOR(MOVE_SUBSTITUTE),                                                   
+                        | TUTOR(MOVE_SUBSTITUTE),    
+
+    [SPECIES_KLINK]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_KLANG]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_KLINKLANG]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_TYNAMO]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_EELEKTRIK]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_EELEKTROSS]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_ELGYEM]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_BEHEEYEM]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_LITWICK]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_LAMPENT]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_CHANDELURE]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),                                              
 
 };

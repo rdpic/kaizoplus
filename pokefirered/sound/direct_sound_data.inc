@@ -2704,6 +2704,50 @@ Cry_Ferrothorn::
 	.incbin "sound/direct_sound_samples/cries/ferrothorn.bin" 
 
 	.align 2
+Cry_Klink::
+	.incbin "sound/direct_sound_samples/cries/klink.bin" 
+
+	.align 2
+Cry_Klang::
+	.incbin "sound/direct_sound_samples/cries/klang.bin"
+
+	.align 2
+Cry_Klinklang::
+	.incbin "sound/direct_sound_samples/cries/klinklang.bin" 
+
+	.align 2
+Cry_Tynamo::
+	.incbin "sound/direct_sound_samples/cries/tynamo.bin" 
+
+	.align 2
+Cry_Eelektrik::
+	.incbin "sound/direct_sound_samples/cries/eelektrik.bin"
+
+	.align 2
+Cry_Eelektross::
+	.incbin "sound/direct_sound_samples/cries/eelektross.bin" 
+
+	.align 2
+Cry_Elgyem::
+	.incbin "sound/direct_sound_samples/cries/elgyem.bin"
+
+	.align 2
+Cry_Beheeyem::
+	.incbin "sound/direct_sound_samples/cries/beheeyem.bin" 
+
+	.align 2
+Cry_Litwick::
+	.incbin "sound/direct_sound_samples/cries/litwick.bin" 
+
+	.align 2
+Cry_Lampent::
+	.incbin "sound/direct_sound_samples/cries/lampent.bin"
+
+	.align 2
+Cry_Chandelure::
+	.incbin "sound/direct_sound_samples/cries/chandelure.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

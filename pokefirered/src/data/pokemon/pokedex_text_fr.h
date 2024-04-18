@@ -4414,3 +4414,115 @@ const u8 gFerrothornPokedexText[] = _(
             "a boulder to rubble.");
 
 const u8 gFerrothornPokedexTextUnused[] = _("");
+
+const u8 gKlinkPokedexText[] = _(
+    "Two bodies comprise a fixed pair.\n"
+            "The two minigears that mesh together\n"
+            "are predetermined. Each will rebound from\n"
+            "other minigears without meshing.");
+
+const u8 gKlinkPokedexTextUnused[] = _("");
+
+const u8 gKlangPokedexText[] = _(
+    "A minigear and big gear comprise its\n"
+            "body. Spinning minigears are rotated\n"
+            "at high speed and repeatedly fired away.\n"
+            "It is dangerous if the gears don't return."); 
+
+const u8 gKlangPokedexTextUnused[] = _("");
+
+const u8 gKlinklangPokedexText[] = _(
+    "Its red core functions as an energy tank.\n"
+            "It is rotated at high speed for a rapid\n"
+            "energy charge. It fires the charged energy\n"
+            "through its spikes into an area.");
+
+const u8 gKlinklangPokedexTextUnused[] = _("");
+
+const u8 gTynamoPokedexText[] = _(
+    "These Pokémon move in schools.\n"
+            "One alone can emit only a trickle of\n"
+            "electricity, so a group of them gathers\n"
+            "to unleash a powerful electric shock.");
+
+const u8 gTynamoPokedexTextUnused[] = _("");
+
+const u8 gEelektrikPokedexText[] = _(
+    "These Pokémon have a big appetite.\n"
+            "It wraps itself around its prey and\n"
+            "paralyzes it with electricity from the\n"
+            "round spots on its sides. Then it chomps."); 
+
+const u8 gEelektrikPokedexTextUnused[] = _("");
+
+const u8 gEelektrossPokedexText[] = _(
+    "They crawl out of the ocean using their\n"
+            "arms. They will attack prey on shore and\n"
+            "immediately drag it into the ocean, with\n"
+            "their sucker mouths.");
+
+const u8 gEelektrossPokedexTextUnused[] = _("");
+
+const u8 gElgyemPokedexText[] = _(
+    "It psychically squeezes the brain of\n"
+            "its foe, causing unendurable headaches.\n"
+            "Rumors of its origin are linked to a UFO\n"
+            "crash site in the desert 50 years ago."); 
+
+const u8 gElgyemPokedexTextUnused[] = _("");
+
+const u8 gBeheeyemPokedexText[] = _(
+    "It can manipulate an opponent's memory.\n"
+            "Apparently, it communicates by flashing\n"
+            "its three fingers, but those patterns\n"
+            "haven't been decoded.");
+
+const u8 gBeheeyemPokedexTextUnused[] = _("");
+
+const u8 gLitwickPokedexText[] = _(
+    "While Litwick shines a light and pretends\n"
+            "to be a guide, it absorbs the life force of\n"
+            "any who follow it, which becomes the fuel\n"
+            "that it burns.");
+
+const u8 gLitwickPokedexTextUnused[] = _("");
+
+const u8 gLampentPokedexText[] = _(
+    "This ominous Pokémon is feared.\n"
+            "Through cities it wanders, searching\n"
+            "for the spirits of the fallen. The spirits\n"
+            "it absorbs fuel its baleful fire."); 
+
+const u8 gLampentPokedexTextUnused[] = _("");
+
+const u8 gChandelurePokedexText[] = _(
+    "Being consumed in Chandelure's flame burns\n"
+            "up the spirit, leaving the body behind.\n"
+            "By waving the flames on its arms, it puts\n"
+            "its foes into a hypnotic trance.");
+
+const u8 gChandelurePokedexTextUnused[] = _("");
+
+const u8 gAxewPokedexText[] = _(
+    "They mark their territory by leaving\n"
+            "gashes in trees with their tusks. If a\n"
+            "tusk breaks, a new one grows in quickly,\n"
+            "harder and sturdier than the last.");
+
+const u8 gAxewPokedexTextUnused[] = _("");
+
+const u8 gFraxurePokedexText[] = _(
+    "Their tusks can shatter rocks.\n"
+            "A broken tusk will not grow back,\n"
+            "so it diligently sharpens its tusks on\n"
+            "river rocks after the end of a battle."); 
+
+const u8 gFraxurePokedexTextUnused[] = _("");
+
+const u8 gHaxorusPokedexText[] = _(
+    "They are kind but can be relentless\n"
+            "when defending territory. Their sturdy\n"
+            "tusks will stay sharp even if used to cut\n"
+            "steel beams.");
+
+const u8 gHaxorusPokedexTextUnused[] = _("");

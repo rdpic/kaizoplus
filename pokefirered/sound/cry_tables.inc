@@ -600,6 +600,17 @@ gCryTable::
 	cry Cry_Galvantula
 	cry Cry_Ferroseed
 	cry Cry_Ferrothorn
+	cry Cry_Klink
+	cry Cry_Klang
+	cry Cry_Klinklang
+	cry Cry_Tynamo
+	cry Cry_Eelektrik
+	cry Cry_Eelektross
+	cry Cry_Elgyem
+	cry Cry_Beheeyem
+	cry Cry_Litwick
+	cry Cry_Lampent
+	cry Cry_Chandelure
 
 	.align 2
 gCryTable_Reverse::
@@ -1203,3 +1214,14 @@ gCryTable_Reverse::
 	cry_reverse Cry_Galvantula
 	cry_reverse Cry_Ferroseed
 	cry_reverse Cry_Ferrothorn
+	cry_reverse Cry_Klink
+	cry_reverse Cry_Klang
+	cry_reverse Cry_Klinklang
+	cry_reverse Cry_Tynamo
+	cry_reverse Cry_Eelektrik
+	cry_reverse Cry_Eelektross
+	cry_reverse Cry_Elgyem
+	cry_reverse Cry_Beheeyem
+	cry_reverse Cry_Litwick
+	cry_reverse Cry_Lampent
+	cry_reverse Cry_Chandelure
