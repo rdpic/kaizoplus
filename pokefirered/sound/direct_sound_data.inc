@@ -2748,6 +2748,18 @@ Cry_Chandelure::
 	.incbin "sound/direct_sound_samples/cries/chandelure.bin"
 
 	.align 2
+Cry_Axew::
+	.incbin "sound/direct_sound_samples/cries/axew.bin" 
+
+	.align 2
+Cry_Fraxure::
+	.incbin "sound/direct_sound_samples/cries/fraxure.bin"
+
+	.align 2
+Cry_Haxorus::
+	.incbin "sound/direct_sound_samples/cries/haxorus.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

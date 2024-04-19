@@ -611,6 +611,9 @@ gCryTable::
 	cry Cry_Litwick
 	cry Cry_Lampent
 	cry Cry_Chandelure
+	cry Cry_Axew
+	cry Cry_Fraxure
+	cry Cry_Haxorus
 
 	.align 2
 gCryTable_Reverse::
@@ -1225,3 +1228,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Litwick
 	cry_reverse Cry_Lampent
 	cry_reverse Cry_Chandelure
+	cry_reverse Cry_Axew
+	cry_reverse Cry_Fraxure
+	cry_reverse Cry_Haxorus

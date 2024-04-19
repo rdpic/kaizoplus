@@ -122,6 +122,7 @@ static const u16 sEasyChatWordsByLetter_A[] = {
     EC_WORD_AWFUL,
     EC_WORD_AWFULLY,
     EC_WORD_AWW,
+    EC_POKEMON2(AXEW),
     EC_POKEMON2(AZELF),
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(AZUMARILL),
@@ -615,6 +616,7 @@ static const u16 sEasyChatWordsByLetter_F[] = {
     EC_WORD_FORGETS,
     EC_WORD_FORGIVE,
     EC_POKEMON(FORRETRESS),
+    EC_POKEMON2(FRAXURE),
     EC_MOVE2(FRENZY_PLANT),
     EC_WORD_FRIDAY,
     EC_WORD_FRIEND,
@@ -760,6 +762,7 @@ static const u16 sEasyChatWordsByLetter_H[] = {
     EC_POKEMON(HAUNTER),
     EC_WORD_HAVE,
     EC_WORD_HAVEN_T,
+    EC_POKEMON2(HAXORUS),
     EC_MOVE(HAZE),
     EC_WORD_HE,
     EC_WORD_HE_S,

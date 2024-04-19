@@ -361,6 +361,9 @@ enum
     CRY_LITWICK = 608,
     CRY_LAMPENT = 609,
     CRY_CHANDELURE = 610,
+    CRY_AXEW = 611,
+    CRY_FRAXURE = 612,
+    CRY_HAXORUS = 613,
 };
 
 #endif
