@@ -7969,4 +7969,238 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 1,
     },
 
+    [NATIONAL_DEX_CUBCHOO] =
+    {
+        .categoryName = _("CHILL"),
+        .height = 5,
+        .weight = 85,
+        .description = gCubchooPokedexText,
+        .unusedDescription = gCubchooPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_BEARTIC] =
+    {
+        .categoryName = _("FREEZING"),
+        .height = 26,
+        .weight = 2600,
+        .description = gBearticPokedexText,
+        .unusedDescription = gBearticPokedexTextUnused,
+        .pokemonScale = 266,
+        .pokemonOffset = 3,
+        .trainerScale = 399,
+        .trainerOffset = 4,
+    },
+
+    [NATIONAL_DEX_CRYOGONAL] =
+    {
+        .categoryName = _("CRYSTALLIZE"),
+        .height = 11,
+        .weight = 1480,
+        .description = gCryogonalPokedexText,
+        .unusedDescription = gCryogonalPokedexTextUnused,
+        .pokemonScale = 320,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SHELMET] =
+    {
+        .categoryName = _("SNAIL"),
+        .height = 4,
+        .weight = 77,
+        .description = gShelmetPokedexText,
+        .unusedDescription = gShelmetPokedexTextUnused,
+        .pokemonScale = 491,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_ACCELGOR] =
+    {
+        .categoryName = _("SHELL OUT"),
+        .height = 8,
+        .weight = 253,
+        .description = gAccelgorPokedexText,
+        .unusedDescription = gAccelgorPokedexTextUnused,
+        .pokemonScale = 366,
+        .pokemonOffset = 9,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_STUNFISK] =
+    {
+        .categoryName = _("TRAP"),
+        .height = 7,
+        .weight = 110,
+        .description = gStunfiskPokedexText,
+        .unusedDescription = gStunfiskPokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 14,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_MIENFOO] =
+    {
+        .categoryName = _("MARTIAL"),
+        .height = 9,
+        .weight = 200,
+        .description = gMienfooPokedexText,
+        .unusedDescription = gMienfooPokedexTextUnused,
+        .pokemonScale = 338,
+        .pokemonOffset = 10,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_MIENSHAO] =
+    {
+        .categoryName = _("MARTIAL"),
+        .height = 14,
+        .weight = 355,
+        .description = gMienshaoPokedexText,
+        .unusedDescription = gMienshaoPokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 2,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DRUDDIGON] =
+    {
+        .categoryName = _("CAVE"),
+        .height = 16,
+        .weight = 1390,
+        .description = gDruddigonPokedexText,
+        .unusedDescription = gDruddigonPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 1,
+        .trainerScale = 296,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_GOLETT] =
+    {
+        .categoryName = _("AUTOMATON"),
+        .height = 10,
+        .weight = 920,
+        .description = gGolettPokedexText,
+        .unusedDescription = gGolettPokedexTextUnused,
+        .pokemonScale = 305,
+        .pokemonOffset = 7,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GOLURK] =
+    {
+        .categoryName = _("AUTOMATON"),
+        .height = 28,
+        .weight = 3300,
+        .description = gGolurkPokedexText,
+        .unusedDescription = gGolurkPokedexTextUnused,
+        .pokemonScale = 275,
+        .pokemonOffset = 3,
+        .trainerScale = 300,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PAWNIARD] =
+    {
+        .categoryName = _("BLADE"),
+        .height = 5,
+        .weight = 102,
+        .description = gPawniardPokedexText,
+        .unusedDescription = gPawniardPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 15,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_BISHARP] =
+    {
+        .categoryName = _("BLADE"),
+        .height = 16,
+        .weight = 700,
+        .description = gBisharpPokedexText,
+        .unusedDescription = gBisharpPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 1,
+        .trainerScale = 296,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_BOUFFALANT] =
+    {
+        .categoryName = _("BUFFALO"),
+        .height = 16,
+        .weight = 946,
+        .description = gBouffalantPokedexText,
+        .unusedDescription = gBouffalantPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 1,
+        .trainerScale = 296,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_RUFFLET] =
+    {
+        .categoryName = _("EAGLET"),
+        .height = 5,
+        .weight = 105,
+        .description = gRuffletPokedexText,
+        .unusedDescription = gRuffletPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_BRAVIARY] =
+    {
+        .categoryName = _("VALIANT"),
+        .height = 15,
+        .weight = 410,
+        .description = gBraviaryPokedexText,
+        .unusedDescription = gBraviaryPokedexTextUnused,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_VULLABY] =
+    {
+        .categoryName = _("DIAPERED"),
+        .height = 5,
+        .weight = 90,
+        .description = gVullabyPokedexText,
+        .unusedDescription = gVullabyPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_MANDIBUZZ] =
+    {
+        .categoryName = _("VULTURE"),
+        .height = 12,
+        .weight = 395,
+        .description = gMandibuzzPokedexText,
+        .unusedDescription = gMandibuzzPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
 };

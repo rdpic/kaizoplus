@@ -112,4 +112,6 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_EELEKTROSS] = 8,
     [SPECIES_LAMPENT] = 6,
     [SPECIES_CHANDELURE] = 6,
+    [SPECIES_CRYOGONAL] = 3,
+    [SPECIES_BRAVIARY] = 6,
 };

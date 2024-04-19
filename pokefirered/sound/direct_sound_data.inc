@@ -2760,6 +2760,78 @@ Cry_Haxorus::
 	.incbin "sound/direct_sound_samples/cries/haxorus.bin"
 
 	.align 2
+Cry_Cubchoo::
+	.incbin "sound/direct_sound_samples/cries/cubchoo.bin" 
+
+	.align 2
+Cry_Beartic::
+	.incbin "sound/direct_sound_samples/cries/beartic.bin"
+
+	.align 2
+Cry_Cryogonal::
+	.incbin "sound/direct_sound_samples/cries/cryogonal.bin"
+
+	.align 2
+Cry_Shelmet::
+	.incbin "sound/direct_sound_samples/cries/shelmet.bin" 
+
+	.align 2
+Cry_Accelgor::
+	.incbin "sound/direct_sound_samples/cries/accelgor.bin"
+
+	.align 2
+Cry_Stunfisk::
+	.incbin "sound/direct_sound_samples/cries/stunfisk.bin"
+
+	.align 2
+Cry_Mienfoo::
+	.incbin "sound/direct_sound_samples/cries/mienfoo.bin" 
+
+	.align 2
+Cry_Mienshao::
+	.incbin "sound/direct_sound_samples/cries/mienshao.bin"
+
+	.align 2
+Cry_Druddigon::
+	.incbin "sound/direct_sound_samples/cries/druddigon.bin"
+
+	.align 2
+Cry_Golett::
+	.incbin "sound/direct_sound_samples/cries/golett.bin"
+
+	.align 2
+Cry_Golurk::
+	.incbin "sound/direct_sound_samples/cries/golurk.bin" 
+
+	.align 2
+Cry_Pawniard::
+	.incbin "sound/direct_sound_samples/cries/pawniard.bin"
+
+	.align 2
+Cry_Bisharp::
+	.incbin "sound/direct_sound_samples/cries/bisharp.bin"
+
+	.align 2
+Cry_Bouffalant::
+	.incbin "sound/direct_sound_samples/cries/bouffalant.bin"
+
+	.align 2
+Cry_Rufflet::
+	.incbin "sound/direct_sound_samples/cries/rufflet.bin"
+
+	.align 2
+Cry_Braviary::
+	.incbin "sound/direct_sound_samples/cries/braviary.bin" 
+
+	.align 2
+Cry_Vullaby::
+	.incbin "sound/direct_sound_samples/cries/vullaby.bin"
+
+	.align 2
+Cry_Mandibuzz::
+	.incbin "sound/direct_sound_samples/cries/mandibuzz.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

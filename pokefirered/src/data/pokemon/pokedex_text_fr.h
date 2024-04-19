@@ -4526,3 +4526,147 @@ const u8 gHaxorusPokedexText[] = _(
             "steel beams.");
 
 const u8 gHaxorusPokedexTextUnused[] = _("");
+
+const u8 gCubchooPokedexText[] = _(
+    "Its nose is always running.\n"
+            "Their snot is a barometer of health.\n"
+            "When healthy, their snot is sticky and\n"
+            "the power of their ice moves increases.");
+
+const u8 gCubchooPokedexTextUnused[] = _("");
+
+const u8 gBearticPokedexText[] = _(
+     "It freezes its breath to create fangs\n"
+            "and claws of ice to fight with.\n"
+            "Very able in the water, it swims around\n"
+            "in northern seas and catches prey."); 
+
+const u8 gBearticPokedexTextUnused[] = _("");
+
+const u8 gCryogonalPokedexText[] = _(
+    "They are born in snow clouds. When\n"
+            "its body temperature goes up, it turns\n"
+            "into steam and vanishes. When its\n"
+            "temperature lowers, it returns to ice.");
+
+const u8 gCryogonalPokedexTextUnused[] = _("");
+
+const u8 gShelmetPokedexText[] = _(
+    "When attacked, it defends itself by\n"
+            "closing the lid of its shell. It evolves\n"
+            "when bathed in an electric-like energy\n"
+            "along with Karrablast.");
+
+const u8 gShelmetPokedexTextUnused[] = _("");
+
+const u8 gAccelgorPokedexText[] = _(
+    "When its body dries out, it weakens. So, to\n"
+            "prevent dehydration, it wraps itself in\n"
+            "layers of thin membrane. It is very light\n"
+            "and fights with ninja-like movements."); 
+
+const u8 gAccelgorPokedexTextUnused[] = _("");
+
+const u8 gStunfiskPokedexText[] = _(
+    "It conceals itself in the mud of the\n"
+            "seashore. Then it waits. When prey touch\n"
+            "it, it delivers a jolt of electricity.\n"
+            "It smiles when transmitting electricity.");
+
+const u8 gStunfiskPokedexTextUnused[] = _("");
+
+const u8 gMienfooPokedexText[] = _(
+    "They have mastered elegant combos.\n"
+            "As they concentrate, their battle moves\n"
+            "become swifter and more precise. What it\n"
+            "lacks in power, it makes up for in quantity.");
+
+const u8 gMienfooPokedexTextUnused[] = _("");
+
+const u8 gMienshaoPokedexText[] = _(
+   "They use the long fur on their arms as\n"
+            "a whip to strike their opponents. Its arm\n"
+            "attacks come with such rapidity that they\n"
+            "cannot even be seen."); 
+
+const u8 gMienshaoPokedexTextUnused[] = _("");
+
+const u8 gDruddigonPokedexText[] = _(
+    "It warms its body by absorbing sunlight\n"
+            "with its wings. When its body temperature\n"
+            "falls, it can no longer move. It uses its\n"
+            "sharp claws to catch prey.");
+
+const u8 gDruddigonPokedexTextUnused[] = _("");
+
+const u8 gGolettPokedexText[] = _(
+    "These Pokémon are thought to have\n"
+            "been created by the science of an\n"
+            "ancient and mysterious civilization.\n"
+            "It's been active for thousands of years.");
+
+const u8 gGolettPokedexTextUnused[] = _("");
+
+const u8 gGolurkPokedexText[] = _(
+    "Golurk were created to protect people\n"
+            "and Pokémon by an ancient civilisation.\n"
+            "Removing the seal on its chest makes its\n"
+            "internal energy go out of control.");
+
+const u8 gGolurkPokedexTextUnused[] = _("");
+
+const u8 gPawniardPokedexText[] = _(
+   "Ignoring their injuries, groups attack by\n"
+            "sinking the blades that cover their bodies\n"
+            "into their prey. If battling dulls them, it\n"
+            "sharpens them on stones by the river."); 
+
+const u8 gPawniardPokedexTextUnused[] = _("");
+
+const u8 gBisharpPokedexText[] = _(
+    "This pitiless Pokémon commands a group\n"
+            "of Pawniard to hound prey into immobility.\n"
+            "It battles to become the boss, but will be\n"
+            "driven from the group if it loses.");
+
+const u8 gBisharpPokedexTextUnused[] = _("");
+
+const u8 gBouffalantPokedexText[] = _(
+    "Their fluffy fur absorbs damage, even\n"
+            "if they strike foes with a fierce headbutt.\n"
+            "Their headbutts have enough destructive\n"
+            "force to derail a train.");
+
+const u8 gBouffalantPokedexTextUnused[] = _("");
+
+const u8 gRuffletPokedexText[] = _(
+    "With its sharp claws, this Pokémon pierces\n"
+            "its prey, and then it pecks at them.\n"
+            "Although it also consumes berries, it's a\n"
+            "carnivore at heart.");
+
+const u8 gRuffletPokedexTextUnused[] = _("");
+
+const u8 gBraviaryPokedexText[] = _(
+    "For the sake of its friends, this brave\n"
+            "warrior of the sky will not stop battling,\n"
+            "even if it is injured. One can carry a car\n"
+            "while flying.");
+
+const u8 gBraviaryPokedexTextUnused[] = _("");
+
+const u8 gVullabyPokedexText[] = _(
+   "It can't fly yet and must wait until its\n"
+            "wings have developed more. They guard\n"
+            "their posteriors with bones that were\n"
+            "gathered by Mandibuzz."); 
+
+const u8 gVullabyPokedexTextUnused[] = _("");
+
+const u8 gMandibuzzPokedexText[] = _(
+    "They adorn themselves beautifully with\n"
+            "bones. This is supposedly an effort to\n"
+            "attract males, but no male Mandibuzz\n"
+            "have ever been found.");
+
+const u8 gMandibuzzPokedexTextUnused[] = _("");

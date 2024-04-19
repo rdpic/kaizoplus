@@ -614,6 +614,24 @@ gCryTable::
 	cry Cry_Axew
 	cry Cry_Fraxure
 	cry Cry_Haxorus
+	cry Cry_Cubchoo
+	cry Cry_Beartic
+	cry Cry_Cryogonal
+	cry Cry_Shelmet
+	cry Cry_Accelgor
+	cry Cry_Stunfisk
+	cry Cry_Mienfoo
+	cry Cry_Mienshao
+	cry Cry_Druddigon
+	cry Cry_Golett
+	cry Cry_Golurk
+	cry Cry_Pawniard
+	cry Cry_Bisharp
+	cry Cry_Bouffalant
+	cry Cry_Rufflet
+	cry Cry_Braviary
+	cry Cry_Vullaby
+	cry Cry_Mandibuzz
 
 	.align 2
 gCryTable_Reverse::
@@ -1231,3 +1249,21 @@ gCryTable_Reverse::
 	cry_reverse Cry_Axew
 	cry_reverse Cry_Fraxure
 	cry_reverse Cry_Haxorus
+	cry_reverse Cry_Cubchoo
+	cry_reverse Cry_Beartic
+	cry_reverse Cry_Cryogonal
+	cry_reverse Cry_Shelmet
+	cry_reverse Cry_Accelgor
+	cry_reverse Cry_Stunfisk
+	cry_reverse Cry_Mienfoo
+	cry_reverse Cry_Mienshao
+	cry_reverse Cry_Druddigon
+	cry_reverse Cry_Golett
+	cry_reverse Cry_Golurk
+	cry_reverse Cry_Pawniard
+	cry_reverse Cry_Bisharp
+	cry_reverse Cry_Bouffalant
+	cry_reverse Cry_Rufflet
+	cry_reverse Cry_Braviary
+	cry_reverse Cry_Vullaby
+	cry_reverse Cry_Mandibuzz

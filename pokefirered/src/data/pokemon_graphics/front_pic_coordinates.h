@@ -3190,6 +3190,96 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
+    [SPECIES_CUBCHOO] =
+    {
+        .size = MON_COORDS_SIZE(32, 40),
+        .y_offset = 12,
+    },
+    [SPECIES_BEARTIC] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 1,
+    },
+    [SPECIES_CRYOGONAL] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_SHELMET] =
+    {
+        .size = MON_COORDS_SIZE(40, 40),
+        .y_offset = 14,
+    },
+    [SPECIES_ACCELGOR] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_STUNFISK] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 14,
+    },
+    [SPECIES_MIENFOO] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_MIENSHAO] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 4,
+    },
+    [SPECIES_DRUDDIGON] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 4,
+    },
+    [SPECIES_GOLETT] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_GOLURK] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_PAWNIARD] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_BISHARP] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_BOUFFALANT] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 4,
+    },
+    [SPECIES_RUFFLET] =
+    {
+        .size = MON_COORDS_SIZE(32, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_BRAVIARY] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 1,
+    },
+    [SPECIES_VULLABY] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 5,
+    },
+    [SPECIES_MANDIBUZZ] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 1,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 24),
