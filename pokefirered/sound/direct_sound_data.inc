@@ -2832,6 +2832,90 @@ Cry_Mandibuzz::
 	.incbin "sound/direct_sound_samples/cries/mandibuzz.bin"
 
 	.align 2
+Cry_Heatmor::
+	.incbin "sound/direct_sound_samples/cries/heatmor.bin"
+
+	.align 2
+Cry_Durant::
+	.incbin "sound/direct_sound_samples/cries/durant.bin"
+
+	.align 2
+Cry_Deino::
+	.incbin "sound/direct_sound_samples/cries/deino.bin" 
+
+	.align 2
+Cry_Zweilous::
+	.incbin "sound/direct_sound_samples/cries/zweilous.bin"
+
+	.align 2
+Cry_Hydreigon::
+	.incbin "sound/direct_sound_samples/cries/hydreigon.bin"
+
+	.align 2
+Cry_Larvesta::
+	.incbin "sound/direct_sound_samples/cries/larvesta.bin"
+
+	.align 2
+Cry_Volcarona::
+	.incbin "sound/direct_sound_samples/cries/volcarona.bin"
+
+	.align 2
+Cry_Cobalion::
+	.incbin "sound/direct_sound_samples/cries/cobalion.bin" 
+
+	.align 2
+Cry_Terrakion::
+	.incbin "sound/direct_sound_samples/cries/terrakion.bin"
+
+	.align 2
+Cry_Virizion::
+	.incbin "sound/direct_sound_samples/cries/virizion.bin"
+
+	.align 2
+Cry_Tornadus::
+	.incbin "sound/direct_sound_samples/cries/tornadus.bin" 
+
+	.align 2
+Cry_Thundurus::
+	.incbin "sound/direct_sound_samples/cries/thundurus.bin"
+
+	.align 2
+Cry_Landorus::
+	.incbin "sound/direct_sound_samples/cries/landorus.bin"
+
+	.align 2
+Cry_Reshiram::
+	.incbin "sound/direct_sound_samples/cries/reshiram.bin"
+
+	.align 2
+Cry_Zekrom::
+	.incbin "sound/direct_sound_samples/cries/zekrom.bin" 
+
+	.align 2
+Cry_Kyurem_W::
+	.incbin "sound/direct_sound_samples/cries/kyurem_w.bin"
+
+	.align 2
+Cry_Kyurem_B::
+	.incbin "sound/direct_sound_samples/cries/kyurem_b.bin"
+
+	.align 2
+Cry_Keldeo::
+	.incbin "sound/direct_sound_samples/cries/keldeo.bin"
+
+	.align 2
+Cry_Meloetta_A::
+	.incbin "sound/direct_sound_samples/cries/meloetta_a.bin" 
+
+	.align 2
+Cry_Meloetta_P::
+	.incbin "sound/direct_sound_samples/cries/meloetta_p.bin"
+
+	.align 2
+Cry_Genesect::
+	.incbin "sound/direct_sound_samples/cries/genesect.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

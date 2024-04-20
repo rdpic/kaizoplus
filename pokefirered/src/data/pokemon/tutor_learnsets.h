@@ -4267,6 +4267,132 @@ static const u16 sTutorLearnsets[] =
                         | TUTOR(MOVE_BODY_SLAM)
                         | TUTOR(MOVE_DOUBLE_EDGE)
                         | TUTOR(MOVE_MIMIC)
-                        | TUTOR(MOVE_SUBSTITUTE),                                                  
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_HEATMOR]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_DURANT]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_DEINO]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_ZWEILOUS]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_HYDREIGON]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE), 
+
+    [SPECIES_LARVESTA]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_VOLCARONA]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_COBALION]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_TERRAKION]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_VIRIZION]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_TORNADUS]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_THUNDURUS]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_LANDORUS]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_RESHIRAM]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_ZEKROM]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_KYUREM_W]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_KYUREM_B]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),    
+
+    [SPECIES_KELDEO]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_MELOETTA_A]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_MELOETTA_P]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_GENESECT]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),                                                       
 
 };

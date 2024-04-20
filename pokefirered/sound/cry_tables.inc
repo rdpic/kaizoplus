@@ -632,6 +632,27 @@ gCryTable::
 	cry Cry_Braviary
 	cry Cry_Vullaby
 	cry Cry_Mandibuzz
+	cry Cry_Heatmor
+	cry Cry_Durant
+	cry Cry_Deino
+	cry Cry_Zweilous
+	cry Cry_Hydreigon
+	cry Cry_Larvesta
+	cry Cry_Volcarona
+	cry Cry_Cobalion
+	cry Cry_Terrakion
+	cry Cry_Virizion
+	cry Cry_Tornadus
+	cry Cry_Thundurus
+	cry Cry_Landorus
+	cry Cry_Reshiram
+	cry Cry_Zekrom
+	cry Cry_Kyurem_W
+	cry Cry_Kyurem_B
+	cry Cry_Keldeo
+	cry Cry_Meloetta_A
+	cry Cry_Meloetta_P
+	cry Cry_Genesect
 
 	.align 2
 gCryTable_Reverse::
@@ -1267,3 +1288,24 @@ gCryTable_Reverse::
 	cry_reverse Cry_Braviary
 	cry_reverse Cry_Vullaby
 	cry_reverse Cry_Mandibuzz
+	cry_reverse Cry_Heatmor
+	cry_reverse Cry_Durant
+	cry_reverse Cry_Deino
+	cry_reverse Cry_Zweilous
+	cry_reverse Cry_Hydreigon
+	cry_reverse Cry_Larvesta
+	cry_reverse Cry_Volcarona
+	cry_reverse Cry_Cobalion
+	cry_reverse Cry_Terrakion
+	cry_reverse Cry_Virizion
+	cry_reverse Cry_Tornadus
+	cry_reverse Cry_Thundurus
+	cry_reverse Cry_Landorus
+	cry_reverse Cry_Reshiram
+	cry_reverse Cry_Zekrom
+	cry_reverse Cry_Kyurem_W
+	cry_reverse Cry_Kyurem_B
+	cry_reverse Cry_Keldeo
+	cry_reverse Cry_Meloetta_A
+	cry_reverse Cry_Meloetta_P
+	cry_reverse Cry_Genesect

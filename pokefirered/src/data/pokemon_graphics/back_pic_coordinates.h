@@ -3280,6 +3280,111 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 48),
         .y_offset = 10,
     },
+    [SPECIES_HEATMOR] =
+    {
+        .size = MON_COORDS_SIZE(64, 24),
+        .y_offset = 21,
+    },
+    [SPECIES_DURANT] =
+    {
+        .size = MON_COORDS_SIZE(64, 32),
+        .y_offset = 17,
+    },
+    [SPECIES_DEINO] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 14,
+    },
+    [SPECIES_ZWEILOUS] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 9,
+    },
+    [SPECIES_HYDREIGON] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 11,
+    },
+    [SPECIES_LARVESTA] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 12,
+    },
+    [SPECIES_VOLCARONA] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_COBALION] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 6,
+    },
+    [SPECIES_TERRAKION] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 8,
+    },
+    [SPECIES_VIRIZION] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 8,
+    },
+    [SPECIES_TORNADUS] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_THUNDURUS] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_LANDORUS] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_RESHIRAM] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 7,
+    },
+    [SPECIES_ZEKROM] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_KYUREM_W] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_KYUREM_B] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_KELDEO] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_MELOETTA_A] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_MELOETTA_P] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 4,
+    },
+    [SPECIES_GENESECT] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 8,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 48),

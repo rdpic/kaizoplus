@@ -4670,3 +4670,170 @@ const u8 gMandibuzzPokedexText[] = _(
             "have ever been found.");
 
 const u8 gMandibuzzPokedexTextUnused[] = _("");
+
+const u8 gHeatmorPokedexText[] = _(
+    "It draws in air through its tail, transforms\n"
+            "it into fire, and uses it like a tongue.\n"
+            "They burn through Durant's steel bodies\n"
+            "and consume their insides.");
+
+const u8 gHeatmorPokedexTextUnused[] = _("");
+
+const u8 gDurantPokedexText[] = _(
+    "Durant dig nests in mountains.\n"
+            "Individuals each play different roles in\n"
+            "driving Heatmor, their natural predator,\n"
+            "away from their colony.");
+
+const u8 gDurantPokedexTextUnused[] = _("");
+
+const u8 gDeinoPokedexText[] = _(
+    "Lacking sight, it's unaware of its\n"
+            "surroundings, so it bumps into things and\n"
+            "eats anything that moves. Approaching\n"
+            "it carelessly is dangerous.");
+
+const u8 gDeinoPokedexTextUnused[] = _("");
+
+const u8 gZweilousPokedexText[] = _(
+   "After it has eaten up all the food in its\n"
+            "territory, it moves on to another area.\n"
+            "Whichever head eats more than the other\n"
+            "gets to be the leader."); 
+
+const u8 gZweilousPokedexTextUnused[] = _("");
+
+const u8 gHydreigonPokedexText[] = _(
+    "This brutal Pokémon travels the skies on\n"
+            "its six wings. The heads on their arms do\n"
+            "not have brains. They use all three heads\n"
+            "to consume and destroy everything.");
+
+const u8 gHydreigonPokedexTextUnused[] = _("");
+
+const u8 gLarvestaPokedexText[] = _(
+    "This Pokémon was believed to have\n"
+            "been born from the sun. It spews fire from\n"
+            "its horns and encases itself in a cocoon\n"
+            "of fire when it evolves.");
+
+const u8 gLarvestaPokedexTextUnused[] = _("");
+
+const u8 gVolcaronaPokedexText[] = _(
+    "When volcanic ash darkened the\n"
+            "atmosphere, it appeared and saved Pokémon\n"
+            "from freezing, Volcarona's fire provided a\n"
+            "replacement for the sun.");
+
+const u8 gVolcaronaPokedexTextUnused[] = _("");
+
+const u8 gCobalionPokedexText[] = _(
+    "It has a body and heart of steel. This\n"
+            "legendary Pokémon battled against humans\n"
+            "to protect Pokémon. Its personality\n"
+            "is calm and composed.");
+
+const u8 gCobalionPokedexTextUnused[] = _("");
+
+const u8 gTerrakionPokedexText[] = _(
+   "Spoken of in legend, this Pokémon used\n"
+            "its phenomenal power to destroy a castle\n"
+            "in its effort to protect Pokémon that had\n"
+            "lost their homes in a war among humans."); 
+
+const u8 gTerrakionPokedexTextUnused[] = _("");
+
+const u8 gVirizionPokedexText[] = _(
+    "Its head sprouts horns as sharp as blades.\n"
+            "Legends say this Pokémon used\n"
+            "whirlwind-like movements to confound\n"
+            "and swiftly cut its opponents.");
+
+const u8 gVirizionPokedexTextUnused[] = _("");
+
+const u8 gTornadusPokedexText[] = _(
+    "An example of what is known as a\n"
+            "form change. Tornadus has been\n"
+            "sighted crossing the ocean while in this\n"
+            "form.");
+
+const u8 gTornadusPokedexTextUnused[] = _("");
+
+const u8 gThundurusPokedexText[] = _(
+   "It pulverizes foes into\n"
+            "nothingness with showers of devastatingly\n"
+            "powerful lightning bolts launched from\n"
+            "the string of orbs on its tail."); 
+
+const u8 gThundurusPokedexTextUnused[] = _("");
+
+const u8 gLandorusPokedexText[] = _(
+    "Landorus soars through the sky in\n"
+            "this form, bestowing plentiful\n"
+            "harvests upon the land and earning the\n"
+            "people's reverence.");
+
+const u8 gLandorusPokedexTextUnused[] = _("");
+
+const u8 gReshiramPokedexText[] = _(
+    "This Pokémon appears in legends. It\n"
+            "sends flames into the air from its tail,\n"
+            "burning up everything around it. It helps\n"
+            "those who want to build a world of truth.");
+
+const u8 gReshiramPokedexTextUnused[] = _("");
+
+const u8 gZekromPokedexText[] = _(
+    "This legendary Pokémon can scorch the\n"
+            "world with lightning. It has a generator\n"
+            "that creates electricity in its tail. It\n"
+            "assists those with strong ideals.");
+
+const u8 gZekromPokedexTextUnused[] = _("");
+
+const u8 gKyuremWPokedexText[] = _(
+   "The sameness of Reshiram's and\n"
+            "Kyurem's genes allowed Kyurem to\n"
+            "absorb Reshiram. Kyurem can now use the\n"
+            "power of both fire and ice."); 
+
+const u8 gKyuremWPokedexTextUnused[] = _("");
+
+const u8 gKyuremBPokedexText[] = _(
+    "The sameness of Zekrom's and\n"
+            "Kyurem's genes allowed Kyurem to absorb\n"
+            "Zekrom. Kyurem can now use the\n"
+            "power of both electricity and ice.");
+
+const u8 gKyuremBPokedexTextUnused[] = _("");
+
+const u8 gKeldeoPokedexText[] = _(
+    "When it is resolute, its body fills with\n"
+            "power and it becomes swifter. It crosses\n"
+            "the world, running over the surfaces of\n"
+            "oceans and rivers.");
+
+const u8 gKeldeoPokedexTextUnused[] = _("");
+
+const u8 gMeloettaAPokedexText[] = _(
+    "The melodies sung by Meloetta have the\n"
+            "power to make Pokémon that hear them\n"
+            "happy or sad. Many famous songs have been\n"
+            "inspired by the tunes that Meloetta plays.");
+
+const u8 gMeloettaAPokedexTextUnused[] = _("");
+
+const u8 gMeloettaPPokedexText[] = _(
+    "Meloetta's melodies are sung with\n"
+            "a special vocalization method that can\n"
+            "control the feelings of those who hear it."); 
+
+const u8 gMeloettaPPokedexTextUnused[] = _("");
+
+const u8 gGenesectPokedexText[] = _(
+    "Over 300 million years ago, it was\n"
+    "feared as the strongest of hunters.\n"
+    "Team Plasma altered it and attached\n"
+    "a cannon to its back.");
+
+const u8 gGenesectPokedexTextUnused[] = _("");

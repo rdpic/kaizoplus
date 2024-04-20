@@ -8203,4 +8203,277 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_HEATMOR] =
+    {
+        .categoryName = _("ANT EATER"),
+        .height = 14,
+        .weight = 580,
+        .description = gHeatmorPokedexText,
+        .unusedDescription = gHeatmorPokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 2,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DURANT] =
+    {
+        .categoryName = _("IRON ANT"),
+        .height = 3,
+        .weight = 330,
+        .description = gDurantPokedexText,
+        .unusedDescription = gDurantPokedexTextUnused,
+        .pokemonScale = 530,
+        .pokemonOffset = 19,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DEINO] =
+    {
+        .categoryName = _("IRATE"),
+        .height = 8,
+        .weight = 173,
+        .description = gDeinoPokedexText,
+        .unusedDescription = gDeinoPokedexTextUnused,
+        .pokemonScale = 366,
+        .pokemonOffset = 12,
+        .trainerScale = 257,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_ZWEILOUS] =
+    {
+        .categoryName = _("HOSTILE"),
+        .height = 14,
+        .weight = 500,
+        .description = gZweilousPokedexText,
+        .unusedDescription = gZweilousPokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 3,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_HYDREIGON] =
+    {
+        .categoryName = _("BRUTAL"),
+        .height = 18,
+        .weight = 1600,
+        .description = gHydreigonPokedexText,
+        .unusedDescription = gHydreigonPokedexTextUnused,
+        .pokemonScale = 267,
+        .pokemonOffset = 2,
+        .trainerScale = 286,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_LARVESTA] =
+    {
+        .categoryName = _("TORCH"),
+        .height = 11,
+        .weight = 288,
+        .description = gLarvestaPokedexText,
+        .unusedDescription = gLarvestaPokedexTextUnused,
+        .pokemonScale = 320,
+        .pokemonOffset = 10,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_VOLCARONA] =
+    {
+        .categoryName = _("SUN"),
+        .height = 16,
+        .weight = 460,
+        .description = gVolcaronaPokedexText,
+        .unusedDescription = gVolcaronaPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 1,
+        .trainerScale = 296,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_COBALION] =
+    {
+        .categoryName = _("IRON WILL"),
+        .height = 21,
+        .weight = 2500,
+        .description = gCobalionPokedexText,
+        .unusedDescription = gCobalionPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 365,
+        .trainerOffset = 7,
+    },
+
+    [NATIONAL_DEX_TERRAKION] =
+    {
+        .categoryName = _("CAVERN"),
+        .height = 19,
+        .weight = 2600,
+        .description = gTerrakionPokedexText,
+        .unusedDescription = gTerrakionPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 1,
+        .trainerScale = 336,
+        .trainerOffset = 4,
+    },
+
+    [NATIONAL_DEX_VIRIZION] =
+    {
+        .categoryName = _("GRASSLAND"),
+        .height = 20,
+        .weight = 2000,
+        .description = gVirizionPokedexText,
+        .unusedDescription = gVirizionPokedexTextUnused,
+        .pokemonScale = 261,
+        .pokemonOffset = 1,
+        .trainerScale = 344,
+        .trainerOffset = 4,
+    },
+
+    [NATIONAL_DEX_TORNADUS] =
+    {
+        .categoryName = _("CYCLONE"),
+        .height = 14,
+        .weight = 630,
+        .description = gTornadusPokedexText,
+        .unusedDescription = gTornadusPokedexTextUnused,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_THUNDURUS] =
+    {
+        .categoryName = _("STORM"),
+        .height = 30,
+        .weight = 610,
+        .description = gThundurusPokedexText,
+        .unusedDescription = gThundurusPokedexTextUnused,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_LANDORUS] =
+    {
+        .categoryName = _("ABUNDANCE"),
+        .height = 13,
+        .weight = 680,
+        .description = gLandorusPokedexText,
+        .unusedDescription = gLandorusPokedexTextUnused,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_RESHIRAM] =
+    {
+        .categoryName = _("VAST WHITE"),
+        .height = 32,
+        .weight = 3300,
+        .description = gReshiramPokedexText,
+        .unusedDescription = gReshiramPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 445,
+        .trainerOffset = 8,
+    },
+
+    [NATIONAL_DEX_ZEKROM] =
+    {
+        .categoryName = _("DEEP BLACK"),
+        .height = 29,
+        .weight = 3450,
+        .description = gZekromPokedexText,
+        .unusedDescription = gZekromPokedexTextUnused,
+        .pokemonScale = 275,
+        .pokemonOffset = 2,
+        .trainerScale = 412,
+        .trainerOffset = 10,
+    },
+
+    [NATIONAL_DEX_KYUREM_W] =
+    {
+        .categoryName = _("BOUNDARY"),
+        .height = 36,
+        .weight = 3250,
+        .description = gKyuremWPokedexText,
+        .unusedDescription = gKyuremWPokedexTextUnused,
+        .pokemonScale = 275,
+        .pokemonOffset = 7,
+        .trainerScale = 356,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_KYUREM_B] =
+    {
+        .categoryName = _("BOUNDARY"),
+        .height = 33,
+        .weight = 3250,
+        .description = gKyuremBPokedexText,
+        .unusedDescription = gKyuremBPokedexTextUnused,
+        .pokemonScale = 275,
+        .pokemonOffset = 7,
+        .trainerScale = 356,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_KELDEO] =
+    {
+        .categoryName = _("COLT"),
+        .height = 14,
+        .weight = 485,
+        .description = gKeldeoPokedexText,
+        .unusedDescription = gKeldeoPokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 2,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_MELOETTA_A] =
+    {
+        .categoryName = _("MELODY"),
+        .height = 6,
+        .weight = 65,
+        .description = gMeloettaAPokedexText,
+        .unusedDescription = gMeloettaAPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_MELOETTA_P] =
+    {
+        .categoryName = _("MELODY"),
+        .height = 6,
+        .weight = 65,
+        .description = gMeloettaPPokedexText,
+        .unusedDescription = gMeloettaPPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GENESECT] =
+    {
+        .categoryName = _("PALEOZOIC"),
+        .height = 15,
+        .weight = 825,  
+        .description = gGenesectPokedexText,
+        .unusedDescription = gGenesectPokedexText,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,   
+    },
+
 };
