@@ -4837,3 +4837,115 @@ const u8 gGenesectPokedexText[] = _(
     "a cannon to its back.");
 
 const u8 gGenesectPokedexTextUnused[] = _("");
+
+const u8 gChespinPokedexText[] = _(
+    "The quills on its head are usually soft.\n"
+            "When it flexes them, the points become\n"
+            "so hard and sharp that they can pierce\n"
+            "rock without any effort.");
+
+const u8 gChespinPokedexTextUnused[] = _("");
+
+const u8 gQuilladinPokedexText[] = _(
+    "They strengthen the sturdy shell covering\n"
+            "their bodies by running into one another.\n"
+            "They are very kind and won't start fights,\n"
+            "but will counterattack with sharp quills."); 
+
+const u8 gQuilladinPokedexTextUnused[] = _("");
+
+const u8 gChesnaughtPokedexText[] = _(
+    "It shields its allies from danger with\n"
+            "its own body. When it takes a defensive\n"
+            "posture with its fists guarding its face,\n"
+            "it can withstand a bomb blast.");
+
+const u8 gChesnaughtPokedexTextUnused[] = _("");
+
+const u8 gFennekinPokedexText[] = _(
+    "As it walks, it munches on a twig to fill\n"
+            "itself with energy in place of a snack.\n"
+            "It intimidates opponents by puffing hot\n"
+            "air out of its roomy ears.");
+
+const u8 gFennekinPokedexTextUnused[] = _("");
+
+const u8 gBraixenPokedexText[] = _(
+    "Braixen has a twig stuck in its tail.\n"
+            "When the twig is plucked from its tail,\n"
+            "friction sets the twig alight. The flame\n"
+            "is used to send signals to its allies."); 
+
+const u8 gBraixenPokedexTextUnused[] = _("");
+
+const u8 gDelphoxPokedexText[] = _(
+    "It gazes into the flame at the tip of its\n"
+            "branch to achieve a focused state, which\n"
+            "allows it to see into the future. It uses\n"
+            "psychic power to incinerate its foes.");
+
+const u8 gDelphoxPokedexTextUnused[] = _("");
+
+const u8 gFroakiePokedexText[] = _(
+    "It protects its skin by covering its body\n"
+            "in bubbles it secretes from its chest and\n"
+            "back. Beneath its happy-go-lucky air, it\n"
+            "keeps a watchful eye on its surroundings.");
+
+const u8 gFroakiePokedexTextUnused[] = _("");
+
+const u8 gFrogadierPokedexText[] = _(
+    "It can throw bubble-covered pebbles with\n"
+            "precise control, hitting empty cans up to\n"
+            "a hundred feet away. Frogadier's swiftness\n"
+            "is unparalleled."); 
+
+const u8 gFrogadierPokedexTextUnused[] = _("");
+
+const u8 gGreninjaPokedexText[] = _(
+    "It appears and vanishes with a ninja's\n"
+    "grace. It toys with its enemies using swift\n"
+    "movements, while slicing them with throwing\n"
+    "stars made of compressed water.");
+
+const u8 gGreninjaPokedexTextUnused[] = _("");
+
+const u8 gBunnelbyPokedexText[] = _(
+    "It has ears like shovels. Digging holes\n"
+            "strengthens its ears so much that they\n"
+            "can sever thick roots effortlessly.\n"
+            "Bunnelby dig the whole night through."); 
+
+const u8 gBunnelbyPokedexTextUnused[] = _("");
+
+const u8 gDiggersbyPokedexText[] = _(
+    "With its powerful ears it reduces dense\n"
+            "bedrock to rubble. It can be a big help\n"
+            "at construction sites. When it's finished\n"
+            "digging, it lounges about lazily.");
+
+const u8 gDiggersbyPokedexTextUnused[] = _("");
+
+const u8 gFletchlingPokedexText[] = _(
+    "This amiable Pokémon is easy to train.\n"
+            "But when battle is joined, it shows its\n"
+            "ferocious side. It's merciless to\n"
+            "intruders that enter its territory.");
+
+const u8 gFletchlingPokedexTextUnused[] = _("");
+
+const u8 gFletchinderPokedexText[] = _(
+    "From its beak, it expels embers that set\n"
+            "the tall grass on fire. Then it pounces on\n"
+            "any bewildered Pokémon that pop out of\n"
+            "the grass."); 
+
+const u8 gFletchinderPokedexTextUnused[] = _("");
+
+const u8 gTalonflamePokedexText[] = _(
+    "In the fever of an exciting battle, it\n"
+            "showers embers from the gaps between its\n"
+            "feathers and takes to the air. It finishes\n"
+            "its prey off with a colossal kick.");
+
+const u8 gTalonflamePokedexTextUnused[] = _("");

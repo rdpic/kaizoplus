@@ -3385,6 +3385,76 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 48),
         .y_offset = 8,
     },
+    [SPECIES_CHESPIN] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 6,
+    },
+    [SPECIES_QUILLADIN] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 9,
+    },
+    [SPECIES_CHESNAUGHT] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 10,
+    },
+    [SPECIES_FENNEKIN] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 8,
+    },
+    [SPECIES_BRAIXEN] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 10,
+    },
+    [SPECIES_DELPHOX] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_FROAKIE] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_FROGADIER] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_GRENINJA] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_BUNNELBY] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_DIGGERSBY] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_FLETCHLING] =
+    {
+        .size = MON_COORDS_SIZE(64, 40),
+        .y_offset = 14,
+    },
+    [SPECIES_FLETCHINDER] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_TALONFLAME] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 5,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 48),

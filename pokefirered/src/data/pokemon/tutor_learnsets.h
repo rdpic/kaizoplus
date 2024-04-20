@@ -4393,6 +4393,90 @@ static const u16 sTutorLearnsets[] =
                         | TUTOR(MOVE_BODY_SLAM)
                         | TUTOR(MOVE_DOUBLE_EDGE)
                         | TUTOR(MOVE_MIMIC)
-                        | TUTOR(MOVE_SUBSTITUTE),                                                       
+                        | TUTOR(MOVE_SUBSTITUTE), 
+
+    [SPECIES_CHESPIN]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_QUILLADIN]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_CHESNAUGHT]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE), 
+
+    [SPECIES_FENNEKIN]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_BRAIXEN]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_DELPHOX]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_FROAKIE]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_FROGADIER]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_GRENINJA]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_BUNNELBY]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_DIGGERSBY]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_FLETCHLING]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),
+
+    [SPECIES_FLETCHINDER]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),  
+
+    [SPECIES_TALONFLAME]  = TUTOR(MOVE_SWORDS_DANCE)
+                        | TUTOR(MOVE_BODY_SLAM)
+                        | TUTOR(MOVE_DOUBLE_EDGE)
+                        | TUTOR(MOVE_MIMIC)
+                        | TUTOR(MOVE_SUBSTITUTE),                                                                  
 
 };

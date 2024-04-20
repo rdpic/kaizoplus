@@ -653,6 +653,20 @@ gCryTable::
 	cry Cry_Meloetta_A
 	cry Cry_Meloetta_P
 	cry Cry_Genesect
+	cry Cry_Chespin
+	cry Cry_Quilladin
+	cry Cry_Chesnaught
+	cry Cry_Fennekin
+	cry Cry_Braixen
+	cry Cry_Delphox
+	cry Cry_Froakie
+	cry Cry_Frogadier
+	cry Cry_Greninja
+	cry Cry_Bunnelby
+	cry Cry_Diggersby
+	cry Cry_Fletchling
+	cry Cry_Fletchinder
+	cry Cry_Talonflame
 
 	.align 2
 gCryTable_Reverse::
@@ -1309,3 +1323,17 @@ gCryTable_Reverse::
 	cry_reverse Cry_Meloetta_A
 	cry_reverse Cry_Meloetta_P
 	cry_reverse Cry_Genesect
+	cry_reverse Cry_Chespin
+	cry_reverse Cry_Quilladin
+	cry_reverse Cry_Chesnaught
+	cry_reverse Cry_Fennekin
+	cry_reverse Cry_Braixen
+	cry_reverse Cry_Delphox
+	cry_reverse Cry_Froakie
+	cry_reverse Cry_Frogadier
+	cry_reverse Cry_Greninja
+	cry_reverse Cry_Bunnelby
+	cry_reverse Cry_Diggersby
+	cry_reverse Cry_Fletchling
+	cry_reverse Cry_Fletchinder
+	cry_reverse Cry_Talonflame

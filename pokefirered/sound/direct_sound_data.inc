@@ -2916,6 +2916,62 @@ Cry_Genesect::
 	.incbin "sound/direct_sound_samples/cries/genesect.bin"
 
 	.align 2
+Cry_Chespin::
+	.incbin "sound/direct_sound_samples/cries/chespin.bin" 
+
+	.align 2
+Cry_Quilladin::
+	.incbin "sound/direct_sound_samples/cries/quilladin.bin"
+
+	.align 2
+Cry_Chesnaught::
+	.incbin "sound/direct_sound_samples/cries/chesnaught.bin"
+
+	.align 2
+Cry_Fennekin::
+	.incbin "sound/direct_sound_samples/cries/fennekin.bin" 
+
+	.align 2
+Cry_Braixen::
+	.incbin "sound/direct_sound_samples/cries/braixen.bin"
+
+	.align 2
+Cry_Delphox::
+	.incbin "sound/direct_sound_samples/cries/delphox.bin"
+
+	.align 2
+Cry_Froakie::
+	.incbin "sound/direct_sound_samples/cries/froakie.bin" 
+
+	.align 2
+Cry_Frogadier::
+	.incbin "sound/direct_sound_samples/cries/frogadier.bin"
+
+	.align 2
+Cry_Greninja::
+	.incbin "sound/direct_sound_samples/cries/greninja.bin"
+
+	.align 2
+Cry_Bunnelby::
+	.incbin "sound/direct_sound_samples/cries/bunnelby.bin"
+
+	.align 2
+Cry_Diggersby::
+	.incbin "sound/direct_sound_samples/cries/diggersby.bin"
+
+	.align 2
+Cry_Fletchling::
+	.incbin "sound/direct_sound_samples/cries/fletchling.bin"
+
+	.align 2
+Cry_Fletchinder::
+	.incbin "sound/direct_sound_samples/cries/fletchinder.bin"
+
+	.align 2
+Cry_Talonflame::
+	.incbin "sound/direct_sound_samples/cries/talonflame.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

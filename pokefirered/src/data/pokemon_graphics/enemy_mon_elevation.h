@@ -118,4 +118,6 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_VOLCARONA] = 6,
     [SPECIES_THUNDURUS] = 7,
     [SPECIES_MELOETTA_A] = 8,
+    [SPECIES_FLETCHINDER] = 9,
+    [SPECIES_TALONFLAME] = 7,
 };
