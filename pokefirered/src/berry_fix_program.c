@@ -139,7 +139,7 @@ static void Task_BerryFixMain(u8 taskId)
             tState = STATE_INIT_MULTIBOOT;
         }
         break;
-    case STATE_INIT_MULTIBOOT:
+   /*  case STATE_INIT_MULTIBOOT:
         gMultibootStart = gMultiBootProgram_BerryGlitchFix_Start;
         gMultibootSize = gMultiBootProgram_BerryGlitchFix_End - gMultiBootProgram_BerryGlitchFix_Start;
         gMultibootParam.masterp = (void *)gMultiBootProgram_BerryGlitchFix_Start;
@@ -168,7 +168,7 @@ static void Task_BerryFixMain(u8 taskId)
             tTimer = 0;
             gMultibootStatus = MultiBootMain(&gMultibootParam);
         }
-        break;
+        break; */
     case STATE_TRANSMIT:
         gMultibootStatus = MultiBootMain(&gMultibootParam);
         if (MultiBootCheckComplete(&gMultibootParam))

@@ -5053,3 +5053,171 @@ const u8 gFurfrouPokedexText[] = _(
     "Pokémon were the guardians of kings.");
 
 const u8 gFurfrouPokedexTextUnused[] = _("");
+
+const u8 gEspurrPokedexText[] = _(
+    "It has enough psychic energy to blast\n"
+            "everything within 300 feet of itself.\n"
+            "The organ that emits its intense psychic\n"
+            "power is sheltered by its ears."); 
+
+const u8 gEspurrPokedexTextUnused[] = _("");
+
+const u8 gMeowsticPokedexText[] = _(
+    "Females are a bit more selfish and\n"
+            "aggressive than males. If they\n"
+            "don't get what they want, they will\n"
+            "torment you with their psychic abilities.");
+
+const u8 gMeowsticPokedexTextUnused[] = _("");
+
+const u8 gHonedgePokedexText[] = _(
+    "If anyone dares to grab its hilt, it\n"
+            "wraps a blue cloth around that person's\n"
+            "arm and drains that person's life\n"
+            "energy completely.");
+
+const u8 gHonedgePokedexTextUnused[] = _("");
+
+const u8 gDoubladePokedexText[] = _(
+    "When Honedge evolves, it divides into\n"
+            "two swords. The complex attack patterns\n"
+            "of its two swords are unstoppable, even\n"
+            "against those skilled at swordplay."); 
+
+const u8 gDoubladePokedexTextUnused[] = _("");
+
+const u8 gAegislashPokedexText[] = _(
+    "Once upon a time, a king with an\n"
+            "Aegislash reigned over the land. His\n"
+            "Pokémon eventually drained him of\n"
+            "life, and his kingdom fell with him.");
+
+const u8 gAegislashPokedexTextUnused[] = _("");
+
+const u8 gSpritzeePokedexText[] = _(
+    "In the past, rather than using perfume,\n"
+            "royal ladies carried a Spritzee that would\n"
+            "waft a fragrance they liked. Its fragrance\n"
+            "changes depending on what it has eaten.");
+
+const u8 gSpritzeePokedexTextUnused[] = _("");
+
+const u8 gAromatissePokedexText[] = _(
+    "Its scent is so overpowering that,\n"
+            "unless a Trainer happens to really enjoy\n"
+            "the smell, he or she will have a hard time\n"
+            "walking alongside it.");
+
+const u8 gAromatissePokedexTextUnused[] = _("");
+
+const u8 gSwirlixPokedexText[] = _(
+    "Because it eats nothing but sweets, its\n"
+            "fur is as sticky sweet as cotton candy.\n"
+            "To entangle its opponents in battle, it\n"
+            "extrudes sticky white threads."); 
+
+const u8 gSwirlixPokedexTextUnused[] = _("");
+
+const u8 gSlurpuffPokedexText[] = _(
+    "Slurpuff can distinguish even the\n"
+            "faintest of scents. It puts its sensitive\n"
+            "sense of smell to use by helping pastry\n"
+            "chefs in their work.");
+
+const u8 gSlurpuffPokedexTextUnused[] = _("");
+
+const u8 gInkayPokedexText[] = _(
+    "It flashes the light-emitting spots on its\n"
+            "body, which drains its opponent's will\n"
+            "to fight. It takes the opportunity to\n"
+            "scuttle away and hide.");
+
+const u8 gInkayPokedexTextUnused[] = _("");
+
+const u8 gMalamarPokedexText[] = _(
+    "It lures prey close with hypnotic motions,\n"
+            "then wraps its tentacles around it before\n"
+            "finishing it off with digestive fluids. It\n"
+            "forces others to do whatever it wants.");
+
+const u8 gMalamarPokedexTextUnused[] = _("");
+
+const u8 gBinaclePokedexText[] = _(
+    "They stretch and then contract, yanking\n"
+            "their rocks along with them in bold hops.\n"
+            "They eat seaweed that washes up on\n"
+            "the shoreline."); 
+
+const u8 gBinaclePokedexTextUnused[] = _("");
+
+const u8 gBarbaraclePokedexText[] = _(
+    "Barbaracle's legs and hands have minds\n"
+            "of their own, and they will move\n"
+            "independently. But they usually follow\n"
+            "the head's orders.");
+
+const u8 gBarbaraclePokedexTextUnused[] = _("");
+
+const u8 gSkrelpPokedexText[] = _(
+    "Camouflaged as rotten kelp, it hides\n"
+            "from foes while storing up power for its\n"
+            "evolution. They spray liquid poison on\n"
+            "prey that approach unawares.");
+
+const u8 gSkrelpPokedexTextUnused[] = _("");
+
+const u8 gDragalgePokedexText[] = _(
+    "Their poison is strong enough to eat\n"
+            "through the hull of a tanker. Tales are\n"
+            "told of ships that wander into seas where\n"
+            "Dragalge live, never to return.");
+
+const u8 gDragalgePokedexTextUnused[] = _("");
+
+const u8 gClauncherPokedexText[] = _(
+    "Through controlled expulsions of internal\n"
+            "gas, it can expel water like a pistol shot.\n"
+            "At close distances, it can even shatter\n"
+            "large rocks."); 
+
+const u8 gClauncherPokedexTextUnused[] = _("");
+
+const u8 gClawitzerPokedexText[] = _(
+    "By expelling water from the nozzle in the\n"
+            "back of its enormous claw, it can move\n"
+            "at a speed of 60 knots. They launch\n"
+            "cannonballs made of water.");
+
+const u8 gClawitzerPokedexTextUnused[] = _("");
+
+const u8 gHelioptilePokedexText[] = _(
+    "They make their home in deserts.\n"
+            "They can generate their own energy from\n"
+            "basking in the sun, so eating food is not\n"
+            "a requirement.");
+
+const u8 gHelioptilePokedexTextUnused[] = _("");
+
+const u8 gHelioliskPokedexText[] = _(
+    "A single Heliolisk can generate sufficient\n"
+            "electricity to power a skyscraper. It can\n"
+            "stimulate its muscles with electricity,\n"
+            "boosting the strength in its legs.");
+
+const u8 gHelioliskPokedexTextUnused[] = _("");
+
+const u8 gTyruntPokedexText[] = _(
+    "Its immense jaws have enough destructive\n"
+            "force that it can chew up a car. If\n"
+            "something happens that it doesn't like,\n"
+            "it throws a tantrum and runs wild."); 
+
+const u8 gTyruntPokedexTextUnused[] = _("");
+
+const u8 gTyrantrumPokedexText[] = _(
+     "Thanks to its gargantuan jaws, which could\n"
+            "shred thick metal plates as if they were\n"
+            "paper, it was invincible in the ancient\n"
+            "world it once inhabited.");
+
+const u8 gTyrantrumPokedexTextUnused[] = _("");

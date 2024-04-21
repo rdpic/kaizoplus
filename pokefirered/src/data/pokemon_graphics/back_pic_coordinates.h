@@ -3520,6 +3520,111 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(56, 64),
         .y_offset = 0,
     },
+    [SPECIES_ESPURR] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_MEOWSTIC] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 9,
+    },
+    [SPECIES_HONEDGE] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 4,
+    },
+    [SPECIES_DOUBLADE] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 7,
+    },
+    [SPECIES_AEGISLASH] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 9,
+    },
+    [SPECIES_SPRITZEE] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_AROMATISSE] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 5,
+    },
+    [SPECIES_SWIRLIX] =
+    {
+        .size = MON_COORDS_SIZE(56, 40),
+        .y_offset = 12,
+    },
+    [SPECIES_SLURPUFF] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 4,
+    },
+    [SPECIES_INKAY] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 9,
+    },
+    [SPECIES_MALAMAR] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 8,
+    },
+    [SPECIES_BINACLE] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 5,
+    },
+    [SPECIES_BARBARACLE] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_SKRELP] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 5,
+    },
+    [SPECIES_DRAGALGE] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_CLAUNCHER] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_CLAWITZER] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_HELIOPTILE] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_HELIOLISK] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 2,
+    },
+    [SPECIES_TYRUNT] =
+    {
+        .size = MON_COORDS_SIZE(64, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_TYRANTRUM] =
+    {
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 5,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 48),

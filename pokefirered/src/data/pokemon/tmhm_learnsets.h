@@ -11028,4 +11028,109 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(TM11_SUNNY_DAY)
                                         | TMHM(HM06_ROCK_SMASH)),
 
+    [SPECIES_ESPURR]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_MEOWSTIC]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_HONEDGE]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_DOUBLADE]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_AEGISLASH]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_SPRITZEE]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_AROMATISSE]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_SWIRLIX]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_SLURPUFF]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_INKAY]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_MALAMAR]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_BINACLE]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_BARBARACLE]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_SKRELP]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_DRAGALGE]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_CLAUNCHER]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_CLAWITZER]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_HELIOPTILE]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_HELIOLISK]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_TYRUNT]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
+    [SPECIES_TYRANTRUM]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(HM06_ROCK_SMASH)),
+
 };

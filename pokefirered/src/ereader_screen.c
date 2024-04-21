@@ -386,7 +386,7 @@ static void Task_EReader(u8 taskId)
         break;
     case ER_STATE_CONNECTING:
         AddTextPrinterToWindow1(gJPText_Connecting);
-        EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, gMultiBootProgram_EReader_Start);
+        /* EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, gMultiBootProgram_EReader_Start); */
         data->state = ER_STATE_TRANSFER;
         break;
     case ER_STATE_TRANSFER:

@@ -680,6 +680,27 @@ gCryTable::
 	cry Cry_Pancham
 	cry Cry_Pangoro
 	cry Cry_Furfrou
+	cry Cry_Espurr
+	cry Cry_Meowstic
+	cry Cry_Honedge
+	cry Cry_Doublade
+	cry Cry_Aegislash
+	cry Cry_Spritzee
+	cry Cry_Aromatisse
+	cry Cry_Swirlix
+	cry Cry_Slurpuff
+	cry Cry_Inkay
+	cry Cry_Malamar
+	cry Cry_Binacle
+	cry Cry_Barbaracle
+	cry Cry_Skrelp
+	cry Cry_Dragalge
+	cry Cry_Clauncher
+	cry Cry_Clawitzer
+	cry Cry_Helioptile
+	cry Cry_Heliolisk
+	cry Cry_Tyrunt
+	cry Cry_Tyrantrum
 
 	.align 2
 gCryTable_Reverse::
@@ -1363,3 +1384,24 @@ gCryTable_Reverse::
 	cry_reverse Cry_Pancham
 	cry_reverse Cry_Pangoro
 	cry_reverse Cry_Furfrou
+	cry_reverse Cry_Espurr
+	cry_reverse Cry_Meowstic
+	cry_reverse Cry_Honedge
+	cry_reverse Cry_Doublade
+	cry_reverse Cry_Aegislash
+	cry_reverse Cry_Spritzee
+	cry_reverse Cry_Aromatisse
+	cry_reverse Cry_Swirlix
+	cry_reverse Cry_Slurpuff
+	cry_reverse Cry_Inkay
+	cry_reverse Cry_Malamar
+	cry_reverse Cry_Binacle
+	cry_reverse Cry_Barbaracle
+	cry_reverse Cry_Skrelp
+	cry_reverse Cry_Dragalge
+	cry_reverse Cry_Clauncher
+	cry_reverse Cry_Clawitzer
+	cry_reverse Cry_Helioptile
+	cry_reverse Cry_Heliolisk
+	cry_reverse Cry_Tyrunt
+	cry_reverse Cry_Tyrantrum
