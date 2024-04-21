@@ -2972,6 +2972,58 @@ Cry_Talonflame::
 	.incbin "sound/direct_sound_samples/cries/talonflame.bin"
 
 	.align 2
+Cry_Scatterbug::
+	.incbin "sound/direct_sound_samples/cries/scatterbug.bin"
+
+	.align 2
+Cry_Spewpa::
+	.incbin "sound/direct_sound_samples/cries/spewpa.bin"
+
+	.align 2
+Cry_Vivillon::
+	.incbin "sound/direct_sound_samples/cries/vivillon.bin"
+
+	.align 2
+Cry_Litleo::
+	.incbin "sound/direct_sound_samples/cries/litleo.bin"
+
+	.align 2
+Cry_Pyroar::
+	.incbin "sound/direct_sound_samples/cries/pyroar.bin"
+
+	.align 2
+Cry_Flabebe::
+	.incbin "sound/direct_sound_samples/cries/flabebe.bin"
+
+	.align 2
+Cry_Floette::
+	.incbin "sound/direct_sound_samples/cries/floette.bin"
+
+	.align 2
+Cry_Florges::
+	.incbin "sound/direct_sound_samples/cries/florges.bin"
+
+	.align 2
+Cry_Skiddo::
+	.incbin "sound/direct_sound_samples/cries/skiddo.bin"
+
+	.align 2
+Cry_Gogoat::
+	.incbin "sound/direct_sound_samples/cries/gogoat.bin"
+
+	.align 2
+Cry_Pancham::
+	.incbin "sound/direct_sound_samples/cries/pancham.bin"
+
+	.align 2
+Cry_Pangoro::
+	.incbin "sound/direct_sound_samples/cries/pangoro.bin"
+
+	.align 2
+Cry_Furfrou::
+	.incbin "sound/direct_sound_samples/cries/furfrou.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

@@ -3455,6 +3455,71 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 1,
     },
+    [SPECIES_SCATTERBUG] =
+    {
+        .size = MON_COORDS_SIZE(32, 48),
+        .y_offset = 13,
+    },
+    [SPECIES_SPEWPA] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_VIVILLON] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_LITLEO] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_PYROAR] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_FLABEBE] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_FLOETTE] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_FLORGES] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_SKIDDO] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_GOGOAT] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 2,
+    },
+    [SPECIES_PANCHAM] =
+    {
+        .size = MON_COORDS_SIZE(32, 48),
+        .y_offset = 12,
+    },
+    [SPECIES_PANGORO] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 0,
+    },
+    [SPECIES_FURFROU] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 3,
+    },
     [SPECIES_EGG] =
     {
         .size = MON_COORDS_SIZE(24, 24),

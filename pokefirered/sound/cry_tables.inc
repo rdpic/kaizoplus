@@ -667,6 +667,19 @@ gCryTable::
 	cry Cry_Fletchling
 	cry Cry_Fletchinder
 	cry Cry_Talonflame
+	cry Cry_Scatterbug
+	cry Cry_Spewpa
+	cry Cry_Vivillon
+	cry Cry_Litleo
+	cry Cry_Pyroar
+	cry Cry_Flabebe
+	cry Cry_Floette
+	cry Cry_Florges
+	cry Cry_Skiddo
+	cry Cry_Gogoat
+	cry Cry_Pancham
+	cry Cry_Pangoro
+	cry Cry_Furfrou
 
 	.align 2
 gCryTable_Reverse::
@@ -1337,3 +1350,16 @@ gCryTable_Reverse::
 	cry_reverse Cry_Fletchling
 	cry_reverse Cry_Fletchinder
 	cry_reverse Cry_Talonflame
+	cry_reverse Cry_Scatterbug
+	cry_reverse Cry_Spewpa
+	cry_reverse Cry_Vivillon
+	cry_reverse Cry_Litleo
+	cry_reverse Cry_Pyroar
+	cry_reverse Cry_Flabebe
+	cry_reverse Cry_Floette
+	cry_reverse Cry_Florges
+	cry_reverse Cry_Skiddo
+	cry_reverse Cry_Gogoat
+	cry_reverse Cry_Pancham
+	cry_reverse Cry_Pangoro
+	cry_reverse Cry_Furfrou

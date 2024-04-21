@@ -8658,4 +8658,173 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
+    [NATIONAL_DEX_SCATTERBUG] =
+    {
+        .categoryName = _("DUST"),
+        .height = 3,
+        .weight = 25,
+        .description = gScatterbugPokedexText,
+        .unusedDescription = gScatterbugPokedexText,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SPEWPA] =
+    {
+        .categoryName = _("DUST"),
+        .height = 3,
+        .weight = 84, 
+        .description = gSpewpaPokedexText,
+        .unusedDescription = gSpewpaPokedexText,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,  
+    },
+
+    [NATIONAL_DEX_VIVILLON] =
+    {
+        .categoryName = _("SCALE"),
+        .height = 12,
+        .weight = 170, 
+        .description = gVivillonPokedexText,
+        .unusedDescription = gVivillonPokedexText,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_LITLEO] =
+    {
+        .categoryName = _("LION CUB"),
+        .height = 6,
+        .weight = 135,
+        .description = gLitleoPokedexText,
+        .unusedDescription = gLitleoPokedexTextUnused,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PYROAR] =
+    {
+        .categoryName = _("ROYAL"),
+        .height = 15,
+        .weight = 815,
+        .description = gPyroarPokedexText,
+        .unusedDescription = gPyroarPokedexText,
+        .pokemonScale = 268,
+        .pokemonOffset = 2,
+        .trainerScale = 271,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_FLABEBE] =
+    {
+        .categoryName = _("BLOOM"),
+        .height = 1,
+        .weight = 1,
+        .description = gFlabebePokedexText,
+        .unusedDescription = gFlabebePokedexText,
+        .pokemonScale = 682,
+        .pokemonOffset = 24,
+        .trainerScale = 256,
+        .trainerOffset = 0, 
+    },
+
+    [NATIONAL_DEX_FLOETTE] =
+    {
+        .categoryName = _("BLOOM"),
+        .height = 2,
+        .weight = 9,
+        .description = gFloettePokedexText,
+        .unusedDescription = gFloettePokedexText,
+        .pokemonScale = 682,
+        .pokemonOffset = 24,
+        .trainerScale = 256,
+        .trainerOffset = 0, 
+    },
+
+    [NATIONAL_DEX_FLORGES] =
+    {
+        .categoryName = _("GARDEN"),
+        .height = 11,
+        .weight = 100, 
+        .description = gFlorgesPokedexText,
+        .unusedDescription = gFlorgesPokedexText,
+        .pokemonScale = 320,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_SKIDDO] =
+    {
+        .categoryName = _("MOUNT"),
+        .height = 9,
+        .weight = 310,
+        .description = gSkiddoPokedexText,
+        .unusedDescription = gSkiddoPokedexTextUnused,
+        .pokemonScale = 338,
+        .pokemonOffset = 8,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_GOGOAT] =
+    {
+        .categoryName = _("MOUNT"),
+        .height = 17,
+        .weight = 910,
+        .description = gPyroarPokedexText,
+        .unusedDescription = gPyroarPokedexText,
+        .pokemonScale = 259,
+        .pokemonOffset = 0,
+        .trainerScale = 290,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_PANCHAM] =
+    {
+        .categoryName = _("PLAYFUL"),
+        .height = 6,
+        .weight = 80,
+        .description = gPanchamPokedexText,
+        .unusedDescription = gPanchamPokedexText,
+        .pokemonScale = 422,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_PANGORO] =
+    {
+        .categoryName = _("DAUNTING"),
+        .height = 21,
+        .weight = 1360,
+        .description = gPangoroPokedexText,
+        .unusedDescription = gPangoroPokedexText,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 365,
+        .trainerOffset = 7,
+    },
+
+    [NATIONAL_DEX_FURFROU] =
+    {
+        .categoryName = _("POODLE"),
+        .height = 12,
+        .weight = 280,
+        .description = gFurfrouPokedexText,
+        .unusedDescription = gFurfrouPokedexText,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
 };

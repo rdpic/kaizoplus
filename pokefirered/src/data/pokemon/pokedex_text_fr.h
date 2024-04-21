@@ -4949,3 +4949,107 @@ const u8 gTalonflamePokedexText[] = _(
             "its prey off with a colossal kick.");
 
 const u8 gTalonflamePokedexTextUnused[] = _("");
+
+const u8 gScatterbugPokedexText[] = _(
+    "When under attack from bird Pokémon,\n"
+    "it spews a poisonous black powder that\n"
+    "causes paralysis on contact. Scatterbug\n"
+    "can live in any region or climate.");
+
+const u8 gScatterbugPokedexTextUnused[] = _("");
+
+const u8 gSpewpaPokedexText[] = _(
+    "It lives hidden within thicket shadows.\n"
+    "When predators attack, it quickly bristles\n"
+    "the fur covering its body in an effort to\n"
+    "threaten them."); 
+
+const u8 gSpewpaPokedexTextUnused[] = _("");
+
+const u8 gVivillonPokedexText[] = _(
+    "Its pattern depends on the climate and\n"
+            "topography of the land it was born in.\n"
+            "This form is from frigid lands.\n"
+            "It scatters toxic color scales in battle.");
+
+const u8 gVivillonPokedexTextUnused[] = _("");
+
+const u8 gLitleoPokedexText[] = _(
+    "They set off on their own from their pride\n"
+            "and live by themselves to become stronger.\n"
+            "These hot-blooded Pokémon are quick\n"
+            "to start a fight."); 
+
+const u8 gLitleoPokedexTextUnused[] = _("");
+
+const u8 gPyroarPokedexText[] = _(
+    "The male with the largest mane of fire\n"
+            "is the leader of the pride. The females\n"
+            "protect the pride's cubs. They viciously\n"
+            "threaten any challenger.");
+
+const u8 gPyroarPokedexTextUnused[] = _("");
+
+const u8 gFlabebePokedexText[] = _(
+    "This Flabébé rides a red flower.\n"
+            "Immediately after birth, this Pokémon\n"
+            "begins flying around in search of a\n"
+            "flower it likes.");
+
+const u8 gFlabebePokedexTextUnused[] = _("");
+
+const u8 gFloettePokedexText[] = _(
+    "This Pokémon uses red wavelengths\n"
+            "of light to pour its own energy\n"
+            "into flowers and draw forth their\n"
+            "latent potential."); 
+
+const u8 gFloettePokedexTextUnused[] = _("");
+
+const u8 gFlorgesPokedexText[] = _(
+    "This Pokémon creates an\n"
+            "impressive flower garden in its territory. It\n"
+            "draws forth the power of the red\n"
+            "flowers around its neck.");
+
+const u8 gFlorgesPokedexTextUnused[] = _("");
+
+const u8 gSkiddoPokedexText[] = _(
+    "If it has sunshine and water, it doesn't\n"
+            "need to eat, because it can generate\n"
+            "energy from the leaves on its back.\n"
+            "It has a placid disposition."); 
+
+const u8 gSkiddoPokedexTextUnused[] = _("");
+
+const u8 gGogoatPokedexText[] = _(
+    "It can tell how its trainer is feeling by\n"
+            "subtle shifts in the grip on its horns. This\n"
+            "empathetic sense lets them run as if one\n"
+            "being. They inhabit mountainous regions.");
+
+const u8 gGogoatPokedexTextUnused[] = _("");
+
+const u8 gPanchamPokedexText[] = _(
+    "There's no point to the leaf in its mouth,\n"
+            "aside from an effort to look cool. It's\n"
+            "mischievous, so it's not well suited to\n"
+            "inexperienced Trainers.");
+
+const u8 gPanchamPokedexTextUnused[] = _("");
+
+const u8 gPangoroPokedexText[] = _(
+    "It boasts superb physical strength.\n"
+            "Those who wish to become Pangoro's\n"
+            "Trainer have no choice but to converse\n"
+            "with their fists."); 
+
+const u8 gPangoroPokedexTextUnused[] = _("");
+
+const u8 gFurfrouPokedexText[] = _(
+    "Trimming its fluffy fur not only makes\n"
+    "it more elegant but also increases the\n"
+    "swiftness of its movements. These\n"
+    "Pokémon were the guardians of kings.");
+
+const u8 gFurfrouPokedexTextUnused[] = _("");

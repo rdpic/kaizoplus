@@ -691,5 +691,18 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_FLETCHLING] = sFletchlingLevelUpLearnset,
     [SPECIES_FLETCHINDER] = sFletchinderLevelUpLearnset,
     [SPECIES_TALONFLAME] = sTalonflameLevelUpLearnset,
+    [SPECIES_SCATTERBUG] = sScatterbugLevelUpLearnset,
+    [SPECIES_SPEWPA] = sSpewpaLevelUpLearnset,
+    [SPECIES_VIVILLON] = sVivillonLevelUpLearnset,
+    [SPECIES_LITLEO] = sLitleoLevelUpLearnset,
+    [SPECIES_PYROAR] = sPyroarLevelUpLearnset,
+    [SPECIES_FLABEBE] = sFlabebeLevelUpLearnset,
+    [SPECIES_FLOETTE] = sFloetteLevelUpLearnset,
+    [SPECIES_FLORGES] = sFlorgesLevelUpLearnset,
+    [SPECIES_SKIDDO] = sSkiddoLevelUpLearnset,
+    [SPECIES_GOGOAT] = sGogoatLevelUpLearnset,
+    [SPECIES_PANCHAM] = sPanchamLevelUpLearnset,
+    [SPECIES_PANGORO] = sPangoroLevelUpLearnset,
+    [SPECIES_FURFROU] = sFurfrouLevelUpLearnset,
     
 };

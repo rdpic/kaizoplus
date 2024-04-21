@@ -120,4 +120,7 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_MELOETTA_A] = 8,
     [SPECIES_FLETCHINDER] = 9,
     [SPECIES_TALONFLAME] = 7,
+    [SPECIES_VIVILLON] = 9,
+    [SPECIES_FLABEBE] = 6,
+    [SPECIES_FLOETTE] = 4,
 };
