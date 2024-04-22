@@ -5221,3 +5221,171 @@ const u8 gTyrantrumPokedexText[] = _(
             "world it once inhabited.");
 
 const u8 gTyrantrumPokedexTextUnused[] = _("");
+
+const u8 gAmauraPokedexText[] = _(
+    "This ancient Pokémon was restored from\n"
+            "part of its body that had been frozen in\n"
+            "ice for over 100 million years. It lived in a\n"
+            "cold land where there were no predators."); 
+
+const u8 gAmauraPokedexTextUnused[] = _("");
+
+const u8 gAurorusPokedexText[] = _(
+     "Using the diamond-shaped crystals on its\n"
+            "body it can instantly create a wall of ice\n"
+            "to block an opponent's attack, or encase\n"
+            "them in ice.");
+
+const u8 gAurorusPokedexTextUnused[] = _("");
+
+const u8 gSylveonPokedexText[] = _(
+    "Its ribbonlike feelers give off an aura\n"
+            "that weakens hostility in its prey, causing\n"
+            "them to let down their guard. A moment\n"
+            "later, it pounces.");
+
+const u8 gSylveonPokedexTextUnused[] = _("");
+
+const u8 gHawluchaPokedexText[] = _(
+    "With its wings, it controls its position in\n"
+            "the air. Its proficient fighting skills\n"
+            "enable it to keep up with big bruisers\n"
+            "like Machamp and Hariyama.");
+
+const u8 gHawluchaPokedexTextUnused[] = _("");
+
+const u8 gDedennePokedexText[] = _(
+    "Its whiskers serve as antennas.\n"
+            "By sending and receiving electrical\n"
+            "waves, it can communicate with others\n"
+            "over vast distances."); 
+
+const u8 gDedennePokedexTextUnused[] = _("");
+
+const u8 gCarbinkPokedexText[] = _(
+    "Born from the high temperatures and\n"
+            "pressures deep underground, it defends\n"
+            "itself by firing beams from the jewel part\n"
+            "of its body.");
+
+const u8 gCarbinkPokedexTextUnused[] = _("");
+
+const u8 gGoomyPokedexText[] = _(
+    "Its source of protection is its slimy,\n"
+            "germ-laden mucous membrane. Anyone\n"
+            "who touches it will need some thorough\n"
+            "hand-washing.");
+
+const u8 gGoomyPokedexTextUnused[] = _("");
+
+const u8 gSliggooPokedexText[] = _(
+    "This Pokémon's mucous can dissolve\n"
+            "anything. Toothless, it sprays mucous\n"
+            "on its prey. Once they're nicely dissolved,\n"
+            "it slurps them up."); 
+
+const u8 gSliggooPokedexTextUnused[] = _("");
+
+const u8 gGoodraPokedexText[] = _(
+    "It gets picked on because it's meek.\n"
+            "But then, whoever teased it gets to feel\n"
+            "the full force of its horns and a good\n"
+            "swatting from its thick tail.");
+
+const u8 gGoodraPokedexTextUnused[] = _("");
+
+const u8 gKlefkiPokedexText[] = _(
+    "These key collectors threaten any\n"
+            "attackers by fiercely jingling their keys\n"
+            "at them. It will sneak into people's homes\n"
+            "to steal their keys.");
+
+const u8 gKlefkiPokedexTextUnused[] = _("");
+
+const u8 gPhantumpPokedexText[] = _(
+    "According to legend, medicine to cure\n"
+            "any illness can be made by plucking the\n"
+            "green leaves on its head, brewing them,\n"
+            "and boiling down the liquid."); 
+
+const u8 gPhantumpPokedexTextUnused[] = _("");
+
+const u8 gTrevenantPokedexText[] = _(
+    "Through its roots, it exerts control over\n"
+            "other trees. A deadly curse falls upon\n"
+            "anyone cutting down trees in forests\n"
+            "where Trevenant dwell.");
+
+const u8 gTrevenantPokedexTextUnused[] = _("");
+
+const u8 gPumpkabooPokedexText[] = _(
+    "The light that streams out from\n"
+            "the holes in the pumpkin can\n"
+            "hypnotize and control the people and\n"
+            "Pokémon that see it.");
+
+const u8 gPumpkabooPokedexTextUnused[] = _("");
+
+const u8 gGourgeistPokedexText[] = _(
+    "Eerie cries emanate from its body\n"
+            "in the dead of night. The sounds are\n"
+            "said to be the wails of spirits who\n"
+            "are suffering in the afterlife.");
+
+const u8 gGourgeistPokedexTextUnused[] = _("");
+
+const u8 gBergmitePokedexText[] = _(
+    "It blocks opponents' attacks with the ice\n"
+            "that shields its body. It uses cold air to\n"
+            "repair any cracks with new ice. They live\n"
+            "in herds on snowy mountains."); 
+
+const u8 gBergmitePokedexTextUnused[] = _("");
+
+const u8 gAvaluggPokedexText[] = _(
+    "The way several Bergmite huddle on its\n"
+            "back make it look like an aircraft carrier\n"
+            "made of ice. Its cumbersome frame crushes\n"
+            "anything that stands in its way.");
+
+const u8 gAvaluggPokedexTextUnused[] = _("");
+
+const u8 gNoibatPokedexText[] = _(
+    "They live in pitch-black caves. Even a\n"
+            "robust wrestler will become dizzy and\n"
+            "unable to stand when exposed to its\n"
+            "200,000-hertz ultrasonic waves.");
+
+const u8 gNoibatPokedexTextUnused[] = _("");
+
+const u8 gNoivernPokedexText[] = _(
+    "They fly around on moonless nights and\n"
+            "attack careless prey. The ultrasonic waves\n"
+            "it emits from its ears can reduce a large\n"
+            "boulder to pebbles.");
+
+const u8 gNoivernPokedexTextUnused[] = _("");
+
+const u8 gXerneasPokedexText[] = _(
+    "Legends say that when the horns on\n"
+    "its head shine in seven colors, it is\n"
+    "sharing everlasting life. It slept for a\n"
+    "thousand years in the form of a tree");
+
+const u8 gXerneasPokedexTextUnused[] = _("");
+
+const u8 gYveltalPokedexText[] = _(
+    "When its life comes to an end, its wings\n"
+            "and tail spread wide and glow red, and\n"
+            "it absorbs the life energy of every living\n"
+            "thing and turns into a cocoon."); 
+
+const u8 gYveltalPokedexTextUnused[] = _("");
+
+const u8 gZygardePokedexText[] = _(
+    "It's said to be monitoring the ecosystem\n"
+    "from deep in the caves where it lives.\n"
+    "There are rumors that even greater power\n"
+    "lies hidden within its cells.");
+
+const u8 gZygardePokedexTextUnused[] = _("");

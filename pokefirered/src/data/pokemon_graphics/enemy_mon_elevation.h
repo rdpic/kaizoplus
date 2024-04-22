@@ -128,4 +128,9 @@ const u8 gEnemyMonElevation[NUM_SPECIES] =
     [SPECIES_AEGISLASH] = 3,
     [SPECIES_SPRITZEE] = 14,
     [SPECIES_INKAY] = 14,
-};
+    [SPECIES_CARBINK] = 4,
+    [SPECIES_KLEFKI] = 5,
+    [SPECIES_PHANTUMP] = 5,
+    [SPECIES_NOIBAT] = 8,
+    [SPECIES_YVELTAL] = 5,
+    };

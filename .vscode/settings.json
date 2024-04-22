@@ -42,6 +42,10 @@
         "trainers.h": "c",
         "battle_move_effects.h": "c",
         "hold_effects.h": "c",
-        "union_room.h": "c"
+        "union_room.h": "c",
+        "list_menu.h": "c",
+        "sound.h": "c",
+        "charconv": "c",
+        "xmemory": "c"
     }
 }

@@ -3108,6 +3108,90 @@ Cry_Tyrantrum::
 	.incbin "sound/direct_sound_samples/cries/tyrantrum.bin"
 
 	.align 2
+Cry_Amaura::
+	.incbin "sound/direct_sound_samples/cries/amaura.bin"
+
+	.align 2
+Cry_Aurorus::
+	.incbin "sound/direct_sound_samples/cries/aurorus.bin"
+
+	.align 2
+Cry_Sylveon::
+	.incbin "sound/direct_sound_samples/cries/sylveon.bin"
+
+	.align 2
+Cry_Hawlucha::
+	.incbin "sound/direct_sound_samples/cries/hawlucha.bin"
+
+	.align 2
+Cry_Dedenne::
+	.incbin "sound/direct_sound_samples/cries/dedenne.bin"
+
+	.align 2
+Cry_Carbink::
+	.incbin "sound/direct_sound_samples/cries/carbink.bin"
+
+	.align 2
+Cry_Goomy::
+	.incbin "sound/direct_sound_samples/cries/goomy.bin"
+
+	.align 2
+Cry_Sliggoo::
+	.incbin "sound/direct_sound_samples/cries/sliggoo.bin"
+
+	.align 2
+Cry_Goodra::
+	.incbin "sound/direct_sound_samples/cries/goodra.bin"
+
+	.align 2
+Cry_Klefki::
+	.incbin "sound/direct_sound_samples/cries/carbink.bin"
+
+	.align 2
+Cry_Phantump::
+	.incbin "sound/direct_sound_samples/cries/phantump.bin"
+
+	.align 2
+Cry_Trevenant::
+	.incbin "sound/direct_sound_samples/cries/trevenant.bin"
+
+	.align 2
+Cry_Pumpkaboo::
+	.incbin "sound/direct_sound_samples/cries/pumpkaboo.bin"
+
+	.align 2
+Cry_Gourgeist::
+	.incbin "sound/direct_sound_samples/cries/gourgeist.bin"
+
+	.align 2
+Cry_Bergmite::
+	.incbin "sound/direct_sound_samples/cries/bergmite.bin"
+
+	.align 2
+Cry_Avalugg::
+	.incbin "sound/direct_sound_samples/cries/avalugg.bin"
+
+	.align 2
+Cry_Noibat::
+	.incbin "sound/direct_sound_samples/cries/noibat.bin"
+
+	.align 2
+Cry_Noivern::
+	.incbin "sound/direct_sound_samples/cries/noivern.bin"
+
+	.align 2
+Cry_Xerneas::
+	.incbin "sound/direct_sound_samples/cries/xerneas.bin"
+
+	.align 2
+Cry_Yveltal::
+	.incbin "sound/direct_sound_samples/cries/yveltal.bin"
+
+	.align 2
+Cry_Zygarde::
+	.incbin "sound/direct_sound_samples/cries/zygarde.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

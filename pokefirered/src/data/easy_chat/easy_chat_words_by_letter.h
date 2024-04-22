@@ -68,6 +68,7 @@ static const u16 sEasyChatWordsByLetter_A[] = {
     EC_WORD_ALTHOUGH,
     EC_WORD_ALWAYS,
     EC_WORD_AM,
+    EC_POKEMON2(AMAURA),
     EC_POKEMON2(AMBIPOM),
     EC_MOVE2(AMNESIA),
     EC_POKEMON2(AMOONGUSS),
@@ -119,6 +120,8 @@ static const u16 sEasyChatWordsByLetter_A[] = {
     EC_POKEMON2(AUDINO),
     EC_WORD_AUNT,
     EC_MOVE(AURORA_BEAM),
+    EC_POKEMON2(AURORUS),
+    EC_POKEMON2(AVALUGG),
     EC_WORD_AVANT_GARDE,
     EC_WORD_AWAY,
     EC_WORD_AWESOME,
@@ -181,6 +184,7 @@ static const u16 sEasyChatWordsByLetter_B[] = {
     EC_MOVE2(BELLY_DRUM),
     EC_WORD_BELONGS_TO,
     EC_WORD_BELOW,
+    EC_POKEMON2(BERGMITE),
     EC_WORD_BERRY,
     EC_WORD_BESIDE,
     EC_WORD_BEST,
@@ -257,6 +261,7 @@ static const u16 sEasyChatWordsByLetter_C[] = {
     EC_WORD_CAN_T_WIN,
     EC_WORD_CANCEL,
     EC_WORD_CAPABLE,
+    EC_POKEMON2(CARBINK),
     EC_WORD_CARDS,
     EC_WORD_CARE,
     EC_WORD_CARES,
@@ -403,6 +408,7 @@ static const u16 sEasyChatWordsByLetter_D[] = {
     EC_WORD_DAYTIME,
     EC_WORD_DECIDE,
     EC_WORD_DECIDED,
+    EC_POKEMON2(DEDENNE),
     EC_WORD_DEEP,
     EC_POKEMON2(DEERLING),
     EC_WORD_DEFEATED,
@@ -737,12 +743,15 @@ static const u16 sEasyChatWordsByLetter_G[] = {
     EC_POKEMON2(GOLURK),
     EC_WORD_GOOD,
     EC_WORD_GOOD_BYE,
+    EC_POKEMON2(GOODRA),
+    EC_POKEMON2(GOOMY),
     EC_POKEMON2(GOREBYSS),
     EC_WORD_GOT,
     EC_WORD_GOTCHA,
     EC_POKEMON2(GOTHITA),
     EC_POKEMON2(GOTHITELLE),
     EC_POKEMON2(GOTHORITA),
+    EC_POKEMON2(GOURGEIST),
     EC_WORD_GOURMET,
     EC_WORD_GRAAAH,
     EC_POKEMON(GRANBULL),
@@ -802,6 +811,7 @@ static const u16 sEasyChatWordsByLetter_H[] = {
     EC_POKEMON(HAUNTER),
     EC_WORD_HAVE,
     EC_WORD_HAVEN_T,
+    EC_POKEMON2(HAWLUCHA),
     EC_POKEMON2(HAXORUS),
     EC_MOVE(HAZE),
     EC_WORD_HE,
@@ -990,6 +1000,7 @@ static const u16 sEasyChatWordsByLetter_K[] = {
     EC_POKEMON(KINGLER),
     EC_POKEMON2(KIRLIA),
     EC_POKEMON2(KLANG),
+    EC_POKEMON2(KLEFKI),
     EC_POKEMON2(KLINK),
     EC_POKEMON2(KLINKLANG),
     EC_MOVE2(KNOCK_OFF),
@@ -1306,6 +1317,8 @@ static const u16 sEasyChatWordsByLetter_N[] = {
     EC_POKEMON2(NINJASK),
     EC_WORD_NITWIT,
     EC_WORD_NO,
+    EC_POKEMON2(NOIBAT),
+    EC_POKEMON2(NOIVERN),
     EC_WORD_NO_MATCH,
     EC_WORD_NO_1,
     EC_POKEMON(NOCTOWL),
@@ -1403,6 +1416,7 @@ static const u16 sEasyChatWordsByLetter_P[] = {
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(PHANPY),
     EC_POKEMON(PHANPY),
+    EC_POKEMON2(PHANTUMP),
     EC_POKEMON2(PHIONE),
     EC_WORD_PHONE,
     -1, 2, // Doubled pokemon species name
@@ -1481,6 +1495,7 @@ static const u16 sEasyChatWordsByLetter_P[] = {
     EC_POKEMON2(PSYDUCK),
     EC_POKEMON(PSYDUCK),
     EC_MOVE(PSYWAVE),
+    EC_POKEMON2(PUMPKABOO),
     EC_POKEMON(PUPITAR),
     EC_WORD_PURE_POWER,
     EC_POKEMON2(PURRLOIN),
@@ -1738,6 +1753,7 @@ static const u16 sEasyChatWordsByLetter_S[] = {
     EC_MOVE2(SLEEP_TALK),
     EC_WORD_SLEPT,
     EC_WORD_SLIDE,
+    EC_POKEMON2(SLIGGOO),
     EC_WORD_SLIMY,
     EC_POKEMON(SLOWBRO),
     EC_POKEMON(SLOWKING),
@@ -1884,6 +1900,7 @@ static const u16 sEasyChatWordsByLetter_S[] = {
     EC_POKEMON2(SWIRLIX),
     EC_POKEMON2(SWOOBAT),
     EC_MOVE2(SWORDS_DANCE),
+    EC_POKEMON2(SYLVEON),
     EC_WORD_SYNCHRONIZE,
     EC_MOVE(SYNTHESIS),
     EC_WORD_SYSTEM,
@@ -2016,6 +2033,7 @@ static const u16 sEasyChatWordsByLetter_T[] = {
     EC_WORD_TREASURE,
     EC_POKEMON2(TREECKO),
     EC_WORD_TRENDY,
+    EC_POKEMON2(TREVENANT),
     EC_MOVE2(TRI_ATTACK),
     EC_MOVE2(TRICK),
     EC_WORD_TRIES,
@@ -2235,6 +2253,7 @@ static const u16 sEasyChatWordsByLetter_X[] = {
     -1, 2, // Doubled pokemon species name
     EC_POKEMON2(XATU),
     EC_POKEMON(XATU),
+    EC_POKEMON2(XERNEAS),
 };
 
 static const u16 sEasyChatWordsByLetter_Y[] = {
@@ -2259,6 +2278,7 @@ static const u16 sEasyChatWordsByLetter_Y[] = {
     EC_WORD_YOUR,
     EC_WORD_YOURS,
     EC_WORD_YUP,
+    EC_POKEMON2(YVELTAL),
 };
 
 static const u16 sEasyChatWordsByLetter_Z[] = {
@@ -2274,6 +2294,7 @@ static const u16 sEasyChatWordsByLetter_Z[] = {
     EC_POKEMON2(ZUBAT),
     EC_POKEMON(ZUBAT),
     EC_POKEMON2(ZWEILOUS),
+    EC_POKEMON2(ZYGARDE),
 };
 
 static const struct EasyChatWordsByLetter sEasyChatWordsByLetterPointers[] = {

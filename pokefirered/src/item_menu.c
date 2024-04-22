@@ -8,7 +8,6 @@
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
 #include "graphics.h"
-#include "help_system.h"
 #include "item.h"
 #include "item_menu.h"
 #include "item_menu_icons.h"
@@ -489,11 +488,7 @@ static bool8 LoadBagMenuGraphics(void)
         ShowBagOrBeginWin0OpenTask();
         gMain.state++;
         break;
-    case 19:
-        if (gBagMenuState.location == ITEMMENULOCATION_ITEMPC)
-            SetHelpContext(HELPCONTEXT_PLAYERS_PC_ITEMS);
-        else
-            SetHelpContext(HELPCONTEXT_BAG);
+    case 19:    
         gPaletteFade.bufferTransferDisabled = FALSE;
         gMain.state++;
         break;

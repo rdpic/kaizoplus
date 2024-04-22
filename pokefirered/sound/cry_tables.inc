@@ -701,6 +701,27 @@ gCryTable::
 	cry Cry_Heliolisk
 	cry Cry_Tyrunt
 	cry Cry_Tyrantrum
+	cry Cry_Amaura
+	cry Cry_Aurorus
+	cry Cry_Sylveon
+	cry Cry_Hawlucha
+	cry Cry_Dedenne
+	cry Cry_Carbink
+	cry Cry_Goomy
+	cry Cry_Sliggoo
+	cry Cry_Goodra
+	cry Cry_Klefki
+	cry Cry_Phantump
+	cry Cry_Trevenant
+	cry Cry_Pumpkaboo
+	cry Cry_Gourgeist
+	cry Cry_Bergmite
+	cry Cry_Avalugg
+	cry Cry_Noibat
+	cry Cry_Noivern
+	cry Cry_Xerneas
+	cry Cry_Yveltal
+	cry Cry_Zygarde
 
 	.align 2
 gCryTable_Reverse::
@@ -1405,3 +1426,24 @@ gCryTable_Reverse::
 	cry_reverse Cry_Heliolisk
 	cry_reverse Cry_Tyrunt
 	cry_reverse Cry_Tyrantrum
+	cry_reverse Cry_Amaura
+	cry_reverse Cry_Aurorus
+	cry_reverse Cry_Sylveon
+	cry_reverse Cry_Hawlucha
+	cry_reverse Cry_Dedenne
+	cry_reverse Cry_Carbink
+	cry_reverse Cry_Goomy
+	cry_reverse Cry_Sliggoo
+	cry_reverse Cry_Goodra
+	cry_reverse Cry_Klefki
+	cry_reverse Cry_Phantump
+	cry_reverse Cry_Trevenant
+	cry_reverse Cry_Pumpkaboo
+	cry_reverse Cry_Gourgeist
+	cry_reverse Cry_Bergmite
+	cry_reverse Cry_Avalugg
+	cry_reverse Cry_Noibat
+	cry_reverse Cry_Noivern
+	cry_reverse Cry_Xerneas
+	cry_reverse Cry_Yveltal
+	cry_reverse Cry_Zygarde
