@@ -9373,4 +9373,225 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 19,
     },
 
+    [NATIONAL_DEX_DIANCIE] =
+    {
+        .categoryName = _("JEWEL"),
+        .height = 7,
+        .weight = 88,
+        .description = gDianciePokedexText,
+        .unusedDescription = gDianciePokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_HOOPA] =
+    {
+        .categoryName = _("MISCHIEF"),
+        .height = 5,
+        .weight = 90,
+        .description = gHoopaPokedexText,
+        .unusedDescription = gHoopaPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_VOLCANION] =
+    {
+        .categoryName = _("STEAM"),
+        .height = 17,
+        .weight = 1950,
+        .description = gVolcanionPokedexText,
+        .unusedDescription = gVolcanionPokedexTextUnused,
+        .pokemonScale = 259,
+        .pokemonOffset = 0,
+        .trainerScale = 290,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_PRIMARINA] =
+    {
+        .categoryName = _("SOLOIST"),
+        .height = 18,
+        .weight = 440,
+        .description = gPrimarinaPokedexText,
+        .unusedDescription = gPrimarinaPokedexTextUnused,
+        .pokemonScale = 267,
+        .pokemonOffset = 2,
+        .trainerScale = 286,
+        .trainerOffset = 1,
+    },
+
+    [NATIONAL_DEX_GOLISOPOD] =
+    {
+        .categoryName = _("SCALE"),
+        .height = 20,
+        .weight = 1080,
+        .description = gGolisopodPokedexText,
+        .unusedDescription = gGolisopodPokedexTextUnused,
+        .pokemonScale = 261,
+        .pokemonOffset = 1,
+        .trainerScale = 334,
+        .trainerOffset = 4,
+    },
+
+    [NATIONAL_DEX_MARSHADOW] =
+    {
+        .categoryName = _("SHADOW"),
+        .height = 7,
+        .weight = 222,
+        .description = gMarshadowPokedexText,
+        .unusedDescription = gMarshadowPokedexTextUnused,
+        .pokemonScale = 365,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DREEPY] =
+    {
+        .categoryName = _("LINGERING"),
+        .height = 5,
+        .weight = 20,
+        .description = gDreepyPokedexText,
+        .unusedDescription = gDreepyPokedexTextUnused,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DRAKLOAK] =
+    {
+        .categoryName = _("CARETAKER"),
+        .height = 14,
+        .weight = 110,
+        .description = gDrakloakPokedexText,
+        .unusedDescription = gDrakloakPokedexTextUnused,
+        .pokemonScale = 265,
+        .pokemonOffset = 2,
+        .trainerScale = 262,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_DRAGAPULT] =
+    {
+        .categoryName = _("STEALTH"),
+        .height = 30,
+        .weight = 500,
+        .description = gDragapultPokedexText,
+        .unusedDescription = gDragapultPokedexTextUnused,
+        .pokemonScale = 275,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_REGIELEKI] =
+    {
+        .categoryName = _("ELECTRON"),
+        .height = 12,
+        .weight = 1450,
+        .description = gRegielekiPokedexText,
+        .unusedDescription = gRegielekiPokedexTextUnused,
+        .pokemonScale = 282,
+        .pokemonOffset = 4,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_REGIDRAGO] =
+    {
+        .categoryName = _("DRAGON ORB"),
+        .height = 21,
+        .weight = 2000,
+        .description = gRegidragoPokedexText,
+        .unusedDescription = gRegidragoPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 365,
+        .trainerOffset = 7,
+    },
+
+    [NATIONAL_DEX_TINKATON] =
+    {
+        .categoryName = _("HAMMER"),
+        .height = 7,
+        .weight = 1128,
+        .description = gTinkatonPokedexText,
+        .unusedDescription = gTinkatonPokedexTextUnused,
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_FLUTTER_MANE] =
+    {
+        .categoryName = _("PARADOX"),
+        .height = 14,
+        .weight = 40,
+        .description = gFlutterManePokedexText,
+        .unusedDescription = gFlutterManePokedexTextUnused,
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_IRON_VALIANT] =
+    {
+        .categoryName = _("PARADOX"),
+        .height = 14,
+        .weight = 350,
+        .description = gIronValiantPokedexText,
+        .unusedDescription = gIronValiantPokedexTextUnused,
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_CHARCADET] =
+    {
+        .categoryName = _("FIRE CHILD"),
+        .height = 6,
+        .weight = 105,
+        .description = gCharcadetPokedexText,
+        .unusedDescription = gCharcadetPokedexTextUnused,
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_ARMAROUGE] =
+    {
+        .categoryName = _("BURNING"),
+        .height = 15,
+        .weight = 850,
+        .description = gArmarougePokedexText,
+        .unusedDescription = gArmarougePokedexTextUnused,
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
+    [NATIONAL_DEX_CERULEDGE] =
+    {
+        .categoryName = _("BLADE"),
+        .height = 16,
+        .weight = 620,
+        .description = gCeruledgePokedexText,
+        .unusedDescription = gCeruledgePokedexTextUnused,
+        .pokemonScale = 356,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
+
 };

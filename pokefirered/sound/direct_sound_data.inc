@@ -3192,6 +3192,74 @@ Cry_Zygarde::
 	.incbin "sound/direct_sound_samples/cries/zygarde.bin"
 
 	.align 2
+Cry_Diancie::
+	.incbin "sound/direct_sound_samples/cries/diancie.bin"
+
+	.align 2
+Cry_Hoopa::
+	.incbin "sound/direct_sound_samples/cries/hoopa.bin"
+
+	.align 2
+Cry_Volcanion::
+	.incbin "sound/direct_sound_samples/cries/volcanion.bin"
+
+	.align 2
+Cry_Primarina::
+	.incbin "sound/direct_sound_samples/cries/primarina.bin"
+
+	.align 2
+Cry_Golisopod::
+	.incbin "sound/direct_sound_samples/cries/golisopod.bin"
+
+	.align 2
+Cry_Marshadow::
+	.incbin "sound/direct_sound_samples/cries/marshadow.bin"
+
+	.align 2
+Cry_Dreepy::
+	.incbin "sound/direct_sound_samples/cries/dreepy.bin"
+
+	.align 2
+Cry_Drakloak::
+	.incbin "sound/direct_sound_samples/cries/drakloak.bin"
+
+	.align 2
+Cry_Dragapult::
+	.incbin "sound/direct_sound_samples/cries/dragapult.bin"
+
+	.align 2
+Cry_Regieleki::
+	.incbin "sound/direct_sound_samples/cries/regieleki.bin"
+
+	.align 2
+Cry_Regidrago::
+	.incbin "sound/direct_sound_samples/cries/regidrago.bin"
+
+	.align 2
+Cry_Tinkaton::
+	.incbin "sound/direct_sound_samples/cries/tinkaton.bin"
+
+	.align 2
+Cry_FlutterMane::
+	.incbin "sound/direct_sound_samples/cries/flutter_mane.bin"
+
+	.align 2
+Cry_IronValiant::
+	.incbin "sound/direct_sound_samples/cries/iron_valiant.bin"
+
+	.align 2
+Cry_Charcadet::
+	.incbin "sound/direct_sound_samples/cries/charcadet.bin"
+
+	.align 2
+Cry_Armarouge::
+	.incbin "sound/direct_sound_samples/cries/armarouge.bin"
+
+	.align 2
+Cry_Ceruledge::
+	.incbin "sound/direct_sound_samples/cries/ceruledge.bin"
+
+	.align 2
 DirectSoundWaveData_register_noise::
 	.incbin "sound/direct_sound_samples/register_noise.bin"
 

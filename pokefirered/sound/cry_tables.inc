@@ -722,6 +722,23 @@ gCryTable::
 	cry Cry_Xerneas
 	cry Cry_Yveltal
 	cry Cry_Zygarde
+	cry Cry_Diancie
+	cry Cry_Hoopa
+	cry Cry_Volcanion
+	cry Cry_Primarina
+	cry Cry_Golisopod
+	cry Cry_Marshadow
+	cry Cry_Dreepy
+	cry Cry_Drakloak
+	cry Cry_Dragapult
+	cry Cry_Regieleki
+	cry Cry_Regidrago
+	cry Cry_Tinkaton
+	cry Cry_FlutterMane
+	cry Cry_IronValiant
+	cry Cry_Charcadet
+	cry Cry_Armarouge
+	cry Cry_Ceruledge
 
 	.align 2
 gCryTable_Reverse::
@@ -1447,3 +1464,20 @@ gCryTable_Reverse::
 	cry_reverse Cry_Xerneas
 	cry_reverse Cry_Yveltal
 	cry_reverse Cry_Zygarde
+	cry_reverse Cry_Diancie
+	cry_reverse Cry_Hoopa
+	cry_reverse Cry_Volcanion
+	cry_reverse Cry_Primarina
+	cry_reverse Cry_Golisopod
+	cry_reverse Cry_Marshadow
+	cry_reverse Cry_Dreepy
+	cry_reverse Cry_Drakloak
+	cry_reverse Cry_Dragapult
+	cry_reverse Cry_Regieleki
+	cry_reverse Cry_Regidrago
+	cry_reverse Cry_Tinkaton
+	cry_reverse Cry_FlutterMane
+	cry_reverse Cry_IronValiant
+	cry_reverse Cry_Charcadet
+	cry_reverse Cry_Armarouge
+	cry_reverse Cry_Ceruledge

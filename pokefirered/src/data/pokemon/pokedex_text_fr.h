@@ -5389,3 +5389,137 @@ const u8 gZygardePokedexText[] = _(
     "lies hidden within its cells.");
 
 const u8 gZygardePokedexTextUnused[] = _("");
+
+const u8 gDianciePokedexText[] = _(
+    "A sudden transformation of Carbink,\n"
+            "its pink, glimmering body is said to be\n"
+            "the loveliest sight in the whole world.\n"
+            "It creates diamonds between its hands.");
+
+const u8 gDianciePokedexTextUnused[] = _("");
+
+const u8 gHoopaPokedexText[] = _(
+    "In its true form, it possess a huge amount\n"
+            "of power. When its powers are sealed away,\n"
+            "it is transformed into a much smaller form.\n"
+            "It teleports things to a secret place."); 
+
+const u8 gHoopaPokedexTextUnused[] = _("");
+
+const u8 gVolcanionPokedexText[] = _(
+    "It lets out billows of steam from the arms\n"
+            "on its back and disappears into the dense\n"
+            "fog. It's said to live in mountains where\n"
+            "humans do not tread.");
+
+const u8 gVolcanionPokedexTextUnused[] = _("");
+
+const u8 gPrimarinaPokedexText[] = _(
+    "It controls its water balloons with song.\n"
+            "The melody is learned from others of\n"
+            "its kind and is passed down from one\n"
+            "generation to the next.");
+
+const u8 gPrimarinaPokedexTextUnused[] = _("");
+
+const u8 gGolisopodPokedexText[] = _(
+    "It battles skillfully with its six arms,\n"
+            "with a flashing slash of its giant sharp\n"
+            "claws, it cleaves seawater--or even\n"
+            "air--right in two."); 
+
+const u8 gGolisopodPokedexTextUnused[] = _("");
+
+const u8 gMarshadowPokedexText[] = _(
+    "Able to conceal itself in the shadows of\n"
+            "others, it never appears before humans,\n"
+            "so its very existence is the stuff of myth.\n"
+            "This Pokémon is craven and cowering.");
+
+const u8 gMarshadowPokedexTextUnused[] = _("");
+
+const u8 gDreepyPokedexText[] = _(
+    "After being reborn as a ghost Pokémon,\n"
+            "Dreepy wanders the areas it used to\n"
+            "inhabit back when it was alive in\n"
+            "prehistoric seas.");
+
+const u8 gDreepyPokedexTextUnused[] = _("");
+
+const u8 gDrakloakPokedexText[] = _(
+    "It's capable of flying faster than 120 mph.\n"
+            "It battles alongside Dreepy and dotes\n"
+            "on them until they successfully evolve."); 
+
+const u8 gDrakloakPokedexTextUnused[] = _("");
+
+const u8 gDragapultPokedexText[] = _(
+    "When it isn't battling, it keeps Dreepy\n"
+            "in the holes on its horns. Once a fight\n"
+            "starts, it launches the Dreepy like\n"
+            "supersonic missiles.");
+
+const u8 gDragapultPokedexTextUnused[] = _("");
+
+const u8 gRegielekiPokedexText[] = _(
+    "This Pokémon is a cluster of electrical\n"
+            "energy. It's said that removing the rings\n"
+            "on Regieleki's body will unleash the\n"
+            "Pokémon's latent power.");
+
+const u8 gRegielekiPokedexTextUnused[] = _("");
+
+const u8 gRegidragoPokedexText[] = _(
+    "An academic theory proposes that\n"
+            "Regidrago's arms were once the head of an\n"
+            "ancient dragon Pokémon. The theory\n"
+            "remains unproven."); 
+
+const u8 gRegidragoPokedexTextUnused[] = _("");
+
+const u8 gTinkatonPokedexText[] = _(
+    "The hammer tops 220 pounds, yet it\n"
+            "gets swung around easily by\n"
+            "Tinkaton as it steals whatever it pleases\n"
+            "and carries its plunder back home.");
+
+const u8 gTinkatonPokedexTextUnused[] = _("");
+
+const u8 gFlutterManePokedexText[] = _(
+    "It has similar features to a\n"
+            "ghostly pterosaur that was covered in a\n"
+            "paranormal magazine, but the two\n"
+            "have little else in common."); 
+
+const u8 gFlutterManePokedexTextUnused[] = _("");
+
+const u8 gIronValiantPokedexText[] = _(
+    "It has some similarities to a mad\n"
+            "scientist's invention covered in a\n"
+            "paranormal magazine.");
+
+const u8 gIronValiantPokedexTextUnused[] = _("");
+
+const u8 gCharcadetPokedexText[] = _(
+    "Burnt charcoal came to life and\n"
+            "became a Pokémon. Possessing a fiery\n"
+            "fighting spirit, Charcadet will\n"
+            "battle even tough opponents.");
+
+const u8 gCharcadetPokedexTextUnused[] = _("");
+
+const u8 gArmarougePokedexText[] = _(
+    "Armarouge evolved through the use\n"
+            "of a set of armor that belonged to\n"
+            "a distinguished warrior. This\n"
+            "Pokémon is incredibly loyal."); 
+
+const u8 gArmarougePokedexTextUnused[] = _("");
+
+const u8 gCeruledgePokedexText[] = _(
+    "The fiery blades on its arms burn\n"
+            "fiercely with the lingering\n"
+            "resentment of a sword wielder who fell\n"
+            "before accomplishing their goal.");
+
+const u8 gCeruledgePokedexTextUnused[] = _("");
