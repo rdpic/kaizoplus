@@ -121,6 +121,8 @@ extern const u8 BattleScript_MoveUsedIsParalyzedCantAttack[];
 extern const u8 BattleScript_NightmareTurnDmg[];
 extern const u8 BattleScript_CurseTurnDmg[];
 extern const u8 BattleScript_TargetPRLZHeal[];
+extern const u8 BattleScript_TargetWokeUp[];
+extern const u8 BattleScript_DefSpDefDown[];
 extern const u8 BattleScript_MoveEffectSleep[];
 extern const u8 BattleScript_YawnMakesAsleep[];
 extern const u8 BattleScript_MoveEffectPoison[];

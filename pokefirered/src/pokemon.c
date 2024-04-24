@@ -2733,6 +2733,16 @@ static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 mo
 #define ShouldGetStatBadgeBoost(flag, battler)\
     (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER)) && FlagGet(flag) && GetBattlerSide(battler) == B_SIDE_PLAYER)
 
+// format: min. weight (hectograms), base power
+static const u16 sWeightToDamageTable[] =
+{
+    100, 20,
+    250, 40,
+    500, 60,
+    1000, 80,
+    2000, 100,
+    0xFFFF, 0xFFFF
+};
 
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
@@ -2762,6 +2772,30 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     spAttack = attacker->spAttack;
     spDefense = defender->spDefense;
 
+    switch (gBattleMoves[move].effect)
+    {
+        case EFFECT_BRINE:
+            if (gBattleMons[gBattlerTarget].hp <= (gBattleMons[gBattlerTarget].maxHP / 2))
+                gBattleMovePower = gBattleMoves[move].power * 2;
+            break;
+        case EFFECT_GYRO_BALL:
+            gBattleMovePower = ((25 * gBattleMons[gBattlerTarget].speed) / gBattleMons[gBattlerAttacker].speed) + 1;
+            if (gBattleMovePower > 150)
+                gBattleMovePower = 150;
+            break;
+        case EFFECT_PAYBACK:
+            if (GetBattlerTurnOrderNum(battlerIdAtk) > GetBattlerTurnOrderNum(battlerIdDef)
+                && (gDisableStructs[gBattlerTarget].isFirstTurn != 2))
+                gBattleMovePower = gBattleMoves[move].power * 2;
+            break;
+        case EFFECT_ASSURANCE:
+            if (gProtectStructs[gBattlerTarget].physicalDmg != 0 
+            || gProtectStructs[gBattlerTarget].specialDmg != 0 
+            || gProtectStructs[gBattlerTarget].confusionSelfDmg)
+                gBattleMovePower = gBattleMoves[move].power * 2;
+            break;
+    }
+
     // Get attacker hold item info
     if (attacker->item == ITEM_ENIGMA_BERRY)
     {
@@ -2787,7 +2821,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     }
 
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
-        attack *= 2;
+        attack *= 1.2;
 
     if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerIdAtk))
         attack = (110 * attack) / 100;

@@ -135,6 +135,7 @@ struct ResourceFlags
 };
 
 #define RESOURCE_FLAG_FLASH_FIRE 1
+#define RESOURCE_FLAG_ROOST      2
 
 struct DisableStruct
 {
@@ -169,6 +170,7 @@ struct DisableStruct
     /*0x18*/ u8 mimickedMoves : 4;
     /*0x19*/ u8 rechargeTimer;
     /*0x1A*/ u8 unk1A[2];
+             u8 embargoTimer;
 };
 
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
@@ -401,7 +403,7 @@ struct BattleStruct
     u8 battlerPartyOrders[MAX_BATTLERS_COUNT][3];
     u8 runTries;
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];
-    u8 field_78; // unused
+    u8 roostTypes[MAX_BATTLERS_COUNT][2];
     u8 safariRockThrowCounter;
     u8 safariBaitThrowCounter;
     u8 safariEscapeFactor;
@@ -411,7 +413,7 @@ struct BattleStruct
     u8 formToChangeInto;
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
-    u8 field_88; // unused
+    u8 beatUpSlot:3;
     u8 field_89; // unused
     u8 field_8A; // unused
     u8 playerPartyIdx;

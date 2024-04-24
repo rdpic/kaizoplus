@@ -5688,6 +5688,9 @@ extern const u32 gBattleAnimBgTilemap_ScaryFaceOpponent[];
 extern const u32 gBattleAnimBgTilemap_ScaryFaceContest[];
 extern const u32 gBattleAnimSpriteGfx_Bird[];
 extern const u32 gBattleAnimSpriteGfx_CrossImpact[];
+extern const u32 gBattleAnimSpriteGfx_Feint[];
+extern const u32 gBattleAnimSpriteGfx_SeedBrown[];
+extern const u32 gBattleAnimSpriteGfx_Acupressure[];
 
 // battle anim particle pals
 extern const u32 gBattleAnimSpritePal_Bone[];
@@ -5936,6 +5939,9 @@ extern const u32 gBattleAnimSpritePal_CrossImpact[];
 extern const u32 gBattleAnimSpritePal_Slash2[];
 extern const u32 gBattleAnimSpritePal_WhipHit[];
 extern const u32 gBattleAnimSpritePal_BlueRing2[];
+extern const u32 gBattleAnimSpritePal_Feint[];
+extern const u32 gBattleAnimSpritePal_SeedBrown[];
+extern const u32 gBattleAnimSpritePal_Acupressure[];
 
 // battle anim task
 extern const u32 gUnusedLevelupAnimationGfx[];

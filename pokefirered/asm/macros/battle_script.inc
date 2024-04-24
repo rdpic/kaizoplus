@@ -1249,6 +1249,24 @@
 	.byte 0xf7
 	.endm
 
+	.macro setroost
+	.byte 0xf8
+	.endm
+
+	.macro gyroballcalc
+	.byte 0xf9
+	.endm
+
+	.macro metalburstdamagecalculator param0:req
+	.byte 0xfa
+	.4byte \param0
+	.endm
+
+	.macro setembargo failInstr:req
+	.byte 0xfb
+	.4byte \failInstr
+	.endm
+	
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -1389,4 +1407,14 @@
 
 	.macro destroyabilitypopup
 	various BS_ABILITY_BATTLER, VARIOUS_DESTROY_ABILITY_POPUP
+	.endm
+
+	.macro tryacupressure battler:req, failInstr:req
+	various \battler, VARIOUS_ACUPRESSURE
+	.4byte \failInstr
+	.endm
+
+	.macro trypsychoshift failInstr:req
+	various BS_ATTACKER, VARIOUS_PSYCHO_SHIFT
+	.4byte \failInstr
 	.endm

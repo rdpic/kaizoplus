@@ -968,3 +968,9 @@ static void AnimTask_WaitAndRestoreVisibility(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+void AnimTask_SetAnimTargetToAttackerOpposite(u8 taskId)
+{
+    gBattleAnimTarget = BATTLE_OPPOSITE(gBattleAnimAttacker);
+    DestroyAnimVisualTask(taskId);
+}

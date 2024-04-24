@@ -211,6 +211,7 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_WATER_SPORT, AI_CBM_WaterSport
 	if_effect EFFECT_CALM_MIND, AI_CBM_CalmMind
 	if_effect EFFECT_DRAGON_DANCE, AI_CBM_DragonDance
+	if_effect EFFECT_QUIVER_DANCE, AI_CBM_QuiverDance
 	end
 
 AI_CBM_Sleep::
@@ -601,6 +602,11 @@ AI_CBM_DragonDance::
 	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus8
 	end
 
+AI_CBM_QuiverDance::
+	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus8
+	end
+
 Score_Minus1::
 	score -1
 	end
@@ -773,6 +779,8 @@ AI_CheckViability::
 	if_effect EFFECT_WATER_SPORT, AI_CV_WaterSport
 	if_effect EFFECT_CALM_MIND, AI_CV_SpDefUp
 	if_effect EFFECT_DRAGON_DANCE, AI_CV_DragonDance
+	if_effect EFFECT_QUIVER_DANCE, AI_CV_QuiverDance
+	if_effect EFFECT_CLOSE_COMBAT, AI_CV_Superpower
 	end
 
 AI_CV_Sleep::
@@ -1871,6 +1879,7 @@ AI_CV_Encore_EncouragedMovesToEncore::
 	.byte EFFECT_WATER_SPORT
 	.byte EFFECT_DRAGON_DANCE
 	.byte EFFECT_CAMOUFLAGE
+	.byte EFFECT_QUIVER_DANCE
 	.byte -1
 
 AI_CV_PainSplit::
@@ -2764,6 +2773,20 @@ AI_CV_DragonDance2::
 AI_CV_DragonDance_End::
 	end
 
+AI_CV_QuiverDance::
+	if_target_faster AI_CV_QuiverDance2
+	if_hp_more_than AI_USER, 50, AI_CV_QuiverDance_End
+	if_random_less_than 70, AI_CV_QuiverDance_End
+	score -1
+	goto AI_CV_QuiverDance_End
+
+AI_CV_QuiverDance2::
+	if_random_less_than 128, AI_CV_QuiverDance_End
+	score +1
+
+AI_CV_QuiverDance_End::
+	end
+
 AI_TryToFaint::
 	if_can_faint AI_TryToFaint_TryToEncourageQuickAttack
 	get_how_powerful_move_is
@@ -2895,6 +2918,7 @@ AI_Risky_EffectsToEncourage::
 	.byte EFFECT_FOCUS_PUNCH
 	.byte EFFECT_REVENGE
 	.byte EFFECT_TEETER_DANCE
+	.byte EFFECT_METAL_BURST
 	.byte -1
 
 AI_PreferBatonPass::
@@ -3009,6 +3033,8 @@ AI_HPAware_DiscouragedEffectsWhenHighHP::
 	.byte EFFECT_MEMENTO
 	.byte EFFECT_GRUDGE
 	.byte EFFECT_OVERHEAT
+	.byte EFFECT_ROOST
+	.byte EFFECT_BRINE
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenMediumHP::
@@ -3054,6 +3080,8 @@ AI_HPAware_DiscouragedEffectsWhenMediumHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
+	.byte EFFECT_QUIVER_DANCE
+	.byte EFFECT_ACUPRESSURE
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenLowHP::
@@ -3104,9 +3132,12 @@ AI_HPAware_DiscouragedEffectsWhenLowHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
+	.byte EFFECT_QUIVER_DANCE
+	.byte EFFECT_ACUPRESSURE
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenTargetHighHP::
+	.byte EFFECT_BRINE
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenTargetMediumHP::
@@ -3149,6 +3180,8 @@ AI_HPAware_DiscouragedEffectsWhenTargetMediumHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
+	.byte EFFECT_QUIVER_DANCE
+	.byte EFFECT_ACUPRESSURE
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenTargetLowHP::
@@ -3211,6 +3244,8 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
+	.byte EFFECT_QUIVER_DANCE
+	.byte EFFECT_ACUPRESSURE
 	.byte -1
 
 AI_Unknown::

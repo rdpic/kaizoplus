@@ -46,6 +46,12 @@
         "list_menu.h": "c",
         "sound.h": "c",
         "charconv": "c",
-        "xmemory": "c"
+        "xmemory": "c",
+        "algorithm": "c",
+        "ios": "c",
+        "type_traits": "c",
+        "xiosbase": "c",
+        "battle_main.h": "c",
+        "battle_scripts.h": "c"
     }
 }
