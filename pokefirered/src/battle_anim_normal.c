@@ -33,6 +33,7 @@ static void AnimShakeMonOrBattleTerrain_UpdateCoordOffsetEnabled(void);
 static void AnimShakeMonOrBattleTerrain_Step(struct Sprite *sprite);
 static void AnimTask_ShakeBattleTerrain_Step(u8 taskId);
 static void AnimFlashingHitSplat_Step(struct Sprite *sprite);
+static void AnimMovePowerSwapGuardSwap(struct Sprite *);
 
 
 static const union AnimCmd sAnim_ConfusionDuck_0[] =
@@ -90,6 +91,63 @@ const struct SpriteTemplate gComplexPaletteBlendSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimComplexPaletteBlend,
+};
+
+static const union AnimCmd sPowerSwapGuardSwapFrame0[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPowerSwapGuardSwapFrame1[] =
+{
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPowerSwapGuardSwapFrame2[] =
+{
+    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPowerSwapGuardSwapFrame3[] =
+{
+    ANIMCMD_FRAME(12, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPowerSwapGuardSwapFrame4[] =
+{
+    ANIMCMD_FRAME(16, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sPowerSwapGuardSwapFrame5[] =
+{
+    ANIMCMD_FRAME(20, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd * const sPowerSwapGuardSwapAnimTable[] =
+{
+    sPowerSwapGuardSwapFrame0,
+    sPowerSwapGuardSwapFrame1,
+    sPowerSwapGuardSwapFrame2,
+    sPowerSwapGuardSwapFrame3,
+    sPowerSwapGuardSwapFrame4,
+    sPowerSwapGuardSwapFrame5
+};
+
+const struct SpriteTemplate gPowerSwapGuardSwapSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_COLORED_ORBS,
+    .paletteTag = ANIM_TAG_COLORED_ORBS,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sPowerSwapGuardSwapAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMovePowerSwapGuardSwap
 };
 
 static const union AnimCmd sAnim_CirclingSparkle[] =
@@ -252,6 +310,39 @@ const struct SpriteTemplate gPersistHitSplatSpriteTemplate =
     .affineAnims = sAffineAnims_HitSplat,
     .callback = AnimHitSplatPersistent,
 };
+
+static void AnimMovePowerSwapGuardSwapWait(struct Sprite *sprite)
+{
+    if (TranslateAnimHorizontalArc(sprite))
+        DestroyAnimSprite(sprite);
+}
+
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: orb type (0..5) - color and size
+// arg 3: from user to target / target to user
+// arg 4: wave period
+// arg 5: wave amplitude
+static void AnimMovePowerSwapGuardSwap(struct Sprite *sprite)
+{
+    StartSpriteAnim(sprite, gBattleAnimArgs[2]);
+    if(gBattleAnimArgs[3] == 0)
+    {
+        InitSpritePosToAnimAttacker(sprite, TRUE);
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
+    }
+    else
+    {
+        InitSpritePosToAnimTarget(sprite, TRUE);
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y);
+    }
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[5] = gBattleAnimArgs[5];
+    InitAnimArcTranslation(sprite);
+    sprite->callback = AnimMovePowerSwapGuardSwapWait;
+}
 
 // Moves a spinning duck around the mon's head.
 // arg 0: initial x pixel offset

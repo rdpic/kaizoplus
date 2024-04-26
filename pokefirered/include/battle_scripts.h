@@ -144,9 +144,6 @@ extern const u8 BattleScript_TraceActivates[];
 extern const u8 BattleScript_RainDishActivates[];
 extern const u8 BattleScript_SandstreamActivates[];
 extern const u8 BattleScript_ShedSkinActivates[];
-extern const u8 BattleScript_WeatherFormChanges[];
-extern const u8 BattleScript_WeatherFormChangesLoop[];
-extern const u8 BattleScript_CastformChange[];
 extern const u8 BattleScript_DroughtActivates[];
 extern const u8 BattleScript_TookAttack[];
 extern const u8 BattleScript_SturdyPreventsOHKO[];
@@ -235,6 +232,8 @@ extern const u8 BattleScript_EmbargoEndTurn[];
 extern const u8 BattleScript_SelectingNotAllowedMoveHealBlock[];
 extern const u8 BattleScript_MoveUsedHealBlockPrevents[];
 extern const u8 BattleScript_BufferEndTurn[];
+extern const u8 BattleScript_LuckyChantEnds[];
+extern const u8 BattleScript_AquaRingHeal[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];

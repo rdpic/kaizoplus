@@ -1301,6 +1301,15 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_Feint, 0x0800, ANIM_TAG_FEINT},
     {gBattleAnimSpriteGfx_SeedBrown, 0x0080, ANIM_TAG_SEED_BROWN},
     {gBattleAnimSpriteGfx_Acupressure, 0x0200, ANIM_TAG_ACUPRESSURE},
+    {gBattleAnimSpriteGfx_TrumpCard, 0x0180, ANIM_TAG_TRUMP_CARD},
+    {gBattleAnimSpriteGfx_TrumpCardParticles, 0x0060, ANIM_TAG_TRUMP_CARD_PARTICLES},
+    {gBattleAnimSpriteGfx_WringOut, 0x0200, ANIM_TAG_WRING_OUT},
+    {gBattleAnimSpriteGfx_PowerTrick, 0x800, ANIM_TAG_POWER_TRICK},
+    {gBattleAnimSpriteGfx_PoisonBubble, 0x0180, ANIM_TAG_GREEN_POISON_BUBBLE},
+    {gBattleAnimSpriteGfx_ColoredOrbs, 0x0300, ANIM_TAG_COLORED_ORBS},
+    {gBattleAnimSpriteGfx_WorrySeed, 0x0080, ANIM_TAG_WORRY_SEED},
+    {gBattleAnimSpriteGfx_SmallCloud, 0x0080, ANIM_TAG_SMALL_CLOUD},
+    {gBattleAnimSpriteGfx_PoisonJab, 0x0080, ANIM_TAG_POISON_JAB},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1597,6 +1606,15 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Feint, ANIM_TAG_FEINT},
     {gBattleAnimSpritePal_SeedBrown, ANIM_TAG_SEED_BROWN},
     {gBattleAnimSpritePal_Acupressure, ANIM_TAG_ACUPRESSURE},
+    {gBattleAnimSpritePal_TrumpCard, ANIM_TAG_TRUMP_CARD},
+    {gBattleAnimSpritePal_TrumpCardParticles, ANIM_TAG_TRUMP_CARD_PARTICLES},
+    {gBattleAnimSpritePal_WringOut, ANIM_TAG_WRING_OUT},
+    {gBattleAnimSpritePal_PowerTrick, ANIM_TAG_POWER_TRICK},
+    {gBattleAnimSpritePal_ColoredOrbs, ANIM_TAG_COLORED_ORBS},
+    {gBattleAnimSpritePal_WorrySeed, ANIM_TAG_WORRY_SEED},
+    {gBattleAnimSpritePal_SmallCloud, ANIM_TAG_SMALL_CLOUD},
+    {gBattleAnimSpritePal_PoisonJab, ANIM_TAG_POISON_JAB},
+    
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =

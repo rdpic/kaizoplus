@@ -172,6 +172,8 @@ struct DisableStruct
     /*0x1A*/ u8 unk1A[2];
              u8 embargoTimer;
              u8 healBlockTimer;
+             u8 usedMoves:4;
+             u8 magnetRiseTimer;
 };
 
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
@@ -201,7 +203,7 @@ struct ProtectStruct
     u32 flinchImmobility:1;     // 0x4
     u32 notFirstStrike:1;       // 0x8
     u32 usedHealBlockedMove:1;
-    u32 flag_x20 : 1;           // 0x20
+    u32 statRaised:1;           // 0x20
     u32 flag_x40 : 1;           // 0x40
     u32 flag_x80 : 1;           // 0x80
     u32 field3 : 8;
@@ -250,6 +252,8 @@ struct SideTimer
     /*0x09*/ u8 followmeTarget;
     /*0x0A*/ u8 spikesAmount;
     /*0x0B*/ u8 fieldB;
+             u8 luckyChantTimer;
+             u8 luckyChantBattlerId;
 };
 
 extern struct SideTimer gSideTimers[];
@@ -415,8 +419,8 @@ struct BattleStruct
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
     u8 beatUpSlot:3;
-    u8 field_89; // unused
-    u8 field_8A; // unused
+    u16 overwrittenAbilities[MAX_BATTLERS_COUNT]; 
+    u8 additionalEffectsCounter:4;
     u8 playerPartyIdx;
     u8 field_8C; // unused
     u8 field_8D; // unused
@@ -479,6 +483,8 @@ extern struct BattleStruct *gBattleStruct;
 #define IS_MOVE_SPECIAL(move)(gBattleMoves[move].category == MOVE_CATEGORY_SPECIAL)
 #define IS_MOVE_STATUS(move)(gBattleMoves[move].category == MOVE_CATEGORY_STATUS)
 
+#define IS_MOVE_RECOIL(move)(gBattleMoves[move].recoil > 0)
+
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
 
 #define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type))
@@ -526,7 +532,7 @@ struct BattleScripting
     u8 reshowHelperState;
     u8 levelUpHP;
     u16 abilityPopupOverwrite;
-    bool8 fixedPopup;
+    s32 savedDmg;
 };
 
 struct BattleSpriteInfo
@@ -695,6 +701,7 @@ extern u8 gSentPokesToOpponent[2];
 extern const u8 *gBattlescriptCurrInstr;
 extern const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];
 extern u16 gLastMoves[MAX_BATTLERS_COUNT];
+extern u16 gLastUsedMove;
 extern u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT];
 extern u16 gSideStatuses[2];

@@ -1171,12 +1171,14 @@
 	.byte 0xe5
 	.endm
 
-	.macro docastformchangeanimation
+	.macro trymagnetrise failInstr:req
 	.byte 0xe6
+	.4byte \failInstr
 	.endm
 
-	.macro trycastformdatachange
+	.macro tryworryseed failInstr:req
 	.byte 0xe7
+	.4byte \failInstr
 	.endm
 
 	.macro settypebasedhalvers param0:req
@@ -1272,11 +1274,21 @@
 	.4byte \failInstr
 	.endm
 
-	.macro setgastroacid failInstr:req
+	.macro trycopycat failInstr:req
 	.byte 0xfd
 	.4byte \failInstr
 	.endm
-	
+
+	.macro swapstatstages stat:req
+	.byte 0xfe
+	.byte \stat
+	.endm
+
+	.macro trysetaquaring param0:req
+	.byte 0xff
+	.4byte \param0
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
@@ -1431,4 +1443,24 @@
 
 	.macro powertrick battler:req
 	various \battler, VARIOUS_POWER_TRICK
+	.endm
+
+	.macro setluckychant battler:req, failInstr:req
+	various \battler VARIOUS_SET_LUCKY_CHANT
+	.4byte \failInstr
+	.endm
+
+	.macro trymefirst failInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_ME_FIRST
+	.4byte \failInstr
+	.endm
+
+	.macro jumpifcantuselastresort battler:req, jumpInstr:req
+	various \battler, VARIOUS_TRY_LAST_RESORT
+	.4byte \jumpInstr
+	.endm
+
+	.macro suckerpunchcheck failInstr:req
+	various BS_ATTACKER, VARIOUS_SUCKER_PUNCH_CHECK
+	.4byte \failInstr
 	.endm

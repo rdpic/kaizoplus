@@ -27,6 +27,8 @@
 #define sRESHOW_HELPER_STATE         gBattleScripting + 0x22 // reshowHelperState
 #define sLVLUP_HP                    gBattleScripting + 0x23 // levelUpHP
 #define sABILITY_OVERWRITE           gBattleScripting + 0x24 // abilityPopupOverwrite
+#define sSAVED_DMG                   gBattleScripting + 0x25 // savedDmg
+
 
 // Array entries for battle communication
 #define MULTIUSE_STATE          0
@@ -99,6 +101,10 @@
 #define VARIOUS_ACUPRESSURE                     18
 #define VARIOUS_PSYCHO_SHIFT                    19
 #define VARIOUS_POWER_TRICK                     20
+#define VARIOUS_SET_LUCKY_CHANT                 21
+#define VARIOUS_TRY_ME_FIRST                    22
+#define VARIOUS_TRY_LAST_RESORT                 23
+#define VARIOUS_SUCKER_PUNCH_CHECK              24
 
 // Cmd_manipulatedmg
 #define DMG_CHANGE_SIGN            0

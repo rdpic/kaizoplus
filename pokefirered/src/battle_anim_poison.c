@@ -11,6 +11,8 @@ static void AnimSludgeProjectile_Step(struct Sprite *sprite);
 static void AnimAcidPoisonBubble_Step(struct Sprite *sprite);
 static void AnimSludgeBombHitParticle_Step(struct Sprite *sprite);
 static void AnimBubbleEffect_Step(struct Sprite *sprite);
+static void AnimSuckerPunchStep(struct Sprite *sprite);
+static void AnimSuckerPunch(struct Sprite *sprite);
 
 static const union AnimCmd sAnim_ToxicBubble[] =
 {
@@ -206,6 +208,80 @@ const struct SpriteTemplate gGreenPoisonBubble =
 	.callback = AnimAcidPoisonBubble,
 };
 
+const union AnimCmd gSuckerPunchAnimCmd[] =
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(0, 3, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 3, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 3, .vFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gSuckerPunchAnim[] =
+{
+    gSuckerPunchAnimCmd,
+};
+
+/* const union AnimCmd gGunkShotParticlesAnimCmd[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_FRAME(8, 1),
+    ANIMCMD_FRAME(12, 1),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gGunkShotParticlesAnims[] =
+{
+    gGunkShotParticlesAnimCmd,
+}; */
+
+const union AffineAnimCmd gSuckerPunchImpactAffineAnimCmd_1[] =
+{
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSuckerPunchImpactAffineAnimCmd_2[] =
+{
+    AFFINEANIMCMD_FRAME(0xD8, 0xD8, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSuckerPunchImpactAffineAnimCmd_3[] =
+{
+    AFFINEANIMCMD_FRAME(0xB0, 0xB0, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd gSuckerPunchImpactAffineAnimCmd_4[] =
+{
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),
+    AFFINEANIMCMD_END,
+};
+
+const union AffineAnimCmd *const gSuckerPunchImpactAffineAnim[] =
+{
+    gSuckerPunchImpactAffineAnimCmd_1,
+    gSuckerPunchImpactAffineAnimCmd_2,
+    gSuckerPunchImpactAffineAnimCmd_3,
+    gSuckerPunchImpactAffineAnimCmd_4,
+};
+
+const struct SpriteTemplate gSuckerPunchSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_POISON_JAB,
+    .paletteTag = ANIM_TAG_POISON_JAB,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
+    .anims = gSuckerPunchAnim,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSuckerPunch,
+};
+
 static void AnimSludgeProjectile(struct Sprite *sprite)
 {
     if (!gBattleAnimArgs[3])
@@ -317,4 +393,42 @@ static void AnimBubbleEffect_Step(struct Sprite *sprite)
     sprite->y2 = -(sprite->data[1] >> 8);
     if (sprite->affineAnimEnded)
         DestroyAnimSprite(sprite);
+}
+
+static void AnimSuckerPunch(struct Sprite *sprite)
+{
+    if (BATTLE_PARTNER(gBattleAnimAttacker) == gBattleAnimTarget && GetBattlerPosition(gBattleAnimTarget) < B_POSITION_PLAYER_RIGHT)
+        gBattleAnimArgs[0] *= -1;
+
+    InitSpritePosToAnimTarget(sprite, TRUE);
+
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+
+    sprite->data[0] = gBattleAnimArgs[3];
+    sprite->data[1] = sprite->x;
+    sprite->data[2] = sprite->x + gBattleAnimArgs[2];
+    sprite->data[3] = sprite->y;
+    sprite->data[4] = sprite->y;
+
+    InitAnimLinearTranslation(sprite);
+
+    sprite->data[5] = gBattleAnimArgs[5];
+    sprite->data[6] = gBattleAnimArgs[4];
+    sprite->data[7] = 0;
+
+    sprite->callback = AnimSuckerPunchStep;
+}
+
+static void AnimSuckerPunchStep(struct Sprite *sprite)
+{
+    if (!AnimTranslateLinear(sprite))
+    {
+        sprite->y2 += Sin(sprite->data[7] >> 8, sprite->data[5]);
+        sprite->data[7] += sprite->data[6];
+    }
+    else
+    {
+        DestroyAnimSprite(sprite);
+    }
 }

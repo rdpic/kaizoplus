@@ -2744,6 +2744,8 @@ static const u16 sWeightToDamageTable[] =
     0xFFFF, 0xFFFF
 };
 
+static const u8 sTrumpCardPowerTable[] = {200, 80, 60, 50, 40};
+
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u32 i;
@@ -2794,6 +2796,25 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             || gProtectStructs[gBattlerTarget].confusionSelfDmg)
                 gBattleMovePower = gBattleMoves[move].power * 2;
             break;
+        case EFFECT_TRUMP_CARD:
+            i = GetMoveSlot(gBattleMons[gBattlerAttacker].moves, move);
+            if (i != MAX_MON_MOVES)
+            {
+                if (gBattleMons[gBattlerAttacker].pp[i] >= ARRAY_COUNT(sTrumpCardPowerTable))
+                    gBattleMovePower = sTrumpCardPowerTable[ARRAY_COUNT(sTrumpCardPowerTable) - 1];
+                else
+                    gBattleMovePower = sTrumpCardPowerTable[gBattleMons[gBattlerAttacker].pp[i]];
+            }
+            break;
+        case EFFECT_VARY_POWER_BASED_ON_HP:
+            gBattleMovePower = gBattleMoves[move].argument * gBattleMons[gBattlerTarget].hp / gBattleMons[gBattlerTarget].maxHP;
+            break;
+        case EFFECT_PUNISHMENT:
+            gBattleMovePower = 60 + (CountBattlerStatIncreases(gBattlerTarget, FALSE) * 20);
+            if (gBattleMovePower > 200)
+                gBattleMovePower = 200;
+            break;
+        
     }
 
     // Get attacker hold item info

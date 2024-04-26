@@ -155,7 +155,9 @@
 #define STATUS3_EMBARGO                 (1 << 21)
 #define STATUS3_HEAL_BLOCK              (1 << 22)
 #define STATUS3_POWER_TRICK             (1 << 23)
-#define STATUS3_GASTRO_ACID             (1 << 24)
+#define STATUS3_ME_FIRST                (1 << 24)
+#define STATUS3_AQUA_RING               (1 << 25)
+#define STATUS3_MAGNET_RISE             (1 << 26)
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
 // Not really sure what a "hitmarker" is.
@@ -195,6 +197,7 @@
 #define SIDE_STATUS_FUTUREATTACK     (1 << 6)
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
+#define SIDE_STATUS_LUCKY_CHANT      (1 << 10)
 
 // Flags describing move's result
 #define MOVE_RESULT_MISSED             (1 << 0)
@@ -286,10 +289,12 @@
 #define MOVE_EFFECT_SP_ATK_TWO_DOWN     59
 #define MOVE_EFFECT_REMOVE_SLEEP        60
 #define MOVE_EFFECT_DEF_SPDEF_DOWN      61
-#define NUM_MOVE_EFFECTS                62
+#define MOVE_EFFECT_SECRET_POWER        62
+#define NUM_MOVE_EFFECTS                63
 
 #define MOVE_EFFECT_AFFECTS_USER        (1 << 6) // 64
 #define MOVE_EFFECT_CERTAIN             (1 << 7) // 128
+#define MOVE_EFFECT_CONTINUE            (1 << 8)
 
 // Battle terrain defines for gBattleTerrain.
 #define BATTLE_TERRAIN_GRASS        0

@@ -97,6 +97,7 @@ u8 IsMonDisobedient(void);
 bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind);
 u32 GetMoveSlot(u16 *moves, u32 move);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
+u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc);
 /* bool32 IsMoldBreakerTypeAbility(u32 ability); */
 
 #endif // GUARD_BATTLE_UTIL_H

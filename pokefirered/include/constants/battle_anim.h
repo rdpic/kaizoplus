@@ -304,6 +304,10 @@
 #define ANIM_TAG_WRING_OUT                  (ANIM_SPRITES_START + 294)
 #define ANIM_TAG_POWER_TRICK                (ANIM_SPRITES_START + 295)
 #define ANIM_TAG_GREEN_POISON_BUBBLE        (ANIM_SPRITES_START + 296)
+#define ANIM_TAG_COLORED_ORBS               (ANIM_SPRITES_START + 297)
+#define ANIM_TAG_WORRY_SEED                 (ANIM_SPRITES_START + 298)
+#define ANIM_TAG_SMALL_CLOUD                (ANIM_SPRITES_START + 299)
+#define ANIM_TAG_POISON_JAB                 (ANIM_SPRITES_START + 300)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -383,6 +387,7 @@
 #define B_ANIM_SILPH_SCOPED             25
 #define B_ANIM_ROCK_THROW               26
 #define B_ANIM_SAFARI_REACTION          27
+#define B_ANIM_AQUA_RING_HEAL           28
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

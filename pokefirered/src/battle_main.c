@@ -173,6 +173,7 @@ EWRAM_DATA u8 gChosenActionByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
 EWRAM_DATA u16 gLastPrintedMoves[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastUsedMove = 0;
 EWRAM_DATA u16 gLastLandedMoves[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastHitByType[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastResultingMoves[MAX_BATTLERS_COUNT] = {0};
@@ -2225,6 +2226,8 @@ static void BattleStartClearSetData(void)
         gLockedMoves[i] = MOVE_NONE;
         gLastPrintedMoves[i] = MOVE_NONE;
         gBattleResources->flags->flags[i] = 0;
+        gBattleStruct->overwrittenAbilities[i] = ABILITY_NONE;
+        gBattleStruct->choicedMove[i] = MOVE_NONE;
     }
 
     for (i = 0; i < 2; i++)
@@ -2236,6 +2239,7 @@ static void BattleStartClearSetData(void)
             dataPtr[j] = 0;
     }
 
+    gLastUsedMove = 0;
     gBattlerAttacker = 0;
     gBattlerTarget = 0;
     gBattlerAbility = 0;
@@ -2342,7 +2346,8 @@ void SwitchInClearSetData(void)
     {
         gBattleMons[gActiveBattler].status2 &= (STATUS2_CONFUSION | STATUS2_FOCUS_ENERGY | STATUS2_SUBSTITUTE | STATUS2_ESCAPE_PREVENTION | STATUS2_CURSED);
         gStatuses3[gActiveBattler] &= (STATUS3_LEECHSEED_BATTLER | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED 
-                                       | STATUS3_MUDSPORT | STATUS3_WATERSPORT | STATUS3_EMBARGO | STATUS3_HEAL_BLOCK | STATUS3_POWER_TRICK | STATUS3_GASTRO_ACID);
+                                       | STATUS3_MUDSPORT | STATUS3_WATERSPORT | STATUS3_EMBARGO | STATUS3_HEAL_BLOCK | STATUS3_POWER_TRICK | STATUS3_AQUA_RING
+                                       | STATUS3_MAGNET_RISE);
         for (i = 0; i < gBattlersCount; i++)
         {
             if (GetBattlerSide(gActiveBattler) != GetBattlerSide(i)
@@ -2420,6 +2425,7 @@ void SwitchInClearSetData(void)
     *((u8 *)(&gBattleStruct->choicedMove[gActiveBattler]) + 0) = MOVE_NONE;
     *((u8 *)(&gBattleStruct->choicedMove[gActiveBattler]) + 1) = MOVE_NONE;
 
+    gBattleStruct->overwrittenAbilities[gActiveBattler] = ABILITY_NONE;
     gBattleResources->flags->flags[gActiveBattler] = 0;
     gCurrentMove = MOVE_NONE;
 }
@@ -2472,6 +2478,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].flinchImmobility = FALSE;
     gProtectStructs[gActiveBattler].notFirstStrike = FALSE;
     gProtectStructs[gActiveBattler].usedHealBlockedMove = FALSE;
+    gProtectStructs[gActiveBattler].statRaised = FALSE;
 
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
 
@@ -3971,6 +3978,7 @@ static void HandleAction_UseMove(void)
     gBattleStruct->atkCancellerTracker = 0;
     gMoveResultFlags = 0;
     gMultiHitCounter = 0;
+    gBattleScripting.savedDmg = 0;
     gBattleCommunication[MISS_TYPE] = 0;
     gCurrMovePos = gChosenMovePos = *(gBattleStruct->chosenMovePositions + gBattlerAttacker);
     // choose move

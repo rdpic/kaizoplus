@@ -53,6 +53,11 @@
         "xiosbase": "c",
         "battle_main.h": "c",
         "battle_scripts.h": "c",
-        "string_util.h": "c"
+        "string_util.h": "c",
+        "xlocmon": "c",
+        "cstdlib": "c",
+        "valarray": "c",
+        "queue": "c",
+        "stack": "c"
     }
 }

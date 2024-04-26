@@ -153,6 +153,8 @@ static void AnimMoveTrumpCardParticle(struct Sprite *);
 static void AnimMoveWringOut(struct Sprite *);
 static void AnimBrickBreakWall_Step(struct Sprite *sprite);
 static void SpriteCB_SpriteOnMonForDuration(struct Sprite *sprite);
+static void AnimMoveWorrySeed(struct Sprite *);
+static void AnimMoveSmallCloud(struct Sprite *);
 
 static const u8 sUnused[] = {2, 4, 1, 3};
 
@@ -392,6 +394,130 @@ const struct SpriteTemplate gPowerTrickSpriteTemplate =
     .images = NULL,
     .affineAnims = sAffineAnims_SpinningBone,
     .callback = SpriteCB_SpriteOnMonForDuration
+};
+
+static const union AnimCmd sPetalDanceBigFlowerAnimCmds[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sPetalDanceSmallFlowerAnimCmds[] =
+{
+    ANIMCMD_FRAME(4, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sPetalDanceBigFlowerAnimTable[] =
+{
+    sPetalDanceBigFlowerAnimCmds,
+};
+
+static const union AnimCmd *const sPetalDanceSmallFlowerAnimTable[] =
+{
+    sPetalDanceSmallFlowerAnimCmds,
+};
+
+const struct SpriteTemplate gPetalDanceBigFlowerSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_FLOWER,
+    .paletteTag = ANIM_TAG_FLOWER,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sPetalDanceBigFlowerAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPetalDanceBigFlower,
+};
+
+const struct SpriteTemplate gPetalDanceSmallFlowerSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_FLOWER,
+    .paletteTag = ANIM_TAG_FLOWER,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = sPetalDanceSmallFlowerAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPetalDanceSmallFlower,
+};
+
+const struct SpriteTemplate gLuckyChantBigStarsSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_GOLD_STARS,
+    .paletteTag = ANIM_TAG_GOLD_STARS,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sPetalDanceBigFlowerAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPetalDanceBigFlower,
+};
+
+const struct SpriteTemplate gLuckyChantSmallStarsSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_GOLD_STARS,
+    .paletteTag = ANIM_TAG_GOLD_STARS,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = sPetalDanceSmallFlowerAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPetalDanceSmallFlower,
+};
+
+static const union AffineAnimCmd sSmallCloundsInit[] =
+{
+    AFFINEANIMCMD_FRAME(0x100,0x100, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sSmallCloudsVariant0[] =
+{
+    AFFINEANIMCMD_FRAME(0x100,0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(-10, -10, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sSmallCloudsVariant1[] =
+{
+    AFFINEANIMCMD_FRAME(0x180,0x180, 0, 0),
+    AFFINEANIMCMD_FRAME(-18, -18, 0, 21),
+    AFFINEANIMCMD_END
+};
+
+
+static const union AffineAnimCmd sSmallCloudsVariant2[] =
+{
+    AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0, 0),
+    AFFINEANIMCMD_FRAME(-6, -6, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd * const sSmallCloudSpriteAffineAnimTable[] =
+{
+    sSmallCloundsInit,
+    sSmallCloudsVariant0,
+    sSmallCloudsVariant1,
+    sSmallCloudsVariant2,
+};
+
+const struct SpriteTemplate gWorrySeedSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WORRY_SEED,
+    .paletteTag = ANIM_TAG_WORRY_SEED,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMoveWorrySeed
+};
+
+const struct SpriteTemplate gSmallCloudTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_CLOUD,
+    .paletteTag = ANIM_TAG_SMALL_CLOUD,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sSmallCloudSpriteAffineAnimTable,
+    .callback = AnimMoveSmallCloud
 };
 
 const struct SpriteTemplate gSleepPowderParticleSpriteTemplate =
@@ -670,50 +796,6 @@ const struct SpriteTemplate gPowerOrbs_Float =
 	.images = NULL,
 	.affineAnims = gDummySpriteAffineAnimTable,
 	.callback = AnimSporeParticle,
-};
-
-static const union AnimCmd sPetalDanceBigFlowerAnimCmds[] =
-{
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sPetalDanceSmallFlowerAnimCmds[] =
-{
-    ANIMCMD_FRAME(4, 1),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd *const sPetalDanceBigFlowerAnimTable[] =
-{
-    sPetalDanceBigFlowerAnimCmds,
-};
-
-static const union AnimCmd *const sPetalDanceSmallFlowerAnimTable[] =
-{
-    sPetalDanceSmallFlowerAnimCmds,
-};
-
-const struct SpriteTemplate gPetalDanceBigFlowerSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_FLOWER,
-    .paletteTag = ANIM_TAG_FLOWER,
-    .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = sPetalDanceBigFlowerAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimPetalDanceBigFlower,
-};
-
-const struct SpriteTemplate gPetalDanceSmallFlowerSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_FLOWER,
-    .paletteTag = ANIM_TAG_FLOWER,
-    .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = sPetalDanceSmallFlowerAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimPetalDanceSmallFlower,
 };
 
 static const union AnimCmd sRazorLeafParticleAnimCmds1[] =
@@ -2770,7 +2852,7 @@ void AnimTask_SporeDoubleBattle(u8 taskId)
 // arg 1: initial y pixel offset
 // arg 2: target y pixel offset
 // arg 3: duration
-static void AnimPetalDanceBigFlower(struct Sprite* sprite)
+void AnimPetalDanceBigFlower(struct Sprite* sprite)
 {
     InitSpritePosToAnimAttacker(sprite, FALSE);
     sprite->data[0] = gBattleAnimArgs[3];
@@ -6265,4 +6347,54 @@ static void SpriteCB_SpriteOnMonForDuration(struct Sprite *sprite)
         sprite->data[3] = 0;
         sprite->callback = AnimBrickBreakWall_Step;
     }
+}
+
+static void AnimMoveWorrySeedWait(struct Sprite *sprite)
+{
+    if (TranslateAnimHorizontalArc(sprite))
+        DestroyAnimSprite(sprite);
+}
+
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: wave period
+// arg 3: wave amplitude
+static void AnimMoveWorrySeed(struct Sprite *sprite)
+{
+    InitSpritePosToAnimAttacker(sprite, TRUE);
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
+
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[5] = gBattleAnimArgs[3];
+    InitAnimArcTranslation(sprite);
+    sprite->callback = AnimMoveWorrySeedWait;
+}
+
+static void AnimMoveSmallCloudAnimate(struct Sprite *sprite)
+{
+    sprite->x2 += sprite->data[0];
+    sprite->y2 += sprite->data[1];
+
+    if(sprite->affineAnimEnded)
+    {
+        DestroyAnimSprite(sprite);
+    }
+
+}
+#define ONE_IF_ZERO(x) ((x) > 0 ? (x) : 1)
+
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: cloud type animation [0..2]
+// arg 3: horizontal velocity
+// arg 4: vertical velocity
+// arg 5: duration
+static void AnimMoveSmallCloud(struct Sprite *sprite)
+{
+    InitSpritePosToAnimTarget(sprite, TRUE);
+    sprite->data[0] = gBattleAnimArgs[3];
+    sprite->data[1] = gBattleAnimArgs[4];
+    sprite->callback = AnimMoveSmallCloudAnimate;
+    StartSpriteAffineAnim(sprite, gBattleAnimArgs[2]+1);
 }

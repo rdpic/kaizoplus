@@ -433,7 +433,14 @@ static const u8 sText_PkmnPreventedFromHealing[] = _("{B_DEF_NAME_WITH_PREFIX} w
 static const u8 sText_HealBlockPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX} was\nprevented from healing!\p");
 static const u8 sText_BufferEnds[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\nwore off!");
 static const u8 sText_PkmnSwitchedAtkAndDef[] = _("{B_ATK_NAME_WITH_PREFIX} switched its\nATK and DEF!");
-static const u8 sText_PkmnsAbilitySuppressed[] = _("{B_DEF_NAME_WITH_PREFIX}'s ability\nwas suppressed!");
+static const u8 sText_ShieldedFromCriticalHits[] = _("The {B_CURRENT_MOVE} shielded the\nteam from critical hits!");
+static const u8 sText_LuckyChantEnds[] = _("{B_ATK_PREFIX3}'s team's LUCKY CHANT\nwore off!");
+static const u8 sText_PkmnSwitchedStatChanges[] = _("{B_ATK_NAME_WITH_PREFIX} switched stat changes\nwith the target!");
+static const u8 sText_PkmnSurroundedWithVeilOfWater[] = _("{B_ATK_NAME_WITH_PREFIX} surrounded itself\nwith a veil of water!");
+static const u8 sText_AquaRingHeal[] = _("AQUA RING restored\n{B_ATK_NAME_WITH_PREFIX}'s HP!");
+static const u8 sText_PkmnAcquiredAbility[] = _("{B_DEF_NAME_WITH_PREFIX} acquired\n{B_DEF_ABILITY}!");
+static const u8 sText_Electromagnetism[] = _("electromagnetism");
+static const u8 sText_PkmnLevitatedOnElectromagnetism[] = _("{B_ATK_NAME_WITH_PREFIX} levitated on\nelectromagnetism!");
 
 static const u8 sText_HP2[] = _("HP");
 static const u8 sText_Attack2[] = _("ATTACK");
@@ -908,7 +915,14 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_HEALBLOCKPREVENTSUSAGE - BATTLESTRINGS_TABLE_START]        = sText_HealBlockPreventsUsage,
     [STRINGID_BUFFERENDS - BATTLESTRINGS_TABLE_START]                    = sText_BufferEnds,
     [STRINGID_PKMNSWITCHEDATKANDDEF - BATTLESTRINGS_TABLE_START]         = sText_PkmnSwitchedAtkAndDef,
-    [STRINGID_PKMNSABILITYSUPPRESSED - BATTLESTRINGS_TABLE_START]        = sText_PkmnsAbilitySuppressed,
+    [STRINGID_SHIELDEDFROMCRITICALHITS - BATTLESTRINGS_TABLE_START]      = sText_ShieldedFromCriticalHits,
+    [STRINGID_LUCKYCHANTENDS - BATTLESTRINGS_TABLE_START]                = sText_LuckyChantEnds,
+    [STRINGID_PKMNSWITCHEDSTATCHANGES - BATTLESTRINGS_TABLE_START]       = sText_PkmnSwitchedStatChanges,
+    [STRINGID_PKMNSURROUNDEDWITHVEILOFWATER - BATTLESTRINGS_TABLE_START] = sText_PkmnSurroundedWithVeilOfWater,
+    [STRINGID_AQUARINGHEAL - BATTLESTRINGS_TABLE_START]                  = sText_AquaRingHeal,
+    [STRINGID_PKMNACQUIREDABILITY - BATTLESTRINGS_TABLE_START]           = sText_PkmnAcquiredAbility,
+    [STRINGID_ELECTROMAGNETISM - BATTLESTRINGS_TABLE_START]              = sText_Electromagnetism,
+    [STRINGID_PKMNLEVITATEDONELECTROMAGNETISM - BATTLESTRINGS_TABLE_START] = sText_PkmnLevitatedOnElectromagnetism,
 };
 
 const u16 gStatusConditionsStringIds[] =

@@ -4,6 +4,7 @@
 #include "global.h"
 #include "sprite.h"
 #include "constants/pokemon.h"
+#include "metaprogram.h"
 
 struct PokemonSubstruct0
 {
@@ -257,6 +258,7 @@ struct BattleMove
     u32 soundMove:1;
     u32 ballisticMove:1;
     u32 ignoresSubstitute:1;
+    u32 copycatBanned:1;
     u32 argument;
     u16 category:2;
 };
