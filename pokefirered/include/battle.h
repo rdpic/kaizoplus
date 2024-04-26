@@ -171,6 +171,7 @@ struct DisableStruct
     /*0x19*/ u8 rechargeTimer;
     /*0x1A*/ u8 unk1A[2];
              u8 embargoTimer;
+             u8 healBlockTimer;
 };
 
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
@@ -190,7 +191,7 @@ struct ProtectStruct
     u32 confusionSelfDmg:1;
     u32 targetNotAffected:1;
     u32 chargingTurn:1;
-    u32 fleeType:2; // for RunAway and Smoke Ball
+    u32 fleeType:2; // 0: Normal, 1: FLEE_ITEM, 2: FLEE_ABILITY
     u32 usedImprisonedMove:1;
     u32 loveImmobility:1;
     u32 usedDisabledMove:1;
@@ -199,7 +200,7 @@ struct ProtectStruct
     u32 flag2Unknown:1;         // 0x2
     u32 flinchImmobility:1;     // 0x4
     u32 notFirstStrike:1;       // 0x8
-    u32 flag_x10 : 1;           // 0x10
+    u32 usedHealBlockedMove:1;
     u32 flag_x20 : 1;           // 0x20
     u32 flag_x40 : 1;           // 0x40
     u32 flag_x80 : 1;           // 0x80
@@ -728,6 +729,8 @@ extern u8 gBattleTerrain;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 gRandomTurnNumber;
 extern u8 gBattlerAbility;
+extern s32 gBideDmg[MAX_BATTLERS_COUNT];
+extern u8 gBideTarget[MAX_BATTLERS_COUNT];
 
 static inline u32 GetBattlerPosition(u32 battler)
 {

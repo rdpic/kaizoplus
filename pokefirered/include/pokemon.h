@@ -241,16 +241,24 @@ struct SpeciesInfo
 
 struct BattleMove
 {
-    u8 effect;
-    u8 power;
-    u8 type;
-    u8 accuracy;
+    u16 effect;
+    u16 power:9; // up to 511
+    u16 type:5;
+    u16 accuracy:7;
     u8 pp;
     u8 secondaryEffectChance;
-    u8 target;
-    s8 priority;
+    u16 target:9;
+    s32 priority:4;
     u8 flags;
-    u8 category;
+    u32 healingMove:1;
+    u32 punchingMove:1;
+    u32 bitingMove:1;
+    u32 pulseMove:1;
+    u32 soundMove:1;
+    u32 ballisticMove:1;
+    u32 ignoresSubstitute:1;
+    u32 argument;
+    u16 category:2;
 };
 
 #define SPINDA_SPOT_WIDTH 16

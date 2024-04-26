@@ -184,6 +184,28 @@ const struct SpriteTemplate gWaterBubbleSpriteTemplate =
     .callback = AnimBubbleEffect,
 };
 
+const struct SpriteTemplate gGreenPoisonDrip =
+{
+	.tileTag = ANIM_TAG_GREEN_POISON_BUBBLE,
+	.paletteTag = ANIM_TAG_GREEN_POISON_BUBBLE,
+	.oam = &gOamData_AffineDouble_ObjNormal_16x16,
+	.anims = sAnims_AcidPoisonDroplet,
+	.images = NULL,
+	.affineAnims = gAffineAnims_Droplet,
+	.callback = AnimAcidPoisonDroplet,
+};
+
+const struct SpriteTemplate gGreenPoisonBubble =
+{
+	.tileTag = ANIM_TAG_GREEN_POISON_BUBBLE,
+	.paletteTag = ANIM_TAG_GREEN_POISON_BUBBLE,
+	.oam = &gOamData_AffineDouble_ObjNormal_16x16,
+	.anims = sAnims_PoisonProjectile,
+	.images = NULL,
+	.affineAnims = sAffineAnims_PoisonProjectile,
+	.callback = AnimAcidPoisonBubble,
+};
+
 static void AnimSludgeProjectile(struct Sprite *sprite)
 {
     if (!gBattleAnimArgs[3])

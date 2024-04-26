@@ -428,6 +428,12 @@ static const u8 sText_ExclamationMark5[] = _("!");
 static const u8 sText_TargetWokeUp[] = _("{B_DEF_NAME_WITH_PREFIX} woke up!");
 static const u8 sText_PkmnWentBack[] = _("{B_ATK_NAME_WITH_PREFIX} went back!");
 static const u8 sText_PkmnCantUseItemsAnymore[] = _("{B_DEF_NAME_WITH_PREFIX} can't use\nitems anymore!");
+static const u8 sText_EmbargoEnds[] = _("{B_ATK_NAME_WITH_PREFIX} can\nuse items again!");
+static const u8 sText_PkmnPreventedFromHealing[] = _("{B_DEF_NAME_WITH_PREFIX} was prevented\nfrom healing!");
+static const u8 sText_HealBlockPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX} was\nprevented from healing!\p");
+static const u8 sText_BufferEnds[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\nwore off!");
+static const u8 sText_PkmnSwitchedAtkAndDef[] = _("{B_ATK_NAME_WITH_PREFIX} switched its\nATK and DEF!");
+static const u8 sText_PkmnsAbilitySuppressed[] = _("{B_DEF_NAME_WITH_PREFIX}'s ability\nwas suppressed!");
 
 static const u8 sText_HP2[] = _("HP");
 static const u8 sText_Attack2[] = _("ATTACK");
@@ -897,6 +903,12 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_TARGETWOKEUP - BATTLESTRINGS_TABLE_START]                  = sText_TargetWokeUp,
     [STRINGID_PKMNWENTBACK - BATTLESTRINGS_TABLE_START]                  = sText_PkmnWentBack,
     [STRINGID_PKMNCANTUSEITEMSANYMORE - BATTLESTRINGS_TABLE_START]       = sText_PkmnCantUseItemsAnymore,
+    [STRINGID_EMBARGOENDS - BATTLESTRINGS_TABLE_START]                   = sText_EmbargoEnds,
+    [STRINGID_PKMNPREVENTEDFROMHEALING - BATTLESTRINGS_TABLE_START]      = sText_PkmnPreventedFromHealing,
+    [STRINGID_HEALBLOCKPREVENTSUSAGE - BATTLESTRINGS_TABLE_START]        = sText_HealBlockPreventsUsage,
+    [STRINGID_BUFFERENDS - BATTLESTRINGS_TABLE_START]                    = sText_BufferEnds,
+    [STRINGID_PKMNSWITCHEDATKANDDEF - BATTLESTRINGS_TABLE_START]         = sText_PkmnSwitchedAtkAndDef,
+    [STRINGID_PKMNSABILITYSUPPRESSED - BATTLESTRINGS_TABLE_START]        = sText_PkmnsAbilitySuppressed,
 };
 
 const u16 gStatusConditionsStringIds[] =

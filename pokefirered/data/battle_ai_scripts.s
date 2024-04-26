@@ -3034,7 +3034,6 @@ AI_HPAware_DiscouragedEffectsWhenHighHP::
 	.byte EFFECT_GRUDGE
 	.byte EFFECT_OVERHEAT
 	.byte EFFECT_ROOST
-	.byte EFFECT_BRINE
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenMediumHP::
@@ -3082,6 +3081,7 @@ AI_HPAware_DiscouragedEffectsWhenMediumHP::
 	.byte EFFECT_DRAGON_DANCE
 	.byte EFFECT_QUIVER_DANCE
 	.byte EFFECT_ACUPRESSURE
+	.byte EFFECT_POWER_TRICK
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenLowHP::
@@ -3134,6 +3134,8 @@ AI_HPAware_DiscouragedEffectsWhenLowHP::
 	.byte EFFECT_DRAGON_DANCE
 	.byte EFFECT_QUIVER_DANCE
 	.byte EFFECT_ACUPRESSURE
+	.byte EFFECT_POWER_TRICK
+	.byte EFFECT_GASTRO_ACID
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenTargetHighHP::
@@ -3182,6 +3184,9 @@ AI_HPAware_DiscouragedEffectsWhenTargetMediumHP::
 	.byte EFFECT_DRAGON_DANCE
 	.byte EFFECT_QUIVER_DANCE
 	.byte EFFECT_ACUPRESSURE
+	.byte EFFECT_VARY_POWER_BASED_ON_HP
+	.byte EFFECT_POWER_TRICK
+	.byte EFFECT_GASTRO_ACID
 	.byte -1
 
 AI_HPAware_DiscouragedEffectsWhenTargetLowHP::
@@ -3206,7 +3211,7 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP::
 	.byte EFFECT_TOXIC
 	.byte EFFECT_LIGHT_SCREEN
 	.byte EFFECT_OHKO
-	.byte EFFECT_SUPER_FANG  @ Maybe supposed to be EFFECT_RAZOR_WIND
+	.byte EFFECT_RAZOR_WIND
 	.byte EFFECT_SUPER_FANG
 	.byte EFFECT_MIST
 	.byte EFFECT_FOCUS_ENERGY
@@ -3246,6 +3251,10 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP::
 	.byte EFFECT_DRAGON_DANCE
 	.byte EFFECT_QUIVER_DANCE
 	.byte EFFECT_ACUPRESSURE
+	.byte EFFECT_PSYCHO_SHIFT
+	.byte EFFECT_VARY_POWER_BASED_ON_HP
+	.byte EFFECT_POWER_TRICK
+	.byte EFFECT_GASTRO_ACID
 	.byte -1
 
 AI_Unknown::

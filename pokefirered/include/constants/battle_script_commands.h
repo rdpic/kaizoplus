@@ -98,6 +98,7 @@
 #define VARIOUS_SWITCHIN_ABILITIES              17
 #define VARIOUS_ACUPRESSURE                     18
 #define VARIOUS_PSYCHO_SHIFT                    19
+#define VARIOUS_POWER_TRICK                     20
 
 // Cmd_manipulatedmg
 #define DMG_CHANGE_SIGN            0

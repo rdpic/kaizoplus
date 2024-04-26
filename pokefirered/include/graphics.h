@@ -5691,6 +5691,10 @@ extern const u32 gBattleAnimSpriteGfx_CrossImpact[];
 extern const u32 gBattleAnimSpriteGfx_Feint[];
 extern const u32 gBattleAnimSpriteGfx_SeedBrown[];
 extern const u32 gBattleAnimSpriteGfx_Acupressure[];
+extern const u32 gBattleAnimSpriteGfx_TrumpCard[];
+extern const u32 gBattleAnimSpriteGfx_TrumpCardParticles[];
+extern const u32 gBattleAnimSpriteGfx_WringOut[];
+extern const u32 gBattleAnimSpriteGfx_PowerTrick[];
 
 // battle anim particle pals
 extern const u32 gBattleAnimSpritePal_Bone[];
@@ -5942,6 +5946,10 @@ extern const u32 gBattleAnimSpritePal_BlueRing2[];
 extern const u32 gBattleAnimSpritePal_Feint[];
 extern const u32 gBattleAnimSpritePal_SeedBrown[];
 extern const u32 gBattleAnimSpritePal_Acupressure[];
+extern const u32 gBattleAnimSpritePal_TrumpCard[];
+extern const u32 gBattleAnimSpritePal_TrumpCardParticles[];
+extern const u32 gBattleAnimSpritePal_WringOut[];
+extern const u32 gBattleAnimSpritePal_PowerTrick[];
 
 // battle anim task
 extern const u32 gUnusedLevelupAnimationGfx[];

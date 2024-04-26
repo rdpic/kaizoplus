@@ -299,6 +299,11 @@
 #define ANIM_TAG_FEINT                      (ANIM_SPRITES_START + 289)
 #define ANIM_TAG_SEED_BROWN                 (ANIM_SPRITES_START + 290)
 #define ANIM_TAG_ACUPRESSURE                (ANIM_SPRITES_START + 291)
+#define ANIM_TAG_TRUMP_CARD                 (ANIM_SPRITES_START + 292)
+#define ANIM_TAG_TRUMP_CARD_PARTICLES       (ANIM_SPRITES_START + 293)
+#define ANIM_TAG_WRING_OUT                  (ANIM_SPRITES_START + 294)
+#define ANIM_TAG_POWER_TRICK                (ANIM_SPRITES_START + 295)
+#define ANIM_TAG_GREEN_POISON_BUBBLE        (ANIM_SPRITES_START + 296)
 
 // battlers
 #define ANIM_ATTACKER    0

@@ -231,6 +231,10 @@ extern const u8 BattleScript_GhostBallDodge[];
 extern const u8 BattleScript_OldMan_Pokedude_CaughtMessage[];
 extern const u8 BattleScript_SilphScopeUnveiled[];
 extern const u8 BattleScript_BattleTowerTrainerBattleWon[];
+extern const u8 BattleScript_EmbargoEndTurn[];
+extern const u8 BattleScript_SelectingNotAllowedMoveHealBlock[];
+extern const u8 BattleScript_MoveUsedHealBlockPrevents[];
+extern const u8 BattleScript_BufferEndTurn[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];

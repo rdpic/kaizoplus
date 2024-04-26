@@ -394,6 +394,11 @@ gBattleAnims_Moves::
 	.4byte Move_NATURAL_GIFT
 	.4byte Move_FLING
 	.4byte Move_PSYCHO_SHIFT
+	.4byte Move_TRUMP_CARD
+	.4byte Move_HEAL_BLOCK
+	.4byte Move_WRING_OUT
+	.4byte Move_POWER_TRICK
+	.4byte Move_GASTRO_ACID
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -10629,6 +10634,138 @@ Move_PSYCHO_SHIFT:
 	end
 	clearmonbg ANIM_ATTACKER
 	blendoff
+	end
+
+Move_TRUMP_CARD:
+	loadspritegfx ANIM_TAG_TRUMP_CARD
+	loadspritegfx ANIM_TAG_CUT
+	loadspritegfx ANIM_TAG_TRUMP_CARD_PARTICLES
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 0, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 1, 32
+	delay 2
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 0, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 2, 32
+	delay 2
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 2, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 2, 32
+	delay 2
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	playsewithpan SE_M_CUT, SOUND_PAN_TARGET
+	createsprite gCuttingSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 0
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 1, 32
+	delay 2
+	createsprite gTrumpCardSpriteTemplate, ANIM_ATTACKER, 40, 40, 0, 1, 32
+	delay 3
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 10, 1
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 12, -5, -4, 0
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 0, 13, 5, 4, 1
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 8, -3, 0, 2
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 2, 12, -5, 4, 3
+	delay 2
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 10, 1, -4, 4
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 0, 13, 5, 6, 1
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 1, 12, -2, 1, 3
+	createsprite gTrumpCardParticleSpriteTempalte, ANIM_ATTACKER, 40, 0, 0, 2, 13, -2, 1, 2
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	waitforvisualfinish
+	end
+
+Move_HEAL_BLOCK:
+	loadspritegfx ANIM_TAG_BLUE_STAR
+	monbg ANIM_TARGET
+	createsprite gHealingBlueStarSpriteTemplate, ANIM_TARGET, 2, 2, 0, -5, ANIM_TARGET, 0
+	delay 7
+	createsprite gHealingBlueStarSpriteTemplate, ANIM_TARGET, 2, 2, -15, 10, ANIM_TARGET, 0
+	delay 7
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 4, 2, 12, 0, RGB_BLACK
+	createsprite gHealingBlueStarSpriteTemplate, ANIM_TARGET, 2, 2, 0, -5, ANIM_TARGET, 0
+	delay 7
+	createsprite gHealingBlueStarSpriteTemplate, ANIM_TARGET, 2, 2, -15, 10, ANIM_TARGET, 0
+	delay 7
+	createsprite gHealingBlueStarSpriteTemplate, ANIM_TARGET, 2, 2, -15, -15, ANIM_TARGET, 0
+	delay 7
+	createsprite gHealingBlueStarSpriteTemplate, ANIM_TARGET, 2, 2, 10, -5, ANIM_TARGET, 0
+	delay 7
+	waitforvisualfinish
+	delay 11
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 4, 2, 0, 12, RGB_BLACK
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	end
+
+Move_WRING_OUT:
+	loadspritegfx ANIM_TAG_WRING_OUT
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, FALSE
+	delay 3
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
+	delay 3
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
+	delay 3
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
+	delay 3
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
+	delay 3
+	createsprite gWringOutHandSpriteTemplate, ANIM_TARGET, 40, 0, 0, 48, 3, 32, TRUE
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	waitforvisualfinish
+	end
+
+Move_POWER_TRICK:
+	loadspritegfx ANIM_TAG_POWER_TRICK
+	loopsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET 0xa 0x3
+	createvisualtask AnimTask_UproarDistortion 0x2, 0x0
+	createsprite gPowerTrickSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0, 0, SOUND_PAN_TARGET, 0
+	delay 0x10
+	createvisualtask AnimTask_UproarDistortion 0x2, 0x0
+	delay 0x10
+	createvisualtask AnimTask_UproarDistortion 0x2, 0x0
+	waitforvisualfinish
+	end
+
+Move_GASTRO_ACID:
+	loadspritegfx ANIM_TAG_GREEN_POISON_BUBBLE
+	monbg ANIM_DEF_PARTNER
+	createsprite gGreenPoisonBubble, ANIM_TARGET, 2, 20, 0, 40, 1, 0, 0, FALSE
+	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
+	delay 5
+	createsprite gGreenPoisonBubble, ANIM_TARGET, 2, 20, 0, 40, 1, 24, 0, FALSE
+	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
+	delay 5
+	createsprite gGreenPoisonBubble, ANIM_TARGET, 2, 20, 0, 40, 1, -24, 0, FALSE
+	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
+	delay 15
+	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 2, 0, 10, 1
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_TARGET, 2, 2, 0, 12, RGB(30, 0, 31)
+	createsprite gGreenPoisonDrip, ANIM_TARGET, 2, 0, -22, 0, 15, 55, FALSE
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
+	delay 10
+	createsprite gGreenPoisonDrip, ANIM_TARGET, 2, -26, -24, 0, 15, 55, FALSE
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
+	delay 10
+	createsprite gGreenPoisonDrip, ANIM_TARGET, 2, 15, -27, 0, 15, 50, FALSE
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
+	delay 10
+	createsprite gGreenPoisonDrip, ANIM_TARGET, 2, -15, -17, 0, 10, 45, FALSE
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
+	delay 10
+	createsprite gGreenPoisonDrip, ANIM_TARGET, 2, 27, -22, 0, 15, 50, FALSE
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
 	end
 
 Move_COUNT:

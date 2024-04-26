@@ -1225,7 +1225,7 @@ static void Cmd_critcalc(void)
      && !(Random() % sCriticalHitChance[critChance])
      && (!(gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) || BtlCtrl_OakOldMan_TestState2Flag(1))
      && !(gBattleTypeFlags & BATTLE_TYPE_POKEDUDE))
-        gCritMultiplier = 2;
+        gCritMultiplier = 1.5;
     else
         gCritMultiplier = 1;
 
@@ -1803,7 +1803,7 @@ static void Cmd_datahpupdate(void)
             // check substitute fading
             if (gDisableStructs[gActiveBattler].substituteHP == 0)
             {
-                gBattlescriptCurrInstr += 2;
+                gBattlescriptCurrInstr = cmd->nextInstr;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_SubstituteFade;
                 return;
@@ -1827,11 +1827,11 @@ static void Cmd_datahpupdate(void)
                 }
                 else
                 {
-                    gTakenDmg[gActiveBattler] += gBattleMoveDamage;
-                    if (gBattlescriptCurrInstr[1] == BS_TARGET)
-                        gTakenDmgByBattler[gActiveBattler] = gBattlerAttacker;
+                gBideDmg[gActiveBattler] += gBattleMoveDamage;
+                if (cmd->battler == BS_TARGET)
+                    gBideTarget[gActiveBattler] = gBattlerAttacker;
                     else
-                        gTakenDmgByBattler[gActiveBattler] = gBattlerTarget;
+                    gBideTarget[gActiveBattler] = gBattlerTarget;
                 }
 
                 if (gBattleMons[gActiveBattler].hp > gBattleMoveDamage)
@@ -6320,6 +6320,13 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->nextInstr;
             return;
         }
+    case VARIOUS_POWER_TRICK:
+    {
+        VARIOUS_ARGS();
+        gStatuses3[gBattlerAttacker] ^= STATUS3_POWER_TRICK;
+        SWAP(gBattleMons[gBattlerAttacker].attack, gBattleMons[gBattlerAttacker].defense, i);
+        break;
+    }
     }
 
     gBattlescriptCurrInstr += 3;
@@ -10068,4 +10075,42 @@ static void Cmd_setembargo(void)
         gDisableStructs[gBattlerTarget].embargoTimer = 5;
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
+}
+
+static void Cmd_sethealblock(void)
+{
+    CMD_ARGS(const u8 *failInstr);
+
+    if (gStatuses3[gBattlerTarget] & STATUS3_HEAL_BLOCK)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
+        gStatuses3[gBattlerTarget] |= STATUS3_HEAL_BLOCK;
+        gDisableStructs[gBattlerTarget].healBlockTimer = 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
+static void Cmd_setgastroacid(void)
+{
+    CMD_ARGS(const u8 *failInstr);
+
+    {
+        gStatuses3[gBattlerTarget] |= STATUS3_GASTRO_ACID;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
+bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move)
+{
+    if (!(gBattleMons[battlerDef].status2 & STATUS2_SUBSTITUTE))
+        return FALSE;
+    else if (gBattleMoves[move].ignoresSubstitute)
+        return FALSE;
+    /* else if (GetBattlerAbility(battlerAtk) == ABILITY_INFILTRATOR)
+        return FALSE; */
+    else
+        return TRUE;
 }

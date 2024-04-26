@@ -375,7 +375,12 @@
 #define MOVE_NATURAL_GIFT 371
 #define MOVE_FLING 372
 #define MOVE_PSYCHO_SHIFT 373
-#define MOVES_COUNT 374
+#define MOVE_TRUMP_CARD 374
+#define MOVE_HEAL_BLOCK 375
+#define MOVE_WRING_OUT 376
+#define MOVE_POWER_TRICK 377
+#define MOVE_GASTRO_ACID 378
+#define MOVES_COUNT 379
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

@@ -219,6 +219,8 @@ EWRAM_DATA u16 gBattleMovePower = 0;
 EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerAbility = 0;
+EWRAM_DATA s32 gBideDmg[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBideTarget[MAX_BATTLERS_COUNT] = {0};
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
@@ -2339,7 +2341,8 @@ void SwitchInClearSetData(void)
     if (gBattleMoves[gCurrentMove].effect == EFFECT_BATON_PASS)
     {
         gBattleMons[gActiveBattler].status2 &= (STATUS2_CONFUSION | STATUS2_FOCUS_ENERGY | STATUS2_SUBSTITUTE | STATUS2_ESCAPE_PREVENTION | STATUS2_CURSED);
-        gStatuses3[gActiveBattler] &= (STATUS3_LEECHSEED_BATTLER | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED | STATUS3_MUDSPORT | STATUS3_WATERSPORT);
+        gStatuses3[gActiveBattler] &= (STATUS3_LEECHSEED_BATTLER | STATUS3_LEECHSEED | STATUS3_ALWAYS_HITS | STATUS3_PERISH_SONG | STATUS3_ROOTED 
+                                       | STATUS3_MUDSPORT | STATUS3_WATERSPORT | STATUS3_EMBARGO | STATUS3_HEAL_BLOCK | STATUS3_POWER_TRICK | STATUS3_GASTRO_ACID);
         for (i = 0; i < gBattlersCount; i++)
         {
             if (GetBattlerSide(gActiveBattler) != GetBattlerSide(i)
@@ -2350,6 +2353,8 @@ void SwitchInClearSetData(void)
                 gStatuses3[i] |= STATUS3_ALWAYS_HITS_TURN(2);
             }
         }
+        if (gStatuses3[gActiveBattler] & STATUS3_POWER_TRICK)
+            SWAP(gBattleMons[gActiveBattler].attack, gBattleMons[gActiveBattler].defense, i);
     }
     else
     {
@@ -2466,6 +2471,7 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].flag2Unknown = FALSE;
     gProtectStructs[gActiveBattler].flinchImmobility = FALSE;
     gProtectStructs[gActiveBattler].notFirstStrike = FALSE;
+    gProtectStructs[gActiveBattler].usedHealBlockedMove = FALSE;
 
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
 

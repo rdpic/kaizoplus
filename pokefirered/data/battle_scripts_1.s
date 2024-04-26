@@ -251,6 +251,11 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectAssurance		 		 @ EFFECT_ASSURANCE
 	.4byte BattleScript_EffectEmbargo				 @ EFFECT_EMBARGO
 	.4byte BattleScript_EffectPsychoShift		     @ EFFECT_PSYCHO_SHIFT
+	.4byte BattleScript_EffectTrumpCard		         @ EFFECT_TRUMP_CARD
+	.4byte BattleScript_EffectHealBlock				 @ EFFECT_HEAL_BLOCK
+	.4byte BattleScript_EffectWringOut			 	 @ EFFECT_VARY_POWER_BASED_ON_HP
+	.4byte BattleScript_EffectPowerTrick			 @ EFFECT_POWER_TRICK
+	.4byte BattleScript_EffectGastroAcid			 @ EFFECT_GASTRO_ACID
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -3037,6 +3042,50 @@ BattleScript_EffectPsychoShiftCanWork:
 	updatestatusicon BS_ATTACKER
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectTrumpCard::
+	goto BattleScript_EffectHit
+
+BattleScript_EffectHealBlock::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	sethealblock BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNPREVENTEDFROMHEALING
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectWringOut::
+	goto BattleScript_EffectHit
+
+BattleScript_EffectPowerTrick::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	powertrick BS_ATTACKER
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNSWITCHEDATKANDDEF
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectGastroAcid::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	setgastroacid BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNSABILITYSUPPRESSED
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
+	goto BattleScript_MoveEnd
+
 BattleScript_FaintAttacker::
 	playfaintcry BS_ATTACKER
 	pause B_WAIT_TIME_LONG
@@ -3769,6 +3818,15 @@ BattleScript_MoveUsedIsTaunted::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_SelectingNotAllowedMoveHealBlock::
+	printselectionstring STRINGID_HEALBLOCKPREVENTSUSAGE
+	endselectionscript
+
+BattleScript_MoveUsedHealBlockPrevents::
+	printstring STRINGID_HEALBLOCKPREVENTSUSAGE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_WishComesTrue::
 	trywish 1, BattleScript_WishButFullHp
 	playanimation BS_TARGET, B_ANIM_WISH_HEAL
@@ -4109,6 +4167,16 @@ BattleScript_YawnMakesAsleep::
 	makevisible BS_EFFECT_BATTLER
 	end2
 
+BattleScript_EmbargoEndTurn::
+	printstring STRINGID_EMBARGOENDS
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_BufferEndTurn::
+	printstring STRINGID_BUFFERENDS
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
 BattleScript_MoveEffectPoison::
 	statusanimation BS_EFFECT_BATTLER
 	printfromtable gGotPoisonedStringIds
@@ -4222,25 +4290,6 @@ BattleScript_ShedSkinActivates::
 	waitmessage B_WAIT_TIME_LONG
 	updatestatusicon BS_ATTACKER
 	end3
-
-BattleScript_WeatherFormChanges::
-	setbyte sBATTLER, 0
-BattleScript_WeatherFormChangesLoop::
-	trycastformdatachange
-	addbyte sBATTLER, 1
-	jumpifbytenotequal sBATTLER, gBattlersCount, BattleScript_WeatherFormChangesLoop
-	return
-
-BattleScript_CastformChange::
-	call BattleScript_DoCastformChangeAnim
-	end3
-
-BattleScript_DoCastformChangeAnim::
-	docastformchangeanimation
-	waitstate
-	printstring STRINGID_PKMNTRANSFORMED
-	waitmessage B_WAIT_TIME_LONG
-	return
 
 BattleScript_AttackerAbilityStatRaise::
 	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_AttackerAbilityStatRaise_End

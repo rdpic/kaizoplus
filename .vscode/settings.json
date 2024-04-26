@@ -52,6 +52,7 @@
         "type_traits": "c",
         "xiosbase": "c",
         "battle_main.h": "c",
-        "battle_scripts.h": "c"
+        "battle_scripts.h": "c",
+        "string_util.h": "c"
     }
 }

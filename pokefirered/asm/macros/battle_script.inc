@@ -1266,6 +1266,16 @@
 	.byte 0xfb
 	.4byte \failInstr
 	.endm
+
+	.macro sethealblock failInstr:req
+	.byte 0xfc
+	.4byte \failInstr
+	.endm
+
+	.macro setgastroacid failInstr:req
+	.byte 0xfd
+	.4byte \failInstr
+	.endm
 	
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
@@ -1417,4 +1427,8 @@
 	.macro trypsychoshift failInstr:req
 	various BS_ATTACKER, VARIOUS_PSYCHO_SHIFT
 	.4byte \failInstr
+	.endm
+
+	.macro powertrick battler:req
+	various \battler, VARIOUS_POWER_TRICK
 	.endm

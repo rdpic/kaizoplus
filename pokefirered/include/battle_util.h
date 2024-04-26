@@ -9,6 +9,7 @@
 #define MOVE_LIMITATION_TORMENTED               (1 << 3)
 #define MOVE_LIMITATION_TAUNT                   (1 << 4)
 #define MOVE_LIMITATION_IMPRISON                (1 << 5)
+#define MOVE_LIMITATION_HEAL_BLOCK              (1 << 6)
 #define MOVE_LIMITATIONS_ALL                    0xFF
 
 #define ABILITYEFFECT_ON_SWITCHIN                0
@@ -74,9 +75,9 @@ void BattleScriptPush(const u8 *bsPtr);
 void BattleScriptPushCursor(void);
 void BattleScriptPop(void);
 u8 TrySetCantSelectMoveBattleScript(void);
-u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check);
+u8 CheckMoveLimitations(u32 battlerId, u8 unusableMoves, u8 check);
 bool8 AreAllMovesUnusable(void);
-u8 GetImprisonedMovesCount(u8 battlerId, u16 move);
+u8 GetImprisonedMovesCount(u32 battlerId, u16 move);
 u8 DoFieldEndTurnEffects(void);
 u8 DoBattlerEndTurnEffects(void);
 bool8 HandleWishPerishSongOnTurnEnd(void);
@@ -94,5 +95,8 @@ void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
 bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind);
+u32 GetMoveSlot(u16 *moves, u32 move);
+bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
+/* bool32 IsMoldBreakerTypeAbility(u32 ability); */
 
 #endif // GUARD_BATTLE_UTIL_H

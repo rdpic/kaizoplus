@@ -153,6 +153,9 @@
 #define STATUS3_INTIMIDATE_POKES        (1 << 19)
 #define STATUS3_TRACE                   (1 << 20)
 #define STATUS3_EMBARGO                 (1 << 21)
+#define STATUS3_HEAL_BLOCK              (1 << 22)
+#define STATUS3_POWER_TRICK             (1 << 23)
+#define STATUS3_GASTRO_ACID             (1 << 24)
 #define STATUS3_SEMI_INVULNERABLE       (STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER)
 
 // Not really sure what a "hitmarker" is.
