@@ -56,7 +56,9 @@ AI_CheckBadMove::
 	if_equal MOVE_POWER_DISCOURAGED, AI_CheckBadMove_CheckSoundproof
 
 AI_CBM_CheckIfNegatesType::
-	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_ability AI_TARGET
 	if_equal ABILITY_VOLT_ABSORB, CheckIfVoltAbsorbCancelsElectric
 	if_equal ABILITY_WATER_ABSORB, CheckIfWaterAbsorbCancelsWater
@@ -231,7 +233,9 @@ AI_CBM_Sleep::
 	end
 
 AI_CBM_Explosion::
-	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_ability AI_TARGET
 	if_equal ABILITY_DAMP, Score_Minus10
 	count_alive_pokemon AI_USER
@@ -250,7 +254,9 @@ AI_CBM_Nightmare::
 
 AI_CBM_DreamEater::
 	if_not_status AI_TARGET, STATUS1_SLEEP, Score_Minus10
-	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	end
 
 AI_CBM_BellyDrum::
@@ -368,7 +374,9 @@ AI_CBM_LightScreen::
 	end
 
 AI_CBM_OneHitKO::
-	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_ability AI_TARGET
 	if_equal ABILITY_STURDY, Score_Minus10
 	if_level_cond 1, Score_Minus10
@@ -379,7 +387,9 @@ AI_CBM_Magnitude::
 	if_equal ABILITY_LEVITATE, Score_Minus10
 
 AI_CBM_HighRiskForDamage::
-	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_ability AI_TARGET
 	if_not_equal ABILITY_WONDER_GUARD, AI_CBM_HighRiskForDamage_End
 	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CBM_HighRiskForDamage_End
@@ -408,7 +418,9 @@ AI_CBM_Reflect::
 	end
 
 AI_CBM_Paralyze::
-	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_target_type1
 	if_equal TYPE_ELECTRIC, Score_Minus10
 	get_target_type2
@@ -531,7 +543,9 @@ AI_CBM_Stockpile::
 	end
 
 AI_CBM_SpitUpAndSwallow::
-	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_stockpile_count AI_USER
 	if_equal 0, Score_Minus10
 	end
@@ -550,11 +564,11 @@ AI_CBM_WillOWisp::
 	if_equal ABILITY_WATER_VEIL, Score_Minus10
 	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
 	get_target_type1
-	if_equal TYPE_FIRE, Score_Minus10
-	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
-	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus10
-	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus10
-	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10  
+	if_equal TYPE_FIRE, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
+	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus30
 	end
 
 AI_CBM_HelpingHand::
@@ -584,21 +598,21 @@ AI_CBM_Refresh::
 	end
 
 AI_CBM_MudSport::
-	if_status3 AI_USER, STATUS3_MUDSPORT, Score_Minus10
+	if_status3 AI_USER, STATUS3_MUDSPORT, Score_Minus30
 	end
 
 AI_CBM_Tickle::
-	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
-	if_stat_level_equal AI_TARGET, STAT_DEF, 0, Score_Minus8
+	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus30
+	if_stat_level_equal AI_TARGET, STAT_DEF, 0, Score_Minus30
 	end
 
 AI_CBM_CosmicPower::
-	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus10
-	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus8
+	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus30
+	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus30
 	end
 
 AI_CBM_BulkUp::
-	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus30
 	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus8
 	end
 
@@ -607,17 +621,17 @@ AI_CBM_WaterSport::
 	end
 
 AI_CBM_CalmMind::
-	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus30
 	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus8
 	end
 
 AI_CBM_DragonDance::
-	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus30
 	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus8
 	end
 
 AI_CBM_QuiverDance::
-	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus30
 	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus8
 	end
 
@@ -632,17 +646,17 @@ AI_CBM_StatSwap::
 	end
 
 AI_CBM_AquaRing::
-	if_status3 AI_USER, STATUS3_AQUA_RING, Score_Minus10
+	if_status3 AI_USER, STATUS3_AQUA_RING, Score_Minus30
 	end
 
 AI_CBM_LuckyChant::
-	if_side_affecting AI_USER, SIDE_STATUS_LUCKY_CHANT, Score_Minus10
+	if_side_affecting AI_USER, SIDE_STATUS_LUCKY_CHANT, Score_Minus30
 	end
 
 AI_CBM_WorrySeed::
 	get_ability AI_TARGET
-	if_equal ABILITY_INSOMNIA, Score_Minus10
-	if_equal ABILITY_VITAL_SPIRIT, Score_Minus10
+	if_equal ABILITY_INSOMNIA, Score_Minus30
+	if_equal ABILITY_VITAL_SPIRIT, Score_Minus30
 	end
 
 Score_Minus1::
@@ -671,6 +685,10 @@ Score_Minus10::
 
 Score_Minus12::
 	score -12
+	end
+
+Score_Minus30::
+	score -30
 	end
 
 Score_Plus1::

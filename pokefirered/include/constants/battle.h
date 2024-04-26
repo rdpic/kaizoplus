@@ -199,6 +199,17 @@
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 #define SIDE_STATUS_LUCKY_CHANT      (1 << 10)
 
+// Field affecting statuses.
+#define STATUS_FIELD_TRICK_ROOM                     (1 << 0)
+/* #define STATUS_FIELD_MAGIC_ROOM                     (1 << 1)
+#define STATUS_FIELD_WONDER_ROOM                    (1 << 2)
+#define STATUS_FIELD_GRASSY_TERRAIN                 (1 << 3)
+#define STATUS_FIELD_MISTY_TERRAIN                  (1 << 4)
+#define STATUS_FIELD_ELECTRIC_TERRAIN               (1 << 5)
+#define STATUS_FIELD_PSYCHIC_TERRAIN                (1 << 6)
+#define STATUS_FIELD_ION_DELUGE                     (1 << 7)
+#define STATUS_FIELD_FAIRY_LOCK                     (1 << 8) */
+
 // Flags describing move's result
 #define MOVE_RESULT_MISSED             (1 << 0)
 #define MOVE_RESULT_SUPER_EFFECTIVE    (1 << 1)
@@ -289,8 +300,7 @@
 #define MOVE_EFFECT_SP_ATK_TWO_DOWN     59
 #define MOVE_EFFECT_REMOVE_SLEEP        60
 #define MOVE_EFFECT_DEF_SPDEF_DOWN      61
-#define MOVE_EFFECT_SECRET_POWER        62
-#define NUM_MOVE_EFFECTS                63
+#define NUM_MOVE_EFFECTS                62
 
 #define MOVE_EFFECT_AFFECTS_USER        (1 << 6) // 64
 #define MOVE_EFFECT_CERTAIN             (1 << 7) // 128

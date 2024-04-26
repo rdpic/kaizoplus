@@ -234,6 +234,7 @@ extern const u8 BattleScript_MoveUsedHealBlockPrevents[];
 extern const u8 BattleScript_BufferEndTurn[];
 extern const u8 BattleScript_LuckyChantEnds[];
 extern const u8 BattleScript_AquaRingHeal[];
+extern const u8 BattleScript_TrickRoomEnds[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];

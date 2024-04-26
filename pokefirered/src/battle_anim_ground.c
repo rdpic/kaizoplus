@@ -25,6 +25,8 @@ static void AnimTask_ShakeTerrain(u8 taskId);
 static void AnimTask_ShakeBattlers(u8 taskId);
 static void SetBattlersXOffsetForShake(struct Task *task);
 static void WaitForFissureCompletion(u8 taskId);
+static void AnimSludgeBombHitParticle(struct Sprite *);
+static void AnimSludgeBombHitParticle_Step(struct Sprite *);
 
 static const union AffineAnimCmd sAffineAnim_Bonemerang[] =
 {
@@ -134,6 +136,28 @@ const struct SpriteTemplate gDirtMoundSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimDigDirtMound,
+};
+
+const struct SpriteTemplate gMudBombSplash =
+{
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSludgeBombHitParticle,
+};
+
+const struct SpriteTemplate gMudBombToss =
+{
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sAnims_MudSlapMud,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimThrowProjectile,
 };
 
 // Moves a bone projectile towards the target mon, which moves like
@@ -749,4 +773,31 @@ static void WaitForFissureCompletion(u8 taskId)
         gBattle_BG3_X = task->data[1];
         gBattle_BG3_Y = task->data[2];
     }
+}
+
+static void AnimSludgeBombHitParticle(struct Sprite *sprite)
+{
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[1] = sprite->x;
+    sprite->data[2] = sprite->x + gBattleAnimArgs[0];
+    sprite->data[3] = sprite->y;
+    sprite->data[4] = sprite->y + gBattleAnimArgs[1];
+
+    InitSpriteDataForLinearTranslation(sprite);
+
+    sprite->data[5] = sprite->data[1] / gBattleAnimArgs[2];
+    sprite->data[6] = sprite->data[2] / gBattleAnimArgs[2];
+
+    sprite->callback = AnimSludgeBombHitParticle_Step;
+}
+
+static void AnimSludgeBombHitParticle_Step(struct Sprite *sprite)
+{
+    TranslateSpriteLinearFixedPoint(sprite);
+
+    sprite->data[1] -= sprite->data[5];
+    sprite->data[2] -= sprite->data[6];
+
+    if (!sprite->data[0])
+        DestroyAnimSprite(sprite);
 }

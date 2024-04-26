@@ -308,6 +308,16 @@
 #define ANIM_TAG_WORRY_SEED                 (ANIM_SPRITES_START + 298)
 #define ANIM_TAG_SMALL_CLOUD                (ANIM_SPRITES_START + 299)
 #define ANIM_TAG_POISON_JAB                 (ANIM_SPRITES_START + 300)
+#define ANIM_TAG_WHITE_STREAK               (ANIM_SPRITES_START + 301)
+#define ANIM_TAG_PURPLE_JAB                 (ANIM_SPRITES_START + 302)
+#define ANIM_TAG_DRAGON_PULSE               (ANIM_SPRITES_START + 303)
+#define ANIM_TAG_POWER_GEM                  (ANIM_SPRITES_START + 304)
+#define ANIM_TAG_ENERGY_BALL                (ANIM_SPRITES_START + 305)
+#define ANIM_TAG_QUICK_GUARD_HAND           (ANIM_SPRITES_START + 306)
+#define ANIM_TAG_PSYCHO_CUT                 (ANIM_SPRITES_START + 307)
+#define ANIM_TAG_FLASH_CANNON_BALL          (ANIM_SPRITES_START + 308)
+#define ANIM_TAG_FAIRY_LOCK_CHAINS          (ANIM_SPRITES_START + 309)
+#define ANIM_TAG_WATER_GUN                  (ANIM_SPRITES_START + 310)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -357,6 +367,11 @@
 #define BG_SOLAR_BEAM_OPPONENT 24
 #define BG_SOLAR_BEAM_PLAYER 25
 #define BG_SOLAR_BEAM_CONTESTS 26
+#define BG_AURA_SPHERE 27
+#define BG_FOCUS_BLAST 28
+#define BG_GIGA_IMPACT_OPPONENT 29
+#define BG_GIGA_IMPACT_PLAYER 30
+#define BG_TRICK_ROOM 31
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_CASTFORM_CHANGE          0

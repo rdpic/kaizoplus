@@ -441,6 +441,8 @@ static const u8 sText_AquaRingHeal[] = _("AQUA RING restored\n{B_ATK_NAME_WITH_P
 static const u8 sText_PkmnAcquiredAbility[] = _("{B_DEF_NAME_WITH_PREFIX} acquired\n{B_DEF_ABILITY}!");
 static const u8 sText_Electromagnetism[] = _("electromagnetism");
 static const u8 sText_PkmnLevitatedOnElectromagnetism[] = _("{B_ATK_NAME_WITH_PREFIX} levitated on\nelectromagnetism!");
+static const u8 sText_PkmnTwistedDimensions[] = _("{B_ATK_NAME_WITH_PREFIX} twisted\nthe dimensions!");
+static const u8 sText_TrickRoomEnds[] = _("The twisted dimensions returned to\nnormal!");
 
 static const u8 sText_HP2[] = _("HP");
 static const u8 sText_Attack2[] = _("ATTACK");
@@ -923,6 +925,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNACQUIREDABILITY - BATTLESTRINGS_TABLE_START]           = sText_PkmnAcquiredAbility,
     [STRINGID_ELECTROMAGNETISM - BATTLESTRINGS_TABLE_START]              = sText_Electromagnetism,
     [STRINGID_PKMNLEVITATEDONELECTROMAGNETISM - BATTLESTRINGS_TABLE_START] = sText_PkmnLevitatedOnElectromagnetism,
+    [STRINGID_PKMNTWISTEDDIMENSIONS - BATTLESTRINGS_TABLE_START]         = sText_PkmnTwistedDimensions,
+    [STRINGID_TRICKROOMENDS - BATTLESTRINGS_TABLE_START]                 = sText_TrickRoomEnds,
 };
 
 const u16 gStatusConditionsStringIds[] =
@@ -1309,6 +1313,14 @@ const u16 gTrappingMoves[NUM_TRAPPING_MOVES + 1] =
     MOVE_WHIRLPOOL,
     MOVE_SAND_TOMB,
     0xFFFF // Never read
+};
+
+const u16 gRoomsStringIds[] =
+{
+    STRINGID_PKMNTWISTEDDIMENSIONS, STRINGID_TRICKROOMENDS,
+    /* STRINGID_SWAPSDEFANDSPDEFOFALLPOKEMON, STRINGID_WONDERROOMENDS,
+    STRINGID_HELDITEMSLOSEEFFECTS, STRINGID_MAGICROOMENDS, */
+    STRINGID_EMPTYSTRING3
 };
 
 const u8 gText_PkmnIsEvolving[] = _("What?\n{STR_VAR_1} is evolving!");

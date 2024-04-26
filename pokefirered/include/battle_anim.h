@@ -184,6 +184,8 @@ extern const union AnimCmd *const gMusicNotesAnimTable[];
 extern const u8 *const gBattleAnims_StatusConditions[];
 extern const u8 *const gBattleAnims_Moves[];
 extern const u16 gMovesWithQuietBGM[];
+extern const union AffineAnimCmd* const sSpriteAffineAnimTable_HydroCannonBall[];
+extern const union AffineAnimCmd sSpriteAffineAnim_HydroCannonBall[];
 
 void MoveBattlerSpriteToBG(u8 battlerId, u8);
 void ResetBattleAnimBg(u8);
@@ -317,5 +319,6 @@ void AnimWaterPulseRing(struct Sprite *sprite);
 u8 SmokescreenImpact(s16 x, s16 y, u8 a3);
 void InitStatsChangeAnimation(u8 taskId);
 void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 arg4, u8 arg5, u8 arg6, u8 arg7, const u32 *gfx, const u32 *tilemap, const u32 *palette);
+void AnimDracoMeteorRock(struct Sprite *sprite);
 
 #endif // GUARD_BATTLE_ANIM_H

@@ -267,6 +267,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectWorrySeed				 @ EFFECT_WORRY_SEED
 	.4byte BattleScript_EffectSuckerPunch			 @ EFFECT_SUCKER_PUNCH
 	.4byte BattleScript_EffectMagnetRise 			 @ EFFECT_MAGNET_RISE
+	.4byte BattleScript_EffectTrickRoom				 @ EFFECT_TRICK_ROOM
+
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -3218,6 +3220,17 @@ BattleScript_EffectMagnetRise::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectTrickRoom::
+	attackcanceler
+	attackstring
+	ppreduce
+	setroom
+	attackanimation
+	waitanimation
+	printfromtable gRoomsStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_FaintAttacker::
 	playfaintcry BS_ATTACKER
 	pause B_WAIT_TIME_LONG
@@ -4311,6 +4324,11 @@ BattleScript_BufferEndTurn::
 
 BattleScript_LuckyChantEnds::
 	printstring STRINGID_LUCKYCHANTENDS
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_TrickRoomEnds::
+	printstring STRINGID_TRICKROOMENDS
 	waitmessage B_WAIT_TIME_LONG
 	end2
 

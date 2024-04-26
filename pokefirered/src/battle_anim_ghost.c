@@ -42,6 +42,9 @@ static void AnimTask_GhostGetOut_Step1(u8 taskId);
 static void AnimTask_GhostGetOut_Step2(u8 taskId);
 static void AnimTask_GhostGetOut_Step3(u8 taskId);
 static void AnimMonMoveCircular_Step(struct Sprite *sprite);
+static void AnimAirWaveCrescent(struct Sprite *sprite);
+static void AnimNeedleArmSpike(struct Sprite *);
+static void AnimNeedleArmSpike_Step(struct Sprite *);
 
 static const union AffineAnimCmd sAffineAnim_ConfuseRayBallBounce[] =
 {
@@ -97,6 +100,106 @@ const struct SpriteTemplate gShadowBallSpriteTemplate =
     .images = NULL,
     .affineAnims = sAffineAnims_ShadowBall,
     .callback = AnimShadowBall,
+};
+
+const struct SpriteTemplate gEnergyBallSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_ENERGY_BALL,
+    .paletteTag = ANIM_TAG_ENERGY_BALL,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = AnimShadowBall,
+};
+
+const struct SpriteTemplate gFlashCannonBallMovementTemplate =
+{
+    .tileTag = ANIM_TAG_FLASH_CANNON_BALL,
+    .paletteTag = ANIM_TAG_FLASH_CANNON_BALL,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = AnimShadowBall
+};
+
+static const union AnimCmd sAffineAnim_AirWaveCrescent[] =
+{
+    ANIMCMD_FRAME(0, 3),
+    ANIMCMD_FRAME(0, 3, .hFlip = TRUE),
+    ANIMCMD_FRAME(0, 3, .vFlip = TRUE),
+    ANIMCMD_FRAME(0, 3, .vFlip = TRUE, .hFlip = TRUE),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sAffineAnims_AirWaveCrescent[] =
+{
+    sAffineAnim_AirWaveCrescent,
+};
+
+static const union AnimCmd sRazorLeafParticleAnimCmds1[] =
+{
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_FRAME(12, 5),
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_FRAME(20, 5),
+    ANIMCMD_FRAME(16, 5),
+    ANIMCMD_FRAME(12, 5),
+    ANIMCMD_FRAME(8, 5),
+    ANIMCMD_FRAME(4, 5),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd sRazorLeafParticleAnimCmds2[] =
+{
+    ANIMCMD_FRAME(24, 5),
+    ANIMCMD_FRAME(28, 5),
+    ANIMCMD_FRAME(32, 5),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sRazorLeafParticleAnimTable[] =
+{
+    sRazorLeafParticleAnimCmds1,
+    sRazorLeafParticleAnimCmds2,
+};
+
+static const union AffineAnimCmd sAffineAnim_PoisonProjectile[] =
+{
+    AFFINEANIMCMD_FRAME(0x160, 0x160, 0, 0),
+    AFFINEANIMCMD_FRAME(-0xA, -0xA, 0, 10),
+    AFFINEANIMCMD_FRAME(0xA, 0xA, 0, 10),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+static const union AffineAnimCmd *const sAffineAnims_PoisonProjectile[] =
+{
+    sAffineAnim_PoisonProjectile,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_LeafStorm =
+{
+    .tileTag = ANIM_TAG_RAZOR_LEAF,
+    .paletteTag = ANIM_TAG_RAZOR_LEAF,
+    .oam = &gOamData_AffineOff_ObjNormal_32x16,
+    .anims = sAffineAnims_AirWaveCrescent,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimAirWaveCrescent,
+};
+
+const struct SpriteTemplate gBattleAnimSpriteTemplate_LeafStorm2 =
+{
+    .tileTag = ANIM_TAG_LEAF,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
+    .anims = sRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_PoisonProjectile,
+    .callback = AnimNeedleArmSpike,
 };
 
 const union AnimCmd sAnim_Lick[] =
@@ -1480,5 +1583,112 @@ static void AnimMonMoveCircular_Step(struct Sprite *sprite)
         gSprites[sprite->data[5]].y2 = 0;
         gSprites[sprite->data[5]].y -= 8;
         sprite->callback = DestroySpriteAndMatrix;
+    }
+}
+
+static void AnimAirWaveCrescent(struct Sprite *sprite)
+{
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    {
+        gBattleAnimArgs[0] = -gBattleAnimArgs[0];
+        gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+        gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+        gBattleAnimArgs[3] = -gBattleAnimArgs[3];
+    }
+    if (IsContest())
+    {
+        gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+        gBattleAnimArgs[3] = -gBattleAnimArgs[3];
+    }
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
+    sprite->data[0] = gBattleAnimArgs[4];
+    if (gBattleAnimArgs[6] == 0)
+    {
+        sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+        sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+    }
+    else
+    {
+        SetAverageBattlerPositions(gBattleAnimTarget, 1, &sprite->data[2], &sprite->data[4]);
+    }
+    sprite->data[2] = sprite->data[2] + gBattleAnimArgs[2];
+    sprite->data[4] = sprite->data[4] + gBattleAnimArgs[3];
+    sprite->callback = StartAnimLinearTranslation;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+    SeekSpriteAnim(sprite, gBattleAnimArgs[5]);
+}
+
+static void AnimNeedleArmSpike(struct Sprite* sprite)
+{
+    u8 a;
+    u8 b;
+    u16 c;
+    u16 x;
+    u16 y;
+
+    if (gBattleAnimArgs[4] == 0)
+    {
+        DestroyAnimSprite(sprite);
+    }
+    else
+    {
+        if (gBattleAnimArgs[0] == 0)
+        {
+            a = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+            b = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+        }
+        else
+        {
+            a = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+            b = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+        }
+
+        sprite->data[0] = gBattleAnimArgs[4];
+        if (gBattleAnimArgs[1] == 0)
+        {
+            sprite->x = gBattleAnimArgs[2] + a;
+            sprite->y = gBattleAnimArgs[3] + b;
+            sprite->data[5] = a;
+            sprite->data[6] = b;
+        }
+        else
+        {
+            sprite->x = a;
+            sprite->y = b;
+            sprite->data[5] = gBattleAnimArgs[2] + a;
+            sprite->data[6] = gBattleAnimArgs[3] + b;
+        }
+
+        x = sprite->x;
+        sprite->data[1] = x * 16;
+        y = sprite->y;
+        sprite->data[2] = y * 16;
+        sprite->data[3] = (sprite->data[5] - sprite->x) * 16 / gBattleAnimArgs[4];
+        sprite->data[4] = (sprite->data[6] - sprite->y) * 16 / gBattleAnimArgs[4];
+        c = ArcTan2Neg(sprite->data[5] - x, sprite->data[6] - y);
+        if (IsContest())
+            c -= 0x8000;
+
+        TrySetSpriteRotScale(sprite, 0, 0x100, 0x100, c);
+        sprite->callback = AnimNeedleArmSpike_Step;
+    }
+}
+
+static void AnimNeedleArmSpike_Step(struct Sprite* sprite)
+{
+    if (sprite->data[0])
+    {
+        sprite->data[1] += sprite->data[3];
+        sprite->data[2] += sprite->data[4];
+        sprite->x = sprite->data[1] >> 4 ;
+        sprite->y = sprite->data[2] >> 4 ;
+        sprite->data[0]--;
+    }
+    else
+    {
+        DestroySpriteAndMatrix(sprite);
     }
 }

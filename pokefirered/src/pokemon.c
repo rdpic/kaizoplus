@@ -16,6 +16,7 @@
 #include "evolution_scene.h"
 #include "battle_message.h"
 #include "battle_util.h"
+#include "battle_scripts.h"
 #include "link.h"
 #include "m4a.h"
 #include "pokedex.h"

@@ -58,6 +58,7 @@
         "cstdlib": "c",
         "valarray": "c",
         "queue": "c",
-        "stack": "c"
+        "stack": "c",
+        "functional": "c"
     }
 }

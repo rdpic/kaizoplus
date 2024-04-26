@@ -5699,6 +5699,16 @@ extern const u32 gBattleAnimSpriteGfx_ColoredOrbs[];
 extern const u32 gBattleAnimSpriteGfx_WorrySeed[];
 extern const u32 gBattleAnimSpriteGfx_SmallCloud[];
 extern const u32 gBattleAnimSpriteGfx_PoisonJab[];
+extern const u32 gBattleAnimSpriteGfx_WhiteStreak[];
+extern const u32 gBattleAnimSpriteGfx_PurpleJab[];
+extern const u32 gBattleAnimSpriteGfx_DragonPulse[];
+extern const u32 gBattleAnimSpriteGfx_PowerGem[];
+extern const u32 gBattleAnimSpriteGfx_EnergyBall[];
+extern const u32 gBattleAnimSpriteGfx_QuickGuard[];
+extern const u32 gBattleAnimSpriteGfx_PsychoCut[];
+extern const u32 gBattleAnimSpriteGfx_FlashCannonBall[];
+extern const u32 gBattleAnimSpriteGfx_FairyLockChains[];
+extern const u32 gBattleAnimSpriteGfx_WaterGun[];
 
 // battle anim particle pals
 extern const u32 gBattleAnimSpritePal_Bone[];
@@ -5958,6 +5968,16 @@ extern const u32 gBattleAnimSpritePal_ColoredOrbs[];
 extern const u32 gBattleAnimSpritePal_WorrySeed[];
 extern const u32 gBattleAnimSpritePal_SmallCloud[];
 extern const u32 gBattleAnimSpritePal_PoisonJab[];
+extern const u32 gBattleAnimSpritePal_WhiteStreak[];
+extern const u32 gBattleAnimSpritePal_PurpleJab[];
+extern const u32 gBattleAnimSpritePal_DragonPulse[];
+extern const u32 gBattleAnimSpritePal_PowerGem[];
+extern const u32 gBattleAnimSpritePal_EnergyBall[];
+extern const u32 gBattleAnimSpritePal_QuickGuard[];
+extern const u32 gBattleAnimSpritePal_PsychoCut[];
+extern const u32 gBattleAnimSpritePal_FlashCannonBall[];
+extern const u32 gBattleAnimSpritePal_DracoMeteor[];
+extern const u32 gBattleAnimSpritePal_WaterGun[];
 
 // battle anim task
 extern const u32 gUnusedLevelupAnimationGfx[];
@@ -5987,6 +6007,9 @@ extern const u32 gBattleAnimBgImage_InAir[];
 extern const u32 gBattleAnimBgImage_Aurora[];
 extern const u32 gBattleAnimBgImage_Fissure[];
 extern const u32 gBattleAnimBgImage_Surf[];
+extern const u32 gBattleAnimBgImage_FocusBlast[];
+extern const u32 gBattleAnimBgImage_GigaImpact[];
+extern const u32 gBattleAnimBgImage_TrickRoom[];
 extern const u32 gBattleAnimBgPalette_Dark[];
 extern const u32 gBattleAnimBgPalette_Ghost[];
 extern const u32 gBattleAnimBgPalette_Psychic[];
@@ -6005,6 +6028,10 @@ extern const u32 gBattleAnimBgPalette_Fissure[];
 extern const u32 gBattleAnimBgPalette_Bug[];
 extern const u32 gBattleAnimBgPalette_SolarBeam[];
 extern const u32 gBattleAnimBgPalette_Surf[];
+extern const u32 gBattleAnimBgPalette_FocusBlast[];
+extern const u32 gBattleAnimBgPalette_AuraSphere[];
+extern const u32 gBattleAnimBgPalette_GigaImpact[];
+extern const u32 gBattleAnimBgPalette_TrickRoom[];
 extern const u32 gBattleAnimBgTilemap_Dark[];
 extern const u32 gBattleAnimBgTilemap_Ghost[];
 extern const u32 gBattleAnimBgTilemap_Psychic[];
@@ -6027,6 +6054,10 @@ extern const u32 gBattleAnimBgTilemap_Fissure[];
 extern const u32 gBattleAnimBgTilemap_SurfOpponent[];
 extern const u32 gBattleAnimBgTilemap_SurfPlayer[];
 extern const u32 gBattleAnimBgTilemap_SurfContest[];
+extern const u32 gBattleAnimBgTilemap_FocusBlast[];
+extern const u32 gBattleAnimBgTilemap_GigaImpactPlayer[];
+extern const u32 gBattleAnimBgTilemap_GigaImpactOpponent[];
+extern const u32 gBattleAnimBgTilemap_TrickRoom[];
 
 // dark
 extern const u32 gMetalShineGfx[];

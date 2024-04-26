@@ -258,6 +258,17 @@ struct SideTimer
 
 extern struct SideTimer gSideTimers[];
 
+struct FieldTimer
+{
+    u8 trickRoomTimer;
+    u8 magicRoomTimer;
+    u8 wonderRoomTimer;
+    u8 terrainTimer;
+    u8 fairyLockTimer;
+};
+
+extern struct FieldTimer gFieldTimers;
+
 struct WishFutureKnock
 {
     u8 futureSightCounter[MAX_BATTLERS_COUNT];
@@ -738,6 +749,7 @@ extern u16 gRandomTurnNumber;
 extern u8 gBattlerAbility;
 extern s32 gBideDmg[MAX_BATTLERS_COUNT];
 extern u8 gBideTarget[MAX_BATTLERS_COUNT];
+extern u32 gFieldStatuses;
 
 static inline u32 GetBattlerPosition(u32 battler)
 {

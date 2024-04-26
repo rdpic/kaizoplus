@@ -1147,9 +1147,8 @@
 	.4byte \param0
 	.endm
 
-	.macro trygetintimidatetarget param0:req
+	.macro setroom
 	.byte 0xe1
-	.4byte \param0
 	.endm
 
 	.macro switchoutabilities battler:req
