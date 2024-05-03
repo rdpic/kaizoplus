@@ -34,6 +34,10 @@ static void AnimDiveBall_Step2(struct Sprite *sprite);
 static void AnimSprayWaterDroplet_Step(struct Sprite *sprite);
 static void AnimUnusedFlashingLight_Step(struct Sprite *sprite);
 static void AnimSkyAttackBird_Step(struct Sprite *sprite);
+void InitSpritePosToAnimTargetsCentre(struct Sprite *sprite, bool32 respectMonPicOffsets);
+static void AnimEllipticalGustCentered(struct Sprite *sprite);
+static void AnimParticleInVortex(struct Sprite *sprite);
+static void AnimParticleInVortex_Step(struct Sprite *sprite);
 
 const struct SpriteTemplate gEllipticalGustSpriteTemplate =
 {
@@ -355,6 +359,80 @@ const struct SpriteTemplate gSkyAttackBirdSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSkyAttackBird,
+};
+
+const struct SpriteTemplate gEllipticalGustCenteredSpriteTemplate = 
+{
+    .tileTag = ANIM_TAG_GUST,
+    .paletteTag = ANIM_TAG_GUST,
+    .oam = &gOamData_AffineOff_ObjNormal_32x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimEllipticalGustCentered,
+};
+
+//fusion bolt
+static const union AffineAnimCmd sSpriteAffineAnim_DrakeStrikePlayer[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 0xb9, 1),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_DrakeStrikeOpponent[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 0x50, 1),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd* const sAffineAnimCmdTable_DrakeStriking[] =  //devastating drake, fusion bolt
+{
+    sSpriteAffineAnim_DrakeStrikePlayer,
+    sSpriteAffineAnim_DrakeStrikeOpponent,
+};
+
+const struct SpriteTemplate gFusionBoltBallTemplate =
+{
+    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .oam = &gOamData_AffineNormal_ObjNormal_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnimCmdTable_DrakeStriking,
+    .callback = AnimFlyBallAttack
+};
+
+//dragon ascent
+static const union AffineAnimCmd sAffineAnimCmd_Drake[] =
+{
+    AFFINEANIMCMD_FRAME(0, 0, 0, 1), //drake faces up
+    AFFINEANIMCMD_END,
+};
+static const union AffineAnimCmd* const sAffineAnimCmdTable_DrakeFaceNorth[] =
+{
+    sAffineAnimCmd_Drake,
+    sAffineAnimCmd_Drake,
+};
+const struct SpriteTemplate gDragonAscentFlyUpTemplate =
+{
+    .tileTag = ANIM_TAG_DRAGON_ASCENT,
+    .paletteTag = ANIM_TAG_DRAGON_ASCENT,
+    .oam = &gOamData_AffineNormal_ObjNormal_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnimCmdTable_DrakeFaceNorth,
+    .callback = AnimParticleInVortex
+};
+
+const struct SpriteTemplate gDragonAscentDrakeTemplate =
+{
+    .tileTag = ANIM_TAG_DRAGON_ASCENT,
+    .paletteTag = ANIM_TAG_DRAGON_ASCENT,
+    .oam = &gOamData_AffineNormal_ObjNormal_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnimCmdTable_DrakeStriking,
+    .callback = AnimFlyBallAttack
 };
 
 static void AnimEllipticalGust(struct Sprite *sprite)
@@ -1286,4 +1364,53 @@ static void AnimTask_SetAttackerVisibility(u8 taskId)
         gSprites[spriteId].invisible = FALSE;
     }
     DestroyAnimVisualTask(taskId);
+}
+
+void InitSpritePosToAnimTargetsCentre(struct Sprite *sprite, bool32 respectMonPicOffsets)
+{
+    if (!respectMonPicOffsets)
+    {
+        sprite->x = (GetBattlerSpriteCoord2(gBattleAnimTarget, BATTLER_COORD_X)
+                       +  GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_X)) / 2;
+        sprite->y = (GetBattlerSpriteCoord2(gBattleAnimTarget, BATTLER_COORD_Y)
+                       +  GetBattlerSpriteCoord2(BATTLE_PARTNER(gBattleAnimTarget), BATTLER_COORD_Y)) / 2;
+    }
+
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
+    sprite->y += gBattleAnimArgs[1];
+}
+
+static void AnimEllipticalGustCentered(struct Sprite *sprite)
+{
+    InitSpritePosToAnimTargetsCentre(sprite, FALSE);
+    sprite->y += 20;
+    sprite->data[1] = 191;
+    sprite->callback = AnimEllipticalGust_Step;
+    sprite->callback(sprite);
+}
+
+// Swirls particle in vortex. Used for moves like Fire Spin or Sand Tomb
+static void AnimParticleInVortex(struct Sprite *sprite)
+{
+    if (gBattleAnimArgs[6] == 0)
+        InitSpritePosToAnimAttacker(sprite, 0);
+    else
+        InitSpritePosToAnimTarget(sprite, FALSE);
+    sprite->data[0] = gBattleAnimArgs[3];
+    sprite->data[1] = gBattleAnimArgs[2];
+    sprite->data[2] = gBattleAnimArgs[4];
+    sprite->data[3] = gBattleAnimArgs[5];
+    sprite->callback = AnimParticleInVortex_Step;
+}
+
+static void AnimParticleInVortex_Step(struct Sprite *sprite)
+{
+    sprite->data[4] += sprite->data[1];
+    sprite->y2 = -(sprite->data[4] >> 8);
+    sprite->x2 = Sin(sprite->data[5], sprite->data[3]);
+    sprite->data[5] = (sprite->data[5] + sprite->data[2]) & 0xFF;
+    if (--sprite->data[0] == -1)
+    {
+        DestroyAnimSprite(sprite);
+    }
 }

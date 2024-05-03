@@ -30,6 +30,7 @@
         .safariZoneFleeRate = 0,                                       \
         .bodyColor = BODY_COLOR_BLACK,                                 \
         .noFlip = FALSE,                                               \
+        .levelUpLearnset = sNoneLevelUpLearnset,                       \
     }
 
 const struct SpeciesInfo gSpeciesInfo[] =
@@ -63,6 +64,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBulbasaurLevelUpLearnset,
     },
     [SPECIES_IVYSAUR] =
     {
@@ -92,6 +94,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sIvysaurLevelUpLearnset,
     },
     [SPECIES_VENUSAUR] =
     {
@@ -121,6 +124,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sVenusaurLevelUpLearnset,
     },
     [SPECIES_CHARMANDER] =
     {
@@ -146,10 +150,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = 255,
         .growthRate = GROWTH_FLUCTUATING,
         .eggGroups = {EGG_GROUP_MONSTER, EGG_GROUP_DRAGON},
-        .abilities = {ABILITY_WATER_ABSORB, ABILITY_NONE},
+        .abilities = {ABILITY_DRIZZLE, ABILITY_NONE},
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sCharmanderLevelUpLearnset,
     },
     [SPECIES_CHARMELEON] =
     {
@@ -179,6 +184,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sCharmeleonLevelUpLearnset,
     },
     [SPECIES_CHARIZARD] =
     {
@@ -208,6 +214,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sCharizardLevelUpLearnset,
     },
     [SPECIES_SQUIRTLE] =
     {
@@ -233,10 +240,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = 255,
         .growthRate = GROWTH_FLUCTUATING,
         .eggGroups = {EGG_GROUP_MONSTER, EGG_GROUP_WATER_1},
-        .abilities = {ABILITY_TORRENT, ABILITY_NONE},
+        .abilities = {ABILITY_MYSTIC_GUARD, ABILITY_NONE},
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSquirtleLevelUpLearnset,
     },
     [SPECIES_WARTORTLE] =
     {
@@ -266,6 +274,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sWartortleLevelUpLearnset,
     },
     [SPECIES_BLASTOISE] =
     {
@@ -295,6 +304,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sBlastoiseLevelUpLearnset,
     },
     [SPECIES_CATERPIE] =
     {
@@ -324,6 +334,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sCaterpieLevelUpLearnset,
     },
     [SPECIES_METAPOD] =
     {
@@ -353,6 +364,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sMetapodLevelUpLearnset,
     },
     [SPECIES_BUTTERFREE] =
     {
@@ -382,6 +394,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sButterfreeLevelUpLearnset,
     },
     [SPECIES_WEEDLE] =
     {
@@ -411,6 +424,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sWeedleLevelUpLearnset,
     },
     [SPECIES_KAKUNA] =
     {
@@ -440,6 +454,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sKakunaLevelUpLearnset,
     },
     [SPECIES_BEEDRILL] =
     {
@@ -469,6 +484,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sBeedrillLevelUpLearnset,
     },
     [SPECIES_PIDGEY] =
     {
@@ -498,6 +514,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPidgeyLevelUpLearnset,
     },
     [SPECIES_PIDGEOTTO] =
     {
@@ -527,6 +544,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPidgeottoLevelUpLearnset,
     },
     [SPECIES_PIDGEOT] =
     {
@@ -556,6 +574,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPidgeotLevelUpLearnset,
     },
     [SPECIES_RATTATA] =
     {
@@ -585,6 +604,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sRattataLevelUpLearnset,
     },
     [SPECIES_RATICATE] =
     {
@@ -614,6 +634,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sRaticateLevelUpLearnset,
     },
     [SPECIES_SPEAROW] =
     {
@@ -643,6 +664,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSpearowLevelUpLearnset,
     },
     [SPECIES_FEAROW] =
     {
@@ -672,6 +694,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sFearowLevelUpLearnset,
     },
     [SPECIES_EKANS] =
     {
@@ -701,6 +724,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sEkansLevelUpLearnset,
     },
     [SPECIES_ARBOK] =
     {
@@ -730,6 +754,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sArbokLevelUpLearnset,
     },
     [SPECIES_PIKACHU] =
     {
@@ -759,6 +784,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sPikachuLevelUpLearnset,
     },
     [SPECIES_RAICHU] =
     {
@@ -788,6 +814,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sRaichuLevelUpLearnset,
     },
     [SPECIES_SANDSHREW] =
     {
@@ -817,6 +844,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sSandshrewLevelUpLearnset,
     },
     [SPECIES_SANDSLASH] =
     {
@@ -846,6 +874,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sSandslashLevelUpLearnset,
     },
     [SPECIES_NIDORAN_F] =
     {
@@ -875,6 +904,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 50,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sNidoranFLevelUpLearnset,
     },
     [SPECIES_NIDORINA] =
     {
@@ -904,6 +934,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 75,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sNidorinaLevelUpLearnset,
     },
     [SPECIES_NIDOQUEEN] =
     {
@@ -933,6 +964,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sNidoqueenLevelUpLearnset,
     },
     [SPECIES_NIDORAN_M] =
     {
@@ -962,6 +994,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 50,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sNidoranMLevelUpLearnset,
     },
     [SPECIES_NIDORINO] =
     {
@@ -991,6 +1024,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 75,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sNidorinoLevelUpLearnset,
     },
     [SPECIES_NIDOKING] =
     {
@@ -1020,6 +1054,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sNidokingLevelUpLearnset,
     },
     [SPECIES_CLEFAIRY] =
     {
@@ -1049,6 +1084,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sClefairyLevelUpLearnset,
     },
     [SPECIES_CLEFABLE] =
     {
@@ -1078,6 +1114,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sClefableLevelUpLearnset,
     },
     [SPECIES_VULPIX] =
     {
@@ -1107,6 +1144,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sVulpixLevelUpLearnset,
     },
     [SPECIES_NINETALES] =
     {
@@ -1136,6 +1174,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sNinetalesLevelUpLearnset,
     },
     [SPECIES_JIGGLYPUFF] =
     {
@@ -1165,6 +1204,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sJigglypuffLevelUpLearnset,
     },
     [SPECIES_WIGGLYTUFF] =
     {
@@ -1194,6 +1234,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sWigglytuffLevelUpLearnset,
     },
     [SPECIES_ZUBAT] =
     {
@@ -1223,6 +1264,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sZubatLevelUpLearnset,
     },
     [SPECIES_GOLBAT] =
     {
@@ -1252,6 +1294,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGolbatLevelUpLearnset,
     },
     [SPECIES_ODDISH] =
     {
@@ -1281,6 +1324,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sOddishLevelUpLearnset,
     },
     [SPECIES_GLOOM] =
     {
@@ -1310,6 +1354,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGloomLevelUpLearnset,
     },
     [SPECIES_VILEPLUME] =
     {
@@ -1339,6 +1384,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sVileplumeLevelUpLearnset,
     },
     [SPECIES_PARAS] =
     {
@@ -1368,6 +1414,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 50,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sParasLevelUpLearnset,
     },
     [SPECIES_PARASECT] =
     {
@@ -1397,6 +1444,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 75,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sParasectLevelUpLearnset,
     },
     [SPECIES_VENONAT] =
     {
@@ -1426,6 +1474,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 50,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sVenonatLevelUpLearnset,
     },
     [SPECIES_VENOMOTH] =
     {
@@ -1455,6 +1504,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 75,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sVenomothLevelUpLearnset,
     },
     [SPECIES_DIGLETT] =
     {
@@ -1484,6 +1534,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDiglettLevelUpLearnset,
     },
     [SPECIES_DUGTRIO] =
     {
@@ -1513,6 +1564,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDugtrioLevelUpLearnset,
     },
     [SPECIES_MEOWTH] =
     {
@@ -1542,6 +1594,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sMeowthLevelUpLearnset,
     },
     [SPECIES_PERSIAN] =
     {
@@ -1571,6 +1624,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sPersianLevelUpLearnset,
     },
     [SPECIES_PSYDUCK] =
     {
@@ -1600,6 +1654,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 50,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sPsyduckLevelUpLearnset,
     },
     [SPECIES_GOLDUCK] =
     {
@@ -1629,6 +1684,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGolduckLevelUpLearnset,
     },
     [SPECIES_MANKEY] =
     {
@@ -1658,6 +1714,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sMankeyLevelUpLearnset,
     },
     [SPECIES_PRIMEAPE] =
     {
@@ -1687,6 +1744,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPrimeapeLevelUpLearnset,
     },
     [SPECIES_GROWLITHE] =
     {
@@ -1716,6 +1774,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGrowlitheLevelUpLearnset,
     },
     [SPECIES_ARCANINE] =
     {
@@ -1745,6 +1804,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sArcanineLevelUpLearnset,
     },
     [SPECIES_POLIWAG] =
     {
@@ -1774,6 +1834,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 50,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = TRUE,
+        .levelUpLearnset = sPoliwagLevelUpLearnset,
     },
     [SPECIES_POLIWHIRL] =
     {
@@ -1803,6 +1864,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = TRUE,
+        .levelUpLearnset = sPoliwhirlLevelUpLearnset,
     },
     [SPECIES_POLIWRATH] =
     {
@@ -1832,6 +1894,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = TRUE,
+        .levelUpLearnset = sPoliwrathLevelUpLearnset,
     },
     [SPECIES_ABRA] =
     {
@@ -1861,6 +1924,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sAbraLevelUpLearnset,
     },
     [SPECIES_KADABRA] =
     {
@@ -1890,6 +1954,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sKadabraLevelUpLearnset,
     },
     [SPECIES_ALAKAZAM] =
     {
@@ -1919,6 +1984,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sAlakazamLevelUpLearnset,
     },
     [SPECIES_MACHOP] =
     {
@@ -1948,6 +2014,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sMachopLevelUpLearnset,
     },
     [SPECIES_MACHOKE] =
     {
@@ -1977,6 +2044,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sMachokeLevelUpLearnset,
     },
     [SPECIES_MACHAMP] =
     {
@@ -2006,6 +2074,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sMachampLevelUpLearnset,
     },
     [SPECIES_BELLSPROUT] =
     {
@@ -2035,6 +2104,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBellsproutLevelUpLearnset,
     },
     [SPECIES_WEEPINBELL] =
     {
@@ -2064,6 +2134,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sWeepinbellLevelUpLearnset,
     },
     [SPECIES_VICTREEBEL] =
     {
@@ -2093,6 +2164,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sVictreebelLevelUpLearnset,
     },
     [SPECIES_TENTACOOL] =
     {
@@ -2122,6 +2194,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTentacoolLevelUpLearnset,
     },
     [SPECIES_TENTACRUEL] =
     {
@@ -2151,6 +2224,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTentacruelLevelUpLearnset,
     },
     [SPECIES_GEODUDE] =
     {
@@ -2180,6 +2254,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGeodudeLevelUpLearnset,
     },
     [SPECIES_GRAVELER] =
     {
@@ -2209,6 +2284,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGravelerLevelUpLearnset,
     },
     [SPECIES_GOLEM] =
     {
@@ -2238,6 +2314,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGolemLevelUpLearnset,
     },
     [SPECIES_PONYTA] =
     {
@@ -2267,6 +2344,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sPonytaLevelUpLearnset,
     },
     [SPECIES_RAPIDASH] =
     {
@@ -2296,6 +2374,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sRapidashLevelUpLearnset,
     },
     [SPECIES_SLOWPOKE] =
     {
@@ -2325,6 +2404,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 50,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSlowpokeLevelUpLearnset,
     },
     [SPECIES_SLOWBRO] =
     {
@@ -2354,6 +2434,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSlowbroLevelUpLearnset,
     },
     [SPECIES_MAGNEMITE] =
     {
@@ -2383,6 +2464,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sMagnemiteLevelUpLearnset,
     },
     [SPECIES_MAGNETON] =
     {
@@ -2412,6 +2494,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sMagnetonLevelUpLearnset,
     },
     [SPECIES_FARFETCHD] =
     {
@@ -2441,6 +2524,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sFarfetchdLevelUpLearnset,
     },
     [SPECIES_DODUO] =
     {
@@ -2470,6 +2554,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 50,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDoduoLevelUpLearnset,
     },
     [SPECIES_DODRIO] =
     {
@@ -2499,6 +2584,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDodrioLevelUpLearnset,
     },
     [SPECIES_SEEL] =
     {
@@ -2528,6 +2614,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSeelLevelUpLearnset,
     },
     [SPECIES_DEWGONG] =
     {
@@ -2557,6 +2644,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDewgongLevelUpLearnset,
     },
     [SPECIES_GRIMER] =
     {
@@ -2586,6 +2674,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGrimerLevelUpLearnset,
     },
     [SPECIES_MUK] =
     {
@@ -2615,6 +2704,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMukLevelUpLearnset,
     },
     [SPECIES_SHELLDER] =
     {
@@ -2644,6 +2734,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sShellderLevelUpLearnset,
     },
     [SPECIES_CLOYSTER] =
     {
@@ -2673,6 +2764,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sCloysterLevelUpLearnset,
     },
     [SPECIES_GASTLY] =
     {
@@ -2702,6 +2794,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGastlyLevelUpLearnset,
     },
     [SPECIES_HAUNTER] =
     {
@@ -2731,6 +2824,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sHaunterLevelUpLearnset,
     },
     [SPECIES_GENGAR] =
     {
@@ -2760,6 +2854,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGengarLevelUpLearnset,
     },
     [SPECIES_ONIX] =
     {
@@ -2789,6 +2884,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sOnixLevelUpLearnset,
     },
     [SPECIES_DROWZEE] =
     {
@@ -2818,6 +2914,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sDrowzeeLevelUpLearnset,
     },
     [SPECIES_HYPNO] =
     {
@@ -2847,6 +2944,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sHypnoLevelUpLearnset,
     },
     [SPECIES_KRABBY] =
     {
@@ -2876,6 +2974,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sKrabbyLevelUpLearnset,
     },
     [SPECIES_KINGLER] =
     {
@@ -2905,6 +3004,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = TRUE,
+        .levelUpLearnset = sKinglerLevelUpLearnset,
     },
     [SPECIES_VOLTORB] =
     {
@@ -2934,6 +3034,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sVoltorbLevelUpLearnset,
     },
     [SPECIES_ELECTRODE] =
     {
@@ -2963,6 +3064,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sElectrodeLevelUpLearnset,
     },
     [SPECIES_EXEGGCUTE] =
     {
@@ -2992,6 +3094,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 75,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sExeggcuteLevelUpLearnset,
     },
     [SPECIES_EXEGGUTOR] =
     {
@@ -3021,6 +3124,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sExeggutorLevelUpLearnset,
     },
     [SPECIES_CUBONE] =
     {
@@ -3050,6 +3154,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sCuboneLevelUpLearnset,
     },
     [SPECIES_MAROWAK] =
     {
@@ -3079,6 +3184,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sMarowakLevelUpLearnset,
     },
     [SPECIES_HITMONLEE] =
     {
@@ -3108,6 +3214,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sHitmonleeLevelUpLearnset,
     },
     [SPECIES_HITMONCHAN] =
     {
@@ -3137,6 +3244,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sHitmonchanLevelUpLearnset,
     },
     [SPECIES_LICKITUNG] =
     {
@@ -3166,6 +3274,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sLickitungLevelUpLearnset,
     },
     [SPECIES_KOFFING] =
     {
@@ -3195,6 +3304,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sKoffingLevelUpLearnset,
     },
     [SPECIES_WEEZING] =
     {
@@ -3224,6 +3334,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sWeezingLevelUpLearnset,
     },
     [SPECIES_RHYHORN] =
     {
@@ -3253,6 +3364,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 75,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sRhyhornLevelUpLearnset,
     },
     [SPECIES_RHYDON] =
     {
@@ -3282,6 +3394,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sRhydonLevelUpLearnset,
     },
     [SPECIES_CHANSEY] =
     {
@@ -3311,6 +3424,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 125,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sChanseyLevelUpLearnset,
     },
     [SPECIES_TANGELA] =
     {
@@ -3340,6 +3454,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTangelaLevelUpLearnset,
     },
     [SPECIES_KANGASKHAN] =
     {
@@ -3369,6 +3484,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 125,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sKangaskhanLevelUpLearnset,
     },
     [SPECIES_HORSEA] =
     {
@@ -3398,6 +3514,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sHorseaLevelUpLearnset,
     },
     [SPECIES_SEADRA] =
     {
@@ -3427,6 +3544,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSeadraLevelUpLearnset,
     },
     [SPECIES_GOLDEEN] =
     {
@@ -3456,6 +3574,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 50,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sGoldeenLevelUpLearnset,
     },
     [SPECIES_SEAKING] =
     {
@@ -3485,6 +3604,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 75,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sSeakingLevelUpLearnset,
     },
     [SPECIES_STARYU] =
     {
@@ -3514,6 +3634,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sStaryuLevelUpLearnset,
     },
     [SPECIES_STARMIE] =
     {
@@ -3543,6 +3664,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sStarmieLevelUpLearnset,
     },
     [SPECIES_MR_MIME] =
     {
@@ -3572,6 +3694,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sMrMimeLevelUpLearnset,
     },
     [SPECIES_SCYTHER] =
     {
@@ -3601,6 +3724,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 125,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sScytherLevelUpLearnset,
     },
     [SPECIES_JYNX] =
     {
@@ -3630,6 +3754,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sJynxLevelUpLearnset,
     },
     [SPECIES_ELECTABUZZ] =
     {
@@ -3659,6 +3784,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = TRUE,
+        .levelUpLearnset = sElectabuzzLevelUpLearnset,
     },
     [SPECIES_MAGMAR] =
     {
@@ -3688,6 +3814,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sMagmarLevelUpLearnset,
     },
     [SPECIES_PINSIR] =
     {
@@ -3717,6 +3844,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 125,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPinsirLevelUpLearnset,
     },
     [SPECIES_TAUROS] =
     {
@@ -3746,6 +3874,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 125,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTaurosLevelUpLearnset,
     },
     [SPECIES_MAGIKARP] =
     {
@@ -3775,6 +3904,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 25,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sMagikarpLevelUpLearnset,
     },
     [SPECIES_GYARADOS] =
     {
@@ -3804,6 +3934,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGyaradosLevelUpLearnset,
     },
     [SPECIES_LAPRAS] =
     {
@@ -3833,6 +3964,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLaprasLevelUpLearnset,
     },
     [SPECIES_DITTO] =
     {
@@ -3862,6 +3994,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDittoLevelUpLearnset,
     },
     [SPECIES_EEVEE] =
     {
@@ -3891,6 +4024,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sEeveeLevelUpLearnset,
     },
     [SPECIES_VAPOREON] =
     {
@@ -3920,6 +4054,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sVaporeonLevelUpLearnset,
     },
     [SPECIES_JOLTEON] =
     {
@@ -3949,6 +4084,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sJolteonLevelUpLearnset,
     },
     [SPECIES_FLAREON] =
     {
@@ -3978,6 +4114,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sFlareonLevelUpLearnset,
     },
     [SPECIES_PORYGON] =
     {
@@ -4007,6 +4144,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sPorygonLevelUpLearnset,
     },
     [SPECIES_OMANYTE] =
     {
@@ -4036,6 +4174,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sOmanyteLevelUpLearnset,
     },
     [SPECIES_OMASTAR] =
     {
@@ -4065,6 +4204,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sOmastarLevelUpLearnset,
     },
     [SPECIES_KABUTO] =
     {
@@ -4094,6 +4234,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sKabutoLevelUpLearnset,
     },
     [SPECIES_KABUTOPS] =
     {
@@ -4123,6 +4264,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sKabutopsLevelUpLearnset,
     },
     [SPECIES_AERODACTYL] =
     {
@@ -4152,6 +4294,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAerodactylLevelUpLearnset,
     },
     [SPECIES_SNORLAX] =
     {
@@ -4181,6 +4324,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSnorlaxLevelUpLearnset,
     },
     [SPECIES_ARTICUNO] =
     {
@@ -4210,6 +4354,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sArticunoLevelUpLearnset,
     },
     [SPECIES_ZAPDOS] =
     {
@@ -4239,6 +4384,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sZapdosLevelUpLearnset,
     },
     [SPECIES_MOLTRES] =
     {
@@ -4268,6 +4414,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sMoltresLevelUpLearnset,
     },
     [SPECIES_DRATINI] =
     {
@@ -4297,6 +4444,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 100,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDratiniLevelUpLearnset,
     },
     [SPECIES_DRAGONAIR] =
     {
@@ -4326,6 +4474,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 125,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDragonairLevelUpLearnset,
     },
     [SPECIES_DRAGONITE] =
     {
@@ -4355,6 +4504,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDragoniteLevelUpLearnset,
     },
     [SPECIES_MEWTWO] =
     {
@@ -4384,6 +4534,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMewtwoLevelUpLearnset,
     },
     [SPECIES_MEW] =
     {
@@ -4413,6 +4564,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sMewLevelUpLearnset,
     },
     [SPECIES_CHIKORITA] =
     {
@@ -4442,6 +4594,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sChikoritaLevelUpLearnset,
     },
     [SPECIES_BAYLEEF] =
     {
@@ -4471,6 +4624,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBayleefLevelUpLearnset,
     },
     [SPECIES_MEGANIUM] =
     {
@@ -4500,6 +4654,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sMeganiumLevelUpLearnset,
     },
     [SPECIES_CYNDAQUIL] =
     {
@@ -4529,6 +4684,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sCyndaquilLevelUpLearnset,
     },
     [SPECIES_QUILAVA] =
     {
@@ -4558,6 +4714,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sQuilavaLevelUpLearnset,
     },
     [SPECIES_TYPHLOSION] =
     {
@@ -4587,6 +4744,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sTyphlosionLevelUpLearnset,
     },
     [SPECIES_TOTODILE] =
     {
@@ -4616,6 +4774,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTotodileLevelUpLearnset,
     },
     [SPECIES_CROCONAW] =
     {
@@ -4645,6 +4804,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = TRUE,
+        .levelUpLearnset = sCroconawLevelUpLearnset,
     },
     [SPECIES_FERALIGATR] =
     {
@@ -4674,6 +4834,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sFeraligatrLevelUpLearnset,
     },
     [SPECIES_SENTRET] =
     {
@@ -4703,6 +4864,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSentretLevelUpLearnset,
     },
     [SPECIES_FURRET] =
     {
@@ -4732,6 +4894,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sFurretLevelUpLearnset,
     },
     [SPECIES_HOOTHOOT] =
     {
@@ -4761,6 +4924,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sHoothootLevelUpLearnset,
     },
     [SPECIES_NOCTOWL] =
     {
@@ -4790,6 +4954,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sNoctowlLevelUpLearnset,
     },
     [SPECIES_LEDYBA] =
     {
@@ -4819,6 +4984,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sLedybaLevelUpLearnset,
     },
     [SPECIES_LEDIAN] =
     {
@@ -4848,6 +5014,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sLedianLevelUpLearnset,
     },
     [SPECIES_SPINARAK] =
     {
@@ -4877,6 +5044,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSpinarakLevelUpLearnset,
     },
     [SPECIES_ARIADOS] =
     {
@@ -4906,6 +5074,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sAriadosLevelUpLearnset,
     },
     [SPECIES_CROBAT] =
     {
@@ -4935,6 +5104,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sCrobatLevelUpLearnset,
     },
     [SPECIES_CHINCHOU] =
     {
@@ -4964,6 +5134,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sChinchouLevelUpLearnset,
     },
     [SPECIES_LANTURN] =
     {
@@ -4993,6 +5164,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLanturnLevelUpLearnset,
     },
     [SPECIES_PICHU] =
     {
@@ -5022,6 +5194,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sPichuLevelUpLearnset,
     },
     [SPECIES_CLEFFA] =
     {
@@ -5051,6 +5224,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sCleffaLevelUpLearnset,
     },
     [SPECIES_IGGLYBUFF] =
     {
@@ -5080,6 +5254,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = TRUE,
+        .levelUpLearnset = sIgglybuffLevelUpLearnset,
     },
     [SPECIES_TOGEPI] =
     {
@@ -5109,6 +5284,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTogepiLevelUpLearnset,
     },
     [SPECIES_TOGETIC] =
     {
@@ -5138,6 +5314,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTogeticLevelUpLearnset,
     },
     [SPECIES_NATU] =
     {
@@ -5167,6 +5344,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sNatuLevelUpLearnset,
     },
     [SPECIES_XATU] =
     {
@@ -5196,6 +5374,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sXatuLevelUpLearnset,
     },
     [SPECIES_MAREEP] =
     {
@@ -5225,6 +5404,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMareepLevelUpLearnset,
     },
     [SPECIES_FLAAFFY] =
     {
@@ -5254,6 +5434,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sFlaaffyLevelUpLearnset,
     },
     [SPECIES_AMPHAROS] =
     {
@@ -5283,6 +5464,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sAmpharosLevelUpLearnset,
     },
     [SPECIES_BELLOSSOM] =
     {
@@ -5312,6 +5494,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBellossomLevelUpLearnset,
     },
     [SPECIES_MARILL] =
     {
@@ -5341,6 +5524,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMarillLevelUpLearnset,
     },
     [SPECIES_AZUMARILL] =
     {
@@ -5370,6 +5554,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAzumarillLevelUpLearnset,
     },
     [SPECIES_SUDOWOODO] =
     {
@@ -5399,6 +5584,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSudowoodoLevelUpLearnset,
     },
     [SPECIES_POLITOED] =
     {
@@ -5428,6 +5614,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = TRUE,
+        .levelUpLearnset = sPolitoedLevelUpLearnset,
     },
     [SPECIES_HOPPIP] =
     {
@@ -5457,6 +5644,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sHoppipLevelUpLearnset,
     },
     [SPECIES_SKIPLOOM] =
     {
@@ -5486,6 +5674,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSkiploomLevelUpLearnset,
     },
     [SPECIES_JUMPLUFF] =
     {
@@ -5515,6 +5704,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sJumpluffLevelUpLearnset,
     },
     [SPECIES_AIPOM] =
     {
@@ -5544,6 +5734,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAipomLevelUpLearnset,
     },
     [SPECIES_SUNKERN] =
     {
@@ -5573,6 +5764,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sSunkernLevelUpLearnset,
     },
     [SPECIES_SUNFLORA] =
     {
@@ -5602,6 +5794,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sSunfloraLevelUpLearnset,
     },
     [SPECIES_YANMA] =
     {
@@ -5631,6 +5824,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sYanmaLevelUpLearnset,
     },
     [SPECIES_WOOPER] =
     {
@@ -5660,6 +5854,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sWooperLevelUpLearnset,
     },
     [SPECIES_QUAGSIRE] =
     {
@@ -5689,6 +5884,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sQuagsireLevelUpLearnset,
     },
     [SPECIES_ESPEON] =
     {
@@ -5718,6 +5914,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sEspeonLevelUpLearnset,
     },
     [SPECIES_UMBREON] =
     {
@@ -5747,6 +5944,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sUmbreonLevelUpLearnset,
     },
     [SPECIES_MURKROW] =
     {
@@ -5765,17 +5963,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .evYield_Speed = 1,
         .evYield_SpAttack = 0,
         .evYield_SpDefense = 0,
-        .itemCommon = ITEM_NONE,
-        .itemRare = ITEM_NONE,
+        .itemCommon = ITEM_ORAN_BERRY,
+        .itemRare = ITEM_ORAN_BERRY,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = 255,
         .growthRate = GROWTH_FLUCTUATING,
         .eggGroups = {EGG_GROUP_FLYING, EGG_GROUP_FLYING},
-        .abilities = {ABILITY_INSOMNIA, ABILITY_NONE},
+        .abilities = {ABILITY_KLUTZ, ABILITY_NONE},
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sMurkrowLevelUpLearnset,
     },
     [SPECIES_SLOWKING] =
     {
@@ -5805,6 +6004,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSlowkingLevelUpLearnset,
     },
     [SPECIES_MISDREAVUS] =
     {
@@ -5834,6 +6034,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sMisdreavusLevelUpLearnset,
     },
     [SPECIES_UNOWN] =
     {
@@ -5863,6 +6064,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = TRUE,
+        .levelUpLearnset = sUnownLevelUpLearnset,
     },
     [SPECIES_WOBBUFFET] =
     {
@@ -5892,6 +6094,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sWobbuffetLevelUpLearnset,
     },
     [SPECIES_GIRAFARIG] =
     {
@@ -5921,6 +6124,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sGirafarigLevelUpLearnset,
     },
     [SPECIES_PINECO] =
     {
@@ -5950,6 +6154,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sPinecoLevelUpLearnset,
     },
     [SPECIES_FORRETRESS] =
     {
@@ -5979,6 +6184,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sForretressLevelUpLearnset,
     },
     [SPECIES_DUNSPARCE] =
     {
@@ -6008,6 +6214,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sDunsparceLevelUpLearnset,
     },
     [SPECIES_GLIGAR] =
     {
@@ -6037,6 +6244,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGligarLevelUpLearnset,
     },
     [SPECIES_STEELIX] =
     {
@@ -6066,6 +6274,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sSteelixLevelUpLearnset,
     },
     [SPECIES_SNUBBULL] =
     {
@@ -6095,6 +6304,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSnubbullLevelUpLearnset,
     },
     [SPECIES_GRANBULL] =
     {
@@ -6124,6 +6334,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGranbullLevelUpLearnset,
     },
     [SPECIES_QWILFISH] =
     {
@@ -6153,6 +6364,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sQwilfishLevelUpLearnset,
     },
     [SPECIES_SCIZOR] =
     {
@@ -6182,6 +6394,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sScizorLevelUpLearnset,
     },
     [SPECIES_SHUCKLE] =
     {
@@ -6211,6 +6424,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sShuckleLevelUpLearnset,
     },
     [SPECIES_HERACROSS] =
     {
@@ -6240,6 +6454,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sHeracrossLevelUpLearnset,
     },
     [SPECIES_SNEASEL] =
     {
@@ -6269,6 +6484,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = TRUE,
+        .levelUpLearnset = sSneaselLevelUpLearnset,
     },
     [SPECIES_TEDDIURSA] =
     {
@@ -6298,6 +6514,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = TRUE,
+        .levelUpLearnset = sTeddiursaLevelUpLearnset,
     },
     [SPECIES_URSARING] =
     {
@@ -6327,6 +6544,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sUrsaringLevelUpLearnset,
     },
     [SPECIES_SLUGMA] =
     {
@@ -6356,6 +6574,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sSlugmaLevelUpLearnset,
     },
     [SPECIES_MAGCARGO] =
     {
@@ -6385,6 +6604,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sMagcargoLevelUpLearnset,
     },
     [SPECIES_SWINUB] =
     {
@@ -6414,6 +6634,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSwinubLevelUpLearnset,
     },
     [SPECIES_PILOSWINE] =
     {
@@ -6443,6 +6664,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPiloswineLevelUpLearnset,
     },
     [SPECIES_CORSOLA] =
     {
@@ -6472,6 +6694,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sCorsolaLevelUpLearnset,
     },
     [SPECIES_REMORAID] =
     {
@@ -6501,6 +6724,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sRemoraidLevelUpLearnset,
     },
     [SPECIES_OCTILLERY] =
     {
@@ -6530,6 +6754,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sOctilleryLevelUpLearnset,
     },
     [SPECIES_DELIBIRD] =
     {
@@ -6559,6 +6784,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sDelibirdLevelUpLearnset,
     },
     [SPECIES_MANTINE] =
     {
@@ -6588,6 +6814,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMantineLevelUpLearnset,
     },
     [SPECIES_SKARMORY] =
     {
@@ -6617,6 +6844,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sSkarmoryLevelUpLearnset,
     },
     [SPECIES_HOUNDOUR] =
     {
@@ -6646,6 +6874,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sHoundourLevelUpLearnset,
     },
     [SPECIES_HOUNDOOM] =
     {
@@ -6675,6 +6904,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sHoundoomLevelUpLearnset,
     },
     [SPECIES_KINGDRA] =
     {
@@ -6704,6 +6934,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sKingdraLevelUpLearnset,
     },
     [SPECIES_PHANPY] =
     {
@@ -6733,6 +6964,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPhanpyLevelUpLearnset,
     },
     [SPECIES_DONPHAN] =
     {
@@ -6762,6 +6994,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sDonphanLevelUpLearnset,
     },
     [SPECIES_PORYGON2] =
     {
@@ -6791,6 +7024,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sPorygon2LevelUpLearnset,
     },
     [SPECIES_STANTLER] =
     {
@@ -6820,6 +7054,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sStantlerLevelUpLearnset,
     },
     [SPECIES_SMEARGLE] =
     {
@@ -6849,6 +7084,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSmeargleLevelUpLearnset,
     },
     [SPECIES_TYROGUE] =
     {
@@ -6878,6 +7114,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTyrogueLevelUpLearnset,
     },
     [SPECIES_HITMONTOP] =
     {
@@ -6907,6 +7144,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sHitmontopLevelUpLearnset,
     },
     [SPECIES_SMOOCHUM] =
     {
@@ -6936,6 +7174,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSmoochumLevelUpLearnset,
     },
     [SPECIES_ELEKID] =
     {
@@ -6965,6 +7204,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = TRUE,
+        .levelUpLearnset = sElekidLevelUpLearnset,
     },
     [SPECIES_MAGBY] =
     {
@@ -6994,6 +7234,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sMagbyLevelUpLearnset,
     },
     [SPECIES_MILTANK] =
     {
@@ -7023,6 +7264,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sMiltankLevelUpLearnset,
     },
     [SPECIES_BLISSEY] =
     {
@@ -7052,6 +7294,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sBlisseyLevelUpLearnset,
     },
     [SPECIES_RAIKOU] =
     {
@@ -7081,6 +7324,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sRaikouLevelUpLearnset,
     },
     [SPECIES_ENTEI] =
     {
@@ -7110,6 +7354,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sEnteiLevelUpLearnset,
     },
     [SPECIES_SUICUNE] =
     {
@@ -7139,6 +7384,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSuicuneLevelUpLearnset,
     },
     [SPECIES_LARVITAR] =
     {
@@ -7168,6 +7414,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sLarvitarLevelUpLearnset,
     },
     [SPECIES_PUPITAR] =
     {
@@ -7197,6 +7444,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sPupitarLevelUpLearnset,
     },
     [SPECIES_TYRANITAR] =
     {
@@ -7226,6 +7474,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTyranitarLevelUpLearnset,
     },
     [SPECIES_LUGIA] =
     {
@@ -7255,6 +7504,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLugiaLevelUpLearnset,
     },
     [SPECIES_HO_OH] =
     {
@@ -7284,6 +7534,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sHoOhLevelUpLearnset,
     },
     [SPECIES_CELEBI] =
     {
@@ -7313,6 +7564,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sCelebiLevelUpLearnset,
     },
     [SPECIES_OLD_UNOWN_B] = OLD_UNOWN_SPECIES_INFO,
     [SPECIES_OLD_UNOWN_C] = OLD_UNOWN_SPECIES_INFO,
@@ -7367,6 +7619,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTreeckoLevelUpLearnset,
     },
     [SPECIES_GROVYLE] =
     {
@@ -7396,6 +7649,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGrovyleLevelUpLearnset,
     },
     [SPECIES_SCEPTILE] =
     {
@@ -7425,6 +7679,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSceptileLevelUpLearnset,
     },
     [SPECIES_TORCHIC] =
     {
@@ -7454,6 +7709,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sTorchicLevelUpLearnset,
     },
     [SPECIES_COMBUSKEN] =
     {
@@ -7483,6 +7739,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sCombuskenLevelUpLearnset,
     },
     [SPECIES_BLAZIKEN] =
     {
@@ -7512,6 +7769,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sBlazikenLevelUpLearnset,
     },
     [SPECIES_MUDKIP] =
     {
@@ -7541,6 +7799,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMudkipLevelUpLearnset,
     },
     [SPECIES_MARSHTOMP] =
     {
@@ -7570,6 +7829,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMarshtompLevelUpLearnset,
     },
     [SPECIES_SWAMPERT] =
     {
@@ -7599,6 +7859,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSwampertLevelUpLearnset,
     },
     [SPECIES_POOCHYENA] =
     {
@@ -7628,6 +7889,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sPoochyenaLevelUpLearnset,
     },
     [SPECIES_MIGHTYENA] =
     {
@@ -7657,6 +7919,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sMightyenaLevelUpLearnset,
     },
     [SPECIES_ZIGZAGOON] =
     {
@@ -7686,6 +7949,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sZigzagoonLevelUpLearnset,
     },
     [SPECIES_LINOONE] =
     {
@@ -7715,6 +7979,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLinooneLevelUpLearnset,
     },
     [SPECIES_WURMPLE] =
     {
@@ -7744,6 +8009,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sWurmpleLevelUpLearnset,
     },
     [SPECIES_SILCOON] =
     {
@@ -7773,6 +8039,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSilcoonLevelUpLearnset,
     },
     [SPECIES_BEAUTIFLY] =
     {
@@ -7802,6 +8069,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sBeautiflyLevelUpLearnset,
     },
     [SPECIES_CASCOON] =
     {
@@ -7831,6 +8099,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sCascoonLevelUpLearnset,
     },
     [SPECIES_DUSTOX] =
     {
@@ -7860,6 +8129,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDustoxLevelUpLearnset,
     },
     [SPECIES_LOTAD] =
     {
@@ -7889,6 +8159,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sLotadLevelUpLearnset,
     },
     [SPECIES_LOMBRE] =
     {
@@ -7918,6 +8189,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sLombreLevelUpLearnset,
     },
     [SPECIES_LUDICOLO] =
     {
@@ -7947,6 +8219,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sLudicoloLevelUpLearnset,
     },
     [SPECIES_SEEDOT] =
     {
@@ -7976,6 +8249,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSeedotLevelUpLearnset,
     },
     [SPECIES_NUZLEAF] =
     {
@@ -8005,6 +8279,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sNuzleafLevelUpLearnset,
     },
     [SPECIES_SHIFTRY] =
     {
@@ -8034,6 +8309,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sShiftryLevelUpLearnset,
     },
     [SPECIES_NINCADA] =
     {
@@ -8063,6 +8339,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sNincadaLevelUpLearnset,
     },
     [SPECIES_NINJASK] =
     {
@@ -8092,6 +8369,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sNinjaskLevelUpLearnset,
     },
     [SPECIES_SHEDINJA] =
     {
@@ -8121,6 +8399,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sShedinjaLevelUpLearnset,
     },
     [SPECIES_TAILLOW] =
     {
@@ -8150,6 +8429,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTaillowLevelUpLearnset,
     },
     [SPECIES_SWELLOW] =
     {
@@ -8179,6 +8459,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSwellowLevelUpLearnset,
     },
     [SPECIES_SHROOMISH] =
     {
@@ -8208,6 +8489,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sShroomishLevelUpLearnset,
     },
     [SPECIES_BRELOOM] =
     {
@@ -8237,6 +8519,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBreloomLevelUpLearnset,
     },
     [SPECIES_SPINDA] =
     {
@@ -8266,6 +8549,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = TRUE,
+        .levelUpLearnset = sSpindaLevelUpLearnset,
     },
     [SPECIES_WINGULL] =
     {
@@ -8295,6 +8579,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sWingullLevelUpLearnset,
     },
     [SPECIES_PELIPPER] =
     {
@@ -8324,6 +8609,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sPelipperLevelUpLearnset,
     },
     [SPECIES_SURSKIT] =
     {
@@ -8353,6 +8639,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSurskitLevelUpLearnset,
     },
     [SPECIES_MASQUERAIN] =
     {
@@ -8382,6 +8669,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMasquerainLevelUpLearnset,
     },
     [SPECIES_WAILMER] =
     {
@@ -8411,6 +8699,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sWailmerLevelUpLearnset,
     },
     [SPECIES_WAILORD] =
     {
@@ -8440,6 +8729,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sWailordLevelUpLearnset,
     },
     [SPECIES_SKITTY] =
     {
@@ -8469,6 +8759,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSkittyLevelUpLearnset,
     },
     [SPECIES_DELCATTY] =
     {
@@ -8498,6 +8789,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDelcattyLevelUpLearnset,
     },
     [SPECIES_KECLEON] =
     {
@@ -8527,6 +8819,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sKecleonLevelUpLearnset,
     },
     [SPECIES_BALTOY] =
     {
@@ -8556,6 +8849,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBaltoyLevelUpLearnset,
     },
     [SPECIES_CLAYDOL] =
     {
@@ -8585,6 +8879,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sClaydolLevelUpLearnset,
     },
     [SPECIES_NOSEPASS] =
     {
@@ -8614,6 +8909,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sNosepassLevelUpLearnset,
     },
     [SPECIES_TORKOAL] =
     {
@@ -8643,6 +8939,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTorkoalLevelUpLearnset,
     },
     [SPECIES_SABLEYE] =
     {
@@ -8672,6 +8969,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSableyeLevelUpLearnset,
     },
     [SPECIES_BARBOACH] =
     {
@@ -8701,6 +8999,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sBarboachLevelUpLearnset,
     },
     [SPECIES_WHISCASH] =
     {
@@ -8730,6 +9029,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sWhiscashLevelUpLearnset,
     },
     [SPECIES_LUVDISC] =
     {
@@ -8759,6 +9059,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sLuvdiscLevelUpLearnset,
     },
     [SPECIES_CORPHISH] =
     {
@@ -8788,6 +9089,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sCorphishLevelUpLearnset,
     },
     [SPECIES_CRAWDAUNT] =
     {
@@ -8817,6 +9119,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sCrawdauntLevelUpLearnset,
     },
     [SPECIES_FEEBAS] =
     {
@@ -8846,6 +9149,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sFeebasLevelUpLearnset,
     },
     [SPECIES_MILOTIC] =
     {
@@ -8875,6 +9179,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sMiloticLevelUpLearnset,
     },
     [SPECIES_CARVANHA] =
     {
@@ -8904,6 +9209,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sCarvanhaLevelUpLearnset,
     },
     [SPECIES_SHARPEDO] =
     {
@@ -8933,6 +9239,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSharpedoLevelUpLearnset,
     },
     [SPECIES_TRAPINCH] =
     {
@@ -8962,6 +9269,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTrapinchLevelUpLearnset,
     },
     [SPECIES_VIBRAVA] =
     {
@@ -8991,6 +9299,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sVibravaLevelUpLearnset,
     },
     [SPECIES_FLYGON] =
     {
@@ -9020,6 +9329,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sFlygonLevelUpLearnset,
     },
     [SPECIES_MAKUHITA] =
     {
@@ -9049,6 +9359,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sMakuhitaLevelUpLearnset,
     },
     [SPECIES_HARIYAMA] =
     {
@@ -9078,6 +9389,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sHariyamaLevelUpLearnset,
     },
     [SPECIES_ELECTRIKE] =
     {
@@ -9107,6 +9419,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sElectrikeLevelUpLearnset,
     },
     [SPECIES_MANECTRIC] =
     {
@@ -9136,6 +9449,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sManectricLevelUpLearnset,
     },
     [SPECIES_NUMEL] =
     {
@@ -9165,6 +9479,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sNumelLevelUpLearnset,
     },
     [SPECIES_CAMERUPT] =
     {
@@ -9194,6 +9509,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sCameruptLevelUpLearnset,
     },
     [SPECIES_SPHEAL] =
     {
@@ -9223,6 +9539,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSphealLevelUpLearnset,
     },
     [SPECIES_SEALEO] =
     {
@@ -9252,6 +9569,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSealeoLevelUpLearnset,
     },
     [SPECIES_WALREIN] =
     {
@@ -9281,6 +9599,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sWalreinLevelUpLearnset,
     },
     [SPECIES_CACNEA] =
     {
@@ -9310,6 +9629,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sCacneaLevelUpLearnset,
     },
     [SPECIES_CACTURNE] =
     {
@@ -9339,6 +9659,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sCacturneLevelUpLearnset,
     },
     [SPECIES_SNORUNT] =
     {
@@ -9368,6 +9689,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sSnoruntLevelUpLearnset,
     },
     [SPECIES_GLALIE] =
     {
@@ -9397,6 +9719,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sGlalieLevelUpLearnset,
     },
     [SPECIES_LUNATONE] =
     {
@@ -9426,6 +9749,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sLunatoneLevelUpLearnset,
     },
     [SPECIES_SOLROCK] =
     {
@@ -9455,6 +9779,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sSolrockLevelUpLearnset,
     },
     [SPECIES_AZURILL] =
     {
@@ -9484,6 +9809,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAzurillLevelUpLearnset,
     },
     [SPECIES_SPOINK] =
     {
@@ -9513,6 +9839,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSpoinkLevelUpLearnset,
     },
     [SPECIES_GRUMPIG] =
     {
@@ -9542,6 +9869,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGrumpigLevelUpLearnset,
     },
     [SPECIES_PLUSLE] =
     {
@@ -9571,6 +9899,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sPlusleLevelUpLearnset,
     },
     [SPECIES_MINUN] =
     {
@@ -9600,6 +9929,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sMinunLevelUpLearnset,
     },
     [SPECIES_MAWILE] =
     {
@@ -9629,6 +9959,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sMawileLevelUpLearnset,
     },
     [SPECIES_MEDITITE] =
     {
@@ -9658,6 +9989,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMedititeLevelUpLearnset,
     },
     [SPECIES_MEDICHAM] =
     {
@@ -9687,6 +10019,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sMedichamLevelUpLearnset,
     },
     [SPECIES_SWABLU] =
     {
@@ -9716,6 +10049,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSwabluLevelUpLearnset,
     },
     [SPECIES_ALTARIA] =
     {
@@ -9745,6 +10079,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAltariaLevelUpLearnset,
     },
     [SPECIES_WYNAUT] =
     {
@@ -9774,6 +10109,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sWynautLevelUpLearnset,
     },
     [SPECIES_DUSKULL] =
     {
@@ -9803,6 +10139,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sDuskullLevelUpLearnset,
     },
     [SPECIES_DUSCLOPS] =
     {
@@ -9832,6 +10169,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sDusclopsLevelUpLearnset,
     },
     [SPECIES_ROSELIA] =
     {
@@ -9861,6 +10199,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = TRUE,
+        .levelUpLearnset = sRoseliaLevelUpLearnset,
     },
     [SPECIES_SLAKOTH] =
     {
@@ -9890,6 +10229,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSlakothLevelUpLearnset,
     },
     [SPECIES_VIGOROTH] =
     {
@@ -9919,6 +10259,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sVigorothLevelUpLearnset,
     },
     [SPECIES_SLAKING] =
     {
@@ -9948,6 +10289,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSlakingLevelUpLearnset,
     },
     [SPECIES_GULPIN] =
     {
@@ -9977,6 +10319,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGulpinLevelUpLearnset,
     },
     [SPECIES_SWALOT] =
     {
@@ -10006,6 +10349,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSwalotLevelUpLearnset,
     },
     [SPECIES_TROPIUS] =
     {
@@ -10035,6 +10379,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTropiusLevelUpLearnset,
     },
     [SPECIES_WHISMUR] =
     {
@@ -10064,6 +10409,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sWhismurLevelUpLearnset,
     },
     [SPECIES_LOUDRED] =
     {
@@ -10093,6 +10439,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLoudredLevelUpLearnset,
     },
     [SPECIES_EXPLOUD] =
     {
@@ -10122,6 +10469,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sExploudLevelUpLearnset,
     },
     [SPECIES_CLAMPERL] =
     {
@@ -10151,6 +10499,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sClamperlLevelUpLearnset,
     },
     [SPECIES_HUNTAIL] =
     {
@@ -10180,6 +10529,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sHuntailLevelUpLearnset,
     },
     [SPECIES_GOREBYSS] =
     {
@@ -10209,18 +10559,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sGorebyssLevelUpLearnset,
     },
     [SPECIES_ABSOL] =
     {
         .baseHP = 65,
-        .baseAttack = 155,
+        .baseAttack = 165,
         .baseDefense = 60,
         .baseSpeed = 110,
         .baseSpAttack = 75,
         .baseSpDefense = 60,
         .types = {TYPE_DARK, TYPE_DARK},
         .catchRate = 127,
-        .expYield = 163,
+        .expYield = 183,
         .evYield_HP = 0,
         .evYield_Attack = 2,
         .evYield_Defense = 0,
@@ -10238,6 +10589,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = TRUE,
+        .levelUpLearnset = sAbsolLevelUpLearnset,
     },
     [SPECIES_SHUPPET] =
     {
@@ -10267,6 +10619,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sShuppetLevelUpLearnset,
     },
     [SPECIES_BANETTE] =
     {
@@ -10296,6 +10649,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sBanetteLevelUpLearnset,
     },
     [SPECIES_SEVIPER] =
     {
@@ -10325,6 +10679,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = TRUE,
+        .levelUpLearnset = sSeviperLevelUpLearnset,
     },
     [SPECIES_ZANGOOSE] =
     {
@@ -10354,6 +10709,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = TRUE,
+        .levelUpLearnset = sZangooseLevelUpLearnset,
     },
     [SPECIES_RELICANTH] =
     {
@@ -10383,6 +10739,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sRelicanthLevelUpLearnset,
     },
     [SPECIES_ARON] =
     {
@@ -10412,6 +10769,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sAronLevelUpLearnset,
     },
     [SPECIES_LAIRON] =
     {
@@ -10441,6 +10799,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sLaironLevelUpLearnset,
     },
     [SPECIES_AGGRON] =
     {
@@ -10470,6 +10829,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sAggronLevelUpLearnset,
     },
     [SPECIES_CASTFORM] =
     {
@@ -10499,6 +10859,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sCastformLevelUpLearnset,
     },
     [SPECIES_VOLBEAT] =
     {
@@ -10528,6 +10889,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sVolbeatLevelUpLearnset,
     },
     [SPECIES_ILLUMISE] =
     {
@@ -10557,6 +10919,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sIllumiseLevelUpLearnset,
     },
     [SPECIES_LILEEP] =
     {
@@ -10586,6 +10949,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLileepLevelUpLearnset,
     },
     [SPECIES_CRADILY] =
     {
@@ -10615,6 +10979,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sCradilyLevelUpLearnset,
     },
     [SPECIES_ANORITH] =
     {
@@ -10644,6 +11009,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sAnorithLevelUpLearnset,
     },
     [SPECIES_ARMALDO] =
     {
@@ -10673,6 +11039,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sArmaldoLevelUpLearnset,
     },
     [SPECIES_RALTS] =
     {
@@ -10702,6 +11069,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sRaltsLevelUpLearnset,
     },
     [SPECIES_KIRLIA] =
     {
@@ -10731,6 +11099,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sKirliaLevelUpLearnset,
     },
     [SPECIES_GARDEVOIR] =
     {
@@ -10760,6 +11129,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGardevoirLevelUpLearnset,
     },
     [SPECIES_BAGON] =
     {
@@ -10789,6 +11159,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sBagonLevelUpLearnset,
     },
     [SPECIES_SHELGON] =
     {
@@ -10818,6 +11189,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sShelgonLevelUpLearnset,
     },
     [SPECIES_SALAMENCE] =
     {
@@ -10847,6 +11219,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSalamenceLevelUpLearnset,
     },
     [SPECIES_BELDUM] =
     {
@@ -10876,6 +11249,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sBeldumLevelUpLearnset,
     },
     [SPECIES_METANG] =
     {
@@ -10905,6 +11279,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMetangLevelUpLearnset,
     },
     [SPECIES_METAGROSS] =
     {
@@ -10934,6 +11309,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMetagrossLevelUpLearnset,
     },
     [SPECIES_REGIROCK] =
     {
@@ -10963,6 +11339,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sRegirockLevelUpLearnset,
     },
     [SPECIES_REGICE] =
     {
@@ -10992,6 +11369,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sRegiceLevelUpLearnset,
     },
     [SPECIES_REGISTEEL] =
     {
@@ -11021,6 +11399,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sRegisteelLevelUpLearnset,
     },
     [SPECIES_KYOGRE] =
     {
@@ -11050,6 +11429,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sKyogreLevelUpLearnset,
     },
     [SPECIES_GROUDON] =
     {
@@ -11079,6 +11459,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sGroudonLevelUpLearnset,
     },
     [SPECIES_RAYQUAZA] =
     {
@@ -11108,6 +11489,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sRayquazaLevelUpLearnset,
     },
     [SPECIES_LATIAS] =
     {
@@ -11137,6 +11519,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sLatiasLevelUpLearnset,
     },
     [SPECIES_LATIOS] =
     {
@@ -11166,6 +11549,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLatiosLevelUpLearnset,
     },
     [SPECIES_JIRACHI] =
     {
@@ -11195,6 +11579,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sJirachiLevelUpLearnset,
     },
     [SPECIES_DEOXYS] =
     {
@@ -11224,6 +11609,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = TRUE,
+        .levelUpLearnset = sDeoxysLevelUpLearnset,
     },
     [SPECIES_CHIMECHO] =
     {
@@ -11252,7 +11638,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
-        .noFlip = FALSE,    
+        .noFlip = FALSE,
+        .levelUpLearnset = sChimechoLevelUpLearnset,    
     },
 
     [SPECIES_TURTWIG] =
@@ -11283,6 +11670,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTurtwigLevelUpLearnset,
     },
 
     [SPECIES_GROTLE] =
@@ -11313,6 +11701,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGrotleLevelUpLearnset,
     },
     [SPECIES_TORTERRA] =
     {
@@ -11342,6 +11731,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTorterraLevelUpLearnset,
     },
 
     [SPECIES_CHIMCHAR] =
@@ -11372,6 +11762,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sChimcharLevelUpLearnset,
     },
 
     [SPECIES_MONFERNO] =
@@ -11402,6 +11793,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sMonfernoLevelUpLearnset,
     },
 
     [SPECIES_INFERNAPE] =
@@ -11432,6 +11824,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sInfernapeLevelUpLearnset,
     },
 
     [SPECIES_PIPLUP] =
@@ -11462,6 +11855,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPiplupLevelUpLearnset,
     },
 
     [SPECIES_PRINPLUP] =
@@ -11492,6 +11886,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPrinplupLevelUpLearnset,
     },
 
     [SPECIES_EMPOLEON] =
@@ -11522,6 +11917,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sEmpoleonLevelUpLearnset,
     },
 
     [SPECIES_STARLY] =
@@ -11552,6 +11948,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sStarlyLevelUpLearnset,
     },
 
     [SPECIES_STARAVIA] =
@@ -11582,6 +11979,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sStaraviaLevelUpLearnset,
     },
 
     [SPECIES_STARAPTOR] =
@@ -11612,6 +12010,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sStaraptorLevelUpLearnset,
     },
 
     [SPECIES_BIDOOF] =
@@ -11642,6 +12041,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBidoofLevelUpLearnset,
     },
 
     [SPECIES_BIBAREL] =
@@ -11672,6 +12072,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBibarelLevelUpLearnset,
     },
 
     [SPECIES_KRICKETOT] =
@@ -11702,6 +12103,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sKricketotLevelUpLearnset,
     },
 
     [SPECIES_KRICKETUNE] =
@@ -11732,6 +12134,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sKricketuneLevelUpLearnset,
     },
 
     [SPECIES_SHINX] =
@@ -11762,6 +12165,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sShinxLevelUpLearnset,
     },
 
     [SPECIES_LUXIO] =
@@ -11792,6 +12196,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLuxioLevelUpLearnset,
     },
 
     [SPECIES_LUXRAY] =
@@ -11822,6 +12227,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLuxrayLevelUpLearnset,
     },
 
     [SPECIES_BUDEW] =
@@ -11852,6 +12258,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBudewLevelUpLearnset,
     },
 
     [SPECIES_ROSERADE] =
@@ -11882,6 +12289,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sRoseradeLevelUpLearnset,
     },
 
     [SPECIES_CRANIDOS] =
@@ -11912,6 +12320,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sCranidosLevelUpLearnset,
     },
 
     [SPECIES_RAMPARDOS] =
@@ -11942,6 +12351,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sRampardosLevelUpLearnset,
     },
 
     [SPECIES_SHIELDON] =
@@ -11972,6 +12382,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sShieldonLevelUpLearnset,
     },
 
     [SPECIES_BASTIODON] =
@@ -12002,6 +12413,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sBastiodonLevelUpLearnset,
     },
 
     [SPECIES_BURMY] =
@@ -12032,6 +12444,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBurmyLevelUpLearnset,
     },
 
     [SPECIES_WORMADAM] =
@@ -12062,6 +12475,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sWormadamLevelUpLearnset,
     },
 
     [SPECIES_MOTHIM] =
@@ -12092,6 +12506,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sMothimLevelUpLearnset,
     },
 
     [SPECIES_COMBEE] =
@@ -12122,6 +12537,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sCombeeLevelUpLearnset,
     },
 
     [SPECIES_VESPIQUEN] =
@@ -12152,6 +12568,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sVespiquenLevelUpLearnset,
     },
 
     [SPECIES_PACHIRISU] =
@@ -12182,6 +12599,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPachirisuLevelUpLearnset,
     },
 
     [SPECIES_BUIZEL] =
@@ -12212,6 +12630,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBuizelLevelUpLearnset,
     },
 
     [SPECIES_FLOATZEL] =
@@ -12242,6 +12661,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sFloatzelLevelUpLearnset,
     },
 
     [SPECIES_CHERUBI] =
@@ -12272,6 +12692,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sCherubiLevelUpLearnset,
     },
 
     [SPECIES_CHERRIM] =
@@ -12302,6 +12723,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sCherrimLevelUpLearnset,
     },
 
     [SPECIES_SHELLOS] =
@@ -12332,6 +12754,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sShellosLevelUpLearnset,
     },
 
     [SPECIES_GASTRODON] =
@@ -12362,6 +12785,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGastrodonLevelUpLearnset,
     },
 
     [SPECIES_AMBIPOM] =
@@ -12392,6 +12816,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAmbipomLevelUpLearnset,
     },
 
     [SPECIES_DRIFLOON] =
@@ -12422,6 +12847,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDrifloonLevelUpLearnset,
     },
 
     [SPECIES_DRIFBLIM] =
@@ -12452,6 +12878,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDrifblimLevelUpLearnset,
     },
 
     [SPECIES_BUNEARY] =
@@ -12482,6 +12909,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBunearyLevelUpLearnset,
     },
 
     [SPECIES_LOPUNNY] =
@@ -12512,6 +12940,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sLopunnyLevelUpLearnset,
     },
 
     [SPECIES_MISMAGIUS] =
@@ -12542,6 +12971,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMismagiusLevelUpLearnset,
     },
 
     [SPECIES_HONCHKROW] =
@@ -12572,6 +13002,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sHonchkrowLevelUpLearnset,
     },
 
     [SPECIES_GLAMEOW] =
@@ -12602,6 +13033,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sGlameowLevelUpLearnset,
     },
 
     [SPECIES_PURUGLY] =
@@ -12632,6 +13064,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sPuruglyLevelUpLearnset,
     },
 
     [SPECIES_CHINGLING] =
@@ -12662,6 +13095,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sChinglingLevelUpLearnset,
     },
 
     [SPECIES_STUNKY] =
@@ -12692,6 +13126,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sStunkyLevelUpLearnset,
     },
 
     [SPECIES_SKUNTANK] =
@@ -12722,6 +13157,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSkuntankLevelUpLearnset,
     },
 
     [SPECIES_BRONZOR] =
@@ -12752,6 +13188,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBronzorLevelUpLearnset,
     },
 
     [SPECIES_BRONZONG] =
@@ -12782,6 +13219,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBronzongLevelUpLearnset,
     },
 
     [SPECIES_BONSLY] =
@@ -12812,6 +13250,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBonslyLevelUpLearnset,
     },
 
     [SPECIES_MIME_JR] =
@@ -12842,6 +13281,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sMimeJrLevelUpLearnset,
     },
 
     [SPECIES_HAPPINY] =
@@ -12872,6 +13312,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sHappinyLevelUpLearnset,
     },
 
     [SPECIES_CHATOT] =
@@ -12902,6 +13343,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sChatotLevelUpLearnset,
     },
 
     [SPECIES_SPIRITOMB] =
@@ -12932,6 +13374,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSpiritombLevelUpLearnset,
     },
 
     [SPECIES_GIBLE] =
@@ -12962,6 +13405,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGibleLevelUpLearnset,
     },
 
     [SPECIES_GABITE] =
@@ -12992,6 +13436,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGabiteLevelUpLearnset,
     },
 
     [SPECIES_GARCHOMP] =
@@ -13022,6 +13467,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGarchompLevelUpLearnset,
     },
 
     [SPECIES_MUNCHLAX] =
@@ -13052,6 +13498,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sMunchlaxLevelUpLearnset,
     },
 
     [SPECIES_RIOLU] =
@@ -13082,6 +13529,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sRioluLevelUpLearnset,
     },
 
     [SPECIES_LUCARIO] =
@@ -13112,6 +13560,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLucarioLevelUpLearnset,
     },
 
     [SPECIES_HIPPOPOTAS] =
@@ -13142,6 +13591,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sHippopotasLevelUpLearnset,
     },
 
     [SPECIES_HIPPOWDON] =
@@ -13172,6 +13622,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sHippowdonLevelUpLearnset,
     },
 
     [SPECIES_SKORUPI] =
@@ -13202,6 +13653,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSkorupiLevelUpLearnset,
     },
 
     [SPECIES_DRAPION] =
@@ -13232,6 +13684,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDrapionLevelUpLearnset,
     },
 
     [SPECIES_CROAGUNK] =
@@ -13262,6 +13715,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sCroagunkLevelUpLearnset,
     },
 
     [SPECIES_TOXICROAK] =
@@ -13292,6 +13746,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sToxicroakLevelUpLearnset,
     },
 
     [SPECIES_CARNIVINE] =
@@ -13322,6 +13777,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sCarnivineLevelUpLearnset,
     },
 
     [SPECIES_FINNEON] =
@@ -13352,6 +13808,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sFinneonLevelUpLearnset,
     },
 
     [SPECIES_LUMINEON] =
@@ -13382,6 +13839,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLumineonLevelUpLearnset,
     },
 
     [SPECIES_MANTYKE] =
@@ -13412,6 +13870,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMantykeLevelUpLearnset,
     },
 
     [SPECIES_SNOVER] =
@@ -13442,6 +13901,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSnoverLevelUpLearnset,
     },
 
     [SPECIES_ABOMASNOW] =
@@ -13472,6 +13932,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAbomasnowLevelUpLearnset,
     },
 
     [SPECIES_WEAVILE] =
@@ -13502,6 +13963,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sWeavileLevelUpLearnset,
     },
 
     [SPECIES_MAGNEZONE] =
@@ -13532,6 +13994,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sMagnezoneLevelUpLearnset,
     },
 
     [SPECIES_LICKILICKY] =
@@ -13562,6 +14025,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sLickilickyLevelUpLearnset,
     },
 
     [SPECIES_RHYPERIOR] =
@@ -13592,6 +14056,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sRhyperiorLevelUpLearnset,
     },
 
     [SPECIES_TANGROWTH] =
@@ -13622,6 +14087,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTangrowthLevelUpLearnset,
     },
 
     [SPECIES_ELECTIVIRE] =
@@ -13652,6 +14118,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sElectivireLevelUpLearnset,
     },
 
     [SPECIES_MAGMORTAR] =
@@ -13682,6 +14149,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sMagmortarLevelUpLearnset,
     },
 
     [SPECIES_TOGEKISS] =
@@ -13712,6 +14180,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTogekissLevelUpLearnset,
     },
 
     [SPECIES_YANMEGA] =
@@ -13742,6 +14211,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sYanmegaLevelUpLearnset,
     },
 
     [SPECIES_LEAFEON] =
@@ -13772,6 +14242,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sLeafeonLevelUpLearnset,
     },
 
     [SPECIES_GLACEON] =
@@ -13802,6 +14273,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGlaceonLevelUpLearnset,
     },
 
     [SPECIES_GLISCOR] =
@@ -13832,6 +14304,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGliscorLevelUpLearnset,
     },
 
     [SPECIES_MAMOSWINE] =
@@ -13862,6 +14335,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sMamoswineLevelUpLearnset,
     },
 
     [SPECIES_PORYGON_Z] =
@@ -13892,6 +14366,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sPorygon_ZLevelUpLearnset,
     },
 
     [SPECIES_GALLADE] =
@@ -13922,6 +14397,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGalladeLevelUpLearnset,
     },
 
     [SPECIES_PROBOPASS] =
@@ -13952,6 +14428,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sProbopassLevelUpLearnset,
     },
 
     [SPECIES_DUSKNOIR] =
@@ -13982,6 +14459,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sDusknoirLevelUpLearnset,
     },
 
     [SPECIES_FROSLASS] =
@@ -14012,6 +14490,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sFroslassLevelUpLearnset,
     },
 
     [SPECIES_ROTOM] =
@@ -14042,6 +14521,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sRotomLevelUpLearnset,
     },
 
     [SPECIES_UXIE] =
@@ -14072,6 +14552,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sUxieLevelUpLearnset,
     },
 
     [SPECIES_MESPRIT] =
@@ -14102,6 +14583,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sMespritLevelUpLearnset,
     },
 
     [SPECIES_AZELF] =
@@ -14132,6 +14614,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAzelfLevelUpLearnset,
     },
 
     [SPECIES_DIALGA] =
@@ -14162,6 +14645,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDialgaLevelUpLearnset,
     },
 
     [SPECIES_PALKIA] =
@@ -14192,6 +14676,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPalkiaLevelUpLearnset,
     },
 
     [SPECIES_HEATRAN] =
@@ -14222,6 +14707,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sHeatranLevelUpLearnset,
     },
 
     [SPECIES_REGIGIGAS] =
@@ -14252,6 +14738,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sRegigigasLevelUpLearnset,
     },
 
     [SPECIES_GIRATINA] =
@@ -14282,6 +14769,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sGiratinaLevelUpLearnset,
     },
 
     [SPECIES_CRESSELIA] =
@@ -14312,6 +14800,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sCresseliaLevelUpLearnset,
     },
 
     [SPECIES_PHIONE] =
@@ -14342,6 +14831,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPhioneLevelUpLearnset,
     },
 
     [SPECIES_MANAPHY] =
@@ -14372,6 +14862,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sManaphyLevelUpLearnset,
     },
 
     [SPECIES_DARKRAI] =
@@ -14402,6 +14893,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sDarkraiLevelUpLearnset,
     },
 
     [SPECIES_SHAYMIN] =
@@ -14432,6 +14924,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sShayminLevelUpLearnset,
     },
 
     [SPECIES_ARCEUS] =
@@ -14462,6 +14955,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sArceusLevelUpLearnset,
     },
 
     [SPECIES_VICTINI] =
@@ -14492,6 +14986,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sVictiniLevelUpLearnset,
     },
 
     [SPECIES_SNIVY] =
@@ -14522,6 +15017,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSnivyLevelUpLearnset,
     },
 
     [SPECIES_SERVINE] =
@@ -14552,6 +15048,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sServineLevelUpLearnset,
     },
 
     [SPECIES_SERPERIOR] =
@@ -14582,6 +15079,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSerperiorLevelUpLearnset,
     },
 
     [SPECIES_TEPIG] =
@@ -14612,6 +15110,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sTepigLevelUpLearnset,
     },
 
     [SPECIES_PIGNITE] =
@@ -14642,6 +15141,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sPigniteLevelUpLearnset,
     },
 
     [SPECIES_EMBOAR] =
@@ -14672,6 +15172,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sEmboarLevelUpLearnset,
     },
 
     [SPECIES_OSHAWOTT] =
@@ -14702,6 +15203,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sOshawottLevelUpLearnset,
     },
 
     [SPECIES_DEWOTT] =
@@ -14732,6 +15234,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDewottLevelUpLearnset,
     },
 
     [SPECIES_SAMUROTT] =
@@ -14762,6 +15265,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSamurottLevelUpLearnset,
     },
 
     [SPECIES_PATRAT] =
@@ -14792,6 +15296,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPatratLevelUpLearnset,
     },
 
     [SPECIES_WATCHOG] =
@@ -14822,6 +15327,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sWatchogLevelUpLearnset,
     },
 
     [SPECIES_LILLIPUP] =
@@ -14852,6 +15358,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sLillipupLevelUpLearnset,
     },
 
     [SPECIES_HERDIER] =
@@ -14882,6 +15389,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sHerdierLevelUpLearnset,
     },
 
     [SPECIES_STOUTLAND] =
@@ -14912,6 +15420,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sStoutlandLevelUpLearnset,
     },
 
     [SPECIES_PURRLOIN] =
@@ -14942,6 +15451,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPurrloinLevelUpLearnset,
     },
 
     [SPECIES_LIEPARD] =
@@ -14972,6 +15482,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLiepardLevelUpLearnset,
     },
 
     [SPECIES_PANSAGE] =
@@ -15002,6 +15513,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPansageLevelUpLearnset,
     },
 
     [SPECIES_SIMISAGE] =
@@ -15032,6 +15544,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSimisageLevelUpLearnset,
     },
 
     [SPECIES_PANSEAR] =
@@ -15062,6 +15575,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sPansearLevelUpLearnset,
     },
 
     [SPECIES_SIMISEAR] =
@@ -15092,6 +15606,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sSimisearLevelUpLearnset,
     },
 
     [SPECIES_PANPOUR] =
@@ -15122,6 +15637,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPanpourLevelUpLearnset,
     },
 
     [SPECIES_SIMIPOUR] =
@@ -15152,6 +15668,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSimipourLevelUpLearnset,
     },
 
     [SPECIES_MUNNA] =
@@ -15182,6 +15699,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sMunnaLevelUpLearnset,
     },
 
     [SPECIES_MUSHARNA] =
@@ -15212,6 +15730,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sMusharnaLevelUpLearnset,
     },
 
     [SPECIES_PIDOVE] =
@@ -15242,6 +15761,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sPidoveLevelUpLearnset,
     },
 
     [SPECIES_TRANQUILL] =
@@ -15272,6 +15792,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sTranquillLevelUpLearnset,
     },
 
     [SPECIES_UNFEZANT] =
@@ -15302,6 +15823,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sUnfezantLevelUpLearnset,
     },
 
     [SPECIES_BLITZLE] =
@@ -15332,6 +15854,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sBlitzleLevelUpLearnset,
     },
 
     [SPECIES_ZEBSTRIKA] =
@@ -15362,6 +15885,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sZebstrikaLevelUpLearnset,
     },
 
     [SPECIES_ROGGENROLA] =
@@ -15392,6 +15916,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sRoggenrolaLevelUpLearnset,
     },
 
     [SPECIES_BOLDORE] =
@@ -15422,6 +15947,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sBoldoreLevelUpLearnset,
     },
 
     [SPECIES_GIGALITH] =
@@ -15452,6 +15978,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGigalithLevelUpLearnset,
     },
 
     [SPECIES_WOOBAT] =
@@ -15482,6 +16009,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sWoobatLevelUpLearnset,
     },
 
     [SPECIES_SWOOBAT] =
@@ -15512,6 +16040,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSwoobatLevelUpLearnset,
     },
 
     [SPECIES_DRILBUR] =
@@ -15542,6 +16071,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sDrilburLevelUpLearnset,
     },
 
     [SPECIES_EXCADRILL] =
@@ -15572,6 +16102,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sExcadrillLevelUpLearnset,
     },
 
     [SPECIES_AUDINO] =
@@ -15602,6 +16133,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAudinoLevelUpLearnset,
     },
 
     [SPECIES_TIMBURR] =
@@ -15632,6 +16164,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sTimburrLevelUpLearnset,
     },
 
     [SPECIES_GURDURR] =
@@ -15662,6 +16195,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sGurdurrLevelUpLearnset,
     },
 
     [SPECIES_CONKELDURR] =
@@ -15692,6 +16226,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sConkeldurrLevelUpLearnset,
     },
 
     [SPECIES_TYMPOLE] =
@@ -15722,6 +16257,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTympoleLevelUpLearnset,
     },
 
     [SPECIES_PALPITOAD] =
@@ -15752,6 +16288,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPalpitoadLevelUpLearnset,
     },
 
     [SPECIES_SEISMITOAD] =
@@ -15782,6 +16319,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSeismitoadLevelUpLearnset,
     },
 
     [SPECIES_THROH] =
@@ -15812,6 +16350,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sThrohLevelUpLearnset,
     },
 
     [SPECIES_SAWK] =
@@ -15842,6 +16381,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSawkLevelUpLearnset,
     },
 
     [SPECIES_SEWADDLE] =
@@ -15872,6 +16412,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sSewaddleLevelUpLearnset,
     },
 
     [SPECIES_SWADLOON] =
@@ -15902,6 +16443,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSwadloonLevelUpLearnset,
     },
 
     [SPECIES_LEAVANNY] =
@@ -15932,6 +16474,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sLeavannyLevelUpLearnset,
     },
 
     [SPECIES_VENIPEDE] =
@@ -15962,6 +16505,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sVenipedeLevelUpLearnset,
     },
 
     [SPECIES_WHIRLIPEDE] =
@@ -15992,6 +16536,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sWhirlipedeLevelUpLearnset,
     },
 
     [SPECIES_SCOLIPEDE] =
@@ -16022,6 +16567,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sScolipedeLevelUpLearnset,
     },
 
     [SPECIES_COTTONEE] =
@@ -16052,6 +16598,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sCottoneeLevelUpLearnset,
     },
 
     [SPECIES_WHIMSICOTT] =
@@ -16082,6 +16629,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sWhimsicottLevelUpLearnset,
     },
 
     [SPECIES_PETILIL] =
@@ -16112,6 +16660,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPetililLevelUpLearnset,
     },
 
     [SPECIES_LILLIGANT] =
@@ -16142,6 +16691,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sLilligantLevelUpLearnset,
     },
 
     [SPECIES_BASCULIN] =
@@ -16172,6 +16722,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBasculinLevelUpLearnset,
     },
 
     [SPECIES_SANDILE] =
@@ -16202,6 +16753,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSandileLevelUpLearnset,
     },
 
     [SPECIES_KROKOROK] =
@@ -16232,6 +16784,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sKrokorokLevelUpLearnset,
     },
 
     [SPECIES_KROOKODILE] =
@@ -16262,6 +16815,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sKrookodileLevelUpLearnset,
     },
 
     [SPECIES_DARUMAKA] =
@@ -16292,6 +16846,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sDarumakaLevelUpLearnset,
     },
 
     [SPECIES_DARMANITAN] =
@@ -16322,6 +16877,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sDarmanitanLevelUpLearnset,
     },
 
     [SPECIES_MARACTUS] =
@@ -16352,6 +16908,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sMaractusLevelUpLearnset,
     },
 
     [SPECIES_DWEBBLE] =
@@ -16382,6 +16939,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sDwebbleLevelUpLearnset,
     },
 
     [SPECIES_CRUSTLE] =
@@ -16412,6 +16970,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sCrustleLevelUpLearnset,
     },
 
     [SPECIES_SCRAGGY] =
@@ -16442,6 +17001,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sScraggyLevelUpLearnset,
     },
 
     [SPECIES_SCRAFTY] =
@@ -16472,6 +17032,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sScraftyLevelUpLearnset,
     },
 
     [SPECIES_SIGILYPH] =
@@ -16502,6 +17063,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSigilyphLevelUpLearnset,
     },
 
     [SPECIES_YAMASK] =
@@ -16532,6 +17094,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sYamaskLevelUpLearnset,
     },
 
     [SPECIES_COFAGRIGUS] =
@@ -16562,6 +17125,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sCofagrigusLevelUpLearnset,
     },
 
     [SPECIES_TIRTOUGA] =
@@ -16592,6 +17156,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTirtougaLevelUpLearnset,
     },
 
     [SPECIES_CARRACOSTA] =
@@ -16622,6 +17187,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sCarracostaLevelUpLearnset,
     },
 
     [SPECIES_ARCHEN] =
@@ -16652,6 +17218,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sArchenLevelUpLearnset,
     },
 
     [SPECIES_ARCHEOPS] =
@@ -16682,6 +17249,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sArcheopsLevelUpLearnset,
     },
 
     [SPECIES_TRUBBISH] =
@@ -16712,6 +17280,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTrubbishLevelUpLearnset,
     },
 
     [SPECIES_GARBODOR] =
@@ -16742,6 +17311,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGarbodorLevelUpLearnset,
     },
 
     [SPECIES_ZORUA] =
@@ -16772,6 +17342,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sZoruaLevelUpLearnset,
     },
 
     [SPECIES_ZOROARK] =
@@ -16802,6 +17373,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sZoroarkLevelUpLearnset,
     },
 
     [SPECIES_MINCCINO] =
@@ -16832,6 +17404,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sMinccinoLevelUpLearnset,
     },
 
     [SPECIES_CINCCINO] =
@@ -16862,6 +17435,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sCinccinoLevelUpLearnset,
     },
 
     [SPECIES_GOTHITA] =
@@ -16892,6 +17466,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGothitaLevelUpLearnset,
     },
 
     [SPECIES_GOTHORITA] =
@@ -16922,6 +17497,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGothoritaLevelUpLearnset,
     },
 
     [SPECIES_GOTHITELLE] =
@@ -16952,6 +17528,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGothitelleLevelUpLearnset,
     },
 
     [SPECIES_SOLOSIS] =
@@ -16982,6 +17559,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSolosisLevelUpLearnset,
     },
 
     [SPECIES_DUOSION] =
@@ -17012,6 +17590,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDuosionLevelUpLearnset,
     },
 
     [SPECIES_REUNICLUS] =
@@ -17042,6 +17621,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sReuniclusLevelUpLearnset,
     },
 
     [SPECIES_DUCKLETT] =
@@ -17072,6 +17652,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDucklettLevelUpLearnset,
     },
 
     [SPECIES_SWANNA] =
@@ -17102,6 +17683,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSwannaLevelUpLearnset,
     },
 
     [SPECIES_VANILLITE] =
@@ -17132,6 +17714,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sVanilliteLevelUpLearnset,
     },
 
     [SPECIES_VANILLISH] =
@@ -17162,6 +17745,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sVanillishLevelUpLearnset,
     },
 
     [SPECIES_VANILLUXE] =
@@ -17192,6 +17776,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sVanilluxeLevelUpLearnset,
     },
 
     [SPECIES_DEERLING] =
@@ -17222,6 +17807,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sDeerlingLevelUpLearnset,
     },
 
     [SPECIES_SAWSBUCK] =
@@ -17252,6 +17838,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSawsbuckLevelUpLearnset,
     },
 
     [SPECIES_EMOLGA] =
@@ -17282,6 +17869,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sEmolgaLevelUpLearnset,
     },
 
     [SPECIES_KARRABLAST] =
@@ -17312,6 +17900,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sKarrablastLevelUpLearnset,
     },
 
     [SPECIES_ESCAVALIER] =
@@ -17342,6 +17931,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sEscavalierLevelUpLearnset,
     },
 
     [SPECIES_FOONGUS] =
@@ -17372,6 +17962,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sFoongusLevelUpLearnset,
     },
 
     [SPECIES_AMOONGUSS] =
@@ -17402,6 +17993,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAmoongussLevelUpLearnset,
     },
 
     [SPECIES_FRILLISH] =
@@ -17432,6 +18024,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sFrillishLevelUpLearnset,
     },
 
     [SPECIES_JELLICENT] =
@@ -17462,6 +18055,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sJellicentLevelUpLearnset,
     },
 
     [SPECIES_ALOMOMOLA] =
@@ -17492,6 +18086,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sAlomomolaLevelUpLearnset,
     },
 
     [SPECIES_JOLTIK] =
@@ -17522,6 +18117,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sJoltikLevelUpLearnset,
     },
 
     [SPECIES_GALVANTULA] =
@@ -17552,6 +18148,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sGalvantulaLevelUpLearnset,
     },
 
     [SPECIES_FERROSEED] =
@@ -17582,6 +18179,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sFerroseedLevelUpLearnset,
     },
 
     [SPECIES_FERROTHORN] =
@@ -17612,6 +18210,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sFerrothornLevelUpLearnset,
     },
 
     [SPECIES_KLINK] =
@@ -17642,6 +18241,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sKlinkLevelUpLearnset,
     },
 
     [SPECIES_KLANG] =
@@ -17672,6 +18272,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sKlangLevelUpLearnset,
     },
 
     [SPECIES_KLINKLANG] =
@@ -17702,6 +18303,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sKlinklangLevelUpLearnset,
     },
 
     [SPECIES_TYNAMO] =
@@ -17732,6 +18334,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sTynamoLevelUpLearnset,
     },
 
     [SPECIES_EELEKTRIK] =
@@ -17762,6 +18365,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sEelektrikLevelUpLearnset,
     },
 
     [SPECIES_EELEKTROSS] =
@@ -17792,6 +18396,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sEelektrossLevelUpLearnset,
     },
 
     [SPECIES_ELGYEM] =
@@ -17822,6 +18427,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sElgyemLevelUpLearnset,
     },
 
     [SPECIES_BEHEEYEM] =
@@ -17852,6 +18458,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBeheeyemLevelUpLearnset,
     },
 
     [SPECIES_LITWICK] =
@@ -17882,6 +18489,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLitwickLevelUpLearnset,
     },
 
     [SPECIES_LAMPENT] =
@@ -17912,6 +18520,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sLampentLevelUpLearnset,
     },
 
     [SPECIES_CHANDELURE] =
@@ -17942,6 +18551,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sChandelureLevelUpLearnset,
     },
 
     [SPECIES_AXEW] =
@@ -17972,6 +18582,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sAxewLevelUpLearnset,
     },
 
     [SPECIES_FRAXURE] =
@@ -18002,6 +18613,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sFraxureLevelUpLearnset,
     },
 
     [SPECIES_HAXORUS] =
@@ -18032,6 +18644,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sHaxorusLevelUpLearnset,
     },
 
     [SPECIES_CUBCHOO] =
@@ -18062,6 +18675,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sCubchooLevelUpLearnset,
     },
 
     [SPECIES_BEARTIC] =
@@ -18092,6 +18706,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sBearticLevelUpLearnset,
     },
 
     [SPECIES_CRYOGONAL] =
@@ -18122,6 +18737,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sCryogonalLevelUpLearnset,
     },
 
     [SPECIES_SHELMET] =
@@ -18152,6 +18768,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sShelmetLevelUpLearnset,
     },
 
     [SPECIES_ACCELGOR] =
@@ -18182,6 +18799,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sAccelgorLevelUpLearnset,
     },
 
     [SPECIES_STUNFISK] =
@@ -18212,6 +18830,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sStunfiskLevelUpLearnset,
     },
 
     [SPECIES_MIENFOO] =
@@ -18242,6 +18861,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sMienfooLevelUpLearnset,
     },
 
     [SPECIES_MIENSHAO] =
@@ -18272,6 +18892,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMienshaoLevelUpLearnset,
     },
 
     [SPECIES_DRUDDIGON] =
@@ -18302,6 +18923,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sDruddigonLevelUpLearnset,
     },
 
     [SPECIES_GOLETT] =
@@ -18332,6 +18954,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGolettLevelUpLearnset,
     },
 
     [SPECIES_GOLURK] =
@@ -18362,6 +18985,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGolurkLevelUpLearnset,
     },
 
     [SPECIES_PAWNIARD] =
@@ -18392,6 +19016,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sPawniardLevelUpLearnset,
     },
 
     [SPECIES_BISHARP] =
@@ -18422,6 +19047,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sBisharpLevelUpLearnset,
     },
 
     [SPECIES_BOUFFALANT] =
@@ -18452,6 +19078,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBouffalantLevelUpLearnset,
     },
 
     [SPECIES_RUFFLET] =
@@ -18482,6 +19109,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sRuffletLevelUpLearnset,
     },
 
     [SPECIES_BRAVIARY] =
@@ -18512,6 +19140,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sBraviaryLevelUpLearnset,
     },
 
     [SPECIES_VULLABY] =
@@ -18542,6 +19171,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sVullabyLevelUpLearnset,
     },
 
     [SPECIES_MANDIBUZZ] =
@@ -18572,6 +19202,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sMandibuzzLevelUpLearnset,
     },
 
     [SPECIES_HEATMOR] =
@@ -18602,6 +19233,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sHeatmorLevelUpLearnset,
     },
 
     [SPECIES_DURANT] =
@@ -18632,6 +19264,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sDurantLevelUpLearnset,
     },
 
     [SPECIES_DEINO] =
@@ -18662,6 +19295,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sDeinoLevelUpLearnset,
     },
 
     [SPECIES_ZWEILOUS] =
@@ -18692,6 +19326,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sZweilousLevelUpLearnset,
     },
 
     [SPECIES_HYDREIGON] =
@@ -18722,6 +19357,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sHydreigonLevelUpLearnset,
     },
 
     [SPECIES_LARVESTA] =
@@ -18752,6 +19388,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sLarvestaLevelUpLearnset,
     },
 
     [SPECIES_VOLCARONA] =
@@ -18782,6 +19419,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sVolcaronaLevelUpLearnset,
     },
 
     [SPECIES_COBALION] =
@@ -18812,6 +19450,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sCobalionLevelUpLearnset,
     },
 
     [SPECIES_TERRAKION] =
@@ -18842,6 +19481,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sTerrakionLevelUpLearnset,
     },
 
     [SPECIES_VIRIZION] =
@@ -18872,6 +19512,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sVirizionLevelUpLearnset,
     },
 
     [SPECIES_TORNADUS] =
@@ -18902,6 +19543,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTornadusLevelUpLearnset,
     },
 
     [SPECIES_THUNDURUS] =
@@ -18932,6 +19574,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sThundurusLevelUpLearnset,
     },
 
     [SPECIES_LANDORUS] =
@@ -18962,6 +19605,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sLandorusLevelUpLearnset,
     },
 
     [SPECIES_RESHIRAM] =
@@ -18992,6 +19636,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sReshiramLevelUpLearnset,
     },
 
     [SPECIES_ZEKROM] =
@@ -19022,6 +19667,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sZekromLevelUpLearnset,
     },
 
     [SPECIES_KYUREM_W] =
@@ -19052,6 +19698,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sKyuremWLevelUpLearnset,
     },
 
     [SPECIES_KYUREM_B] =
@@ -19082,6 +19729,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sKyuremBLevelUpLearnset,
     },
 
     [SPECIES_KELDEO] =
@@ -19112,6 +19760,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sKeldeoLevelUpLearnset,
     },
 
     [SPECIES_MELOETTA_A] =
@@ -19142,6 +19791,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMeloettaALevelUpLearnset,
     },
 
     [SPECIES_MELOETTA_P] =
@@ -19172,6 +19822,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMeloettaPLevelUpLearnset,
     },
 
     [SPECIES_GENESECT] =
@@ -19202,6 +19853,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGenesectLevelUpLearnset,
     },
 
     [SPECIES_CHESPIN] =
@@ -19232,6 +19884,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sChespinLevelUpLearnset,
     },
 
     [SPECIES_QUILLADIN] =
@@ -19262,6 +19915,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sQuilladinLevelUpLearnset,
     },
 
     [SPECIES_CHESNAUGHT] =
@@ -19292,6 +19946,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sChesnaughtLevelUpLearnset,
     },
 
     [SPECIES_FENNEKIN] =
@@ -19322,6 +19977,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sFennekinLevelUpLearnset,
     },
 
     [SPECIES_BRAIXEN] =
@@ -19352,6 +20008,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sBraixenLevelUpLearnset,
     },
 
     [SPECIES_DELPHOX] =
@@ -19382,6 +20039,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sDelphoxLevelUpLearnset,
     },
 
     [SPECIES_FROAKIE] =
@@ -19412,6 +20070,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sFroakieLevelUpLearnset,
     },
 
     [SPECIES_FROGADIER] =
@@ -19442,6 +20101,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sFrogadierLevelUpLearnset,
     },
 
     [SPECIES_GRENINJA] =
@@ -19472,6 +20132,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGreninjaLevelUpLearnset,
     },
 
     [SPECIES_BUNNELBY] =
@@ -19502,6 +20163,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBunnelbyLevelUpLearnset,
     },
 
     [SPECIES_DIGGERSBY] =
@@ -19532,6 +20194,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDiggersbyLevelUpLearnset,
     },
 
     [SPECIES_FLETCHLING] =
@@ -19562,6 +20225,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sFletchlingLevelUpLearnset,
     },
 
     [SPECIES_FLETCHINDER] =
@@ -19592,6 +20256,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sFletchinderLevelUpLearnset,
     },
 
     [SPECIES_TALONFLAME] =
@@ -19622,6 +20287,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sTalonflameLevelUpLearnset,
     },
 
     [SPECIES_SCATTERBUG] =
@@ -19652,6 +20318,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sScatterbugLevelUpLearnset,
     },
 
     [SPECIES_SPEWPA] =
@@ -19682,6 +20349,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLACK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSpewpaLevelUpLearnset,
     },
 
     [SPECIES_VIVILLON] =
@@ -19712,6 +20380,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sVivillonLevelUpLearnset,
     },
 
     [SPECIES_LITLEO] =
@@ -19742,6 +20411,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sLitleoLevelUpLearnset,
     },
 
     [SPECIES_PYROAR] =
@@ -19772,6 +20442,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPyroarLevelUpLearnset,
     },
 
     [SPECIES_FLABEBE] =
@@ -19802,6 +20473,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sFlabebeLevelUpLearnset,
     },
 
     [SPECIES_FLOETTE] =
@@ -19832,6 +20504,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sFloetteLevelUpLearnset,
     },
 
     [SPECIES_FLORGES] =
@@ -19862,6 +20535,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sFlorgesLevelUpLearnset,
     },
 
     [SPECIES_SKIDDO] =
@@ -19892,6 +20566,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSkiddoLevelUpLearnset,
     },
 
     [SPECIES_GOGOAT] =
@@ -19922,6 +20597,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGogoatLevelUpLearnset,
     },
 
     [SPECIES_PANCHAM] =
@@ -19952,6 +20628,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPanchamLevelUpLearnset,
     },
 
     [SPECIES_PANGORO] =
@@ -19982,6 +20659,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPangoroLevelUpLearnset,
     },
 
     [SPECIES_FURFROU] =
@@ -20012,6 +20690,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sFurfrouLevelUpLearnset,
     },
 
     [SPECIES_ESPURR] =
@@ -20042,6 +20721,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sEspurrLevelUpLearnset,
     },
 
     [SPECIES_MEOWSTIC] =
@@ -20072,6 +20752,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMeowsticLevelUpLearnset,
     },
 
     [SPECIES_HONEDGE] =
@@ -20102,6 +20783,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sHonedgeLevelUpLearnset,
     },
 
     [SPECIES_DOUBLADE] =
@@ -20132,6 +20814,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDoubladeLevelUpLearnset,
     },
 
     [SPECIES_AEGISLASH] =
@@ -20162,6 +20845,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sAegislashLevelUpLearnset,
     },
 
     [SPECIES_SPRITZEE] =
@@ -20192,6 +20876,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSpritzeeLevelUpLearnset,
     },
 
     [SPECIES_AROMATISSE] =
@@ -20222,6 +20907,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sAromatisseLevelUpLearnset,
     },
 
     [SPECIES_SWIRLIX] =
@@ -20252,6 +20938,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSwirlixLevelUpLearnset,
     },
 
     [SPECIES_SLURPUFF] =
@@ -20282,6 +20969,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSlurpuffLevelUpLearnset,
     },
 
     [SPECIES_INKAY] =
@@ -20312,6 +21000,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sInkayLevelUpLearnset,
     },
 
     [SPECIES_MALAMAR] =
@@ -20342,6 +21031,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sMalamarLevelUpLearnset,
     },
 
     [SPECIES_BINACLE] =
@@ -20372,6 +21062,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBinacleLevelUpLearnset,
     },
 
     [SPECIES_BARBARACLE] =
@@ -20402,6 +21093,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sBarbaracleLevelUpLearnset,
     },
 
     [SPECIES_SKRELP] =
@@ -20432,6 +21124,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sSkrelpLevelUpLearnset,
     },
 
     [SPECIES_DRAGALGE] =
@@ -20462,6 +21155,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDragalgeLevelUpLearnset,
     },
 
     [SPECIES_CLAUNCHER] =
@@ -20492,6 +21186,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sClauncherLevelUpLearnset,
     },
 
     [SPECIES_CLAWITZER] =
@@ -20522,6 +21217,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sClawitzerLevelUpLearnset,
     },
 
     [SPECIES_HELIOPTILE] =
@@ -20552,6 +21248,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sHelioptileLevelUpLearnset,
     },
 
     [SPECIES_HELIOLISK] =
@@ -20582,6 +21279,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sHelioliskLevelUpLearnset,
     },
 
     [SPECIES_TYRUNT] =
@@ -20612,6 +21310,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTyruntLevelUpLearnset,
     },
 
     [SPECIES_TYRANTRUM] =
@@ -20642,6 +21341,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sTyrantrumLevelUpLearnset,
     },
 
     [SPECIES_AMAURA] =
@@ -20672,6 +21372,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAmauraLevelUpLearnset,
     },
 
     [SPECIES_AURORUS] =
@@ -20702,6 +21403,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAurorusLevelUpLearnset,
     },
 
     [SPECIES_SYLVEON] =
@@ -20732,6 +21434,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sSylveonLevelUpLearnset,
     },
 
     [SPECIES_HAWLUCHA] =
@@ -20762,6 +21465,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sHawluchaLevelUpLearnset,
     },
 
     [SPECIES_DEDENNE] =
@@ -20792,6 +21496,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sDedenneLevelUpLearnset,
     },
 
     [SPECIES_CARBINK] =
@@ -20822,6 +21527,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sCarbinkLevelUpLearnset,
     },
 
     [SPECIES_GOOMY] =
@@ -20852,6 +21558,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGoomyLevelUpLearnset,
     },
 
     [SPECIES_SLIGGOO] =
@@ -20882,6 +21589,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sSliggooLevelUpLearnset,
     },
 
     [SPECIES_GOODRA] =
@@ -20912,6 +21620,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sGoodraLevelUpLearnset,
     },
 
     [SPECIES_KLEFKI] =
@@ -20942,6 +21651,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sKlefkiLevelUpLearnset,
     },
 
     [SPECIES_PHANTUMP] =
@@ -20972,6 +21682,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPhantumpLevelUpLearnset,
     },
 
     [SPECIES_TREVENANT] =
@@ -21002,6 +21713,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sTrevenantLevelUpLearnset,
     },
 
     [SPECIES_PUMPKABOO] =
@@ -21032,6 +21744,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sPumpkabooLevelUpLearnset,
     },
 
     [SPECIES_GOURGEIST] =
@@ -21062,6 +21775,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sGourgeistLevelUpLearnset,
     },
 
     [SPECIES_BERGMITE] =
@@ -21092,6 +21806,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sBergmiteLevelUpLearnset,
     },
 
     [SPECIES_AVALUGG] =
@@ -21122,6 +21837,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sAvaluggLevelUpLearnset,
     },
 
     [SPECIES_NOIBAT] =
@@ -21152,6 +21868,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sNoibatLevelUpLearnset,
     },
 
     [SPECIES_NOIVERN] =
@@ -21182,6 +21899,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sNoivernLevelUpLearnset,
     },
 
     [SPECIES_XERNEAS] =
@@ -21212,6 +21930,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sXerneasLevelUpLearnset,
     },
 
     [SPECIES_YVELTAL] =
@@ -21242,6 +21961,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sYveltalLevelUpLearnset,
     },
 
     [SPECIES_ZYGARDE] =
@@ -21272,6 +21992,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sZygardeLevelUpLearnset,
     },
 
     [SPECIES_DIANCIE] =
@@ -21302,6 +22023,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sDiancieLevelUpLearnset,
     },
 
     [SPECIES_HOOPA] =
@@ -21332,6 +22054,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sHoopaLevelUpLearnset,
     },
 
     [SPECIES_VOLCANION] =
@@ -21362,6 +22085,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = FALSE,
+        .levelUpLearnset = sVolcanionLevelUpLearnset,
     },
 
     [SPECIES_PRIMARINA] =
@@ -21392,6 +22116,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = FALSE,
+        .levelUpLearnset = sPrimarinaLevelUpLearnset,
     },
 
     [SPECIES_GOLISOPOD] =
@@ -21422,6 +22147,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sGolisopodLevelUpLearnset,
     },
 
     [SPECIES_MARSHADOW] =
@@ -21452,6 +22178,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sMarshadowLevelUpLearnset,
     },
 
     [SPECIES_DREEPY] =
@@ -21482,6 +22209,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDreepyLevelUpLearnset,
     },
 
     [SPECIES_DRAKLOAK] =
@@ -21512,6 +22240,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDrakloakLevelUpLearnset,
     },
 
     [SPECIES_DRAGAPULT] =
@@ -21542,6 +22271,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sDragapultLevelUpLearnset,
     },
 
     [SPECIES_REGIELEKI] =
@@ -21572,6 +22302,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
+        .levelUpLearnset = sRegielekiLevelUpLearnset,
     },
 
     [SPECIES_REGIDRAGO] =
@@ -21602,6 +22333,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
+        .levelUpLearnset = sRegidragoLevelUpLearnset,
     },
 
     [SPECIES_TINKATON] =
@@ -21632,6 +22364,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = FALSE,
+        .levelUpLearnset = sTinkatonLevelUpLearnset,
     },
 
     [SPECIES_FLUTTER_MANE] =
@@ -21662,6 +22395,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_GRAY,
         .noFlip = FALSE,
+        .levelUpLearnset = sFlutterManeLevelUpLearnset,
     },
 
     [SPECIES_IRON_VALIANT] =
@@ -21692,6 +22426,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_WHITE,
         .noFlip = FALSE,
+        .levelUpLearnset = sIronValiantLevelUpLearnset,
     },
 
     [SPECIES_CHARCADET] =
@@ -21722,6 +22457,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sCharcadetLevelUpLearnset,
     },
 
     [SPECIES_ARMAROUGE] =
@@ -21752,6 +22488,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_RED,
         .noFlip = FALSE,
+        .levelUpLearnset = sArmarougeLevelUpLearnset,
     },
 
     [SPECIES_CERULEDGE] =
@@ -21782,6 +22519,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .safariZoneFleeRate = 0,
         .bodyColor = BODY_COLOR_PURPLE,
         .noFlip = FALSE,
+        .levelUpLearnset = sCeruledgeLevelUpLearnset,
     },
 
 };

@@ -13,6 +13,11 @@ static void AnimSludgeBombHitParticle_Step(struct Sprite *sprite);
 static void AnimBubbleEffect_Step(struct Sprite *sprite);
 static void AnimSuckerPunchStep(struct Sprite *sprite);
 static void AnimSuckerPunch(struct Sprite *sprite);
+static void AnimGunkShotParticlesStep(struct Sprite *sprite);
+static void AnimGunkShotParticles(struct Sprite *sprite);
+static void AnimGunkShotImpact(struct Sprite *sprite);
+static void AnimFallingRock(struct Sprite *sprite);
+static void AnimFallingRock_Step(struct Sprite *sprite);
 
 static const union AnimCmd sAnim_ToxicBubble[] =
 {
@@ -222,7 +227,7 @@ const union AnimCmd *const gSuckerPunchAnim[] =
     gSuckerPunchAnimCmd,
 };
 
-/* const union AnimCmd gGunkShotParticlesAnimCmd[] =
+const union AnimCmd gGunkShotParticlesAnimCmd[] =
 {
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_FRAME(4, 1),
@@ -234,7 +239,7 @@ const union AnimCmd *const gSuckerPunchAnim[] =
 const union AnimCmd *const gGunkShotParticlesAnims[] =
 {
     gGunkShotParticlesAnimCmd,
-}; */
+};
 
 const union AffineAnimCmd gSuckerPunchImpactAffineAnimCmd_1[] =
 {
@@ -280,6 +285,40 @@ const struct SpriteTemplate gSuckerPunchSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSuckerPunch,
+};
+
+const struct SpriteTemplate gGunkShoParticlesSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WATER_ORB,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .oam = &gOamData_AffineOff_ObjBlend_16x16,
+    .anims = gGunkShotParticlesAnims,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimGunkShotParticles,
+};
+
+const struct SpriteTemplate gGunkShotImpactSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_WATER_IMPACT,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gSuckerPunchImpactAffineAnim,
+    .callback = AnimGunkShotImpact,
+};
+
+//venom drench
+const struct SpriteTemplate gVenomDrenchAcidTemplate =
+{
+    .tileTag = ANIM_TAG_POISON_BUBBLE,
+    .paletteTag = ANIM_TAG_POISON_BUBBLE,
+    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
+    .anims = sAnims_PoisonProjectile,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFallingRock
 };
 
 static void AnimSludgeProjectile(struct Sprite *sprite)
@@ -431,4 +470,91 @@ static void AnimSuckerPunchStep(struct Sprite *sprite)
     {
         DestroyAnimSprite(sprite);
     }
+}
+
+static void AnimGunkShotImpact(struct Sprite *sprite)
+{
+    StartSpriteAffineAnim(sprite, gBattleAnimArgs[3]);
+    if (gBattleAnimArgs[2] == 0)
+        InitSpritePosToAnimAttacker(sprite, 1);
+    else
+        InitSpritePosToAnimTarget(sprite, TRUE);
+
+    sprite->callback = RunStoredCallbackWhenAffineAnimEnds;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+}
+
+static void AnimGunkShotParticles(struct Sprite *sprite)
+{
+    u16 retArg;
+
+    InitSpritePosToAnimAttacker(sprite, TRUE);
+    sprite->data[0] = 30;
+    sprite->data[1] = sprite->x;
+    sprite->data[2] = GetBattlerSpriteCoord(gBattleAnimTarget, 2);
+    sprite->data[3] = sprite->y;
+    sprite->data[4] = GetBattlerSpriteCoord(gBattleAnimTarget, 3);
+    InitAnimLinearTranslation(sprite);
+    sprite->data[5] = 0xD200 / sprite->data[0];
+    sprite->data[7] = gBattleAnimArgs[3];
+    retArg = gBattleAnimArgs[ARG_RET_ID];
+    if (gBattleAnimArgs[ARG_RET_ID] > 127)
+    {
+        sprite->data[6] = (retArg - 127) * 256;
+        sprite->data[7] = -sprite->data[7];
+    }
+    else
+    {
+        sprite->data[6] = retArg * 256;
+    }
+    sprite->callback = AnimGunkShotParticlesStep;
+    sprite->callback(sprite);
+}
+
+static void AnimGunkShotParticlesStep(struct Sprite *sprite)
+{
+    if (AnimTranslateLinear(sprite))
+        DestroyAnimSprite(sprite);
+    sprite->y2 += Sin(sprite->data[6] >> 8, sprite->data[7]);
+    if ((sprite->data[6] + sprite->data[5]) >> 8 > 127)
+    {
+        sprite->data[6] = 0;
+        sprite->data[7] = -sprite->data[7];
+    }
+    else
+    {
+        sprite->data[6] += sprite->data[5];
+    }
+}
+
+static void AnimFallingRock(struct Sprite *sprite)
+{
+    if (gBattleAnimArgs[3] != 0)
+        SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->x, &sprite->y);
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += 14;
+    StartSpriteAnim(sprite, gBattleAnimArgs[1]);
+    AnimateSprite(sprite);
+    sprite->data[0] = 0;
+    sprite->data[1] = 0;
+    sprite->data[2] = 4;
+    sprite->data[3] = 16;
+    sprite->data[4] = -70;
+    sprite->data[5] = gBattleAnimArgs[2];
+    StoreSpriteCallbackInData6(sprite, AnimFallingRock_Step);
+    sprite->callback = TranslateSpriteInEllipse;
+    sprite->callback(sprite);
+}
+
+static void AnimFallingRock_Step(struct Sprite *sprite)
+{
+    sprite->x += sprite->data[5];
+    sprite->data[0] = 192;
+    sprite->data[1] = sprite->data[5];
+    sprite->data[2] = 4;
+    sprite->data[3] = 32;
+    sprite->data[4] = -24;
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
+    sprite->callback = TranslateSpriteInEllipse;
+    sprite->callback(sprite);
 }

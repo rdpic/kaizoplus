@@ -341,6 +341,8 @@ static u8 GetAbilityEncounterRateModType(void)
             sWildEncounterData.abilityEffect = 1;
         else if (ability == ABILITY_ILLUMINATE)
             sWildEncounterData.abilityEffect = 2;
+        else if (ability == ABILITY_QUICK_FEET)
+            sWildEncounterData.abilityEffect = 1;
     }
     return sWildEncounterData.abilityEffect;
 }

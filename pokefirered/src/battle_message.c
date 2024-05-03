@@ -142,7 +142,7 @@ static const u8 sText_PkmnHidUnderwater[] = _("{B_ATK_NAME_WITH_PREFIX} hid\nund
 static const u8 sText_PkmnSprangUp[] = _("{B_ATK_NAME_WITH_PREFIX} sprang up!");
 static const u8 sText_PkmnSqueezedByBind[] = _("{B_DEF_NAME_WITH_PREFIX} was squeezed by\n{B_ATK_NAME_WITH_PREFIX}'s BIND!");
 static const u8 sText_PkmnTrappedInVortex[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nin the vortex!");
-static const u8 sText_PkmnTrappedBySandTomb[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nby SAND TOMB!");
+static const u8 sText_PkmnTrappedBySandTomb[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped!");
 static const u8 sText_PkmnWrappedBy[] = _("{B_DEF_NAME_WITH_PREFIX} was WRAPPED by\n{B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnClamped[] = _("{B_ATK_NAME_WITH_PREFIX} CLAMPED\n{B_DEF_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnHurtBy[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby {B_BUFF1}!");
@@ -443,6 +443,40 @@ static const u8 sText_Electromagnetism[] = _("electromagnetism");
 static const u8 sText_PkmnLevitatedOnElectromagnetism[] = _("{B_ATK_NAME_WITH_PREFIX} levitated on\nelectromagnetism!");
 static const u8 sText_PkmnTwistedDimensions[] = _("{B_ATK_NAME_WITH_PREFIX} twisted\nthe dimensions!");
 static const u8 sText_TrickRoomEnds[] = _("The twisted dimensions returned to\nnormal!");
+static const u8 sText_VanishedInstantly[] =_("{B_ATK_NAME_WITH_PREFIX} vanished\ninstantly!");
+static const u8 sText_PkmnMakesGroundMissElectroMagnetism[] = _("{B_DEF_NAME_WITH_PREFIX} dodges thanks to electromagnetism!");
+static const u8 sText_SharedItsGuard[] =_("{B_ATK_NAME_WITH_PREFIX} shared its\nguard with the target!");
+static const u8 sText_SharedItsPower[] =_("{B_ATK_NAME_WITH_PREFIX} shared its\npower with the target!");
+static const u8 sText_BecameNimble[] =_("{B_ATK_NAME_WITH_PREFIX} became nimble!");
+static const u8 sText_drastically[] = _("drastically ");
+static const u8 sText_severely[] = _("severely ");
+static const u8 sText_NoEffectOnTarget[] = _("It had no effect\non {B_DEF_NAME_WITH_PREFIX}!");
+static const u8 sText_TargetChangedType[] =_("{B_DEF_NAME_WITH_PREFIX} transformed\ninto the {B_BUFF1} type!");
+static const u8 sText_ResetsTargetsStatLevels[] =_("{B_DEF_NAME_WITH_PREFIX}'s stat changes\nwere removed!");
+static const u8 sText_IncinerateBurn[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nwas burnt up!");
+static const u8 sText_ReflectTargetsType[] =_("{B_ATK_NAME_WITH_PREFIX}'s type\nchanged to match the {B_DEF_NAME_WITH_PREFIX}'s!");
+static const u8 sText_CloakedInAFreezingLight[] = _("{B_ATK_NAME_WITH_PREFIX} became cloaked\nin a freezing light!");
+static const u8 sText_TopsyTurvySwitchedStats[] = _("{B_DEF_NAME_WITH_PREFIX}'s stat changes were\nall reversed!");
+static const u8 sText_TerrainBecomesMisty[] = _("Mist swirled about\nthe battlefield!");
+static const u8 sText_TerrainBecomesGrassy[] = _("Grass grew to cover\nthe battlefield!");
+static const u8 sText_TerrainBecomesElectric[] = _("An electric current runs across\nthe battlefield!");
+static const u8 sText_TerrainBecomesPsychic[] = _("The battlefield got weird!");
+static const u8 sText_ElectricTerrainEnds[] = _("The electricity disappeared\nfrom the battlefield.");
+static const u8 sText_MistyTerrainEnds[] = _("The mist disappeared\nfrom the battlefield.");
+static const u8 sText_PsychicTerrainEnds[] = _("The weirdness disappeared\nfrom the battlefield.");
+static const u8 sText_GrassyTerrainEnds[] = _("The grass disappeared\nfrom the battlefield.");
+static const u8 sText_MistyTerrainPreventsStatus[] = _("{B_DEF_NAME_WITH_PREFIX} surrounds itself\nwith a protective mist!");
+static const u8 sText_ElectricTerrainPreventsSleep[] = _("{B_DEF_NAME_WITH_PREFIX} surrounds itself\nwith electrified terrain!");
+static const u8 sText_PsychicTerrainPreventsPriority[] = _("{B_DEF_NAME_WITH_PREFIX} surrounds itself\nwith psychic terrain!");
+static const u8 sText_GrassyTerrainHeals[] = _("{B_ATK_NAME_WITH_PREFIX} is healed\nby the grassy terrain!");
+static const u8 sText_EnduredViaSturdy[] = _("{B_DEF_NAME_WITH_PREFIX} endured\nthe hit using {B_DEF_ABILITY}!");
+static const u8 sText_PkmnAbsorbingPower[] = _("{B_ATK_NAME_WITH_PREFIX} is absorbing power!");
+static const u8 sText_PkmnHurtsWithSpiky[] = _("{B_DEF_NAME_WITH_PREFIX}'s SPIKY SHIELD\nhurt {B_ATK_NAME_WITH_PREFIX}!");
+static const u8 sText_TargetsStatWasMaxedOut[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY} maxed\nits {B_BUFF1}!");
+static const u8 sText_SolarPowerHpDrop[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\ntakes its toll!");
+static const u8 sText_PoisonHealHpUp[] = _("The poisoning healed {B_ATK_NAME_WITH_PREFIX}\na little bit!");
+static const u8 sText_AirLockActivates[] = _("The effects of weather\ndisappeared.");
+static const u8 sText_PressureActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is exerting its\npressure!");
 
 static const u8 sText_HP2[] = _("HP");
 static const u8 sText_Attack2[] = _("ATTACK");
@@ -927,6 +961,40 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_PKMNLEVITATEDONELECTROMAGNETISM - BATTLESTRINGS_TABLE_START] = sText_PkmnLevitatedOnElectromagnetism,
     [STRINGID_PKMNTWISTEDDIMENSIONS - BATTLESTRINGS_TABLE_START]         = sText_PkmnTwistedDimensions,
     [STRINGID_TRICKROOMENDS - BATTLESTRINGS_TABLE_START]                 = sText_TrickRoomEnds,
+    [STRINGID_VANISHEDINSTANTLY - BATTLESTRINGS_TABLE_START]             = sText_VanishedInstantly,
+    [STRINGID_ELECTROMAGNETISMMISS - BATTLESTRINGS_TABLE_START]          = sText_PkmnMakesGroundMissElectroMagnetism,
+    [STRINGID_SHAREDITSGUARD - BATTLESTRINGS_TABLE_START]                = sText_SharedItsGuard,
+    [STRINGID_SHAREDITSPOWER - BATTLESTRINGS_TABLE_START]                = sText_SharedItsPower,
+    [STRINGID_BECAMENIMBLE - BATTLESTRINGS_TABLE_START]                  = sText_BecameNimble,
+    [STRINGID_DRASTICALLY - BATTLESTRINGS_TABLE_START]                   = sText_drastically,
+    [STRINGID_SEVERELY - BATTLESTRINGS_TABLE_START]                      = sText_severely,
+    [STRINGID_NOEFFECTONTARGET - BATTLESTRINGS_TABLE_START]              = sText_NoEffectOnTarget,
+    [STRINGID_TARGETCHANGEDTYPE  - BATTLESTRINGS_TABLE_START]            = sText_TargetChangedType,
+    [STRINGID_RESETSTARGETSSTATLEVELS - BATTLESTRINGS_TABLE_START]       = sText_ResetsTargetsStatLevels,
+    [STRINGID_INCINERATEBURN - BATTLESTRINGS_TABLE_START]                = sText_IncinerateBurn,
+    [STRINGID_REFLECTTARGETSTYPE - BATTLESTRINGS_TABLE_START]            = sText_ReflectTargetsType,
+    [STRINGID_CLOAKEDINAFREEZINGLIGHT - BATTLESTRINGS_TABLE_START]       = sText_CloakedInAFreezingLight,
+    [STRINGID_TOPSYTURVYSWITCHEDSTATS - BATTLESTRINGS_TABLE_START]       = sText_TopsyTurvySwitchedStats,
+    [STRINGID_TERRAINBECOMESMISTY - BATTLESTRINGS_TABLE_START]           = sText_TerrainBecomesMisty,
+    [STRINGID_TERRAINBECOMESGRASSY - BATTLESTRINGS_TABLE_START]          = sText_TerrainBecomesGrassy,
+    [STRINGID_TERRAINBECOMESELECTRIC - BATTLESTRINGS_TABLE_START]        = sText_TerrainBecomesElectric,
+    [STRINGID_TERRAINBECOMESPSYCHIC - BATTLESTRINGS_TABLE_START]         = sText_TerrainBecomesPsychic,
+    [STRINGID_ELECTRICTERRAINENDS - BATTLESTRINGS_TABLE_START]           = sText_ElectricTerrainEnds,
+    [STRINGID_MISTYTERRAINENDS - BATTLESTRINGS_TABLE_START]              = sText_MistyTerrainEnds,
+    [STRINGID_PSYCHICTERRAINENDS - BATTLESTRINGS_TABLE_START]            = sText_PsychicTerrainEnds,
+    [STRINGID_GRASSYTERRAINENDS - BATTLESTRINGS_TABLE_START]             = sText_GrassyTerrainEnds,
+    [STRINGID_MISTYTERRAINPREVENTS - BATTLESTRINGS_TABLE_START]          = sText_MistyTerrainPreventsStatus,
+    [STRINGID_ELECTRICTERRAINPREVENTS - BATTLESTRINGS_TABLE_START]       = sText_ElectricTerrainPreventsSleep,
+    [STRINGID_PSYCHICTERRAINPREVENTS - BATTLESTRINGS_TABLE_START]        = sText_PsychicTerrainPreventsPriority,
+    [STRINGID_GRASSYTERRAINHEALS - BATTLESTRINGS_TABLE_START]            = sText_GrassyTerrainHeals,
+    [STRINGID_ENDUREDSTURDY - BATTLESTRINGS_TABLE_START]                 = sText_EnduredViaSturdy,
+    [STRINGID_PKNMABSORBINGPOWER - BATTLESTRINGS_TABLE_START]            = sText_PkmnAbsorbingPower,
+    [STRINGID_PKMNHURTSWITHSPIKY - BATTLESTRINGS_TABLE_START]            = sText_PkmnHurtsWithSpiky,
+    [STRINGID_TARGETSSTATWASMAXEDOUT - BATTLESTRINGS_TABLE_START]        = sText_TargetsStatWasMaxedOut,
+    [STRINGID_SOLARPOWERHPDROP - BATTLESTRINGS_TABLE_START]              = sText_SolarPowerHpDrop,
+    [STRINGID_POISONHEALHPUP - BATTLESTRINGS_TABLE_START]                = sText_PoisonHealHpUp,
+    [STRINGID_AIRLOCKACTIVATES - BATTLESTRINGS_TABLE_START]              = sText_AirLockActivates,
+    [STRINGID_PRESSUREENTERS - BATTLESTRINGS_TABLE_START]                = sText_PressureActivates,
 };
 
 const u16 gStatusConditionsStringIds[] =
@@ -940,7 +1008,8 @@ const u16 gMissStringIds[] =
     [B_MSG_PROTECTED]   = STRINGID_PKMNPROTECTEDITSELF,
     [B_MSG_AVOIDED_ATK] = STRINGID_PKMNAVOIDEDATTACK,
     [B_MSG_AVOIDED_DMG] = STRINGID_AVOIDEDDAMAGE,
-    [B_MSG_GROUND_MISS] = STRINGID_PKMNMAKESGROUNDMISS
+    [B_MSG_GROUND_MISS] = STRINGID_PKMNMAKESGROUNDMISS,
+    [B_MSG_ELECTROMAGNETISM_MISS] = STRINGID_ELECTROMAGNETISMMISS
 };
 
 const u16 gNoEscapeStringIds[] =
@@ -1078,7 +1147,10 @@ const u16 gFirstTurnOfTwoStringIds[] =
     [B_MSG_TURN1_FLY]        = STRINGID_PKMNFLEWHIGH,
     [B_MSG_TURN1_DIG]        = STRINGID_PKMNDUGHOLE,
     [B_MSG_TURN1_DIVE]       = STRINGID_PKMNHIDUNDERWATER,
-    [B_MSG_TURN1_BOUNCE]     = STRINGID_PKMNSPRANGUP
+    [B_MSG_TURN1_BOUNCE]     = STRINGID_PKMNSPRANGUP,
+    [B_MSG_TURN1_SHADOW_FORCE] = STRINGID_VANISHEDINSTANTLY,
+    [B_MSG_TURN1_KYUREM]     = STRINGID_CLOAKEDINAFREEZINGLIGHT,
+    [B_MSG_TURN1_GEOMANCY]   = STRINGID_PKNMABSORBINGPOWER,
 };
 
 // Index copied from move's index in gTrappingMoves
@@ -1089,7 +1161,9 @@ const u16 gWrappedStringIds[] =
     STRINGID_PKMNTRAPPEDINVORTEX,  // MOVE_FIRE_SPIN
     STRINGID_PKMNCLAMPED,          // MOVE_CLAMP
     STRINGID_PKMNTRAPPEDINVORTEX,  // MOVE_WHIRLPOOL
-    STRINGID_PKMNTRAPPEDBYSANDTOMB // MOVE_SAND_TOMB
+    STRINGID_PKMNTRAPPEDBYSANDTOMB, // MOVE_SAND_TOMB
+    STRINGID_PKMNTRAPPEDINVORTEX,  // MOVE_MAGMA_STORM
+    STRINGID_PKMNTRAPPEDBYSANDTOMB, // MOVE_INFESTATION
 };
 
 const u16 gMistUsedStringIds[] =
@@ -1150,6 +1224,21 @@ const u16 gGotDefrostedStringIds[] =
 {
     [B_MSG_DEFROSTED]         = STRINGID_PKMNWASDEFROSTED2,
     [B_MSG_DEFROSTED_BY_MOVE] = STRINGID_PKMNWASDEFROSTEDBY
+};
+
+const u16 gSwitchInAbilityStringIds[] =
+{
+    [B_MSG_SWITCHIN_PRESSURE] = STRINGID_PRESSUREENTERS,
+    /* [B_MSG_SWITCHIN_MOLDBREAKER] = STRINGID_MOLDBREAKERENTERS,
+    [B_MSG_SWITCHIN_TERAVOLT] = STRINGID_TERAVOLTENTERS,
+    [B_MSG_SWITCHIN_TURBOBLAZE] = STRINGID_TURBOBLAZEENTERS,
+    [B_MSG_SWITCHIN_SLOWSTART] = STRINGID_SLOWSTARTENTERS,
+    [B_MSG_SWITCHIN_UNNERVE] = STRINGID_UNNERVEENTERS,
+    [B_MSG_SWITCHIN_ANTICIPATION] = STRINGID_ANTICIPATIONACTIVATES,
+    [B_MSG_SWITCHIN_FOREWARN] = STRINGID_FOREWARNACTIVATES, */
+    /* [B_MSG_SWITCHIN_DARKAURA] = STRINGID_DARKAURAENTERS,
+    [B_MSG_SWITCHIN_FAIRYAURA] = STRINGID_FAIRYAURAENTERS,
+    [B_MSG_SWITCHIN_AURABREAK] = STRINGID_AURABREAKENTERS, */
 };
 
 const u16 gKOFailedStringIds[] =
@@ -1312,14 +1401,18 @@ const u16 gTrappingMoves[NUM_TRAPPING_MOVES + 1] =
     MOVE_CLAMP,
     MOVE_WHIRLPOOL,
     MOVE_SAND_TOMB,
+    MOVE_MAGMA_STORM,
+    MOVE_INFESTATION,
     0xFFFF // Never read
 };
 
 const u16 gRoomsStringIds[] =
 {
     STRINGID_PKMNTWISTEDDIMENSIONS, STRINGID_TRICKROOMENDS,
-    /* STRINGID_SWAPSDEFANDSPDEFOFALLPOKEMON, STRINGID_WONDERROOMENDS,
-    STRINGID_HELDITEMSLOSEEFFECTS, STRINGID_MAGICROOMENDS, */
+    STRINGID_TERRAINBECOMESGRASSY, STRINGID_GRASSYTERRAINENDS,
+    STRINGID_TERRAINBECOMESMISTY, STRINGID_MISTYTERRAINENDS,
+    STRINGID_TERRAINBECOMESPSYCHIC, STRINGID_PSYCHICTERRAINENDS,
+    STRINGID_TERRAINBECOMESELECTRIC, STRINGID_ELECTRICTERRAINENDS,
     STRINGID_EMPTYSTRING3
 };
 

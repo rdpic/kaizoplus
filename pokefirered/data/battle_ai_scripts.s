@@ -69,41 +69,42 @@ AI_CBM_CheckIfNegatesType::
 
 CheckIfVoltAbsorbCancelsElectric::
 	get_curr_move_type
-	if_equal_ TYPE_ELECTRIC, Score_Minus12
+	if_equal_ TYPE_ELECTRIC, Score_Minus30
 	goto AI_CheckBadMove_CheckSoundproof
 
 CheckIfWaterAbsorbCancelsWater::
 	get_curr_move_type
-	if_equal_ TYPE_WATER, Score_Minus12
+	if_equal_ TYPE_WATER, Score_Minus30
 	goto AI_CheckBadMove_CheckSoundproof
 
 CheckIfFlashFireCancelsFire::
 	get_curr_move_type
-	if_equal_ TYPE_FIRE, Score_Minus12
+	if_equal_ TYPE_FIRE, Score_Minus30
 	goto AI_CheckBadMove_CheckSoundproof
 
 CheckIfWonderGuardCancelsMove::
 	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CheckBadMove_CheckSoundproof
-	goto Score_Minus10
+	goto Score_Minus30
 
 CheckIfLevitateCancelsGroundMove::
 	get_curr_move_type
-	if_equal_ TYPE_GROUND, Score_Minus10
+	if_equal_ TYPE_GROUND, Score_Minus30
 
 AI_CheckBadMove_CheckSoundproof::
 	get_ability AI_TARGET
 	if_not_equal ABILITY_SOUNDPROOF, AI_CheckBadMove_CheckEffect
-	if_move MOVE_GROWL, Score_Minus10
-	if_move MOVE_ROAR, Score_Minus10
-	if_move MOVE_SING, Score_Minus10
-	if_move MOVE_SUPERSONIC, Score_Minus10
-	if_move MOVE_SCREECH, Score_Minus10
-	if_move MOVE_SNORE, Score_Minus10
-	if_move MOVE_UPROAR, Score_Minus10
-	if_move MOVE_PERISH_SONG, Score_Minus10
-	if_move MOVE_METAL_SOUND, Score_Minus10
-	if_move MOVE_GRASS_WHISTLE, Score_Minus10
-	if_move MOVE_HYPER_VOICE, Score_Minus10
+	if_move MOVE_GROWL, Score_Minus30
+	if_move MOVE_ROAR, Score_Minus30
+	if_move MOVE_SING, Score_Minus30
+	if_move MOVE_SUPERSONIC, Score_Minus30
+	if_move MOVE_SCREECH, Score_Minus30
+	if_move MOVE_SNORE, Score_Minus30
+	if_move MOVE_UPROAR, Score_Minus30
+	if_move MOVE_PERISH_SONG, Score_Minus30
+	if_move MOVE_METAL_SOUND, Score_Minus30
+	if_move MOVE_GRASS_WHISTLE, Score_Minus30
+	if_move MOVE_HYPER_VOICE, Score_Minus30
+	if_move MOVE_ROAR_OF_TIME, Score_Minus30
 
 AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep
@@ -186,7 +187,7 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_MIRROR_COAT, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_SKULL_BASH, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_FUTURE_SIGHT, AI_CBM_FutureSight
-	if_effect EFFECT_TELEPORT, Score_Minus10
+	if_effect EFFECT_TELEPORT, Score_Minus30
 	if_effect EFFECT_DEFENSE_CURL, AI_CBM_DefenseUp
 	if_effect EFFECT_FAKE_OUT, AI_CBM_FakeOut
 	if_effect EFFECT_STOCKPILE, AI_CBM_Stockpile
@@ -222,14 +223,24 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_AQUA_RING, AI_CBM_AquaRing
 	if_effect EFFECT_LUCKY_CHANT, AI_CBM_LuckyChant
 	if_effect EFFECT_WORRY_SEED, AI_CBM_WorrySeed
+	if_effect EFFECT_GUARD_SPLIT, AI_CBM_StatSwap
+	if_effect EFFECT_POWER_SPLIT, AI_CBM_StatSwap
+	if_effect EFFECT_AUTOTOMIZE, AI_CBM_SpeedUp
+	if_effect EFFECT_SYNCHRONOISE, AI_CBM_Synchronoise
+	if_effect EFFECT_ELECTRO_BALL, AI_CBM_ElectroBall
+	if_effect EFFECT_SOAK, AI_CBM_Soak
+	if_effect EFFECT_SPEED_UP_HIT, AI_CBM_SpeedUp
+	if_effect EFFECT_COIL, AI_CBM_BulkUp
+	if_effect EFFECT_SHELL_SMASH, AI_CBM_DragonDance
+	if_effect EFFECT_SHIFT_GEAR, AI_CBM_DragonDance
 	end
 
 AI_CBM_Sleep::
 	get_ability AI_TARGET
-	if_equal ABILITY_INSOMNIA, Score_Minus10
-	if_equal ABILITY_VITAL_SPIRIT, Score_Minus10
-	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
-	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
+	if_equal ABILITY_INSOMNIA, Score_Minus30
+	if_equal ABILITY_VITAL_SPIRIT, Score_Minus30
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus30
+	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus30
 	end
 
 AI_CBM_Explosion::
@@ -237,96 +248,96 @@ AI_CBM_Explosion::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_ability AI_TARGET
-	if_equal ABILITY_DAMP, Score_Minus10
+	if_equal ABILITY_DAMP, Score_Minus30
 	count_alive_pokemon AI_USER
 	if_not_equal 0, AI_CBM_Explosion_End
 	count_alive_pokemon AI_TARGET
-	if_not_equal 0, Score_Minus10
+	if_not_equal 0, Score_Minus30
 	goto Score_Minus1
 
 AI_CBM_Explosion_End::
 	end
 
 AI_CBM_Nightmare::
-	if_status2 AI_TARGET, STATUS2_NIGHTMARE, Score_Minus10
-	if_not_status AI_TARGET, STATUS1_SLEEP, Score_Minus10
+	if_status2 AI_TARGET, STATUS2_NIGHTMARE, Score_Minus30
+	if_not_status AI_TARGET, STATUS1_SLEEP, Score_Minus30
 	end
 
 AI_CBM_DreamEater::
-	if_not_status AI_TARGET, STATUS1_SLEEP, Score_Minus10
+	if_not_status AI_TARGET, STATUS1_SLEEP, Score_Minus30
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	end
 
 AI_CBM_BellyDrum::
-	if_hp_less_than AI_USER, 51, Score_Minus10
+	if_hp_less_than AI_USER, 51, Score_Minus30
 
 AI_CBM_AttackUp::
-	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus30
 	end
 
 AI_CBM_DefenseUp::
-	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus30
 	end
 
 AI_CBM_SpeedUp::
-	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus30
 	end
 
 AI_CBM_SpAtkUp::
-	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPATK, 12, Score_Minus30
 	end
 
 AI_CBM_SpDefUp::
-	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_SPDEF, 12, Score_Minus30
 	end
 
 AI_CBM_AccUp::
-	if_stat_level_equal AI_USER, STAT_ACC, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_ACC, 12, Score_Minus30
 	end
 
 AI_CBM_EvasionUp::
-	if_stat_level_equal AI_USER, STAT_EVASION, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_EVASION, 12, Score_Minus30
 	end
 
 AI_CBM_AttackDown::
-	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus30
 	get_ability AI_TARGET
-	if_equal ABILITY_HYPER_CUTTER, Score_Minus10
+	if_equal ABILITY_HYPER_CUTTER, Score_Minus30
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_DefenseDown::
-	if_stat_level_equal AI_TARGET, STAT_DEF, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_DEF, 0, Score_Minus30
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpeedDown::
-	if_stat_level_equal AI_TARGET, STAT_SPEED, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_SPEED, 0, Score_Minus30
 	get_ability AI_TARGET
-	if_equal ABILITY_SPEED_BOOST, Score_Minus10
+	if_equal ABILITY_SPEED_BOOST, Score_Minus30
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpAtkDown::
-	if_stat_level_equal AI_TARGET, STAT_SPATK, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_SPATK, 0, Score_Minus30
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_SpDefDown::
-	if_stat_level_equal AI_TARGET, STAT_SPDEF, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_SPDEF, 0, Score_Minus30
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_AccDown::
-	if_stat_level_equal AI_TARGET, STAT_ACC, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_ACC, 0, Score_Minus30
 	get_ability AI_TARGET
-	if_equal ABILITY_KEEN_EYE, Score_Minus10
+	if_equal ABILITY_KEEN_EYE, Score_Minus30
 	goto CheckIfAbilityBlocksStatChange
 
 AI_CBM_EvasionDown::
-	if_stat_level_equal AI_TARGET, STAT_EVASION, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_EVASION, 0, Score_Minus30
 
 CheckIfAbilityBlocksStatChange::
 	get_ability AI_TARGET
-	if_equal ABILITY_CLEAR_BODY, Score_Minus10
-	if_equal ABILITY_WHITE_SMOKE, Score_Minus10
+	if_equal ABILITY_CLEAR_BODY, Score_Minus30
+	if_equal ABILITY_WHITE_SMOKE, Score_Minus30
 	end
 
 AI_CBM_Haze::
@@ -344,29 +355,29 @@ AI_CBM_Haze::
 	if_stat_level_more_than AI_TARGET, STAT_SPDEF, 6, AI_CBM_Haze_End
 	if_stat_level_more_than AI_TARGET, STAT_ACC, 6, AI_CBM_Haze_End
 	if_stat_level_more_than AI_TARGET, STAT_EVASION, 6, AI_CBM_Haze_End
-	goto Score_Minus10
+	goto Score_Minus30
 
 AI_CBM_Haze_End::
 	end
 
 AI_CBM_Roar::
 	count_alive_pokemon AI_TARGET
-	if_equal 0, Score_Minus10
+	if_equal 0, Score_Minus30
 	get_ability AI_TARGET
-	if_equal ABILITY_SUCTION_CUPS, Score_Minus10
+	if_equal ABILITY_SUCTION_CUPS, Score_Minus30
 	end
 
 AI_CBM_Poison::
 	get_target_type1
-	if_equal TYPE_STEEL, Score_Minus10
-	if_equal TYPE_POISON, Score_Minus10
+	if_equal TYPE_STEEL, Score_Minus30
+	if_equal TYPE_POISON, Score_Minus30
 	get_target_type2
-	if_equal TYPE_STEEL, Score_Minus10
-	if_equal TYPE_POISON, Score_Minus10
+	if_equal TYPE_STEEL, Score_Minus30
+	if_equal TYPE_POISON, Score_Minus30
 	get_ability AI_TARGET
-	if_equal ABILITY_IMMUNITY, Score_Minus10
-	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
-	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
+	if_equal ABILITY_IMMUNITY, Score_Minus30
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus30
+	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus30
 	end
 
 AI_CBM_LightScreen::
@@ -378,13 +389,14 @@ AI_CBM_OneHitKO::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_ability AI_TARGET
-	if_equal ABILITY_STURDY, Score_Minus10
-	if_level_cond 1, Score_Minus10
+	if_equal ABILITY_STURDY, Score_Minus30
+	if_level_cond 1, Score_Minus30
 	end
 
 AI_CBM_Magnitude::
 	get_ability AI_TARGET
-	if_equal ABILITY_LEVITATE, Score_Minus10
+	if_equal ABILITY_LEVITATE, Score_Minus30
+	if_status3 AI_TARGET, STATUS3_MAGNET_RISE, Score_Minus30
 
 AI_CBM_HighRiskForDamage::
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
@@ -393,7 +405,7 @@ AI_CBM_HighRiskForDamage::
 	get_ability AI_TARGET
 	if_not_equal ABILITY_WONDER_GUARD, AI_CBM_HighRiskForDamage_End
 	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CBM_HighRiskForDamage_End
-	goto Score_Minus10
+	goto Score_Minus30
 
 AI_CBM_HighRiskForDamage_End::
 	end
@@ -403,14 +415,14 @@ AI_CBM_Mist::
 	end
 
 AI_CBM_FocusEnergy::
-	if_status2 AI_USER, STATUS2_FOCUS_ENERGY, Score_Minus10
+	if_status2 AI_USER, STATUS2_FOCUS_ENERGY, Score_Minus30
 	end
 
 AI_CBM_Confuse::
 	if_status2 AI_TARGET, STATUS2_CONFUSION, Score_Minus5
 	get_ability AI_TARGET
-	if_equal ABILITY_OWN_TEMPO, Score_Minus10
-	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10
+	if_equal ABILITY_OWN_TEMPO, Score_Minus30
+	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus30
 	end
 
 AI_CBM_Reflect::
@@ -422,26 +434,26 @@ AI_CBM_Paralyze::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_target_type1
-	if_equal TYPE_ELECTRIC, Score_Minus10
+	if_equal TYPE_ELECTRIC, Score_Minus30
 	get_target_type2
-	if_equal TYPE_ELECTRIC, Score_Minus10
+	if_equal TYPE_ELECTRIC, Score_Minus30
 	get_ability AI_TARGET
-	if_equal ABILITY_LIMBER, Score_Minus10
-	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
-	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10  
+	if_equal ABILITY_LIMBER, Score_Minus30
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus30
+	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus30  
 	end
 
 AI_CBM_Substitute::
 	if_status2 AI_USER, STATUS2_SUBSTITUTE, Score_Minus8
-	if_hp_less_than AI_USER, 26, Score_Minus10
+	if_hp_less_than AI_USER, 26, Score_Minus30
 	end
 
 AI_CBM_LeechSeed::
-	if_status3 AI_TARGET, STATUS3_LEECHSEED, Score_Minus10
+	if_status3 AI_TARGET, STATUS3_LEECHSEED, Score_Minus30
 	get_target_type1
-	if_equal TYPE_GRASS, Score_Minus10
+	if_equal TYPE_GRASS, Score_Minus30
 	get_target_type2
-	if_equal TYPE_GRASS, Score_Minus10
+	if_equal TYPE_GRASS, Score_Minus30
 	end
 
 AI_CBM_Disable::
@@ -457,49 +469,49 @@ AI_CBM_DamageDuringSleep::
 	end
 
 AI_CBM_CantEscape::
-	if_status2 AI_TARGET, STATUS2_ESCAPE_PREVENTION, Score_Minus10
+	if_status2 AI_TARGET, STATUS2_ESCAPE_PREVENTION, Score_Minus30
 	end
 
 AI_CBM_Curse::
-	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus10
+	if_stat_level_equal AI_USER, STAT_ATK, 12, Score_Minus30
 	if_stat_level_equal AI_USER, STAT_DEF, 12, Score_Minus8
 	end
 
 AI_CBM_Spikes::
-	if_side_affecting AI_TARGET, SIDE_STATUS_SPIKES, Score_Minus10
+	if_side_affecting AI_TARGET, SIDE_STATUS_SPIKES, Score_Minus30
 	end
 
 AI_CBM_Foresight::
-	if_status2 AI_TARGET, STATUS2_FORESIGHT, Score_Minus10
+	if_status2 AI_TARGET, STATUS2_FORESIGHT, Score_Minus30
 	end
 
 AI_CBM_PerishSong::
-	if_status3 AI_TARGET, STATUS3_PERISH_SONG, Score_Minus10
+	if_status3 AI_TARGET, STATUS3_PERISH_SONG, Score_Minus30
 	end
 
 AI_CBM_Sandstorm::
 	get_weather
-	if_equal AI_WEATHER_SANDSTORM, Score_Minus8
+	if_equal AI_WEATHER_SANDSTORM, Score_Minus30
 	end
 
 AI_CBM_Attract::
-	if_status2 AI_TARGET, STATUS2_INFATUATION, Score_Minus10
+	if_status2 AI_TARGET, STATUS2_INFATUATION, Score_Minus30
 	get_ability AI_TARGET
-	if_equal ABILITY_OBLIVIOUS, Score_Minus10
+	if_equal ABILITY_OBLIVIOUS, Score_Minus30
 	get_gender AI_USER
 	if_equal MON_MALE, AI_CBM_Attract_CheckIfTargetIsFemale
 	if_equal MON_FEMALE, AI_CBM_Attract_CheckIfTargetIsMale
-	goto Score_Minus10
+	goto Score_Minus30
 
 AI_CBM_Attract_CheckIfTargetIsFemale::
 	get_gender AI_TARGET
 	if_equal MON_FEMALE, AI_CBM_Attract_End
-	goto Score_Minus10
+	goto Score_Minus30
 
 AI_CBM_Attract_CheckIfTargetIsMale::
 	get_gender AI_TARGET
 	if_equal MON_MALE, AI_CBM_Attract_End
-	goto Score_Minus10
+	goto Score_Minus30
 
 AI_CBM_Attract_End::
 	end
@@ -509,37 +521,37 @@ AI_CBM_Safeguard::
 	end
 
 AI_CBM_Memento::
-	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus10
+	if_stat_level_equal AI_TARGET, STAT_ATK, 0, Score_Minus30
 	if_stat_level_equal AI_TARGET, STAT_SPATK, 0, Score_Minus8
 
 AI_CBM_BatonPass::
 	count_alive_pokemon AI_USER
-	if_equal 0, Score_Minus10
+	if_equal 0, Score_Minus30
 	end
 
 AI_CBM_RainDance::
 	get_weather
-	if_equal AI_WEATHER_RAIN, Score_Minus8
+	if_equal AI_WEATHER_RAIN, Score_Minus30
 	end
 
 AI_CBM_SunnyDay::
 	get_weather
-	if_equal AI_WEATHER_SUN, Score_Minus8
+	if_equal AI_WEATHER_SUN, Score_Minus30
 	end
 
 AI_CBM_FutureSight::
-	if_side_affecting AI_TARGET, SIDE_STATUS_FUTUREATTACK, Score_Minus10
+	if_side_affecting AI_TARGET, SIDE_STATUS_FUTUREATTACK, Score_Minus30
 	if_side_affecting AI_USER, SIDE_STATUS_FUTUREATTACK, Score_Minus12  
 	end
 
 AI_CBM_FakeOut::
 	is_first_turn_for AI_USER
-	if_equal 0, Score_Minus10
+	if_equal 0, Score_Minus30
 	end
 
 AI_CBM_Stockpile::
 	get_stockpile_count AI_USER
-	if_equal 3, Score_Minus10
+	if_equal 3, Score_Minus30
 	end
 
 AI_CBM_SpitUpAndSwallow::
@@ -547,22 +559,22 @@ AI_CBM_SpitUpAndSwallow::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
 	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	get_stockpile_count AI_USER
-	if_equal 0, Score_Minus10
+	if_equal 0, Score_Minus30
 	end
 
 AI_CBM_Hail::
 	get_weather
-	if_equal AI_WEATHER_HAIL, Score_Minus8
+	if_equal AI_WEATHER_HAIL, Score_Minus30
 	end
 
 AI_CBM_Torment::
-	if_status2 AI_TARGET, STATUS2_TORMENT, Score_Minus10
+	if_status2 AI_TARGET, STATUS2_TORMENT, Score_Minus30
 	end
 
 AI_CBM_WillOWisp::
 	get_ability AI_TARGET
-	if_equal ABILITY_WATER_VEIL, Score_Minus10
-	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
+	if_equal ABILITY_WATER_VEIL, Score_Minus30
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus30
 	get_target_type1
 	if_equal TYPE_FIRE, Score_Minus30
 	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus30
@@ -572,29 +584,29 @@ AI_CBM_WillOWisp::
 	end
 
 AI_CBM_HelpingHand::
-	if_not_double_battle Score_Minus10
+	if_not_double_battle Score_Minus30
 	end
 
 AI_CBM_TrickAndKnockOff::
 	get_ability AI_TARGET
-	if_equal ABILITY_STICKY_HOLD, Score_Minus10
+	if_equal ABILITY_STICKY_HOLD, Score_Minus30
 	end
 
 AI_CBM_Ingrain::
-	if_status3 AI_USER, STATUS3_ROOTED, Score_Minus10
+	if_status3 AI_USER, STATUS3_ROOTED, Score_Minus30
 	end
 
 AI_CBM_Recycle::
 	get_used_held_item AI_USER
-	if_equal ITEM_NONE, Score_Minus10
+	if_equal ITEM_NONE, Score_Minus30
 	end
 
 AI_CBM_Imprison::
-	if_status3 AI_USER, STATUS3_IMPRISONED_OTHERS, Score_Minus10
+	if_status3 AI_USER, STATUS3_IMPRISONED_OTHERS, Score_Minus30
 	end
 
 AI_CBM_Refresh::
-	if_not_status AI_USER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, Score_Minus10
+	if_not_status AI_USER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, Score_Minus30
 	end
 
 AI_CBM_MudSport::
@@ -617,7 +629,7 @@ AI_CBM_BulkUp::
 	end
 
 AI_CBM_WaterSport::
-	if_status3 AI_USER, STATUS3_WATERSPORT, Score_Minus10
+	if_status3 AI_USER, STATUS3_WATERSPORT, Score_Minus30
 	end
 
 AI_CBM_CalmMind::
@@ -636,13 +648,13 @@ AI_CBM_QuiverDance::
 	end
 
 AI_CBM_StatSwap::
-	if_stat_level_more_than AI_USER, STAT_ATK, 6, Score_Minus10
-	if_stat_level_more_than AI_USER, STAT_DEF, 6, Score_Minus10
-	if_stat_level_more_than AI_USER, STAT_SPEED, 6, Score_Minus10
-	if_stat_level_more_than AI_USER, STAT_SPATK, 6, Score_Minus10
-	if_stat_level_more_than AI_USER, STAT_SPDEF, 6, Score_Minus10
-	if_stat_level_more_than AI_USER, STAT_ACC, 6, Score_Minus10
-	if_stat_level_more_than AI_USER, STAT_EVASION, 6, Score_Minus10
+	if_stat_level_more_than AI_USER, STAT_ATK, 6, Score_Minus30
+	if_stat_level_more_than AI_USER, STAT_DEF, 6, Score_Minus30
+	if_stat_level_more_than AI_USER, STAT_SPEED, 6, Score_Minus30
+	if_stat_level_more_than AI_USER, STAT_SPATK, 6, Score_Minus30
+	if_stat_level_more_than AI_USER, STAT_SPDEF, 6, Score_Minus30
+	if_stat_level_more_than AI_USER, STAT_ACC, 6, Score_Minus30
+	if_stat_level_more_than AI_USER, STAT_EVASION, 6, Score_Minus30
 	end
 
 AI_CBM_AquaRing::
@@ -657,6 +669,24 @@ AI_CBM_WorrySeed::
 	get_ability AI_TARGET
 	if_equal ABILITY_INSOMNIA, Score_Minus30
 	if_equal ABILITY_VITAL_SPIRIT, Score_Minus30
+	end
+
+AI_CBM_Synchronoise::
+	if_has_move_with_effect AI_USER, EFFECT_SYNCHRONOISE, Score_Minus10
+	end
+
+AI_CBM_ElectroBall::
+	if_stat_level_more_than AI_TARGET, STAT_SPEED, 8, Score_Minus30
+	if_stat_level_less_than AI_USER, STAT_SPEED, 6, Score_Minus30
+	end
+
+AI_CBM_Soak::
+	get_ability AI_TARGET
+	if_equal ABILITY_WATER_ABSORB, Score_Minus30
+	get_target_type1
+	if_equal TYPE_WATER, Score_Minus30
+	get_target_type2
+	if_equal TYPE_WATER, Score_Minus30
 	end
 
 Score_Minus1::
@@ -839,6 +869,12 @@ AI_CheckViability::
 	if_effect EFFECT_POWER_SWAP, AI_CV_StatSwap
 	if_effect EFFECT_GUARD_SWAP, AI_CV_StatSwap
 	if_effect EFFECT_HEART_SWAP, AI_CV_StatSwap
+	if_effect EFFECT_EVASION_DOWN_3, AI_CV_EvasionDown
+	if_effect EFFECT_SHELL_SMASH, AI_CV_DragonDance
+	if_effect EFFECT_SHIFT_GEAR, AI_CV_DragonDance
+	if_effect EFFECT_FINAL_GAMBIT, AI_CV_FinalGambit
+	if_effect EFFECT_FREEZE_DRY, AI_CV_FreezeDry
+	if_effect EFFECT_TOPSY_TURVY, AI_CV_TopsyTurvy
 	end
 
 AI_CV_Sleep::
@@ -1947,6 +1983,9 @@ AI_CV_Encore_EncouragedMovesToEncore::
 	.byte EFFECT_POWER_SWAP
 	.byte EFFECT_HEART_SWAP
 	.byte EFFECT_AQUA_RING
+	.byte EFFECT_ACUPRESSURE
+	.byte EFFECT_COIL 
+	.byte EFFECT_SOAK
 	.byte -1
 
 AI_CV_PainSplit::
@@ -2892,28 +2931,57 @@ AI_CV_StatSwap4::
 AI_CV_StatSwap_End::
 	end
 
+AI_CV_FinalGambit::
+	score +30
+	end
+
+AI_CV_FreezeDry::
+	get_target_type1
+	if_equal TYPE_WATER, Score_Plus10
+	get_target_type2
+	if_equal TYPE_WATER, Score_Plus10
+	end
+
+AI_CV_TopsyTurvy::
+	if_stat_level_more_than AI_TARGET, STAT_ATK, 7, AI_CV_StatSwap2
+	if_stat_level_more_than AI_TARGET, STAT_DEF, 7, AI_CV_StatSwap2
+	if_stat_level_more_than AI_TARGET, STAT_SPATK, 7, AI_CV_StatSwap2
+	if_stat_level_more_than AI_TARGET, STAT_SPDEF, 7, AI_CV_StatSwap2
+	if_stat_level_more_than AI_TARGET, STAT_EVASION, 7, AI_CV_StatSwap2
+	score +10
+	goto AI_CV_TopsyTurvy_End
+
+AI_CV_TopsyTurvy2::
+	if_random_less_than 50, AI_CV_StatSwap_End
+	score +10
+
+AI_CV_TopsyTurvy_End::
+	end
+
 AI_TryToFaint::
 	if_can_faint AI_TryToFaint_TryToEncourageQuickAttack
 	get_how_powerful_move_is
 	if_equal MOVE_NOT_MOST_POWERFUL, Score_Minus1
+	if_effect EFFECT_FUTURE_SIGHT, Score_Minus30
 	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_TryToFaint_SuperEffective
 	if_type_effectiveness AI_EFFECTIVENESS_x4, AI_TryToFaint_DoubleSuperEffective
 	end
 
 AI_TryToFaint_SuperEffective:
 	if_random_less_than 30, AI_TryToFaint_End
-	score +10
+	score +20
 	end
 
 AI_TryToFaint_DoubleSuperEffective:
 	if_random_less_than 30, AI_TryToFaint_End
-	score +12
+	score +30
 	end
 
 AI_TryToFaint_TryToEncourageQuickAttack::
 	if_effect EFFECT_EXPLOSION, AI_TryToFaint_End
+	if_effect EFFECT_FINAL_GAMBIT, Score_Plus10
 	if_not_effect EFFECT_QUICK_ATTACK, AI_TryToFaint_ScoreUp4
-	score +8
+	score +10
 
 AI_TryToFaint_ScoreUp4::
 	score +4
@@ -3054,7 +3122,7 @@ AI_PreferBatonPass_GoForBatonPass::
 AI_PreferBatonPass2:
 	get_turn_count
 	if_equal 0, Score_Plus5
-	if_hp_less_than AI_USER, 60, Score_Minus10
+	if_hp_less_than AI_USER, 60, Score_Minus30
 	goto Score_Plus1
 
 AI_PreferBatonPass3::

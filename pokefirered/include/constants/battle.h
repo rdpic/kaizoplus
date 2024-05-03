@@ -201,14 +201,13 @@
 
 // Field affecting statuses.
 #define STATUS_FIELD_TRICK_ROOM                     (1 << 0)
-/* #define STATUS_FIELD_MAGIC_ROOM                     (1 << 1)
-#define STATUS_FIELD_WONDER_ROOM                    (1 << 2)
-#define STATUS_FIELD_GRASSY_TERRAIN                 (1 << 3)
-#define STATUS_FIELD_MISTY_TERRAIN                  (1 << 4)
-#define STATUS_FIELD_ELECTRIC_TERRAIN               (1 << 5)
-#define STATUS_FIELD_PSYCHIC_TERRAIN                (1 << 6)
-#define STATUS_FIELD_ION_DELUGE                     (1 << 7)
-#define STATUS_FIELD_FAIRY_LOCK                     (1 << 8) */
+#define STATUS_FIELD_GRASSY_TERRAIN                 (1 << 1)
+#define STATUS_FIELD_MISTY_TERRAIN                  (1 << 2)
+#define STATUS_FIELD_ELECTRIC_TERRAIN               (1 << 3)
+#define STATUS_FIELD_PSYCHIC_TERRAIN                (1 << 4)
+#define STATUS_FIELD_FAIRY_LOCK                     (1 << 5)
+
+#define STATUS_FIELD_TERRAIN_ANY        (STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)
 
 // Flags describing move's result
 #define MOVE_RESULT_MISSED             (1 << 0)
@@ -234,8 +233,19 @@
 #define B_WEATHER_SUN_PERMANENT       (1 << 6)
 #define B_WEATHER_SUN                 (B_WEATHER_SUN_TEMPORARY | B_WEATHER_SUN_PERMANENT)
 #define B_WEATHER_HAIL_TEMPORARY      (1 << 7)
-#define B_WEATHER_HAIL                (B_WEATHER_HAIL_TEMPORARY)
+#define B_WEATHER_HAIL_PERMANENT      (1 << 8)
+#define B_WEATHER_HAIL                (B_WEATHER_HAIL_TEMPORARY | B_WEATHER_HAIL_PERMANENT)
 #define B_WEATHER_ANY                 (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL)
+
+// Battle Weather as enum
+#define ENUM_WEATHER_NONE                 0
+#define ENUM_WEATHER_RAIN                 1
+#define ENUM_WEATHER_SUN                  2
+#define ENUM_WEATHER_SANDSTORM            3
+#define ENUM_WEATHER_HAIL                 4
+/* #define ENUM_WEATHER_SUN_PRIMAL           5
+#define ENUM_WEATHER_RAIN_PRIMAL          6
+#define ENUM_WEATHER_STRONG_WINDS         7 */
 
 // Move Effects
 #define MOVE_EFFECT_SLEEP               1
@@ -293,14 +303,15 @@
 #define MOVE_EFFECT_EVS_MINUS_2         52
 #define MOVE_EFFECT_THRASH              53
 #define MOVE_EFFECT_KNOCK_OFF           54
-#define MOVE_EFFECT_NOTHING_37          55
-#define MOVE_EFFECT_NOTHING_38          56
-#define MOVE_EFFECT_NOTHING_39          57
+#define MOVE_EFFECT_CLEAR_SMOG          55
+#define MOVE_EFFECT_INCINERATE          56
+#define MOVE_EFFECT_V_CREATE            57
 #define MOVE_EFFECT_NOTHING_3A          58
 #define MOVE_EFFECT_SP_ATK_TWO_DOWN     59
 #define MOVE_EFFECT_REMOVE_SLEEP        60
 #define MOVE_EFFECT_DEF_SPDEF_DOWN      61
-#define NUM_MOVE_EFFECTS                62
+#define MOVE_EFFECT_RECOIL_50           62
+#define NUM_MOVE_EFFECTS                63
 
 #define MOVE_EFFECT_AFFECTS_USER        (1 << 6) // 64
 #define MOVE_EFFECT_CERTAIN             (1 << 7) // 128

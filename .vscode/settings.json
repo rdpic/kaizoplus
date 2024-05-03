@@ -59,6 +59,18 @@
         "valarray": "c",
         "queue": "c",
         "stack": "c",
-        "functional": "c"
+        "functional": "c",
+        "level_up_learnsets.h": "c",
+        "species_info.h": "c",
+        "experience_tables.h": "c",
+        "cry_ids.h": "c",
+        "naming_screen.h": "c",
+        "array": "c",
+        "ranges": "c",
+        "span": "c",
+        "battle_interface.h": "c",
+        "vs_seeker.h": "c",
+        "reshow_battle_screen.h": "c",
+        "xlocinfo": "c"
     }
 }

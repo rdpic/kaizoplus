@@ -311,6 +311,17 @@ const struct SpriteTemplate gPersistHitSplatSpriteTemplate =
     .callback = AnimHitSplatPersistent,
 };
 
+const struct SpriteTemplate gThousandWavesPoundImpactTemplate =
+{
+    .tileTag = ANIM_TAG_IMPACT,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_HitSplat,
+    .callback = AnimHitSplatOnMonEdge
+};
+
 static void AnimMovePowerSwapGuardSwapWait(struct Sprite *sprite)
 {
     if (TranslateAnimHorizontalArc(sprite))
@@ -789,15 +800,18 @@ static void AnimTask_FlashAnimTagWithColor_Step2(u8 taskId)
 void AnimTask_InvertScreenColor(u8 taskId)
 {
     u32 selectedPalettes = 0;
-    u8 attackerBattler = gBattleAnimAttacker;
-    u8 targetBattler = gBattleAnimTarget;
 
-    if (gBattleAnimArgs[0] & 0x100)
+    if (gBattleAnimArgs[0] & 0x1)
         selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
-    if (gBattleAnimArgs[1] & 0x100)
-        selectedPalettes |= (0x10000 << attackerBattler);
-    if (gBattleAnimArgs[2] & 0x100)
-        selectedPalettes |= (0x10000 << targetBattler);
+    if (gBattleAnimArgs[0] & 0x2)
+        selectedPalettes |= (0x10000 << gBattleAnimAttacker);
+    if (gBattleAnimArgs[0] & 0x4)
+        selectedPalettes |= (0x10000 << gBattleAnimTarget);
+    if (gBattleAnimArgs[0] & 0x8)
+        selectedPalettes |= (0x10000 << BATTLE_PARTNER(gBattleAnimTarget));
+	if (gBattleAnimArgs[0] & 0x10)
+        selectedPalettes |= (0x10000 << BATTLE_PARTNER(gBattleAnimAttacker));
+
     InvertPlttBuffer(selectedPalettes);
     DestroyAnimVisualTask(taskId);
 }

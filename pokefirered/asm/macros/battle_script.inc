@@ -1069,9 +1069,9 @@
 	.4byte \param0
 	.endm
 
-	.macro trysethelpinghand param0:req
+	.macro averagestats stat:req
 	.byte 0xd1
-	.4byte \param0
+	.byte \stat
 	.endm
 
 	.macro tryswapitems param0:req
@@ -1147,7 +1147,7 @@
 	.4byte \param0
 	.endm
 
-	.macro setroom
+	.macro setroomterrain
 	.byte 0xe1
 	.endm
 
@@ -1254,8 +1254,9 @@
 	.byte 0xf8
 	.endm
 
-	.macro gyroballcalc
+	.macro callnative func:req
 	.byte 0xf9
+	.4byte \func
 	.endm
 
 	.macro metalburstdamagecalculator param0:req
@@ -1286,6 +1287,15 @@
 	.macro trysetaquaring param0:req
 	.byte 0xff
 	.4byte \param0
+	.endm
+
+@ callnative macros
+
+	.macro jumpifterrainaffected battler:req, terrainFlags:req, jumpInstr:req
+	callnative BS_JumpIfTerrainAffected
+	.byte \battler
+	.4byte \terrainFlags
+	.4byte \jumpInstr
 	.endm
 
 @ various command changed to more readable macros
@@ -1418,6 +1428,10 @@
 	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm
 
+	.macro dmgtocurrattackerhp
+	manipulatedamage DMG_CURR_ATTACKER_HP
+	.endm
+
 	.macro showabilitypopup battler:req
 	various \battler, VARIOUS_ABILITY_POPUP
 	.endm
@@ -1462,4 +1476,50 @@
 	.macro suckerpunchcheck failInstr:req
 	various BS_ATTACKER, VARIOUS_SUCKER_PUNCH_CHECK
 	.4byte \failInstr
+	.endm
+
+	.macro jumpifcantusesynchronoise jumpInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_SYNCHRONOISE
+	.4byte \jumpInstr
+	.endm
+
+	.macro trysoak failInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_SOAK
+	.4byte \failInstr
+	.endm
+
+	.macro tryentrainment failInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_ENTRAINMENT
+	.4byte \failInstr
+	.endm
+
+	.macro setlastusedability battler:req
+	various \battler, VARIOUS_SET_LAST_USED_ABILITY
+	.endm
+
+	.macro tryreflecttype failInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_REFLECT_TYPE
+	.4byte \failInstr
+	.endm
+
+	.macro tryactivatefellstinger battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_FELL_STINGER
+	.endm
+
+	.macro invertstatstages battler:req
+	various \battler, VARIOUS_INVERT_STAT_STAGES
+	.endm
+
+	.macro checkgrassyterrainheal battler:req, failInstr:req
+	various \battler, VARIOUS_CHECK_IF_GRASSY_TERRAIN_HEALS
+	.4byte \failInstr
+	.endm
+
+	.macro stattextbuffer battler:req
+	various \battler, VARIOUS_STAT_TEXT_BUFFER
+	.endm
+
+	.macro jumpifmysticguard battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_MYSTIC_GUARD
+	.4byte \jumpInstr
 	.endm

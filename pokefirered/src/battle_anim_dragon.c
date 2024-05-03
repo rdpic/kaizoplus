@@ -17,6 +17,8 @@ static void AnimDragonRushStep(struct Sprite *sprite);
 static void AnimSpinningDracoMeteor(struct Sprite *sprite);
 static void AnimSpinningDracoMeteorFinish(struct Sprite *sprite);
 static void AnimDracoMeteorRock_Step(struct Sprite *sprite);
+static void AnimFireSpread(struct Sprite *sprite);
+static void SpriteCB_AnimSpriteOnSelectedMonPos(struct Sprite *sprite);
 
 static EWRAM_DATA u16 sUnusedOverheatData[7] = {0};
 
@@ -190,17 +192,6 @@ const struct SpriteTemplate gOverheatFlameSpriteTemplate =
     .callback = AnimOverheatFlame,
 };
 
-const struct SpriteTemplate gDragonPulseSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_DRAGON_PULSE,
-    .paletteTag = ANIM_TAG_DRAGON_PULSE,
-    .oam = &gOamData_AffineOff_ObjNormal_16x32,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = TranslateAnimSpriteToTargetMonLocation,
-};
-
 const union AnimCmd gDragonRushAnimCmds[] =
 {
     ANIMCMD_FRAME(0, 4),
@@ -266,6 +257,108 @@ const struct SpriteTemplate gDracoMeteorTailSpriteTemplate =
     .images = NULL,
     .affineAnims = sSpriteAffineAnimTable_HydroCannonBall,
     .callback = AnimDracoMeteorRock,
+};
+
+// Frost Breath
+const struct SpriteTemplate gFrostBreathBlueRageTemplate =
+{
+    .tileTag = ANIM_TAG_FIRE_PLUME,
+    .paletteTag = ANIM_TAG_ICE_CHUNK,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_DragonRageFirePlume,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimDragonRageFirePlume
+};
+
+const struct SpriteTemplate gFrostBreathBlueBreathTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_ICE_CHUNK,
+    .oam = &gOamData_AffineDouble_ObjNormal_32x32,
+    .anims = sAnims_DragonRageFire,
+    .images = NULL,
+    .affineAnims = sAffineAnims_DragonRageFire,
+    .callback = AnimDragonFireToTarget
+};
+
+//sacred sword
+const struct SpriteTemplate gSacredSwordBladesTemplate =
+{
+    .tileTag = ANIM_TAG_SCRATCH,
+    .paletteTag = ANIM_TAG_SWORD,
+    .oam = &gOamData_AffineDouble_ObjNormal_32x32,
+    .anims = sAnims_DragonBreathFire,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFireSpread
+};
+
+const struct SpriteTemplate gChromaBladesBladesTemplate =
+{
+    .tileTag = ANIM_TAG_SCRATCH,
+    .paletteTag = ANIM_TAG_POISON_POWDER,
+    .oam = &gOamData_AffineDouble_ObjNormal_32x32,
+    .anims = sAnims_DragonBreathFire,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFireSpread
+};
+
+const struct SpriteTemplate gSearingShotEruptionRockTemplate =
+{
+    .tileTag = ANIM_TAG_WARM_ROCK,
+    .paletteTag = ANIM_TAG_WARM_ROCK,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimOverheatFlame
+};
+
+const struct SpriteTemplate gSecretSwordBladesTemplate =
+{
+    .tileTag = ANIM_TAG_CUT,
+    .paletteTag = ANIM_TAG_SWORD,
+    .oam = &gOamData_AffineDouble_ObjNormal_32x32,
+    .anims = sAnims_DragonBreathFire,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFireSpread
+};
+
+//steam eruption
+const struct SpriteTemplate gSteamEruptionBreathTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_WATER_GUN,
+    .oam = &gOamData_AffineDouble_ObjNormal_32x32,
+    .anims = sAnims_DragonBreathFire,
+    .images = NULL,
+    .affineAnims = sAffineAnims_DragonBreathFire,
+    .callback = AnimDragonFireToTarget
+};
+
+const struct SpriteTemplate gGeomancyYellowRageTemplate =
+{
+    .tileTag = ANIM_TAG_FIRE_PLUME,
+    .paletteTag = ANIM_TAG_PAW_PRINT,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_DragonRageFirePlume,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimDragonRageFirePlume
+};
+
+const struct SpriteTemplate gPrecipiceBladesPlumeTemplate =
+{
+    .tileTag = ANIM_TAG_FIRE_PLUME,
+    .paletteTag = ANIM_TAG_FIRE_PLUME,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_DragonRageFirePlume,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_AnimSpriteOnSelectedMonPos
 };
 
 static void AnimOutrageFlame(struct Sprite *sprite)
@@ -591,4 +684,77 @@ static void AnimDracoMeteorRock_Step(struct Sprite *sprite)
 		DestroyAnimSprite(sprite);
 
 	sprite->data[5]++;
+}
+
+static void AnimFireSpread(struct Sprite *sprite)
+{
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
+    sprite->y += gBattleAnimArgs[1];
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[1] = gBattleAnimArgs[2];
+    sprite->data[2] = gBattleAnimArgs[3];
+    sprite->callback = TranslateSpriteLinearFixedPoint;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+}
+
+static u8 LoadBattleAnimTarget(u8 arg)
+{
+    u8 battler;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        switch (gBattleAnimArgs[arg])
+        {
+        case 0:
+            battler = gBattleAnimAttacker;
+            break;
+        default:
+            battler = gBattleAnimTarget;
+            break;
+        case 2:
+            battler = BATTLE_PARTNER(gBattleAnimAttacker);
+            break;
+        case 3:
+            battler = BATTLE_PARTNER(gBattleAnimTarget);
+            break;
+        }
+    }
+    else
+    {
+        if (gBattleAnimArgs[arg] == 0)
+            battler = gBattleAnimAttacker;
+        else
+            battler = gBattleAnimTarget;
+    }
+
+    return battler;
+}
+
+static void InitSpritePosToGivenTarget(struct Sprite *sprite, u8 target)
+{
+    sprite->x = GetBattlerSpriteCoord2(target, BATTLER_COORD_X);
+    sprite->y = GetBattlerSpriteCoord2(target, BATTLER_COORD_Y);
+
+    SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
+    sprite->y2 = gBattleAnimArgs[1];
+}
+
+static void SpriteCB_AnimSpriteOnSelectedMonPos(struct Sprite *sprite)
+{
+    if (!sprite->data[0])
+    {
+        u8 target = LoadBattleAnimTarget(2);
+
+        if (!IsBattlerSpriteVisible(target))
+            DestroyAnimSprite(sprite);
+        else
+        {
+            InitSpritePosToGivenTarget(sprite, target);
+            sprite->data[0]++;
+        }
+    }
+    else if (sprite->animEnded || sprite->affineAnimEnded)
+    {
+        DestroySpriteAndMatrix(sprite);
+    }
 }

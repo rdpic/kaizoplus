@@ -2481,6 +2481,8 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].notFirstStrike = FALSE;
     gProtectStructs[gActiveBattler].usedHealBlockedMove = FALSE;
     gProtectStructs[gActiveBattler].statRaised = FALSE;
+    gProtectStructs[gActiveBattler].kingsShielded = FALSE;
+    gProtectStructs[gActiveBattler].spikyShielded = FALSE;
 
     gDisableStructs[gActiveBattler].isFirstTurn = 2;
 
@@ -3009,11 +3011,15 @@ u8 IsRunningFromBattleImpossible(void)
     u8 side;
     s32 i;
 
-    if (gBattleMons[gActiveBattler].item == ITEM_ENIGMA_BERRY)
+    if (gBattleMons[gActiveBattler].item == ITEM_ENIGMA_BERRY && gBattleMons[gActiveBattler].ability != ABILITY_KLUTZ)
         holdEffect = gEnigmaBerries[gActiveBattler].holdEffect;
-    else
+    else if (gBattleMons[gActiveBattler].item != ITEM_ENIGMA_BERRY && gBattleMons[gActiveBattler].ability != ABILITY_KLUTZ)
         holdEffect = ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item);
+    else
+        holdEffect = HOLD_EFFECT_NONE;
+
     gPotentialItemEffectBattler = gActiveBattler;
+
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN
      || (gBattleTypeFlags & BATTLE_TYPE_LINK)
      || gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY)
@@ -3410,6 +3416,10 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     u8 holdEffectParam = 0;
     u16 moveBattler1 = 0, moveBattler2 = 0;
     bool8 isTrickRoomActive = (gFieldStatuses & STATUS_FIELD_TRICK_ROOM) != 0;
+    bool8 battler1Stalls = (gBattleMons[battler1].ability == ABILITY_STALL);
+    bool8 battler2Stalls = (gBattleMons[battler2].ability == ABILITY_STALL);
+    u8 priorityBattler1 = gBattleMoves[moveBattler1].priority;
+    u8 priorityBattler2 = gBattleMoves[moveBattler2].priority;
     bool8 speedComparisonResult;
 
     if (WEATHER_HAS_EFFECT)
@@ -3435,16 +3445,24 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
                 * (gStatStageRatios[gBattleMons[battler1].statStages[STAT_SPEED]][0])
                 / (gStatStageRatios[gBattleMons[battler1].statStages[STAT_SPEED]][1]);
 
-    if (gBattleMons[battler1].item == ITEM_ENIGMA_BERRY)
+    if (gBattleMons[battler1].item == ITEM_ENIGMA_BERRY && gBattleMons[battler1].ability != ABILITY_KLUTZ)
     {
         holdEffect = gEnigmaBerries[battler1].holdEffect;
         holdEffectParam = gEnigmaBerries[battler1].holdEffectParam;
     }
-    else
+    else if (gBattleMons[battler1].item != ITEM_ENIGMA_BERRY && gBattleMons[battler1].ability != ABILITY_KLUTZ)
     {
         holdEffect = ItemId_GetHoldEffect(gBattleMons[battler1].item);
         holdEffectParam = ItemId_GetHoldEffectParam(gBattleMons[battler1].item);
     }
+    else
+    {
+        holdEffect = HOLD_EFFECT_NONE;
+    }
+
+    if (gBattleMons[battler1].ability == ABILITY_UNBURDEN && gBattleResources->flags->flags[battler1] & RESOURCE_FLAG_UNBURDEN)
+        speedBattler1 *= 2;
+
     // badge boost
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK)
      && FlagGet(FLAG_BADGE03_GET)
@@ -3452,24 +3470,34 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         speedBattler1 = (speedBattler1 * 110) / 100;
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
         speedBattler1 /= 2;
-    if (gBattleMons[battler1].status1 & STATUS1_PARALYSIS)
-        speedBattler1 /= 4;
+    if (gBattleMons[battler1].status1 & STATUS1_PARALYSIS && gBattleMons[battler1].ability != ABILITY_QUICK_FEET)
+        speedBattler1 /= 2;
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100)
         speedBattler1 = UINT_MAX;
+
     // check second battlerId's speed
     speedBattler2 = (gBattleMons[battler2].speed * speedMultiplierBattler2)
                     * (gStatStageRatios[gBattleMons[battler2].statStages[STAT_SPEED]][0])
                     / (gStatStageRatios[gBattleMons[battler2].statStages[STAT_SPEED]][1]);
-    if (gBattleMons[battler2].item == ITEM_ENIGMA_BERRY)
+
+    if (gBattleMons[battler2].item == ITEM_ENIGMA_BERRY && gBattleMons[battler2].ability != ABILITY_KLUTZ)
     {
         holdEffect = gEnigmaBerries[battler2].holdEffect;
         holdEffectParam = gEnigmaBerries[battler2].holdEffectParam;
     }
-    else
+    else if (gBattleMons[battler2].item != ITEM_ENIGMA_BERRY && gBattleMons[battler2].ability != ABILITY_KLUTZ)
     {
         holdEffect = ItemId_GetHoldEffect(gBattleMons[battler2].item);
         holdEffectParam = ItemId_GetHoldEffectParam(gBattleMons[battler2].item);
     }
+    else
+    {
+        holdEffect = HOLD_EFFECT_NONE;
+    }
+
+    if (gBattleMons[battler2].ability == ABILITY_UNBURDEN && gBattleResources->flags->flags[battler2] & RESOURCE_FLAG_UNBURDEN)
+        speedBattler2 *= 2;
+
     // badge boost
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK)
      && FlagGet(FLAG_BADGE03_GET)
@@ -3477,8 +3505,8 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         speedBattler2 = (speedBattler2 * 110) / 100;
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
         speedBattler2 /= 2;
-    if (gBattleMons[battler2].status1 & STATUS1_PARALYSIS)
-        speedBattler2 /= 4;
+    if (gBattleMons[battler2].status1 & STATUS1_PARALYSIS && gBattleMons[battler2].ability != ABILITY_QUICK_FEET)
+        speedBattler2 /= 2;
     if (holdEffect == HOLD_EFFECT_QUICK_CLAW && gRandomTurnNumber < (0xFFFF * holdEffectParam) / 100)
         speedBattler2 = UINT_MAX;
     if (ignoreChosenMoves)
@@ -3511,6 +3539,14 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     speedComparisonResult = speedBattler1 < speedBattler2;
     if (isTrickRoomActive) {
         speedComparisonResult = !speedComparisonResult;
+    }
+
+    // Handle Stall ability by setting very low priority
+    if (battler1Stalls) {
+        priorityBattler1 = -6; // Set to a very low priority
+    }
+    if (battler2Stalls) {
+        priorityBattler2 = -6; // Set to a very low priority
     }
 
     // both move priorities are different than 0
@@ -3643,6 +3679,8 @@ static void TurnValuesCleanUp(bool8 var0)
         {
             gProtectStructs[gActiveBattler].protected = FALSE;
             gProtectStructs[gActiveBattler].endured = FALSE;
+            gProtectStructs[gActiveBattler].kingsShielded = FALSE;
+            gProtectStructs[gActiveBattler].spikyShielded = FALSE;
         }
         else
         {
@@ -4245,11 +4283,15 @@ bool8 TryRunFromBattle(u8 battler)
     u8 holdEffect;
     u8 speedVar;
 
-    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY)
+    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY && gBattleMons[battler].ability != ABILITY_KLUTZ)
         holdEffect = gEnigmaBerries[battler].holdEffect;
-    else
+    else if (gBattleMons[battler].item != ITEM_ENIGMA_BERRY && gBattleMons[battler].ability != ABILITY_KLUTZ)
         holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item);
+    else
+        holdEffect = HOLD_EFFECT_NONE;
+
     gPotentialItemEffectBattler = battler;
+
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
     {
         gLastUsedItem = gBattleMons[battler].item;

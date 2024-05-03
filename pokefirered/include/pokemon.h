@@ -234,6 +234,7 @@ struct SpeciesInfo
  /* 0x18 */ u8 safariZoneFleeRate;
  /* 0x19 */ u8 bodyColor : 7;
             u8 noFlip : 1;
+            const struct LevelUpMove *levelUpLearnset;
 };
 
 #define MOVE_CATEGORY_PHYSICAL 0
@@ -258,6 +259,7 @@ struct BattleMove
     u32 soundMove:1;
     u32 ballisticMove:1;
     u32 ignoresSubstitute:1;
+    u32 ignoresTargetDefenseEvasionStages:1;
     u32 copycatBanned:1;
     u32 argument;
     u16 category:2;
@@ -272,10 +274,10 @@ struct SpindaSpot
     u16 image[SPINDA_SPOT_HEIGHT];
 };
 
-struct __attribute__((packed)) LevelUpMove
+struct LevelUpMove
 {
-    u16 move:9;
-    u16 level:7;
+    u16 move;
+    u16 level;
 };
 
 struct Evolution
@@ -307,7 +309,6 @@ extern const u8 gStatStageRatios[][2];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
 extern struct PokemonStorage* gPokemonStoragePtr;
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
-extern const u16 *const gLevelUpLearnsets[];
 extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpriteTemplate gSpriteTemplates_Battlers[];
@@ -439,5 +440,7 @@ bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 bank);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 battlePosition, u8 mode);
 void DestroyMonSpritesGfxManager(void);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 bufferId);
+const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species);
+u16 SanitizeSpeciesId(u16 species);
 
 #endif // GUARD_POKEMON_H

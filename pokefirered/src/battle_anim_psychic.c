@@ -420,7 +420,7 @@ const struct SpriteTemplate gPsychoBoostOrbSpriteTemplate =
 const struct SpriteTemplate gPsychoCutSpiralSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPIRAL,
-    .paletteTag = ANIM_TAG_PSYCHO_CUT,
+    .paletteTag = ANIM_TAG_PURPLE_FLAME,
     .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -431,7 +431,7 @@ const struct SpriteTemplate gPsychoCutSpiralSpriteTemplate =
 const struct SpriteTemplate gPsychoCutSpriteTemplate =
 {
     .tileTag = ANIM_TAG_PSYCHO_CUT,
-    .paletteTag = ANIM_TAG_PSYCHO_CUT,
+    .paletteTag = ANIM_TAG_PURPLE_FLAME,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

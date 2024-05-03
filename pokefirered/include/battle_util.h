@@ -32,6 +32,7 @@
 #define ABILITYEFFECT_COUNT_BATTLER_SIDE         17
 #define ABILITYEFFECT_COUNT_ON_FIELD             18
 #define ABILITYEFFECT_CHECK_ON_FIELD             19
+#define ABILITYEFFECT_MOVE_END_ATTACKER          20
 #define ABILITYEFFECT_MUD_SPORT                  253
 #define ABILITYEFFECT_WATER_SPORT                254
 #define ABILITYEFFECT_SWITCH_IN_WEATHER          255
@@ -86,18 +87,21 @@ void TryClearRageStatuses(void);
 u8 AtkCanceller_UnableToUseMove(void);
 bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2);
 u8 CastformDataTypeChange(u8 battler);
-u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveArg);
+u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 moveArg);
 void BattleScriptExecute(const u8 *BS_ptr);
 void BattleScriptPushCursorAndCallback(const u8 *BS_ptr);
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn);
 void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
-u8 IsMonDisobedient(void);
 bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind);
 u32 GetMoveSlot(u16 *moves, u32 move);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
 u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc);
+bool32 DoBattlersShareType(u32 battler1, u32 battler2);
+u8 GetBattlerType(u32 battler, u8 typeIndex);
+bool32 IsBattlerTerrainAffected(u32 battler, u32 terrainFlag);
+bool32 TryChangeBattleWeather(u32 battler, u32 weatherEnumId, bool32 viaAbility);
 /* bool32 IsMoldBreakerTypeAbility(u32 ability); */
 
 #endif // GUARD_BATTLE_UTIL_H

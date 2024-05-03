@@ -105,11 +105,23 @@
 #define VARIOUS_TRY_ME_FIRST                    22
 #define VARIOUS_TRY_LAST_RESORT                 23
 #define VARIOUS_SUCKER_PUNCH_CHECK              24
+#define VARIOUS_TRY_AUTOTOMIZE                  25
+#define VARIOUS_TRY_SYNCHRONOISE                26
+#define VARIOUS_TRY_SOAK                        27
+#define VARIOUS_TRY_ENTRAINMENT                 28
+#define VARIOUS_SET_LAST_USED_ABILITY           29
+#define VARIOUS_TRY_REFLECT_TYPE                30
+#define VARIOUS_TRY_ACTIVATE_FELL_STINGER       31
+#define VARIOUS_INVERT_STAT_STAGES              32
+#define VARIOUS_CHECK_IF_GRASSY_TERRAIN_HEALS   33
+#define VARIOUS_STAT_TEXT_BUFFER                34
+#define VARIOUS_JUMP_IF_MYSTIC_GUARD            35
 
-// Cmd_manipulatedmg
+// Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
 #define DMG_RECOIL_FROM_MISS       1
 #define DMG_DOUBLED                2
+#define DMG_CURR_ATTACKER_HP       3
 
 // Cmd_jumpifcantswitch
 #define SWITCH_IGNORE_ESCAPE_PREVENTION   (1 << 7)
@@ -154,6 +166,14 @@
 #define MOVEEND_UPDATE_LAST_MOVES               14
 #define MOVEEND_MIRROR_MOVE                     15
 #define MOVEEND_NEXT_TARGET                     16
-#define MOVEEND_COUNT                           17
+#define MOVEEND_SAME_MOVE_TURNS                 17
+#define MOVEEND_KINGS_SHIELD                    18
+#define MOVEEND_SPIKY_SHIELD                    19
+#define MOVEEND_ABILITIES_ATTACKER              20
+#define MOVEEND_COUNT                           21
+
+// switch cases
+#define B_SWITCH_NORMAL     0
+#define B_SWITCH_HIT        1  
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

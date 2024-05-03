@@ -40,6 +40,8 @@ static void AnimWillOWispOrb_Step(struct Sprite *sprite);
 static void AnimTask_MoveHeatWaveTargets_Step(u8 taskId);
 static void AnimLavaPlumeOrbitScatter(struct Sprite *);
 static void AnimLavaPlumeOrbitScatterStep(struct Sprite *);
+static void AnimNeedleArmSpike(struct Sprite *);
+static void AnimNeedleArmSpike_Step(struct Sprite *);
 
 static const union AnimCmd sAnim_FireSpiralSpread_0[] =
 {
@@ -481,6 +483,63 @@ const struct SpriteTemplate gLavaPlumeSpriteTemplate =
     .images = NULL,
     .affineAnims = gLavaPlumeAffineAnims,
     .callback = AnimLavaPlumeOrbitScatter,
+};
+
+const struct SpriteTemplate gSpacialRendBladesTemplate =
+{
+    .tileTag = ANIM_TAG_PUNISHMENT_BLADES,
+    .paletteTag = ANIM_TAG_PINK_HEART_2, //ANIM_TAG_BERRY_EATEN,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_BasicFire,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFireSpiralOutward
+};
+
+const struct SpriteTemplate gSpacialRendBladesTemplate2 =
+{
+    .tileTag = ANIM_TAG_PUNISHMENT_BLADES,
+    .paletteTag = ANIM_TAG_PINK_HEART_2,    //ANIM_TAG_BERRY_EATEN,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_FireSpiralSpread,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFireSpread
+};
+
+const union AnimCmd gIncinerateAnim1[] =
+{
+    ANIMCMD_FRAME(0, 2),
+    ANIMCMD_FRAME(16, 4),
+    ANIMCMD_FRAME(32, 2),
+    ANIMCMD_JUMP(0),
+};
+
+const union AnimCmd *const gIncinerateAnims[] =
+{
+    gIncinerateAnim1,
+};
+
+const struct SpriteTemplate gIncinerateSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gIncinerateAnims,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = TranslateAnimSpriteToTargetMonLocation,
+};
+
+const struct SpriteTemplate gVCreateFlameTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = sAnims_FireBlastCross,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimNeedleArmSpike
 };
 
 // For the first stage of Fire Punch
@@ -1325,4 +1384,76 @@ static void AnimLavaPlumeOrbitScatterStep(struct Sprite *sprite)
     sprite->y2 += sprite->data[1];
     if (sprite->x + sprite->x2 + 16 > 272u || sprite->y + sprite->y2 > 160 || sprite->y + sprite->y2 < -16)
         DestroyAnimSprite(sprite);
+}
+
+static void AnimNeedleArmSpike(struct Sprite* sprite)
+{
+    u8 a;
+    u8 b;
+    u16 c;
+    u16 x;
+    u16 y;
+
+    if (gBattleAnimArgs[4] == 0)
+    {
+        DestroyAnimSprite(sprite);
+    }
+    else
+    {
+        if (gBattleAnimArgs[0] == 0)
+        {
+            a = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+            b = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+        }
+        else
+        {
+            a = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+            b = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+        }
+
+        sprite->data[0] = gBattleAnimArgs[4];
+        if (gBattleAnimArgs[1] == 0)
+        {
+            sprite->x = gBattleAnimArgs[2] + a;
+            sprite->y = gBattleAnimArgs[3] + b;
+            sprite->data[5] = a;
+            sprite->data[6] = b;
+        }
+        else
+        {
+            sprite->x = a;
+            sprite->y = b;
+            sprite->data[5] = gBattleAnimArgs[2] + a;
+            sprite->data[6] = gBattleAnimArgs[3] + b;
+        }
+
+        x = sprite->x;
+        sprite->data[1] = x * 16;
+        y = sprite->y;
+        sprite->data[2] = y * 16;
+        sprite->data[3] = (sprite->data[5] - sprite->x) * 16 / gBattleAnimArgs[4];
+        sprite->data[4] = (sprite->data[6] - sprite->y) * 16 / gBattleAnimArgs[4];
+        c = ArcTan2Neg(sprite->data[5] - x, sprite->data[6] - y);
+        if (IsContest())
+            c -= 0x8000;
+
+        TrySetSpriteRotScale(sprite, 0, 0x100, 0x100, c);
+        sprite->callback = AnimNeedleArmSpike_Step;
+    }
+}
+
+static void AnimNeedleArmSpike_Step(struct Sprite* sprite)
+{
+    if (sprite->data[0])
+    {
+        sprite->data[1] += sprite->data[3];
+        sprite->data[2] += sprite->data[4];
+        sprite->x = sprite->data[1] >> 4 ;
+        sprite->y = sprite->data[2] >> 4 ;
+        sprite->data[0]--;
+    }
+    else
+    {
+        DestroySpriteAndMatrix(sprite);
+    }
 }

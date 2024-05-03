@@ -1742,10 +1742,9 @@ static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/trainer_class_lookups.h"
 #include "data/pokemon/cry_ids.h"
 #include "data/pokemon/experience_tables.h"
-#include "data/pokemon/species_info.h"
 #include "data/pokemon/level_up_learnsets.h"
+#include "data/pokemon/species_info.h"
 #include "data/pokemon/evolution.h"
-#include "data/pokemon/level_up_learnset_pointers.h"
 
 static const s8 sPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT] =
 {
@@ -2620,21 +2619,16 @@ static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
     u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
     s32 level = GetLevelFromBoxMonExp(boxMon);
     s32 i;
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
-    for (i = 0; gLevelUpLearnsets[species][i] != LEVEL_UP_END; i++)
+    for (i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
     {
-        u16 moveLevel;
-        u16 move;
-
-        moveLevel = (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV);
-
-        if (moveLevel > (level << 9))
+        if (learnset[i].level > level)
             break;
-
-        move = (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID);
-
-        if (GiveMoveToBoxMon(boxMon, move) == MON_HAS_MAX_MOVES)
-            DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, move);
+        if (learnset[i].level == 0)
+            continue;
+        if (GiveMoveToBoxMon(boxMon, learnset[i].move) == MON_HAS_MAX_MOVES)
+            DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, learnset[i].move);
     }
 }
 
@@ -2643,6 +2637,7 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
     u32 retVal = MOVE_NONE;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
     // since you can learn more than one move per level
     // the game needs to know whether you decided to
@@ -2652,20 +2647,21 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
     {
         sLearningMoveTableID = 0;
 
-        while ((gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_MOVE_LV) != (level << 9))
+        while (learnset[sLearningMoveTableID].level != level)
         {
             sLearningMoveTableID++;
-            if (gLevelUpLearnsets[species][sLearningMoveTableID] == LEVEL_UP_END)
+            if (learnset[sLearningMoveTableID].move == LEVEL_UP_MOVE_END)
                 return MOVE_NONE;
         }
     }
 
-    if ((gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_MOVE_LV) == (level << 9))
+    if (learnset[sLearningMoveTableID].level == level)
     {
-        gMoveToLearn = (gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_MOVE_ID);
+        gMoveToLearn = learnset[sLearningMoveTableID].move;
         sLearningMoveTableID++;
         retVal = GiveMoveToMon(mon, gMoveToLearn);
     }
+
 
     return retVal;
 }
@@ -2746,6 +2742,7 @@ static const u16 sWeightToDamageTable[] =
 };
 
 static const u8 sTrumpCardPowerTable[] = {200, 80, 60, 50, 40};
+static const u8 sSpeedDiffPowerTable[] = {40, 60, 80, 120, 150};
 
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
@@ -2755,6 +2752,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     u8 type;
     u16 attack, defense;
     u16 spAttack, spDefense;
+    u16 speed;
     u8 defenderHoldEffect;
     u8 defenderHoldEffectParam;
     u8 attackerHoldEffect;
@@ -2815,7 +2813,50 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             if (gBattleMovePower > 200)
                 gBattleMovePower = 200;
             break;
-        
+        case EFFECT_VENOSHOCK:
+            if (gBattleMons[gBattlerTarget].status1 & STATUS1_POISON
+                || gBattleMons[gBattlerTarget].status1 & STATUS1_TOXIC_POISON)  // Check if the target is poisoned
+                gBattleMovePower = gBattleMoves[move].power * 2;  // Double the power
+            else
+                gBattleMovePower = gBattleMoves[move].power;  // Use base power
+            break;
+        case EFFECT_ELECTRO_BALL:
+            speed = gBattleMons[gBattlerAttacker].speed / gBattleMons[gBattlerTarget].speed;
+            if (speed >= ARRAY_COUNT(sSpeedDiffPowerTable))
+                speed = ARRAY_COUNT(sSpeedDiffPowerTable) - 1;
+            gBattleMovePower = sSpeedDiffPowerTable[speed];
+            break;
+        case EFFECT_FOUL_PLAY:
+            attack = defender->attack;  // Use defender's attack stat for Foul Play
+            break;
+        case EFFECT_ECHOED_VOICE:
+            // gBattleStruct->sameMoveTurns incremented in ppreduce
+            if (gBattleStruct->sameMoveTurns[gBattlerAttacker] != 0)
+            {
+                gBattleMovePower += (gBattleMovePower * gBattleStruct->sameMoveTurns[gBattlerAttacker]);
+                if (gBattleMovePower > 200)
+                    gBattleMovePower = 200;
+            }
+            break;
+        case EFFECT_STORED_POWER:
+            gBattleMovePower += (CountBattlerStatIncreases(gBattlerAttacker, TRUE) * 20);
+            break;
+        case EFFECT_HEX:
+            if (gBattleMons[gBattlerTarget].status1 & STATUS1_POISON
+                || gBattleMons[gBattlerTarget].status1 & STATUS1_BURN
+                || gBattleMons[gBattlerTarget].status1 & STATUS1_PARALYSIS
+                || gBattleMons[gBattlerTarget].status1 & STATUS1_FREEZE
+                || gBattleMons[gBattlerTarget].status1 & STATUS1_TOXIC_POISON
+                || gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP)  // Check if the target has any status
+                gBattleMovePower = gBattleMoves[move].power * 2;  // Double the power
+            else
+                gBattleMovePower = gBattleMoves[move].power;  // Use base power
+            break;
+        case EFFECT_ACROBATICS:
+            if (gBattleMons[gBattlerAttacker].item == ITEM_NONE)
+                gBattleMovePower *= 2;
+            break;
+
     }
 
     // Get attacker hold item info
@@ -2843,7 +2884,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     }
 
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
-        attack *= 1.2;
+        attack = (120 * attack) / 100;
 
     if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerIdAtk))
         attack = (110 * attack) / 100;
@@ -2907,10 +2948,22 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (type == TYPE_BUG && attacker->ability == ABILITY_SWARM && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (type == TYPE_FIRE && defender->ability == ABILITY_HEATPROOF)    
+        gBattleMovePower /= 2;
+    if (type == TYPE_FIRE && defender->ability == ABILITY_DRY_SKIN)    
+        gBattleMovePower = (125 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_IRON_FIST && gBattleMoves[move].punchingMove)    
+        gBattleMovePower = (120 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_SOLAR_POWER && gBattleWeather & B_WEATHER_SUN)    
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_NORMALIZE)    
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_TECHNICIAN && gBattleMovePower <= 60)    
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
 
     if (IS_MOVE_PHYSICAL(move))
     {
-        if (gCritMultiplier == 1.5)
+        if (gCritMultiplier == 2 || gCritMultiplier == 3)
         {
             // Critical hit, if attacker has lost attack stat stages then ignore stat drop
             if (attacker->statStages[STAT_ATK] > DEFAULT_STAT_STAGE)
@@ -2924,7 +2977,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         damage = damage * gBattleMovePower;
         damage *= (2 * attacker->level / 5 + 2);
 
-        if (gCritMultiplier == 1.5)
+        if (gCritMultiplier == 2 || gCritMultiplier == 3 || gBattleMoves[move].ignoresTargetDefenseEvasionStages)
         {
             // Critical hit, if defender has gained defense stat stages then ignore stat increase
             if (defender->statStages[STAT_DEF] < DEFAULT_STAT_STAGE)
@@ -2965,33 +3018,63 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (IS_MOVE_SPECIAL(gCurrentMove))
     {
-        if (gCritMultiplier == 1.5)
+        if (gCurrentMove == MOVE_PSYSHOCK || gCurrentMove == MOVE_PSYSTRIKE || gCurrentMove == MOVE_SECRET_SWORD|| gCurrentMove == MOVE_BELCH)
         {
-            // Critical hit, if attacker has lost sp. attack stat stages then ignore stat drop
-            if (attacker->statStages[STAT_SPATK] > DEFAULT_STAT_STAGE)
+            // Psyshock uses the physical Defense stat instead of Special Defense
+            if (gCritMultiplier == 2 || gCritMultiplier == 3)
+            {
+                // Ignore defender's Defense stat stage increases on a critical hit
+                if (defender->statStages[STAT_DEF] < DEFAULT_STAT_STAGE)
+                    APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
+                else
+                    damageHelper = defense;
+            }
+            else
+                APPLY_STAT_MOD(damageHelper, defender, defense, STAT_DEF)
+
+            // Use attacker's Special Attack for damage calculation
+            if (attacker->statStages[STAT_SPATK] > DEFAULT_STAT_STAGE || gCritMultiplier == 2 || gCritMultiplier == 3)
                 APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
             else
                 damage = spAttack;
+
+            damage = damage * gBattleMovePower;
+            damage *= (2 * attacker->level / 5 + 2);
+            damage = (damage / damageHelper);
+            damage /= 50;
         }
         else
-            APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
-
-        damage = damage * gBattleMovePower;
-        damage *= (2 * attacker->level / 5 + 2);
-
-        if (gCritMultiplier == 1.5)
         {
-            // Critical hit, if defender has gained sp. defense stat stages then ignore stat increase
-            if (defender->statStages[STAT_SPDEF] < DEFAULT_STAT_STAGE)
-                APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
+            // Existing code for special move damage calculation
+            if (gCritMultiplier == 2 || gCritMultiplier == 3)
+            {
+                // Critical hit, ignore stat drops
+                if (attacker->statStages[STAT_SPATK] > DEFAULT_STAT_STAGE)
+                    APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
+                else
+                    damage = spAttack;
+            }
             else
-                damageHelper = spDefense;
-        }
-        else
-            APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
+                APPLY_STAT_MOD(damage, attacker, spAttack, STAT_SPATK)
 
-        damage = (damage / damageHelper);
-        damage /= 50;
+            // Existing code for calculating damage against Special Defense
+            damage = damage * gBattleMovePower;
+            damage *= (2 * attacker->level / 5 + 2);
+
+            if (gCritMultiplier == 2 || gCritMultiplier == 3)
+            {
+                // Critical hit, ignore defender's stat increases
+                if (defender->statStages[STAT_SPDEF] < DEFAULT_STAT_STAGE)
+                    APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
+                else
+                    damageHelper = spDefense;
+            }
+            else
+                APPLY_STAT_MOD(damageHelper, defender, spDefense, STAT_SPDEF)
+
+            damage = (damage / damageHelper);
+            damage /= 50;
+        }
 
         // Apply Lightscreen
         if ((sideStatus & SIDE_STATUS_LIGHTSCREEN) && gCritMultiplier == 1)
@@ -4693,6 +4776,11 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                         case ITEM6_HEAL_HP_LVL_UP:
                             data = gBattleScripting.levelUpHP;
                             break;
+                        case ITEM6_HEAL_HP_QUARTER:
+                            data = GetMonData(mon, MON_DATA_MAX_HP, NULL) / 4;
+                            if (data == 0)
+                                data = 1;
+                            break;
                         }
 
                         // Only restore HP if not at max health
@@ -6134,6 +6222,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     u8 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
     int i, j, k;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -6143,23 +6232,23 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     {
         u16 moveLevel;
 
-        if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
+        if (learnset[i].move == LEVEL_UP_MOVE_END)
             break;
 
-        moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV;
+        moveLevel = learnset[i].level;
 
-        if (moveLevel <= (level << 9))
+        if (moveLevel <= level)
         {
-            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); j++)
+            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != learnset[i].move; j++)
                 ;
 
             if (j == MAX_MON_MOVES)
             {
-                for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); k++)
+                for (k = 0; k < numMoves && moves[k] != learnset[i].move; k++)
                     ;
 
                 if (k == numMoves)
-                    moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
+                    moves[numMoves++] = learnset[i].move;
             }
         }
     }
@@ -6169,13 +6258,14 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 
 u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
 {
-    u8 numMoves = 0;
+    u16 numMoves = 0;
     int i;
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
-    for (i = 0; i < MAX_LEVEL_UP_MOVES && gLevelUpLearnsets[species][i] != LEVEL_UP_END; i++)
-         moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
+    for (i = 0; i < MAX_LEVEL_UP_MOVES && learnset[i].move != LEVEL_UP_MOVE_END; i++)
+        moves[numMoves++] = learnset[i].move;
 
-     return numMoves;
+    return numMoves;
 }
 
 u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
@@ -6185,6 +6275,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     u8 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
     int i, j, k;
 
     if (species == SPECIES_EGG)
@@ -6197,23 +6288,23 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     {
         u16 moveLevel;
 
-        if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
+        if (learnset[i].move == LEVEL_UP_MOVE_END)
             break;
 
-        moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV;
+        moveLevel = learnset[i].level;
 
-        if (moveLevel <= (level << 9))
+        if (moveLevel <= level)
         {
-            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); j++)
+            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != learnset[i].move; j++)
                 ;
 
             if (j == MAX_MON_MOVES)
             {
-                for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); k++)
+                for (k = 0; k < numMoves && moves[k] != learnset[i].move; k++)
                     ;
 
                 if (k == numMoves)
-                    moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
+                    moves[numMoves++] = learnset[i].move;
             }
         }
     }
@@ -6842,4 +6933,20 @@ u8 *MonSpritesGfxManager_GetSpritePtr(u8 spriteNum)
             spriteNum = 0;
         return sMonSpritesGfxManager->spritePointers[spriteNum];
     }
+}
+
+const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species)
+{
+    const struct LevelUpMove *learnset = gSpeciesInfo[SanitizeSpeciesId(species)].levelUpLearnset;
+    if (learnset == NULL)
+        return gSpeciesInfo[SPECIES_NONE].levelUpLearnset;
+    return learnset;
+}
+
+u16 SanitizeSpeciesId(u16 species)
+{
+    if (species > NUM_SPECIES)
+        return SPECIES_NONE;
+    else
+        return species;
 }

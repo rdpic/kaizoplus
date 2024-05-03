@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "battle_anim.h"
+#include "random.h"
 #include "scanline_effect.h"
 #include "graphics.h"
 #include "trig.h"
@@ -45,6 +46,17 @@ static void AnimMonMoveCircular_Step(struct Sprite *sprite);
 static void AnimAirWaveCrescent(struct Sprite *sprite);
 static void AnimNeedleArmSpike(struct Sprite *);
 static void AnimNeedleArmSpike_Step(struct Sprite *);
+static void SpriteCB_SpriteOnMonForDuration(struct Sprite *sprite);
+static void AnimBrickBreakWall_Step(struct Sprite *sprite);
+static void AnimParticleInVortex(struct Sprite *sprite);
+static void AnimParticleInVortex_Step(struct Sprite *sprite);
+static void AnimBite(struct Sprite *sprite);
+static void AnimBite_Step1(struct Sprite *sprite);
+static void AnimBite_Step2(struct Sprite *sprite);
+static void AnimRaiseSprite(struct Sprite *sprite);
+static void AnimDirtScatter(struct Sprite *sprite);
+static void AnimSweetScentPetal(struct Sprite *);
+static void AnimSweetScentPetal_Step(struct Sprite *);
 
 static const union AffineAnimCmd sAffineAnim_ConfuseRayBallBounce[] =
 {
@@ -95,17 +107,6 @@ const struct SpriteTemplate gShadowBallSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SHADOW_BALL,
     .paletteTag = ANIM_TAG_SHADOW_BALL,
-    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = sAffineAnims_ShadowBall,
-    .callback = AnimShadowBall,
-};
-
-const struct SpriteTemplate gEnergyBallSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_ENERGY_BALL,
-    .paletteTag = ANIM_TAG_ENERGY_BALL,
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -201,6 +202,244 @@ const struct SpriteTemplate gBattleAnimSpriteTemplate_LeafStorm2 =
     .affineAnims = sAffineAnims_PoisonProjectile,
     .callback = AnimNeedleArmSpike,
 };
+
+const struct SpriteTemplate gElectroBallCannonBallTemplate =
+{
+    .tileTag = ANIM_TAG_FLASH_CANNON_BALL,
+    .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = AnimShadowBall
+};
+
+const struct SpriteTemplate gFinalGambitBlueYawnTemplate =
+{
+    .tileTag = ANIM_TAG_PINK_CLOUD,
+    .paletteTag = ANIM_TAG_WATER_IMPACT,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = AnimShadowBall
+};
+
+//horn leech
+const struct SpriteTemplate gHornLeechHornTemplate =
+{
+    .tileTag = ANIM_TAG_HORN_LEECH,
+    .paletteTag = ANIM_TAG_HORN_LEECH,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimShadowBall
+};
+
+const struct SpriteTemplate gRazorShellTemplate =
+{
+    .tileTag = ANIM_TAG_CUT,
+    .paletteTag = ANIM_TAG_SWORD,
+    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = SpriteCB_SpriteOnMonForDuration
+};
+
+//leaf tornado
+const struct SpriteTemplate gLeafTornadoVortexTemplate =
+{
+    .tileTag = ANIM_TAG_LEAF,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimParticleInVortex
+};
+
+//gear grind
+const struct SpriteTemplate gGearGrindTemplate =
+{
+    .tileTag = ANIM_TAG_GEAR,
+    .paletteTag = ANIM_TAG_GEAR,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = AnimBite
+};
+
+const struct SpriteTemplate gWaterShurikenStarTemplate =
+{
+    .tileTag = ANIM_TAG_YELLOW_STAR,
+    .paletteTag = ANIM_TAG_WATER_ORB,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = AnimShadowBall,
+};
+
+const struct SpriteTemplate gGeomancyRedCellVortexTemplate =
+{
+    .tileTag = ANIM_TAG_ZYGARDE_HEXES,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimParticleInVortex
+};
+
+const struct SpriteTemplate gGeomancyGreenCellVortexTemplate =
+{
+    .tileTag = ANIM_TAG_ZYGARDE_HEXES,
+    .paletteTag = ANIM_TAG_WHIP_HIT,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimParticleInVortex
+};
+
+const struct SpriteTemplate gGeomancyBlueCellVortexTemplate =
+{
+    .tileTag = ANIM_TAG_ZYGARDE_HEXES,
+    .paletteTag = ANIM_TAG_SWEAT_BEAD,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimParticleInVortex
+};
+
+const struct SpriteTemplate gGeomancyRedCellRaiseTemplate =
+{
+    .tileTag = ANIM_TAG_ZYGARDE_HEXES,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimRaiseSprite
+};
+
+const struct SpriteTemplate gGeomancyGreenCellRaiseTemplate =
+{
+    .tileTag = ANIM_TAG_ZYGARDE_HEXES,
+    .paletteTag = ANIM_TAG_WHIP_HIT,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimRaiseSprite
+};
+
+const struct SpriteTemplate gGeomancyBlueCellRaiseTemplate =
+{
+    .tileTag = ANIM_TAG_ZYGARDE_HEXES,
+    .paletteTag = ANIM_TAG_SWEAT_BEAD,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimRaiseSprite
+};
+
+//strange steam
+const struct SpriteTemplate gStrangeSteamPinkCloudTemplate =
+{
+    .tileTag = ANIM_TAG_PINK_CLOUD,
+    .paletteTag = ANIM_TAG_PINK_CLOUD,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = AnimDirtScatter
+};
+
+const struct SpriteTemplate gStrangeSteamGreenCloudTemplate =
+{
+    .tileTag = ANIM_TAG_PINK_CLOUD,
+    .paletteTag = ANIM_TAG_FINGER,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = AnimDirtScatter
+};
+
+const struct SpriteTemplate gStrangeSteamBlueCloudTemplate =
+{
+    .tileTag = ANIM_TAG_PINK_CLOUD,
+    .paletteTag = ANIM_TAG_WATER_GUN,
+    .oam = &gOamData_AffineNormal_ObjNormal_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ShadowBall,
+    .callback = AnimDirtScatter
+};
+
+// springtide storm
+const struct SpriteTemplate gSpriteTemplate_SpringtideHeart = {
+    .tileTag = ANIM_TAG_RED_HEART,
+    .paletteTag = ANIM_TAG_RED_HEART,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimParticleInVortex
+};
+
+static const union AffineAnimCmd sAffineAnim_Whirlpool[] =
+{
+    AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0, 0),
+    AFFINEANIMCMD_FRAME(0x2, -0x3, 0, 5),
+    AFFINEANIMCMD_FRAME(-0x2, 0x3, 0, 5),
+    AFFINEANIMCMD_JUMP(1),
+};
+
+static const union AffineAnimCmd *const sAffineAnims_Whirlpool[] =
+{
+    sAffineAnim_Whirlpool,
+};
+
+const struct SpriteTemplate gFloralHealingLeavesTemplate =
+{
+    .tileTag = ANIM_TAG_LEAF,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_Whirlpool,
+    .callback = AnimParticleInVortex
+};
+
+const struct SpriteTemplate gFloralHealingWindLeavesTemplate =
+{
+    .tileTag = ANIM_TAG_LEAF,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSweetScentPetal
+};
+
+const struct SpriteTemplate gThousandWavesRotatingImpactTemplate =
+{
+    .tileTag = ANIM_TAG_ZYGARDE_HEXES,
+    .paletteTag = ANIM_TAG_WHIP_HIT,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sRazorLeafParticleAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_Whirlpool,
+    .callback = AnimParticleInVortex
+};
+
 
 const union AnimCmd sAnim_Lick[] =
 {
@@ -1690,5 +1929,254 @@ static void AnimNeedleArmSpike_Step(struct Sprite* sprite)
     else
     {
         DestroySpriteAndMatrix(sprite);
+    }
+}
+
+//Creates purple flames that surround the target.
+//No args.
+void AnimTask_PurpleFlamesOnTarget(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    task->data[0] = 0;
+    task->data[1] = 16;
+    task->data[9] = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    task->data[10] = GetBattlerYCoordWithElevation(gBattleAnimTarget);
+    task->data[11] = (GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_WIDTH) / 2) + 8;
+    task->data[7] = 0;
+    task->data[5] = GetBattlerSpriteBGPriority(gBattleAnimTarget);
+    task->data[6] = GetBattlerSpriteSubpriority(gBattleAnimTarget) - 2;
+    task->data[3] = 0;
+    task->data[4] = 16;
+    SetGpuReg(REG_OFFSET_BLDCNT, (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL));
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 0x10));
+    task->data[8] = 0;
+    task->func = AnimTask_GrudgeFlames_Step;
+}
+
+static u8 LoadBattleAnimTarget(u8 arg)
+{
+    u8 battler;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        switch (gBattleAnimArgs[arg])
+        {
+        case 0:
+            battler = gBattleAnimAttacker;
+            break;
+        default:
+            battler = gBattleAnimTarget;
+            break;
+        case 2:
+            battler = BATTLE_PARTNER(gBattleAnimAttacker);
+            break;
+        case 3:
+            battler = BATTLE_PARTNER(gBattleAnimTarget);
+            break;
+        }
+    }
+    else
+    {
+        if (gBattleAnimArgs[arg] == 0)
+            battler = gBattleAnimAttacker;
+        else
+            battler = gBattleAnimTarget;
+    }
+
+    return battler;
+}
+
+static void SpriteCB_SpriteOnMonForDuration(struct Sprite *sprite)
+{
+    u8 target = LoadBattleAnimTarget(0);
+
+    if (!IsBattlerSpriteVisible(target))
+    {
+        DestroyAnimSprite(sprite);
+    }
+    else
+    {
+        sprite->x = GetBattlerSpriteCoord(target, 0);
+        sprite->y = GetBattlerSpriteCoord(target, 1);
+        sprite->x += gBattleAnimArgs[1];
+        sprite->y += gBattleAnimArgs[2];
+        sprite->data[0] = 0;
+        sprite->data[1] = gBattleAnimArgs[3];
+        sprite->data[2] = gBattleAnimArgs[4];
+        sprite->data[3] = 0;
+        sprite->callback = AnimBrickBreakWall_Step;
+    }
+}
+
+static void AnimBrickBreakWall_Step(struct Sprite *sprite)
+{
+    switch (sprite->data[0])
+    {
+    case 0:
+        if (--sprite->data[1] == 0)
+        {
+            if (sprite->data[2] == 0)
+                DestroyAnimSprite(sprite);
+            else
+                ++sprite->data[0];
+        }
+        break;
+    case 1:
+        if (++sprite->data[1] > 1)
+        {
+            sprite->data[1] = 0;
+            ++sprite->data[3];
+            if (sprite->data[3] & 1)
+                sprite->x2 = 2;
+            else
+                sprite->x2 = -2;
+        }
+
+        if (--sprite->data[2] == 0)
+            DestroyAnimSprite(sprite);
+        break;
+    }
+}
+
+// Swirls particle in vortex. Used for moves like Fire Spin or Sand Tomb
+static void AnimParticleInVortex(struct Sprite *sprite)
+{
+    if (gBattleAnimArgs[6] == 0)
+        InitSpritePosToAnimAttacker(sprite, 0);
+    else
+        InitSpritePosToAnimTarget(sprite, FALSE);
+    sprite->data[0] = gBattleAnimArgs[3];
+    sprite->data[1] = gBattleAnimArgs[2];
+    sprite->data[2] = gBattleAnimArgs[4];
+    sprite->data[3] = gBattleAnimArgs[5];
+    sprite->callback = AnimParticleInVortex_Step;
+}
+
+static void AnimParticleInVortex_Step(struct Sprite *sprite)
+{
+    sprite->data[4] += sprite->data[1];
+    sprite->y2 = -(sprite->data[4] >> 8);
+    sprite->x2 = Sin(sprite->data[5], sprite->data[3]);
+    sprite->data[5] = (sprite->data[5] + sprite->data[2]) & 0xFF;
+    if (--sprite->data[0] == -1)
+    {
+        DestroyAnimSprite(sprite);
+    }
+}
+
+static void AnimBite(struct Sprite *sprite)
+{
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += gBattleAnimArgs[1];
+    StartSpriteAffineAnim(sprite, gBattleAnimArgs[2]);
+    sprite->data[0] = gBattleAnimArgs[3];
+    sprite->data[1] = gBattleAnimArgs[4];
+    sprite->data[2] = gBattleAnimArgs[5];
+    sprite->callback = AnimBite_Step1;
+}
+
+static void AnimBite_Step1(struct Sprite *sprite)
+{
+    sprite->data[4] += sprite->data[0];
+    sprite->data[5] += sprite->data[1];
+    sprite->x2 = sprite->data[4] >> 8;
+    sprite->y2 = sprite->data[5] >> 8;
+    if (++sprite->data[3] == sprite->data[2])
+        sprite->callback = AnimBite_Step2;
+}
+
+static void AnimBite_Step2(struct Sprite *sprite)
+{
+    sprite->data[4] -= sprite->data[0];
+    sprite->data[5] -= sprite->data[1];
+    sprite->x2 = sprite->data[4] >> 8;
+    sprite->y2 = sprite->data[5] >> 8;
+    if (--sprite->data[3] == 0)
+        DestroySpriteAndMatrix(sprite);
+}
+
+static void AnimRaiseSprite(struct Sprite *sprite)
+{
+    StartSpriteAnim(sprite, gBattleAnimArgs[4]);
+    InitSpritePosToAnimAttacker(sprite, 0);
+    sprite->data[0] = gBattleAnimArgs[3];
+    sprite->data[2] = sprite->x;
+    sprite->data[4] = sprite->y + gBattleAnimArgs[2];
+    sprite->callback = StartAnimLinearTranslation;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+}
+
+// Moves a small dirt projectile towards the target mon.
+// arg 0: initial x pixel offset
+// arg 1: initial y pixel offset
+// arg 2: duration
+// arg 3: target x pixel offset
+// arg 4: target y pixel offset
+static void AnimDirtScatter(struct Sprite *sprite)
+{
+    u8 targetXPos, targetYPos;
+    s16 xOffset, yOffset;
+
+    InitSpritePosToAnimAttacker(sprite, 1);
+    targetXPos = GetBattlerSpriteCoord2(gBattleAnimTarget, BATTLER_COORD_X_2);
+    targetYPos = GetBattlerSpriteCoord2(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+    xOffset = Random() & 0x1F;
+    yOffset = Random() & 0x1F;
+    if (xOffset > 16)
+        xOffset = 16 - xOffset;
+    if (yOffset > 16)
+        yOffset = 16 - yOffset;
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[2] = targetXPos + xOffset;
+    sprite->data[4] = targetYPos + yOffset;
+    sprite->callback = StartAnimLinearTranslation;
+    StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
+}
+
+// Floats a petal across the screen towards the target mon's side.
+// arg 0: initial y pixel offset
+// arg 1: sprite anim num
+// arg 2: unused
+static void AnimSweetScentPetal(struct Sprite *sprite)
+{
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+    {
+        sprite->x = 0;
+        sprite->y = gBattleAnimArgs[0];
+    }
+    else
+    {
+        sprite->x = DISPLAY_WIDTH;
+        sprite->y = gBattleAnimArgs[0] - 30;
+    }
+
+    sprite->data[2] = gBattleAnimArgs[2];
+    StartSpriteAnim(sprite, gBattleAnimArgs[1]);
+    sprite->callback = AnimSweetScentPetal_Step;
+}
+
+static void AnimSweetScentPetal_Step(struct Sprite *sprite)
+{
+    sprite->data[0] += 3;
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+    {
+        sprite->x += 5;
+        sprite->y -= 1;
+
+        if (sprite->x > DISPLAY_WIDTH)
+            DestroyAnimSprite(sprite);
+
+        sprite->y2 = Sin(sprite->data[0] & 0xFF, 16);
+    }
+    else
+    {
+        sprite->x -= 5;
+        sprite->y += 1;
+
+        if (sprite->x < 0)
+            DestroyAnimSprite(sprite);
+
+        sprite->y2 = Cos(sprite->data[0] & 0xFF, 16);
     }
 }

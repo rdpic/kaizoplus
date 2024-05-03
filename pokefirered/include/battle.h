@@ -136,6 +136,7 @@ struct ResourceFlags
 
 #define RESOURCE_FLAG_FLASH_FIRE 1
 #define RESOURCE_FLAG_ROOST      2
+#define RESOURCE_FLAG_UNBURDEN   3
 
 struct DisableStruct
 {
@@ -204,8 +205,9 @@ struct ProtectStruct
     u32 notFirstStrike:1;       // 0x8
     u32 usedHealBlockedMove:1;
     u32 statRaised:1;           // 0x20
-    u32 flag_x40 : 1;           // 0x40
-    u32 flag_x80 : 1;           // 0x80
+    u32 kingsShielded:1;
+    u32 spikyShielded:1;
+    u32 touchedProtectLike:1;
     u32 field3 : 8;
 
     u32 physicalDmg;
@@ -233,7 +235,6 @@ struct SpecialStatus
     u8 physicalBattlerId;
     u8 specialBattlerId;
     u8 switchInAbilityDone:1;
-    u8 field13;
 };
 
 extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
@@ -261,9 +262,10 @@ extern struct SideTimer gSideTimers[];
 struct FieldTimer
 {
     u8 trickRoomTimer;
-    u8 magicRoomTimer;
-    u8 wonderRoomTimer;
-    u8 terrainTimer;
+    u8 grassyTerrainTimer;
+    u8 mistyTerrainTimer;
+    u8 psychicTerrainTimer;
+    u8 electricTerrainTimer;
     u8 fairyLockTimer;
 };
 
@@ -286,7 +288,7 @@ extern struct WishFutureKnock gWishFutureKnock;
 struct AI_ThinkingStruct
 {
     u8 aiState;
-    u8 movesetIndex;
+    u16 movesetIndex;
     u16 moveConsidered;
     s8 score[4];
     u32 funcResult;
@@ -433,8 +435,8 @@ struct BattleStruct
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT]; 
     u8 additionalEffectsCounter:4;
     u8 playerPartyIdx;
-    u8 field_8C; // unused
-    u8 field_8D; // unused
+    u8 sameMoveTurns[MAX_BATTLERS_COUNT];
+    u8 savedBattlerTarget;
     u8 stringMoveType;
     u8 expGetterBattlerId;
     u8 field_90; // unused
@@ -493,8 +495,6 @@ extern struct BattleStruct *gBattleStruct;
 #define IS_MOVE_PHYSICAL(move)(gBattleMoves[move].category == MOVE_CATEGORY_PHYSICAL)
 #define IS_MOVE_SPECIAL(move)(gBattleMoves[move].category == MOVE_CATEGORY_SPECIAL)
 #define IS_MOVE_STATUS(move)(gBattleMoves[move].category == MOVE_CATEGORY_STATUS)
-
-#define IS_MOVE_RECOIL(move)(gBattleMoves[move].recoil > 0)
 
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
 
