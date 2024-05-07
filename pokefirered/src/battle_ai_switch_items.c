@@ -114,7 +114,8 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     {
         absorbingTypeAbilities[0] = ABILITY_WATER_ABSORB;
         absorbingTypeAbilities[1] = ABILITY_DRY_SKIN;
-        numAbsorbingAbilities = 2;
+        absorbingTypeAbilities[2] = ABILITY_STORM_DRAIN;
+        numAbsorbingAbilities = 3;
     }
     else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].type == TYPE_ELECTRIC)
     {
@@ -122,6 +123,11 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
         absorbingTypeAbilities[1] = ABILITY_MOTOR_DRIVE;
         absorbingTypeAbilities[2] = ABILITY_LIGHTNING_ROD;
         numAbsorbingAbilities = 3;
+    }
+    else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].type == TYPE_GRASS)
+    {
+        absorbingTypeAbilities[0] = ABILITY_SAP_SIPPER;
+        numAbsorbingAbilities = 1;
     }
     else
         return FALSE;

@@ -70,10 +70,10 @@ static const struct LevelUpMove sVenusaurLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sCharmanderLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_INCINERATE),
-    LEVEL_UP_MOVE(1, MOVE_SHEER_COLD),
-    LEVEL_UP_MOVE(1, MOVE_THUNDER_WAVE),
-    LEVEL_UP_MOVE(1, MOVE_CHATTER),
+    LEVEL_UP_MOVE(1, MOVE_FREEZE_DRY),
+    LEVEL_UP_MOVE(1, MOVE_POWER_GEM),
+    LEVEL_UP_MOVE(1, MOVE_THUNDERBOLT),
+    LEVEL_UP_MOVE(1, MOVE_FLAMETHROWER),
     LEVEL_UP_MOVE(7, MOVE_EMBER),
     LEVEL_UP_MOVE(10, MOVE_SMOKESCREEN),
     LEVEL_UP_MOVE(16, MOVE_DRAGON_RAGE),
@@ -127,10 +127,10 @@ static const struct LevelUpMove sCharizardLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sSquirtleLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_EMBER),
-    /* LEVEL_UP_MOVE(1, MOVE_AQUA_RING),
+    LEVEL_UP_MOVE(1, MOVE_KINGS_SHIELD),
+    /* LEVEL_UP_MOVE(1, MOVE_WATER_PULSE),
     LEVEL_UP_MOVE(1, MOVE_QUIVER_DANCE),
-    LEVEL_UP_MOVE(4, MOVE_DRAGON_DANCE), */
+    LEVEL_UP_MOVE(4, MOVE_MUD_SHOT), */
     LEVEL_UP_MOVE(7, MOVE_WATER_GUN),
     LEVEL_UP_MOVE(10, MOVE_WITHDRAW),
     LEVEL_UP_MOVE(13, MOVE_BUBBLE),

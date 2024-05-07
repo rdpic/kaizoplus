@@ -175,6 +175,7 @@ struct DisableStruct
              u8 healBlockTimer;
              u8 usedMoves:4;
              u8 magnetRiseTimer;
+             u8 slowStartTimer;
 };
 
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
@@ -208,6 +209,7 @@ struct ProtectStruct
     u32 kingsShielded:1;
     u32 spikyShielded:1;
     u32 touchedProtectLike:1;
+    u32 usesBouncedMove:1;
     u32 field3 : 8;
 
     u32 physicalDmg;
@@ -235,6 +237,7 @@ struct SpecialStatus
     u8 physicalBattlerId;
     u8 specialBattlerId;
     u8 switchInAbilityDone:1;
+    u8 stormDrainRedirected:1;
 };
 
 extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
@@ -440,6 +443,7 @@ struct BattleStruct
     u8 stringMoveType;
     u8 expGetterBattlerId;
     u8 field_90; // unused
+    u8 soulheartBattlerId;
     u8 absentBattlerFlags;
     u8 AI_monToSwitchIntoId[2];
     u8 simulatedInputState[4];  // used by Oak/Old Man/Pokedude controllers
@@ -544,6 +548,7 @@ struct BattleScripting
     u8 levelUpHP;
     u16 abilityPopupOverwrite;
     s32 savedDmg;
+    u8 savedBattler;
 };
 
 struct BattleSpriteInfo

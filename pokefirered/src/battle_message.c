@@ -477,6 +477,40 @@ static const u8 sText_SolarPowerHpDrop[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_
 static const u8 sText_PoisonHealHpUp[] = _("The poisoning healed {B_ATK_NAME_WITH_PREFIX}\na little bit!");
 static const u8 sText_AirLockActivates[] = _("The effects of weather\ndisappeared.");
 static const u8 sText_PressureActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is exerting its\npressure!");
+static const u8 sText_MoldBreakerEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} breaks the mold!");
+static const u8 sText_PkmnsAbilityPreventsAbility[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nprevents {B_DEF_NAME_WITH_PREFIX}'s\l{B_DEF_ABILITY} from working!");
+static const u8 sText_AftermathDmg[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt!");
+static const u8 sText_ForewarnActivates[] = _("{B_SCR_ACTIVE_ABILITY} alerted {B_SCR_ACTIVE_NAME_WITH_PREFIX}\nto {B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!");
+static const u8 sText_SlowStartEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} can't get it going!");
+static const u8 sText_SlowStartEnd[] = _("{B_ATK_NAME_WITH_PREFIX} finally got\nits act together!");
+static const u8 sText_SnowWarningHail[] = _("It started to hail!");
+static const u8 sText_LastAbilityRaisedBuff1[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ABILITY}\nraised its {B_BUFF1}!");
+static const u8 sText_CursedBodyDisabled[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1} was disabled\nby {B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}!");
+static const u8 sText_TargetAbilityLoweredStat[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nlowered its {B_BUFF1}!");
+static const u8 sText_TargetStatWontGoHigher[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwon't go higher!");
+static const u8 sText_TargetAbilityRaisedStat[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nraised its {B_BUFF1}!");
+static const u8 sText_HarvestBerry[] = _("{B_ATK_NAME_WITH_PREFIX} harvested\nits {B_LAST_ITEM}!");
+static const u8 sText_ImposterTransform[] = _("{B_ATK_NAME_WITH_PREFIX} transformed into\n{B_DEF_NAME_WITH_PREFIX} using IMPOSTER!");
+static const u8 sText_PkmnMoveBouncedViaAbility[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE} was\nbounced back by {B_DEF_NAME_WITH_PREFIX}'s\l{B_DEF_ABILITY}!");
+static const u8 sText_TurboblazeEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is radiating\na blazing aura!");
+static const u8 sText_TeravoltEnters[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is radiating\na bursting aura!");
+static const u8 sText_AromaVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX} is protected\nby an aromatic veil!");
+static const u8 sText_PkmnCutsSpAtkWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncuts {B_DEF_NAME_WITH_PREFIX}'s SP. ATK!");
+static const u8 sText_DarkAuraActivates[] = _("A dark aura is radiating!");
+static const u8 sText_FairyAuraActivates[] = _("A fairy aura is radiating!");
+static const u8 sText_AuraBreakActivates[] = _("All other POKéMON's\nauras are reversed!");
+static const u8 sText_ExtremelyHarshSunlight[] = _("The sunlight turned\nextremely harsh!");
+static const u8 sText_ExtremeSunlightFaded[] = _("The extreme sunlight faded.{PAUSE 64}");
+static const u8 sText_MoveEvaporatedInTheHarshSunlight[] = _("The WATER-type attack evaporated\nin the harsh sunlight!");
+static const u8 sText_ExtremelyHarshSunlightWasNotLessened[] = _("The extremely harsh sunlight\nwas not lessened at all!");
+static const u8 sText_HeavyRain[] = _("A heavy rain began to fall!");
+static const u8 sText_HeavyRainLifted[] = _("The heavy rain has lifted!{PAUSE 64}");
+static const u8 sText_MoveFizzledOutInTheHeavyRain[] = _("The FIRE-type attack fizzled out\nin the heavy rain!");
+static const u8 sText_NoReliefFromHeavyRain[] = _("There is no relief from\nthis heavy rain!");
+static const u8 sText_MysteriousAirCurrent[] = _("A mysterious air current is\nprotecting FLYING-type POKéMON!");
+static const u8 sText_StrongWindsDissipated[] = _("The mysterious strong winds\nhave dissipated!{PAUSE 64}");
+static const u8 sText_MysteriousAirCurrentBlowsOn[] = _("The mysterious air current\nblows on!");
+static const u8 sText_AttackWeakenedByStrongWinds[] = _("The mysterious strong winds\nweakened the attack!");
 
 static const u8 sText_HP2[] = _("HP");
 static const u8 sText_Attack2[] = _("ATTACK");
@@ -995,6 +1029,40 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_POISONHEALHPUP - BATTLESTRINGS_TABLE_START]                = sText_PoisonHealHpUp,
     [STRINGID_AIRLOCKACTIVATES - BATTLESTRINGS_TABLE_START]              = sText_AirLockActivates,
     [STRINGID_PRESSUREENTERS - BATTLESTRINGS_TABLE_START]                = sText_PressureActivates,
+    [STRINGID_MOLDBREAKERENTERS - BATTLESTRINGS_TABLE_START]             = sText_MoldBreakerEnters,
+    [STRINGID_PKMNSABILITYPREVENTSABILITY - BATTLESTRINGS_TABLE_START]   = sText_PkmnsAbilityPreventsAbility,
+    [STRINGID_AFTERMATHDMG - BATTLESTRINGS_TABLE_START]                  = sText_AftermathDmg,
+    [STRINGID_FOREWARNACTIVATES - BATTLESTRINGS_TABLE_START]             = sText_ForewarnActivates,
+    [STRINGID_SLOWSTARTENTERS - BATTLESTRINGS_TABLE_START]               = sText_SlowStartEnters,
+    [STRINGID_SLOWSTARTEND - BATTLESTRINGS_TABLE_START]                  = sText_SlowStartEnd,
+    [STRINGID_SNOWWARNINGHAIL - BATTLESTRINGS_TABLE_START]               = sText_SnowWarningHail,
+    [STRINGID_LASTABILITYRAISEDSTAT - BATTLESTRINGS_TABLE_START]         = sText_LastAbilityRaisedBuff1,
+    [STRINGID_CUSEDBODYDISABLED - BATTLESTRINGS_TABLE_START]             = sText_CursedBodyDisabled,
+    [STRINGID_TARGETABILITYSTATLOWER - BATTLESTRINGS_TABLE_START]        = sText_TargetAbilityLoweredStat,
+    [STRINGID_TARGETSTATWONTGOHIGHER - BATTLESTRINGS_TABLE_START]        = sText_TargetStatWontGoHigher,
+    [STRINGID_TARGETABILITYSTATRAISE - BATTLESTRINGS_TABLE_START]        = sText_TargetAbilityRaisedStat,
+    [STRINGID_HARVESTBERRY - BATTLESTRINGS_TABLE_START]                  = sText_HarvestBerry,
+    [STRINGID_IMPOSTERTRANSFORM - BATTLESTRINGS_TABLE_START]             = sText_ImposterTransform,
+    [STRINGID_PKMNMOVEBOUNCEDABILITY - BATTLESTRINGS_TABLE_START]        = sText_PkmnMoveBouncedViaAbility,
+    [STRINGID_TURBOBLAZEENTERS - BATTLESTRINGS_TABLE_START]              = sText_TurboblazeEnters,
+    [STRINGID_TERAVOLTENTERS - BATTLESTRINGS_TABLE_START]                = sText_TeravoltEnters,
+    [STRINGID_AROMAVEILPROTECTED - BATTLESTRINGS_TABLE_START]            = sText_AromaVeilProtected,
+    [STRINGID_PKMNCUTSSPATKWITH - BATTLESTRINGS_TABLE_START]             = sText_PkmnCutsSpAtkWith,
+    [STRINGID_DARKAURAENTERS - BATTLESTRINGS_TABLE_START]                = sText_DarkAuraActivates,
+    [STRINGID_FAIRYAURAENTERS - BATTLESTRINGS_TABLE_START]               = sText_FairyAuraActivates,
+    [STRINGID_AURABREAKENTERS - BATTLESTRINGS_TABLE_START]               = sText_AuraBreakActivates,
+    [STRINGID_EXTREMELYHARSHSUNLIGHT - BATTLESTRINGS_TABLE_START]        = sText_ExtremelyHarshSunlight,
+    [STRINGID_EXTREMESUNLIGHTFADED - BATTLESTRINGS_TABLE_START]          = sText_ExtremeSunlightFaded,
+    [STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT - BATTLESTRINGS_TABLE_START] = sText_MoveEvaporatedInTheHarshSunlight,
+    [STRINGID_EXTREMELYHARSHSUNLIGHTWASNOTLESSENED - BATTLESTRINGS_TABLE_START] = sText_ExtremelyHarshSunlightWasNotLessened,
+    [STRINGID_HEAVYRAIN - BATTLESTRINGS_TABLE_START]                     = sText_HeavyRain,
+    [STRINGID_HEAVYRAINLIFTED - BATTLESTRINGS_TABLE_START]               = sText_HeavyRainLifted,
+    [STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN - BATTLESTRINGS_TABLE_START]  = sText_MoveFizzledOutInTheHeavyRain,
+    [STRINGID_NORELIEFROMHEAVYRAIN - BATTLESTRINGS_TABLE_START]          = sText_NoReliefFromHeavyRain,
+    [STRINGID_MYSTERIOUSAIRCURRENT - BATTLESTRINGS_TABLE_START]          = sText_MysteriousAirCurrent,
+    [STRINGID_STRONGWINDSDISSIPATED - BATTLESTRINGS_TABLE_START]         = sText_StrongWindsDissipated,
+    [STRINGID_MYSTERIOUSAIRCURRENTBLOWSON - BATTLESTRINGS_TABLE_START]   = sText_MysteriousAirCurrentBlowsOn,
+    [STRINGID_ATTACKWEAKENEDBSTRONGWINDS - BATTLESTRINGS_TABLE_START]    = sText_AttackWeakenedByStrongWinds,
 };
 
 const u16 gStatusConditionsStringIds[] =
@@ -1229,16 +1297,19 @@ const u16 gGotDefrostedStringIds[] =
 const u16 gSwitchInAbilityStringIds[] =
 {
     [B_MSG_SWITCHIN_PRESSURE] = STRINGID_PRESSUREENTERS,
-    /* [B_MSG_SWITCHIN_MOLDBREAKER] = STRINGID_MOLDBREAKERENTERS,
-    [B_MSG_SWITCHIN_TERAVOLT] = STRINGID_TERAVOLTENTERS,
-    [B_MSG_SWITCHIN_TURBOBLAZE] = STRINGID_TURBOBLAZEENTERS,
+    [B_MSG_SWITCHIN_MOLDBREAKER] = STRINGID_MOLDBREAKERENTERS,
+    [B_MSG_SWITCHIN_FOREWARN] = STRINGID_FOREWARNACTIVATES,
     [B_MSG_SWITCHIN_SLOWSTART] = STRINGID_SLOWSTARTENTERS,
-    [B_MSG_SWITCHIN_UNNERVE] = STRINGID_UNNERVEENTERS,
-    [B_MSG_SWITCHIN_ANTICIPATION] = STRINGID_ANTICIPATIONACTIVATES,
-    [B_MSG_SWITCHIN_FOREWARN] = STRINGID_FOREWARNACTIVATES, */
-    /* [B_MSG_SWITCHIN_DARKAURA] = STRINGID_DARKAURAENTERS,
+    [B_MSG_SWITCHIN_TURBOBLAZE] = STRINGID_TURBOBLAZEENTERS,
+    [B_MSG_SWITCHIN_TERAVOLT] = STRINGID_TERAVOLTENTERS,
+    [B_MSG_SWITCHIN_DARKAURA] = STRINGID_DARKAURAENTERS,
     [B_MSG_SWITCHIN_FAIRYAURA] = STRINGID_FAIRYAURAENTERS,
-    [B_MSG_SWITCHIN_AURABREAK] = STRINGID_AURABREAKENTERS, */
+    [B_MSG_SWITCHIN_AURABREAK] = STRINGID_AURABREAKENTERS,
+};
+
+const u16 gMagicCoatBounceStringIds[] =
+{
+    STRINGID_PKMNMOVEBOUNCED, STRINGID_PKMNMOVEBOUNCEDABILITY
 };
 
 const u16 gKOFailedStringIds[] =
@@ -1308,6 +1379,12 @@ const u16 gWeatherStartsStringIds[] =
     [WEATHER_DOWNPOUR]           = STRINGID_ITISRAINING,
     [WEATHER_UNDERWATER_BUBBLES] = STRINGID_ITISRAINING,
     [WEATHER_ABNORMAL]           = STRINGID_ITISRAINING
+};
+
+const u16 gPrimalWeatherBlocksStringIds[] =
+{
+    [B_MSG_PRIMAL_WEATHER_FIZZLED_BY_RAIN]      = STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN,
+    [B_MSG_PRIMAL_WEATHER_EVAPORATED_IN_SUN]    = STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT,
 };
 
 const u16 gInobedientStringIds[] =

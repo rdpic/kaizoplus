@@ -438,6 +438,7 @@
 #define B_ANIM_SAFARI_REACTION          27
 #define B_ANIM_AQUA_RING_HEAL           28
 #define B_ANIM_RESTORE_BG               29
+#define B_ANIM_STRONG_WINDS             30
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

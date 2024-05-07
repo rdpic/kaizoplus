@@ -28,6 +28,7 @@
 #define sLVLUP_HP                    gBattleScripting + 0x23 // levelUpHP
 #define sABILITY_OVERWRITE           gBattleScripting + 0x24 // abilityPopupOverwrite
 #define sSAVED_DMG                   gBattleScripting + 0x25 // savedDmg
+#define sSAVED_BATTLER               gBattleScripting + 0x26 // savedBattler
 
 
 // Array entries for battle communication
@@ -116,6 +117,9 @@
 #define VARIOUS_CHECK_IF_GRASSY_TERRAIN_HEALS   33
 #define VARIOUS_STAT_TEXT_BUFFER                34
 #define VARIOUS_JUMP_IF_MYSTIC_GUARD            35
+#define VARIOUS_TRY_ACTIVATE_SOULHEART          36
+#define VARIOUS_TRY_ACTIVATE_MOXIE              37
+#define VARIOUS_PLAY_MOVE_ANIMATION             38        
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

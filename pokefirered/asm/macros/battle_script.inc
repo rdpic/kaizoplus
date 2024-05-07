@@ -100,7 +100,10 @@
 	.byte 0x16
 	.endm
 
-	.macro seteffectsecondary
+	.macro seteffectsecondary moveEffect=0
+	.if \moveEffect != 0
+		setmoveeffect \moveEffect
+	.endif
 	.byte 0x17
 	.endm
 
@@ -1522,4 +1525,17 @@
 	.macro jumpifmysticguard battler:req, jumpInstr:req
 	various \battler, VARIOUS_JUMP_IF_MYSTIC_GUARD
 	.4byte \jumpInstr
+	.endm
+
+	.macro tryactivatesoulheart
+	various BS_ATTACKER, VARIOUS_TRY_ACTIVATE_SOULHEART
+	.endm
+
+	.macro tryactivatemoxie battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_MOXIE
+	.endm
+
+	.macro playmoveanimation battler:req, move:req
+	various \battler, VARIOUS_PLAY_MOVE_ANIMATION
+	.2byte \move
 	.endm

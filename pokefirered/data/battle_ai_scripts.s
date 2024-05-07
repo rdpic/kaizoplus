@@ -65,6 +65,9 @@ AI_CBM_CheckIfNegatesType::
 	if_equal ABILITY_FLASH_FIRE, CheckIfFlashFireCancelsFire
 	if_equal ABILITY_WONDER_GUARD, CheckIfWonderGuardCancelsMove
 	if_equal ABILITY_LEVITATE, CheckIfLevitateCancelsGroundMove
+	if_equal ABILITY_MOTOR_DRIVE, CheckIfVoltAbsorbCancelsElectric
+	if_equal ABILITY_LIGHTNING_ROD, CheckIfVoltAbsorbCancelsElectric
+	if_equal ABILITY_SAP_SIPPER, CheckIfSapSipperCancelsGrass
 	goto AI_CheckBadMove_CheckSoundproof
 
 CheckIfVoltAbsorbCancelsElectric::
@@ -82,6 +85,11 @@ CheckIfFlashFireCancelsFire::
 	if_equal_ TYPE_FIRE, Score_Minus30
 	goto AI_CheckBadMove_CheckSoundproof
 
+CheckIfSapSipperCancelsGrass::
+	get_curr_move_type
+	if_equal_ TYPE_GRASS, Score_Minus30
+	goto AI_CheckBadMove_CheckSoundproof
+
 CheckIfWonderGuardCancelsMove::
 	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CheckBadMove_CheckSoundproof
 	goto Score_Minus30
@@ -92,7 +100,7 @@ CheckIfLevitateCancelsGroundMove::
 
 AI_CheckBadMove_CheckSoundproof::
 	get_ability AI_TARGET
-	if_not_equal ABILITY_SOUNDPROOF, AI_CheckBadMove_CheckEffect
+	if_not_equal ABILITY_SOUNDPROOF, AI_CheckBadMove_CheckBulletproof
 	if_move MOVE_GROWL, Score_Minus30
 	if_move MOVE_ROAR, Score_Minus30
 	if_move MOVE_SING, Score_Minus30
@@ -105,6 +113,44 @@ AI_CheckBadMove_CheckSoundproof::
 	if_move MOVE_GRASS_WHISTLE, Score_Minus30
 	if_move MOVE_HYPER_VOICE, Score_Minus30
 	if_move MOVE_ROAR_OF_TIME, Score_Minus30
+	if_move MOVE_BUG_BUZZ, Score_Minus30
+	if_move MOVE_CHATTER, Score_Minus30
+	if_move MOVE_ROUND, Score_Minus30
+	if_move MOVE_ECHOED_VOICE, Score_Minus30
+	if_move MOVE_RELIC_SONG, Score_Minus30
+	if_move MOVE_SNARL, Score_Minus30
+	if_move MOVE_NOBLE_ROAR, Score_Minus30
+	if_move MOVE_DISARMING_VOICE, Score_Minus30
+	if_move MOVE_PARTING_SHOT, Score_Minus30
+	if_move MOVE_BOOMBURST, Score_Minus30
+	if_move MOVE_CONFIDE, Score_Minus30
+	if_move MOVE_ALLURING_VOICE, Score_Minus30
+
+AI_CheckBadMove_CheckBulletproof::
+	get_ability AI_TARGET
+	if_not_equal ABILITY_BULLETPROOF, AI_CheckBadMove_CheckEffect
+	if_move MOVE_EGG_BOMB, Score_Minus30
+	if_move MOVE_BARRAGE, Score_Minus30
+	if_move MOVE_SLUDGE_BOMB, Score_Minus30
+	if_move MOVE_OCTAZOOKA, Score_Minus30
+	if_move MOVE_ZAP_CANNON, Score_Minus30
+	if_move MOVE_SHADOW_BALL, Score_Minus30
+	if_move MOVE_MIST_BALL, Score_Minus30
+	if_move MOVE_ICE_BALL, Score_Minus30
+	if_move MOVE_WEATHER_BALL, Score_Minus30
+	if_move MOVE_BULLET_SEED, Score_Minus30
+	if_move MOVE_ROCK_BLAST, Score_Minus30
+	if_move MOVE_GYRO_BALL, Score_Minus30
+	if_move MOVE_AURA_SPHERE, Score_Minus30
+	if_move MOVE_SEED_BOMB, Score_Minus30
+	if_move MOVE_FOCUS_BLAST, Score_Minus30
+	if_move MOVE_ENERGY_BALL, Score_Minus30
+	if_move MOVE_MUD_BOMB, Score_Minus30
+	if_move MOVE_ROCK_WRECKER, Score_Minus30
+	if_move MOVE_MAGNET_BOMB, Score_Minus30
+	if_move MOVE_ELECTRO_BALL, Score_Minus30
+	if_move MOVE_ACID_SPRAY, Score_Minus30
+	if_move MOVE_SEARING_SHOT, Score_Minus30
 
 AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_SLEEP, AI_CBM_Sleep
@@ -239,6 +285,7 @@ AI_CBM_Sleep::
 	get_ability AI_TARGET
 	if_equal ABILITY_INSOMNIA, Score_Minus30
 	if_equal ABILITY_VITAL_SPIRIT, Score_Minus30
+	if_equal ABILITY_SWEET_VEIL, Score_Minus30
 	if_status AI_TARGET, STATUS1_ANY, Score_Minus30
 	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus30
 	end
@@ -338,6 +385,7 @@ CheckIfAbilityBlocksStatChange::
 	get_ability AI_TARGET
 	if_equal ABILITY_CLEAR_BODY, Score_Minus30
 	if_equal ABILITY_WHITE_SMOKE, Score_Minus30
+	@if_equal ABILITY_DEFIANT, Score_Minus30
 	end
 
 AI_CBM_Haze::
@@ -381,7 +429,7 @@ AI_CBM_Poison::
 	end
 
 AI_CBM_LightScreen::
-	if_side_affecting AI_USER, SIDE_STATUS_LIGHTSCREEN, Score_Minus8
+	if_side_affecting AI_USER, SIDE_STATUS_LIGHTSCREEN, Score_Minus30
 	end
 
 AI_CBM_OneHitKO::
@@ -426,7 +474,7 @@ AI_CBM_Confuse::
 	end
 
 AI_CBM_Reflect::
-	if_side_affecting AI_USER, SIDE_STATUS_REFLECT, Score_Minus8
+	if_side_affecting AI_USER, SIDE_STATUS_REFLECT, Score_Minus30
 	end
 
 AI_CBM_Paralyze::
@@ -669,6 +717,7 @@ AI_CBM_WorrySeed::
 	get_ability AI_TARGET
 	if_equal ABILITY_INSOMNIA, Score_Minus30
 	if_equal ABILITY_VITAL_SPIRIT, Score_Minus30
+	if_equal ABILITY_SWEET_VEIL, Score_Minus30
 	end
 
 AI_CBM_Synchronoise::
@@ -890,13 +939,9 @@ AI_CV_Sleep_End::
 	end
 
 AI_CV_Absorb::
-	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_AbsorbEncourageMaybe
-	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_AbsorbEncourageMaybe
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	goto AI_CV_Absorb_End
-
-AI_CV_AbsorbEncourageMaybe::
-	if_random_less_than 50, AI_CV_Absorb_End
-	score -3
 
 AI_CV_Absorb_End::
 	end
@@ -933,12 +978,9 @@ AI_CV_SelfKO_End::
 	end
 
 AI_CV_DreamEater::
-	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_DreamEater_ScoreDown1
-	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_DreamEater_ScoreDown1
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus5
 	goto AI_CV_DreamEater_End
-
-AI_CV_DreamEater_ScoreDown1::
-	score -1
 
 AI_CV_DreamEater_End::
 	end
@@ -1639,15 +1681,14 @@ AI_CV_HighCrit::
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_HighCrit_End
 	if_type_effectiveness AI_EFFECTIVENESS_x2, AI_CV_HighCrit2
 	if_type_effectiveness AI_EFFECTIVENESS_x4, AI_CV_HighCrit2
-	if_random_less_than 128, AI_CV_HighCrit_End
+	if_random_less_than 64, AI_CV_HighCrit_End
 
 AI_CV_HighCrit2::
-	if_random_less_than 128, AI_CV_HighCrit_End
-	score +2
+	if_random_less_than 64, AI_CV_HighCrit_End
+	score +10
 
 AI_CV_HighCrit_End::
 	end
-
 
 AI_CV_Swagger:
 	if_has_move AI_USER, MOVE_PSYCH_UP, AI_CV_SwaggerHasPsychUp
@@ -2537,14 +2578,14 @@ AI_CV_FocusPunch::
 	goto AI_CV_FocusPunch_End
 
 AI_CV_FocusPunch2::
-	score -1
+	score -30
 	goto AI_CV_FocusPunch_End
 
 AI_CV_FocusPunch3::
 	if_random_less_than 100, AI_CV_FocusPunch_End
 
 AI_CV_FocusPunch_ScoreUp1::
-	score +1
+	score +3
 
 AI_CV_FocusPunch_End::
 	end
@@ -2634,7 +2675,7 @@ AI_CV_ChangeSelfAbility_AbilitiesToEncourage::
 	.byte -1
 
 AI_CV_Superpower::
-	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_Superpower_ScoreDown1
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_Superpower_ScoreDown1
 	if_stat_level_less_than AI_USER, STAT_ATK, 6, AI_CV_Superpower_ScoreDown1
 	if_target_faster AI_CV_Superpower2
@@ -2645,7 +2686,7 @@ AI_CV_Superpower2::
 	if_hp_less_than AI_USER, 60, AI_CV_Superpower_End
 
 AI_CV_Superpower_ScoreDown1::
-	score -1
+	score -5
 
 AI_CV_Superpower_End::
 	end
@@ -2707,11 +2748,11 @@ AI_CV_Revenge_End::
 	end
 
 AI_CV_BrickBreak::
-	if_side_affecting AI_TARGET, SIDE_STATUS_REFLECT, AI_CV_BrickBreak_ScoreUp1
+	if_side_affecting AI_TARGET, SIDE_STATUS_REFLECT, AI_CV_BrickBreak_ScoreUp3
 	goto AI_CV_BrickBreak_End
 
-AI_CV_BrickBreak_ScoreUp1::
-	score +1
+AI_CV_BrickBreak_ScoreUp3::
+	score +3
 
 AI_CV_BrickBreak_End::
 	end
@@ -2745,7 +2786,7 @@ AI_CV_Endeavor_End::
 	end
 
 AI_CV_Eruption::
-	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_Eruption_ScoreDown1
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_Eruption_ScoreDown1
 	if_target_faster AI_CV_Eruption2
 	if_hp_more_than AI_TARGET, 50, AI_CV_Eruption_End
@@ -2755,7 +2796,7 @@ AI_CV_Eruption2::
 	if_hp_more_than AI_TARGET, 70, AI_CV_Eruption_End
 
 AI_CV_Eruption_ScoreDown1::
-	score -1
+	score -5
 
 AI_CV_Eruption_End::
 	end
@@ -2831,7 +2872,7 @@ AI_CV_MudSport_End::
 	end
 
 AI_CV_Overheat::
-	if_type_effectiveness AI_EFFECTIVENESS_x0_25, AI_CV_Overheat_ScoreDown1
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus30
 	if_type_effectiveness AI_EFFECTIVENESS_x0_5, AI_CV_Overheat_ScoreDown1
 	if_target_faster AI_CV_Overheat2
 	if_hp_more_than AI_USER, 60, AI_CV_Overheat_End
@@ -2841,7 +2882,7 @@ AI_CV_Overheat2::
 	if_hp_more_than AI_USER, 80, AI_CV_Overheat_End
 
 AI_CV_Overheat_ScoreDown1::
-	score -1
+	score -5
 
 AI_CV_Overheat_End::
 	end

@@ -71,6 +71,8 @@
         "battle_interface.h": "c",
         "vs_seeker.h": "c",
         "reshow_battle_screen.h": "c",
-        "xlocinfo": "c"
+        "xlocinfo": "c",
+        "battle_script_commands.h": "c",
+        "battle_terrain_unused.h": "c"
     }
 }

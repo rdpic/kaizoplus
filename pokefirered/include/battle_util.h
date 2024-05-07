@@ -102,6 +102,9 @@ bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 u8 GetBattlerType(u32 battler, u8 typeIndex);
 bool32 IsBattlerTerrainAffected(u32 battler, u32 terrainFlag);
 bool32 TryChangeBattleWeather(u32 battler, u32 weatherEnumId, bool32 viaAbility);
-/* bool32 IsMoldBreakerTypeAbility(u32 ability); */
+bool32 IsMoldBreakerTypeAbility(u32 ability);
+u32 GetBattlerAbility(u32 battler);
+u32 IsAbilityOnField(u32 ability);
+u16 GetUsedHeldItem(u32 battler);
 
 #endif // GUARD_BATTLE_UTIL_H

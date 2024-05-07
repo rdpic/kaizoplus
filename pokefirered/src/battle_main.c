@@ -3416,21 +3416,22 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     u8 holdEffectParam = 0;
     u16 moveBattler1 = 0, moveBattler2 = 0;
     bool8 isTrickRoomActive = (gFieldStatuses & STATUS_FIELD_TRICK_ROOM) != 0;
-    bool8 battler1Stalls = (gBattleMons[battler1].ability == ABILITY_STALL);
-    bool8 battler2Stalls = (gBattleMons[battler2].ability == ABILITY_STALL);
-    u8 priorityBattler1 = gBattleMoves[moveBattler1].priority;
-    u8 priorityBattler2 = gBattleMoves[moveBattler2].priority;
     bool8 speedComparisonResult;
 
     if (WEATHER_HAS_EFFECT)
     {
         if ((gBattleMons[battler1].ability == ABILITY_SWIFT_SWIM && gBattleWeather & B_WEATHER_RAIN)
-            || (gBattleMons[battler1].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN))
+            || (gBattleMons[battler1].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN)
+            || (gBattleMons[battler1].ability == ABILITY_SLUSH_RUSH && gBattleWeather & B_WEATHER_HAIL)
+            || (gBattleMons[battler1].ability == ABILITY_SAND_RUSH && gBattleWeather & B_WEATHER_SANDSTORM))
             speedMultiplierBattler1 = 2;
         else
             speedMultiplierBattler1 = 1;
+            
         if ((gBattleMons[battler2].ability == ABILITY_SWIFT_SWIM && gBattleWeather & B_WEATHER_RAIN)
-            || (gBattleMons[battler2].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN))
+            || (gBattleMons[battler2].ability == ABILITY_CHLOROPHYLL && gBattleWeather & B_WEATHER_SUN)
+            || (gBattleMons[battler2].ability == ABILITY_SLUSH_RUSH && gBattleWeather & B_WEATHER_HAIL)
+            || (gBattleMons[battler2].ability == ABILITY_SAND_RUSH && gBattleWeather & B_WEATHER_SANDSTORM))
             speedMultiplierBattler2 = 2;
         else
             speedMultiplierBattler2 = 1;
@@ -3439,6 +3440,24 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     {
         speedMultiplierBattler1 = 1;
         speedMultiplierBattler2 = 1;
+    }
+
+    if (gChosenActionByBattler[battler1] == B_ACTION_USE_MOVE)
+    {
+        moveBattler1 = gBattleMons[battler1].moves[*(gBattleStruct->chosenMovePositions + battler1)];
+        if (IS_MOVE_STATUS(moveBattler1) && gBattleMons[battler1].ability == ABILITY_PRANKSTER)
+            speedMultiplierBattler1 = 2;
+        if (gBattleMoves[moveBattler1].type == TYPE_FLYING && gBattleMons[battler1].ability == ABILITY_GALE_WINGS)
+            speedMultiplierBattler1 = 2;
+    }
+
+    if (gChosenActionByBattler[battler2] == B_ACTION_USE_MOVE)
+    {
+        moveBattler2 = gBattleMons[battler2].moves[*(gBattleStruct->chosenMovePositions + battler2)];
+        if (IS_MOVE_STATUS(moveBattler2) && gBattleMons[battler2].ability == ABILITY_PRANKSTER)
+            speedMultiplierBattler2 = 2;
+        if (gBattleMoves[moveBattler2].type == TYPE_FLYING && gBattleMons[battler2].ability == ABILITY_GALE_WINGS)
+            speedMultiplierBattler2 = 2;
     }
 
     speedBattler1 = (gBattleMons[battler1].speed * speedMultiplierBattler1)
@@ -3460,14 +3479,6 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         holdEffect = HOLD_EFFECT_NONE;
     }
 
-    if (gBattleMons[battler1].ability == ABILITY_UNBURDEN && gBattleResources->flags->flags[battler1] & RESOURCE_FLAG_UNBURDEN)
-        speedBattler1 *= 2;
-
-    // badge boost
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK)
-     && FlagGet(FLAG_BADGE03_GET)
-     && GetBattlerSide(battler1) == B_SIDE_PLAYER)
-        speedBattler1 = (speedBattler1 * 110) / 100;
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
         speedBattler1 /= 2;
     if (gBattleMons[battler1].status1 & STATUS1_PARALYSIS && gBattleMons[battler1].ability != ABILITY_QUICK_FEET)
@@ -3494,15 +3505,15 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     {
         holdEffect = HOLD_EFFECT_NONE;
     }
-
+    if (gBattleMons[battler1].ability == ABILITY_UNBURDEN && gBattleResources->flags->flags[battler1] & RESOURCE_FLAG_UNBURDEN)
+        speedBattler1 *= 2;
     if (gBattleMons[battler2].ability == ABILITY_UNBURDEN && gBattleResources->flags->flags[battler2] & RESOURCE_FLAG_UNBURDEN)
         speedBattler2 *= 2;
+    if (gBattleMons[battler1].ability == ABILITY_STALL)
+        speedBattler1 /= 2;
+    if (gBattleMons[battler2].ability == ABILITY_STALL)
+        speedBattler2 /= 2;
 
-    // badge boost
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK)
-     && FlagGet(FLAG_BADGE03_GET)
-     && GetBattlerSide(battler2) == B_SIDE_PLAYER)
-        speedBattler2 = (speedBattler2 * 110) / 100;
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE)
         speedBattler2 /= 2;
     if (gBattleMons[battler2].status1 & STATUS1_PARALYSIS && gBattleMons[battler2].ability != ABILITY_QUICK_FEET)
@@ -3539,14 +3550,6 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
     speedComparisonResult = speedBattler1 < speedBattler2;
     if (isTrickRoomActive) {
         speedComparisonResult = !speedComparisonResult;
-    }
-
-    // Handle Stall ability by setting very low priority
-    if (battler1Stalls) {
-        priorityBattler1 = -6; // Set to a very low priority
-    }
-    if (battler2Stalls) {
-        priorityBattler2 = -6; // Set to a very low priority
     }
 
     // both move priorities are different than 0

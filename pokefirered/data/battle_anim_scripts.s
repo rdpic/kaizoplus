@@ -680,6 +680,7 @@ gBattleAnims_General::
 	.4byte General_SafariReaction           @ B_ANIM_SAFARI_REACTION
 	.4byte General_AquaRingHeal             @ B_ANIM_AQUA_RING_HEAL
 	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
+	.4byte General_StrongWinds              @ B_ANIM_STRONG_WINDS
 
 	.align 2
 gBattleAnims_Special::
@@ -20617,6 +20618,29 @@ SafariReaction_Eating:
 	waitforvisualfinish
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
 	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 8, 136, 0, 2
+	end
+
+General_StrongWinds::
+	loadspritegfx ANIM_TAG_FLYING_DIRT
+	playsewithpan SE_M_GUST, 0
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_FLYING_DIRT, 0, 6, 6, RGB_SKY_BLUE
+	createvisualtask AnimTask_LoadSandstormBackground, 5, FALSE
+	createvisualtask AnimTask_BlendBackground, 6, 6, RGB_SKY_BLUE
+	delay 12
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 10, 2304, 96, 1
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 90, 2048, 96, 1
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 50, 2560, 96, 1
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 20, 2304, 96, 1
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 70, 1984, 96, 1
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 0, 2816, 96, 1
+	delay 10
+	createsprite gFlyingSandCrescentSpriteTemplate, ANIM_ATTACKER, 40, 60, 2560, 96, 1
+	stopsound
 	end
 
 SnatchMoveTrySwapFromSubstitute:

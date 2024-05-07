@@ -258,6 +258,7 @@ struct BattleMove
     u32 pulseMove:1;
     u32 soundMove:1;
     u32 ballisticMove:1;
+    u32 powderMove:1;
     u32 ignoresSubstitute:1;
     u32 ignoresTargetDefenseEvasionStages:1;
     u32 copycatBanned:1;

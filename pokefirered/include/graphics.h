@@ -6132,6 +6132,10 @@ extern const u32 gBattleAnimBgTilemap_MistyTerrain[];
 extern const u32 gBattleAnimBgTilemap_PsychicTerrain[];
 extern const u32 gBattleAnimBgTilemap_HydroPump[];
 
+extern const u32 gBattleAnimSpritePal_Windstorm[];
+extern const u32 gBattleAnimBgTilemap_Sandstorm[];
+extern const u32 gBattleAnimBgImage_Sandstorm[];
+
 // dark
 extern const u32 gMetalShineGfx[];
 extern const u32 gMetalShinePalette[];
@@ -6143,8 +6147,8 @@ extern const u32 gFile_graphics_battle_anims_backgrounds_scary_face_palette[];
 extern const u32 gFile_graphics_battle_anims_backgrounds_scary_face_player_tilemap[];
 
 // rock
-extern const u32 gFile_graphics_battle_anims_backgrounds_sandstorm_brew_tilemap[];
-extern const u32 gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet[];
+/* extern const u32 gFile_graphics_battle_anims_backgrounds_sandstorm_brew_tilemap[];
+extern const u32 gFile_graphics_battle_anims_backgrounds_sandstorm_brew_sheet[]; */
 extern const u32 gBattleAnimSpritePal_FlyingDirt[];
 
 // title_screen
