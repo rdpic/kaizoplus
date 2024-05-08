@@ -2914,6 +2914,42 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defense *= 2;
     if (attackerHoldEffect == HOLD_EFFECT_THICK_CLUB && (attacker->species == SPECIES_CUBONE || attacker->species == SPECIES_MAROWAK))
         attack *= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_BABIRI && type == TYPE_STEEL)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_ROSELI && type == TYPE_FAIRY)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_CHARTI && type == TYPE_ROCK)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_CHILAN && type == TYPE_NORMAL)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_CHOPLE && type == TYPE_FIGHTING)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_COBA && type == TYPE_FLYING)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_COLBUR && type == TYPE_DARK)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_HABAN && type == TYPE_DRAGON)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_KASIB && type == TYPE_GHOST)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_KEBIA && type == TYPE_POISON)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_OCCA && type == TYPE_FIRE)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_PASSHO && type == TYPE_WATER)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_PAYAPA && type == TYPE_PSYCHIC)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_RINDO && type == TYPE_GRASS)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_SHUCA && type == TYPE_GROUND)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_TANGA && type == TYPE_BUG)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_WACAN && type == TYPE_ELECTRIC)
+        gBattleMovePower /= 2;
+    if (defenderHoldEffect == HOLD_EFFECT_YACHE && type == TYPE_ICE)
+        gBattleMovePower /= 2;
 
     // Apply Ability effects and boosts
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
@@ -2993,10 +3029,15 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (attacker->ability == ABILITY_MEGA_LAUNCHER && gBattleMoves[move].pulseMove)    
         gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (defender->ability == ABILITY_GRASS_PELT)
+    if (defender->ability == ABILITY_AURA_BARRIER)
         spDefense = (120 * spDefense) / 100;
     if (attacker->ability == ABILITY_TOUGH_CLAWS && gBattleMoves[move].flags & FLAG_MAKES_CONTACT)    
         gBattleMovePower = (130 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_HARMONICS && gBattleMoves[move].soundMove)    
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_SHARPNESS && gBattleMoves[move].slicingMove)    
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
+        
     if ((IsAbilityOnField(ABILITY_DARK_AURA) && type == TYPE_DARK)
     || (IsAbilityOnField(ABILITY_FAIRY_AURA) && type == TYPE_FAIRY))
     {

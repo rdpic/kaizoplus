@@ -511,6 +511,7 @@ static const u8 sText_MysteriousAirCurrent[] = _("A mysterious air current is\np
 static const u8 sText_StrongWindsDissipated[] = _("The mysterious strong winds\nhave dissipated!{PAUSE 64}");
 static const u8 sText_MysteriousAirCurrentBlowsOn[] = _("The mysterious air current\nblows on!");
 static const u8 sText_AttackWeakenedByStrongWinds[] = _("The mysterious strong winds\nweakened the attack!");
+static const u8 sText_AttackWeakenedByBerry[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nhalved the damage!");
 
 static const u8 sText_HP2[] = _("HP");
 static const u8 sText_Attack2[] = _("ATTACK");
@@ -1063,6 +1064,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_STRONGWINDSDISSIPATED - BATTLESTRINGS_TABLE_START]         = sText_StrongWindsDissipated,
     [STRINGID_MYSTERIOUSAIRCURRENTBLOWSON - BATTLESTRINGS_TABLE_START]   = sText_MysteriousAirCurrentBlowsOn,
     [STRINGID_ATTACKWEAKENEDBSTRONGWINDS - BATTLESTRINGS_TABLE_START]    = sText_AttackWeakenedByStrongWinds,
+    [STRINGID_RESISTBERRYHALVES - BATTLESTRINGS_TABLE_START]             = sText_AttackWeakenedByBerry,
 };
 
 const u16 gStatusConditionsStringIds[] =

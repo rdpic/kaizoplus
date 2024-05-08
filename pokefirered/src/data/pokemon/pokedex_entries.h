@@ -4970,7 +4970,7 @@ const struct PokedexEntry gPokedexEntries[] =
     {
         .categoryName = _("SEA BASIN"),
         .height = 45,
-        .weight = 3520,
+        .weight = 4300,
         .description = gKyogrePokedexText,
         .unusedDescription = gKyogrePokedexTextUnused,
         .pokemonScale = 272,
@@ -4983,7 +4983,7 @@ const struct PokedexEntry gPokedexEntries[] =
     {
         .categoryName = _("CONTINENT"),
         .height = 35,
-        .weight = 9500,
+        .weight = 9999,
         .description = gGroudonPokedexText,
         .unusedDescription = gGroudonPokedexTextUnused,
         .pokemonScale = 276,

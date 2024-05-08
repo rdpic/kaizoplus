@@ -615,7 +615,8 @@
 #define MOVE_PRECIPICE_BLADES 611
 #define MOVE_DRAGON_ASCENT 612
 #define MOVE_LIGHT_OF_RUIN 613
-#define MOVES_COUNT 614
+#define MOVE_AQUA_CUTTER 614
+#define MOVES_COUNT 615
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

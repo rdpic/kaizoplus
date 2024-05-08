@@ -287,6 +287,11 @@ extern const u8 BattleScript_DeltaStreamActivates[];
 extern const u8 BattleScript_PrimalWeatherBlocksMove[];
 extern const u8 BattleScript_AttackWeakenedByStrongWinds[];
 extern const u8 BattleScript_StrongWindsContinue[];
+extern const u8 BattleScript_ElectricSurgeActivates[];
+extern const u8 BattleScript_PsychicSurgeActivates[];
+extern const u8 BattleScript_MistySurgeActivates[];
+extern const u8 BattleScript_GrassySurgeActivates[];
+extern const u8 BattleScript_ResistBerryActivated[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForBallThrow[];

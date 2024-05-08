@@ -4363,7 +4363,7 @@ static const struct LevelUpMove sMantineLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sSkarmoryLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_LEER),
+    LEVEL_UP_MOVE(1, MOVE_MIRROR_SHOT),
     LEVEL_UP_MOVE(1, MOVE_PECK),
     LEVEL_UP_MOVE( 6, MOVE_SAND_ATTACK),
     LEVEL_UP_MOVE( 9, MOVE_METAL_CLAW),

@@ -12,6 +12,7 @@ void FieldUseFunc_Rod(u8 taskId);
 void FieldUseFunc_CoinCase(u8 taskId);
 void FieldUseFunc_PowderJar(u8 taskId);
 void FieldUseFunc_PokeFlute(u8 taskId);
+void FieldUseFunc_AbilityCapsule(u8 taskId);
 void FieldUseFunc_Medicine(u8 taskId);
 void FieldUseFunc_Ether(u8 taskId);
 void FieldUseFunc_PpUp(u8 taskId);

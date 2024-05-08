@@ -69,5 +69,23 @@
 #define HOLD_EFFECT_THICK_CLUB     65
 #define HOLD_EFFECT_STICK          66
 #define HOLD_EFFECT_FAIRY_POWER    67
+#define HOLD_EFFECT_BABIRI         68
+#define HOLD_EFFECT_ROSELI         69
+#define HOLD_EFFECT_CHARTI         70
+#define HOLD_EFFECT_CHILAN         71
+#define HOLD_EFFECT_CHOPLE         72
+#define HOLD_EFFECT_COBA           73
+#define HOLD_EFFECT_COLBUR         74
+#define HOLD_EFFECT_HABAN          75
+#define HOLD_EFFECT_KASIB          76
+#define HOLD_EFFECT_KEBIA          77
+#define HOLD_EFFECT_OCCA           78
+#define HOLD_EFFECT_PASSHO         79
+#define HOLD_EFFECT_PAYAPA         80
+#define HOLD_EFFECT_RINDO          81
+#define HOLD_EFFECT_SHUCA          82
+#define HOLD_EFFECT_TANGA          83
+#define HOLD_EFFECT_WACAN          84
+#define HOLD_EFFECT_YACHE          85
 
 #endif // GUARD_HOLD_EFFECTS_H

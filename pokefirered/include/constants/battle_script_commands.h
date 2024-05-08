@@ -119,7 +119,8 @@
 #define VARIOUS_JUMP_IF_MYSTIC_GUARD            35
 #define VARIOUS_TRY_ACTIVATE_SOULHEART          36
 #define VARIOUS_TRY_ACTIVATE_MOXIE              37
-#define VARIOUS_PLAY_MOVE_ANIMATION             38        
+#define VARIOUS_PLAY_MOVE_ANIMATION             38     
+#define VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER     39  
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

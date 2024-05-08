@@ -268,6 +268,14 @@ static const u8 sItemEffect_XSpecial[8] = {
     STAT_BOOST_FRIENDSHIP_CHANGE,
 };
 
+static const u8 sItemEffect_Magmarizer[6] = {
+    [4] = ITEM4_EVO_STONE,
+};
+
+static const u8 sItemEffect_Electirizer[6] = {
+    [4] = ITEM4_EVO_STONE,
+};
+
 static const u8 sItemEffect_SunStone[6] = {
     [4] = ITEM4_EVO_STONE,
 };
@@ -293,6 +301,18 @@ static const u8 sItemEffect_LeafStone[6] = {
 };
 
 static const u8 sItemEffect_DuskStone[6] = {
+    [4] = ITEM4_EVO_STONE,
+};
+
+static const u8 sItemEffect_ShinyStone[6] = {
+    [4] = ITEM4_EVO_STONE,
+};
+
+static const u8 sItemEffect_IceStone[6] = {
+    [4] = ITEM4_EVO_STONE,
+};
+
+static const u8 sItemEffect_DubiousDisc[6] = {
     [4] = ITEM4_EVO_STONE,
 };
 
@@ -381,6 +401,7 @@ const u8 *const gItemEffectTable[] =
     [ITEM_PP_UP - ITEM_POTION]         = sItemEffect_PPUp,
     [ITEM_ZINC - ITEM_POTION]          = sItemEffect_Zinc,
     [ITEM_PP_MAX - ITEM_POTION]        = sItemEffect_PPMax,
+    [ITEM_SWIFT_FEATHER - ITEM_POTION] = sItemEffect_Carbos,
     [ITEM_GUARD_SPEC - ITEM_POTION]    = sItemEffect_GuardSpec,
     [ITEM_DIRE_HIT - ITEM_POTION]      = sItemEffect_DireHit,
     [ITEM_X_ATTACK - ITEM_POTION]      = sItemEffect_XAttack,
@@ -388,6 +409,8 @@ const u8 *const gItemEffectTable[] =
     [ITEM_X_SPEED - ITEM_POTION]       = sItemEffect_XSpeed,
     [ITEM_X_ACCURACY - ITEM_POTION]    = sItemEffect_XAccuracy,
     [ITEM_X_SPECIAL - ITEM_POTION]     = sItemEffect_XSpecial,
+    [ITEM_MAGMARIZER - ITEM_POTION]    = sItemEffect_Magmarizer,
+    [ITEM_ELECTIRIZER - ITEM_POTION]   = sItemEffect_Electirizer,
     [ITEM_SUN_STONE - ITEM_POTION]     = sItemEffect_SunStone,
     [ITEM_MOON_STONE - ITEM_POTION]    = sItemEffect_MoonStone,
     [ITEM_FIRE_STONE - ITEM_POTION]    = sItemEffect_FireStone,
@@ -395,6 +418,9 @@ const u8 *const gItemEffectTable[] =
     [ITEM_WATER_STONE - ITEM_POTION]   = sItemEffect_WaterStone,
     [ITEM_LEAF_STONE - ITEM_POTION]    = sItemEffect_LeafStone,
     [ITEM_DUSK_STONE - ITEM_POTION]    = sItemEffect_DuskStone,
+    [ITEM_SHINY_STONE - ITEM_POTION]   = sItemEffect_ShinyStone,
+    [ITEM_ICE_STONE - ITEM_POTION]     = sItemEffect_IceStone,
+    [ITEM_DUBIOUS_DISC - ITEM_POTION]  = sItemEffect_DubiousDisc,
     [ITEM_CHERI_BERRY - ITEM_POTION]   = sItemEffect_CheriBerry,
     [ITEM_CHESTO_BERRY - ITEM_POTION]  = sItemEffect_ChestoBerry,
     [ITEM_PECHA_BERRY - ITEM_POTION]   = sItemEffect_PechaBerry,
@@ -405,5 +431,17 @@ const u8 *const gItemEffectTable[] =
     [ITEM_PERSIM_BERRY - ITEM_POTION]  = sItemEffect_PersimBerry,
     [ITEM_LUM_BERRY - ITEM_POTION]     = sItemEffect_LumBerry,
     [ITEM_SITRUS_BERRY - ITEM_POTION]  = sItemEffect_SitrusBerry,
+    [ITEM_OLD_GATEAU - ITEM_POTION]    = sItemEffect_FullHeal,
+    [ITEM_CASTELIACONE - ITEM_POTION]  = sItemEffect_FullHeal,
+    [ITEM_PEWTER_CRUNCHIES - ITEM_POTION] = sItemEffect_FullHeal,
+    [ITEM_BIG_MALASADA - ITEM_POTION]  = sItemEffect_FullHeal,
+    [ITEM_LUMIOSE_GALETTE - ITEM_POTION] = sItemEffect_FullHeal,
+    [ITEM_SHALOUR_SABLE - ITEM_POTION]  = sItemEffect_FullHeal,
+    [ITEM_RAGE_CANDY_BAR - ITEM_POTION] = sItemEffect_FullHeal,
+    [ITEM_HEALTH_FEATHER - ITEM_POTION] = sItemEffect_HPUp,
+    [ITEM_MUSCLE_FEATHER - ITEM_POTION] = sItemEffect_Protein,
+    [ITEM_RESIST_FEATHER - ITEM_POTION] = sItemEffect_Iron,
+    [ITEM_GENIUS_FEATHER - ITEM_POTION] = sItemEffect_Calcium,
+    [ITEM_CLEVER_FEATHER - ITEM_POTION] = sItemEffect_Zinc,
     [LAST_BERRY_INDEX - ITEM_POTION]   = NULL,
 };

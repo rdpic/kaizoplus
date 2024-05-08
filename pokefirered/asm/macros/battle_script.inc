@@ -1539,3 +1539,7 @@
 	various \battler, VARIOUS_PLAY_MOVE_ANIMATION
 	.2byte \move
 	.endm
+
+	.macro trytoclearprimalweather
+	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
+	.endm

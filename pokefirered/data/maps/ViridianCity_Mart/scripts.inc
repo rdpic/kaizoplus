@@ -71,6 +71,10 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_MOON_STONE
 	.2byte ITEM_SUN_STONE
 	.2byte ITEM_DUSK_STONE
+	.2byte ITEM_SHINY_STONE
+	.2byte ITEM_ICE_STONE
+	.2byte ITEM_UP_GRADE
+	.2byte ITEM_ABILITY_CAPSULE
 	.2byte ITEM_NONE
 	release
 	end

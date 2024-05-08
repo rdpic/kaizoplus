@@ -1571,6 +1571,10 @@ static void Cmd_typecalc(void)
     {
         moveType = TYPE_FLYING;
     }
+    else if (gBattleMons[gBattlerAttacker].ability == ABILITY_GALVANIZE && gBattleMoves[gCurrentMove].type == TYPE_NORMAL)
+    {
+        moveType = TYPE_ELECTRIC;
+    }
     else
     {
         GET_MOVE_TYPE(gCurrentMove, moveType);
@@ -1636,6 +1640,12 @@ static void Cmd_typecalc(void)
     if (gBattleMons[gBattlerAttacker].ability == ABILITY_TINTED_LENS && (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE))
     {
         gBattleMoveDamage *= 2;
+    }
+
+    // Handle Neuroforce
+    if (gBattleMons[gBattlerAttacker].ability == ABILITY_NEUROFORCE && (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE))
+    {
+        gBattleMoveDamage = (125 * gBattleMoveDamage) / 100;
     }
 
     // Handle Filter and Solid Rock
@@ -7155,6 +7165,39 @@ static void Cmd_various(void)
         MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
+    }
+    case VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER:
+    {
+        bool8 shouldNotClear = FALSE;
+
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            u32 ability = GetBattlerAbility(i);
+            if (((ability == ABILITY_DESOLATE_LAND && gBattleWeather & B_WEATHER_SUN_PRIMAL)
+             || (ability == ABILITY_PRIMORDIAL_SEA && gBattleWeather & B_WEATHER_RAIN_PRIMAL)
+             || (ability == ABILITY_DELTA_STREAM && gBattleWeather & B_WEATHER_STRONG_WINDS))
+             && gBattleMons[i].hp != 0)
+                shouldNotClear = TRUE;
+        }
+        if (gBattleWeather & B_WEATHER_SUN_PRIMAL && !shouldNotClear)
+        {
+            gBattleWeather &= ~B_WEATHER_SUN_PRIMAL;
+            PrepareStringBattle(STRINGID_EXTREMESUNLIGHTFADED, gActiveBattler);
+            gBattleCommunication[MSG_DISPLAY] = 1;
+        }
+        else if (gBattleWeather & B_WEATHER_RAIN_PRIMAL && !gActiveBattler)
+        {
+            gBattleWeather &= ~B_WEATHER_RAIN_PRIMAL;
+            PrepareStringBattle(STRINGID_HEAVYRAINLIFTED, gActiveBattler);
+            gBattleCommunication[MSG_DISPLAY] = 1;
+        }
+        else if (gBattleWeather & B_WEATHER_STRONG_WINDS && !shouldNotClear)
+        {
+            gBattleWeather &= ~B_WEATHER_STRONG_WINDS;
+            PrepareStringBattle(STRINGID_STRONGWINDSDISSIPATED, gActiveBattler);
+            gBattleCommunication[MSG_DISPLAY] = 1;
+        }
+        break;
     }
     }
 

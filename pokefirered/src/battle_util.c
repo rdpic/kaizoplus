@@ -158,6 +158,20 @@ static void ForewarnChooseMove(u32 battler)
     Free(data);
 }
 
+static bool32 TryChangeBattleTerrain(u32 battler, u32 statusFlag, u8 *timer)
+{
+    if (!(gFieldStatuses & statusFlag))
+    {
+        gFieldStatuses &= ~(STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN);
+        gFieldStatuses |= statusFlag;
+        *timer = 5;
+        gBattleScripting.battler = battler;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 u16 GetUsedHeldItem(u32 battler)
 {
     return gBattleStruct->usedHeldItems[gActiveBattler];
@@ -2419,6 +2433,34 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     effect++;
                 }
                 break;
+            case ABILITY_ELECTRIC_SURGE:
+                if (TryChangeBattleTerrain(battler, STATUS_FIELD_ELECTRIC_TERRAIN, &gFieldTimers.electricTerrainTimer))
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_ElectricSurgeActivates);
+                    effect++;
+                }
+                break;
+            case ABILITY_PSYCHIC_SURGE:
+                if (TryChangeBattleTerrain(battler, STATUS_FIELD_PSYCHIC_TERRAIN, &gFieldTimers.psychicTerrainTimer))
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_PsychicSurgeActivates);
+                    effect++;
+                }
+                break;
+            case ABILITY_MISTY_SURGE:
+                if (TryChangeBattleTerrain(battler, STATUS_FIELD_MISTY_TERRAIN, &gFieldTimers.mistyTerrainTimer))
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_MistySurgeActivates);
+                    effect++;
+                }
+                break;
+            case ABILITY_GRASSY_SURGE:
+                if (TryChangeBattleTerrain(battler, STATUS_FIELD_GRASSY_TERRAIN, &gFieldTimers.grassyTerrainTimer))
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_GrassySurgeActivates);
+                    effect++;
+                }
+                break;
             }
             break;
         case ABILITYEFFECT_ENDTURN: // 1
@@ -3722,7 +3764,134 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;
+            case HOLD_EFFECT_BABIRI:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_STEEL) 
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_ROSELI:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_FAIRY) 
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_CHARTI:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_ROCK) 
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_CHILAN:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_NORMAL)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_CHOPLE:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_FIGHTING)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_COBA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_FLYING)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_COLBUR:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_DARK)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_HABAN:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_DRAGON)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_KASIB:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_GHOST)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_KEBIA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_POISON)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_OCCA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_FIRE)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_PASSHO:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_WATER)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_PAYAPA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_PSYCHIC)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_RINDO:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_GRASS)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_SHUCA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_GROUND)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_TANGA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_BUG)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_WACAN:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_YACHE:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_ICE)
+                {
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
             }
+            
             if (effect != 0)
             {
                 gBattleScripting.battler = battlerId;
@@ -3823,6 +3992,150 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     BattleScriptPushCursor();
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CURED_PROBLEM;
                     gBattlescriptCurrInstr = BattleScript_BerryCureChosenStatusRet;
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_BABIRI:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_STEEL) 
+                {
+                    BattleScriptPushCursor();
+                    gBattlescriptCurrInstr = BattleScript_ResistBerryActivated;
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_ROSELI:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_FAIRY) 
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_CHARTI:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_ROCK) 
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_CHILAN:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_NORMAL)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_CHOPLE:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_FIGHTING)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_COBA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_FLYING)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_COLBUR:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_DARK)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_HABAN:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_DRAGON)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_KASIB:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_GHOST)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_KEBIA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_POISON)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_OCCA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_FIRE)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_PASSHO:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_WATER)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_PAYAPA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_PSYCHIC)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_RINDO:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_GRASS)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_SHUCA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_GROUND)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_TANGA:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_BUG)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_WACAN:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
+                    effect = ITEM_EFFECT_OTHER;
+                }
+                break;
+            case HOLD_EFFECT_YACHE:
+                if (TARGET_TURN_DAMAGED && gBattleMoves[gCurrentMove].type == TYPE_ICE)
+                {
+                    BattleScriptPushCursor();
+                    BattleScriptExecute(BattleScript_ResistBerryActivated);
                     effect = ITEM_EFFECT_OTHER;
                 }
                 break;

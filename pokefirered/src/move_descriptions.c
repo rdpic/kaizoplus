@@ -612,6 +612,8 @@ const u8 gMoveDescription_OriginPulse[] = _("Beams of glowing\nblue light blast\
 const u8 gMoveDescription_PrecipiceBlades[] = _("Fearsome blades of\nstone attack\nboth foes. (P)");
 const u8 gMoveDescription_DragonAscent[] = _("A strong attack\nbut lowers the\ndefensive stats.\n(P)");
 const u8 gMoveDescription_LightOfRuin[] = _("Fires a great\nbeam of light\nthat also hurts\nthe user. (Sp)");
+const u8 gMoveDescription_AquaCutter[] = _("Pressurized water\ncut with a\nhigh crit ratio.\n(P)");
+
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -1222,4 +1224,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_PRECIPICE_BLADES - 1] = gMoveDescription_PrecipiceBlades,
     [MOVE_DRAGON_ASCENT - 1] = gMoveDescription_DragonAscent,
     [MOVE_LIGHT_OF_RUIN - 1] = gMoveDescription_LightOfRuin,
+    [MOVE_AQUA_CUTTER - 1] = gMoveDescription_AquaCutter,
     };
