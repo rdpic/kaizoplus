@@ -33,30 +33,7 @@ local function KaizoXYZExtension()
 	}
 
 	-- local DEBUG_MESSAGES_ON = false
-
-	-- Returns true if the Tracker code supports this Kaizo XYZ rom hack
-	function self.checkIfTrackerVersionSupported()
-		if GameSettings and GameSettings.RomHackSupport and GameSettings.RomHackSupport.KaizoXYZ then
-			return true
-		end
-
-		self.isKaizoXYZ = false
-
-		if self.allowWarningPopup then
-			-- Pop up a delayed warning to notify that the current tracker needs updating to use this extension
-			-- Also disable this extension to prevent future warnings
-			Program.addFrameCounter("KaizoXYZWarning", 5, function()
-				local warningMessage = string.format("The Kaizo XYZ extension requires Tracker %s or higher.\n\nPlease update your Tracker before using this extension.", self.requiredVersion)
-				Main.DisplayError(warningMessage, "Update", function()
-					Program.changeScreenView(UpdateScreen)
-					if Main.IsOnBizhawk() then client.unpause() end
-				end)
-				CustomCode.disableExtension(self.extensionKey or "KaizoXYZExtension")
-			end, 1)
-		end
-		return false
-	end
-
+	
 	-- Returns true if the loaded game rom is a Kaizo XYZ game rom
 	function self.checkIfKaizoXYZROM()
 		local kaizoXYZMonCount = Memory.read32(self.monCountAddress)
@@ -140,9 +117,6 @@ local function KaizoXYZExtension()
 	-- INTERNAL TRACKER FUNCTIONS
 	-- Executed only once: When the extension is enabled by the user, and/or when the Tracker first starts up, after it loads all other required files and code
 	function self.startup()
-		if not self.checkIfTrackerVersionSupported() then
-			return
-		end
 
         self.isKaizoXYZ = self.checkIfKaizoXYZROM()
         if not self.isKaizoXYZ then
@@ -160,7 +134,6 @@ local function KaizoXYZExtension()
 		self.overrideTrackerSettings()
 		self.overrideCoreTrackerFunctions()
 		self.addUpdateNewData()
-		self.addGameOverInfo()
 	end
 
 	-- Executed only once: When the extension is disabled by the user, necessary to undo any customizations, if able
@@ -174,21 +147,6 @@ local function KaizoXYZExtension()
 
 		-- Force tracker to refresh and reload its scripts, removing all Kaizo XYZ changes
 		Main.forceRestart = true
-
-		-- if DEBUG_MESSAGES_ON then
-		-- 	Utils.printDebug("\nKaizo XYZ extension disabled.")
-		-- end
-		self.removeGameOverInfo()
-	end
-
-	-- Executed when the user clicks the "Check for Updates" button while viewing the extension details within the Tracker's UI
-	function self.checkForUpdates()
-		local versionResponsePattern = '"tag_name":%s+"%w+(%d+%.%d+%.%d+%.?%d*)"' -- matches "1.0" in "tag_name": "v1.0"
-		local versionCheckUrl = string.format("https://api.github.com/repos/%s/releases/latest", self.github or "")
-		local downloadUrl = string.format("%s/releases/latest", self.url or "")
-		local compareFunc = function(a, b) return a ~= b and not Utils.isNewerVersion(a, b) end -- if current version is *older* than online version
-		local isUpdateAvailable = Utils.checkForVersionUpdate(versionCheckUrl, self.version, versionResponsePattern, compareFunc)
-		return isUpdateAvailable, downloadUrl
 	end
 
 	-- KAIZO XYZ DATA
@@ -7818,41 +7776,9 @@ local function KaizoXYZExtension()
 		Resources.sanitizeTable(Resources.Data)
 	end
 
-	function self.addGameOverInfo()
-		GameOverScreen.Buttons.KaizoXYZVersion = {
-		type = Constants.ButtonTypes.NO_BORDER,
-		-- The location and dimensions of the button {x,y,w,h}; shares space with Retry Battle button.
-		box = { Constants.SCREEN.WIDTH + 80, 7, 32, 16 },
-		-- Text to show on the button
-		getText = function(_thisBtnObj)
-			return string.format("[v%s]", self.version)
-		end,
-		-- Color used for the text only; must pick a color from Theme
-		textColor = "Intermediate text",
-	
-		-- Only display this button if the game ends because the player won
-		isVisible = function(_thisBtnObj)
-			return Main.IsOnBizhawk() and GameOverScreen.status == GameOverScreen.Statuses.WON
-		end,
-		-- Optional code to execute each time the Tracker refreshes data
-		-- updateSelf = function(_thisBtnObj)
-		-- end,
-		-- Optional code to perform an on-click event.
-		-- If this changes something on screen, use `Program.redraw(true)` to refresh immediately
-		-- onClick = function(_thisBtnObj)
-		-- end,
-		}
-	end
-
-	function self.removeGameOverInfo()
-		GameOverScreen.Buttons.KaizoXYZVersion = nil
-	end
-
 	function self.updatePokeData()
 		local PE = PokemonData.Evolutions
-
-		PokemonData.Addresses.offsetExpYield = 0x1a
-		PokemonData.Addresses.sizeofExpYield = 3
+		
 		PokemonData.Values.EggId = 763
 		PokemonData.Values.GhostId = 764
 		PokemonData.Values.DefaultBaseFriendship = 255
