@@ -13442,9 +13442,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
     [SPECIES_GARCHOMP] =
     {
         .baseHP        = 108,
-        .baseAttack    = 150,
+        .baseAttack    = 200,
         .baseDefense   = 95,
-        .baseSpeed     = 102,
+        .baseSpeed     = 132,
         .baseSpAttack  = 80,
         .baseSpDefense = 85,
         .types = {TYPE_DRAGON, TYPE_GROUND},

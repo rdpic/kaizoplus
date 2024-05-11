@@ -2,13 +2,13 @@ local function KaizoXYZExtension()
 	local self = {
 		version = "1.0.0",
 		name = "Kaizo XYZ",
-		author = "Kuroe, UTDZac",
+		author = "Kuroe, Cyan, UTDZac",
 		description = "Extension that allows for compatibility with the Fire Red Kaizo XYZ ROM hack.",
 		github = "rdpic/kaizoplus", -- Replace "MyUsername" and "ExtensionRepo" to match your GitHub repo url, if any
 
 		requiredVersion = "v8.5.0", -- minimum Tracker version required to use this extension with full support
 		extensionKey = "KaizoXYZExtension", -- matches the name of this file, used for enabling/disabling this extension
-    	isNatDex = false, -- a stored verification check if this game rom is a nat. dex game rom
+    	isKaizoXYZ = false, -- a stored verification check if this game rom is a kaizo xyz game rom
 		allowWarningPopup = true, -- if tracker doesn't support this extension, popup a warning
 		monCountAddress = 0x08000170,
 	}
@@ -23,29 +23,29 @@ local function KaizoXYZExtension()
 		PokemonSprites = {
 			folderNames = { "kaizoxyz", "sprites_mons", }, -- ordered; to create the folder path
 			fileType = ".png",
-			builtPath = "/",  -- path to new nat. dex "pokemon" icon sprites, built later in startup()
+			builtPath = "/",  -- path to new kaizo xyz "pokemon" icon sprites, built later in startup()
 		},
 		TypeSprites = {
 			folderNames = { "kaizoxyz", "sprites_types", }, -- ordered; to create the folder path
 			fileType = ".png",
-			builtPath = "/",  -- path to new nat. dex "type" icon sprites, built later in startup()
+			builtPath = "/",  -- path to new kaizo xyz "type" icon sprites, built later in startup()
 		},
 	}
 
 	-- local DEBUG_MESSAGES_ON = false
 
-	-- Returns true if the Tracker code supports this Nat. Dex rom hack
+	-- Returns true if the Tracker code supports this Kaizo XYZ rom hack
 	function self.checkIfTrackerVersionSupported()
-		if GameSettings and GameSettings.RomHackSupport and GameSettings.RomHackSupport.NatDex then
+		if GameSettings and GameSettings.RomHackSupport and GameSettings.RomHackSupport.KaizoXYZ then
 			return true
 		end
 
-		self.isNatDex = false
+		self.isKaizoXYZ = false
 
 		if self.allowWarningPopup then
 			-- Pop up a delayed warning to notify that the current tracker needs updating to use this extension
 			-- Also disable this extension to prevent future warnings
-			Program.addFrameCounter("NatDexWarning", 5, function()
+			Program.addFrameCounter("KaizoXYZWarning", 5, function()
 				local warningMessage = string.format("The Kaizo XYZ extension requires Tracker %s or higher.\n\nPlease update your Tracker before using this extension.", self.requiredVersion)
 				Main.DisplayError(warningMessage, "Update", function()
 					Program.changeScreenView(UpdateScreen)
@@ -57,10 +57,10 @@ local function KaizoXYZExtension()
 		return false
 	end
 
-	-- Returns true if the loaded game rom is a Nat. Dex game rom
-	function self.checkIfNatDexROM()
+	-- Returns true if the loaded game rom is a Kaizo XYZ game rom
+	function self.checkIfKaizoXYZROM()
 		local kaizoXYZMonCount = Memory.read32(self.monCountAddress)
-		return (kaizoXYZMonCount == 763)
+		return (kaizoXYZMonCount == 762)
     end
 
 	function self.buildExtensionPaths()
@@ -97,8 +97,8 @@ local function KaizoXYZExtension()
 		self.currentGetRandomizerSettingsPath = FileManager.getRandomizerSettingsPath
 		FileManager.getRandomizerSettingsPath = self.overrideGetRandomizerSettingsPath
 
-		self.currentTryLoadFunc = PokemonRevoData.tryLoadData
-		PokemonRevoData.tryLoadData = self.overrideTryLoadRevoData
+		--[[ self.currentTryLoadFunc = PokemonRevoData.tryLoadData
+		PokemonRevoData.tryLoadData = self.overrideTryLoadRevoData ]]
 
 		self.currentDexMapInternalToNational = PokemonData.dexMapInternalToNational
 		PokemonData.dexMapInternalToNational = self.overrideDexMapInternalToNational
@@ -127,16 +127,17 @@ local function KaizoXYZExtension()
 	end
 
 	function self.addUpdateNewData()
-		-- Add new Nat Dex data
+		-- Add new Kaizo XYZ data
 		self.addNewEvoStones()
 		self.addNewEvoDetails()
 		self.addNewPokemonData()
 		self.addNewMoves()
+		self.addNewAbilities()
 		self.addNewTypes()
 		self.addNewSprites()
 		self.addResources()
 
-		-- Update existing data to Nat Dex
+		-- Update existing data to Kaizo XYZ
 		self.updateResources()
 		self.updatePokeData()
 		self.updateMoveData()
@@ -164,16 +165,16 @@ local function KaizoXYZExtension()
 			return
 		end
 
-        self.isNatDex = self.checkIfNatDexROM()
-        if not self.isNatDex then
+        self.isKaizoXYZ = self.checkIfKaizoXYZROM()
+        if not self.isKaizoXYZ then
 			-- if DEBUG_MESSAGES_ON then
-	        --     Utils.printDebug("\nNat. Dex ROM not detected. Extension disabled.")
+	        --     Utils.printDebug("\nKaizo XYZ ROM not detected. Extension disabled.")
 			-- end
             return
 		end
 
 		-- if DEBUG_MESSAGES_ON then
-		-- 	Utils.printDebug("\nNat. Dex ROM detected. Extension enabled.")
+		-- 	Utils.printDebug("\nKaizo XYZ ROM detected. Extension enabled.")
 		-- end
 
 		self.buildExtensionPaths()
@@ -185,18 +186,18 @@ local function KaizoXYZExtension()
 
 	-- Executed only once: When the extension is disabled by the user, necessary to undo any customizations, if able
 	function self.unload()
-		if not self.isNatDex then
+		if not self.isKaizoXYZ then
 			return
 		end
 
 		self.undoOverrideTrackerSettings()
 		self.undoOverrideCoreTrackerFunctions()
 
-		-- Force tracker to refresh and reload its scripts, removing all Nat. Dex changes
+		-- Force tracker to refresh and reload its scripts, removing all Kaizo XYZ changes
 		Main.forceRestart = true
 
 		-- if DEBUG_MESSAGES_ON then
-		-- 	Utils.printDebug("\nNat. Dex extension disabled.")
+		-- 	Utils.printDebug("\nKaizo XYZ extension disabled.")
 		-- end
 		self.removeGameOverInfo()
 	end
@@ -211,7 +212,7 @@ local function KaizoXYZExtension()
 		return isUpdateAvailable, downloadUrl
 	end
 
-	-- NAT DEX DATA
+	-- KAIZO XYZ DATA
 	self.Data = {}
 
 	self.Data.pokeTypesList = {
@@ -271,215 +272,1849 @@ local function KaizoXYZExtension()
 		[649] = "Pawniard"       , [650] = "Bisharp"        , [651] = "Bouffalant"     , [652] = "Rufflet"        , [653] = "Braviary"       ,
 		[654] = "Vullaby"        , [655] = "Mandibuzz"      , [656] = "Heatmor"        , [657] = "Durant"         , [658] = "Deino"          ,
 		[659] = "Zweilous"       , [660] = "Hydreigon"      , [661] = "Larvesta"       , [662] = "Volcarona"      , [663] = "Cobalion"       ,
-		[664] = "Terrakion"      , [665] = "Virizion"       , [666] = "Tornadus"       , [667] = "Thundurus"      , [668] = "Reshiram"       ,
-		[669] = "Zekrom"         , [670] = "Landorus"       , [671] = "Kyurem"         , [672] = "Keldeo"         , [673] = "Meloetta"       ,
-		[674] = "Genesect"       ,
+		[664] = "Terrakion"      , [665] = "Virizion"       , [666] = "Tornadus"       , [667] = "Thundurus"      , [668] = "Landorus"       ,
+		[669] = "Reshiram"       , [670] = "Zekrom"         , [671] = "Kyurem W"       , [672] = "Kyurem B"       , [673] = "Keldeo"         ,
+		[674] = "Meloetta A"     , [675] = "Meloetta P"     , [676] = "Genesect"       ,
 
-		[675] = "Chespin"        , [676] = "Quilladin"      , [677] = "Chesnaught"     , [678] = "Fennekin"       , [679] = "Braixen"        ,
-		[680] = "Delphox"        , [681] = "Froakie"        , [682] = "Frogadier"      , [683] = "Greninja"       , [684] = "Bunnelby"       ,
-		[685] = "Diggersby"      , [686] = "Fletchling"     , [687] = "Fletchinder"    , [688] = "Talonflame"     , [689] = "Scatterbug"     ,
-		[690] = "Spewpa"         , [691] = "Vivillon"       , [692] = "Litleo"         , [693] = "Pyroar"         , [694] = "Flabébé"        ,
-		[695] = "Floette"        , [696] = "Florges"        , [697] = "Skiddo"         , [698] = "Gogoat"         , [699] = "Pancham"        ,
-		[700] = "Pangoro"        , [701] = "Furfrou"        , [702] = "Espurr"         , [703] = "Meowstic"       , [704] = "Honedge"        ,
-		[705] = "Doublade"       , [706] = "Aegislash"      , [707] = "Spritzee"       , [708] = "Aromatisse"     , [709] = "Swirlix"        ,
-		[710] = "Slurpuff"       , [711] = "Inkay"          , [712] = "Malamar"        , [713] = "Binacle"        , [714] = "Barbaracle"     ,
-		[715] = "Skrelp"         , [716] = "Dragalge"       , [717] = "Clauncher"      , [718] = "Clawitzer"      , [719] = "Helioptile"     ,
-		[720] = "Heliolisk"      , [721] = "Tyrunt"         , [722] = "Tyrantrum"      , [723] = "Amaura"         , [724] = "Aurorus"        ,
-		[725] = "Sylveon"        , [726] = "Hawlucha"       , [727] = "Dedenne"        , [728] = "Carbink"        , [729] = "Goomy"          ,
-		[730] = "Sliggoo"        , [731] = "Goodra"         , [732] = "Klefki"         , [733] = "Phantump"       , [734] = "Trevenant"      ,
-		[735] = "Pumpkaboo"      , [736] = "Gourgeist"      , [737] = "Bergmite"       , [738] = "Avalugg"        , [739] = "Noibat"         ,
-		[740] = "Noivern"        , [741] = "Xerneas"        , [742] = "Yveltal"        , [743] = "Zygarde"        , [744] = "Diancie"        ,
-		[745] = "Hoopa"          , [746] = "Volcanion"      ,
-
-		[747] = "Rowlet"         , [748] = "Dartrix"        , [749] = "Decidueye"      , [750] = "Litten"         , [751] = "Torracat"       ,
-		[752] = "Incineroar"     , [753] = "Popplio"        , [754] = "Brionne"        , [755] = "Primarina"      , [756] = "Pikipek"        ,
-		[757] = "Trumbeak"       , [758] = "Toucannon"      , [759] = "Yungoos"        , [760] = "Gumshoos"       , [761] = "Grubbin"        ,
-		[762] = "Charjabug"      , [763] = "Vikavolt"       , [764] = "Crabrawler"     , [765] = "Crabominable"   , [766] = "Oricorio"       ,
-		[767] = "Cutiefly"       , [768] = "Ribombee"       , [769] = "Rockruff"       , [770] = "Lycanroc"       , [771] = "Wishiwashi"     ,
-		[772] = "Mareanie"       , [773] = "Toxapex"        , [774] = "Mudbray"        , [775] = "Mudsdale"       , [776] = "Dewpider"       ,
-		[777] = "Araquanid"      , [778] = "Fomantis"       , [779] = "Lurantis"       , [780] = "Morelull"       , [781] = "Shiinotic"      ,
-		[782] = "Salandit"       , [783] = "Salazzle"       , [784] = "Stufful"        , [785] = "Bewear"         , [786] = "Bounsweet"      ,
-		[787] = "Steenee"        , [788] = "Tsareena"       , [789] = "Comfey"         , [790] = "Oranguru"       , [791] = "Passimian"      ,
-		[792] = "Wimpod"         , [793] = "Golisopod"      , [794] = "Sandygast"      , [795] = "Palossand"      , [796] = "Pyukumuku"      ,
-		[797] = "Type: Null"     , [798] = "Silvally"       , [799] = "Minior"         , [800] = "Komala"         , [801] = "Turtonator"     ,
-		[802] = "Togedemaru"     , [803] = "Mimikyu"        , [804] = "Bruxish"        , [805] = "Drampa"         , [806] = "Dhelmise"       ,
-		[807] = "Jangmo-o"       , [808] = "Hakamo-o"       , [809] = "Kommo-o"        , [810] = "Tapu Koko"      , [811] = "Tapu Lele"      ,
-		[812] = "Tapu Bulu"      , [813] = "Tapu Fini"      , [814] = "Cosmog"         , [815] = "Cosmoem"        , [816] = "Solgaleo"       ,
-		[817] = "Lunala"         , [818] = "Nihilego"       , [819] = "Buzzwole"       , [820] = "Pheromosa"      , [821] = "Xurkitree"      ,
-		[822] = "Celesteela"     , [823] = "Kartana"        , [824] = "Guzzlord"       , [825] = "Necrozma"       , [826] = "Magearna"       ,
-		[827] = "Marshadow"      , [828] = "Poipole"        , [829] = "Naganadel"      , [830] = "Stakataka"      , [831] = "Blacephalon"    ,
-		[832] = "Zeraora"        , [833] = "Meltan"         , [834] = "Melmetal"       ,
-
-		[835] = "Grookey"        , [836] = "Thwackey"       , [837] = "Rillaboom"      , [838] = "Scorbunny"      , [839] = "Raboot"         ,
-		[840] = "Cinderace"      , [841] = "Sobble"         , [842] = "Drizzile"       , [843] = "Inteleon"       , [844] = "Skwovet"        ,
-		[845] = "Greedent"       , [846] = "Rookidee"       , [847] = "Corvisquire"    , [848] = "Corviknight"    , [849] = "Blipbug"        ,
-		[850] = "Dottler"        , [851] = "Orbeetle"       , [852] = "Nickit"         , [853] = "Thievul"        , [854] = "Gossifleur"     ,
-		[855] = "Eldegoss"       , [856] = "Wooloo"         , [857] = "Dubwool"        , [858] = "Chewtle"        , [859] = "Drednaw"        ,
-		[860] = "Yamper"         , [861] = "Boltund"        , [862] = "Rolycoly"       , [863] = "Carkol"         , [864] = "Coalossal"      ,
-		[865] = "Applin"         , [866] = "Flapple"        , [867] = "Appletun"       , [868] = "Silicobra"      , [869] = "Sandaconda"     ,
-		[870] = "Cramorant"      , [871] = "Arrokuda"       , [872] = "Barraskewda"    , [873] = "Toxel"          , [874] = "Toxtricity"     ,
-		[875] = "Sizzlipede"     , [876] = "Centiskorch"    , [877] = "Clobbopus"      , [878] = "Grapploct"      , [879] = "Sinistea"       ,
-		[880] = "Polteageist"    , [881] = "Hatenna"        , [882] = "Hattrem"        , [883] = "Hatterene"      , [884] = "Impidimp"       ,
-		[885] = "Morgrem"        , [886] = "Grimmsnarl"     , [887] = "Obstagoon"      , [888] = "Perrserker"     , [889] = "Cursola"        ,
-		[890] = "Sirfetch'd"     , [891] = "Mr. Rime"       , [892] = "Runerigus"      , [893] = "Milcery"        , [894] = "Alcremie"       ,
-		[895] = "Falinks"        , [896] = "Pincurchin"     , [897] = "Snom"           , [898] = "Frosmoth"       , [899] = "Stonjourner"    ,
-		[900] = "Eiscue"         , [901] = "Indeedee"       , [902] = "Morpeko"        , [903] = "Cufant"         , [904] = "Copperajah"     ,
-		[905] = "Dracozolt"      , [906] = "Arctozolt"      , [907] = "Dracovish"      , [908] = "Arctovish"      , [909] = "Duraludon"      ,
-		[910] = "Dreepy"         , [911] = "Drakloak"       , [912] = "Dragapult"      , [913] = "Zacian"         , [914] = "Zamazenta"      ,
-		[915] = "Eternatus"      , [916] = "Kubfu"          , [917] = "Urshifu"        , [918] = "Zarude"         , [919] = "Regieleki"      ,
-		[920] = "Regidrago"      , [921] = "Glastrier"      , [922] = "Spectrier"      , [923] = "Calyrex"        , [924] = "Wyrdeer"        ,
-		[925] = "Kleavor"        , [926] = "Ursaluna"       , [927] = "Basculegion"    , [928] = "Sneasler"       , [929] = "Overqwil"       ,
-		[930] = "Enamorus"       ,
-
-		[931] = "Sprigatito"     , [932] = "Floragato"      , [933] = "Meowscarada"    , [934] = "Fuecoco"        , [935] = "Crocalor"       ,
-		[936] = "Skeledirge"     , [937] = "Quaxly"         , [938] = "Quaxwell"       , [939] = "Quaquaval"      , [940] = "Lechonk"        ,
-		[941] = "Oinkologne"     , [942] = "Tarountula"     , [943] = "Spidops"        , [944] = "Nymble"         , [945] = "Lokix"          ,
-		[946] = "Pawmi"          , [947] = "Pawmo"          , [948] = "Pawmot"         , [949] = "Tandemaus"      , [950] = "Maushold"       ,
-		[951] = "Fidough"        , [952] = "Dachsbun"       , [953] = "Smoliv"         , [954] = "Dolliv"         , [955] = "Arboliva"       ,
-		[956] = "Squawkabilly"   , [957] = "Nacli"          , [958] = "Naclstack"      , [959] = "Garganacl"      , [960] = "Charcadet"      ,
-		[961] = "Armarouge"      , [962] = "Ceruledge"      , [963] = "Tadbulb"        , [964] = "Bellibolt"      , [965] = "Wattrel"        ,
-		[966] = "Kilowattrel"    , [967] = "Maschiff"       , [968] = "Mabosstiff"     , [969] = "Shroodle"       , [970] = "Grafaiai"       ,
-		[971] = "Bramblin"       , [972] = "Brambleghast"   , [973] = "Toedscool"      , [974] = "Toedscruel"     , [975] = "Klawf"          ,
-		[976] = "Capsakid"       , [977] = "Scovillain"     , [978] = "Rellor"         , [979] = "Rabsca"         , [980] = "Flittle"        ,
-		[981] = "Espathra"       , [982] = "Tinkatink"      , [983] = "Tinkatuff"      , [984] = "Tinkaton"       , [985] = "Wiglett"        ,
-		[986] = "Wugtrio"        , [987] = "Bombirdier"     , [988] = "Finizen"        , [989] = "Palafin"        , [990] = "Varoom"         ,
-		[991] = "Revavroom"      , [992] = "Cyclizar"       , [993] = "Orthworm"       , [994] = "Glimmet"        , [995] = "Glimmora"       ,
-		[996] = "Greavard"       , [997] = "Houndstone"     , [998] = "Flamigo"        , [999] = "Cetoddle"       , [1000] = "Cetitan"       ,
-		[1001] = "Veluza"        , [1002] = "Dondozo"       , [1003] = "Tatsugiri"     , [1004] = "Annihilape"    , [1005] = "Clodsire"      ,
-		[1006] = "Farigiraf"     , [1007] = "Dudunsparce"   , [1008] = "Kingambit"     , [1009] = "Great Tusk"    , [1010] = "Scream Tail"   ,
-		[1011] = "Brute Bonnet"  , [1012] = "Flutter Mane"  , [1013] = "Slither Wing"  , [1014] = "Sandy Shocks"  , [1015] = "Iron Treads"   ,
-		[1016] = "Iron Bundle"   , [1017] = "Iron Hands"    , [1018] = "Iron Jugulis"  , [1019] = "Iron Moth"     , [1020] = "Iron Thorns"   ,
-		[1021] = "Frigibax"      , [1022] = "Arctibax"      , [1023] = "Baxcalibur"    , [1024] = "Gimmighoul"    , [1025] = "Gholdengo"     ,
-		[1026] = "Wo-Chien"      , [1027] = "Chien-Pao"     , [1028] = "Ting-Lu"       , [1029] = "Chi-Yu"        , [1030] = "Roaring Moon"  ,
-		[1031] = "Iron Valiant"  , [1032] = "Koraidon"      , [1033] = "Miraidon"      , [1034] = "Walking Wake"  , [1035] = "Iron Leaves"   ,
-		[1036] = "Dipplin"       , [1037] = "Poltchageist"  , [1038] = "Sinistcha"     , [1039] = "Okidogi"       , [1040] = "Munkidori"     ,
-		[1041] = "Fezandipiti"   , [1042] = "Ogerpon"       , [1043] = "Archaludon"    , [1044] = "Hydrapple"     , [1045] = "Gouging Fire"  ,
-		[1046] = "Raging Bolt"   , [1047] = "Iron Boulder"  , [1048] = "Iron Crown"    , [1049] = "Terapagos"     , [1050] = "Pecharunt"     ,
-
-		[1051] = "Venusaur M"    , [1052] = "Charizard X"   , [1053] = "Charizard Y"   , [1054] = "Blastoise M"   , [1055] = "Beedrill M"    ,
-		[1056] = "Pidgeot M"     , [1057] = "Alakazam M"    , [1058] = "Slowbro M"     , [1059] = "Gengar M"      , [1060] = "Kangaskhan M"  ,
-		[1061] = "Pinsir M"      , [1062] = "Gyarados M"    , [1063] = "Aerodactyl M"  , [1064] = "Mewtwo X"      , [1065] = "Mewtwo Y"      ,
-		[1066] = "Ampharos M"    , [1067] = "Steelix M"     , [1068] = "Scizor M"      , [1069] = "Heracross M"   , [1070] = "Houndoom M"    ,
-		[1071] = "Tyranitar M"   , [1072] = "Sceptile M"    , [1073] = "Blaziken M"    , [1074] = "Swampert M"    , [1075] = "Gardevoir M"   ,
-		[1076] = "Sableye M"     , [1077] = "Mawile M"      , [1078] = "Aggron M"      , [1079] = "Medicham M"    , [1080] = "Manectric M"   ,
-		[1081] = "Sharpedo M"    , [1082] = "Camerupt M"    , [1083] = "Altaria M"     , [1084] = "Banette M"     , [1085] = "Absol M"       ,
-		[1086] = "Glalie M"      , [1087] = "Salamence M"   , [1088] = "Metagross M"   , [1089] = "Latias M"      , [1090] = "Latios M"      ,
-		[1091] = "Lopunny M"     , [1092] = "Garchomp M"    , [1093] = "Lucario M"     , [1094] = "Abomasnow M"   , [1095] = "Gallade M"     ,
-		[1096] = "Audino M"      , [1097] = "Diancie M"     , [1098] = "Rayquaza M"    , [1099] = "Kyogre P"      , [1100] = "Groudon P"     ,
-
-		[1101] = "Rattata A"     , [1102] = "Raticate A"    , [1103] = "Raichu A"      , [1104] = "Sandshrew A"   , [1105] = "Sandslash A"   ,
-		[1106] = "Vulpix A"      , [1107] = "Ninetales A"   , [1108] = "Diglett A"     , [1109] = "Dugtrio A"     , [1110] = "Meowth A"      ,
-		[1111] = "Persian A"     , [1112] = "Geodude A"     , [1113] = "Graveler A"    , [1114] = "Golem A"       , [1115] = "Grimer A"      ,
-		[1116] = "Muk A"         , [1117] = "Exeggutor A"   , [1118] = "Marowak A"     , [1119] = "Meowth G"      , [1120] = "Ponyta G"      ,
-		[1121] = "Rapidash G"    , [1122] = "Slowpoke G"    , [1123] = "Slowbro G"     , [1124] = "Farfetch'd G"  , [1125] = "Weezing G"     ,
-		[1126] = "Mr. Mime G"    , [1127] = "Articuno G"    , [1128] = "Zapdos G"      , [1129] = "Moltres G"     , [1130] = "Slowking G"    ,
-		[1131] = "Corsola G"     , [1132] = "Zigzagoon G"   , [1133] = "Linoone G"     , [1134] = "Darumaka G"    , [1135] = "Darmanitan G"  ,
-		[1136] = "Yamask G"      , [1137] = "Stunfisk G"    , [1138] = "Growlithe H"   , [1139] = "Arcanine H"    , [1140] = "Voltorb H"     ,
-		[1141] = "Electrode H"   , [1142] = "Typhlosion H"  , [1143] = "Qwilfish H"    , [1144] = "Sneasel H"     , [1145] = "Samurott H"    ,
-		[1146] = "Lilligant H"   , [1147] = "Zorua H"       , [1148] = "Zoroark H"     , [1149] = "Braviary H"    , [1150] = "Sliggoo H"     ,
-		[1151] = "Goodra H"      , [1152] = "Avalugg H"     , [1153] = "Decidueye H"   , [1154] = "Tauros P"      , [1155] = "Wooper P"      ,
-
-		[1156] = "Pikachu C"     , [1157] = "Pikachu P"     , [1158] = "Tauros P F"    , [1159] = "Tauros P W"    , [1160] = "Eevee P"       ,
-		[1161] = "Pichu S"       , [1162] = "Castform F"    , [1163] = "Castform W"    , [1164] = "Castform I"    , [1165] = "Deoxys Atk"    ,
-		[1166] = "Deoxys Def"    , [1167] = "Deoxys Spe"    , [1168] = "Burmy S"       , [1169] = "Burmy T"       , [1170] = "Wormadam S"    ,
-		[1171] = "Wormadam T"    , [1172] = "Cherrim S"     , [1173] = "Rotom Heat"    , [1174] = "Rotom Wash"    , [1175] = "Rotom Frost"   ,
-		[1176] = "Rotom Fan"     , [1177] = "Rotom Mow"     , [1178] = "Dialga O"      , [1179] = "Palkia O"      , [1180] = "Giratina O"    ,
-		[1181] = "Shaymin S"     , [1182] = "Basculin B"    , [1183] = "Basculin W"    , [1184] = "Darmanitan Z"  , [1185] = "Darmanitan Z G",
-		[1186] = "Tornadus T"    , [1187] = "Thundurus T"   , [1188] = "Landorus T"    , [1189] = "Kyurem W"      , [1190] = "Kyurem B"      ,
-		[1191] = "Meloetta P"    , [1192] = "Greninja A"    , [1193] = "Floette E"     , [1194] = "Meowstic F"    , [1195] = "Aegislash B"   ,
-	    [1196] = "Pumpkaboo S"   , [1197] = "Pumpkaboo L"   , [1198] = "Pumpkaboo X"   , [1199] = "Gourgeist S"   , [1200] = "Gourgeist L"   ,
-		[1201] = "Gourgeist X"   , [1202] = "Zygarde 10"    , [1203] = "Zygarde C"     , [1204] = "Hoopa U"       , [1205] = "Oricorio E"    ,
-		[1206] = "Oricorio P"    , [1207] = "Oricorio G"    , [1208] = "Lycanroc M"    , [1209] = "Lycanroc D"    , [1210] = "Wishiwashi S"  ,
-		[1211] = "Minior C"      , [1212] = "Necrozma DM"   , [1213] = "Necrozma DW"   , [1214] = "Necrozma U"    , [1215] = "Toxtricity L"  ,
-		[1216] = "Eiscue N"      , [1217] = "Indeedee F"    , [1218] = "Morpeko H"     , [1219] = "Zacian C"      , [1220] = "Zamazenta C"   ,
-		[1221] = "Eternatus E"   , [1222] = "Urshifu R"     , [1223] = "Calyrex I"     , [1224] = "Calyrex S"     , [1225] = "Ursaluna B"    ,
-		[1226] = "Basculegion F" , [1227] = "Enamorus T"    , [1228] = "Oinkologne F"  , [1229] = "Palafin H"     , [1230] = "Gimmighoul R"  ,
-		[1231] = "Ogerpon W"     , [1232] = "Ogerpon F"     , [1233] = "Ogerpon R"     , [1234] = "Terapagos T"   , [1235] = "Terapagos S"   ,
+		[677] = "Chespin"        , [678] = "Quilladin"      , [679] = "Chesnaught"     , [680] = "Fennekin"       , [681] = "Braixen"        ,
+		[682] = "Delphox"        , [683] = "Froakie"        , [684] = "Frogadier"      , [685] = "Greninja"       , [686] = "Bunnelby"       ,
+		[687] = "Diggersby"      , [688] = "Fletchling"     , [689] = "Fletchinder"    , [690] = "Talonflame"     , [691] = "Scatterbug"     ,
+		[692] = "Spewpa"         , [693] = "Vivillon"       , [694] = "Litleo"         , [695] = "Pyroar"         , [696] = "Flabébé"        ,
+		[697] = "Floette"        , [698] = "Florges"        , [699] = "Skiddo"         , [700] = "Gogoat"         , [701] = "Pancham"        ,
+		[702] = "Pangoro"        , [703] = "Furfrou"        , [704] = "Espurr"         , [705] = "Meowstic"       , [706] = "Honedge"        ,
+		[707] = "Doublade"       , [708] = "Aegislash"      , [709] = "Spritzee"       , [710] = "Aromatisse"     , [711] = "Swirlix"        ,
+		[712] = "Slurpuff"       , [713] = "Inkay"          , [714] = "Malamar"        , [715] = "Binacle"        , [716] = "Barbaracle"     ,
+		[717] = "Skrelp"         , [718] = "Dragalge"       , [719] = "Clauncher"      , [720] = "Clawitzer"      , [721] = "Helioptile"     ,
+		[722] = "Heliolisk"      , [723] = "Tyrunt"         , [724] = "Tyrantrum"      , [725] = "Amaura"         , [726] = "Aurorus"        ,
+		[727] = "Sylveon"        , [728] = "Hawlucha"       , [729] = "Dedenne"        , [730] = "Carbink"        , [731] = "Goomy"          ,
+		[732] = "Sliggoo"        , [733] = "Goodra"         , [734] = "Klefki"         , [735] = "Phantump"       , [736] = "Trevenant"      ,
+		[737] = "Pumpkaboo"      , [738] = "Gourgeist"      , [739] = "Bergmite"       , [740] = "Avalugg"        , [741] = "Noibat"         ,
+		[742] = "Noivern"        , [743] = "Xerneas"        , [744] = "Yveltal"        , [745] = "Zygarde"        , [746] = "Diancie"        ,
+		[747] = "Hoopa"          , [748] = "Volcanion"      , [749] = "Primarina"      , [750] = "Golisopod"      , [751] = "Marshadow"      , 
+		[752] = "Dreepy"	     , [753] = "Drakloak"       , [754] = "Dragapult"      , [755] = "Regieleki"      , [756] = "Regidrago"      , 
+		[757] = "Tinkaton"       , [758] = "Flutter Mane"   , [759] = "Iron Valiant"   , [760] = "Charcadet"      , [761] = "Armarouge"      , 
+		[762] = "Ceruledge"      , 
 	}
 
 	self.Data.moveNameList = {
-		[355] = "Disarming Voice",
-		[356] = "Draining Kiss",
-		[357] = "Play Rough",
-		[358] = "Fairy Wind",
-		[359] = "Moonblast",
-		[360] = "Dazzling Gleam",
+		[355] = "Quiver Dance",
+		[356] = "Roost",
+		[357] = "Miracle Eye",
+		[358] = "Wake-Up Slap",
+		[359] = "Hammer Arm",
+		[360] = "Gyro Ball",
+		[361] = "Brine",
+		[362] = "Feint",
+		[363] = "Pluck",
+		[364] = "Acupressure",
+		[365] = "Metal Burst",
+		[366] = "U-Turn",
+		[367] = "Close Combat",
+		[368] = "Payback",
+		[369] = "Assurance",
+		[370] = "Embargo",
+		[371] = "Natural Gift",
+		[372] = "Fling",
+		[373] = "Psycho Shift",
+		[374] = "Trump Card",
+		[375] = "Heal Block",
+		[376] = "Wring Out",
+		[377] = "Power Trick",
+		[378] = "Lucky Chant",
+		[379] = "Me First",
+		[380] = "Copycat",
+		[381] = "Power Swap",
+		[382] = "Guard Swap",
+		[383] = "Heart Swap",
+		[384] = "Aqua Ring",
+		[385] = "Punishment",
+		[386] = "Last Resort",
+		[387] = "Worry Seed",
+		[388] = "Sucker Punch",
+		[389] = "Magnet Rise",
+		[390] = "Flare Blitz",
+		[391] = "Force Palm",
+		[392] = "Aura Sphere",
+		[393] = "Rock Polish",
+		[394] = "Poison Jab",
+		[395] = "Dark Pulse",
+		[396] = "Night Slash",
+		[397] = "Aqua Tail",
+		[398] = "Seed Bomb",
+		[399] = "Air Slash",
+		[400] = "X-Scissor",
+		[401] = "Bug Buzz",
+		[402] = "Dragon Pulse",
+		[403] = "Dragon Rush",
+		[404] = "Power Gem",
+		[405] = "Drain Punch",
+		[406] = "Vacuum Wave",
+		[407] = "Focus Blast",
+		[408] = "Energy Ball",
+		[409] = "Brave Bird",
+		[410] = "Earth Power",
+		[411] = "Switcheroo",
+		[412] = "Giga Impact",
+		[413] = "Nasty Plot",
+		[414] = "Bullet Punch",
+		[415] = "Avalanche",
+		[416] = "Ice Shard",
+		[417] = "Shadow Claw",
+		[418] = "Thunder Fang",
+		[419] = "Ice Fang",
+		[420] = "Fire Fang",
+		[421] = "Shadow Sneak",
+		[422] = "Mud Bomb",
+		[423] = "Psycho Cut",
+		[424] = "Zen Headbutt",
+		[425] = "Mirror Shot",
+		[426] = "Flash Cannon",
+		[427] = "Rock Climb",
+		[428] = "Defog",
+		[429] = "Trick Room",
+		[430] = "Draco Meteor",
+		[431] = "Discharge",
+		[432] = "Lava Plume",
+		[433] = "Leaf Storm",
+		[434] = "Power Whip",
+		[435] = "Rock Wrecker",
+		[436] = "Cross Poison",
+		[437] = "Gunk Shot",
+		[438] = "Iron Head",
+		[439] = "Magnet Bomb",
+		[440] = "Stone Edge",
+		[441] = "Captivate",
+		[442] = "Grass Knot",
+		[443] = "Chatter",
+		[444] = "Judgment",
+		[445] = "Bug Bite",
+		[446] = "Charge Beam",
+		[447] = "Wood Hammer",
+		[448] = "Aqua Jet",
+		[449] = "Attack Order",
+		[450] = "Defend Order",
+		[451] = "Heal Order",
+		[452] = "Head Smash",
+		[453] = "Double Hit",
+		[454] = "Roar of Time",
+		[455] = "Spacial Rend",
+		[456] = "Crush Grip",
+		[457] = "Magma Storm",
+		[458] = "Dark Void",
+		[459] = "Seed Flare",
+		[460] = "Ominous Wind",
+		[461] = "Shadow Force",
+		[462] = "Hone Claws",
+		[463] = "Wide Guard",
+		[464] = "Guard Split",
+		[465] = "Power Split",
+		[466] = "Psyshock",
+		[467] = "Venoshock",
+		[468] = "Autotomize",
+		[469] = "Rage Powder",
+		[470] = "Telekinesis",
+		[471] = "Smack Down",
+		[472] = "Storm Throw",
+		[473] = "Frost Breath",
+		[474] = "Flame Burst",
+		[475] = "Sludge Wave",
+		[476] = "Synchronoise",
+		[477] = "Electro Ball",
+		[478] = "Soak",
+		[479] = "Flame Charge",
+		[480] = "Coil",
+		[481] = "Low Sweep",
+		[482] = "Acid Spray",
+		[483] = "Foul Play",
+		[484] = "Entrainment",
+		[485] = "After You",
+		[486] = "Round",
+		[487] = "Echoed Voice",
+		[488] = "Chip Away",
+		[489] = "Clear Smog",
+		[490] = "Stored Power",
+		[491] = "Quick Guard",
+		[492] = "Ally Switch",
+		[493] = "Scald",
+		[494] = "Shell Smash",
+		[495] = "Hex",
+		[496] = "Shift Gear",
+		[497] = "Incinerate",
+		[498] = "Circle Throw",
+		[499] = "Quash",
+		[500] = "Acrobatics",
+		[501] = "Reflect Type",
+		[502] = "Final Gambit",
+		[503] = "Inferno",
+		[504] = "Water Pledge",
+		[505] = "Fire Pledge",
+		[506] = "Grass Pledge",
+		[507] = "Volt Switch",
+		[508] = "Struggle Bug",
+		[509] = "Bulldoze",
+		[510] = "Dragon Tail",
+		[511] = "Work Up",
+		[512] = "Electroweb",
+		[513] = "Wild Charge",
+		[514] = "Drill Run",
+		[515] = "Dual Chop",
+		[516] = "Heart Stamp",
+		[517] = "Horn Leech",
+		[518] = "Sacred Sword",
+		[519] = "Razor Shell",
+		[520] = "Leaf Tornado",
+		[521] = "Steamroller",
+		[522] = "Cotton Guard",
+		[523] = "Night Daze",
+		[524] = "Psystrike",
+		[525] = "Tail Slap",
+		[526] = "Hurricane",
+		[527] = "Head Charge",
+		[528] = "Gear Grind",
+		[529] = "Searing Shot",
+		[530] = "Techno Blast",
+		[531] = "Relic Song",
+		[532] = "Secret Sword",
+		[533] = "Glaciate",
+		[534] = "Bolt Strike",
+		[535] = "Blue Flare",
+		[536] = "Fiery Dance",
+		[537] = "Freeze Shock",
+		[538] = "Ice Burn",
+		[539] = "Snarl",
+		[540] = "Icicle Crash",
+		[541] = "V-Create",
+		[542] = "Fusion Flare",
+		[543] = "Fusion Bolt",
+		[544] = "Flying Press",
+		[545] = "Mat Block",
+		[546] = "Belch",
+		[547] = "Rototiller",
+		[548] = "Sticky Web",
+		[549] = "Fell Stinger",
+		[550] = "Phantom Force",
+		[551] = "Trick or Treat",
+		[552] = "Noble Roar",
+		[553] = "Parabolic Charge",
+		[554] = "Forest's Curse",
+		[555] = "Petal Blizzard",
+		[556] = "Freeze Dry",
+		[557] = "Disarming Voice",
+		[558] = "Parting Shot",
+		[559] = "Topsy Turvy",
+		[560] = "Draining Kiss",
+		[561] = "Crafty Shield",
+		[562] = "Grassy Terrain",
+		[563] = "Misty Terrain",
+		[564] = "Psychic Terrain",
+		[565] = "Electric Terrain",
+		[566] = "Dazzling Gleam",
+		[567] = "Celebrate",
+		[568] = "Hold Hands",
+		[569] = "Baby-Doll Eyes",
+		[570] = "Nuzzle",
+		[571] = "Hold Back",
+		[572] = "Electrify",
+		[573] = "Play Rough",
+		[574] = "Fairy Wind",
+		[575] = "Moonblast",
+		[576] = "Boomburst",
+		[577] = "Fairy Lock",
+		[578] = "King's Shield",
+		[579] = "Play Nice",
+		[580] = "Confide",
+		[581] = "Diamond Storm",
+		[582] = "Steam Eruption",
+		[583] = "Hyperspace Hole",
+		[584] = "Water Shuriken",
+		[585] = "Mystical Fire",
+		[586] = "Spiky Shield",
+		[587] = "Aromatic Mist",
+		[588] = "Eerie Impulse",
+		[589] = "Venom Drench",
+		[590] = "Geomancy",
+		[591] = "Magnetic Flux",
+		[592] = "Happy Hour",
+		[593] = "Infestation",
+		[594] = "Power-Up Punch",
+		[595] = "Alluring Voice",
+		[596] = "Strange Steam",
+		[597] = "Spirit Break",
+		[598] = "Fleur Cannon",
+		[599] = "Floral Healing",
+		[600] = "Misty Explosion",
+		[601] = "Liquidation",
+		[602] = "Triple Axel",
+		[603] = "Chroma Blades",
+		[604] = "Light Slash",
+		[605] = "Lunar Punch",
+		[606] = "Moon Break",
+		[607] = "Dual Flick",
+		[608] = "Oblivion Wing",
+		[609] = "Thousand Waves",
+		[610] = "Origin Pulse",
+		[611] = "Precipice Blades",
+		[612] = "Dragon Ascent",
+		[613] = "Light of Ruin",
+		[614] = "Aqua Cutter",
 	}
 
-	self.Data.natDexMoveDescriptions = {
+	self.Data.kaizoXYZMoveDescriptions = {
 		[355] = {
-			NameKey = "Disarming Voice",
-			Description = "Deals damage and bypasses accuracy checks to always hit, unless the target is in the semi-invulnerable turn of a move such as Dig or Fly. No effect against Soundproof.",
+			NameKey = "Quiver Dance",
+			Description = "Raises Special Attack and Speed by one stage.",
 		},
 		[356] = {
-			NameKey = "Draining Kiss",
-			Description = "75% of the damage dealt is restored to the user as HP.",
+			NameKey = "Roost",
+			Description = "Restores 50% of the max HP.",
 		},
 		[357] = {
-			NameKey = "Play Rough",
-			Description = "Deals damage and has a 10% chance of lowering the target's Attack stat by one stage.",
+			NameKey = "Miracle Eye",
+			Description = "100% chance to hit for the next move.",
 		},
 		[358] = {
-			NameKey = "Fairy Wind",
-			Description = "Deals damage and has no secondary effect.",
+			NameKey = "Wake-Up Slap",
+			Description = "Deals double damage on sleeping foes, but wakes them up.",
 		},
 		[359] = {
-			NameKey = "Moonblast",
-			Description = "Deals damage and has a 30% chance of lowering the target's Special Attack stat by one stage.",
+			NameKey = "Hammer Arm",
+			Description = "Drops own Speed by one stage.",
 		},
 		[360] = {
-			NameKey = "Dazzling Gleam",
-			Description = "Deals damage to all adjacent opponents.",
+			NameKey = "Gyro Ball",
+			Description = "Deals more damage when slower.",
 		},
+		[361] = {
+			NameKey = "Brine",
+			Description = "Deals double damage if the target is half HP or below.",
+		},
+		[362] = {
+			NameKey = "Feint",
+			Description = "Ignores Protect-like moves.",
+		},
+		[363] = {
+			NameKey = "Pluck",
+			Description = "Steals the foe's held item.",
+		},
+		[364] = {
+			NameKey = "Acupressure",
+			Description = "Raises one random stat by two stages.",
+		},
+		[365] = {
+			NameKey = "Metal Burst",
+			Description = "Deals double the received damage.",
+		},
+		[366] = {
+			NameKey = "U-Turn",
+			Description = "Deals damage, then switches out.",
+		},
+		[367] = {
+			NameKey = "Close Combat",
+			Description = "Drops own Defense and Sp. Defense by one stage.",
+		},
+		[368] = {
+			NameKey = "Payback",
+			Description = "Deals double damage if the user moves last.",
+		},
+		[369] = {
+			NameKey = "Assurance",
+			Description = "Deals double damage if the target has already taken damage.",
+		},
+		[370] = {
+			NameKey = "Embargo",
+			Description = "The target can't use items anymore.",
+		},
+		[371] = {
+			NameKey = "Natural Gift",
+			Description = "Deals damage.",
+		},
+		[372] = {
+			NameKey = "Fling",
+			Description = "Deals damage.",
+		},
+		[373] = {
+			NameKey = "Psycho Shift",
+			Description = "Transfers status condition to the target.",
+		},
+		[374] = {
+			NameKey = "Trump Card",
+			Description = "Deals more damage the less PP it has left.",
+		},
+		[375] = {
+			NameKey = "Heal Block",
+			Description = "The target can't restore HP anymore.",
+		},
+		[376] = {
+			NameKey = "Wring Out",
+			Description = "Deals more damage the more HP the target has left.",
+		},
+		[377] = {
+			NameKey = "Power Trick",
+			Description = "Swaps own Attack and Defense.",
+		},
+		[378] = {
+			NameKey = "Lucky Chant",
+			Description = "Prevents critical hits for 5 turns.",
+		},
+		[379] = {
+			NameKey = "Me First",
+			Description = "Executes the target's move first with 1.5x power.",
+		},
+		[380] = {
+			NameKey = "Copycat",
+			Description = "Mimics the last move used by the target.",
+		},
+		[381] = {
+			NameKey = "Power Swap",
+			Description = "Swaps Attack and Sp. Attack changes with the target.",
+		},
+		[382] = {
+			NameKey = "Guard Swap",
+			Description = "Swaps Defense and Sp. Defense changes with the target.",
+		},
+		[383] = {
+			NameKey = "Heart Swap",
+			Description = "Swaps all stat changes with the target.",
+		},
+		[384] = {
+			NameKey = "Aqua Ring",
+			Description = "Restores 1/16 of max HP every turn.",
+		},
+		[385] = {
+			NameKey = "Punishment",
+			Description = "Deals more damage if the target has stat buffs.",
+		},
+		[386] = {
+			NameKey = "Last Resort",
+			Description = "Can only be used if all other moves have been used.",
+		},
+		[387] = {
+			NameKey = "Worry Seed",
+			Description = "Sets the target's ability to Insomnia.",
+		},
+		[388] = {
+			NameKey = "Sucker Punch",
+			Description = "Hits first if the target is using a damage move.",
+		},
+		[389] = {
+			NameKey = "Magnet Rise",
+			Description = "Immune to Ground moves for 5 turns.",
+		},
+		[390] = {
+			NameKey = "Flare Blitz",
+			Description = "33% recoil.",
+		},
+		[391] = {
+			NameKey = "Force Palm",
+			Description = "30% chance to paralyze the target.",
+		},
+		[392] = {
+			NameKey = "Aura Sphere",
+			Description = "Never misses.",
+		},
+		[393] = {
+			NameKey = "Rock Polish",
+			Description = "Raises Speed by two stages.",
+		},
+		[394] = {
+			NameKey = "Poison Jab",
+			Description = "30% chance to poison the target.",
+		},
+		[395] = {
+			NameKey = "Dark Pulse",
+			Description = "20% chance to make the target flinch.",
+		},
+		[396] = {
+			NameKey = "Night Slash",
+			Description = "High crit ratio.",
+		},
+		[397] = {
+			NameKey = "Aqua Tail",
+			Description = "Deals damage.",
+		},
+		[398] = {
+			NameKey = "Seed Bomb",
+			Description = "Deals damage.",
+		},
+		[399] = {
+			NameKey = "Air Slash",
+			Description = "30% chance to make the target flinch.",
+		},
+		[400] = {
+			NameKey = "X-Scissor",
+			Description = "Deals damage.",
+		},
+		[401] = {
+			NameKey = "Bug Buzz",
+			Description = "10% chance to lower Sp. Defense.",
+		},
+		[402] = {
+			NameKey = "Dragon Pulse",
+			Description = "Deals damage.",
+		},
+		[403] = {
+			NameKey = "Dragon Rush",
+			Description = "20% chance to make the target flinch.",
+		},
+		[404] = {
+			NameKey = "Power Gem",
+			Description = "Deals damage.",
+		},
+		[405] = {
+			NameKey = "Drain Punch",
+			Description = "Heals by 50% of the damage dealt.",
+		},
+		[406] = {
+			NameKey = "Vacuum Wave",
+			Description = "+1 priority.",
+		},
+		[407] = {
+			NameKey = "Focus Blast",
+			Description = "10% chance to lower Sp. Defense.",
+		},
+		[408] = {
+			NameKey = "Energy Ball",
+			Description = "10% chance to lower Sp. Defense.",
+		},
+		[409] = {
+			NameKey = "Brave Bird",
+			Description = "Prevents critical hits for 5 turns.",
+		},
+		[410] = {
+			NameKey = "Earth Power",
+			Description = "10% chance to lower Sp. Defense.",
+		},
+		[411] = {
+			NameKey = "Switcheroo",
+			Description = "Swaps items with the target.",
+		},
+		[412] = {
+			NameKey = "Giga Impact",
+			Description = "Skips one turn to recharge.",
+		},
+		[413] = {
+			NameKey = "Nasty Plot",
+			Description = "Raises Sp. Attack by two stages.",
+		},
+		[414] = {
+			NameKey = "Bullet Punch",
+			Description = "+1 priority.",
+		},
+		[415] = {
+			NameKey = "Avalanche",
+			Description = "-4 priority. Deals double damage if hurt.",
+		},
+		[416] = {
+			NameKey = "Ice Shard",
+			Description = "+1 priority.",
+		},
+		[417] = {
+			NameKey = "Shadow Claw",
+			Description = "High crit-ratio.",
+		},
+		[418] = {
+			NameKey = "Thunder Fang",
+			Description = "10% chance to make the target flinch.",
+		},
+		[419] = {
+			NameKey = "Ice Fang",
+			Description = "10% chance to make the target flinch.",
+		},
+		[420] = {
+			NameKey = "Fire Fang",
+			Description = "10% chance to make the target flinch.",
+		},
+		[421] = {
+			NameKey = "Shadow Sneak",
+			Description = "+1 priority.",
+		},
+		[422] = {
+			NameKey = "Mud Bomb",
+			Description = "30% chance to lower accuracy.",
+		},
+		[423] = {
+			NameKey = "Psycho Cut",
+			Description = "High crit ratio.",
+		},
+		[424] = {
+			NameKey = "Zen Headbutt",
+			Description = "20% chance to make the target flinch.",
+		},
+		[425] = {
+			NameKey = "Mirror Shot",
+			Description = "30% chance to lower accuracy.",
+		},
+		[426] = {
+			NameKey = "Flash Cannon",
+			Description = "10% chance to lower Sp. Defense.",
+		},
+		[427] = {
+			NameKey = "Rock Climb",
+			Description = "20% chance to confuse the target.",
+		},
+		[428] = {
+			NameKey = "Defog",
+			Description = "Lowers evasion by two stages.",
+		},
+		[429] = {
+			NameKey = "Trick Room",
+			Description = "Hit order is inverted for 5 turns.",
+		},
+		[430] = {
+			NameKey = "Draco Meteor",
+			Description = "Lowers own Sp. Attack by two stages.",
+		},
+		[431] = {
+			NameKey = "Discharge",
+			Description = "30% chance to paralyze the target.",
+		},
+		[432] = {
+			NameKey = "Lava Plume",
+			Description = "30% chance to burn the target.",
+		},
+		[433] = {
+			NameKey = "Leaf Storm",
+			Description = "Lowers own Sp. Attack by two stages.",
+		},
+		[434] = {
+			NameKey = "Power Whip",
+			Description = "Deals damage.",
+		},
+		[435] = {
+			NameKey = "Rock Wrecker",
+			Description = "Skips one turn to recharge.",
+		},
+		[436] = {
+			NameKey = "Cross Poison",
+			Description = "10% chance to poison the target. High crit ratio.",
+		},
+		[437] = {
+			NameKey = "Gunk Shot",
+			Description = "30% chance to poison the target.",
+		},
+		[438] = {
+			NameKey = "Iron Head",
+			Description = "30% chance to make the target flinch.",
+		},
+		[439] = {
+			NameKey = "Magnet Bomb",
+			Description = "Never misses.",
+		},
+		[440] = {
+			NameKey = "Stone Edge",
+			Description = "High crit ratio.",
+		},
+		[441] = {
+			NameKey = "Captivate",
+			Description = "Lowers Sp. Attack by two stages.",
+		},
+		[442] = {
+			NameKey = "Grass Knot",
+			Description = "Deals more damage the heavier the target is.",
+		},
+		[443] = {
+			NameKey = "Chatter",
+			Description = "100% chance to confuse the target.",
+		},
+		[444] = {
+			NameKey = "Judgment",
+			Description = "Deals damage.",
+		},
+		[445] = {
+			NameKey = "Bug Bite",
+			Description = "Steals the target's held item.",
+		},
+		[446] = {
+			NameKey = "Charge Beam",
+			Description = "70% chance to raise Sp. Attack by one stage.",
+		},
+		[447] = {
+			NameKey = "Wood Hammer",
+			Description = "33% recoil.",
+		},
+		[448] = {
+			NameKey = "Aqua Jet",
+			Description = "+1 priority.",
+		},
+		[449] = {
+			NameKey = "Attack Order",
+			Description = "High crit ratio.",
+		},
+		[450] = {
+			NameKey = "Defend Order",
+			Description = "Raises Defense and Sp. Defense by one stage.",
+		},
+		[451] = {
+			NameKey = "Heal Order",
+			Description = "Restores 50% of max HP.",
+		},
+		[452] = {
+			NameKey = "Head Smash",
+			Description = "50% recoil.",
+		},
+		[453] = {
+			NameKey = "Double Hit",
+			Description = "Hits twice.",
+		},
+		[454] = {
+			NameKey = "Roar of Time",
+			Description = "Skips one turn to recharge.",
+		},
+		[455] = {
+			NameKey = "Spacial Rend",
+			Description = "High crit ratio.",
+		},
+		[456] = {
+			NameKey = "Crush Grip",
+			Description = "Deals more damage the more HP the target has left.",
+		},
+		[457] = {
+			NameKey = "Magma Storm",
+			Description = "Traps the target for 4-5 turns.",
+		},
+		[458] = {
+			NameKey = "Dark Void",
+			Description = "Makes the target sleep.",
+		},
+		[459] = {
+			NameKey = "Seed Flare",
+			Description = "40% chance to lower Sp. Defense by two stages.",
+		},
+		[460] = {
+			NameKey = "Ominous Wind",
+			Description = "10% chance to raise all stats.",
+		},
+		[461] = {
+			NameKey = "Shadow Force",
+			Description = "Two-turn move. Ignores Protect.",
+		},
+		[462] = {
+			NameKey = "Hone Claws",
+			Description = "Raises Attack and accuracy by one stage.",
+		},
+		[463] = {
+			NameKey = "Wide Guard",
+			Description = "Protects the user from all attacks.",
+		},
+		[464] = {
+			NameKey = "Guard Split",
+			Description = "Averages defenses with the target.",
+		},
+		[465] = {
+			NameKey = "Power Split",
+			Description = "Averages attacks with the target.",
+		},
+		[466] = {
+			NameKey = "Psyshock",
+			Description = "Deals physical damage.",
+		},
+		[467] = {
+			NameKey = "Venoshock",
+			Description = "Deals double damage if the target is poisoned.",
+		},
+		[468] = {
+			NameKey = "Autotomize",
+			Description = "Raises Speed by two stages.",
+		},
+		[469] = {
+			NameKey = "Rage Powder",
+			Description = "Draws attention.",
+		},
+		[470] = {
+			NameKey = "Telekinesis",
+			Description = "Lowers evasion by three stages.",
+		},
+		[471] = {
+			NameKey = "Smack Down",
+			Description = "Deals damage.",
+		},
+		[472] = {
+			NameKey = "Storm Throw",
+			Description = "Always crits.",
+		},
+		[473] = {
+			NameKey = "Frost Breath",
+			Description = "Always crits.",
+		},
+		[474] = {
+			NameKey = "Flame Burst",
+			Description = "Deals damage.",
+		},
+		[475] = {
+			NameKey = "Sludge Wave",
+			Description = "10% chance to poison the target.",
+		},
+		[476] = {
+			NameKey = "Synchronoise",
+			Description = "Only lands if the target shares its type with the user.",
+		},
+		[477] = {
+			NameKey = "Electro Ball",
+			Description = "Deals more damage when faster.",
+		},
+		[478] = {
+			NameKey = "Soak",
+			Description = "Makes the target Water-type.",
+		},
+		[479] = {
+			NameKey = "Flame Charge",
+			Description = "Raises Speed by one stage.",
+		},
+		[480] = {
+			NameKey = "Coil",
+			Description = "Raises Attack, Defense and accuracy by one stage.",
+		},
+		[481] = {
+			NameKey = "Low Sweep",
+			Description = "Lowers Speed by one stage.",
+		},
+		[482] = {
+			NameKey = "Acid Spray",
+			Description = "Lowers Sp. Defense by two stages.",
+		},
+		[483] = {
+			NameKey = "Foul Play",
+			Description = "Uses the target's Attack stat.",
+		},
+		[484] = {
+			NameKey = "Entrainment",
+			Description = "Gives own ability to the target.",
+		},
+		[485] = {
+			NameKey = "After You",
+			Description = "Lets the foe move first.",
+		},
+		[486] = {
+			NameKey = "Round",
+			Description = "Deals damage.",
+		},
+		[487] = {
+			NameKey = "Echoed Voice",
+			Description = "Deals more damage if used consecutively.",
+		},
+		[488] = {
+			NameKey = "Chip Away",
+			Description = "Always crits.",
+		},
+		[489] = {
+			NameKey = "Clear Smog",
+			Description = "Resets the target's stat changes.",
+		},
+		[490] = {
+			NameKey = "Stored Power",
+			Description = "Deals more damage if the user has stat changes.",
+		},
+		[491] = {
+			NameKey = "Quick Guard",
+			Description = "Protects the user from all attacks.",
+		},
+		[492] = {
+			NameKey = "Ally Switch",
+			Description = "Swaps positions with the ally.",
+		},
+		[493] = {
+			NameKey = "Scald",
+			Description = "30% chance to burn the target.",
+		},
+		[494] = {
+			NameKey = "Shell Smash",
+			Description = "Raises Attack, Sp. Attack and Speed by two stages. Lowers Defense and Sp. Defense by one stage.",
+		},
+		[495] = {
+			NameKey = "Hex",
+			Description = "Deals double damage if the target has a status condition.",
+		},
+		[496] = {
+			NameKey = "Shift Gear",
+			Description = "Raises Attack by one stage and Speed by two stages.",
+		},
+		[497] = {
+			NameKey = "Incinerate",
+			Description = "Destroys the target's held berry.",
+		},
+		[498] = {
+			NameKey = "Circle Throw",
+			Description = "-6 priority. Forces the target to switch out.",
+		},
+		[499] = {
+			NameKey = "Quash",
+			Description = "Makes the target move last.",
+		},
+		[500] = {
+			NameKey = "Acrobatics",
+			Description = "Deals double damage if the user has no held item.",
+		},
+		[501] = {
+			NameKey = "Reflect Type",
+			Description = "Becomes the target's type.",
+		},
+		[502] = {
+			NameKey = "Final Gambit",
+			Description = "Deals damage equal to current HP and faints.",
+		},
+		[503] = {
+			NameKey = "Inferno",
+			Description = "100% chance to burn the target.",
+		},
+		[504] = {
+			NameKey = "Water Pledge",
+			Description = "Deals damage.",
+		},
+		[505] = {
+			NameKey = "Fire Pledge",
+			Description = "Deals damage.",
+		},
+		[506] = {
+			NameKey = "Grass Pledge",
+			Description = "Deals damage.",
+		},
+		[507] = {
+			NameKey = "Volt Switch",
+			Description = "Deals damage, then switches out.",
+		},
+		[508] = {
+			NameKey = "Struggle Bug",
+			Description = "100% chance to lower Sp. Attack by one stage.",
+		},
+		[509] = {
+			NameKey = "Bulldoze",
+			Description = "100% chance to lower Speed by one stage.",
+		},
+		[510] = {
+			NameKey = "Dragon Tail",
+			Description = "-6 priority. Forces the target to switch out.",
+		},
+		[511] = {
+			NameKey = "Work Up",
+			Description = "Raises Attack and Sp. Attack by one stage.",
+		},
+		[512] = {
+			NameKey = "Electroweb",
+			Description = "100% chance to lower Speed by one stage.",
+		},
+		[513] = {
+			NameKey = "Wild Charge",
+			Description = "25% recoil.",
+		},
+		[514] = {
+			NameKey = "Drill Run",
+			Description = "High crit ratio.",
+		},
+		[515] = {
+			NameKey = "Dual Chop",
+			Description = "Hits twice.",
+		},
+		[516] = {
+			NameKey = "Heart Stamp",
+			Description = "30% chance to make the target flinch.",
+		},
+		[517] = {
+			NameKey = "Horn Leech",
+			Description = "Heals by 50% of the damage dealt.",
+		},
+		[518] = {
+			NameKey = "Sacred Sword",
+			Description = "Always hits. Ignores Defense stat changes.",
+		},
+		[519] = {
+			NameKey = "Razor Shell",
+			Description = "50% chance to lower Defense by one stage.",
+		},
+		[520] = {
+			NameKey = "Leaf Tornado",
+			Description = "50% chance to lower accuracy by one stage.",
+		},
+		[521] = {
+			NameKey = "Steamroller",
+			Description = "30% chance to make the target flinch.",
+		},
+		[522] = {
+			NameKey = "Cotton Guard",
+			Description = "Raised Defense by three stages.",
+		},
+		[523] = {
+			NameKey = "Night Daze",
+			Description = "40% chance to lower accuracy by one stage.",
+		},
+		[524] = {
+			NameKey = "Psystrike",
+			Description = "Deals physical damage.",
+		},
+		[525] = {
+			NameKey = "Tail Slap",
+			Description = "Hits from 2 to 5 times.",
+		},
+		[526] = {
+			NameKey = "Hurricane",
+			Description = "30% chance to confuse the target.",
+		},
+		[527] = {
+			NameKey = "Head Charge",
+			Description = "25% recoil.",
+		},
+		[528] = {
+			NameKey = "Gear Grind",
+			Description = "Hits twice.",
+		},
+		[529] = {
+			NameKey = "Searing Shot",
+			Description = "30% chance to burn the target.",
+		},
+		[530] = {
+			NameKey = "Techno Blast",
+			Description = "Deals damage.",
+		},
+		[531] = {
+			NameKey = "Relic Song",
+			Description = "10% chance to leave the target asleep.",
+		},
+		[532] = {
+			NameKey = "Secret Sword",
+			Description = "Deals physical damage.",
+		},
+		[533] = {
+			NameKey = "Glaciate",
+			Description = "100% chance to lower Speed by one stage.",
+		},
+		[534] = {
+			NameKey = "Bolt Strike",
+			Description = "20% chance to paralyze the target.",
+		},
+		[535] = {
+			NameKey = "Blue Flare",
+			Description = "20% chance to burn the target.",
+		},
+		[536] = {
+			NameKey = "Fiery Dance",
+			Description = "50% chance to raise Sp. Attack by one stage.",
+		},
+		[537] = {
+			NameKey = "Freeze Shock",
+			Description = "Charges one turn, then attacks. 100% chance to paralyze.",
+		},
+		[538] = {
+			NameKey = "Ice Burn",
+			Description = "Charges one turn, then attacks. 100% chance to burn.",
+		},
+		[539] = {
+			NameKey = "Snarl",
+			Description = "100% chance to lower Sp. Attack by one stage.",
+		},
+		[540] = {
+			NameKey = "Icicle Crash",
+			Description = "30% chance to make the target flinch.",
+		},
+		[541] = {
+			NameKey = "V-Create",
+			Description = "Lowers own Defense, Sp. Defense and Speed by one stage.",
+		},
+		[542] = {
+			NameKey = "Fusion Flare",
+			Description = "Deals damage.",
+		},
+		[543] = {
+			NameKey = "Fusion Bolt",
+			Description = "Deals damage.",
+		},
+		[544] = {
+			NameKey = "Flying Press",
+			Description = "It also counts as a Flying-type move.",
+		},
+		[545] = {
+			NameKey = "Mat Block",
+			Description = "Protects the user from all attacks.",
+		},
+		[546] = {
+			NameKey = "Belch",
+			Description = "Deals physical damage.",
+		},
+		[547] = {
+			NameKey = "Rototiller",
+			Description = "Raises Attack and Sp. Attack by one stage.",
+		},
+		[548] = {
+			NameKey = "Sticky Web",
+			Description = "Lowers Speed by two stages.",
+		},
+		[549] = {
+			NameKey = "Fell Stinger",
+			Description = "Raises Attack by two stages on KOs.",
+		},
+		[550] = {
+			NameKey = "Phantom Force",
+			Description = "Two-turn move. Ignores Protect.",
+		},
+		[551] = {
+			NameKey = "Trick or Treat",
+			Description = "Makes the foe Ghost-type.",
+		},
+		[552] = {
+			NameKey = "Noble Roar",
+			Description = "Lowers Attack and Sp. Attack by one stage.",
+		},
+		[553] = {
+			NameKey = "Parabolic Charge",
+			Description = "Heals by 50% of the damage dealt.",
+		},
+		[554] = {
+			NameKey = "Forest's Curse",
+			Description = "Makes the target Grass-type.",
+		},
+		[555] = {
+			NameKey = "Petal Blizzard",
+			Description = "Deals damage.",
+		},
+		[556] = {
+			NameKey = "Freeze Dry",
+			Description = "Supereffective on Water-types. 10% chance to freeze.",
+		},
+		[557] = {
+			NameKey = "Disarming Voice",
+			Description = "Never misses.",
+		},
+		[558] = {
+			NameKey = "Parting Shot",
+			Description = "Lowers Attack and Sp. Attack by one stage, then switches out.",
+		},
+		[559] = {
+			NameKey = "Topsy Turvy",
+			Description = "Inverts the target's stat changes.",
+		},
+		[560] = {
+			NameKey = "Draining Kiss",
+			Description = "Heals by 50% of the damage dealt.",
+		},
+		[561] = {
+			NameKey = "Crafty Shield",
+			Description = "Protects the user from all attacks.",
+		},
+		[562] = {
+			NameKey = "Grassy Terrain",
+			Description = "Sets Grassy Terrain for 5 turns.",
+		},
+		[563] = {
+			NameKey = "Misty Terrain",
+			Description = "Sets Misty Terrain for 5 turns.",
+		},
+		[564] = {
+			NameKey = "Psychic Terrain",
+			Description = "Sets Psychic Terrain for 5 turns.",
+		},
+		[565] = {
+			NameKey = "Electric Terrain",
+			Description = "Sets Electric Terrain for 5 turns.",
+		},
+		[566] = {
+			NameKey = "Dazzling Gleam",
+			Description = "Deals damage.",
+		},
+		[567] = {
+			NameKey = "Celebrate",
+			Description = "Does nothing.",
+		},
+		[568] = {
+			NameKey = "Hold Hands",
+			Description = "Does nothing.",
+		},
+		[569] = {
+			NameKey = "Baby-Doll Eyes",
+			Description = "+1 priority. Lowers Attack by one stage.",
+		},
+		[570] = {
+			NameKey = "Nuzzle",
+			Description = "100% chance to paralyze the target.",
+		},
+		[571] = {
+			NameKey = "Hold Back",
+			Description = "Leaves the target with 1 HP.",
+		},
+		[572] = {
+			NameKey = "Electrify",
+			Description = "Makes the target Electric-type.",
+		},
+		[573] = {
+			NameKey = "Play Rough",
+			Description = "10% chance to lower Attack.",
+		},
+		[574] = {
+			NameKey = "Fairy Wind",
+			Description = "Deals damage.",
+		},
+		[575] = {
+			NameKey = "Moonblast",
+			Description = "30% chance to lower Sp. Attack.",
+		},
+		[576] = {
+			NameKey = "Boomburst",
+			Description = "Deals damage.",
+		},
+		[577] = {
+			NameKey = "Fairy Lock",
+			Description = "Prevents the target from escaping.",
+		},
+		[578] = {
+			NameKey = "King's Shield",
+			Description = "Protects the user and lowers Attack by two stages on contact.",
+		},
+		[579] = {
+			NameKey = "Play Nice",
+			Description = "Lowers Attack by one stage.",
+		},
+		[580] = {
+			NameKey = "Confide",
+			Description = "Lowers Sp. Attack by one stage.",
+		},
+		[581] = {
+			NameKey = "Diamond Storm",
+			Description = "50% chance to raise Defense by one stage.",
+		},
+		[582] = {
+			NameKey = "Steam Eruption",
+			Description = "30% chance to burn the target.",
+		},
+		[583] = {
+			NameKey = "Hyperspace Hole",
+			Description = "Never misses. Ignores Protect.",
+		},
+		[584] = {
+			NameKey = "Water Shuriken",
+			Description = "+1 priority. Hits from 2 to 5 times.",
+		},
+		[585] = {
+			NameKey = "Mystical Fire",
+			Description = "100% chance to lower Sp. Attack by one stage.",
+		},
+		[586] = {
+			NameKey = "Spiky Shield",
+			Description = "Protects the user and deals damage on contact.",
+		},
+		[587] = {
+			NameKey = "Aromatic Mist",
+			Description = "Raises Defense and Sp. Defense by one stage.",
+		},
+		[588] = {
+			NameKey = "Eerie Impulse",
+			Description = "Lowers Sp. Attack by two stages.",
+		},
+		[589] = {
+			NameKey = "Venom Drench",
+			Description = "Lowers Attack, Sp. Attack and Speed by one stage.",
+		},
+		[590] = {
+			NameKey = "Geomancy",
+			Description = "Two-turn move. Raises Sp. Attack, Sp. Defense and Speed by two stages.",
+		},
+		[591] = {
+			NameKey = "Magnetic Flux",
+			Description = "Raises Defense and Sp. Defense by one stage.",
+		},
+		[592] = {
+			NameKey = "Happy Hour",
+			Description = "Does nothing.",
+		},
+		[593] = {
+			NameKey = "Infestation",
+			Description = "Traps the target.",
+		},
+		[594] = {
+			NameKey = "Power-Up Punch",
+			Description = "70% chance to raise Attack by one stage.",
+		},
+		[595] = {
+			NameKey = "Alluring Voice",
+			Description = "30% chance to confuse the target.",
+		},
+		[596] = {
+			NameKey = "Strange Steam",
+			Description = "20% chance to confuse the target.",
+		},
+		[597] = {
+			NameKey = "Spirit Break",
+			Description = "100% chance to lower Sp. Attack by one stage.",
+		},
+		[598] = {
+			NameKey = "Fleur Cannon",
+			Description = "Lowers own Sp. Attack by two stages.",
+		},
+		[599] = {
+			NameKey = "Floral Healing",
+			Description = "Restores 50% of max HP.",
+		},
+		[600] = {
+			NameKey = "Misty Explosion",
+			Description = "Faints the user.",
+		},
+		[601] = {
+			NameKey = "Liquidation",
+			Description = "20% chance to lower Defense by one stage.",
+		},
+		[602] = {
+			NameKey = "Triple Axel",
+			Description = "Hits three times with growing power.",
+		},
+		[603] = {
+			NameKey = "Chroma Blades",
+			Description = "Hits three times with growing power.",
+		},
+		[604] = {
+			NameKey = "Light Slash",
+			Description = "High crit ratio.",
+		},
+		[605] = {
+			NameKey = "Lunar Punch",
+			Description = "10% chance to confuse the target.",
+		},
+		[606] = {
+			NameKey = "Moon Break",
+			Description = "Always crits.",
+		},
+		[607] = {
+			NameKey = "Dual Flick",
+			Description = "Hits twice.",
+		},
+		[608] = {
+			NameKey = "Oblivion Wing",
+			Description = "Heals by 50% of damage dealt.",
+		},
+		[609] = {
+			NameKey = "Thousand Waves",
+			Description = "Deals damage.",
+		},
+		[610] = {
+			NameKey = "Origin Pulse",
+			Description = "Deals damage.",
+		},
+		[611] = {
+			NameKey = "Precipice Blades",
+			Description = "Deals damage.",
+		},
+		[612] = {
+			NameKey = "Dragon Ascent",
+			Description = "Lowers own Defense and Sp. Defense by one stage.",
+		},
+		[613] = {
+			NameKey = "Light of Ruin",
+			Description = "50% recoil.",
+		},
+		[614] = {
+			NameKey = "Aqua Cutter",
+			Description = "High crit ratio.",
+		},
+
 	}
 
-	self.Data.natDexEvoStones = {
+	self.Data.kaizoXYZAbilityDescriptions = {
+
+		[78] = {
+			NameKey = "Motor Drive",
+			Description = "This Pokémon absorbs Electric-type moves to boost its Speed.",
+		},
+		[79] = {
+			NameKey = "Steadfast",
+			Description = "This Pokémon's Speed raises after a flinch.",
+		},
+		[80] = {
+			NameKey = "Snow Cloak",
+			Description = "Increases evasion by 20% in a hailstorm, and this Pokémon takes no end of turn damage in a hailstorm.",
+		},
+		[81] = {
+			NameKey = "Gluttony",
+			Description = "This Pokémon eats berries when its HP reach 50%.",
+		},
+		[82] = {
+			NameKey = "Anger Point",
+			Description = "Suffering a critical hit boosts this Pokémon's Attack to +6.",
+		},
+		[83] = {
+			NameKey = "Unburden",
+			Description = "This Pokémon's Speed doubles after using/losing its hold item.",
+		},
+		[84] = {
+			NameKey = "Heatproof",
+			Description = "This Pokémon suffers half the damage from Fire-type moves and burns.",
+		},
+		[85] = {
+			NameKey = "Simple",
+			Description = "This Pokémon's stat changes are doubled.",
+		},
+		[86] = {
+			NameKey = "Dry Skin",
+			Description = "This Pokémon absorbs Water-type moves to restore HP, but suffers 25% more damage from Fire-type moves.",
+		},
+		[87] = {
+			NameKey = "Iron Fist",
+			Description = "Boosts the power of punching moves by 50%.",
+		},
+		[88] = {
+			NameKey = "Poison Heal",
+			Description = "This Pokémon restores HP at the end of the turn while poisoned.",
+		},
 		[89] = {
-			id = 89,
-			name = "Dubious Disc",
-			--icon = "dubious-disc",
-			pocket = MiscData.BagPocket.Items,
+			NameKey = "Adaptability",
+			Description = "This Pokémon's STAB moves deal 2x the damage instead of 1.5x.",
 		},
 		[90] = {
-			id = 90,
-			name = "Razor Claw",
-			--icon = "razor-claw",
-			pocket = MiscData.BagPocket.Items,
+			NameKey = "Skill Link",
+			Description = "This Pokémon's multi-hit moves always hit 5 times.",
 		},
 		[91] = {
+			NameKey = "Hydration",
+			Description = "This Pokémon heals its status condition under the rain.",
+		},
+		[92] = {
+			NameKey = "Solar Power",
+			Description = "This Pokémon's Sp. Attack raises by 50% under the sun, but the user loses 1/8 HP every end of the turn.",
+		},
+		[93] = {
+			NameKey = "Quick Feet",
+			Description = "This Pokémon's Speed doubles if affected by status conditions.",
+		},
+		[94] = {
+			NameKey = "Normalize",
+			Description = "This Pokémon's moves are Normal-type.",
+		},
+		[95] = {
+			NameKey = "Sniper",
+			Description = "This Pokémon's critical hits deal 3x the damage instead of 2x.",
+		},
+		[96] = {
+			NameKey = "Magic Guard",
+			Description = "This Pokémon only suffers damage by direct hits.",
+		},
+		[97] = {
+			NameKey = "No Guard",
+			Description = "It ensures that all moves hit for both allies and enemies.",
+		},
+		[98] = {
+			NameKey = "Stall",
+			Description = "This Pokémon's Speed is halved.",
+		},
+		[99] = {
+			NameKey = "Technician",
+			Description = "Boosts the power of moves that have power equal or inferior to 60 by 50%.",
+		},
+		[100] = {
+			NameKey = "Mystic Guard",
+			Description = "This Pokémon is immune to primary status conditions.",
+		},
+		[101] = {
+			NameKey = "Klutz",
+			Description = "This Pokémon cannot use hold items.",
+		},
+		[102] = {
+			NameKey = "Mold Breaker",
+			Description = "This Pokémon bypasses all abilities that may influence the damage or effects of its moves during its turn.",
+		},
+		[103] = {
+			NameKey = "Super Luck",
+			Description = "This Pokémon deals critical hits twice more often.",
+		},
+		[104] = {
+			NameKey = "Aftermath",
+			Description = "Upon fainting due to a contact move, this Pokémon deals 25% of the attacker's max HP as damage.",
+		},
+		[105] = {
+			NameKey = "Forewarn",
+			Description = "This Pokémon scouts the foe's most powerful move.",
+		},
+		[106] = {
+			NameKey = "Unaware",
+			Description = "This Pokémon resets the foe's stat changes on hit.",
+		},
+		[107] = {
+			NameKey = "Tinted Lens",
+			Description = "This Pokémon's 'not very effective' moves deal 2x the damage.",
+		},
+		[108] = {
+			NameKey = "Filter",
+			Description = "This Pokémon suffers 25% less damage from super effective moves.",
+		},
+		[109] = {
+			NameKey = "Slow Start",
+			Description = "This Pokémon's Attack and Speed are halved for 5 turns.",
+		},
+		[110] = {
+			NameKey = "Scrappy",
+			Description = "This Pokémon's Normal-type and Fighting-type moves can hit Ghost-type Pokémon.",
+		},
+		[111] = {
+			NameKey = "Storm Drain",
+			Description = "All single-target Water moves are redirected to this Pokémon and boost its Sp. Attack.",
+		},
+		[112] = {
+			NameKey = "Ice Body",
+			Description = "This Pokémon restores 1/16 of its max HP at the end of the turn in a hailstorm.",
+		},
+		[113] = {
+			NameKey = "Solid Rock",
+			Description = "This Pokémon suffers 25% less damage from super effective moves.",
+		},
+		[114] = {
+			NameKey = "Snow Warning",
+			Description = "Changes weather to hail when switched in.",
+		},
+		[115] = {
+			NameKey = "Collector",
+			Description = "After winning a battle, there is a 10% chance that this Pokémon will be holding an item, if it was not already holding one.",
+		},
+		[116] = {
+			NameKey = "Frisk",
+			Description = "This Pokémon scouts the foe's hold item.",
+		},
+		[117] = {
+			NameKey = "Reckless",
+			Description = "Boosts the damage of recoil moves by 50%.",
+		},
+		[118] = {
+			NameKey = "Multitype",
+			Description = "Boosts the power of all moves by 10%.",
+		},
+		[119] = {
+			NameKey = "Flower Gift",
+			Description = "Boosts this Pokémon's Sp. Attack and Sp. Defense by 50% under the sun.",
+		},
+		[120] = {
+			NameKey = "Soul Heart",
+			Description = "KOs may raise this Pokémon's Sp. Attack with a 50% chance.",
+		},
+		[121] = {
+			NameKey = "Moxie",
+			Description = "KOs may raise this Pokémon's Attack with a 70% chance.",
+		},
+		[122] = {
+			NameKey = "Liquid Voice",
+			Description = "Converts this Pokémon's sound moves to Water-type.",
+		},
+		[123] = {
+			NameKey = "Transistor",
+			Description = "Boosts the power of Electric-type moves by 50%.",
+		},
+		[124] = {
+			NameKey = "Dragon's Maw",
+			Description = "Boosts the power of Dragon-type moves by 50%.",
+		},
+		[125] = {
+			NameKey = "Steelworker",
+			Description = "Boosts the power of Steel-type moves by 50%.",
+		},
+		[126] = {
+			NameKey = "Slush Rush",
+			Description = "This Pokémon's Speed is doubled in a hailstorm. The user is immune to hail damage.",
+		},
+		[127] = {
+			NameKey = "Stalwart",
+			Description = "This Pokémon ignores redirections.",
+		},
+		[128] = {
+			NameKey = "Stance Change",
+			Description = "Empty description.",
+		},
+		[129] = {
+			NameKey = "Sheer Force",
+			Description = "Boosts the power of moves with secondary effects by 30% at the cost of their effects.",
+		},
+		[130] = {
+			NameKey = "Defiant",
+			Description = "Prevents stat reductions caused by opposing Pokémon's moves and abilities and raises Attack.",
+		},
+		[131] = {
+			NameKey = "Competitive",
+			Description = "Prevents stat reductions caused by opposing Pokémon's moves and abilities and raises Sp. Attack.",
+		},
+		[132] = {
+			NameKey = "Defeatist",
+			Description = "This Pokémon's Attack and Sp. Attack are halved at half HP and below.",
+		},
+		[133] = {
+			NameKey = "Cursed Body",
+			Description = "May disable the opponent's current move with a 30% chance.",
+		},
+		[134] = {
+			NameKey = "Healer",
+			Description = "This Pokémon may heal its ally's status condition with a 30% chance every end of the turn.",
+		},
+		[135] = {
+			NameKey = "Friend Guard",
+			Description = "Reduces damage taken by allies by 25%.",
+		},
+		[136] = {
+			NameKey = "Weak Armor",
+			Description = "Suffering a physical move will lower this Pokémon's Defense by one stage and raise its Speed by two stages.",
+		},
+		[137] = {
+			NameKey = "Heavy Metal",
+			Description = "This Pokémon's weight is doubled.",
+		},
+		[138] = {
+			NameKey = "Light Metal",
+			Description = "This Pokémon's weight is halved.",
+		},
+		[139] = {
+			NameKey = "Multiscale",
+			Description = "This Pokémon suffers half the damage when full HP.",
+		},
+		[140] = {
+			NameKey = "Toxic Boost",
+			Description = "This Pokémon's Attack is doubled when poisoned.",
+		},
+		[141] = {
+			NameKey = "Flare Boost",
+			Description = "This Pokémon's Sp. Attack is doubled when burned.",
+		},
+		[142] = {
+			NameKey = "Harvest",
+			Description = "This Pokémon may recycle used Berries with a 25% chance.",
+		},
+		[143] = {
+			NameKey = "Telepathy",
+			Description = "This Pokémon avoids damage from allies' moves.",
+		},
+		[144] = {
+			NameKey = "Overcoat",
+			Description = "This Pokémon is immune to weather damage and powder moves.",
+		},
+		[145] = {
+			NameKey = "Poison Touch",
+			Description = "This Pokémon may poison the opponent with a 50% chance upon using a contact move.",
+		},
+		[146] = {
+			NameKey = "Regenerator",
+			Description = "This Pokémon restores 1/3 of its max HP upon switching out.",
+		},
+		[147] = {
+			NameKey = "Big Pecks",
+			Description = "This Pokémon's Defense can't be lowered.",
+		},
+		[148] = {
+			NameKey = "Sand Rush",
+			Description = "This Pokémon's Speed doubles in a sandstorm. The user is immune to sand damage.",
+		},
+		[149] = {
+			NameKey = "Wonder Skin",
+			Description = "Status moves that target this Pokémon have their accuracy lowered by 50%.",
+		},
+		[150] = {
+			NameKey = "Analytic",
+			Description = "Boosts the power of moves by 30% if the user moves last.",
+		},
+		[151] = {
+			NameKey = "Imposter",
+			Description = "This Pokémon transforms into the opponent, copying all of its stats (including changes) except for its HP.",
+		},
+		[152] = {
+			NameKey = "Infiltrator",
+			Description = "This Pokémon ignores Reflect, Light Screen, Mist and Substitute.",
+		},
+		[153] = {
+			NameKey = "Justified",
+			Description = "Suffering Dark-type moves boosts this Pokémon's Attack.",
+		},
+		[154] = {
+			NameKey = "Rattled",
+			Description = "Suffering Dark-type, Ghost-type or Bug-type moves boosts this Pokémon's Speed.",
+		},
+		[155] = {
+			NameKey = "Magic Bounce",
+			Description = "This Pokémon bounces status moves back at the opponent.",
+		},
+		[156] = {
+			NameKey = "Sap Sipper",
+			Description = "This Pokémon absorbs Grass-type moves to raise its Attack.",
+		},
+		[157] = {
+			NameKey = "Prankster",
+			Description = "This Pokémon's Speed is doubled while using status moves.",
+		},
+		[158] = {
+			NameKey = "Sand Force",
+			Description = "Boosts the power of Rock-type, Steel-type and Ground-type moves by 30% in a sandstorm. The user is immune to sand damage.",
+		},
+		[159] = {
+			NameKey = "Iron Barbs",
+			Description = "This Pokémon deals 1/8 of the opponent's max HP as damage upon suffering a contact move.",
+		},
+		[160] = {
+			NameKey = "Zen Mode",
+			Description = "Empty description.",
+		},
+		[161] = {
+			NameKey = "Victory Star",
+			Description = "Raises party accuracy by 10%.",
+		},
+		[162] = {
+			NameKey = "Turboblaze",
+			Description = "This Pokémon bypasses all abilities that may influence the damage or effects of its moves during its turn.",
+		},
+		[163] = {
+			NameKey = "Teravolt",
+			Description = "This Pokémon bypasses all abilities that may influence the damage or effects of its moves during its turn.",
+		},
+		[164] = {
+			NameKey = "Aroma Veil",
+			Description = "This Pokémon is immune to secondary status conditions.",
+		},
+		[165] = {
+			NameKey = "Protean",
+			Description = "This Pokémon switches type to its current move's type.",
+		},
+		[166] = {
+			NameKey = "Fur Coat",
+			Description = "Raises this Pokémon's Defense by 20%.",
+		},
+		[167] = {
+			NameKey = "Pure Mind",
+			Description = "Raises this Pokémon's Sp. Attack by 15%.",
+		},
+		[168] = {
+			NameKey = "Intimidate",
+			Description = "This Pokémon cuts the opponent's Attack upon switching in.",
+		},
+		[169] = {
+			NameKey = "Soul Chill",
+			Description = "This Pokémon cuts the opponent's Sp. Attack upon switching in.",
+		},
+		[170] = {
+			NameKey = "Bulletproof",
+			Description = "This Pokémon is immune to ballistic moves.",
+		},
+		[171] = {
+			NameKey = "Strong Jaw",
+			Description = "Boosts the power of biting moves by 50%.",
+		},
+		[172] = {
+			NameKey = "Refrigerate",
+			Description = "This Pokémon's Normal-type moves become Ice-type.",
+		},
+		[173] = {
+			NameKey = "Sweet Veil",
+			Description = "This Pokémon is immune to sleep.",
+		},
+		[174] = {
+			NameKey = "Gale Wings",
+			Description = "This Pokémon's Speed is doubled while using Flying-type moves.",
+		},
+		[175] = {
+			NameKey = "Mega Launcher",
+			Description = "Boosts the power of pulse moves by 50%.",
+		},
+		[176] = {
+			NameKey = "Aura Barrier",
+			Description = "Raises this Pokémon's Sp. Defense by 20%.",
+		},
+		[177] = {
+			NameKey = "Symbiosis",
+			Description = "This Pokémon transfers its item to its ally.",
+		},
+		[178] = {
+			NameKey = "Tough Claws",
+			Description = "Boosts the power of contact moves by 30%.",
+		},
+		[179] = {
+			NameKey = "Pixilate",
+			Description = "This Pokémon's Normal-type moves become Fairy-type.",
+		},
+		[180] = {
+			NameKey = "Aerilate",
+			Description = "This Pokémon's Normal-type moves become Flying-type.",
+		},
+		[181] = {
+			NameKey = "Gooey",
+			Description = "Lowers the opponent's Speed upon suffering a contact move.",
+		},
+		[182] = {
+			NameKey = "Dark Aura",
+			Description = "Boosts the power of ally and foe Dark-type moves by 33%.",
+		},
+		[183] = {
+			NameKey = "Fairy Aura",
+			Description = "Boosts the power of ally and foe Fairy-type moves by 33%.",
+		},
+		[184] = {
+			NameKey = "Aura Break",
+			Description = "Reverses the effects of Dark Aura and Fairy Aura.",
+		},
+		[185] = {
+			NameKey = "Primordial Sea",
+			Description = "Summons heavy rain upon switching in. It blocks Fire-type moves and boosts the power of Water-type moves by 50%.",
+		},
+		[186] = {
+			NameKey = "Desolate Land",
+			Description = "Summons extremely harsh sunlight upon switching in. It blocks Water-type moves and boosts the power of Fire-type moves by 50%.",
+		},
+		[187] = {
+			NameKey = "Delta Stream",
+			Description = "Summons strong winds upon switching in. It halves Rock-type, Electric-type and Ice-type moves damage on Flying-types and boosts Flying-type moves power by 50%.",
+		},
+		[188] = {
+			NameKey = "Electric Surge",
+			Description = "The terrain becomes Electric upon switching in.",
+		},
+		[189] = {
+			NameKey = "Psychic Surge",
+			Description = "The terrain becomes Psychic upon switching in.",
+		},
+		[190] = {
+			NameKey = "Misty Surge",
+			Description = "The terrain becomes Misty upon switching in.",
+		},
+		[191] = {
+			NameKey = "Grassy Surge",
+			Description = "The terrain becomes Grassy upon switching in.",
+		},
+		[192] = {
+			NameKey = "Neuroforce",
+			Description = "Super effective moves deal 25% more damage.",
+		},
+		[193] = {
+			NameKey = "Harmonics",
+			Description = "Boosts the power of sound moves by 50%.",
+		},
+		[194] = {
+			NameKey = "Galvanize",
+			Description = "This Pokémon's Normal-type moves become Electric-type.",
+		},
+		[195] = {
+			NameKey = "Sharpness",
+			Description = "Boosts the power of slicing moves by 50%.",
+		},
+
+	}
+
+	self.Data.kaizoXYZEvoStones = {
+		[91] = {
 			id = 91,
-			name = "Razor Fang",
-			--icon = "razor-fang",
+			name = "Magmarizer",
+			--icon = "magmarizer",
 			pocket = MiscData.BagPocket.Items,
 		},
 		[92] = {
 			id = 92,
-			name = "Linking Cord",
-			--icon = "linking-cord",
+			name = "Electirizer",
+			--icon = "electirizer",
 			pocket = MiscData.BagPocket.Items,
 		},
 		[99] = {
 			id = 99,
-			name = "Shiny Stone",
-			--icon = "shiny-stone",
-			pocket = MiscData.BagPocket.Items,
-		},
-		[100] = {
-			id = 100,
 			name = "Dusk Stone",
 			--icon = "dusk-stone",
 			pocket = MiscData.BagPocket.Items,
 		},
+		[100] = {
+			id = 100,
+			name = "Shiny Stone",
+			--icon = "shiny-stone",
+			pocket = MiscData.BagPocket.Items,
+		},
 		[101] = {
 			id = 101,
-			name = "Dawn Stone",
-			--icon = "dawn-stone",
+			name = "Ice Stone",
+			--icon = "ice-stone",
 			pocket = MiscData.BagPocket.Items,
 		},
 		[102] = {
 			id = 102,
-			name = "Ice Stone",
-			--icon = "ice-stone",
+			name = "Dubious Disc",
+			--icon = "dubious-disc",
 			pocket = MiscData.BagPocket.Items,
 		},
 		[187] = {
@@ -520,34 +2155,27 @@ local function KaizoXYZExtension()
 		},
 	}
 
-	self.Data.natDexEvoDetails = {
+	self.Data.kaizoXYZEvoDetails = {
 		-- Shiny stone item
 		SHINY = {
 			abbreviation = "SHINY",
 			short = { "Shiny", },
 			detailed = { "Shiny Stone", },
-			evoItemIds = { 99 },
+			evoItemIds = { 100 },
 		},
 		-- Dusk stone item
 		DUSK = {
 			abbreviation = "DUSK",
 			short = { "Dusk", },
 			detailed = { "Dusk Stone", },
-			evoItemIds = { 100 },
-		},
-		-- Dawn stone item
-		DAWN = {
-			abbreviation = "DAWN",
-			short = { "Dawn", },
-			detailed = { "Dawn Stone", },
-			evoItemIds = { 101 },
+			evoItemIds = { 99 },
 		},
 		-- Ice stone item
 		ICE = {
 			abbreviation = "ICE",
 			short = { "Ice", },
 			detailed = { "Ice Stone", },
-			evoItemIds = { 102 },
+			evoItemIds = { 101 },
 		},
 		-- Metal Coat item
 		METAL_COAT = {
@@ -582,28 +2210,7 @@ local function KaizoXYZExtension()
 			abbreviation = "D.DISC",
 			short = { "Dub.Disc", },
 			detailed = { "Dubious Disc", },
-			evoItemIds = { 89 },
-		},
-		-- Razor Claw item
-		RAZOR_CLAW = {
-			abbreviation = "R.CLAW",
-			short = { "Rzr.Claw", },
-			detailed = { "Razor Claw", },
-			evoItemIds = { 90 },
-		},
-		-- Razor Fang item
-		RAZOR_FANG = {
-			abbreviation = "R.FANG",
-			short = { "Rzr.Fang", },
-			detailed = { "Razor Fang", },
-			evoItemIds = { 91 },
-		},
-		-- Linking Cord item
-		LINKING_CORD = {
-			abbreviation = "L.CORD",
-			short = { "Link Crd.", },
-			detailed = { "Linking Cord", },
-			evoItemIds = { 92 },
+			evoItemIds = { 102 },
 		},
 		-- Water or Dusk stone items
 		WATER_DUSK = {
@@ -680,56 +2287,70 @@ local function KaizoXYZExtension()
 			detailed = { "DeepSeaTooth", "DeepSeaScale", },
 			evoItemIds = { 192, 193 },
 		},
+		-- Electirizer
+		ELECTIRIZER = {
+			abbreviation = "ELECT",
+			short = { "Electirizer", },
+			detailed = { "Electirizer", },
+			evoItemIds = { 92, },
+		},
+		-- Magmarizer
+		MAGMARIZER = {
+			abbreviation = "MAGMA",
+			short = { "Magmarizer", },
+			detailed = { "Magmarizer", },
+			evoItemIds = { 91, },
+		},
 		-- Various evolution stone items
-		EEVEE_STONES_NATDEX = {
+		EEVEE_STONES_KAIZOXYZ = {
 			abbreviation = "STONE",
-			short = { "Thunder", "Water", "Fire", "Sun", "Moon", "Leaf", "Ice", "Dawn" },
-			detailed = { "8 Diff. Stones", },
-			evoItemIds = { 93, 94, 95, 96, 97, 98, 102, 101 },
+			short = { "Thunder", "Water", "Fire", "Sun", "Moon" },
+			detailed = { "5 Diff. Stones", },
+			evoItemIds = { 93, 94, 95, 96, 97, },
 		},
 	}
 
-	self.Data.natDexMons = {
+	self.Data.kaizoXYZMons = {
 		{
 			name = "Turtwig",
-			evolution = "18",
+			evolution = "16",
 			bst = 318,
 			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, } },
 			weight = 10.2,
 		},
 		{
 			name = "Grotle",
-			evolution = "32",
+			evolution = "30",
 			bst = 405,
-			movelvls = { { 13, 17, 22, 27, 32, 37, 42, 47, 52, }, { 13, 17, 22, 27, 32, 37, 42, 47, 52, } },
+			movelvls = { { 5, 9, 13, 17, 22, 27, 32, 37, 42, 47, 52, }, { 5, 9, 13, 17, 22, 27, 32, 37, 42, 47, 52, } },
 			weight = 97.0,
 		},
 		{
 			name = "Torterra",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 525,
-			movelvls = { { 17, 22, 27, 33, 39, 45, 51, 57, 63, }, { 17, 22, 27, 33, 39, 45, 51, 57, 63, } },
+			movelvls = { { 5, 9, 13, 17, 24, 31, 35, 41, 47, 53, 57, 61, 66, }, { 5, 9, 13, 17, 24, 31, 35, 41, 47, 53, 57, 61, 66, } },
 			weight = 310.0,
 		},
 		{
 			name = "Chimchar",
-			evolution = "14",
+			evolution = "16",
 			bst = 309,
 			movelvls = { { 7, 9, 15, 17, 23, 25, 31, 33, 39, 41, 47, }, { 7, 9, 15, 17, 23, 25, 31, 33, 39, 41, 47, } },
 			weight = 6.2,
 		},
 		{
 			name = "Monferno",
-			evolution = "36",
+			evolution = "30",
 			bst = 405,
-			movelvls = { { 9, 16, 19, 26, 29, 36, 39, 46, 49, 56, }, { 9, 16, 19, 26, 29, 36, 39, 46, 49, 56, } },
+			movelvls = { { 7, 9, 14, 16, 19, 26, 29, 36, 39, 46, 49, 56, }, { 7, 9, 14, 16, 19, 26, 29, 36, 39, 46, 49, 56, } },
 			weight = 22.0,
 		},
 		{
 			name = "Infernape",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 534,
-			movelvls = { { 16, 19, 26, 29, 42, 47, 52, 58, 65, }, { 16, 19, 26, 29, 42, 47, 52, 58, 65, } },
+			movelvls = { { 7, 9, 14, 18, 22, 26, 30, 36, 42, 52, 58, 68, }, { 7, 9, 14, 18, 22, 26, 30, 36, 42, 52, 58, 68, } },
 			weight = 55.0,
 		},
 		{
@@ -741,16 +2362,16 @@ local function KaizoXYZExtension()
 		},
 		{
 			name = "Prinplup",
-			evolution = "36",
+			evolution = "30",
 			bst = 405,
-			movelvls = { { 15, 19, 24, 28, 33, 37, 42, 46, 50, }, { 15, 19, 24, 28, 33, 37, 42, 46, 50, } },
+			movelvls = { { 4, 8, 11, 15, 16, 19, 24, 28, 33, 37, 42, 46, 50, }, { 4, 8, 11, 15, 16, 19, 24, 28, 33, 37, 42, 46, 50, } },
 			weight = 23.0,
 		},
 		{
 			name = "Empoleon",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 530,
-			movelvls = { { 11, 15, 19, 24, 28, 33, 39, 46, 52, 59, 66, }, { 11, 15, 19, 24, 28, 33, 39, 46, 52, 59, 66, } },
+			movelvls = { { 4, 8, 11, 15, 20, 25, 29, 33, 38, 43, 50, 55, 61, 70, }, { 4, 8, 11, 15, 20, 25, 29, 33, 38, 43, 50, 55, 61, 70, } },
 			weight = 84.5,
 		},
 		{
@@ -762,30 +2383,30 @@ local function KaizoXYZExtension()
 		},
 		{
 			name = "Staravia",
-			evolution = "34",
+			evolution = "22",
 			bst = 340,
-			movelvls = { { 9, 13, 18, 23, 28, 33, 38, 43, 48, }, { 9, 13, 18, 23, 28, 33, 38, 43, 48, } },
+			movelvls = { { 5, 9, 13, 18, 23, 28, 33, 38, 43, 48, }, { 5, 9, 13, 18, 23, 28, 33, 38, 43, 48, } },
 			weight = 15.5,
 		},
 		{
 			name = "Staraptor",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 13, 18, 23, 28, 33, 41, 49, 57, }, { 13, 18, 23, 28, 33, 41, 49, 57, } },
+			bst = 505,
+			movelvls = { { 5, 9, 13, 18, 23, 28, 33, 37, 41, 49, 57, 62, 68, 75, }, { 5, 9, 13, 18, 23, 28, 33, 37, 41, 49, 57, 62, 68, 75, } },
 			weight = 24.9,
 		},
 		{
 			name = "Bidoof",
-			evolution = "15",
+			evolution = "14",
 			bst = 250,
-			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, } },
 			weight = 20.0,
 		},
 		{
 			name = "Bibarel",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 410,
-			movelvls = { { 5, 9, 13, 18, 23, 28, 33, 38, 43, 48, 53, 58, }, { 5, 9, 13, 18, 23, 28, 33, 38, 43, 48, 53, 58, } },
+			movelvls = { { 5, 9, 13, 15, 18, 23, 28, 33, 38, 43, 48, 53, }, { 5, 9, 13, 15, 18, 23, 28, 33, 38, 43, 48, 53, } },
 			weight = 31.5,
 		},
 		{
@@ -799,48 +2420,47 @@ local function KaizoXYZExtension()
 			name = "Kricketune",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 384,
-			movelvls = { { 14, 18, 22, 26, 30, 34, 36, 38, 42, 44, 46, 50, }, { 14, 18, 22, 26, 30, 34, 36, 38, 42, 44, 46, 50, } },
+			movelvls = { { 10, 14, 18, 22, 26, 30, 34, 36, 38, 42, 44, 46, 50, }, { 10, 14, 18, 22, 26, 30, 34, 36, 38, 42, 44, 46, 50, } },
 			weight = 25.5,
 		},
 		{
 			name = "Shinx",
-			evolution = "15",
+			evolution = "14",
 			bst = 263,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 5, 9, 11, 13, 17, 21, 25, 29, 33, 37, 41, 45, }, { 5, 9, 11, 13, 17, 21, 25, 29, 33, 37, 41, 45, } },
 			weight = 9.5,
 		},
 		{
 			name = "Luxio",
-			evolution = "30",
+			evolution = "22",
 			bst = 363,
-			movelvls = { { 12, 18, 24, 31, 36, 42, 48, 54, 60, 68, }, { 12, 18, 24, 31, 36, 42, 48, 54, 60, 68, } },
+			movelvls = { { 5, 9, 13, 18, 23, 28, 33, 38, 43, 48, 53, }, { 15, 9, 13, 18, 23, 28, 33, 38, 43, 48, 53, } },
 			weight = 30.5,
-			friendshipBase = 100
 		},
 		{
 			name = "Luxray",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 523,
-			movelvls = { { 12, 18, 24, 33, 40, 48, 56, 64, 72, 80, }, { 12, 18, 24, 33, 40, 48, 56, 64, 72, 80, } },
+			movelvls = { { 5, 9, 13, 18, 23, 28, 35, 42, 49, 56, 63, 67, }, { 5, 9, 13, 18, 23, 28, 35, 42, 49, 56, 63, 67, } },
 			weight = 42.0,
 		},
 		{
 			name = "Budew",
 			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 280,
-			movelvls = { { }, { } },
+			movelvls = { { 4, 7, 10, 13, 16, }, { 4, 7, 10, 13, 16, } },
 			weight = 1.2,
 		},
 		{
 			name = "Roserade",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 515,
-			movelvls = { { }, { } },
+			movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 50, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 50, } },
 			weight = 14.5,
 		},
 		{
 			name = "Cranidos",
-			evolution = "30",
+			evolution = "14",
 			bst = 350,
 			movelvls = { { 6, 10, 15, 19, 24, 28, 33, 37, 42, 46, }, { 6, 10, 15, 19, 24, 28, 33, 37, 42, 46, } },
 			weight = 31.5,
@@ -849,12 +2469,12 @@ local function KaizoXYZExtension()
 			name = "Rampardos",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 495,
-			movelvls = { { 10, 15, 19, 24, 28, 36, 43, 51, 58, }, { 10, 15, 19, 24, 28, 36, 43, 51, 58, } },
+			movelvls = { { 6, 10, 15, 19, 24, 28, 36, 43, 51, 58, }, { 6, 10, 15, 19, 24, 28, 36, 43, 51, 58, } },
 			weight = 102.5,
 		},
 		{
 			name = "Shieldon",
-			evolution = "30",
+			evolution = "14",
 			bst = 350,
 			movelvls = { { 6, 10, 15, 19, 24, 28, 33, 37, 42, 46, }, { 6, 10, 15, 19, 24, 28, 33, 37, 42, 46, } },
 			weight = 57.0,
@@ -863,12 +2483,12 @@ local function KaizoXYZExtension()
 			name = "Bastiodon",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 495,
-			movelvls = { { 15, 19, 24, 28, 36, 43, 51, 58, }, { 15, 19, 24, 28, 36, 43, 51, 58, } },
+			movelvls = { { 6, 10, 15, 19, 24, 28, 36, 43, 51, 58, }, { 6, 10, 15, 19, 24, 28, 36, 43, 51, 58, } },
 			weight = 149.5,
 		},
 		{
 			name = "Burmy",
-			evolution = "20",
+			evolution = "10",
 			bst = 224,
 			movelvls = { { 10, 15, 20, }, { 10, 15, 20, } },
 			weight = 3.4,
@@ -877,7 +2497,7 @@ local function KaizoXYZExtension()
 			name = "Wormadam",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 424,
-			movelvls = { { 10, 15, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, }, { 10, 15, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, } },
+			movelvls = { { 10, 15, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, }, { 10, 15, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, } },
 			weight = 6.5,
 		},
 		{
@@ -889,16 +2509,16 @@ local function KaizoXYZExtension()
 		},
 		{
 			name = "Combee",
-			evolution = PokemonData.Evolutions.FEMALE21,
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 244,
-			movelvls = { { }, { } },
+			movelvls = { { 13, 29, }, { 13, 29, } },
 			weight = 5.5,
 		},
 		{
 			name = "Vespiquen",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 474,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 40, 44, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, } },
 			weight = 38.5,
 		},
 		{
@@ -907,39 +2527,38 @@ local function KaizoXYZExtension()
 			bst = 405,
 			movelvls = { { 5, 9, 13, 17, 19, 21, 25, 29, 33, 37, 41, 45, 49, }, { 5, 9, 13, 17, 19, 21, 25, 29, 33, 37, 41, 45, 49, } },
 			weight = 3.9,
-			friendshipBase = 100
 		},
 		{
 			name = "Buizel",
-			evolution = "26",
+			evolution = "16",
 			bst = 330,
-			movelvls = { { 4, 7, 11, 15, 18, 21, 24, 27, 31, 35, 38, 41, 45, 49, }, { 4, 7, 11, 15, 18, 21, 24, 27, 31, 35, 38, 41, 45, 49, } },
+			movelvls = { { 4, 7, 11, 15, 18, 21, 24, 27, 31, 35, 38, 41, 45, }, { 4, 7, 11, 15, 18, 21, 24, 27, 31, 35, 38, 41, 45, } },
 			weight = 29.5,
 		},
 		{
 			name = "Floatzel",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 495,
-			movelvls = { { 15, 18, 21, 24, 29, 35, 41, 46, 51, 57, 62, }, { 15, 18, 21, 24, 29, 35, 41, 46, 51, 57, 62, } },
+			movelvls = { { 4, 7, 11, 15, 18, 21, 24, 29, 35, 41, 46, 51, 57, }, { 4, 7, 11, 15, 18, 21, 24, 29, 35, 41, 46, 51, 57, } },
 			weight = 33.5,
 		},
 		{
 			name = "Cherubi",
-			evolution = "25",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 275,
-			movelvls = { { 5, 10, 15, 20, 26, 30, 35, 40, 45, }, { 5, 10, 15, 20, 26, 30, 35, 40, 45, } },
+			movelvls = { { 7, 10, 13, 19, 22, 28, 31, 37, 40, 47, }, { 7, 10, 13, 19, 22, 28, 31, 37, 40, 47, } },
 			weight = 3.3,
 		},
 		{
 			name = "Cherrim",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 450,
-			movelvls = { { 15, 20, 28, 34, 41, 48, 55, 62, }, { 15, 20, 28, 34, 41, 48, 55, 62, } },
+			bst = 519,
+			movelvls = { { 7, 10, 13, 19, 22, 25, 30, 35, 43, 48, 53, 58, 66, 71, }, { 7, 10, 13, 19, 22, 25, 30, 35, 43, 48, 53, 58, 66, 71, } },
 			weight = 9.3,
 		},
 		{
 			name = "Shellos",
-			evolution = "30",
+			evolution = "14",
 			bst = 325,
 			movelvls = { { 5, 10, 15, 20, 25, 31, 35, 40, 45, }, { 5, 10, 15, 20, 25, 31, 35, 40, 45, } },
 			weight = 6.3,
@@ -948,66 +2567,61 @@ local function KaizoXYZExtension()
 			name = "Gastrodon",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 475,
-			movelvls = { { 15, 20, 25, 33, 39, 46, 53, }, { 15, 20, 25, 33, 39, 46, 53, } },
+			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
 			weight = 29.9,
 		},
 		{
 			name = "Ambipom",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 482,
-			movelvls = { { 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, }, { 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, } },
+			movelvls = { { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, }, { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, } },
 			weight = 20.3,
-			friendshipBase = 100
 		},
 		{
 			name = "Drifloon",
-			evolution = "28",
+			evolution = "14",
 			bst = 348,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 24, 24, 29, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 24, 24, 29, 32, 36, 40, 44, } },
+			movelvls = { { 4, 8, 13, 16, 20, 25, 27, 32, 32, 36, 40, 44, 50, }, { 4, 8, 13, 16, 20, 25, 27, 32, 32, 36, 40, 44, 50, } },
 			weight = 1.2,
 		},
 		{
 			name = "Drifblim",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 498,
-			movelvls = { { 12, 16, 20, 24, 24, 24, 31, 36, 42, 48, 54, }, { 12, 16, 20, 24, 24, 24, 31, 36, 42, 48, 54, } },
+			movelvls = { { 4, 8, 13, 16, 20, 25, 30, 34, 34, 40, 46, 52, 60, 65, }, { 4, 8, 13, 16, 20, 25, 30, 34, 34, 40, 46, 52, 60, 65, } },
 			weight = 15.0,
 		},
 		{
 			name = "Buneary",
 			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 350,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
+			movelvls = { { 6, 10, 13, 16, 23, 26, 33, 36, 43, 46, 50, 56, 63, }, { 6, 10, 13, 16, 23, 26, 33, 36, 43, 46, 50, 56, 63, } },
 			weight = 5.5,
-			friendshipBase = 0,
 		},
 		{
 			name = "Lopunny",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
+			bst = 510,
+			movelvls = { { 6, 10, 13, 16, 23, 26, 33, 36, 43, 46, 53, 56, 63, 66, }, { 6, 10, 13, 16, 23, 26, 33, 36, 43, 46, 53, 56, 63, 66, } },
 			weight = 33.3,
-			friendshipBase = 140,
 		},
 		{
 			name = "Mismagius",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 495,
-			movelvls = { { }, { } },
+			movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, 60, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, 60, } },
 			weight = 4.4,
-			friendshipBase = 35
 		},
 		{
 			name = "Honchkrow",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 505,
-			movelvls = { { 25, 35, 45, 55, 65, }, { 25, 35, 45, 55, 65, } },
+			movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, 60, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, 60, } },
 			weight = 27.3,
-			friendshipBase = 35
 		},
 		{
 			name = "Glameow",
-			evolution = "38",
+			evolution = "14",
 			bst = 310,
 			movelvls = { { 5, 8, 13, 17, 20, 25, 29, 32, 37, 41, 44, 48, 50, }, { 5, 8, 13, 17, 20, 25, 29, 32, 37, 41, 44, 48, 50, } },
 			weight = 3.9,
@@ -1028,53 +2642,52 @@ local function KaizoXYZExtension()
 		},
 		{
 			name = "Stunky",
-			evolution = "34",
+			evolution = "14",
 			bst = 329,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, } },
+			movelvls = { { 4, 7, 10, 14, 18, 22, 27, 32, 37, 43, 46, 49, }, { 4, 7, 10, 14, 18, 22, 27, 32, 37, 43, 46, 49, } },
 			weight = 19.2,
 		},
 		{
 			name = "Skuntank",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 479,
-			movelvls = { { 12, 15, 18, 21, 24, 27, 30, 33, 38, 43, 48, }, { 12, 15, 18, 21, 24, 27, 30, 33, 38, 43, 48, } },
+			movelvls = { { 4, 7, 10, 14, 18, 22, 27, 32, 37, 41, 51, 56, 61, }, { 4, 7, 10, 14, 18, 22, 27, 32, 37, 41, 51, 56, 61, } },
 			weight = 38.0,
 		},
 		{
 			name = "Bronzor",
-			evolution = "33",
+			evolution = "18",
 			bst = 300,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
+			movelvls = { { 5, 9, 11, 15, 19, 21, 25, 29, 31, 35, 39, 41, 45, 49, }, { 5, 9, 11, 15, 19, 21, 25, 29, 31, 35, 39, 41, 45, 49, } },
 			weight = 60.5,
 		},
 		{
 			name = "Bronzong",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 500,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, } },
+			movelvls = { { 5, 9, 11, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 9, 11, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
 			weight = 187.0,
 		},
 		{
 			name = "Bonsly",
-			evolution = "15",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 290,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
+			movelvls = { { 5, 9, 12, 15, 19, 22, 26, 29, 33, 36, 40, }, { 5, 9, 12, 15, 19, 22, 26, 29, 33, 36, 40, } },
 			weight = 15.0,
 		},
 		{
 			name = "Mime Jr.",
-			evolution = "15",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 310,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 36, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 36, 36, 40, 44, 48, 52, } },
+			movelvls = { { 5, 9, 12, 15, 18, 22, 22, 25, 29, 32, 36, 39, 43, 46, 50, }, { 5, 9, 12, 15, 18, 22, 22, 25, 29, 32, 36, 39, 43, 46, 50, } },
 			weight = 13.0,
 		},
 		{
 			name = "Happiny",
-			evolution = PokemonData.Evolutions.SHINY,
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 220,
-			movelvls = { { 4, 8, 12, 16, 20, }, { 4, 8, 12, 16, 20, } },
+			movelvls = { { 5, 9, 12, }, { 5, 9, 12, } },
 			weight = 24.4,
-			friendshipBase = 140
 		},
 		{
 			name = "Chatot",
@@ -1082,90 +2695,89 @@ local function KaizoXYZExtension()
 			bst = 411,
 			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 50, 57, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 50, 57, } },
 			weight = 1.9,
-			friendshipBase = 35
 		},
 		{
 			name = "Spiritomb",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
+			bst = 500,
+			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
 			weight = 108.0,
 		},
 		{
 			name = "Gible",
-			evolution = "24",
+			evolution = "22",
 			bst = 300,
-			movelvls = { { 6, 12, 18, 25, 30, 36, 42, 48, 54, 60, }, { 6, 12, 18, 25, 30, 36, 42, 48, 54, 60, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 27, 31, 37, }, { 5, 9, 13, 17, 21, 25, 27, 31, 37, } },
 			weight = 20.5,
 		},
 		{
 			name = "Gabite",
-			evolution = "48",
+			evolution = "40",
 			bst = 410,
-			movelvls = { { 18, 27, 34, 42, 50, 58, 66, 74, }, { 18, 27, 34, 42, 50, 58, 66, 74, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 30, 35, 40, 45, }, { 5, 9, 13, 17, 21, 25, 30, 35, 40, 45, } },
 			weight = 56.0,
 		},
 		{
 			name = "Garchomp",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 18, 27, 34, 42, 52, 62, 72, 82, }, { 18, 27, 34, 42, 52, 62, 72, 82, } },
+			bst = 700,
+			movelvls = { { 9, 16, 22, 30, 38, 44, 50, 55, 62, 70, }, { 9, 16, 22, 30, 38, 44, 50, 55, 62, 70, } },
 			weight = 95.0,
 		},
 		{
 			name = "Munchlax",
 			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 390,
-			movelvls = { { 4, 8, 12, 16, 20, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
+			movelvls = { { 4, 9, 12, 17, 20, 25, 28, 33, 36, 41, 44, 49, 50, 57, }, { 4, 9, 12, 17, 20, 25, 28, 33, 36, 41, 44, 49, 50, 57, } },
 			weight = 105.0,
 		},
 		{
 			name = "Riolu",
 			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 285,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
+			movelvls = { { 4, 9, 12, 16, 20, 25, 30, 34, }, { 4, 9, 12, 16, 20, 25, 30, 34, } },
 			weight = 20.2,
 		},
 		{
 			name = "Lucario",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 525,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, } },
+			bst = 550,
+			movelvls = { { 9, 15, 21, 30, 36, 41, 50, 57, 64, 71, }, { 9, 15, 21, 30, 36, 41, 50, 57, 64, 71, } },
 			weight = 54.0,
 		},
 		{
 			name = "Hippopotas",
-			evolution = "34",
+			evolution = "14",
 			bst = 330,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
+			movelvls = { { 7, 13, 19, 19, 25, 31, 37, 44, 50, }, { 7, 13, 19, 19, 25, 31, 37, 44, 50, } },
 			weight = 49.5,
 		},
 		{
 			name = "Hippowdon",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 525,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 62, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 62, } },
+			movelvls = { { 9, 14, 19, 25, 31, 40, 50, 60, 66, 71, }, { 9, 14, 19, 25, 31, 40, 50, 60, 66, 71, } },
 			weight = 300.0,
 		},
 		{
 			name = "Skorupi",
-			evolution = "40",
+			evolution = "12",
 			bst = 330,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, } },
+			movelvls = { { 5, 9, 12, 16, 20, 23, 27, 30, 34, 38, 41, 45, 47, 49, }, { 5, 9, 12, 16, 20, 23, 27, 30, 34, 38, 41, 45, 47, 49, } },
 			weight = 12.0,
 		},
 		{
 			name = "Drapion",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 500,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 44, 49, 54, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 44, 49, 54, } },
+			movelvls = { { 5, 9, 13, 16, 20, 23, 27, 30, 34, 38, 43, 49, 53, 57, }, { 5, 9, 13, 16, 20, 23, 27, 30, 34, 38, 43, 49, 53, 57, } },
 			weight = 61.5,
 		},
 		{
 			name = "Croagunk",
-			evolution = "37",
+			evolution = "16",
 			bst = 300,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 4, 8, 12, 16, 19, 22, 24, 29, 31, 36, 38, 43, 45, 47, 50, }, { 4, 8, 12, 16, 19, 22, 24, 29, 31, 36, 38, 43, 45, 47, 50, } },
 			weight = 23.0,
 			friendshipBase = 100
 		},
@@ -1173,7 +2785,7 @@ local function KaizoXYZExtension()
 			name = "Toxicroak",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 490,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, }, { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, } },
+			movelvls = { { 5, 9, 12, 16, 20, 25, 29, 34, 40, 44, 50, 55, 59, 63, 68, }, { 5, 9, 12, 16, 20, 25, 29, 34, 40, 44, 50, 55, 59, 63, 68, } },
 			weight = 44.4,
 		},
 		{
@@ -1185,200 +2797,192 @@ local function KaizoXYZExtension()
 		},
 		{
 			name = "Finneon",
-			evolution = "31",
+			evolution = "14",
 			bst = 330,
-			movelvls = { { 6, 13, 17, 22, 26, 29, 33, 38, 42, 45, 49, 54, }, { 6, 13, 17, 22, 26, 29, 33, 38, 42, 45, 49, 54, } },
+			movelvls = { { 6, 10, 13, 17, 22, 26, 29, 33, 38, 42, 45, 49, 54, }, { 6, 10, 13, 17, 22, 26, 29, 33, 38, 42, 45, 49, 54, } },
 			weight = 7.0,
 		},
 		{
 			name = "Lumineon",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 460,
-			movelvls = { { 13, 22, 26, 29, 35, 42, 48, 53, 59, }, { 13, 22, 26, 29, 35, 42, 48, 53, 59, } },
+			movelvls = { { 6, 10, 13, 17, 22, 26, 29, 35, 42, 48, 53, 59, 66, }, { 6, 10, 13, 17, 22, 26, 29, 35, 42, 48, 53, 59, 66, } },
 			weight = 24.0,
 		},
 		{
 			name = "Mantyke",
-			evolution = "35",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 345,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 5, 9, 12, 14, 16, 19, 23, 27, 32, 36, 39, 46, 49, }, { 5, 9, 12, 14, 16, 19, 23, 27, 32, 36, 39, 46, 49, } },
 			weight = 65.0,
 		},
 		{
 			name = "Snover",
-			evolution = "40",
+			evolution = "14",
 			bst = 334,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, } },
+			movelvls = { { 5, 9, 13, 17, 21, 26, 31, 36, 41, 46, }, { 5, 9, 13, 17, 21, 26, 31, 36, 41, 46, } },
 			weight = 50.5,
 		},
 		{
 			name = "Abomasnow",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 494,
-			movelvls = { { 15, 20, 25, 30, 35, 43, 49, 56, }, { 15, 20, 25, 30, 35, 43, 49, 56, } },
+			bst = 564,
+			movelvls = { { 5, 9, 13, 17, 21, 26, 31, 36, 47, 58, 63, 69, 75, }, { 5, 9, 13, 17, 21, 26, 31, 36, 47, 58, 63, 69, 75, } },
 			weight = 135.5,
 		},
 		{
 			name = "Weavile",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 510,
-			movelvls = { { 18, 24, 30, 36, 42, 48, 54, 60, 66, }, { 18, 24, 30, 36, 42, 48, 54, 60, 66, } },
+			movelvls = { { 8, 11, 15, 20, 24, 28, 33, 40, 45, 51, 57, 63, 70, }, { 8, 11, 15, 20, 24, 28, 33, 40, 45, 51, 57, 63, 70, } },
 			weight = 34.0,
-			friendshipBase = 35
 		},
 		{
 			name = "Magnezone",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 535,
-			movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, } },
+			movelvls = { { 8, 11, 15, 20, 24, 28, 33, 40, 45, 51, 57, 63, 70, 75, 82, }, { 8, 11, 15, 20, 24, 28, 33, 40, 45, 51, 57, 63, 70, 75, 82, } },
 			weight = 180.0,
 		},
 		{
 			name = "Lickilicky",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 515,
-			movelvls = { { 18, 24, 30, 36, 42, 48, 54, 60, }, { 18, 24, 30, 36, 42, 48, 54, 60, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, } },
 			weight = 140.0,
 		},
 		{
 			name = "Rhyperior",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 535,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, 75, }, { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, 75, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 48, 55, 62, 69, 74, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 48, 55, 62, 69, 74,  } },
 			weight = 282.8,
 		},
 		{
 			name = "Tangrowth",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 535,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 48, 55, 62, 66, 70, 75, 80, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 48, 55, 62, 66, 70, 75, 80, } },
 			weight = 128.6,
 		},
 		{
 			name = "Electivire",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 540,
-			movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, } },
+			movelvls = { { 5, 9, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 9, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
 			weight = 138.6,
 		},
 		{
 			name = "Magmortar",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 540,
-			movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, } },
+			movelvls = { { 5, 9, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 9, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
 			weight = 68.0,
 		},
 		{
 			name = "Togekiss",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 545,
-			movelvls = { { }, { } },
+			movelvls = { { 9, 15, 19, 22, 26, 31, 36, 42, 49, 55, 62, 69, }, { 9, 15, 19, 22, 26, 31, 36, 42, 49, 55, 62, 69, } },
 			weight = 38.0,
 		},
 		{
 			name = "Yanmega",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 515,
-			movelvls = { { 14, 17, 22, 27, 30, 33, 38, 43, 46, 49, }, { 14, 17, 22, 27, 30, 33, 38, 43, 46, 49, } },
+			movelvls = { { 6, 11, 14, 17, 22, 27, 30, 33, 38, 43, 46, 49, 54, 57, }, { 6, 11, 14, 17, 22, 27, 30, 33, 38, 43, 46, 49, 54, 57, } },
 			weight = 51.5,
 		},
 		{
 			name = "Leafeon",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 525,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } },
 			weight = 25.5,
-			friendshipBase = 35
 		},
 		{
 			name = "Glaceon",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 525,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } },
 			weight = 25.9,
-			friendshipBase = 35
 		},
 		{
 			name = "Gliscor",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 510,
-			movelvls = { { 13, 16, 19, 22, 27, 30, 35, 40, 45, 50, }, { 13, 16, 19, 22, 27, 30, 35, 40, 45, 50, } },
+			movelvls = { { 5, 9, 13, 19, 25, 30, 34, 39, 44, 50, 55, 59, 63, 70, }, { 5, 9, 13, 19, 25, 30, 34, 39, 44, 50, 55, 59, 63, 70, } },
 			weight = 42.5,
 		},
 		{
 			name = "Mamoswine",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 530,
-			movelvls = { { 15, 20, 25, 30, 37, 44, 51, 58, 65, }, { 15, 20, 25, 30, 37, 44, 51, 58, 65, } },
+			movelvls = { { 5, 9, 13, 19, 25, 30, 34, 39, 44, 50, 55, 59, 63, 70, }, { 5, 9, 13, 19, 25, 30, 34, 39, 44, 50, 55, 59, 63, 70, } },
 			weight = 291.0,
 		},
 		{
 			name = "Porygon-Z",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 535,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } },
+			movelvls = { { 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } },
 			weight = 34.0,
 		},
 		{
 			name = "Gallade",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 518,
-			movelvls = { { 9, 12, 15, 18, 23, 28, 35, 42, 49, 56, 56, 63, }, { 9, 12, 15, 18, 23, 28, 35, 42, 49, 56, 56, 63, } },
+			bst = 548,
+			movelvls = { { 9, 14, 18, 23, 28, 33, 37, 41, 46, 50, 55, 60, 66, 70, 77, }, { 9, 14, 18, 23, 28, 33, 37, 41, 46, 50, 55, 60, 66, 70, 77, } },
 			weight = 52.0,
-			friendshipBase = 35
 		},
 		{
 			name = "Probopass",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 525,
-			movelvls = { { 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 43, }, { 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 43, } },
+			movelvls = { { 5, 9, 13, 17, 21, 26, 31, 37, 41, 47, 52, 57, 62, 66, 70, }, { 5, 9, 13, 17, 21, 26, 31, 37, 41, 47, 52, 57, 62, 66, 70, } },
 			weight = 340.0,
 		},
 		{
 			name = "Dusknoir",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 525,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, }, { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, } },
+			movelvls = { { 5, 9, 13, 17, 21, 26, 31, 37, 41, 47, 52, 57, 62, 66, 70, }, { 5, 9, 13, 17, 21, 26, 31, 37, 41, 47, 52, 57, 62, 66, 70, } },
 			weight = 106.6,
-			friendshipBase = 35
 		},
 		{
 			name = "Froslass",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 480,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, }, { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, } },
+			movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 48, 54, 60, 66, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 48, 54, 60, 66, } },
 			weight = 26.6,
 		},
 		{
 			name = "Rotom",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 440,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			bst = 520,
+			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } },
 			weight = 0.3,
 		},
 		{
 			name = "Uxie",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, } },
+			movelvls = { { 9, 16, 21, 31, 36, 46, 50, 55, 61, 66, 76, }, { 9, 16, 21, 31, 36, 46, 50, 55, 61, 66, 76, } },
 			weight = 0.3,
-			friendshipBase = 140
 		},
 		{
 			name = "Mesprit",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, } },
+			movelvls = { { 9, 16, 21, 31, 36, 46, 50, 55, 61, 66, 76, }, { 9, 16, 21, 31, 36, 46, 50, 55, 61, 66, 76, } },
 			weight = 0.3,
-			friendshipBase = 140
 		},
 		{
 			name = "Azelf",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, } },
+			movelvls = { { 9, 16, 21, 31, 36, 46, 50, 55, 61, 66, 76, }, { 9, 16, 21, 31, 36, 46, 50, 55, 61, 66, 76, } },
 			weight = 0.3,
-			friendshipBase = 140
 		},
 		{
 			name = "Dialga",
@@ -1386,7 +2990,6 @@ local function KaizoXYZExtension()
 			bst = 680,
 			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
 			weight = 683.0,
-			friendshipBase = 0
 		},
 		{
 			name = "Palkia",
@@ -1394,52 +2997,47 @@ local function KaizoXYZExtension()
 			bst = 680,
 			movelvls = { { 8, 16, 24, 32, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 48, 56, 64, 72, 80, 88, } },
 			weight = 336.0,
-			friendshipBase = 0
 		},
 		{
 			name = "Heatran",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, } },
+			movelvls = { { 9, 17, 25, 33, 41, 49, 57, 65, 73, 81, 88, 96, }, { 9, 17, 25, 33, 41, 49, 57, 65, 73, 81, 88, 96, } },
 			weight = 430.0,
-			friendshipBase = 100
 		},
 		{
 			name = "Regigigas",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 670,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, } },
+			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
 			weight = 420.0,
-			friendshipBase = 0
 		},
 		{
 			name = "Giratina",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 680,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, } },
+			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
 			weight = 750.0,
-			friendshipBase = 0
 		},
 		{
 			name = "Cresselia",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 72, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 72, } },
+			movelvls = { { 9, 16, 21, 31, 36, 46, 50, 55, 61, 66, 76, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 72, } },
 			weight = 85.6,
-			friendshipBase = 100
 		},
 		{
 			name = "Phione",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 9, 16, 24, 31, 39, 46, 54, 61, 69, 75, }, { 9, 16, 24, 31, 39, 46, 54, 61, 69, 75, } },
+			bst = 510,
+			movelvls = { { 9, 15, 20, 24, 31, 36, 41, 46, 51, 56, 61, 69, }, { 9, 15, 20, 24, 31, 36, 41, 46, 51, 56, 61, 69, } },
 			weight = 3.1,
 		},
 		{
 			name = "Manaphy",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 9, 16, 24, 31, 39, 46, 54, 61, 69, 76, }, { 9, 16, 24, 31, 39, 46, 54, 61, 69, 76, } },
+			movelvls = { { 9, 15, 20, 24, 31, 36, 41, 46, 51, 56, 61, 69, }, { 9, 15, 20, 24, 31, 36, 41, 46, 51, 56, 61, 69, } },
 			weight = 1.4,
 		},
 		{
@@ -1448,7 +3046,6 @@ local function KaizoXYZExtension()
 			bst = 600,
 			movelvls = { { 11, 20, 29, 38, 47, 57, 66, 75, 84, 93, }, { 11, 20, 29, 38, 47, 57, 66, 75, 84, 93, } },
 			weight = 50.5,
-			friendshipBase = 0
 		},
 		{
 			name = "Shaymin",
@@ -1456,7 +3053,6 @@ local function KaizoXYZExtension()
 			bst = 600,
 			movelvls = { { 10, 19, 28, 37, 46, 55, 64, 73, 82, 91, 100, }, { 10, 19, 28, 37, 46, 55, 64, 73, 82, 91, 100, } },
 			weight = 2.1,
-			friendshipBase = 100
 		},
 		{
 			name = "Arceus",
@@ -1464,278 +3060,276 @@ local function KaizoXYZExtension()
 			bst = 720,
 			movelvls = { { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, }, { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, } },
 			weight = 320.0,
-			friendshipBase = 0
 		},
 		{
 			name = "Victini",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
+			movelvls = { { 9, 17, 25, 33, 41, 49, 57, 65, 73, 81, 89, 97, }, { 9, 17, 25, 33, 41, 49, 57, 65, 73, 81, 89, 97, } },
 			weight = 4.0,
-			friendshipBase = 100
 		},
 		{
 			name = "Snivy",
-			evolution = "17",
+			evolution = "16",
 			bst = 308,
-			movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, } },
+			movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, } },
 			weight = 8.1,
 		},
 		{
 			name = "Servine",
-			evolution = "36",
+			evolution = "30",
 			bst = 413,
-			movelvls = { { 13, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 13, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
 			weight = 16.0,
 		},
 		{
 			name = "Serperior",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 528,
-			movelvls = { { 13, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 13, 16, 20, 24, 28, 32, 38, 44, 50, 56, } },
+			movelvls = { { 4, 7, 10, 13, 16, 20, 24, 28, 32, 38, 44, 50, 56, 62, }, { 4, 7, 10, 13, 16, 20, 24, 28, 32, 38, 44, 50, 56, 62, } },
 			weight = 63.0,
 		},
 		{
 			name = "Tepig",
-			evolution = "17",
+			evolution = "16",
 			bst = 308,
 			movelvls = { { 3, 7, 9, 13, 15, 19, 21, 25, 27, 31, 33, 37, 39, 43, }, { 3, 7, 9, 13, 15, 19, 21, 25, 27, 31, 33, 37, 39, 43, } },
 			weight = 9.9,
 		},
 		{
 			name = "Pignite",
-			evolution = "36",
+			evolution = "30",
 			bst = 418,
-			movelvls = { { 13, 15, 20, 23, 28, 31, 36, 39, 44, 47, 52, }, { 13, 15, 20, 23, 28, 31, 36, 39, 44, 47, 52, } },
+			movelvls = { { 3, 7, 9, 13, 15, 17, 20, 23, 28, 31, 36, 39, 44, 47, 52, }, { 3, 7, 9, 13, 15, 17, 20, 23, 28, 31, 36, 39, 44, 47, 52, } },
 			weight = 55.5,
 		},
 		{
 			name = "Emboar",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 528,
-			movelvls = { { 13, 15, 20, 23, 28, 31, 38, 43, 50, 55, 62, }, { 13, 15, 20, 23, 28, 31, 38, 43, 50, 55, 62, } },
+			movelvls = { { 3, 7, 9, 13, 17, 20, 25, 30, 34, 38, 43, 50, 56, 64, 70, }, {  3, 7, 9, 13, 17, 20, 25, 30, 34, 38, 43, 50, 56, 64, 70, } },
 			weight = 150.0,
 		},
 		{
 			name = "Oshawott",
-			evolution = "17",
+			evolution = "16",
 			bst = 308,
 			movelvls = { { 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, }, { 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, } },
 			weight = 5.9,
 		},
 		{
 			name = "Dewott",
-			evolution = "36",
+			evolution = "30",
 			bst = 413,
-			movelvls = { { 13, 18, 21, 26, 29, 34, 37, 42, 45, 50, 53, }, { 13, 18, 21, 26, 29, 34, 37, 42, 45, 50, 53, } },
+			movelvls = { { 5, 7, 11, 13, 17, 20, 25, 28, 33, 36, 41, 44, 49, 52, }, { 5, 7, 11, 13, 17, 20, 25, 28, 33, 36, 41, 44, 49, 52, } },
 			weight = 24.5,
 		},
 		{
 			name = "Samurott",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 528,
-			movelvls = { { 13, 18, 21, 25, 29, 34, 39, 46, 51, 58, 63, }, { 13, 18, 21, 25, 29, 34, 39, 46, 51, 58, 63, } },
+			movelvls = { { 3, 7, 9, 13, 17, 20, 25, 30, 34, 38, 43, 50, 56, 64, 70, }, { 3, 7, 9, 13, 17, 20, 25, 30, 34, 38, 43, 50, 56, 64, 70, } },
 			weight = 94.6,
 		},
 		{
 			name = "Patrat",
-			evolution = "20",
+			evolution = "14",
 			bst = 255,
-			movelvls = { { 3, 6, 8, 11, 13, 16, 18, 21, 23, 26, 28, 31, 33, 36, 38, 41, }, { 3, 6, 8, 11, 13, 16, 18, 21, 23, 26, 28, 31, 33, 36, 38, 41, } },
+			movelvls = { { 3, 6, 8, 11, 13, 16, 18, 21, 23, 26, 28, 31, 33, 36, }, { 3, 6, 8, 11, 13, 16, 18, 21, 23, 26, 28, 31, 33, 36, } },
 			weight = 11.6,
 		},
 		{
 			name = "Watchog",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 420,
-			movelvls = { { 3, 6, 8, 11, 13, 16, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, }, { 3, 6, 8, 11, 13, 16, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, } },
+			movelvls = { { 3, 6, 8, 11, 13, 16, 18, 20, 22, 25, 29, 32, 36, 39, 43, }, { 3, 6, 8, 11, 13, 16, 18, 20, 22, 25, 29, 32, 36, 39, 43, } },
 			weight = 27.0,
 		},
 		{
 			name = "Lillipup",
-			evolution = "16",
+			evolution = "14",
 			bst = 275,
-			movelvls = { { 4, 8, 12, 17, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 17, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 5, 8, 10, 12, 15, 19, 22, 26, 29, 33, 36, 40, 45, }, { 5, 8, 10, 12, 15, 19, 22, 26, 29, 33, 36, 40, 45, } },
 			weight = 4.1,
 		},
 		{
 			name = "Herdier",
-			evolution = "32",
+			evolution = "20",
 			bst = 370,
-			movelvls = { { 12, 19, 24, 30, 36, 42, 48, 54, 60, 66, }, { 12, 19, 24, 30, 36, 42, 48, 54, 60, 66, } },
+			movelvls = { { 5, 8, 12, 15, 20, 24, 29, 33, 38, 42, 47, 52, }, { 5, 8, 12, 15, 20, 24, 29, 33, 38, 42, 47, 52, } },
 			weight = 14.7,
 		},
 		{
 			name = "Stoutland",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 500,
-			movelvls = { { 12, 19, 24, 30, 38, 46, 54, 62, 70, 78, }, { 12, 19, 24, 30, 38, 46, 54, 62, 70, 78, } },
+			movelvls = { { 5, 8, 12, 15, 20, 24, 29, 36, 42, 51, 59, 63, }, { 5, 8, 12, 15, 20, 24, 29, 36, 42, 51, 59, 63, } },
 			weight = 61.0,
 		},
 		{
 			name = "Purrloin",
-			evolution = "20",
+			evolution = "14",
 			bst = 281,
-			movelvls = { { 4, 5, 12, 16, 21, 24, 28, 32, 36, 40, }, { 4, 5, 12, 16, 21, 24, 28, 32, 36, 40, } },
+			movelvls = { { 3, 6, 10, 12, 15, 19, 21, 24, 28, 30, 33, 37, 39, 42, 46, 49, }, { 3, 6, 10, 12, 15, 19, 21, 24, 28, 30, 33, 37, 39, 42, 46, 49, } },
 			weight = 10.1,
 		},
 		{
 			name = "Liepard",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 446,
-			movelvls = { { 12, 16, 23, 28, 34, 40, 46, 52, }, { 12, 16, 23, 28, 34, 40, 46, 52, } },
+			movelvls = { { 3, 6, 10, 12, 15, 19, 22, 26, 31, 34, 38, 43, 47, 50, 55, 58, }, { 3, 6, 10, 12, 15, 19, 22, 26, 31, 34, 38, 43, 47, 50, 55, 58, } },
 			weight = 37.5,
 		},
 		{
 			name = "Pansage",
 			evolution = PokemonData.Evolutions.LEAF,
 			bst = 316,
-			movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, } },
+			movelvls = { { 4, 9, 11, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, }, { 4, 9, 11, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, } },
 			weight = 10.5,
 		},
 		{
 			name = "Simisage",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 498,
-			movelvls = { { }, { } },
+			movelvls = { { 5, 9, 13, 17, 21, 27, 33, 38, 44, 49, 53, 60, 65, 70, }, { 5, 9, 13, 17, 21, 27, 33, 38, 44, 49, 53, 60, 65, 70, } },
 			weight = 30.5,
 		},
 		{
 			name = "Pansear",
 			evolution = PokemonData.Evolutions.FIRE,
 			bst = 316,
-			movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, } },
+			movelvls = { { 4, 9, 11, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, }, { 4, 9, 11, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, } },
 			weight = 11.0,
 		},
 		{
 			name = "Simisear",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 498,
-			movelvls = { { }, { } },
+			movelvls = { { 5, 9, 13, 17, 21, 27, 33, 38, 44, 49, 53, 60, 65, 70, }, { 5, 9, 13, 17, 21, 27, 33, 38, 44, 49, 53, 60, 65, 70, } },
 			weight = 28.0,
 		},
 		{
 			name = "Panpour",
 			evolution = PokemonData.Evolutions.WATER,
 			bst = 316,
-			movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, } },
+			movelvls = { { 4, 9, 11, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, }, { 4, 9, 11, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, } },
 			weight = 13.5,
 		},
 		{
 			name = "Simipour",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 498,
-			movelvls = { { }, { } },
+			movelvls = { { 5, 9, 13, 17, 21, 27, 33, 38, 44, 49, 53, 60, 65, 70, }, { 5, 9, 13, 17, 21, 27, 33, 38, 44, 49, 53, 60, 65, 70, } },
 			weight = 29.0,
 		},
 		{
 			name = "Munna",
 			evolution = PokemonData.Evolutions.MOON,
 			bst = 292,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
+			movelvls = { { 5, 9, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, }, { 5, 9, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, } },
 			weight = 23.3,
 		},
 		{
 			name = "Musharna",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 487,
-			movelvls = { { }, { } },
+			movelvls = { { 9, 13, 17, 21, 25, 29, 33, 40, 44, 48, 54, 60, 66, 70, }, { 9, 13, 17, 21, 25, 29, 33, 40, 44, 48, 54, 60, 66, 70, } },
 			weight = 60.5,
 		},
 		{
 			name = "Pidove",
-			evolution = "21",
+			evolution = "14",
 			bst = 264,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
+			movelvls = { { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, }, { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, } },
 			weight = 2.1,
 		},
 		{
 			name = "Tranquill",
-			evolution = "32",
+			evolution = "22",
 			bst = 358,
-			movelvls = { { 12, 16, 20, 26, 34, 38, 44, 50, 56, }, { 12, 16, 20, 26, 34, 38, 44, 50, 56, } },
+			movelvls = { { 4, 8, 11, 15, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59, }, { 4, 8, 11, 15, 18, 23, 27, 32, 36, 41, 45, 50, 54, 59, } },
 			weight = 15.0,
 		},
 		{
 			name = "Unfezant",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 488,
-			movelvls = { { 12, 16, 20, 26, 36, 42, 50, 58, 66, }, { 12, 16, 20, 26, 36, 42, 50, 58, 66, } },
+			movelvls = { { 4, 8, 11, 15, 18, 23, 27, 33, 38, 44, 49, 55, 60, 66, }, { 4, 8, 11, 15, 18, 23, 27, 33, 38, 44, 49, 55, 60, 66, } },
 			weight = 29.0,
 		},
 		{
 			name = "Blitzle",
-			evolution = "27",
+			evolution = "16",
 			bst = 295,
-			movelvls = { { 4, 8, 11, 15, 18, 22, 25, 29, 33, 35, 40, }, { 4, 8, 11, 15, 18, 22, 25, 29, 33, 35, 40, } },
+			movelvls = { { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, }, { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, } },
 			weight = 29.8,
 		},
 		{
 			name = "Zebstrika",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 497,
-			movelvls = { { 11, 18, 25, 31, 36, 42, 47, 53, }, { 11, 18, 25, 31, 36, 42, 47, 53, } },
+			movelvls = { { 4, 8, 11, 15, 18, 22, 25, 31, 36, 42, 47, 53, 58, 65, }, { 4, 8, 11, 15, 18, 22, 25, 31, 36, 42, 47, 53, 58, 65, } },
 			weight = 79.5,
 		},
 		{
 			name = "Roggenrola",
-			evolution = "25",
+			evolution = "12",
 			bst = 280,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
+			movelvls = { { 4, 7, 10, 14, 17, 20, 23, 27, 30, 33, 36, 40, }, { 4, 7, 10, 14, 17, 20, 23, 27, 30, 33, 36, 40, } },
 			weight = 18.0,
 		},
 		{
 			name = "Boldore",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
+			evolution = "22",
 			bst = 390,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, } },
+			movelvls = { { 4, 7, 10, 14, 17, 20, 23, 25, 30, 36, 42, 48, 55, }, { 4, 7, 10, 14, 17, 20, 23, 25, 30, 36, 42, 48, 55, } },
 			weight = 102.0,
 		},
 		{
 			name = "Gigalith",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 515,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, } },
+			movelvls = { { 4, 9, 13, 17, 21, 25, 30, 35, 41, 48, 55, 62, 70, }, { 4, 9, 13, 17, 21, 25, 30, 35, 41, 48, 55, 62, 70, } },
 			weight = 260.0,
 		},
 		{
 			name = "Woobat",
 			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 323,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 4, 8, 12, 15, 19, 21, 25, 29, 29, 32, 36, 41, 47, }, { 4, 8, 12, 15, 19, 21, 25, 29, 29, 32, 36, 41, 47, } },
 			weight = 2.1,
 		},
 		{
 			name = "Swoobat",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 425,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 4, 9, 12, 15, 19, 21, 25, 29, 29, 32, 36, 41, 47, }, { 4, 9, 12, 15, 19, 21, 25, 29, 29, 32, 36, 41, 47, } },
 			weight = 10.5,
 		},
 		{
 			name = "Drilbur",
-			evolution = "31",
+			evolution = "14",
 			bst = 328,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, }, { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, } },
 			weight = 8.5,
 		},
 		{
 			name = "Excadrill",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 508,
-			movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, } },
+			movelvls = { { 5, 8, 12, 15, 19, 24, 30, 35, 39, 44, 50, 55, 62, 70, }, { 5, 8, 12, 15, 19, 24, 30, 35, 39, 44, 50, 55, 62, 70, } },
 			weight = 40.4,
 		},
 		{
 			name = "Audino",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 445,
-			movelvls = { { 4, 9, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, }, { 4, 9, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, } },
+			bst = 540,
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 34, 40, 46, 52, 59, 66, 72, 77, }, { 5, 9, 13, 17, 21, 25, 29, 34, 40, 46, 52, 59, 66, 72, 77, } },
 			weight = 31.0,
 		},
 		{
 			name = "Timburr",
-			evolution = "25",
+			evolution = "16",
 			bst = 305,
 			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
 			weight = 12.5,
@@ -1743,56 +3337,56 @@ local function KaizoXYZExtension()
 		},
 		{
 			name = "Gurdurr",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
+			evolution = "24",
 			bst = 405,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, } },
+			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 31, 34, 37, 40, 43, 46, 49, 53, 57, }, { 4, 8, 12, 16, 20, 24, 28, 31, 34, 37, 40, 43, 46, 49, 53, 57, } },
 			weight = 40.0,
 		},
 		{
 			name = "Conkeldurr",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 505,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, } },
+			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 31, 34, 37, 40, 43, 46, 49, 53, 57, }, { 4, 8, 12, 16, 20, 24, 28, 31, 34, 37, 40, 43, 46, 49, 53, 57, } },
 			weight = 87.0,
 		},
 		{
 			name = "Tympole",
-			evolution = "25",
+			evolution = "12",
 			bst = 294,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 42, 45, }, { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 42, 45, } },
 			weight = 4.5,
 		},
 		{
 			name = "Palpitoad",
-			evolution = "36",
+			evolution = "20",
 			bst = 384,
-			movelvls = { { 12, 16, 20, 24, 30, 37, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 37, 42, 48, 54, 60, } },
+			movelvls = { { 5, 9, 12, 16, 20, 23, 28, 33, 37, 42, 47, 51, }, { 5, 9, 12, 16, 20, 23, 28, 33, 37, 42, 47, 51, } },
 			weight = 17.0,
 		},
 		{
 			name = "Seismitoad",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 509,
-			movelvls = { { 12, 16, 20, 24, 30, 39, 46, 54, 62, 70, }, { 12, 16, 20, 24, 30, 39, 46, 54, 62, 70, } },
+			movelvls = { { 5, 9, 12, 16, 20, 24, 30, 34, 39, 44, 49, 55, 59, 65, }, { 5, 9, 12, 16, 20, 24, 30, 34, 39, 44, 49, 55, 59, 65, } },
 			weight = 62.0,
 		},
 		{
 			name = "Throh",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 465,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } },
 			weight = 55.5,
 		},
 		{
 			name = "Sawk",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 465,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } },
 			weight = 51.0,
 		},
 		{
 			name = "Sewaddle",
-			evolution = "20",
+			evolution = "10",
 			bst = 310,
 			movelvls = { { 8, 15, 22, 29, 31, 36, 43, }, { 8, 15, 22, 29, 31, 36, 43, } },
 			weight = 2.5,
@@ -1801,63 +3395,63 @@ local function KaizoXYZExtension()
 			name = "Swadloon",
 			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 380,
-			movelvls = { { 22, 29, 31, 36, 43, }, { 22, 29, 31, 36, 43, } },
+			movelvls = { { 20, }, { 20, } },
 			weight = 7.3,
 		},
 		{
 			name = "Leavanny",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 500,
-			movelvls = { { 22, 29, 32, 36, 39, 43, 46, 50, }, { 22, 29, 32, 36, 39, 43, 46, 50, } },
+			movelvls = { { 8, 15, 22, 29, 32, 34, 36, 39, 43, 46, 50, }, { 8, 15, 22, 29, 32, 34, 36, 39, 43, 46, 50, } },
 			weight = 20.5,
 		},
 		{
 			name = "Venipede",
-			evolution = "22",
+			evolution = "10",
 			bst = 260,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
+			movelvls = { { 5, 8, 12, 15, 19, 22, 29, 32, 33, 36, 40, 43, }, { 5, 8, 12, 15, 19, 22, 29, 32, 33, 36, 40, 43, } },
 			weight = 5.3,
 		},
 		{
 			name = "Whirlipede",
-			evolution = "30",
+			evolution = "16",
 			bst = 360,
-			movelvls = { { 12, 16, 20, 26, 32, 38, 44, 50, 56, }, { 12, 16, 20, 26, 32, 38, 44, 50, 56, } },
+			movelvls = { { 5, 8, 12, 15, 19, 22, 23, 28, 32, 37, 41, 43, 46, 50, }, { 5, 8, 12, 15, 19, 22, 23, 28, 32, 37, 41, 43, 46, 50, } },
 			weight = 58.5,
 		},
 		{
 			name = "Scolipede",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 485,
-			movelvls = { { 12, 16, 20, 26, 34, 42, 50, 58, 66, 74, }, { 12, 16, 20, 26, 34, 42, 50, 58, 66, 74, } },
+			movelvls = { { 5, 8, 12, 15, 19, 23, 28, 30, 33, 39, 44, 47, 50, 55, 65, }, { 5, 8, 12, 15, 19, 23, 28, 30, 33, 39, 44, 47, 50, 55, 65, } },
 			weight = 200.5,
 		},
 		{
 			name = "Cottonee",
 			evolution = PokemonData.Evolutions.SUN,
 			bst = 280,
-			movelvls = { { 3, 6, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, }, { 3, 6, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, } },
+			movelvls = { { 5, 8, 10, 13, 17, 19, 22, 26, 28, 31, 35, 37, 40, 44, 46, }, { 5, 8, 10, 13, 17, 19, 22, 26, 28, 31, 35, 37, 40, 44, 46, } },
 			weight = 0.6,
 		},
 		{
 			name = "Whimsicott",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 480,
-			movelvls = { { }, { } },
+			movelvls = { { 8, 11, 14, 18, 22, 28, 34, 41, 46, 50, 55, 60, 66, 70, }, { 8, 11, 14, 18, 22, 28, 34, 41, 46, 50, 55, 60, 66, 70, } },
 			weight = 6.6,
 		},
 		{
 			name = "Petilil",
 			evolution = PokemonData.Evolutions.SUN,
 			bst = 280,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, } },
+			movelvls = { { 4, 8, 10, 13, 17, 19, 22, 26, 28, 31, 35, 37, 40, 44, 46, }, { 4, 8, 10, 13, 17, 19, 22, 26, 28, 31, 35, 37, 40, 44, 46, } },
 			weight = 6.6,
 		},
 		{
 			name = "Lilligant",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 480,
-			movelvls = { { 5, }, { 5, } },
+			movelvls = { { 8, 11, 14, 18, 22, 28, 34, 41, 46, 50, 55, 60, 66, 70, }, { 8, 11, 14, 18, 22, 28, 34, 41, 46, 50, 55, 60, 66, 70, } },
 			weight = 16.3,
 		},
 		{
@@ -1869,211 +3463,210 @@ local function KaizoXYZExtension()
 		},
 		{
 			name = "Sandile",
-			evolution = "29",
+			evolution = "14",
 			bst = 292,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, } },
+			movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, } },
 			weight = 15.2,
 		},
 		{
 			name = "Krokorok",
-			evolution = "40",
+			evolution = "22",
 			bst = 351,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 32, 35, 42, 47, }, { 9, 12, 15, 18, 21, 24, 27, 32, 35, 42, 47, } },
+			movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 32, 36, 40, 44, 48, 52, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 32, 36, 40, 44, 48, 52, } },
 			weight = 33.4,
 		},
 		{
 			name = "Krookodile",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 519,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 32, 35, 44, 51, 58, }, { 9, 12, 15, 18, 21, 24, 27, 32, 35, 44, 51, 58, } },
+			movelvls = { { 4, 9, 12, 15, 18, 21, 24, 27, 32, 35, 40, 44, 48, 54, 60, }, { 4, 9, 12, 15, 18, 21, 24, 27, 32, 35, 40, 44, 48, 54, 60, } },
 			weight = 96.3,
 		},
 		{
 			name = "Darumaka",
-			evolution = "35",
+			evolution = "16",
 			bst = 315,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 3, 6, 9, 11, 14, 17, 19, 22, 25, 27, 30, 33, 35, 39, 42, }, { 3, 6, 9, 11, 14, 17, 19, 22, 25, 27, 30, 33, 35, 39, 42, } },
 			weight = 37.5,
 		},
 		{
 			name = "Darmanitan",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 480,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, } },
+			movelvls = { { 5, 9, 12, 15, 19, 23, 27, 33, 37, 42, 47, 52, 57, 61, 66, 71, }, { 5, 9, 12, 15, 19, 23, 27, 33, 37, 42, 47, 52, 57, 61, 66, 71, } },
 			weight = 92.9,
 		},
 		{
 			name = "Maractus",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 461,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, } },
+			movelvls = { { 3, 6, 10, 13, 15, 18, 22, 26, 29, 33, 38, 42, 45, 48, 50, 55, 57, }, { 3, 6, 10, 13, 15, 18, 22, 26, 29, 33, 38, 42, 45, 48, 50, 55, 57, } },
 			weight = 28.0,
 		},
 		{
 			name = "Dwebble",
-			evolution = "34",
+			evolution = "14",
 			bst = 325,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 5, 7, 11, 13, 17, 19, 23, 24, 29, 31, 35, 37, 41, 43, }, { 5, 7, 11, 13, 17, 19, 23, 24, 29, 31, 35, 37, 41, 43, } },
 			weight = 14.5,
 		},
 		{
 			name = "Crustle",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 485,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, } },
+			movelvls = { { 5, 7, 11, 13, 17, 19, 23, 24, 29, 31, 38, 43, 50, 55, }, { 5, 7, 11, 13, 17, 19, 23, 24, 29, 31, 38, 43, 50, 55, } },
 			weight = 200.0,
 		},
 		{
 			name = "Scraggy",
-			evolution = "39",
+			evolution = "16",
 			bst = 348,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
+			movelvls = { { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 42, 45, 48, 50, }, { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 42, 45, 48, 50, } },
 			weight = 11.8,
-			friendshipBase = 35
 		},
 		{
 			name = "Scrafty",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 488,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, 60, } },
+			movelvls = { { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 45, 51, 58, 65, }, { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 45, 51, 58, 65, } },
 			weight = 30.0,
 		},
 		{
 			name = "Sigilyph",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 490,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 50, 55, 60, } },
+			movelvls = { { 4, 8, 11, 14, 18, 21, 24, 28, 33, 38, 43, 48, 55, 60, 65, }, { 4, 8, 11, 14, 18, 21, 24, 28, 33, 38, 43, 48, 55, 60, 65, } },
 			weight = 14.0,
 		},
 		{
 			name = "Yamask",
-			evolution = "34",
+			evolution = "16",
 			bst = 303,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 48, 52, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 33, 37, 41, 45, 49, }, { 5, 9, 13, 17, 21, 25, 29, 33, 33, 37, 41, 45, 49, } },
 			weight = 1.5,
 		},
 		{
 			name = "Cofagrigus",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 483,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 56, 62, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 56, 62, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 33, 34, 39, 45, 51, 57, }, { 5, 9, 13, 17, 21, 25, 29, 33, 33, 34, 39, 45, 51, 57, } },
 			weight = 76.5,
 		},
 		{
 			name = "Tirtouga",
-			evolution = "37",
+			evolution = "20",
 			bst = 355,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, } },
+			movelvls = { { 5, 8, 11, 15, 18, 21, 25, 28, 31, 35, 38, 41, 45, 48, 50, }, { 5, 8, 11, 15, 18, 21, 25, 28, 31, 35, 38, 41, 45, 48, 50, } },
 			weight = 16.5,
 		},
 		{
 			name = "Carracosta",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 495,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, } },
+			movelvls = { { 5, 8, 11, 15, 18, 21, 25, 28, 31, 35, 40, 45, 51, 56, 61, }, { 5, 8, 11, 15, 18, 21, 25, 28, 31, 35, 40, 45, 51, 56, 61, } },
 			weight = 81.0,
 		},
 		{
 			name = "Archen",
-			evolution = "37",
+			evolution = "20",
 			bst = 401,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, } },
+			movelvls = { { 5, 8, 11, 15, 18, 21, 25, 28, 31, 35, 38, 41, 45, 48, 50, }, { 5, 8, 11, 15, 18, 21, 25, 28, 31, 35, 38, 41, 45, 48, 50, } },
 			weight = 9.5,
 		},
 		{
 			name = "Archeops",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 567,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, } },
+			movelvls = { { 5, 8, 13, 18, 22, 27, 32, 38, 44, 50, 56, 62, 67, 71, 77, }, { 5, 8, 13, 18, 22, 27, 32, 38, 44, 50, 56, 62, 67, 71, 77, } },
 			weight = 32.0,
 		},
 		{
 			name = "Trubbish",
-			evolution = "36",
+			evolution = "14",
 			bst = 329,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 21, 24, 27, 30, 33, 37, 39, 42, }, { 3, 6, 9, 12, 15, 18, 21, 21, 24, 27, 30, 33, 37, 39, 42, } },
+			movelvls = { { 3, 9, 12, 14, 18, 23, 23, 25, 29, 34, 36, 40, 42, 45, 47, }, { 3, 9, 12, 14, 18, 23, 23, 25, 29, 34, 36, 40, 42, 45, 47, } },
 			weight = 31.0,
 		},
 		{
 			name = "Garbodor",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 474,
-			movelvls = { { 9, 12, 15, 18, 21, 21, 24, 27, 30, 33, 39, 43, 48, }, { 9, 12, 15, 18, 21, 21, 24, 27, 30, 33, 39, 43, 48, } },
+			movelvls = { { 3, 9, 12, 14, 18, 23, 23, 25, 29, 34, 39, 46, 49, 54, 59, }, { 3, 9, 12, 14, 18, 23, 23, 25, 29, 34, 39, 46, 49, 54, 59, } },
 			weight = 107.3,
 		},
 		{
 			name = "Zorua",
-			evolution = "30",
+			evolution = "14",
 			bst = 330,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, } },
 			weight = 12.5,
 		},
 		{
 			name = "Zoroark",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 510,
-			movelvls = { { 12, 20, 24, 28, 34, 40, 46, 52, 58, }, { 12, 20, 24, 28, 34, 40, 46, 52, 58, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 30, 34, 39, 44, 49, 54, 59, 64, }, { 5, 9, 13, 17, 21, 25, 29, 30, 34, 39, 44, 49, 54, 59, 64, } },
 			weight = 81.1,
 		},
 		{
 			name = "Minccino",
 			evolution = PokemonData.Evolutions.SHINY,
 			bst = 300,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 3, 7, 9, 13, 15, 19, 21, 25, 27, 31, 33, 37, 39, 43, 45, 49, }, { 3, 7, 9, 13, 15, 19, 21, 25, 27, 31, 33, 37, 39, 43, 45, 49, } },
 			weight = 5.8,
 		},
 		{
 			name = "Cinccino",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 470,
-			movelvls = { { }, { } },
+			movelvls = { { 5, 9, 12, 15, 19, 23, 27, 33, 38, 42, 46, 51, 55, 60, 65, 69, }, { 5, 9, 12, 15, 19, 23, 27, 33, 38, 42, 46, 51, 55, 60, 65, 69, } },
 			weight = 7.5,
 		},
 		{
 			name = "Gothita",
-			evolution = "32",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 290,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 33, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 33, 36, 40, 44, 48, } },
+			movelvls = { { 5, 9, 11, 14, 16, 19, 24, 25, 28, 31, 33, 37, 40, 46, 48, }, { 5, 9, 11, 14, 16, 19, 24, 25, 28, 31, 33, 37, 40, 46, 48, } },
 			weight = 5.8,
 		},
 		{
 			name = "Gothorita",
-			evolution = "41",
+			evolution = "22",
 			bst = 390,
-			movelvls = { { 12, 16, 20, 24, 28, 35, 46, 52, 58, }, { 12, 16, 20, 24, 28, 35, 46, 52, 58, } },
+			movelvls = { { 5, 9, 11, 14, 16, 19, 24, 25, 28, 31, 34, 39, 43, 50, 53, }, { 5, 9, 11, 14, 16, 19, 24, 25, 28, 31, 34, 39, 43, 50, 53, } },
 			weight = 18.0,
 		},
 		{
 			name = "Gothitelle",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 12, 16, 20, 24, 28, 35, 40, 48, 56, 64, }, { 12, 16, 20, 24, 28, 35, 40, 48, 56, 64, } },
+			bst = 500,
+			movelvls = { { 5, 9, 12, 15, 18, 21, 24, 27, 30, 34, 40, 44, 50, 57, 64, }, { 5, 9, 12, 15, 18, 21, 24, 27, 30, 34, 40, 44, 50, 57, 64, } },
 			weight = 44.0,
 		},
 		{
 			name = "Solosis",
-			evolution = "32",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 290,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 24, 28, 33, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 24, 28, 33, 36, 40, 44, 48, } },
+			movelvls = { { 5, 9, 11, 14, 16, 19, 24, 25, 28, 31, 33, 37, 40, 46, 48, }, { 5, 9, 11, 14, 16, 19, 24, 25, 28, 31, 33, 37, 40, 46, 48, } },
 			weight = 1.0,
 		},
 		{
 			name = "Duosion",
-			evolution = "41",
+			evolution = "22",
 			bst = 370,
-			movelvls = { { 12, 16, 20, 24, 24, 28, 35, 40, 46, 52, 58, }, { 12, 16, 20, 24, 24, 28, 35, 40, 46, 52, 58, } },
+			movelvls = { { 5, 9, 11, 14, 16, 19, 24, 25, 28, 31, 34, 39, 43, 50, 53, }, { 5, 9, 11, 14, 16, 19, 24, 25, 28, 31, 34, 39, 43, 50, 53, } },
 			weight = 8.0,
 		},
 		{
 			name = "Reuniclus",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 12, 16, 20, 24, 24, 28, 35, 40, 48, 56, 64, }, { 12, 16, 20, 24, 24, 28, 35, 40, 48, 56, 64, } },
+			bst = 500,
+			movelvls = { { 5, 9, 12, 15, 18, 21, 24, 27, 30, 34, 40, 44, 50, 57, 64, }, { 5, 9, 12, 15, 18, 21, 24, 27, 30, 34, 40, 44, 50, 57, 64, } },
 			weight = 20.1,
 		},
 		{
 			name = "Ducklett",
-			evolution = "35",
+			evolution = "16",
 			bst = 305,
 			movelvls = { { 6, 9, 13, 15, 19, 21, 24, 27, 30, 34, 37, 41, 46, }, { 6, 9, 13, 15, 19, 21, 24, 27, 30, 34, 37, 41, 46, } },
 			weight = 5.5,
@@ -2082,42 +3675,42 @@ local function KaizoXYZExtension()
 			name = "Swanna",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 473,
-			movelvls = { { 13, 15, 19, 21, 24, 27, 30, 34, 40, 47, 55, }, { 13, 15, 19, 21, 24, 27, 30, 34, 40, 47, 55, } },
+			movelvls = { { 3, 6, 9, 13, 15, 19, 21, 24, 27, 30, 34, 40, 47, 55, }, { 3, 6, 9, 13, 15, 19, 21, 24, 27, 30, 34, 40, 47, 55, } },
 			weight = 24.2,
 		},
 		{
 			name = "Vanillite",
-			evolution = "35",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 305,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 4, 9, 11, 13, 16, 19, 22, 26, 31, 35, 40, 44, 49, 53, }, { 4, 9, 11, 13, 16, 19, 22, 26, 31, 35, 40, 44, 49, 53, } },
 			weight = 5.7,
 		},
 		{
 			name = "Vanillish",
-			evolution = "47",
+			evolution = "20",
 			bst = 395,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, } },
+			movelvls = { { 7, 10, 13, 16, 19, 22, 26, 31, 36, 42, 47, 53, 58, }, { 7, 10, 13, 16, 19, 22, 26, 31, 36, 42, 47, 53, 58, } },
 			weight = 41.0,
 		},
 		{
 			name = "Vanilluxe",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 535,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 52, 60, }, { 12, 16, 20, 24, 28, 32, 38, 44, 52, 60, } },
+			movelvls = { { 4, 7, 10, 13, 16, 19, 22, 26, 31, 36, 42, 50, 59, 67, 73, }, { 4, 7, 10, 13, 16, 19, 22, 26, 31, 36, 42, 50, 59, 67, 73, } },
 			weight = 57.5,
 		},
 		{
 			name = "Deerling",
-			evolution = "34",
+			evolution = "16",
 			bst = 335,
-			movelvls = { { 4, 7, 10, 13, 16, 20, 24, 28, 32, 37, 42, }, { 4, 7, 10, 13, 16, 20, 24, 28, 32, 37, 42, } },
+			movelvls = { { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 41, 46, 51, }, { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 41, 46, 51, } },
 			weight = 19.5,
 		},
 		{
 			name = "Sawsbuck",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 475,
-			movelvls = { { 10, 13, 16, 20, 24, 28, 36, 44, 52, }, { 10, 13, 16, 20, 24, 28, 36, 44, 52, } },
+			movelvls = { { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 37, 44, 52, 60, }, { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 37, 44, 52, 60, } },
 			weight = 92.5,
 		},
 		{
@@ -2129,105 +3722,105 @@ local function KaizoXYZExtension()
 		},
 		{
 			name = "Karrablast",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
+			evolution = "10",
 			bst = 315,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 4, 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, }, { 4, 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, } },
 			weight = 5.9,
 		},
 		{
 			name = "Escavalier",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 495,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
+			movelvls = { { 4, 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, 60, }, { 4, 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, 60, } },
 			weight = 33.0,
 		},
 		{
 			name = "Foongus",
-			evolution = "39",
+			evolution = "10",
 			bst = 294,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 5, 9, 12, 15, 18, 20, 24, 28, 32, 35, 39, 43, 45, 50, }, { 5, 9, 12, 15, 18, 20, 24, 28, 32, 35, 39, 43, 45, 50, } },
 			weight = 1.0,
 		},
 		{
 			name = "Amoonguss",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 464,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, }, { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, } },
+			bst = 484,
+			movelvls = { { 5, 9, 12, 15, 18, 20, 24, 28, 32, 35, 43, 49, 54, 62, }, { 5, 9, 12, 15, 18, 20, 24, 28, 32, 35, 43, 49, 54, 62, } },
 			weight = 10.5,
 		},
 		{
 			name = "Frillish",
-			evolution = "40",
+			evolution = "16",
 			bst = 335,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 41, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 41, 44, 48, } },
+			movelvls = { { 5, 9, 13, 17, 22, 27, 32, 37, 43, 49, 55, 61, }, { 5, 9, 13, 17, 22, 27, 32, 37, 43, 49, 55, 61, } },
 			weight = 33.0,
 		},
 		{
 			name = "Jellicent",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 43, 48, 54, }, { 12, 16, 20, 24, 28, 32, 36, 43, 48, 54, } },
+			bst = 510,
+			movelvls = { { 5, 9, 13, 17, 22, 27, 32, 37, 45, 53, 61, 69, }, { 5, 9, 13, 17, 22, 27, 32, 37, 45, 53, 61, 69, } },
 			weight = 135.0,
 		},
 		{
 			name = "Alomomola",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 470,
-			movelvls = { { 5, 9, 13, 13, 21, 25, 29, 33, 37, 41, 45, 49, 55, }, { 5, 9, 13, 13, 21, 25, 29, 33, 37, 41, 45, 49, 55, } },
+			bst = 480,
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, } },
 			weight = 31.6,
 		},
 		{
 			name = "Joltik",
-			evolution = "36",
+			evolution = "16",
 			bst = 319,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 37, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 37, 40, 44, 48, } },
+			movelvls = { { 4, 7, 12, 15, 18, 23, 26, 29, 34, 37, 40, 45, 48, }, { 4, 7, 12, 15, 18, 23, 26, 29, 34, 37, 40, 45, 48, } },
 			weight = 0.6,
 		},
 		{
 			name = "Galvantula",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 472,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 39, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 39, 44, 50, 56, } },
+			bst = 495,
+			movelvls = { { 4, 9, 12, 15, 18, 23, 26, 29, 34, 40, 46, 54, 60, 65, }, { 4, 9, 12, 15, 18, 23, 26, 29, 34, 40, 46, 54, 60, 65, } },
 			weight = 14.3,
 		},
 		{
 			name = "Ferroseed",
-			evolution = "40",
+			evolution = "14",
 			bst = 305,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, } },
+			movelvls = { { 6, 9, 14, 18, 21, 26, 30, 35, 38, 43, 47, 52, 55, }, { 6, 9, 14, 18, 21, 26, 30, 35, 38, 43, 47, 52, 55, } },
 			weight = 18.8,
 		},
 		{
 			name = "Ferrothorn",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 489,
-			movelvls = { { 15, 20, 25, 30, 35, 43, 49, 56, }, { 15, 20, 25, 30, 35, 43, 49, 56, } },
+			bst = 509,
+			movelvls = { { 6, 9, 14, 18, 21, 26, 30, 35, 38, 40, 46, 53, 61, 67, }, { 6, 9, 14, 18, 21, 26, 30, 35, 38, 40, 46, 53, 61, 67, } },
 			weight = 110.0,
 		},
 		{
 			name = "Klink",
-			evolution = "38",
+			evolution = "16",
 			bst = 300,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 6, 11, 16, 21, 26, 31, 36, 39, 42, 45, 48, 50, 54, 57, }, { 6, 11, 16, 21, 26, 31, 36, 39, 42, 45, 48, 50, 54, 57, } },
 			weight = 21.0,
 		},
 		{
 			name = "Klang",
-			evolution = "49",
+			evolution = "30",
 			bst = 440,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, }, { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, } },
+			movelvls = { { 6, 11, 16, 21, 26, 31, 36, 40, 44, 48, 52, 56, 60, 64, }, { 6, 11, 16, 21, 26, 31, 36, 40, 44, 48, 52, 56, 60, 64, } },
 			weight = 51.0,
 		},
 		{
 			name = "Klinklang",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 520,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 42, 48, 56, 64, }, { 12, 16, 20, 24, 28, 32, 36, 42, 48, 56, 64, } },
+			movelvls = { { 6, 11, 16, 21, 25, 31, 36, 40, 44, 48, 54, 60, 66, 72, 76, }, { 6, 11, 16, 21, 25, 31, 36, 40, 44, 48, 54, 60, 66, 72, 76, } },
 			weight = 81.0,
 		},
 		{
 			name = "Tynamo",
-			evolution = "39",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 275,
 			movelvls = { { }, { } },
 			weight = 0.3,
@@ -2236,33 +3829,33 @@ local function KaizoXYZExtension()
 			name = "Eelektrik",
 			evolution = PokemonData.Evolutions.THUNDER,
 			bst = 405,
-			movelvls = { { 9, 19, 29, 44, 49, 54, 59, 64, 69, 74, }, { 9, 19, 29, 44, 49, 54, 59, 64, 69, 74, } },
+			movelvls = { { 9, 12, 15, 19, 25, 31, 39, 44, 52, 60, 70, }, { 9, 12, 15, 19, 25, 31, 39, 44, 52, 60, 70, } },
 			weight = 22.0,
 		},
 		{
 			name = "Eelektross",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 515,
-			movelvls = { { 5, }, { 5, } },
+			movelvls = { { 9, 12, 15, 19, 25, 31, 39, 44, 52, 60, 65, 70, }, { 9, 12, 15, 19, 25, 31, 39, 44, 52, 60, 65, 70, } },
 			weight = 80.5,
 		},
 		{
 			name = "Elgyem",
-			evolution = "42",
+			evolution = "16",
 			bst = 335,
-			movelvls = { { 6, 12, 18, 24, 24, 30, 36, 43, 48, 54, 60, }, { 6, 12, 18, 24, 24, 30, 36, 43, 48, 54, 60, } },
+			movelvls = { { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, 53, 56, }, { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, 53, 56, } },
 			weight = 9.0,
 		},
 		{
 			name = "Beheeyem",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 18, 24, 24, 30, 36, 45, 52, 60, 68, }, { 18, 24, 24, 30, 36, 45, 52, 60, 68, } },
+			bst = 495,
+			movelvls = { { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 45, 50, 56, 58, 63, 68, }, { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 45, 50, 56, 58, 63, 68, } },
 			weight = 34.5,
 		},
 		{
 			name = "Litwick",
-			evolution = "41",
+			evolution = "14",
 			bst = 275,
 			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
 			weight = 3.1,
@@ -2271,212 +3864,201 @@ local function KaizoXYZExtension()
 			name = "Lampent",
 			evolution = PokemonData.Evolutions.DUSK,
 			bst = 370,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 46, 52, 58, 64, }, { 12, 16, 20, 24, 28, 32, 36, 40, 46, 52, 58, 64, } },
+			movelvls = { { 3, 5, 9, 11, 13, 16, 20, 24, 28, 33, 38, 45, 53, 61, 69, }, { 3, 5, 9, 11, 13, 16, 20, 24, 28, 33, 38, 45, 53, 61, 69, } },
 			weight = 13.0,
 		},
 		{
 			name = "Chandelure",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 520,
-			movelvls = { { }, { } },
+			movelvls = { { 3, 5, 9, 11, 13, 16, 20, 24, 28, 33, 38, 45, 53, 61, 69, }, { 3, 5, 9, 11, 13, 16, 20, 24, 28, 33, 38, 45, 53, 61, 69, } },
 			weight = 34.3,
 		},
 		{
 			name = "Axew",
-			evolution = "38",
+			evolution = "22",
 			bst = 320,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, } },
+			movelvls = { { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 41, 46, 50, 56, 61, }, { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 41, 46, 50, 56, 61, } },
 			weight = 18.0,
-			friendshipBase = 35
 		},
 		{
 			name = "Fraxure",
-			evolution = "48",
+			evolution = "45",
 			bst = 410,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, 56, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, 56, } },
+			movelvls = { { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 42, 48, 54, 60, 66, }, { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 42, 48, 54, 60, 66, } },
 			weight = 36.0,
-			friendshipBase = 35
 		},
 		{
 			name = "Haxorus",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 540,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 53, 60, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 53, 60, } },
+			movelvls = { { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 42, 50, 58, 66, 74, }, { 4, 7, 10, 13, 16, 20, 24, 28, 32, 36, 42, 50, 58, 66, 74, } },
 			weight = 105.5,
-			friendshipBase = 35
 		},
 		{
 			name = "Cubchoo",
-			evolution = "37",
+			evolution = "14",
 			bst = 305,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, } },
+			movelvls = { { 5, 9, 13, 15, 17, 21, 25, 29, 33, 36, 41, 45, 49, 53, 57, }, { 5, 9, 13, 15, 17, 21, 25, 29, 33, 36, 41, 45, 49, 53, 57, } },
 			weight = 8.5,
 		},
 		{
 			name = "Beartic",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 505,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, } },
+			movelvls = { { 9, 13, 17, 21, 25, 29, 33, 36, 37, 41, 45, 53, 59, 66, }, { 9, 13, 17, 21, 25, 29, 33, 36, 37, 41, 45, 53, 59, 66, } },
 			weight = 260.0,
 		},
 		{
 			name = "Cryogonal",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 515,
-			movelvls = { { 4, 8, 12, 16, 16, 20, 24, 28, 32, 36, 40, 40, 44, 48, 52, 56, 60, }, { 4, 8, 12, 16, 16, 20, 24, 28, 32, 36, 40, 40, 44, 48, 52, 56, 60, } },
+			movelvls = { { 5, 9, 13, 17, 21, 21, 25, 29, 33, 37, 37, 41, 45, 49, 50, 53, 57, 61, }, { 5, 9, 13, 17, 21, 21, 25, 29, 33, 37, 37, 41, 45, 49, 50, 53, 57, 61, } },
 			weight = 148.0,
 		},
 		{
 			name = "Shelmet",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
+			evolution = "10",
 			bst = 305,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 4, 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 50, 56, }, { 4, 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 50, 56, } },
 			weight = 7.7,
 		},
 		{
 			name = "Accelgor",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 495,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
+			movelvls = { { 4, 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, }, { 4, 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, } },
 			weight = 25.3,
 		},
 		{
 			name = "Stunfisk",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 471,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 30, 35, 40, 45, 50, 55, 61, }, { 5, 9, 13, 17, 21, 25, 30, 35, 40, 45, 50, 55, 61, } },
 			weight = 11.0,
-			friendshipBase = 70
 		},
 		{
 			name = "Mienfoo",
-			evolution = "50",
+			evolution = "16",
 			bst = 350,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 51, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 51, 55, 60, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 50, 57, 61, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 50, 57, 61, } },
 			weight = 20.0,
 		},
 		{
 			name = "Mienshao",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 510,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 45, 53, 59, 66, }, { 15, 20, 25, 30, 35, 40, 45, 53, 59, 66, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 56, 63, 70, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 56, 63, 70, } },
 			weight = 35.5,
 		},
 		{
 			name = "Druddigon",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 485,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 5, 9, 13, 18, 21, 25, 27, 31, 35, 40, 45, 49, 55, 62, }, { 5, 9, 13, 18, 21, 25, 27, 31, 35, 40, 45, 49, 55, 62, } },
 			weight = 139.0,
 		},
 		{
 			name = "Golett",
-			evolution = "43",
+			evolution = "14",
 			bst = 303,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 30, 35, 40, 45, 50, 55, }, { 5, 9, 13, 17, 21, 25, 30, 35, 40, 45, 50, 55, } },
 			weight = 92.0,
 		},
 		{
 			name = "Golurk",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 483,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 46, 52, 58, 64, }, { 12, 16, 20, 24, 28, 32, 36, 40, 46, 52, 58, 64, } },
+			bst = 523,
+			movelvls = { { 5, 9, 13, 17, 21, 25, 30, 35, 40, 43, 50, 60, 70, 75, }, { 5, 9, 13, 17, 21, 25, 30, 35, 40, 43, 50, 60, 70, 75, } },
 			weight = 330.0,
 		},
 		{
 			name = "Pawniard",
-			evolution = "52",
+			evolution = "16",
 			bst = 340,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } },
+			movelvls = { { 6, 9, 14, 17, 22, 25, 30, 33, 38, 41, 46, 49, 54, 57, 62, }, { 6, 9, 14, 17, 22, 25, 30, 33, 38, 41, 46, 49, 54, 57, 62, } },
 			weight = 10.2,
-			friendshipBase = 35
 		},
 		{
 			name = "Bisharp",
-			evolution = "62",
+			evolution = PokemonData.Evolutions.NONE,
 			bst = 490,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 45, 50, 57, 64, 71, }, { 15, 20, 25, 30, 35, 40, 45, 50, 57, 64, 71, } },
+			movelvls = { { 6, 9, 14, 17, 22, 25, 30, 33, 38, 41, 46, 49, 57, 63, 71, }, { 6, 9, 14, 17, 22, 25, 30, 33, 38, 41, 46, 49, 57, 63, 71, } },
 			weight = 70.0,
-			friendshipBase = 35
 		},
 		{
 			name = "Bouffalant",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 490,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 6, 11, 16, 21, 26, 31, 36, 41, 46, 50, 56, 61, }, { 6, 11, 16, 21, 26, 31, 36, 41, 46, 50, 56, 61, } },
 			weight = 94.6,
 		},
 		{
 			name = "Rufflet",
-			evolution = "54",
+			evolution = "16",
 			bst = 350,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 55, 60, 66, 72, }, { 6, 12, 18, 24, 30, 36, 42, 48, 55, 60, 66, 72, } },
+			movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, 59, 64, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, 59, 64, } },
 			weight = 10.5,
 		},
 		{
 			name = "Braviary",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 510,
-			movelvls = { { 18, 24, 30, 36, 42, 48, 57, 64, 72, }, { 18, 24, 30, 36, 42, 48, 57, 64, 72, } },
+			movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 51, 57, 63, 70, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 51, 57, 63, 70, } },
 			weight = 41.0,
 		},
 		{
 			name = "Vullaby",
-			evolution = "54",
+			evolution = "16",
 			bst = 370,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, } },
+			movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, 59, 64, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, 59, 64, } },
 			weight = 9.0,
-			friendshipBase = 35
 		},
 		{
 			name = "Mandibuzz",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 510,
-			movelvls = { { 18, 24, 30, 36, 42, 48, 57, 64, 72, 80, }, { 18, 24, 30, 36, 42, 48, 57, 64, 72, 80, } },
+			movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 51, 57, 63, 70, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 51, 57, 63, 70, } },
 			weight = 39.5,
-			friendshipBase = 35
 		},
 		{
 			name = "Heatmor",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 484,
-			movelvls = { { 5, 10, 15, 20, 20, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 20, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
+			movelvls = { { 6, 11, 16, 21, 26, 31, 36, 41, 44, 47, 50, 50, 50, 61, }, { 6, 11, 16, 21, 26, 31, 36, 41, 44, 47, 50, 50, 50, 61, } },
 			weight = 58.0,
 		},
 		{
 			name = "Durant",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 484,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
+			movelvls = { { 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, }, { 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56, 61, 66, } },
 			weight = 33.0,
 		},
 		{
 			name = "Deino",
-			evolution = "50",
+			evolution = "22",
 			bst = 300,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, } },
+			movelvls = { { 4, 9, 12, 17, 20, 25, 28, 32, 38, 42, 48, 50, 58, 62, }, { 4, 9, 12, 17, 20, 25, 28, 32, 38, 42, 48, 50, 58, 62, } },
 			weight = 17.3,
-			friendshipBase = 35
 		},
 		{
 			name = "Zweilous",
-			evolution = "64",
+			evolution = "45",
 			bst = 420,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 54, 60, 66, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 54, 60, 66, } },
+			movelvls = { { 4, 9, 12, 17, 20, 25, 28, 32, 38, 42, 48, 55, 64, 71, }, { 4, 9, 12, 17, 20, 25, 28, 32, 38, 42, 48, 55, 64, 71, } },
 			weight = 50.0,
-			friendshipBase = 35
 		},
 		{
 			name = "Hydreigon",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 54, 60, 68, 76, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 54, 60, 68, 76, } },
+			movelvls = { { 4, 9, 12, 17, 20, 25, 28, 32, 38, 42, 48, 55, 68, 79, }, { 4, 9, 12, 17, 20, 25, 28, 32, 38, 42, 48, 55, 68, 79, } },
 			weight = 160.0,
-			friendshipBase = 35
 		},
 		{
 			name = "Larvesta",
-			evolution = "59",
+			evolution = "16",
 			bst = 360,
 			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, } },
 			weight = 28.8,
@@ -2485,145 +4067,147 @@ local function KaizoXYZExtension()
 			name = "Volcarona",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 550,
-			movelvls = { { 18, 24, 30, 36, 42, 48, 54, 62, 70, 78, }, { 18, 24, 30, 36, 42, 48, 54, 62, 70, 78, } },
+			movelvls = { { 9, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81, }, { 9, 15, 21, 27, 33, 39, 45, 51, 57, 63, 69, 75, 81, } },
 			weight = 46.0,
 		},
 		{
 			name = "Cobalion",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, } },
+			movelvls = { { 7, 13, 19, 25, 31, 37, 42, 49, 55, 61, 67, 73, }, { 7, 13, 19, 25, 31, 37, 42, 49, 55, 61, 67, 73, } },
 			weight = 250.0,
-			friendshipBase = 35
 		},
 		{
 			name = "Terrakion",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, } },
+			movelvls = { { 7, 13, 19, 25, 31, 37, 42, 49, 55, 61, 67, 73, }, { 7, 13, 19, 25, 31, 37, 42, 49, 55, 61, 67, 73, } },
 			weight = 260.0,
-			friendshipBase = 35
 		},
 		{
 			name = "Virizion",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, } },
+			movelvls = { { 7, 13, 19, 25, 31, 37, 42, 49, 55, 61, 67, 73, }, { 7, 13, 19, 25, 31, 37, 42, 49, 55, 61, 67, 73, } },
 			weight = 200.0,
-			friendshipBase = 35
 		},
 		{
 			name = "Tornadus",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 77, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 77, } },
+			movelvls = { { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85, }, { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85, } },
 			weight = 63.0,
-			friendshipBase = 90
 		},
 		{
 			name = "Thundurus",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
+			movelvls = { { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85, }, { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85, } },
 			weight = 61.0,
-			friendshipBase = 90
-		},
-		{
-			name = "Reshiram",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 330.0,
-			friendshipBase = 0
-		},
-		{
-			name = "Zekrom",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 345.0,
-			friendshipBase = 0
 		},
 		{
 			name = "Landorus",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 5, 10, 15, 20, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, }, { 5, 10, 15, 20, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, } },
+			movelvls = { { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85, }, { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, 79, 85, } },
 			weight = 68.0,
-			friendshipBase = 90
 		},
 		{
-			name = "Kyurem",
+			name = "Reshiram",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 660,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
+			bst = 680,
+			movelvls = { { 15, 22, 29, 36, 43, 50, 54, 71, 78, 85, 92, 100, }, { 15, 22, 29, 36, 43, 50, 54, 71, 78, 85, 92, 100, } },
+			weight = 330.0,
+		},
+		{
+			name = "Zekrom",
+			evolution = PokemonData.Evolutions.NONE,
+			bst = 680,
+			movelvls = { { 15, 22, 29, 36, 43, 50, 54, 71, 78, 85, 92, 100, }, { 15, 22, 29, 36, 43, 50, 54, 71, 78, 85, 92, 100, } },
+			weight = 345.0,
+		},
+		{
+			name = "Kyurem W",
+			evolution = PokemonData.Evolutions.NONE,
+			bst = 700,
+			movelvls = { { 15, 22, 29, 36, 43, 50, 54, 71, 78, 85, 92, }, { 15, 22, 29, 36, 43, 50, 54, 71, 78, 85, 92, } },
 			weight = 325.0,
-			friendshipBase = 0
+		},
+		{
+			name = "Kyurem B",
+			evolution = PokemonData.Evolutions.NONE,
+			bst = 700,
+			movelvls = { { 15, 22, 29, 36, 43, 50, 54, 71, 78, 85, 92, }, { 15, 22, 29, 36, 43, 50, 54, 71, 78, 85, 92, } },
+			weight = 325.0,
 		},
 		{
 			name = "Keldeo",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, } },
+			movelvls = { { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, }, { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, } },
 			weight = 48.5,
-			friendshipBase = 35
 		},
 		{
-			name = "Meloetta",
+			name = "Meloetta A",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 21, 26, 31, 36, 43, 50, 57, 64, 71, 78, 85, }, { 21, 26, 31, 36, 43, 50, 57, 64, 71, 78, 85, } },
+			movelvls = { { 6, 11, 16, 21, 26, 31, 36, 43, 50, 57, 64, 71, 78, 85, }, { 6, 11, 16, 21, 26, 31, 36, 43, 50, 57, 64, 71, 78, 85, } },
 			weight = 6.5,
-			friendshipBase = 100
+		},
+		{
+			name = "Meloetta P",
+			evolution = PokemonData.Evolutions.NONE,
+			bst = 600,
+			movelvls = { { 6, 11, 16, 21, 26, 31, 36, 43, 50, 57, 64, 71, 78, 85, }, { 6, 11, 16, 21, 26, 31, 36, 43, 50, 57, 64, 71, 78, 85, } },
+			weight = 6.5,
 		},
 		{
 			name = "Genesect",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
+			movelvls = { { 7, 11, 18, 22, 29, 33, 40, 44, 51, 55, 62, 66, 73, 77, }, { 7, 11, 18, 22, 29, 33, 40, 44, 51, 55, 62, 66, 73, 77, } },
 			weight = 82.5,
-			friendshipBase = 0
 		},
 		{
 			name = "Chespin",
 			evolution = "16",
 			bst = 313,
-			movelvls = { { 8, 11, 15, 18, 27, 32, 35, 42, 45, 48, }, { 8, 11, 15, 18, 27, 32, 35, 42, 45, 48, } },
+			movelvls = { { 5, 8, 11, 15, 18, 27, 32, 35, 42, 45, 48, }, { 5, 8, 11, 15, 18, 27, 32, 35, 42, 45, 48, } },
 			weight = 9.0,
 		},
 		{
 			name = "Quilladin",
-			evolution = "36",
+			evolution = "30",
 			bst = 405,
-			movelvls = { { 8, 11, 15, 20, 24, 29, 34, 38, 43, 47, 53, }, { 8, 11, 15, 20, 24, 29, 34, 38, 43, 47, 53, } },
+			movelvls = { { 5, 8, 11, 15, 20, 26, 30, 35, 39, 44, 48, 52, 55, }, { 5, 8, 11, 15, 20, 26, 30, 35, 39, 44, 48, 52, 55, } },
 			weight = 29.0,
 		},
 		{
 			name = "Chesnaught",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 530,
-			movelvls = { { 11, 15, 19, 29, 35, 41, 48, 54, 60, 66, 78, }, { 11, 15, 19, 29, 35, 41, 48, 54, 60, 66, 78, } },
+			movelvls = { { 5, 8, 11, 15, 20, 26, 30, 35, 41, 44, 48, 52, 55, 55, 60, 70, }, { 5, 8, 11, 15, 20, 26, 30, 35, 41, 44, 48, 52, 55, 55, 60, 70, } },
 			weight = 90.0,
 		},
 		{
 			name = "Fennekin",
 			evolution = "16",
 			bst = 307,
-			movelvls = { { 5, 11, 14, 17, 20, 25, 31, 35, 38, 41, 43, 48, }, { 5, 11, 14, 17, 20, 25, 31, 35, 38, 41, 43, 48, } },
+			movelvls = { { 5, 11, 14, 17, 20, 25, 27, 31, 35, 38, 41, 43, 46, 48, }, { 5, 11, 14, 17, 20, 25, 27, 31, 35, 38, 41, 43, 46, 48, } },
 			weight = 9.4,
 		},
 		{
 			name = "Braixen",
-			evolution = "36",
+			evolution = "30",
 			bst = 409,
-			movelvls = { { 11, 14, 18, 22, 28, 36, 41, 45, 49, 52, 56, 59, }, { 11, 14, 18, 22, 28, 36, 41, 45, 49, 52, 56, 59, } },
+			movelvls = { { 5, 11, 14, 18, 22, 27, 30, 34, 41, 45, 48, 51, 53, 55, }, { 5, 11, 14, 18, 22, 27, 30, 34, 41, 45, 48, 51, 53, 55, } },
 			weight = 14.5,
 		},
 		{
 			name = "Delphox",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 534,
-			movelvls = { { 14, 18, 22, 28, 38, 45, 51, 57, 62, 68, 74, }, { 14, 18, 22, 28, 38, 45, 51, 57, 62, 68, 74, } },
+			movelvls = { { 5, 11, 14, 18, 22, 27, 30, 34, 42, 47, 51, 55, 55, 58, 61, 69, }, {  5, 11, 14, 18, 22, 27, 30, 34, 42, 47, 51, 55, 55, 58, 61, 69, } },
 			weight = 39.0,
 		},
 		{
@@ -2635,77 +4219,77 @@ local function KaizoXYZExtension()
 		},
 		{
 			name = "Frogadier",
-			evolution = "36",
+			evolution = "30",
 			bst = 405,
-			movelvls = { { 8, 10, 14, 19, 23, 28, 33, 40, 45, 50, 56, }, { 8, 10, 14, 19, 23, 28, 33, 40, 45, 50, 56, } },
+			movelvls = { { 5, 8, 10, 14, 20, 23, 28, 33, 38, 44, 48, 55, }, { 5, 8, 10, 14, 20, 23, 28, 33, 38, 44, 48, 55, } },
 			weight = 10.9,
 		},
 		{
 			name = "Greninja",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 530,
-			movelvls = { { 10, 14, 19, 23, 28, 33, 42, 49, 56, 68, }, { 10, 14, 19, 23, 28, 33, 42, 49, 56, 68, } },
+			movelvls = { { 5, 8, 10, 14, 20, 23, 28, 33, 43, 49, 52, 55, 56, 60, 70, }, { 5, 8, 10, 14, 20, 23, 28, 33, 43, 49, 52, 55, 56, 60, 70, } },
 			weight = 40.0,
 		},
 		{
 			name = "Bunnelby",
-			evolution = "20",
+			evolution = "14",
 			bst = 237,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, } },
+			movelvls = { { 7, 10, 13, 15, 18, 20, 25, 29, 33, 38, 42, 47, 49, }, { 7, 10, 13, 15, 18, 20, 25, 29, 33, 38, 42, 47, 49, } },
 			weight = 5.0,
 		},
 		{
 			name = "Diggersby",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 423,
-			movelvls = { { 9, 12, 15, 18, 23, 28, 33, 38, 43, 48, 53, 58, }, { 9, 12, 15, 18, 23, 28, 33, 38, 43, 48, 53, 58, } },
+			movelvls = { { 7, 13, 15, 18, 20, 26, 31, 37, 42, 48, 53, 57, 60, }, { 7, 13, 15, 18, 20, 26, 31, 37, 42, 48, 53, 57, 60, } },
 			weight = 42.4,
 		},
 		{
 			name = "Fletchling",
-			evolution = "17",
+			evolution = "14",
 			bst = 278,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } },
+			movelvls = { { 6, 10, 13, 16, 21, 25, 29, 34, 39, 41, 45, 48, }, { 6, 10, 13, 16, 21, 25, 29, 34, 39, 41, 45, 48, } },
 			weight = 1.7,
 		},
 		{
 			name = "Fletchinder",
-			evolution = "35",
+			evolution = "22",
 			bst = 382,
-			movelvls = { { 15, 22, 29, 36, 43, 50, 57, 64, }, { 15, 22, 29, 36, 43, 50, 57, 64, } },
+			movelvls = { { 6, 10, 13, 16, 17, 25, 27, 31, 38, 42, 46, 51, 55, }, { 6, 10, 13, 16, 17, 25, 27, 31, 38, 42, 46, 51, 55, } },
 			weight = 16.0,
 		},
 		{
 			name = "Talonflame",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 499,
-			movelvls = { { 15, 22, 29, 38, 47, 56, 65, 74, 83, }, { 15, 22, 29, 38, 47, 56, 65, 74, 83, } },
+			bst = 519,
+			movelvls = { { 6, 10, 13, 16, 17, 25, 27, 31, 39, 44, 49, 55, 60, 64, }, { 6, 10, 13, 16, 17, 25, 27, 31, 39, 44, 49, 55, 60, 64, } },
 			weight = 24.5,
 		},
 		{
 			name = "Scatterbug",
-			evolution = "9",
+			evolution = "7",
 			bst = 200,
 			movelvls = { { 6, 15, }, { 6, 15, } },
 			weight = 2.5,
 		},
 		{
 			name = "Spewpa",
-			evolution = "12",
+			evolution = "10",
 			bst = 213,
-			movelvls = { { }, { } },
+			movelvls = { { 9, }, { 9, } },
 			weight = 8.4,
 		},
 		{
 			name = "Vivillon",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 411,
-			movelvls = { { 12, 17, 21, 25, 31, 35, 45, 50, }, { 12, 17, 21, 25, 31, 35, 45, 50, } },
+			bst = 491,
+			movelvls = { { 9, 12, 17, 21, 25, 31, 35, 45, 50, 55, 61, }, { 9, 12, 17, 21, 25, 31, 35, 45, 50, 55, 61, } },
 			weight = 17.0,
 		},
 		{
 			name = "Litleo",
-			evolution = "35",
+			evolution = "16",
 			bst = 369,
 			movelvls = { { 5, 8, 11, 15, 20, 23, 28, 33, 36, 39, 43, 46, 50, }, { 5, 8, 11, 15, 20, 23, 28, 33, 36, 39, 43, 46, 50, } },
 			weight = 13.5,
@@ -2714,370 +4298,364 @@ local function KaizoXYZExtension()
 			name = "Pyroar",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 507,
-			movelvls = { { 11, 15, 20, 23, 28, 33, 38, 42, 48, 51, 57, }, { 11, 15, 20, 23, 28, 33, 38, 42, 48, 51, 57, } },
+			movelvls = { { 5, 8, 11, 15, 20, 23, 28, 33, 38, 42, 48, 51, 57, }, { 5, 8, 11, 15, 20, 23, 28, 33, 38, 42, 48, 51, 57, } },
 			weight = 81.5,
 		},
 		{
 			name = "Flabébé",
-			evolution = "19",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 303,
-			movelvls = { { 6, 10, 15, 20, 22, 24, 28, 33, 37, 41, 45, 48, }, { 6, 10, 15, 20, 22, 24, 28, 33, 37, 41, 45, 48, } },
+			movelvls = { { 6, 9, 15, 20, 22, 24, 28, 33, 37, 41, 45, 48, }, { 6, 10, 15, 20, 22, 24, 28, 33, 37, 41, 45, 48, } },
 			weight = 0.1,
 		},
 		{
 			name = "Floette",
 			evolution = PokemonData.Evolutions.SHINY,
 			bst = 371,
-			movelvls = { { 10, 15, 20, 25, 27, 33, 38, 43, 46, 51, 58, }, { 10, 15, 20, 25, 27, 33, 38, 43, 46, 51, 58, } },
+			movelvls = { { 6, 10, 15, 20, 25, 27, 33, 38, 43, 46, 51, 58, }, { 6, 10, 15, 20, 25, 27, 33, 38, 43, 46, 51, 58, } },
 			weight = 0.9,
 		},
 		{
 			name = "Florges",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 552,
-			movelvls = { { 5, }, { 5, } },
+			movelvls = { { 6, 10, 15, 20, 25, 27, 33, 38, 43, 46, 51, 58, 66, }, { 6, 10, 15, 20, 25, 27, 33, 38, 43, 46, 51, 58, 66, } },
 			weight = 10.0,
 		},
 		{
 			name = "Skiddo",
-			evolution = "32",
+			evolution = "16",
 			bst = 350,
-			movelvls = { { 7, 9, 12, 13, 16, 20, 22, 26, 30, 34, 38, 42, 45, }, { 7, 9, 12, 13, 16, 20, 22, 26, 30, 34, 38, 42, 45, } },
+			movelvls = { { 7, 9, 12, 13, 16, 20, 22, 26, 30, 34, 38, 42, 45, 50, }, { 7, 9, 12, 13, 16, 20, 22, 26, 30, 34, 38, 42, 45, 50, } },
 			weight = 31.0,
 		},
 		{
 			name = "Gogoat",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 531,
-			movelvls = { { 12, 13, 16, 20, 22, 26, 30, 34, 40, 47, 55, 58, }, { 12, 13, 16, 20, 22, 26, 30, 34, 40, 47, 55, 58, } },
+			movelvls = { { 7, 9, 12, 13, 16, 20, 22, 26, 30, 34, 40, 47, 55, 58, 60, 65, }, { 7, 9, 12, 13, 16, 20, 22, 26, 30, 34, 40, 47, 55, 58, 60, 65, } },
 			weight = 91.0,
 		},
 		{
 			name = "Pancham",
-			evolution = "32",
+			evolution = "18",
 			bst = 348,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 33, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 33, 36, 40, 44, } },
+			movelvls = { { 7, 10, 12, 15, 20, 25, 27, 33, 39, 42, 45, 48, }, { 7, 10, 12, 15, 20, 25, 27, 33, 39, 42, 45, 48, } },
 			weight = 8.0,
 		},
 		{
 			name = "Pangoro",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 495,
-			movelvls = { { 12, 16, 20, 24, 28, 35, 40, 46, 52, 58, }, { 12, 16, 20, 24, 28, 35, 40, 46, 52, 58, } },
+			bst = 525,
+			movelvls = { { 7, 10, 12, 15, 20, 25, 27, 35, 42, 45, 48, 52, 57, 65, 70, }, { 7, 10, 12, 15, 20, 25, 27, 35, 42, 45, 48, 52, 57, 65, 70, } },
 			weight = 136.0,
 		},
 		{
 			name = "Furfrou",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 472,
-			movelvls = { { 5, 9, 12, 15, 22, 27, 33, 35, 38, 42, 48, }, { 5, 9, 12, 15, 22, 27, 33, 35, 38, 42, 48, } },
+			movelvls = { { 5, 9, 12, 15, 22, 27, 33, 35, 38, 42, 48, 54, 60, }, { 5, 9, 12, 15, 22, 27, 33, 35, 38, 42, 48, 54, 60, } },
 			weight = 28.0,
 		},
 		{
 			name = "Espurr",
-			evolution = "25",
+			evolution = "16",
 			bst = 355,
-			movelvls = { { 3, 6, 9, 18, 21, 30, 30, 33, }, { 3, 6, 9, 18, 21, 30, 30, 33, } },
+			movelvls = { { 5, 9, 11, 13, 17, 19, 22, 25, }, { 5, 9, 11, 13, 17, 19, 22, 25, } },
 			weight = 3.5,
 		},
 		{
 			name = "Meowstic",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 466,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 29, 34, 34, 39, 44, 49, 54, 59, }, { 9, 12, 15, 18, 21, 24, 29, 34, 34, 39, 44, 49, 54, 59, } },
+			bst = 516,
+			movelvls = { { 5, 9, 13, 17, 21, 25, 30, 35, 40, 44, 48, 53, 59, 65, 70, 77, }, { 5, 9, 13, 17, 21, 25, 30, 35, 40, 44, 48, 53, 59, 65, 70, 77, } },
 			weight = 8.5,
 		},
 		{
 			name = "Honedge",
-			evolution = "35",
+			evolution = "16",
 			bst = 325,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 5, 8, 13, 18, 20, 22, 26, 29, 32, 35, 39, 42, 47, }, { 5, 8, 13, 18, 20, 22, 26, 29, 32, 35, 39, 42, 47, } },
 			weight = 2.0,
 		},
 		{
 			name = "Doublade",
 			evolution = PokemonData.Evolutions.DUSK,
 			bst = 448,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, } },
+			movelvls = { { 5, 8, 13, 18, 20, 22, 26, 29, 32, 36, 41, 45, 51, }, { 5, 8, 13, 18, 20, 22, 26, 29, 32, 36, 41, 45, 51, } },
 			weight = 4.5,
 		},
 		{
 			name = "Aegislash",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { }, { } },
+			bst = 520,
+			movelvls = { { 5, 8, 13, 18, 23, 28, 31, 36, 41, 46, 51, 56, 61, 66, 71, }, { 5, 8, 13, 18, 23, 28, 31, 36, 41, 46, 51, 56, 61, 66, 71, } },
 			weight = 53.0,
 		},
 		{
 			name = "Spritzee",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 341,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, } },
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 31, 35, 38, 42, 44, 48, 50, }, { 6, 8, 13, 17, 21, 25, 29, 31, 35, 38, 42, 44, 48, 50, } },
 			weight = 0.5,
 		},
 		{
 			name = "Aromatisse",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 462,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, } },
+			bst = 482,
+			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 31, 35, 38, 42, 44, 48, 53, 57, 64, }, { 6, 8, 13, 17, 21, 25, 29, 31, 35, 38, 42, 44, 48, 53, 57, 64, } },
 			weight = 15.5,
 		},
 		{
 			name = "Swirlix",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 341,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, } },
+			movelvls = { { 5, 9, 11, 13, 17, 21, 26, 31, 36, 41, 45, 49, 58, 67, }, { 5, 8, 10, 13, 17, 21, 26, 31, 36, 41, 45, 49, 58, 67, } },
 			weight = 3.5,
 		},
 		{
 			name = "Slurpuff",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, } },
+			bst = 492,
+			movelvls = { { 5, 9, 11, 13, 17, 21, 26, 31, 36, 41, 45, 49, 58, 67, }, { 5, 8, 10, 13, 17, 21, 26, 31, 36, 41, 45, 49, 58, 67, } },
 			weight = 5.0,
 		},
 		{
 			name = "Inkay",
-			evolution = "30",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 288,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 31, 33, 36, 39, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 31, 33, 36, 39, } },
+			movelvls = { { 4, 9, 12, 13, 15, 18, 21, 23, 27, 31, 35, 39, 43, 46, 48, }, { 4, 9, 12, 13, 15, 18, 21, 23, 27, 31, 35, 39, 43, 46, 48, } },
 			weight = 3.5,
 		},
 		{
 			name = "Malamar",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 482,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 33, 37, 42, 47, }, { 9, 12, 15, 18, 21, 24, 27, 33, 37, 42, 47, } },
+			movelvls = { { 4, 9, 12, 13, 15, 18, 21, 23, 27, 31, 35, 39, 43, 46, 48, }, { 4, 9, 12, 13, 15, 18, 21, 23, 27, 31, 35, 39, 43, 46, 48, } },
 			weight = 47.0,
 		},
 		{
 			name = "Binacle",
-			evolution = "39",
+			evolution = "14",
 			bst = 306,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
+			movelvls = { { 4, 7, 10, 13, 18, 20, 24, 28, 32, 37, 41, 45, 49, }, { 4, 7, 10, 13, 18, 20, 24, 28, 32, 37, 41, 45, 49, } },
 			weight = 31.0,
 		},
 		{
 			name = "Barbaracle",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 500,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, }, { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, } },
+			movelvls = { { 4, 7, 10, 13, 18, 20, 24, 28, 32, 37, 44, 48, 55, 60, 65, }, { 4, 7, 10, 13, 18, 20, 24, 28, 32, 37, 44, 48, 55, 60, 65, } },
 			weight = 96.0,
 		},
 		{
 			name = "Skrelp",
-			evolution = "48",
+			evolution = "20",
 			bst = 320,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 5, 9, 12, 15, 19, 23, 25, 28, 32, 35, 38, 42, 49, }, { 5, 9, 12, 15, 19, 23, 25, 28, 32, 35, 38, 42, 49, } },
 			weight = 7.3,
 		},
 		{
 			name = "Dragalge",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 494,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 45, 52, 59, 66, }, { 15, 20, 25, 30, 35, 40, 45, 52, 59, 66, } },
+			bst = 514,
+			movelvls = { { 5, 9, 12, 15, 19, 24, 29, 34, 40, 44, 50, 55, 61, 66, 71, }, { 5, 9, 12, 15, 19, 24, 29, 34, 40, 44, 50, 55, 61, 66, 71, } },
 			weight = 81.5,
 		},
 		{
 			name = "Clauncher",
-			evolution = "37",
+			evolution = "16",
 			bst = 330,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 7, 9, 12, 16, 20, 25, 30, 34, 39, 43, 48, }, { 7, 9, 12, 16, 20, 25, 30, 34, 39, 43, 48, } },
 			weight = 8.3,
 		},
 		{
 			name = "Clawitzer",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 500,
-			movelvls = { { 15, 20, 25, 30, 35, 42, 49, 56, 63, }, { 15, 20, 25, 30, 35, 42, 49, 56, 63, } },
+			movelvls = { { 7, 9, 12, 16, 20, 25, 30, 34, 42, 47, 53, 57, 63, 67, }, { 7, 9, 12, 16, 20, 25, 30, 34, 42, 47, 53, 57, 63, 67, } },
 			weight = 35.3,
 		},
 		{
 			name = "Helioptile",
 			evolution = PokemonData.Evolutions.SUN,
 			bst = 289,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
+			movelvls = { { 6, 11, 13, 17, 22, 25, 31, 35, 40, 45, 49, }, { 6, 11, 13, 17, 22, 25, 31, 35, 40, 45, 49, } },
 			weight = 6.0,
 		},
 		{
 			name = "Heliolisk",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 481,
-			movelvls = { { }, { } },
+			bst = 501,
+			movelvls = { { 9, 11, 13, 17, 22, 25, 31, 35, 40, 45, 49, 55, 61, 66, }, { 9, 11, 13, 17, 22, 25, 31, 35, 40, 45, 49, 55, 61, 66, } },
 			weight = 21.0,
 		},
 		{
 			name = "Tyrunt",
-			evolution = "39",
+			evolution = "20",
 			bst = 362,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
+			movelvls = { { 6, 10, 12, 15, 17, 20, 26, 30, 34, 37, 40, 44, 49, }, { 6, 10, 12, 15, 17, 20, 26, 30, 34, 37, 40, 44, 49, } },
 			weight = 26.0,
 		},
 		{
 			name = "Tyrantrum",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 521,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, 60, 66, }, { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, 60, 66, } },
+			movelvls = { { 6, 10, 12, 15, 17, 20, 26, 30, 34, 37, 42, 47, 53, 58, 68, 75, }, { 6, 10, 12, 15, 17, 20, 26, 30, 34, 37, 42, 47, 53, 58, 68, 75, } },
 			weight = 270.0,
 		},
 		{
 			name = "Amaura",
-			evolution = "39",
+			evolution = "16",
 			bst = 362,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
+			movelvls = { { 5, 10, 13, 15, 18, 20, 26, 30, 34, 38, 41, 44, 47, 50, 57, 65, }, { 5, 10, 13, 15, 18, 20, 26, 30, 34, 38, 41, 44, 47, 50, 57, 65, } },
 			weight = 25.2,
 		},
 		{
 			name = "Aurorus",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 521,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, 60, 66, }, { 12, 16, 20, 24, 28, 32, 36, 42, 48, 54, 60, 66, } },
+			movelvls = { { 5, 10, 13, 15, 18, 20, 26, 30, 34, 38, 43, 46, 50, 56, 63, 74, 77, }, { 5, 10, 13, 15, 18, 20, 26, 30, 34, 38, 43, 46, 50, 56, 63, 74, 77, } },
 			weight = 225.0,
 		},
 		{
 			name = "Sylveon",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 525,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
+			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
 			weight = 23.5,
 		},
 		{
 			name = "Hawlucha",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 500,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
+			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 55, 60, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 55, 60, } },
 			weight = 21.5,
 		},
 		{
 			name = "Dedenne",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 431,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 35, 40, 45, 50, 55, 60, } },
+			movelvls = { { 7, 11, 14, 17, 20, 23, 26, 30, 31, 34, 39, 42, 45, 50, }, { 7, 11, 14, 17, 20, 23, 26, 30, 31, 34, 39, 42, 45, 50, } },
 			weight = 2.2,
 		},
 		{
 			name = "Carbink",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 500,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
+			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
 			weight = 5.7,
 		},
 		{
 			name = "Goomy",
-			evolution = "40",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 300,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } },
+			movelvls = { { 5, 9, 13, 18, 25, 28, 32, 38, 42, }, { 5, 9, 13, 18, 25, 28, 32, 38, 42, } },
 			weight = 2.8,
-			friendshipBase = 35
 		},
 		{
 			name = "Sliggoo",
-			evolution = "50",
+			evolution = "45",
 			bst = 452,
-			movelvls = { { 15, 20, 25, 30, 35, 43, 49, 56, }, { 15, 20, 25, 30, 35, 43, 49, 56, } },
+			movelvls = { { 5, 9, 13, 18, 25, 28, 32, 38, 42, }, { 5, 9, 13, 18, 25, 28, 32, 38, 42, } },
 			weight = 17.5,
-			friendshipBase = 35
 		},
 		{
 			name = "Goodra",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 15, 20, 25, 30, 35, 43, 49, 58, 67, }, { 15, 20, 25, 30, 35, 43, 49, 58, 67, } },
+			movelvls = { { 5, 9, 13, 18, 25, 28, 32, 38, 47, 50, 55, 63, 71, 80, }, { 5, 9, 13, 18, 25, 28, 32, 38, 47, 50, 55, 63, 71, 80, } },
 			weight = 150.5,
-			friendshipBase = 35
 		},
 		{
 			name = "Klefki",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 470,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
+			movelvls = { { 5, 8, 12, 15, 18, 23, 27, 32, 34, 36, 40, 43, 44, 50, }, { 5, 8, 12, 15, 18, 23, 27, 32, 34, 36, 40, 43, 44, 50, } },
 			weight = 3.0,
 		},
 		{
 			name = "Phantump",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 309,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
+			movelvls = { { 5, 9, 13, 19, 23, 28, 31, 35, 39, 45, 49, 54, }, { 5, 9, 13, 19, 23, 28, 31, 35, 39, 45, 49, 54, } },
 			weight = 7.0,
 		},
 		{
 			name = "Trevenant",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 474,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
+			bst = 494,
+			movelvls = { { 5, 8, 13, 19, 23, 28, 31, 35, 39, 45, 49, 55, 62, }, { 5, 8, 13, 19, 23, 28, 31, 35, 39, 45, 49, 55, 62, } },
 			weight = 71.0,
 		},
 		{
 			name = "Pumpkaboo",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 335,
-			movelvls = { { 4, 8, 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, }, { 4, 8, 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, } },
+			movelvls = { { 4, 9, 15, 20, 23, 26, 30, 36, 42, 48, }, { 4, 9, 15, 20, 23, 26, 30, 36, 42, 48, } },
 			weight = 5.0,
 		},
 		{
 			name = "Gourgeist",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 494,
-			movelvls = { { 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, 48, }, { 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, 48, } },
+			movelvls = { { 4, 11, 16, 20, 26, 30, 33, 42, 48, 53, 57, 75, }, { 4, 11, 16, 20, 26, 30, 33, 42, 48, 53, 57, 75, } },
 			weight = 12.5,
 		},
 		{
 			name = "Bergmite",
-			evolution = "37",
+			evolution = PokemonData.Evolutions.ICE,
 			bst = 304,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, } },
+			movelvls = { { 5, 10, 15, 20, 22, 26, 30, 35, 39, 43, 47, 49, }, { 5, 10, 15, 20, 22, 26, 30, 35, 39, 43, 47, 49, } },
 			weight = 99.5,
 		},
 		{
 			name = "Avalugg",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 514,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, } },
+			movelvls = { { 5, 10, 15, 20, 22, 26, 30, 35, 42, 46, 51, 56, 60, 65, }, { 5, 10, 15, 20, 22, 26, 30, 35, 42, 46, 51, 56, 60, 65, } },
 			weight = 505.0,
 		},
 		{
 			name = "Noibat",
-			evolution = "48",
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 245,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 49, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 49, 52, } },
+			movelvls = { { 5, 9, 13, 16, 18, 23, 27, 31, 35, 40, 43, 48, 58, }, { 5, 9, 13, 16, 18, 23, 27, 31, 35, 40, 43, 48, 58, } },
 			weight = 8.0,
 		},
 		{
 			name = "Noivern",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 535,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 51, 56, 62, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 51, 56, 62, } },
+			movelvls = { { 5, 11, 15, 20, 23, 28, 33, 39, 44, 50, 55, 60, 64, 70, 75, }, { 5, 11, 15, 20, 23, 28, 33, 39, 44, 50, 55, 60, 64, 70, 75, } },
 			weight = 85.0,
 		},
 		{
 			name = "Xerneas",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 680,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, } },
+			movelvls = { { 5, 10, 18, 26, 35, 44, 51, 55, 59, 63, 72, 80, 88, 93, }, { 5, 10, 18, 26, 35, 44, 51, 55, 59, 63, 72, 80, 88, 93, } },
 			weight = 215.0,
-			friendshipBase = 0
 		},
 		{
 			name = "Yveltal",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 680,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, } },
+			movelvls = { { 5, 10, 18, 26, 35, 44, 51, 55, 59, 63, 72, 80, 88, 93, }, { 5, 10, 18, 26, 35, 44, 51, 55, 59, 63, 72, 80, 88, 93, } },
 			weight = 203.0,
-			friendshipBase = 0
 		},
 		{
 			name = "Zygarde",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
+			movelvls = { { 5, 10, 18, 26, 35, 44, 51, 55, 59, 63, 72, 80, 88, 93, }, { 5, 10, 18, 26, 35, 44, 51, 55, 59, 63, 72, 80, 88, 93, } },
 			weight = 305.0,
-			friendshipBase = 0
 		},
 		{
 			name = "Diancie",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, } },
+			movelvls = { { 5, 8, 12, 18, 21, 27, 31, 35, 40, 46, 49, 50, 50, 60, 70, }, { 5, 8, 12, 18, 21, 27, 31, 35, 40, 46, 49, 50, 50, 60, 70, } },
 			weight = 8.8,
 		},
 		{
@@ -3086,1191 +4664,45 @@ local function KaizoXYZExtension()
 			bst = 600,
 			movelvls = { { 6, 10, 15, 19, 25, 29, 29, 35, 46, 50, 50, 55, 68, 75, 85, }, { 6, 10, 15, 19, 25, 29, 29, 35, 46, 50, 50, 55, 68, 75, 85, } },
 			weight = 9.0,
-			friendshipBase = 100
 		},
 		{
 			name = "Volcanion",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 60, 66, 78, 84, 90, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 60, 66, 78, 84, 90, } },
+			movelvls = { { 8, 11, 15, 21, 28, 32, 40, 46, 50, 58, 65, 76, 85, }, { 8, 11, 15, 21, 28, 32, 40, 46, 50, 58, 65, 76, 85, } },
 			weight = 195.0,
-			friendshipBase = 100
-		},
-		{
-			name = "Rowlet",
-			evolution = "17",
-			bst = 320,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, } },
-			weight = 1.5,
-		},
-		{
-			name = "Dartrix",
-			evolution = "34",
-			bst = 420,
-			movelvls = { { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, }, { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, } },
-			weight = 16.0,
-		},
-		{
-			name = "Decidueye",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 9, 12, 15, 20, 25, 30, 37, 44, 51, 58, }, { 9, 12, 15, 20, 25, 30, 37, 44, 51, 58, } },
-			weight = 36.6,
-		},
-		{
-			name = "Litten",
-			evolution = "17",
-			bst = 320,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, } },
-			weight = 4.3,
-		},
-		{
-			name = "Torracat",
-			evolution = "34",
-			bst = 420,
-			movelvls = { { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, }, { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, } },
-			weight = 25.0,
-		},
-		{
-			name = "Incineroar",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 9, 12, 15, 20, 25, 30, 32, 44, 51, 58, }, { 9, 12, 15, 20, 25, 30, 32, 44, 51, 58, } },
-			weight = 83.0,
-		},
-		{
-			name = "Popplio",
-			evolution = "17",
-			bst = 320,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, } },
-			weight = 7.5,
-		},
-		{
-			name = "Brionne",
-			evolution = "34",
-			bst = 420,
-			movelvls = { { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, }, { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, } },
-			weight = 17.5,
 		},
 		{
 			name = "Primarina",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 530,
-			movelvls = { { 9, 12, 15, 20, 25, 30, 37, 44, 51, 58, }, { 9, 12, 15, 20, 25, 30, 37, 44, 51, 58, } },
+			movelvls = { { 4, 9, 14, 18, 22, 26, 30, 34, 40, 44, 50, 55, 60, 66, }, { 4, 9, 14, 18, 22, 26, 30, 34, 40, 44, 50, 55, 60, 66, } },
 			weight = 44.0,
-		},
-		{
-			name = "Pikipek",
-			evolution = "14",
-			bst = 265,
-			movelvls = { { 3, 7, 9, 13, 15, 19, 21, 25, 27, 31, 33, 37, }, { 3, 7, 9, 13, 15, 19, 21, 25, 27, 31, 33, 37, } },
-			weight = 1.2,
-		},
-		{
-			name = "Trumbeak",
-			evolution = "28",
-			bst = 355,
-			movelvls = { { 13, 16, 21, 24, 29, 32, 37, 40, 45, }, { 13, 16, 21, 24, 29, 32, 37, 40, 45, } },
-			weight = 14.8,
-		},
-		{
-			name = "Toucannon",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 13, 16, 21, 24, 30, 34, 40, 44, 50, }, { 13, 16, 21, 24, 30, 34, 40, 44, 50, } },
-			weight = 26.0,
-		},
-		{
-			name = "Yungoos",
-			evolution = "20",
-			bst = 253,
-			movelvls = { { 3, 7, 10, 13, 19, 22, 25, 28, 31, 34, 37, 40, 43, }, { 3, 7, 10, 13, 19, 22, 25, 28, 31, 34, 37, 40, 43, } },
-			weight = 6.0,
-		},
-		{
-			name = "Gumshoos",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 418,
-			movelvls = { { 13, 19, 23, 27, 31, 35, 39, 43, 47, 52, }, { 13, 19, 23, 27, 31, 35, 39, 43, 47, 52, } },
-			weight = 14.2,
-		},
-		{
-			name = "Grubbin",
-			evolution = "20",
-			bst = 300,
-			movelvls = { { 5, 10, 15, 21, 25, 30, 35, 40, }, { 5, 10, 15, 21, 25, 30, 35, 40, } },
-			weight = 4.4,
-		},
-		{
-			name = "Charjabug",
-			evolution = PokemonData.Evolutions.THUNDER,
-			bst = 400,
-			movelvls = { { 15, 23, 29, 36, 43, 50, 57, 64, }, { 15, 23, 29, 36, 43, 50, 57, 64, } },
-			weight = 10.5,
-		},
-		{
-			name = "Vikavolt",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 15, 23, 29, 36, 43, 50, 57, 64, }, { 15, 23, 29, 36, 43, 50, 57, 64, } },
-			weight = 45.0,
-		},
-		{
-			name = "Crabrawler",
-			evolution = PokemonData.Evolutions.ICE,
-			bst = 338,
-			movelvls = { { 5, 9, 13, 17, 22, 25, 29, 33, 37, 42, 45, 49, }, { 5, 9, 13, 17, 22, 25, 29, 33, 37, 42, 45, 49, } },
-			weight = 7.0,
-		},
-		{
-			name = "Crabominable",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 478,
-			movelvls = { { 17, 22, 25, 29, 33, 37, 42, 45, 49, }, { 17, 22, 25, 29, 33, 37, 42, 45, 49, } },
-			weight = 180.0,
-		},
-		{
-			name = "Oricorio",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 476,
-			movelvls = { { 4, 6, 10, 13, 16, 20, 23, 26, 30, 33, 36, 40, 43, 47, }, { 4, 6, 10, 13, 16, 20, 23, 26, 30, 33, 36, 40, 43, 47, } },
-			weight = 3.4,
-		},
-		{
-			name = "Cutiefly",
-			evolution = "25",
-			bst = 304,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, } },
-			weight = 0.2,
-		},
-		{
-			name = "Ribombee",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 464,
-			movelvls = { { 18, 24, 32, 40, 48, 56, 64, }, { 18, 24, 32, 40, 48, 56, 64, } },
-			weight = 0.5,
-		},
-		{
-			name = "Rockruff",
-			evolution = "25",
-			bst = 280,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
-			weight = 9.2,
-		},
-		{
-			name = "Lycanroc",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 487,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 25.0,
-		},
-		{
-			name = "Wishiwashi",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 175,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
-			weight = 0.3,
-		},
-		{
-			name = "Mareanie",
-			evolution = "38",
-			bst = 305,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } },
-			weight = 8.0,
-		},
-		{
-			name = "Toxapex",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 495,
-			movelvls = { { 15, 20, 25, 30, 35, 42, 49, 56, }, { 15, 20, 25, 30, 35, 42, 49, 56, } },
-			weight = 14.5,
-		},
-		{
-			name = "Mudbray",
-			evolution = "30",
-			bst = 385,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
-			weight = 110.0,
-		},
-		{
-			name = "Mudsdale",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, } },
-			weight = 920.0,
-		},
-		{
-			name = "Dewpider",
-			evolution = "22",
-			bst = 269,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
-			weight = 4.0,
-		},
-		{
-			name = "Araquanid",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 454,
-			movelvls = { { 12, 16, 20, 26, 32, 38, 44, 50, 56, 62, }, { 12, 16, 20, 26, 32, 38, 44, 50, 56, 62, } },
-			weight = 82.0,
-		},
-		{
-			name = "Fomantis",
-			evolution = "34",
-			bst = 250,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } },
-			weight = 1.5,
-		},
-		{
-			name = "Lurantis",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 15, 20, 25, 30, 37, 44, 51, 63, }, { 15, 20, 25, 30, 37, 44, 51, 63, } },
-			weight = 18.5,
-		},
-		{
-			name = "Morelull",
-			evolution = "24",
-			bst = 285,
-			movelvls = { { 4, 8, 12, 16, 20, 25, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 25, 28, 32, 36, 40, 44, } },
-			weight = 1.5,
-		},
-		{
-			name = "Shiinotic",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 405,
-			movelvls = { { 12, 16, 20, 27, 32, 38, 44, 50, 56, }, { 12, 16, 20, 27, 32, 38, 44, 50, 56, } },
-			weight = 11.5,
-		},
-		{
-			name = "Salandit",
-			evolution = PokemonData.Evolutions.FEMALE33,
-			bst = 320,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 4.8,
-		},
-		{
-			name = "Salazzle",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 15, 20, 25, 30, 37, 44, 51, 58, }, { 15, 20, 25, 30, 37, 44, 51, 58, } },
-			weight = 22.2,
-		},
-		{
-			name = "Stufful",
-			evolution = "27",
-			bst = 340,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
-			weight = 6.8,
-		},
-		{
-			name = "Bewear",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 135.0,
-		},
-		{
-			name = "Bounsweet",
-			evolution = "18",
-			bst = 210,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, }, { 4, 8, 12, 16, 20, 24, 28, 32, } },
-			weight = 3.2,
-		},
-		{
-			name = "Steenee",
-			evolution = "29",
-			bst = 290,
-			movelvls = { { 16, 22, 28, 34, 40, 46, }, { 16, 22, 28, 34, 40, 46, } },
-			weight = 8.2,
-		},
-		{
-			name = "Tsareena",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 16, 22, 28, 34, 40, 46, 58, }, { 16, 22, 28, 34, 40, 46, 58, } },
-			weight = 21.4,
-		},
-		{
-			name = "Comfey",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, } },
-			weight = 0.3,
-		},
-		{
-			name = "Oranguru",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 76.0,
-		},
-		{
-			name = "Passimian",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 82.8,
-		},
-		{
-			name = "Wimpod",
-			evolution = "30",
-			bst = 230,
-			movelvls = { { }, { } },
-			weight = 12.0,
 		},
 		{
 			name = "Golisopod",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 530,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
+			movelvls = { { 4, 9, 13, 18, 23, 28, 33, 38, 44, 50, 55, 60, 66, }, { 4, 9, 13, 18, 23, 28, 33, 38, 44, 50, 55, 60, 66, } },
 			weight = 108.0,
-		},
-		{
-			name = "Sandygast",
-			evolution = "42",
-			bst = 320,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 70.0,
-		},
-		{
-			name = "Palossand",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, }, { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, } },
-			weight = 250.0,
-		},
-		{
-			name = "Pyukumuku",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 410,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 1.2,
-		},
-		{
-			name = "Type: Null",
-			evolution = PokemonData.Evolutions.FRIEND,
-			bst = 534,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 120.5,
-			friendshipBase = 0,
-		},
-		{
-			name = "Silvally",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 100.5,
-			friendshipBase = 0,
-		},
-		{
-			name = "Minior",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 440,
-			movelvls = { { 3, 8, 10, 15, 17, 22, 24, 29, 31, 36, 38, 43, 45, 50, }, { 3, 8, 10, 15, 17, 22, 24, 29, 31, 36, 38, 43, 45, 50, } },
-			weight = 40.0,
-		},
-		{
-			name = "Komala",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 6, 6, 6, 11, 16, 21, 26, 31, 36, 41, 46, }, { 6, 6, 6, 11, 16, 21, 26, 31, 36, 41, 46, } },
-			weight = 19.9,
-		},
-		{
-			name = "Turtonator",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 212.0,
-		},
-		{
-			name = "Togedemaru",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 435,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 3.3,
-		},
-		{
-			name = "Mimikyu",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 476,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 0.7,
-		},
-		{
-			name = "Bruxish",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 475,
-			movelvls = { { 4, 9, 12, 17, 20, 25, 28, 33, 36, 41, 44, }, { 4, 9, 12, 17, 20, 25, 28, 33, 36, 41, 44, } },
-			weight = 19.0,
-		},
-		{
-			name = "Drampa",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 185.0,
-		},
-		{
-			name = "Dhelmise",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 517,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, } },
-			weight = 210.0,
-		},
-		{
-			name = "Jangmo-o",
-			evolution = "35",
-			bst = 300,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
-			weight = 29.7,
-		},
-		{
-			name = "Hakamo-o",
-			evolution = "45",
-			bst = 420,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, } },
-			weight = 47.0,
-		},
-		{
-			name = "Kommo-o",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 52, 60, 68, 76, }, { 12, 16, 20, 24, 28, 32, 38, 44, 52, 60, 68, 76, } },
-			weight = 78.2,
-		},
-		{
-			name = "Tapu Koko",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
-			weight = 20.5,
-		},
-		{
-			name = "Tapu Lele",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
-			weight = 18.6,
-		},
-		{
-			name = "Tapu Bulu",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
-			weight = 45.5,
-		},
-		{
-			name = "Tapu Fini",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
-			weight = 21.2,
-		},
-		{
-			name = "Cosmog",
-			evolution = "43",
-			bst = 200,
-			movelvls = { { }, { } },
-			weight = 0.1,
-			friendshipBase = 0,
-		},
-		{
-			name = "Cosmoem",
-			evolution = "53",
-			bst = 400,
-			movelvls = { { }, { } },
-			weight = 999.9,
-			friendshipBase = 0,
-		},
-		{
-			name = "Solgaleo",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, } },
-			weight = 230.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Lunala",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, } },
-			weight = 120.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Nihilego",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 55.5,
-			friendshipBase = 0,
-		},
-		{
-			name = "Buzzwole",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 333.6,
-			friendshipBase = 0,
-		},
-		{
-			name = "Pheromosa",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 25.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Xurkitree",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 100.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Celesteela",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 999.9,
-			friendshipBase = 0,
-		},
-		{
-			name = "Kartana",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 0.1,
-			friendshipBase = 0,
-		},
-		{
-			name = "Guzzlord",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 888.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Necrozma",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 230.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Magearna",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, } },
-			weight = 80.5,
-			friendshipBase = 0,
 		},
 		{
 			name = "Marshadow",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 600,
-			movelvls = { { 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, 99, }, { 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, 99, } },
+			movelvls = { { 5, 11, 15, 20, 26, 30, 35, 41, 45, 50, 56, 60, 66, }, { 5, 11, 15, 20, 26, 30, 35, 41, 45, 50, 56, 60, 66, } },
 			weight = 22.2,
-			friendshipBase = 0,
-		},
-		{
-			name = "Poipole",
-			evolution = "50",
-			bst = 420,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, } },
-			weight = 1.8,
-			friendshipBase = 0,
-		},
-		{
-			name = "Naganadel",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 540,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, } },
-			weight = 150.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Stakataka",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 820.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Blacephalon",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 13.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Zeraora",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, } },
-			weight = 44.5,
-			friendshipBase = 0,
-		},
-		{
-			name = "Meltan",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 300,
-			movelvls = { { 8, 16, 24, 32, 40, }, { 8, 16, 24, 32, 40, } },
-			weight = 8.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Melmetal",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, }, { 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, } },
-			weight = 80.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Grookey",
-			evolution = "16",
-			bst = 310,
-			movelvls = { { 6, 8, 12, 17, 20, 24, 28, 32, 36, }, { 6, 8, 12, 17, 20, 24, 28, 32, 36, } },
-			weight = 5.0,
-		},
-		{
-			name = "Thwackey",
-			evolution = "35",
-			bst = 420,
-			movelvls = { { 12, 19, 24, 30, 36, 42, 48, }, { 12, 19, 24, 30, 36, 42, 48, } },
-			weight = 14.0,
-		},
-		{
-			name = "Rillaboom",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 12, 19, 24, 30, 38, 46, 54, 62, }, { 12, 19, 24, 30, 38, 46, 54, 62, } },
-			weight = 90.0,
-		},
-		{
-			name = "Scorbunny",
-			evolution = "16",
-			bst = 310,
-			movelvls = { { 6, 8, 12, 17, 20, 24, 28, 32, 36, }, { 6, 8, 12, 17, 20, 24, 28, 32, 36, } },
-			weight = 4.5,
-		},
-		{
-			name = "Raboot",
-			evolution = "35",
-			bst = 420,
-			movelvls = { { 12, 19, 24, 30, 36, 42, 48, }, { 12, 19, 24, 30, 36, 42, 48, } },
-			weight = 9.0,
-		},
-		{
-			name = "Cinderace",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 12, 19, 24, 30, 38, 46, 54, 62, }, { 12, 19, 24, 30, 38, 46, 54, 62, } },
-			weight = 33.0,
-		},
-		{
-			name = "Sobble",
-			evolution = "16",
-			bst = 310,
-			movelvls = { { 6, 8, 12, 17, 20, 24, 28, 32, 36, }, { 6, 8, 12, 17, 20, 24, 28, 32, 36, } },
-			weight = 4.0,
-		},
-		{
-			name = "Drizzile",
-			evolution = "35",
-			bst = 420,
-			movelvls = { { 12, 19, 24, 30, 36, 42, 48, }, { 12, 19, 24, 30, 36, 42, 48, } },
-			weight = 11.5,
-		},
-		{
-			name = "Inteleon",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 12, 19, 24, 30, 38, 46, 54, 62, }, { 12, 19, 24, 30, 38, 46, 54, 62, } },
-			weight = 45.2,
-		},
-		{
-			name = "Skwovet",
-			evolution = "24",
-			bst = 275,
-			movelvls = { { 5, 10, 15, 15, 15, 20, 25, 30, 35, 40, 45, }, { 5, 10, 15, 15, 15, 20, 25, 30, 35, 40, 45, } },
-			weight = 2.5,
-		},
-		{
-			name = "Greedent",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 460,
-			movelvls = { { 15, 15, 15, 20, 27, 34, 41, 48, 55, }, { 15, 15, 15, 20, 27, 34, 41, 48, 55, } },
-			weight = 6.0,
-		},
-		{
-			name = "Rookidee",
-			evolution = "18",
-			bst = 245,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, } },
-			weight = 1.8,
-		},
-		{
-			name = "Corvisquire",
-			evolution = "38",
-			bst = 365,
-			movelvls = { { 12, 16, 22, 28, 34, 40, 46, }, { 12, 16, 22, 28, 34, 40, 46, } },
-			weight = 16.0,
-		},
-		{
-			name = "Corviknight",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 495,
-			movelvls = { { 12, 16, 22, 28, 34, 42, 50, }, { 12, 16, 22, 28, 34, 42, 50, } },
-			weight = 75.0,
-		},
-		{
-			name = "Blipbug",
-			evolution = "10",
-			bst = 180,
-			movelvls = { { }, { } },
-			weight = 8.0,
-		},
-		{
-			name = "Dottler",
-			evolution = "30",
-			bst = 335,
-			movelvls = { { }, { } },
-			weight = 19.5,
-		},
-		{
-			name = "Orbeetle",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 505,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
-			weight = 40.8,
-		},
-		{
-			name = "Nickit",
-			evolution = "18",
-			bst = 245,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, } },
-			weight = 8.9,
-		},
-		{
-			name = "Thievul",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 455,
-			movelvls = { { 12, 16, 22, 28, 34, 40, 46, 52, }, { 12, 16, 22, 28, 34, 40, 46, 52, } },
-			weight = 19.9,
-		},
-		{
-			name = "Gossifleur",
-			evolution = "20",
-			bst = 250,
-			movelvls = { { 4, 8, 12, 16, 21, 24, 28, 32, 36, }, { 4, 8, 12, 16, 21, 24, 28, 32, 36, } },
-			weight = 2.2,
-		},
-		{
-			name = "Eldegoss",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 460,
-			movelvls = { { 12, 16, 23, 28, 34, 40, 46, 52, }, { 12, 16, 23, 28, 34, 40, 46, 52, } },
-			weight = 2.5,
-		},
-		{
-			name = "Wooloo",
-			evolution = "24",
-			bst = 270,
-			movelvls = { { 4, 8, 12, 16, 21, 25, 28, 32, 36, 40, }, { 4, 8, 12, 16, 21, 25, 28, 32, 36, 40, } },
-			weight = 6.0,
-		},
-		{
-			name = "Dubwool",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 12, 16, 21, 27, 32, 38, 44, 50, 56, }, { 12, 16, 21, 27, 32, 38, 44, 50, 56, } },
-			weight = 43.0,
-		},
-		{
-			name = "Chewtle",
-			evolution = "22",
-			bst = 284,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, }, { 7, 14, 21, 28, 35, 42, 49, } },
-			weight = 8.5,
-		},
-		{
-			name = "Drednaw",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 21, 30, 39, 48, 57, 66, }, { 21, 30, 39, 48, 57, 66, } },
-			weight = 115.5,
-		},
-		{
-			name = "Yamper",
-			evolution = "25",
-			bst = 270,
-			movelvls = { { 5, 10, 15, 20, 26, 30, 35, 40, 45, }, { 5, 10, 15, 20, 26, 30, 35, 40, 45, } },
-			weight = 13.5,
-		},
-		{
-			name = "Boltund",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 15, 20, 28, 34, 41, 48, 55, 62, }, { 15, 20, 28, 34, 41, 48, 55, 62, } },
-			weight = 34.0,
-		},
-		{
-			name = "Rolycoly",
-			evolution = "18",
-			bst = 240,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, }, { 5, 10, 15, 20, 25, 30, 35, 40, } },
-			weight = 12.0,
-		},
-		{
-			name = "Carkol",
-			evolution = "34",
-			bst = 410,
-			movelvls = { { 15, 20, 27, 35, 41, 48, 55, }, { 15, 20, 27, 35, 41, 48, 55, } },
-			weight = 78.0,
-		},
-		{
-			name = "Coalossal",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 15, 20, 27, 37, 45, 54, 63, }, { 15, 20, 27, 37, 45, 54, 63, } },
-			weight = 310.5,
-		},
-		{
-			name = "Applin",
-			evolution = PokemonData.Evolutions.SUN_LEAF_DAWN,
-			bst = 260,
-			movelvls = { { }, { } },
-			weight = 0.5,
-		},
-		{
-			name = "Flapple",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
-			weight = 1.0,
-		},
-		{
-			name = "Appletun",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
-			weight = 13.0,
-		},
-		{
-			name = "Silicobra",
-			evolution = "36",
-			bst = 315,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } },
-			weight = 7.6,
-		},
-		{
-			name = "Sandaconda",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 15, 20, 25, 30, 35, 42, 49, 51, }, { 15, 20, 25, 30, 35, 42, 49, 51, } },
-			weight = 65.5,
-		},
-		{
-			name = "Cramorant",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 475,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, }, { 7, 14, 21, 28, 35, 42, 49, 56, } },
-			weight = 18.0,
-		},
-		{
-			name = "Arrokuda",
-			evolution = "26",
-			bst = 280,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, }, { 6, 12, 18, 24, 30, 36, 42, 48, } },
-			weight = 1.0,
-		},
-		{
-			name = "Barraskewda",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 18, 24, 32, 40, 48, 56, }, { 18, 24, 32, 40, 48, 56, } },
-			weight = 30.0,
-		},
-		{
-			name = "Toxel",
-			evolution = "30",
-			bst = 242,
-			movelvls = { { }, { } },
-			weight = 11.0,
-		},
-		{
-			name = "Toxtricity",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 502,
-			movelvls = { { 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 40.0,
-		},
-		{
-			name = "Sizzlipede",
-			evolution = "28",
-			bst = 305,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 1.0,
-		},
-		{
-			name = "Centiskorch",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 525,
-			movelvls = { { 15, 20, 25, 32, 39, 46, 53, 60, 67, }, { 15, 20, 25, 32, 39, 46, 53, 60, 67, } },
-			weight = 120.0,
-		},
-		{
-			name = "Clobbopus",
-			evolution = "35",
-			bst = 310,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, } },
-			weight = 4.0,
-		},
-		{
-			name = "Grapploct",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 45, 50, }, { 15, 20, 25, 30, 35, 40, 45, 50, } },
-			weight = 39.0,
-		},
-		{
-			name = "Sinistea",
-			evolution = PokemonData.Evolutions.MOON,
-			bst = 308,
-			movelvls = { { 6, 12, 24, 30, 36, 42, 48, 54, 60, }, { 6, 12, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 0.2,
-		},
-		{
-			name = "Polteageist",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 508,
-			movelvls = { { 18, 24, 30, 36, 42, 48, 54, 60, 66, }, { 18, 24, 30, 36, 42, 48, 54, 60, 66, } },
-			weight = 0.4,
-		},
-		{
-			name = "Hatenna",
-			evolution = "32",
-			bst = 265,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, } },
-			weight = 3.4,
-		},
-		{
-			name = "Hattrem",
-			evolution = "42",
-			bst = 370,
-			movelvls = { { 15, 20, 25, 30, 37, 44, 51, }, { 15, 20, 25, 30, 37, 44, 51, } },
-			weight = 4.8,
-		},
-		{
-			name = "Hatterene",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 15, 20, 25, 30, 37, 46, 55, 64, }, { 15, 20, 25, 30, 37, 46, 55, 64, } },
-			weight = 5.1,
-		},
-		{
-			name = "Impidimp",
-			evolution = "32",
-			bst = 265,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 33, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 33, 36, 40, 44, } },
-			weight = 5.5,
-		},
-		{
-			name = "Morgrem",
-			evolution = "42",
-			bst = 370,
-			movelvls = { { 12, 16, 20, 24, 28, 35, 40, 46, 52, }, { 12, 16, 20, 24, 28, 35, 40, 46, 52, } },
-			weight = 12.5,
-		},
-		{
-			name = "Grimmsnarl",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 12, 16, 20, 24, 28, 35, 40, 48, 56, 64, }, { 12, 16, 20, 24, 28, 35, 40, 48, 56, 64, } },
-			weight = 61.0,
-		},
-		{
-			name = "Obstagoon",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 520,
-			movelvls = { { 9, 12, 15, 18, 23, 28, 35, 42, 49, 56, }, { 9, 12, 15, 18, 23, 28, 35, 42, 49, 56, } },
-			weight = 46.0,
-		},
-		{
-			name = "Perrserker",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 440,
-			movelvls = { { 12, 16, 20, 24, 31, 36, 42, 48, 54, }, { 12, 16, 20, 24, 31, 36, 42, 48, 54, } },
-			weight = 28.0,
-		},
-		{
-			name = "Cursola",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 0.4,
-		},
-		{
-			name = "Sirfetch'd",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 507,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 117.0,
-		},
-		{
-			name = "Mr. Rime",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 520,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 58.2,
-		},
-		{
-			name = "Runerigus",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 483,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 56, 62, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 56, 62, } },
-			weight = 66.6,
-		},
-		{
-			name = "Milcery",
-			evolution = PokemonData.Evolutions.SHINY,
-			bst = 270,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } },
-			weight = 0.3,
-		},
-		{
-			name = "Alcremie",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 495,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 45, 50, }, { 15, 20, 25, 30, 35, 40, 45, 50, } },
-			weight = 0.5,
-		},
-		{
-			name = "Falinks",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 470,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 62.0,
-		},
-		{
-			name = "Pincurchin",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 435,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 1.0,
-		},
-		{
-			name = "Snom",
-			evolution = PokemonData.Evolutions.FRIEND,
-			bst = 185,
-			movelvls = { { }, { } },
-			weight = 3.8,
-		},
-		{
-			name = "Frosmoth",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 475,
-			movelvls = { { 4, 8, 12, 16, 21, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 21, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 42.0,
-		},
-		{
-			name = "Stonjourner",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 470,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, } },
-			weight = 520.0,
-		},
-		{
-			name = "Eiscue",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 470,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 89.0,
-		},
-		{
-			name = "Indeedee",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 475,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 28.0,
-			friendshipBase = 140,
-		},
-		{
-			name = "Morpeko",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 436,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 3.0,
-		},
-		{
-			name = "Cufant",
-			evolution = "34",
-			bst = 330,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 100.0,
-		},
-		{
-			name = "Copperajah",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 15, 20, 25, 30, 37, 44, 51, 58, 65, }, { 15, 20, 25, 30, 37, 44, 51, 58, 65, } },
-			weight = 650.0,
-		},
-		{
-			name = "Dracozolt",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 505,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, } },
-			weight = 190.0,
-		},
-		{
-			name = "Arctozolt",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 505,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, } },
-			weight = 150.0,
-		},
-		{
-			name = "Dracovish",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 505,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, } },
-			weight = 215.0,
-		},
-		{
-			name = "Arctovish",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 505,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, } },
-			weight = 175.0,
-		},
-		{
-			name = "Duraludon",
-			evolution = PokemonData.Evolutions.METAL_COAT,
-			bst = 535,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, } },
-			weight = 40.0,
 		},
 		{
 			name = "Dreepy",
-			evolution = "50",
+			evolution = "18",
 			bst = 270,
 			movelvls = { { }, { } },
 			weight = 2.0,
 		},
 		{
 			name = "Drakloak",
-			evolution = "60",
+			evolution = "40",
 			bst = 410,
 			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 61, 66, 72, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 61, 66, 72, } },
 			weight = 11.0,
@@ -4283,2366 +4715,1969 @@ local function KaizoXYZExtension()
 			weight = 50.0,
 		},
 		{
-			name = "Zacian",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 660,
-			movelvls = { { 11, 22, 33, 44, 55, 66, 77, 88, }, { 11, 22, 33, 44, 55, 66, 77, 88, } },
-			weight = 110.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Zamazenta",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 660,
-			movelvls = { { 11, 22, 33, 44, 55, 66, 77, 88, }, { 11, 22, 33, 44, 55, 66, 77, 88, } },
-			weight = 210.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Eternatus",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 690,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 950.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Kubfu",
-			evolution = PokemonData.Evolutions.WATER_DUSK,
-			bst = 385,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 12.0,
-		},
-		{
-			name = "Urshifu",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 550,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 105.0,
-		},
-		{
-			name = "Zarude",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, } },
-			weight = 70.0,
-			friendshipBase = 0,
-		},
-		{
 			name = "Regieleki",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, } },
+			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 60, 66, 72, 78, }, { 6, 12, 18, 24, 30, 36, 42, 48, 60, 66, 72, 78, } },
 			weight = 145.0,
-			friendshipBase = 35,
 		},
 		{
 			name = "Regidrago",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 580,
-			movelvls = { { 6, 12, 18, 30, 36, 42, 48, 54, 60, 66, 72, 78, }, { 6, 12, 18, 30, 36, 42, 48, 54, 60, 66, 72, 78, } },
+			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 60, 66, 72, 78, }, { 6, 12, 18, 24, 30, 36, 42, 48, 60, 66, 72, 78, } },
 			weight = 200.0,
-			friendshipBase = 35,
 		},
 		{
-			name = "Glastrier",
+			name = "Tinkaton",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 580,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, } },
-			weight = 800.0,
-			friendshipBase = 35,
+			bst = 506,
+			movelvls = { { 5, 9, 11, 14, 17, 21, 24, 27, 31, 35, 39, 43, 47, 52, }, { 5, 9, 11, 14, 17, 21, 24, 27, 31, 35, 39, 43, 47, 52, } },
+			weight = 112.8,
 		},
 		{
-			name = "Spectrier",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 580,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, } },
-			weight = 44.5,
-			friendshipBase = 35,
-		},
-		{
-			name = "Calyrex",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 8, 16, 24, 32, 40, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 7.7,
-			friendshipBase = 100,
-		},
-		{
-			name = "Wyrdeer",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 525,
-			movelvls = { { 3, 7, 10, 13, 16, 21, 23, 27, 32, 37, 49, 55, 62, }, { 3, 7, 10, 13, 16, 21, 23, 27, 32, 37, 49, 55, 62, } },
-			weight = 95.1,
-		},
-		{
-			name = "Kleavor",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
-			weight = 89.0,
-		},
-		{
-			name = "Ursaluna",
+			name = "Flutter Mane",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 550,
-			movelvls = { { 8, 13, 17, 22, 25, 29, 35, 41, 41, 48, 56, 64, }, { 8, 13, 17, 22, 25, 29, 35, 41, 41, 48, 56, 64, } },
-			weight = 290.0,
-		},
-		{
-			name = "Basculegion",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
-			weight = 110.0,
-		},
-		{
-			name = "Sneasler",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 43.0,
-			friendshipBase = 35,
-		},
-		{
-			name = "Overqwil",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 40, 44, 48, 52, 56, } },
-			weight = 60.5,
-		},
-		{
-			name = "Enamorus",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 580,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
-			weight = 48.0,
-			friendshipBase = 90,
-		},
-		{
-			name = "Sprigatito",
-			evolution = "16",
-			bst = 310,
-			movelvls = { { 7, 10, 13, 15, 17, 21, 25, 28, 32, 36, }, { 7, 10, 13, 15, 17, 21, 25, 28, 32, 36, } },
-			weight = 4.1,
-		},
-		{
-			name = "Floragato",
-			evolution = "36",
-			bst = 410,
-			movelvls = { { 7, 10, 13, 15, 20, 24, 28, 33, 38, 42, 46, }, { 7, 10, 13, 15, 20, 24, 28, 33, 38, 42, 46, } },
-			weight = 12.2,
-		},
-		{
-			name = "Meowscarada",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 7, 10, 13, 15, 20, 24, 29, 33, 38, 42, 47, 52, 58, 64, }, { 7, 10, 13, 15, 20, 24, 29, 33, 38, 42, 47, 52, 58, 64, } },
-			weight = 31.2,
-		},
-		{
-			name = "Fuecoco",
-			evolution = "16",
-			bst = 310,
-			movelvls = { { 7, 12, 15, 17, 21, 25, 28, 32, 36, }, { 7, 12, 15, 17, 21, 25, 28, 32, 36, } },
-			weight = 9.8,
-		},
-		{
-			name = "Crocalor",
-			evolution = "36",
-			bst = 411,
-			movelvls = { { 7, 10, 12, 15, 17, 24, 28, 32, 38, 42, 47, }, { 7, 10, 12, 15, 17, 24, 28, 32, 38, 42, 47, } },
-			weight = 30.7,
-		},
-		{
-			name = "Skeledirge",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 7, 10, 12, 15, 17, 24, 28, 32, 38, 42, 47, 47, 58, 64, }, { 7, 10, 12, 15, 17, 24, 28, 32, 38, 42, 47, 47, 58, 64, } },
-			weight = 326.5,
-		},
-		{
-			name = "Quaxly",
-			evolution = "16",
-			bst = 310,
-			movelvls = { { 7, 10, 13, 17, 21, 24, 28, 31, 35, }, { 7, 10, 13, 17, 21, 24, 28, 31, 35, } },
-			weight = 6.1,
-		},
-		{
-			name = "Quaxwell",
-			evolution = "36",
-			bst = 410,
-			movelvls = { { 7, 10, 13, 17, 19, 23, 27, 32, 38, 43, 48, }, { 7, 10, 13, 17, 19, 23, 27, 32, 38, 43, 48, } },
-			weight = 21.5,
-		},
-		{
-			name = "Quaquaval",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 7, 10, 13, 17, 17, 21, 27, 32, 38, 43, 47, 52, 58, 64, }, { 7, 10, 13, 17, 17, 21, 27, 32, 38, 43, 47, 52, 58, 64, } },
-			weight = 61.9,
-		},
-		{
-			name = "Lechonk",
-			evolution = "18",
-			bst = 254,
-			movelvls = { { 5, 8, 12, 15, 17, 21, 24, 27, 30, 32, 35, }, { 5, 8, 12, 15, 17, 21, 24, 27, 30, 32, 35, } },
-			weight = 10.2,
-		},
-		{
-			name = "Oinkologne",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 489,
-			movelvls = { { 5, 8, 12, 15, 17, 23, 26, 27, 34, 38, 42, 48, 54, }, { 5, 8, 12, 15, 17, 23, 26, 27, 34, 38, 42, 48, 54, } },
-			weight = 120.0,
-		},
-		{
-			name = "Tarountula",
-			evolution = "15",
-			bst = 210,
-			movelvls = { { 5, 8, 11, 14, 18, 22, 25, 29, 33, 36, 40, 44, }, { 5, 8, 11, 14, 18, 22, 25, 29, 33, 36, 40, 44, } },
+			movelvls = { { 9, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
 			weight = 4.0,
 		},
 		{
-			name = "Spidops",
+			name = "Iron Valiant",
 			evolution = PokemonData.Evolutions.NONE,
-			bst = 404,
-			movelvls = { { 5, 8, 11, 14, 19, 24, 28, 33, 37, 41, 45, 49, }, { 5, 8, 11, 14, 19, 24, 28, 33, 37, 41, 45, 49, } },
-			weight = 16.5,
-		},
-		{
-			name = "Nymble",
-			evolution = "24",
-			bst = 210,
-			movelvls = { { 4, 6, 9, 11, 14, 18, 22, 26, 30, 38, 41, }, { 4, 6, 9, 11, 14, 18, 22, 26, 30, 38, 41, } },
-			weight = 1.0,
-			friendshipBase = 20,
-		},
-		{
-			name = "Lokix",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 450,
-			movelvls = { { 4, 6, 9, 11, 14, 18, 22, 28, 32, 36, 40, 44, 48, 53, }, { 4, 6, 9, 11, 14, 18, 22, 28, 32, 36, 40, 44, 48, 53, } },
-			weight = 17.5,
-			friendshipBase = 0,
-		},
-		{
-			name = "Pawmi",
-			evolution = "18",
-			bst = 240,
-			movelvls = { { 3, 6, 8, 12, 15, 19, 23, 27, 31, 35, 38, 40, 44, }, { 3, 6, 8, 12, 15, 19, 23, 27, 31, 35, 38, 40, 44, } },
-			weight = 2.5,
-		},
-		{
-			name = "Pawmo",
-			evolution = PokemonData.Evolutions.FRIEND,
-			bst = 350,
-			movelvls = { { 3, 6, 8, 12, 15, 19, 23, 27, 32, 38, 42, 46, 52, }, { 3, 6, 8, 12, 15, 19, 23, 27, 32, 38, 42, 46, 52, } },
-			weight = 6.5,
-		},
-		{
-			name = "Pawmot",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 3, 6, 8, 12, 15, 19, 23, 25, 29, 33, 39, 44, 49, 54, 60, }, { 3, 6, 8, 12, 15, 19, 23, 25, 29, 33, 39, 44, 49, 54, 60, } },
-			weight = 41.0,
-		},
-		{
-			name = "Tandemaus",
-			evolution = "25",
-			bst = 305,
-			movelvls = { { 5, 8, 11, 14, 18, 22, 26, 30, 33, 37, 41, 46, }, { 5, 8, 11, 14, 18, 22, 26, 30, 33, 37, 41, 46, } },
-			weight = 1.8,
-		},
-		{
-			name = "Maushold",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 470,
-			movelvls = { { 5, 8, 11, 14, 18, 22, 29, 33, 37, 41, 46, 53, }, { 5, 8, 11, 14, 18, 22, 29, 33, 37, 41, 46, 53, } },
-			weight = 2.8,
-		},
-		{
-			name = "Fidough",
-			evolution = "26",
-			bst = 312,
-			movelvls = { { 3, 6, 8, 11, 15, 18, 22, 26, 30, 33, 36, 40, 45, }, { 3, 6, 8, 11, 15, 18, 22, 26, 30, 33, 36, 40, 45, } },
-			weight = 10.9,
-		},
-		{
-			name = "Dachsbun",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 477,
-			movelvls = { { 3, 6, 8, 11, 15, 18, 22, 29, 33, 38, 42, 47, 53, }, { 3, 6, 8, 11, 15, 18, 22, 29, 33, 38, 42, 47, 53, } },
-			weight = 14.9,
-		},
-		{
-			name = "Smoliv",
-			evolution = "25",
-			bst = 260,
-			movelvls = { { 5, 7, 10, 13, 16, 20, 23, 27, 30, 34, 38, }, { 5, 7, 10, 13, 16, 20, 23, 27, 30, 34, 38, } },
-			weight = 6.5,
-		},
-		{
-			name = "Dolliv",
-			evolution = "35",
-			bst = 354,
-			movelvls = { { 5, 7, 10, 13, 16, 20, 23, 29, 34, 37, 42, }, { 5, 7, 10, 13, 16, 20, 23, 29, 34, 37, 42, } },
-			weight = 11.9,
-		},
-		{
-			name = "Arboliva",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 5, 7, 10, 13, 16, 20, 23, 29, 34, 39, 46, 52, 58, }, { 5, 7, 10, 13, 16, 20, 23, 29, 34, 39, 46, 52, 58, } },
-			weight = 48.2,
-		},
-		{
-			name = "Squawkabilly",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 417,
-			movelvls = { { 6, 10, 13, 17, 20, 24, 27, 30, 34, 38, 42, 47, 52, }, { 6, 10, 13, 17, 20, 24, 27, 30, 34, 38, 42, 47, 52, } },
-			weight = 2.4,
-		},
-		{
-			name = "Nacli",
-			evolution = "24",
-			bst = 280,
-			movelvls = { { 5, 7, 10, 13, 16, 20, 25, 30, 33, 35, 40, 45, }, { 5, 7, 10, 13, 16, 20, 25, 30, 33, 35, 40, 45, } },
-			weight = 16.0,
-		},
-		{
-			name = "Naclstack",
-			evolution = "38",
-			bst = 355,
-			movelvls = { { 5, 7, 10, 13, 16, 20, 30, 34, 38, 41, 45, 51, }, { 5, 7, 10, 13, 16, 20, 30, 34, 38, 41, 45, 51, } },
-			weight = 105.0,
-		},
-		{
-			name = "Garganacl",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 5, 7, 10, 13, 16, 24, 30, 34, 40, 44, 49, 54, 60, }, { 5, 7, 10, 13, 16, 24, 30, 34, 40, 44, 49, 54, 60, } },
-			weight = 240.0,
+			bst = 580,
+			movelvls = { { 9, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 84, 91, } },
+			weight = 35.0,
 		},
 		{
 			name = "Charcadet",
-			evolution = PokemonData.Evolutions.MOON_SUN,
+			evolution = PokemonData.Evolutions.FRIEND,
 			bst = 255,
-			movelvls = { { 8, 12, 16, 20, 24, 28, 32, }, { 8, 12, 16, 20, 24, 28, 32, } },
+			movelvls = { { 9, 12, 16, 20, 24, 28, 32, }, { 9, 12, 16, 20, 24, 28, 32, } },
 			weight = 10.5,
 		},
 		{
 			name = "Armarouge",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 525,
-			movelvls = { { 8, 12, 16, 20, 24, 28, 32, 37, 42, 48, 56, 62, }, { 8, 12, 16, 20, 24, 28, 32, 37, 42, 48, 56, 62, } },
+			movelvls = { { 9, 12, 16, 20, 24, 28, 32, 37, 42, 48, 56, 62, 70, }, { 9, 12, 16, 20, 24, 28, 32, 37, 42, 48, 56, 62, 70, } },
 			weight = 85.0,
-			friendshipBase = 20,
 		},
 		{
 			name = "Ceruledge",
 			evolution = PokemonData.Evolutions.NONE,
 			bst = 525,
-			movelvls = { { 8, 12, 16, 20, 24, 28, 32, 37, 42, 48, 56, 62, }, { 8, 12, 16, 20, 24, 28, 32, 37, 42, 48, 56, 62, } },
+			movelvls = { { 9, 12, 16, 20, 24, 28, 32, 37, 42, 48, 56, 62, 70, }, { 9, 12, 16, 20, 24, 28, 32, 37, 42, 48, 56, 62, 70, } },
 			weight = 62.0,
-			friendshipBase = 20,
 		},
-		{
-			name = "Tadbulb",
-			evolution = PokemonData.Evolutions.THUNDER,
-			bst = 272,
-			movelvls = { { 7, 11, 17, 21, 24, 25, 32, 36, 40, 45, 50, }, { 7, 11, 17, 21, 24, 25, 32, 36, 40, 45, 50, } },
-			weight = 0.4,
-		},
-		{
-			name = "Bellibolt",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 495,
-			movelvls = { { 7, 11, 17, 21, 24, 25, 32, 36, 40, 45, 50, }, { 7, 11, 17, 21, 24, 25, 32, 36, 40, 45, 50, } },
-			weight = 113.0,
-		},
-		{
-			name = "Wattrel",
-			evolution = "25",
-			bst = 280,
-			movelvls = { { 4, 7, 11, 15, 19, 23, 27, 32, 37, 43, }, { 4, 7, 11, 15, 19, 23, 27, 32, 37, 43, } },
-			weight = 3.6,
-		},
-		{
-			name = "Kilowattrel",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 4, 7, 11, 15, 19, 24, 30, 36, 43, 48, 55, }, { 4, 7, 11, 15, 19, 24, 30, 36, 43, 48, 55, } },
-			weight = 38.6,
-		},
-		{
-			name = "Maschiff",
-			evolution = "30",
-			bst = 340,
-			movelvls = { { 4, 7, 10, 14, 18, 22, 26, 31, 35, 39, 43, 49, }, { 4, 7, 10, 14, 18, 22, 26, 31, 35, 39, 43, 49, } },
-			weight = 16.0,
-		},
-		{
-			name = "Mabosstiff",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 505,
-			movelvls = { { 4, 7, 10, 14, 18, 22, 26, 34, 39, 43, 48, 55, 60, }, { 4, 7, 10, 14, 18, 22, 26, 34, 39, 43, 48, 55, 60, } },
-			weight = 61.0,
-		},
-		{
-			name = "Shroodle",
-			evolution = "28",
-			bst = 290,
-			movelvls = { { 5, 8, 8, 11, 14, 18, 21, 25, 29, 33, 36, 40, 45, }, { 5, 8, 8, 11, 14, 18, 21, 25, 29, 33, 36, 40, 45, } },
-			weight = 0.7,
-		},
-		{
-			name = "Grafaiai",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 5, 8, 11, 14, 18, 21, 25, 33, 37, 40, 45, 51, }, { 5, 8, 11, 14, 18, 21, 25, 33, 37, 40, 45, 51, } },
-			weight = 27.2,
-		},
-		{
-			name = "Bramblin",
-			evolution = PokemonData.Evolutions.FRIEND,
-			bst = 275,
-			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 35, 40, 45, 50, 55, }, { 5, 9, 13, 17, 21, 25, 29, 35, 40, 45, 50, 55, } },
-			weight = 0.6,
-		},
-		{
-			name = "Brambleghast",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 5, 9, 13, 17, 21, 25, 29, 35, 40, 45, 50, 55, }, { 5, 9, 13, 17, 21, 25, 29, 35, 40, 45, 50, 55, } },
-			weight = 6.0,
-		},
-		{
-			name = "Toedscool",
-			evolution = "30",
-			bst = 335,
-			movelvls = { { 4, 8, 8, 12, 15, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 8, 12, 15, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 33.0,
-		},
-		{
-			name = "Toedscruel",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 515,
-			movelvls = { { 4, 8, 8, 12, 15, 16, 20, 24, 28, 34, 40, 44, 48, 54, 58, }, { 4, 8, 8, 12, 15, 16, 20, 24, 28, 34, 40, 44, 48, 54, 58, } },
-			weight = 58.0,
-		},
-		{
-			name = "Klawf",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 450,
-			movelvls = { { 6, 9, 13, 17, 21, 24, 29, 33, 37, 42, 47, 51, 56, }, { 6, 9, 13, 17, 21, 24, 29, 33, 37, 42, 47, 51, 56, } },
-			weight = 79.0,
-		},
-		{
-			name = "Capsakid",
-			evolution = PokemonData.Evolutions.FIRE,
-			bst = 304,
-			movelvls = { { 4, 10, 13, 17, 21, 24, 28, 38, 44, 48, }, { 4, 10, 13, 17, 21, 24, 28, 38, 44, 48, } },
-			weight = 3.0,
-		},
-		{
-			name = "Scovillain",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 486,
-			movelvls = { { 4, 10, 13, 17, 21, 24, 28, 33, 38, 44, 48, 48, }, { 4, 10, 13, 17, 21, 24, 28, 33, 38, 44, 48, 48, } },
-			weight = 15.0,
-		},
-		{
-			name = "Rellor",
-			evolution = PokemonData.Evolutions.FRIEND,
-			bst = 270,
-			movelvls = { { 4, 7, 11, 15, 20, 24, 29, 35, }, { 4, 7, 11, 15, 20, 24, 29, 35, } },
-			weight = 1.0,
-		},
-		{
-			name = "Rabsca",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 470,
-			movelvls = { { 4, 7, 11, 15, 20, 24, 29, 35, 40, 40, 40, 45, 50, }, { 4, 7, 11, 15, 20, 24, 29, 35, 40, 40, 40, 45, 50, } },
-			weight = 3.5,
-		},
-		{
-			name = "Flittle",
-			evolution = "35",
-			bst = 255,
-			movelvls = { { 5, 8, 11, 15, 19, 24, 29, 34, }, { 5, 8, 11, 15, 19, 24, 29, 34, } },
-			weight = 1.5,
-		},
-		{
-			name = "Espathra",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 481,
-			movelvls = { { 5, 8, 11, 15, 19, 24, 29, 34, 43, 49, 54, }, { 5, 8, 11, 15, 19, 24, 29, 34, 43, 49, 54, } },
-			weight = 90.0,
-		},
-		{
-			name = "Tinkatink",
-			evolution = "24",
-			bst = 297,
-			movelvls = { { 5, 8, 11, 14, 17, 21, 24, 27, 31, 35, 39, 43, 47, 52, }, { 5, 8, 11, 14, 17, 21, 24, 27, 31, 35, 39, 43, 47, 52, } },
-			weight = 8.9,
-		},
-		{
-			name = "Tinkatuff",
-			evolution = "38",
-			bst = 380,
-			movelvls = { { 5, 8, 11, 14, 17, 21, 24, 27, 31, 35, 39, 43, 47, 52, }, { 5, 8, 11, 14, 17, 21, 24, 27, 31, 35, 39, 43, 47, 52, } },
-			weight = 59.1,
-		},
-		{
-			name = "Tinkaton",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 506,
-			movelvls = { { 5, 8, 11, 14, 17, 21, 24, 27, 31, 35, 39, 43, 47, 52, }, { 5, 8, 11, 14, 17, 21, 24, 27, 31, 35, 39, 43, 47, 52, } },
-			weight = 112.8,
-		},
-		{
-			name = "Wiglett",
-			evolution = "26",
-			bst = 245,
-			movelvls = { { 4, 8, 12, 20, 20, 24, 28, 32, 36, 40, }, { 4, 8, 12, 20, 20, 24, 28, 32, 36, 40, } },
-			weight = 1.8,
-		},
-		{
-			name = "Wugtrio",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 425,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, } },
-			weight = 5.4,
-		},
-		{
-			name = "Bombirdier",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 7, 11, 16, 20, 24, 29, 36, 42, 47, 53, 60, }, { 7, 11, 16, 20, 24, 29, 36, 42, 47, 53, 60, } },
-			weight = 42.9,
-		},
-		{
-			name = "Finizen",
-			evolution = "38",
-			bst = 315,
-			movelvls = { { 7, 10, 13, 17, 21, 25, 29, 34, 39, 44, 50, }, { 7, 10, 13, 17, 21, 25, 29, 34, 39, 44, 50, } },
-			weight = 60.2,
-		},
-		{
-			name = "Palafin",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 457,
-			movelvls = { { 7, 10, 13, 17, 21, 25, 29, 34, 39, 44, 50, 55, 61, }, { 7, 10, 13, 17, 21, 25, 29, 34, 39, 44, 50, 55, 61, } },
-			weight = 60.2,
-		},
-		{
-			name = "Varoom",
-			evolution = "40",
-			bst = 300,
-			movelvls = { { 4, 7, 10, 13, 17, 21, 25, 28, 32, 36, 41, 46, 50, }, { 4, 7, 10, 13, 17, 21, 25, 28, 32, 36, 41, 46, 50, } },
-			weight = 35.0,
-		},
-		{
-			name = "Revavroom",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 4, 7, 10, 13, 17, 21, 25, 28, 32, 36, 46, 52, 58, }, { 4, 7, 10, 13, 17, 21, 25, 28, 32, 36, 46, 52, 58, } },
-			weight = 120.0,
-		},
-		{
-			name = "Cyclizar",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 501,
-			movelvls = { { 7, 11, 14, 18, 23, 27, 31, 36, 40, 45, 51, 57, }, { 7, 11, 14, 18, 23, 27, 31, 36, 40, 45, 51, 57, } },
-			weight = 63.0,
-		},
-		{
-			name = "Orthworm",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 7, 12, 16, 21, 26, 30, 34, 38, 43, 47, 52, }, { 7, 12, 16, 21, 26, 30, 34, 38, 43, 47, 52, } },
-			weight = 310.0,
-		},
-		{
-			name = "Glimmet",
-			evolution = "35",
-			bst = 350,
-			movelvls = { { 7, 11, 15, 18, 22, 26, 29, 33, 37, 41, 46, }, { 7, 11, 15, 18, 22, 26, 29, 33, 37, 41, 46, } },
-			weight = 8.0,
-		},
-		{
-			name = "Glimmora",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 525,
-			movelvls = { { 7, 11, 15, 18, 22, 26, 29, 33, 39, 44, 50, }, { 7, 11, 15, 18, 22, 26, 29, 33, 39, 44, 50, } },
-			weight = 45.0,
-		},
-		{
-			name = "Greavard",
-			evolution = "30",
-			bst = 290,
-			movelvls = { { 3, 6, 6, 9, 12, 16, 24, 28, 32, 37, 41, 46, 52, }, { 3, 6, 6, 9, 12, 16, 24, 28, 32, 37, 41, 46, 52, } },
-			weight = 35.0,
-		},
-		{
-			name = "Houndstone",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 488,
-			movelvls = { { 3, 6, 6, 9, 12, 16, 24, 28, 36, 41, 46, 51, 58, }, { 3, 6, 6, 9, 12, 16, 24, 28, 36, 41, 46, 51, 58, } },
-			weight = 15.0,
-		},
-		{
-			name = "Flamigo",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 5, 9, 12, 15, 18, 21, 27, 31, 35, 39, 44, 48, 54, }, { 5, 9, 12, 15, 18, 21, 27, 31, 35, 39, 44, 48, 54, } },
-			weight = 37.0,
-		},
-		{
-			name = "Cetoddle",
-			evolution = PokemonData.Evolutions.ICE,
-			bst = 334,
-			movelvls = { { 6, 9, 12, 15, 19, 25, 27, 31, 36, 40, 44, 49, 53, }, { 6, 9, 12, 15, 19, 25, 27, 31, 36, 40, 44, 49, 53, } },
-			weight = 45.0,
-		},
-		{
-			name = "Cetitan",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 521,
-			movelvls = { { 6, 9, 12, 15, 19, 25, 27, 31, 36, 40, 44, 49, 53, }, { 6, 9, 12, 15, 19, 25, 27, 31, 36, 40, 44, 49, 53, } },
-			weight = 700.0,
-		},
-		{
-			name = "Veluza",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 478,
-			movelvls = { { 7, 11, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 7, 11, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 90.0,
-		},
-		{
-			name = "Dondozo",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 5, 10, 15, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 5, 10, 15, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } },
-			weight = 220.0,
-		},
-		{
-			name = "Tatsugiri",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 475,
-			movelvls = { { 6, 12, 17, 23, 28, 34, 39, 43, 47, 52, }, { 6, 12, 17, 23, 28, 34, 39, 43, 47, 52, } },
-			weight = 8.0,
-		},
-		{
-			name = "Annihilape",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 535,
-			movelvls = { { 5, 8, 12, 17, 22, 26, 30, 35, 39, 44, 48, 53, 57, }, { 5, 8, 12, 17, 22, 26, 30, 35, 39, 44, 48, 53, 57, } },
-			weight = 56.0,
-		},
-		{
-			name = "Clodsire",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 430,
-			movelvls = { { 4, 8, 12, 16, 21, 24, 30, 36, 40, 48, }, { 4, 8, 12, 16, 21, 24, 30, 36, 40, 48, } },
-			weight = 223.0,
-		},
-		{
-			name = "Farigiraf",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 520,
-			movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, } },
-			weight = 160.0,
-		},
-		{
-			name = "Dudunsparce",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 520,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 62, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 62, } },
-			weight = 39.2,
-		},
-		{
-			name = "Kingambit",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 550,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 45, 50, 57, 64, 71, }, { 15, 20, 25, 30, 35, 40, 45, 50, 57, 64, 71, } },
-			weight = 120.0,
-		},
-		{
-			name = "Great Tusk",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 320.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Scream Tail",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 8.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Brute Bonnet",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 91, } },
-			weight = 21.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Flutter Mane",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 4.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Slither Wing",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 92.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Sandy Shocks",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 60.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Iron Treads",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 240.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Iron Bundle",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 11.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Iron Hands",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 380.7,
-			friendshipBase = 0,
-		},
-		{
-			name = "Iron Jugulis",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 56, 63, 70, 77, 84, 91, } },
-			weight = 111.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Iron Moth",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 36.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Iron Thorns",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 7, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 303.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Frigibax",
-			evolution = "35",
-			bst = 320,
-			movelvls = { { 6, 12, 18, 24, 29, 32, 36, 40, 44, 48, }, { 6, 12, 18, 24, 29, 32, 36, 40, 44, 48, } },
-			weight = 17.0,
-		},
-		{
-			name = "Arctibax",
-			evolution = "54",
-			bst = 423,
-			movelvls = { { 6, 12, 18, 24, 29, 40, 45, 50, 55, }, { 6, 12, 18, 24, 29, 40, 45, 50, 55, } },
-			weight = 30.0,
-		},
-		{
-			name = "Baxcalibur",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 6, 12, 18, 24, 29, 35, 42, 48, 55, 62, }, { 6, 12, 18, 24, 29, 35, 42, 48, 55, 62, } },
-			weight = 210.0,
-		},
-		{
-			name = "Gimmighoul",
-			evolution = "50",
-			bst = 300,
-			movelvls = { { }, { } },
-			weight = 5.0,
-		},
-		{
-			name = "Gholdengo",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 550,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, } },
-			weight = 30.0,
-		},
-		{
-			name = "Wo-Chien",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 15, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
-			weight = 74.2,
-			friendshipBase = 0,
-		},
-		{
-			name = "Chien-Pao",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 15, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
-			weight = 152.2,
-			friendshipBase = 0,
-		},
-		{
-			name = "Ting-Lu",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
-			weight = 699.7,
-			friendshipBase = 0,
-		},
-		{
-			name = "Chi-Yu",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 570,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
-			weight = 4.9,
-			friendshipBase = 0,
-		},
-		{
-			name = "Roaring Moon",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 590,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 380.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Iron Valiant",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 590,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 84, 91, } },
-			weight = 35.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Koraidon",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 670,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, } },
-			weight = 303.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Miraidon",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 670,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, } },
-			weight = 240.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Walking Wake",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 590,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 56, 63, 70, 77, 84, }, { 7, 14, 21, 28, 35, 42, 56, 63, 70, 77, 84, } },
-			weight = 280.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Iron Leaves",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 590,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 125.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Dipplin",
-			evolution = PokemonData.Evolutions.FRIEND,
-			bst = 485,
-			movelvls = { { 4, 8, 12, 16, 20, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 28, 32, 36, 40, 44, } },
-			weight = 4.4,
-		},
-		{
-			name = "Poltchageist",
-			evolution = PokemonData.Evolutions.MOON,
-			bst = 308,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 1.1,
-		},
-		{
-			name = "Sinistcha",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 508,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 2.2,
-		},
-		{
-			name = "Okidogi",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 555,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, } },
-			weight = 92.2,
-			friendshipBase = 0,
-		},
-		{
-			name = "Munkidori",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 555,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, } },
-			weight = 12.2,
-			friendshipBase = 0,
-		},
-		{
-			name = "Fezandipiti",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 555,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 56, 64, 72, }, { 8, 16, 24, 32, 40, 48, 56, 56, 64, 72, } },
-			weight = 30.1,
-			friendshipBase = 0,
-		},
-		{
-			name = "Ogerpon",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 550,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, } },
-			weight = 39.8,
-		},
-		{
-			name = "Archaludon",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, } },
-			weight = 60.0,
-		},
-		{
-			name = "Hydrapple",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 540,
-			movelvls = { { 4, 8, 12, 16, 20, 28, 32, 36, 40, 44, 54, }, { 4, 8, 12, 16, 20, 28, 32, 36, 40, 44, 54, } },
-			weight = 93.0,
-		},
-		{
-			name = "Gouging Fire",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 590,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 590.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Raging Bolt",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 590,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 480.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Iron Boulder",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 590,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 162.5,
-			friendshipBase = 0,
-		},
-		{
-			name = "Iron Crown",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 590,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, } },
-			weight = 156.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Terapagos",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 450,
-			movelvls = { { 10, 20, 30, 40, 50, 60, 70, 80, 90, }, { 10, 20, 30, 40, 50, 60, 70, 80, 90, } },
-			weight = 6.5,
-		},
-		{
-			name = "Pecharunt",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, } },
-			weight = 0.3,
-			friendshipBase = 0,
-		},
-		{
-			name = "Venusaur M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 625,
-			movelvls = { { 9, 12, 15, 15, 20, 25, 30, 37, 44, 51, 58, }, { 9, 12, 15, 15, 20, 25, 30, 37, 44, 51, 58, } },
-			weight = 155.5,
-		},
-		{
-			name = "Charizard X",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 634,
-			movelvls = { { 12, 19, 24, 30, 39, 46, 54, 62, }, { 12, 19, 24, 30, 39, 46, 54, 62, } },
-			weight = 110.5,
-		},
-		{
-			name = "Charizard Y",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 634,
-			movelvls = { { 12, 19, 24, 30, 39, 46, 54, 62, }, { 12, 19, 24, 30, 39, 46, 54, 62, } },
-			weight = 100.5,
-		},
-		{
-			name = "Blastoise M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 630,
-			movelvls = { { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, }, { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, } },
-			weight = 101.1,
-		},
-		{
-			name = "Beedrill M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 495,
-			movelvls = { { 11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, }, { 11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, } },
-			weight = 40.5,
-		},
-		{
-			name = "Pidgeot M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 579,
-			movelvls = { { 5, 9, 13, 17, 22, 27, 32, 38, 44, 50, 56, 62, 68, }, { 5, 9, 13, 17, 22, 27, 32, 38, 44, 50, 56, 62, 68, } },
-			weight = 50.5,
-		},
-		{
-			name = "Alakazam M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } },
-			weight = 48.0,
-		},
-		{
-			name = "Slowbro M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 590,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, } },
-			weight = 120.0,
-		},
-		{
-			name = "Gengar M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 40.5,
-		},
-		{
-			name = "Kangaskhan M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 590,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 100.0,
-		},
-		{
-			name = "Pinsir M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 59.0,
-		},
-		{
-			name = "Gyarados M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 640,
-			movelvls = { { 4, 8, 12, 16, 21, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 21, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 305.0,
-		},
-		{
-			name = "Aerodactyl M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 615,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 79.0,
-		},
-		{
-			name = "Mewtwo X",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 780,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 56, 64, 72, 80, 88, } },
-			weight = 127.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Mewtwo Y",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 780,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 56, 64, 72, 80, 88, } },
-			weight = 33.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Ampharos M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 610,
-			movelvls = { { 11, 16, 20, 25, 29, 35, 40, 46, 51, 57, 62, }, { 11, 16, 20, 25, 29, 35, 40, 46, 51, 57, 62, } },
-			weight = 61.5,
-		},
-		{
-			name = "Steelix M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 610,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, } },
-			weight = 740.0,
-		},
-		{
-			name = "Scizor M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
-			weight = 125.0,
-		},
-		{
-			name = "Heracross M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 62.5,
-		},
-		{
-			name = "Houndoom M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 13, 16, 20, 26, 30, 35, 41, 45, 50, 56, 62, }, { 13, 16, 20, 26, 30, 35, 41, 45, 50, 56, 62, } },
-			weight = 49.5,
-			friendshipBase = 35,
-		},
-		{
-			name = "Tyranitar M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 33, 37, 42, 47, 52, 59, }, { 9, 12, 15, 18, 21, 24, 27, 33, 37, 42, 47, 52, 59, } },
-			weight = 255.0,
-			friendshipBase = 35,
-		},
-		{
-			name = "Sceptile M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 630,
-			movelvls = { { 5, 12, 15, 20, 25, 30, 35, 42, 49, 56, }, { 5, 12, 15, 20, 25, 30, 35, 42, 49, 56, } },
-			weight = 55.2,
-		},
-		{
-			name = "Blaziken M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 630,
-			movelvls = { { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, 63, }, { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, 63, } },
-			weight = 52.0,
-		},
-		{
-			name = "Swampert M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 635,
-			movelvls = { { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, 63, }, { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, 63, } },
-			weight = 102.0,
-		},
-		{
-			name = "Gardevoir M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 618,
-			movelvls = { { 9, 12, 15, 18, 23, 28, 35, 42, 49, 56, 63, }, { 9, 12, 15, 18, 23, 28, 35, 42, 49, 56, 63, } },
-			weight = 48.4,
-			friendshipBase = 35,
-		},
-		{
-			name = "Sableye M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 3, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, }, { 3, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, } },
-			weight = 161.0,
-			friendshipBase = 35,
-		},
-		{
-			name = "Mawile M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 4, 8, 12, 16, 16, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 16, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
-			weight = 23.5,
-		},
-		{
-			name = "Aggron M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 630,
-			movelvls = { { 12, 16, 20, 24, 28, 35, 40, 48, 56, 64, 72, 80, 88, }, { 12, 16, 20, 24, 28, 35, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 395.0,
-			friendshipBase = 35,
-		},
-		{
-			name = "Medicham M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 12, 15, 17, 20, 23, 25, 28, 31, 33, 36, 47, 53, 53, }, { 12, 15, 17, 20, 23, 25, 28, 31, 33, 36, 47, 53, 53, } },
-			weight = 31.5,
-		},
-		{
-			name = "Manectric M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 575,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 44.0,
-		},
-		{
-			name = "Sharpedo M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 560,
-			movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, } },
-			weight = 130.3,
-			friendshipBase = 35,
-		},
-		{
-			name = "Camerupt M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 560,
-			movelvls = { { 12, 15, 19, 22, 26, 29, 31, 39, 46, }, { 12, 15, 19, 22, 26, 29, 31, 39, 46, } },
-			weight = 320.5,
-		},
-		{
-			name = "Altaria M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 590,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, } },
-			weight = 20.6,
-		},
-		{
-			name = "Banette M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 555,
-			movelvls = { { 16, 19, 22, 26, 30, 34, 40, 46, 53, }, { 16, 19, 22, 26, 30, 34, 40, 46, 53, } },
-			weight = 13.0,
-			friendshipBase = 35,
-		},
-		{
-			name = "Absol M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 565,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 49.0,
-			friendshipBase = 35,
-		},
-		{
-			name = "Glalie M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 580,
-			movelvls = { { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, }, { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, } },
-			weight = 350.2,
-		},
-		{
-			name = "Salamence M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 15, 20, 25, 33, 39, 46, 55, 73, }, { 15, 20, 25, 33, 39, 46, 55, 73, } },
-			weight = 112.6,
-			friendshipBase = 35,
-		},
-		{
-			name = "Metagross M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 6, 12, 16, 26, 34, 42, 52, 62, 72, 82, }, { 6, 12, 16, 26, 34, 42, 52, 62, 72, 82, } },
-			weight = 942.9,
-			friendshipBase = 35,
-		},
-		{
-			name = "Latias M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 52.0,
-			friendshipBase = 90,
-		},
-		{
-			name = "Latios M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 70.0,
-			friendshipBase = 90,
-		},
-		{
-			name = "Lopunny M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 580,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
-			weight = 28.3,
-			friendshipBase = 140,
-		},
-		{
-			name = "Garchomp M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 18, 27, 34, 42, 52, 62, 72, 82, }, { 18, 27, 34, 42, 52, 62, 72, 82, } },
-			weight = 95.0,
-		},
-		{
-			name = "Lucario M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 625,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, } },
-			weight = 57.5,
-		},
-		{
-			name = "Abomasnow M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 594,
-			movelvls = { { 15, 20, 25, 30, 35, 43, 49, 56, }, { 15, 20, 25, 30, 35, 43, 49, 56, } },
-			weight = 185.0,
-		},
-		{
-			name = "Gallade M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 618,
-			movelvls = { { 9, 12, 15, 18, 23, 28, 35, 42, 49, 56, 56, 63, }, { 9, 12, 15, 18, 23, 28, 35, 42, 49, 56, 56, 63, } },
-			weight = 56.4,
-			friendshipBase = 35,
-		},
-		{
-			name = "Audino M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 545,
-			movelvls = { { 4, 9, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, }, { 4, 9, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, } },
-			weight = 32.0,
-		},
-		{
-			name = "Diancie M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, } },
-			weight = 27.8,
-		},
-		{
-			name = "Rayquaza M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 780,
-			movelvls = { { 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, }, { 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, } },
-			weight = 392.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Kyogre P",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 770,
-			movelvls = { { 9, 18, 27, 36, 45, 54, 72, 81, 90, }, { 9, 18, 27, 36, 45, 54, 72, 81, 90, } },
-			weight = 430.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Groudon P",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 770,
-			movelvls = { { 9, 18, 27, 36, 45, 54, 72, 81, 90, }, { 9, 18, 27, 36, 45, 54, 72, 81, 90, } },
-			weight = 999.7,
-			friendshipBase = 0,
-		},
-		{
-			name = "Rattata A",
-			evolution = "20",
-			bst = 253,
-			movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, } },
-			weight = 3.8,
-		},
-		{
-			name = "Raticate A",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 413,
-			movelvls = { { 4, 7, 10, 13, 16, 19, 24, 29, 34, 39, 44, }, { 4, 7, 10, 13, 16, 19, 24, 29, 34, 39, 44, } },
-			weight = 25.5,
-		},
-		{
-			name = "Raichu A",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 485,
-			movelvls = { { 5, }, { 5, } },
-			weight = 21.0,
-		},
-		{
-			name = "Sandshrew A",
-			evolution = PokemonData.Evolutions.ICE,
-			bst = 300,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, } },
-			weight = 40.0,
-		},
-		{
-			name = "Sandslash A",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 450,
-			movelvls = { { }, { } },
-			weight = 55.0,
-		},
-		{
-			name = "Vulpix A",
-			evolution = PokemonData.Evolutions.ICE,
-			bst = 299,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 9.9,
-		},
-		{
-			name = "Ninetales A",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 505,
-			movelvls = { { }, { } },
-			weight = 19.9,
-		},
-		{
-			name = "Diglett A",
-			evolution = "26",
-			bst = 265,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
-			weight = 1.0,
-		},
-		{
-			name = "Dugtrio A",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 425,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, } },
-			weight = 66.6,
-		},
-		{
-			name = "Meowth A",
-			evolution = PokemonData.Evolutions.FRIEND,
-			bst = 290,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, } },
-			weight = 4.2,
-		},
-		{
-			name = "Persian A",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 440,
-			movelvls = { { 12, 16, 20, 24, 31, 36, 42, 48, 54, }, { 12, 16, 20, 24, 31, 36, 42, 48, 54, } },
-			weight = 33.0,
-		},
-		{
-			name = "Geodude A",
-			evolution = "25",
-			bst = 300,
-			movelvls = { { 4, 6, 10, 12, 16, 18, 22, 24, 28, 30, 34, 36, 40, 42, }, { 4, 6, 10, 12, 16, 18, 22, 24, 28, 30, 34, 36, 40, 42, } },
-			weight = 20.3,
-		},
-		{
-			name = "Graveler A",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
-			bst = 390,
-			movelvls = { { 10, 12, 16, 18, 22, 24, 30, 34, 40, 44, 50, 54, }, { 10, 12, 16, 18, 22, 24, 30, 34, 40, 44, 50, 54, } },
-			weight = 110.0,
-		},
-		{
-			name = "Golem A",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 495,
-			movelvls = { { 12, 16, 18, 22, 24, 30, 34, 40, 44, 50, 54, }, { 12, 16, 18, 22, 24, 30, 34, 40, 44, 50, 54, } },
-			weight = 316.0,
-		},
-		{
-			name = "Grimer A",
-			evolution = "38",
-			bst = 325,
-			movelvls = { { 4, 7, 12, 15, 18, 21, 26, 29, 32, 37, 40, 43, 46, 48, }, { 4, 7, 12, 15, 18, 21, 26, 29, 32, 37, 40, 43, 46, 48, } },
-			weight = 42.0,
-		},
-		{
-			name = "Muk A",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 12, 15, 18, 21, 26, 29, 32, 37, 40, 46, 52, 57, }, { 12, 15, 18, 21, 26, 29, 32, 37, 40, 46, 52, 57, } },
-			weight = 52.0,
-		},
-		{
-			name = "Exeggutor A",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { }, { } },
-			weight = 415.6,
-		},
-		{
-			name = "Marowak A",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 425,
-			movelvls = { { 12, 16, 20, 24, 31, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 31, 36, 42, 48, 54, 60, } },
-			weight = 34.0,
-		},
-		{
-			name = "Meowth G",
-			evolution = "28",
-			bst = 290,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, } },
-			weight = 7.5,
-		},
-		{
-			name = "Ponyta G",
-			evolution = "40",
-			bst = 410,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, 55, } },
-			weight = 24.0,
-		},
-		{
-			name = "Rapidash G",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 15, 20, 25, 30, 35, 43, 49, 56, 63, }, { 15, 20, 25, 30, 35, 43, 49, 56, 63, } },
-			weight = 80.0,
-		},
-		{
-			name = "Slowpoke G",
-			evolution = PokemonData.Evolutions.WATER_ROCK,
-			bst = 315,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, } },
-			weight = 36.0,
-		},
-		{
-			name = "Slowbro G",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, } },
-			weight = 70.5,
-		},
-		{
-			name = "Farfetch'd G",
-			evolution = "34",
-			bst = 377,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } },
-			weight = 42.0,
-		},
-		{
-			name = "Weezing G",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 62, 68, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 62, 68, } },
-			weight = 16.0,
-		},
-		{
-			name = "Mr. Mime G",
-			evolution = "42",
-			bst = 460,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 56.8,
-		},
-		{
-			name = "Articuno G",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 580,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 50.9,
-			friendshipBase = 35,
-		},
-		{
-			name = "Zapdos G",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 580,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 58.2,
-			friendshipBase = 35,
-		},
-		{
-			name = "Moltres G",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 580,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } },
-			weight = 66.0,
-			friendshipBase = 35,
-		},
-		{
-			name = "Slowking G",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, } },
-			weight = 79.5,
-		},
-		{
-			name = "Corsola G",
-			evolution = "38",
-			bst = 410,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 0.5,
-		},
-		{
-			name = "Zigzagoon G",
-			evolution = "20",
-			bst = 240,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, } },
-			weight = 17.5,
-		},
-		{
-			name = "Linoone G",
-			evolution = "35",
-			bst = 420,
-			movelvls = { { 9, 12, 15, 18, 23, 28, 33, 38, 43, 48, }, { 9, 12, 15, 18, 23, 28, 33, 38, 43, 48, } },
-			weight = 32.5,
-		},
-		{
-			name = "Darumaka G",
-			evolution = PokemonData.Evolutions.ICE,
-			bst = 315,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
-			weight = 40.0,
-		},
-		{
-			name = "Darmanitan G",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, } },
-			weight = 120.0,
-		},
-		{
-			name = "Yamask G",
-			evolution = "34",
-			bst = 303,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 48, 52, } },
-			weight = 1.5,
-		},
-		{
-			name = "Stunfisk G",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 471,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 20.5,
-		},
-		{
-			name = "Growlithe H",
-			evolution = PokemonData.Evolutions.FIRE,
-			bst = 350,
-			movelvls = { { 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
-			weight = 22.7,
-		},
-		{
-			name = "Arcanine H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 555,
-			movelvls = { { 5, 64, }, { 5, 64, } },
-			weight = 168.0,
-		},
-		{
-			name = "Voltorb H",
-			evolution = PokemonData.Evolutions.LEAF,
-			bst = 330,
-			movelvls = { { 4, 6, 9, 11, 13, 16, 20, 22, 26, 29, 34, 34, 41, 46, 50, }, { 4, 6, 9, 11, 13, 16, 20, 22, 26, 29, 34, 34, 41, 46, 50, } },
-			weight = 13.0,
-		},
-		{
-			name = "Electrode H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 4, 6, 9, 11, 13, 16, 20, 22, 26, 29, 34, 34, 41, 46, 50, }, { 4, 6, 9, 11, 13, 16, 20, 22, 26, 29, 34, 34, 41, 46, 50, } },
-			weight = 71.0,
-		},
-		{
-			name = "Typhlosion H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 534,
-			movelvls = { { 13, 20, 24, 31, 35, 43, 48, 56, 61, 74, }, { 13, 20, 24, 31, 35, 43, 48, 56, 61, 74, } },
-			weight = 69.8,
-		},
-		{
-			name = "Qwilfish H",
-			evolution = "28",
-			bst = 440,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 40, 44, 48, 52, 56, } },
-			weight = 3.9,
-		},
-		{
-			name = "Sneasel H",
-			evolution = PokemonData.Evolutions.RAZOR_CLAW,
-			bst = 430,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 27.0,
-			friendshipBase = 35,
-		},
-		{
-			name = "Samurott H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 528,
-			movelvls = { { 13, 18, 21, 25, 29, 34, 39, 46, 51, 58, 63, }, { 13, 18, 21, 25, 29, 34, 39, 46, 51, 58, 63, } },
-			weight = 58.2,
-		},
-		{
-			name = "Lilligant H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 480,
-			movelvls = { { 5, }, { 5, } },
-			weight = 19.2,
-		},
-		{
-			name = "Zorua H",
-			evolution = "30",
-			bst = 330,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
-			weight = 12.5,
-		},
-		{
-			name = "Zoroark H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, } },
-			weight = 73.0,
-		},
-		{
-			name = "Braviary H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 510,
-			movelvls = { { 18, 24, 30, 36, 42, 48, 57, 64, 72, 80, }, { 18, 24, 30, 36, 42, 48, 57, 64, 72, 80, } },
-			weight = 43.4,
-		},
-		{
-			name = "Sliggoo H",
-			evolution = "50",
-			bst = 452,
-			movelvls = { { 15, 20, 25, 30, 35, 43, 49, 56, }, { 15, 20, 25, 30, 35, 43, 49, 56, } },
-			weight = 68.5,
-			friendshipBase = 35,
-		},
-		{
-			name = "Goodra H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 15, 20, 25, 30, 35, 43, 49, 49, 58, 67, }, { 15, 20, 25, 30, 35, 43, 49, 49, 58, 67, } },
-			weight = 334.1,
-			friendshipBase = 35,
-		},
-		{
-			name = "Avalugg H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 514,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, 61, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, 61, } },
-			weight = 262.4,
-		},
-		{
-			name = "Decidueye H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 9, 12, 15, 20, 25, 30, 37, 44, 51, 58, }, { 9, 12, 15, 20, 25, 30, 37, 44, 51, 58, } },
-			weight = 37.0,
-		},
-		{
-			name = "Tauros P",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 115.0,
-		},
-		{
-			name = "Wooper P",
-			evolution = "20",
-			bst = 210,
-			movelvls = { { 4, 8, 12, 16, 21, 24, 28, 32, 36, 40, }, { 4, 8, 12, 16, 21, 24, 28, 32, 36, 40, } },
-			weight = 11.0,
-		},
-		{
-			name = "Pikachu C",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 320,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } },
-			weight = 6.0,
-		},
-		{
-			name = "Pikachu P",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 430,
-			movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, } },
-			weight = 6.0,
-		},
-		{
-			name = "Tauros P F",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 85.0,
-		},
-		{
-			name = "Tauros P W",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 490,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 110.0,
-		},
-		{
-			name = "Eevee P",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 435,
-			movelvls = { { 3, 6, 10, 14, 17, 21, 24, 28, 31, }, { 3, 6, 10, 14, 17, 21, 24, 28, 31, } },
-			weight = 6.5,
-		},
-		{
-			name = "Pichu S",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 205,
-			movelvls = { { 4, 8, 12, 16, 20, }, { 4, 8, 12, 16, 20, } },
-			weight = 2.0,
-		},
-		{
-			name = "Castform F",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 420,
-			movelvls = { { 10, 10, 10, 15, 20, 20, 20, 25, 35, 35, 35, 45, }, { 10, 10, 10, 15, 20, 20, 20, 25, 35, 35, 35, 45, } },
-			weight = 0.8,
-		},
-		{
-			name = "Castform W",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 420,
-			movelvls = { { 10, 10, 10, 15, 20, 20, 20, 25, 35, 35, 35, 45, }, { 10, 10, 10, 15, 20, 20, 20, 25, 35, 35, 35, 45, } },
-			weight = 0.8,
-		},
-		{
-			name = "Castform I",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 420,
-			movelvls = { { 10, 10, 10, 15, 20, 20, 20, 25, 35, 35, 35, 45, }, { 10, 10, 10, 15, 20, 20, 20, 25, 35, 35, 35, 45, } },
-			weight = 0.8,
-		},
-		{
-			name = "Deoxys Atk",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, }, { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, } },
-			weight = 60.8,
-			friendshipBase = 0,
-		},
-		{
-			name = "Deoxys Def",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 7, 13, 19, 25, 31, 37, 43, 49, 55, 55, 61, 67, 73, 73, }, { 7, 13, 19, 25, 31, 37, 43, 49, 55, 55, 61, 67, 73, 73, } },
-			weight = 60.8,
-			friendshipBase = 0,
-		},
-		{
-			name = "Deoxys Spe",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, }, { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, } },
-			weight = 60.8,
-			friendshipBase = 0,
-		},
-		{
-			name = "Burmy S",
-			evolution = "20",
-			bst = 224,
-			movelvls = { { 10, 15, 20, }, { 10, 15, 20, } },
-			weight = 3.4,
-		},
-		{
-			name = "Burmy T",
-			evolution = "20",
-			bst = 224,
-			movelvls = { { 10, 15, 20, }, { 10, 15, 20, } },
-			weight = 3.4,
-		},
-		{
-			name = "Wormadam S",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 424,
-			movelvls = { { 10, 15, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, }, { 10, 15, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, } },
-			weight = 6.5,
-		},
-		{
-			name = "Wormadam T",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 424,
-			movelvls = { { 10, 15, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, }, { 10, 15, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, } },
-			weight = 6.5,
-		},
-		{
-			name = "Cherrim S",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 519,
-			movelvls = { { 15, 20, 28, 34, 41, 48, 55, 62, }, { 15, 20, 28, 34, 41, 48, 55, 62, } },
-			weight = 9.3,
-		},
-		{
-			name = "Rotom Heat",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 520,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 0.3,
-		},
-		{
-			name = "Rotom Wash",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 520,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 0.3,
-		},
-		{
-			name = "Rotom Frost",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 520,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 0.3,
-		},
-		{
-			name = "Rotom Fan",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 520,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 0.3,
-		},
-		{
-			name = "Rotom Mow",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 520,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } },
-			weight = 0.3,
-		},
-		{
-			name = "Dialga O",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 850.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Palkia O",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 8, 16, 24, 32, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 48, 56, 64, 72, 80, 88, } },
-			weight = 660.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Giratina O",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, }, { 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, } },
-			weight = 650.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Shaymin S",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 10, 19, 28, 37, 46, 55, 64, 73, 82, 91, 100, }, { 10, 19, 28, 37, 46, 55, 64, 73, 82, 91, 100, } },
-			weight = 5.2,
-			friendshipBase = 100,
-		},
-		{
-			name = "Basculin B",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 460,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
-			weight = 18.0,
-		},
-		{
-			name = "Basculin W",
-			evolution = "35",
-			bst = 460,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
-			weight = 18.0,
-		},
-		{
-			name = "Darmanitan Z",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 540,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, } },
-			weight = 92.9,
-		},
-		{
-			name = "Darmanitan Z G",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 540,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, } },
-			weight = 120.0,
-		},
-		{
-			name = "Tornadus T",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 580,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 77, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 77, } },
-			weight = 63.0,
-			friendshipBase = 90,
-		},
-		{
-			name = "Thundurus T",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 580,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
-			weight = 61.0,
-			friendshipBase = 90,
-		},
-		{
-			name = "Landorus T",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 5, 10, 15, 20, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, }, { 5, 10, 15, 20, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, } },
-			weight = 68.0,
-			friendshipBase = 90,
-		},
-		{
-			name = "Kyurem W",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 325.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Kyurem B",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 325.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Meloetta P",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 21, 26, 31, 36, 43, 50, 57, 64, 71, 78, 85, }, { 21, 26, 31, 36, 43, 50, 57, 64, 71, 78, 85, } },
-			weight = 6.5,
-			friendshipBase = 100,
-		},
-		{
-			name = "Greninja A",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 640,
-			movelvls = { { 10, 14, 19, 23, 28, 33, 42, 49, 56, 68, }, { 10, 14, 19, 23, 28, 33, 42, 49, 56, 68, } },
-			weight = 40.0,
-		},
-		{
-			name = "Floette E",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 551,
-			movelvls = { { 10, 15, 20, 25, 27, 33, 38, 43, 46, 50, 51, 58, }, { 10, 15, 20, 25, 27, 33, 38, 43, 46, 50, 51, 58, } },
-			weight = 0.9,
-		},
-		{
-			name = "Meowstic F",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 466,
-			movelvls = { { 9, 12, 15, 18, 21, 24, 29, 34, 34, 39, 44, 49, 54, 59, }, { 9, 12, 15, 18, 21, 24, 29, 34, 34, 39, 44, 49, 54, 59, } },
-			weight = 8.5,
-		},
-		{
-			name = "Aegislash B",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { }, { } },
-			weight = 53.0,
-		},
-		{
-			name = "Pumpkaboo S",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
-			bst = 335,
-			movelvls = { { 4, 8, 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, }, { 4, 8, 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, } },
-			weight = 3.5,
-		},
-		{
-			name = "Pumpkaboo L",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
-			bst = 335,
-			movelvls = { { 4, 8, 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, }, { 4, 8, 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, } },
-			weight = 7.5,
-		},
-		{
-			name = "Pumpkaboo X",
-			evolution = PokemonData.Evolutions.LINKING_CORD,
-			bst = 335,
-			movelvls = { { 4, 8, 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, }, { 4, 8, 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, } },
-			weight = 15.0,
-		},
-		{
-			name = "Gourgeist S",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 494,
-			movelvls = { { 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, 48, }, { 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, 48, } },
-			weight = 9.5,
-		},
-		{
-			name = "Gourgeist L",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 494,
-			movelvls = { { 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, 48, }, { 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, 48, } },
-			weight = 14.0,
-		},
-		{
-			name = "Gourgeist X",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 494,
-			movelvls = { { 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, 48, }, { 12, 12, 16, 20, 24, 24, 28, 32, 36, 36, 40, 44, 48, } },
-			weight = 39.0,
-		},
-		{
-			name = "Zygarde 10",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 486,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 33.5,
-			friendshipBase = 0,
-		},
-		{
-			name = "Zygarde C",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 708,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 610.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Hoopa U",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 6, 10, 15, 19, 25, 29, 29, 46, 50, 50, 55, 75, 85, }, { 6, 10, 15, 19, 25, 29, 29, 46, 50, 50, 55, 75, 85, } },
-			weight = 490.0,
-		},
-		{
-			name = "Oricorio E",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 476,
-			movelvls = { { 4, 6, 10, 13, 16, 20, 23, 26, 30, 33, 36, 40, 43, 47, }, { 4, 6, 10, 13, 16, 20, 23, 26, 30, 33, 36, 40, 43, 47, } },
-			weight = 3.4,
-		},
-		{
-			name = "Oricorio P",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 476,
-			movelvls = { { 4, 6, 10, 13, 16, 20, 23, 26, 30, 33, 36, 40, 43, 47, }, { 4, 6, 10, 13, 16, 20, 23, 26, 30, 33, 36, 40, 43, 47, } },
-			weight = 3.4,
-		},
-		{
-			name = "Oricorio G",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 476,
-			movelvls = { { 4, 6, 10, 13, 16, 20, 23, 26, 30, 33, 36, 40, 43, 47, }, { 4, 6, 10, 13, 16, 20, 23, 26, 30, 33, 36, 40, 43, 47, } },
-			weight = 3.4,
-		},
-		{
-			name = "Lycanroc M",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 487,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 25.0,
-		},
-		{
-			name = "Lycanroc D",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 487,
-			movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 25.0,
-		},
-		{
-			name = "Wishiwashi S",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 620,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } },
-			weight = 78.6,
-		},
-		{
-			name = "Minior C",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 500,
-			movelvls = { { 3, 8, 10, 15, 17, 22, 24, 29, 31, 36, 38, 43, 45, 50, }, { 3, 8, 10, 15, 17, 22, 24, 29, 31, 36, 38, 43, 45, 50, } },
-			weight = 0.3,
-		},
-		{
-			name = "Necrozma DM",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 460.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Necrozma DW",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 350.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Necrozma U",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 754,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 230.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Toxtricity L",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 502,
-			movelvls = { { 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 40.0,
-		},
-		{
-			name = "Eiscue N",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 470,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, } },
-			weight = 89.0,
-		},
-		{
-			name = "Indeedee F",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 475,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } },
-			weight = 28.0,
-			friendshipBase = 140,
-		},
-		{
-			name = "Morpeko H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 436,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } },
-			weight = 3.0,
-		},
-		{
-			name = "Zacian C",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 11, 22, 33, 44, 55, 66, 77, 88, }, { 11, 22, 33, 44, 55, 66, 77, 88, } },
-			weight = 355.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Zamazenta C",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 11, 22, 33, 44, 55, 66, 77, 88, }, { 11, 22, 33, 44, 55, 66, 77, 88, } },
-			weight = 785.0,
-			friendshipBase = 0,
-		},
-		{
-			name = "Eternatus E",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 1125,
-			movelvls = { { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 999.9,
-			friendshipBase = 0,
-		},
-		{
-			name = "Urshifu R",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 550,
-			movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } },
-			weight = 105.0,
-		},
-		{
-			name = "Calyrex I",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 8, 16, 24, 32, 40, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 809.1,
-			friendshipBase = 100,
-		},
-		{
-			name = "Calyrex S",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 680,
-			movelvls = { { 8, 16, 24, 32, 40, 40, 48, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 40, 48, 56, 64, 72, 80, 88, } },
-			weight = 53.6,
-			friendshipBase = 100,
-		},
-		{
-			name = "Ursaluna B",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 555,
-			movelvls = { { 8, 13, 17, 22, 25, 35, 41, 41, 48, 56, 64, 70, }, { 8, 13, 17, 22, 25, 35, 41, 41, 48, 56, 64, 70, } },
-			weight = 333.0,
-		},
-		{
-			name = "Basculegion F",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 530,
-			movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } },
-			weight = 110.0,
-		},
-		{
-			name = "Enamorus T",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 580,
-			movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } },
-			weight = 48.0,
-			friendshipBase = 90,
-		},
-		{
-			name = "Oinkologne F",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 489,
-			movelvls = { { 3, 6, 9, 12, 15, 17, 23, 28, 30, 34, 39, 45, 51, }, { 3, 6, 9, 12, 15, 17, 23, 28, 30, 34, 39, 45, 51, } },
-			weight = 120.0,
-		},
-		{
-			name = "Palafin H",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 650,
-			movelvls = { { 7, 10, 13, 17, 21, 25, 29, 34, 39, 44, 50, 55, 61, }, { 7, 10, 13, 17, 21, 25, 29, 34, 39, 44, 50, 55, 61, } },
-			weight = 97.4,
-		},
-		{
-			name = "Gimmighoul R",
-			evolution = "50",
-			bst = 300,
-			movelvls = { { }, { } },
-			weight = 0.1,
-		},
-		{
-			name = "Ogerpon W",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 550,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, } },
-			weight = 39.8,
-		},
-		{
-			name = "Ogerpon F",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 550,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, } },
-			weight = 39.8,
-		},
-		{
-			name = "Ogerpon R",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 550,
-			movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, } },
-			weight = 39.8,
-		},
-		{
-			name = "Terapagos T",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 600,
-			movelvls = { { 10, 20, 30, 40, 50, 60, 70, 80, 90, }, { 10, 20, 30, 40, 50, 60, 70, 80, 90, } },
-			weight = 16.0,
-		},
-		{
-			name = "Terapagos S",
-			evolution = PokemonData.Evolutions.NONE,
-			bst = 700,
-			movelvls = { { 10, 20, 30, 40, 50, 60, 70, 80, 90, }, { 10, 20, 30, 40, 50, 60, 70, 80, 90, } },
-			weight = 77.0,
-		},
+
 	}
 
-	self.Data.natDexMoves = {
+	self.Data.kaizoXYZMoves = {
 		{
 			id = "355",
+			name = "Quiver Dance",
+			type = PokemonData.Types.BUG,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "356",
+			name = "Roost",
+			type = PokemonData.Types.FLYING,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "357",
+			name = "Miracle Eye",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "40",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "358",
+			name = "Wake-Up Slap",
+			type = PokemonData.Types.FIGHTING,
+			power = "70",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "359",
+			name = "Hammer Arm",
+			type = PokemonData.Types.FIGHTING,
+			power = "100",
+			pp = "10",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "360",
+			name = "Gyro Ball",
+			type = PokemonData.Types.STEEL,
+			power = "0",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+			variablepower = true,
+		},
+		{
+			id = "361",
+			name = "Brine",
+			type = PokemonData.Types.WATER,
+			power = "65",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "362",
+			name = "Feint",
+			type = PokemonData.Types.NORMAL,
+			power = "30",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			priority = "+ 2",
+		},
+		{
+			id = "363",
+			name = "Pluck",
+			type = PokemonData.Types.FLYING,
+			power = "60",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "364",
+			name = "Acupressure",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "30",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "365",
+			name = "Metal Burst",
+			type = PokemonData.Types.STEEL,
+			power = "100",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			priority = "-- 5",
+			variablepower = true,
+		},
+		{
+			id = "366",
+			name = "U-Turn",
+			type = PokemonData.Types.BUG,
+			power = "70",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "367",
+			name = "Close Combat",
+			type = PokemonData.Types.FIGHTING,
+			power = "120",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "368",
+			name = "Payback",
+			type = PokemonData.Types.DARK,
+			power = "50",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "369",
+			name = "Assurance",
+			type = PokemonData.Types.DARK,
+			power = "60",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "370",
+			name = "Embargo",
+			type = PokemonData.Types.DARK,
+			power = "0",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "371",
+			name = "Natural Gift",
+			type = PokemonData.Types.NORMAL,
+			power = "50",
+			pp = "30",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "372",
+			name = "Fling",
+			type = PokemonData.Types.DARK,
+			power = "50",
+			pp = "30",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "373",
+			name = "Psycho Shift",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "374",
+			name = "Trump Card",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "5",
+			accuracy = "0",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "375",
+			name = "Heal Block",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "376",
+			name = "Wring Out",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+			iscontact = true,
+		},
+		{
+			id = "377",
+			name = "Power Trick",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "378",
+			name = "Lucky Chant",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "30",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "379",
+			name = "Me First",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "380",
+			name = "Copycat",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "381",
+			name = "Power Swap",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "382",
+			name = "Guard Swap",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "383",
+			name = "Heart Swap",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "384",
+			name = "Aqua Ring",
+			type = PokemonData.Types.WATER,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "385",
+			name = "Punishment",
+			type = PokemonData.Types.DARK,
+			power = "60",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "386",
+			name = "Last Resort",
+			type = PokemonData.Types.NORMAL,
+			power = "140",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "387",
+			name = "Worry Seed",
+			type = PokemonData.Types.GRASS,
+			power = "0",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "388",
+			name = "Sucker Punch",
+			type = PokemonData.Types.DARK,
+			power = "80",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "389",
+			name = "Magnet Rise",
+			type = PokemonData.Types.ELECTRIC,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "390",
+			name = "Flare Blitz",
+			type = PokemonData.Types.FIRE,
+			power = "120",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "391",
+			name = "Force Palm",
+			type = PokemonData.Types.FIGHTING,
+			power = "60",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "392",
+			name = "Aura Sphere",
+			type = PokemonData.Types.FIGHTING,
+			power = "80",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "393",
+			name = "Rock Polish",
+			type = PokemonData.Types.ROCK,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "394",
+			name = "Poison Jab",
+			type = PokemonData.Types.POISON,
+			power = "80",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "395",
+			name = "Dark Pulse",
+			type = PokemonData.Types.DARK,
+			power = "80",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "396",
+			name = "Night Slash",
+			type = PokemonData.Types.DARK,
+			power = "70",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "397",
+			name = "Aqua Tail",
+			type = PokemonData.Types.WATER,
+			power = "90",
+			pp = "10",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "398",
+			name = "Seed Bomb",
+			type = PokemonData.Types.GRASS,
+			power = "80",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "399",
+			name = "Air Slash",
+			type = PokemonData.Types.FLYING,
+			power = "75",
+			pp = "15",
+			accuracy = "95",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "400",
+			name = "X-Scissor",
+			type = PokemonData.Types.BUG,
+			power = "80",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "401",
+			name = "Bug Buzz",
+			type = PokemonData.Types.BUG,
+			power = "90",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "402",
+			name = "Dragon Pulse",
+			type = PokemonData.Types.DRAGON,
+			power = "85",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "403",
+			name = "Dragon Rush",
+			type = PokemonData.Types.DRAGON,
+			power = "100",
+			pp = "10",
+			accuracy = "75",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "404",
+			name = "Power Gem",
+			type = PokemonData.Types.ROCK,
+			power = "80",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "405",
+			name = "Drain Punch",
+			type = PokemonData.Types.FIGHTING,
+			power = "75",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "406",
+			name = "Vacuum Wave",
+			type = PokemonData.Types.FIGHTING,
+			power = "40",
+			pp = "30",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+			priority = "+ 1",
+		},
+		{
+			id = "407",
+			name = "Focus Blast",
+			type = PokemonData.Types.FIGHTING,
+			power = "120",
+			pp = "5",
+			accuracy = "70",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "408",
+			name = "Energy Ball",
+			type = PokemonData.Types.GRASS,
+			power = "90",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "409",
+			name = "Brave Bird",
+			type = PokemonData.Types.FLYING,
+			power = "120",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "410",
+			name = "Earth Power",
+			type = PokemonData.Types.GROUND,
+			power = "90",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "411",
+			name = "Switcheroo",
+			type = PokemonData.Types.DARK,
+			power = "0",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "412",
+			name = "Giga Impact",
+			type = PokemonData.Types.NORMAL,
+			power = "150",
+			pp = "5",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "413",
+			name = "Nasty Plot",
+			type = PokemonData.Types.DARK,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "414",
+			name = "Bullet Punch",
+			type = PokemonData.Types.STEEL,
+			power = "40",
+			pp = "30",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+			priority = "+ 1",
+		},
+		{
+			id = "415",
+			name = "Avalanche",
+			type = PokemonData.Types.ICE,
+			power = "60",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+			priority = "- 4",
+		},
+		{
+			id = "416",
+			name = "Ice Shard",
+			type = PokemonData.Types.ICE,
+			power = "40",
+			pp = "30",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			priority = "+ 1",
+		},
+		{
+			id = "417",
+			name = "Shadow Claw",
+			type = PokemonData.Types.GHOST,
+			power = "70",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "418",
+			name = "Thunder Fang",
+			type = PokemonData.Types.ELECTRIC,
+			power = "70",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "419",
+			name = "Ice Fang",
+			type = PokemonData.Types.ICE,
+			power = "70",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "420",
+			name = "Fire Fang",
+			type = PokemonData.Types.FIRE,
+			power = "70",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "421",
+			name = "Shadow Sneak",
+			type = PokemonData.Types.GHOST,
+			power = "40",
+			pp = "30",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+			priority = "+ 1",
+		},
+		{
+			id = "422",
+			name = "Mud Bomb",
+			type = PokemonData.Types.GROUND,
+			power = "65",
+			pp = "10",
+			accuracy = "85",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "423",
+			name = "Psycho Cut",
+			type = PokemonData.Types.PSYCHIC,
+			power = "70",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "424",
+			name = "Zen Headbutt",
+			type = PokemonData.Types.PSYCHIC,
+			power = "80",
+			pp = "15",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "425",
+			name = "Mirror Shot",
+			type = PokemonData.Types.STEEL,
+			power = "65",
+			pp = "10",
+			accuracy = "85",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "426",
+			name = "Flash Cannon",
+			type = PokemonData.Types.STEEL,
+			power = "80",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "427",
+			name = "Rock Climb",
+			type = PokemonData.Types.NORMAL,
+			power = "90",
+			pp = "20",
+			accuracy = "85",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "428",
+			name = "Defog",
+			type = PokemonData.Types.FLYING,
+			power = "0",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "429",
+			name = "Trick Room",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "5",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+			priority = "- 7",
+		},
+		{
+			id = "430",
+			name = "Draco Meteor",
+			type = PokemonData.Types.DRAGON,
+			power = "130",
+			pp = "5",
+			accuracy = "90",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "431",
+			name = "Discharge",
+			type = PokemonData.Types.ELECTRIC,
+			power = "80",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "432",
+			name = "Lava Plume",
+			type = PokemonData.Types.FIRE,
+			power = "80",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "433",
+			name = "Leaf Storm",
+			type = PokemonData.Types.GRASS,
+			power = "130",
+			pp = "5",
+			accuracy = "90",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "434",
+			name = "Power Whip",
+			type = PokemonData.Types.GRASS,
+			power = "120",
+			pp = "10",
+			accuracy = "85",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "435",
+			name = "Rock Wrecker",
+			type = PokemonData.Types.ROCK,
+			power = "150",
+			pp = "5",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "436",
+			name = "Cross Poison",
+			type = PokemonData.Types.POISON,
+			power = "70",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "437",
+			name = "Gunk Shot",
+			type = PokemonData.Types.POISON,
+			power = "120",
+			pp = "5",
+			accuracy = "80",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "438",
+			name = "Iron Head",
+			type = PokemonData.Types.STEEL,
+			power = "80",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "439",
+			name = "Magnet Bomb",
+			type = PokemonData.Types.STEEL,
+			power = "60",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "440",
+			name = "Stone Edge",
+			type = PokemonData.Types.ROCK,
+			power = "100",
+			pp = "5",
+			accuracy = "80",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "441",
+			name = "Captivate",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "442",
+			name = "Grass Knot",
+			type = PokemonData.Types.GRASS,
+			power = "WT",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+			iscontact = true,
+			variablepower = true,
+		},
+		{
+			id = "443",
+			name = "Chatter",
+			type = PokemonData.Types.FLYING,
+			power = "65",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "444",
+			name = "Judgment",
+			type = PokemonData.Types.NORMAL,
+			power = "100",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "445",
+			name = "Bug Bite",
+			type = PokemonData.Types.BUG,
+			power = "60",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "446",
+			name = "Charge Beam",
+			type = PokemonData.Types.ELECTRIC,
+			power = "50",
+			pp = "10",
+			accuracy = "90",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "447",
+			name = "Wood Hammer",
+			type = PokemonData.Types.GRASS,
+			power = "120",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "448",
+			name = "Aqua Jet",
+			type = PokemonData.Types.WATER,
+			power = "40",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+			priority = "+ 1",
+		},
+		{
+			id = "449",
+			name = "Attack Order",
+			type = PokemonData.Types.BUG,
+			power = "90",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "450",
+			name = "Defend Order",
+			type = PokemonData.Types.BUG,
+			power = "0",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS
+		},
+		{
+			id = "451",
+			name = "Heal Order",
+			type = PokemonData.Types.BUG,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "452",
+			name = "Head Smash",
+			type = PokemonData.Types.ROCK,
+			power = "150",
+			pp = "5",
+			accuracy = "80",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "453",
+			name = "Double Hit",
+			type = PokemonData.Types.NORMAL,
+			power = "35",
+			pp = "10",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "454",
+			name = "Roar of Time",
+			type = PokemonData.Types.DRAGON,
+			power = "150",
+			pp = "5",
+			accuracy = "90",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "455",
+			name = "Spacial Rend",
+			type = PokemonData.Types.DRAGON,
+			power = "100",
+			pp = "5",
+			accuracy = "95",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "456",
+			name = "Crush Grip",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "457",
+			name = "Magma Storm",
+			type = PokemonData.Types.FIRE,
+			power = "100",
+			pp = "5",
+			accuracy = "75",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "458",
+			name = "Dark Void",
+			type = PokemonData.Types.DARK,
+			power = "0",
+			pp = "10",
+			accuracy = "80",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "459",
+			name = "Seed Flare",
+			type = PokemonData.Types.GRASS,
+			power = "120",
+			pp = "5",
+			accuracy = "85",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "460",
+			name = "Ominous Wind",
+			type = PokemonData.Types.GHOST,
+			power = "60",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "461",
+			name = "Shadow Force",
+			type = PokemonData.Types.GHOST,
+			power = "120",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "462",
+			name = "Hone Claws",
+			type = PokemonData.Types.DARK,
+			power = "0",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "463",
+			name = "Wide Guard",
+			type = PokemonData.Types.ROCK,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+			priority = "+ 4"
+		},
+		{
+			id = "464",
+			name = "Guard Split",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "465",
+			name = "Power Split",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "466",
+			name = "Psyshock",
+			type = PokemonData.Types.PSYCHIC,
+			power = "80",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "467",
+			name = "Venoshock",
+			type = PokemonData.Types.POISON,
+			power = "65",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "468",
+			name = "Autotomize",
+			type = PokemonData.Types.STEEL,
+			power = "0",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "469",
+			name = "Rage Powder",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "470",
+			name = "Telekinesis",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "471",
+			name = "Smack Down",
+			type = PokemonData.Types.ROCK,
+			power = "50",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "472",
+			name = "Storm Throw",
+			type = PokemonData.Types.FIGHTING,
+			power = "50",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "473",
+			name = "Frost Breath",
+			type = PokemonData.Types.ICE,
+			power = "50",
+			pp = "10",
+			accuracy = "90",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "474",
+			name = "Flame Burst",
+			type = PokemonData.Types.FIRE,
+			power = "70",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "475",
+			name = "Sludge Wave",
+			type = PokemonData.Types.POISON,
+			power = "95",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "476",
+			name = "Synchronoise",
+			type = PokemonData.Types.PSYCHIC,
+			power = "120",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "477",
+			name = "Electro Ball",
+			type = PokemonData.Types.ELECTRIC,
+			power = "0",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "478",
+			name = "Soak",
+			type = PokemonData.Types.WATER,
+			power = "0",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "479",
+			name = "Flame Charge",
+			type = PokemonData.Types.FIRE,
+			power = "50",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "480",
+			name = "Coil",
+			type = PokemonData.Types.POISON,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "481",
+			name = "Low Sweep",
+			type = PokemonData.Types.FIGHTING,
+			power = "65",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "482",
+			name = "Acid Spray",
+			type = PokemonData.Types.POISON,
+			power = "40",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "483",
+			name = "Foul Play",
+			type = PokemonData.Types.DARK,
+			power = "95",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "484",
+			name = "Entrainment",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "485",
+			name = "After You",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "486",
+			name = "Round",
+			type = PokemonData.Types.NORMAL,
+			power = "60",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "487",
+			name = "Echoed Voice",
+			type = PokemonData.Types.NORMAL,
+			power = "40",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "488",
+			name = "Chip Away",
+			type = PokemonData.Types.NORMAL,
+			power = "60",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "489",
+			name = "Clear Smog",
+			type = PokemonData.Types.POISON,
+			power = "50",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "490",
+			name = "Stored Power",
+			type = PokemonData.Types.PSYCHIC,
+			power = "20",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "491",
+			name = "Quick Guard",
+			type = PokemonData.Types.FIGHTING,
+			power = "0",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+			priority = "+ 4",
+		},
+		{
+			id = "492",
+			name = "Ally Switch",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+			priority = "+ 1",
+		},
+		{
+			id = "493",
+			name = "Scald",
+			type = PokemonData.Types.WATER,
+			power = "80",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "494",
+			name = "Shell Smash",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "495",
+			name = "Hex",
+			type = PokemonData.Types.GHOST,
+			power = "65",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "496",
+			name = "Shift Gear",
+			type = PokemonData.Types.STEEL,
+			power = "0",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "497",
+			name = "Incinerate",
+			type = PokemonData.Types.FIRE,
+			power = "60",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "498",
+			name = "Circle Throw",
+			type = PokemonData.Types.FIGHTING,
+			power = "60",
+			pp = "10",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+			priority = "- 6",
+		},
+		{
+			id = "499",
+			name = "Quash",
+			type = PokemonData.Types.DARK,
+			power = "0",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "500",
+			name = "Acrobatics",
+			type = PokemonData.Types.FLYING,
+			power = "55",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "501",
+			name = "Reflect Type",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "502",
+			name = "Final Gambit",
+			type = PokemonData.Types.FIGHTING,
+			power = "0",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "503",
+			name = "Inferno",
+			type = PokemonData.Types.FIRE,
+			power = "100",
+			pp = "5",
+			accuracy = "50",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "504",
+			name = "Water Pledge",
+			type = PokemonData.Types.WATER,
+			power = "80",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "505",
+			name = "Fire Pledge",
+			type = PokemonData.Types.FIRE,
+			power = "80",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "506",
+			name = "Grass Pledge",
+			type = PokemonData.Types.GRASS,
+			power = "80",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "507",
+			name = "Volt Switch",
+			type = PokemonData.Types.ELECTRIC,
+			power = "70",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "508",
+			name = "Struggle Bug",
+			type = PokemonData.Types.BUG,
+			power = "50",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "509",
+			name = "Bulldoze",
+			type = PokemonData.Types.GROUND,
+			power = "60",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "510",
+			name = "Dragon Tail",
+			type = PokemonData.Types.DRAGON,
+			power = "60",
+			pp = "10",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+			priority = "- 6",
+		},
+		{
+			id = "511",
+			name = "Work Up",
+			type = PokemonData.Types.NORMAL,
+			power = "-",
+			pp = "30",
+			accuracy = "-",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "512",
+			name = "Electroweb",
+			type = PokemonData.Types.ELECTRIC,
+			power = "55",
+			pp = "15",
+			accuracy = "95",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "513",
+			name = "Wild Charge",
+			type = PokemonData.Types.ELECTRIC,
+			power = "90",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "514",
+			name = "Drill Run",
+			type = PokemonData.Types.GROUND,
+			power = "80",
+			pp = "10",
+			accuracy = "95",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "515",
+			name = "Dual Chop",
+			type = PokemonData.Types.DRAGON,
+			power = "40",
+			pp = "15",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "516",
+			name = "Heart Stamp",
+			type = PokemonData.Types.PSYCHIC,
+			power = "60",
+			pp = "25",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "517",
+			name = "Horn Leech",
+			type = PokemonData.Types.GRASS,
+			power = "75",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "518",
+			name = "Sacred Sword",
+			type = PokemonData.Types.FIGHTING,
+			power = "90",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "519",
+			name = "Razor Shell",
+			type = PokemonData.Types.WATER,
+			power = "75",
+			pp = "10",
+			accuracy = "95",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "520",
+			name = "Leaf Tornado",
+			type = PokemonData.Types.GRASS,
+			power = "65",
+			pp = "10",
+			accuracy = "95",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "521",
+			name = "Steamroller",
+			type = PokemonData.Types.BUG,
+			power = "65",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "522",
+			name = "Cotton Guard",
+			type = PokemonData.Types.GRASS,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "523",
+			name = "Night Daze",
+			type = PokemonData.Types.DARK,
+			power = "85",
+			pp = "10",
+			accuracy = "95",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "524",
+			name = "Psystrike",
+			type = PokemonData.Types.PSYCHIC,
+			power = "100",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "525",
+			name = "Tail Slap",
+			type = PokemonData.Types.NORMAL,
+			power = "25",
+			pp = "25",
+			accuracy = "85",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "526",
+			name = "Hurricane",
+			type = PokemonData.Types.FLYING,
+			power = "110",
+			pp = "10",
+			accuracy = "70",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "527",
+			name = "Head Charge",
+			type = PokemonData.Types.NORMAL,
+			power = "120",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "528",
+			name = "Gear Grind",
+			type = PokemonData.Types.STEEL,
+			power = "50",
+			pp = "15",
+			accuracy = "85",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "529",
+			name = "Searing Shot",
+			type = PokemonData.Types.FIRE,
+			power = "100",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "530",
+			name = "Techno Blast",
+			type = PokemonData.Types.NORMAL,
+			power = "120",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "531",
+			name = "Relic Song",
+			type = PokemonData.Types.NORMAL,
+			power = "75",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "532",
+			name = "Secret Sword",
+			type = PokemonData.Types.FIGHTING,
+			power = "85",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "533",
+			name = "Glaciate",
+			type = PokemonData.Types.ICE,
+			power = "65",
+			pp = "10",
+			accuracy = "95",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "534",
+			name = "Bolt Strike",
+			type = PokemonData.Types.ELECTRIC,
+			power = "130",
+			pp = "5",
+			accuracy = "85",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "535",
+			name = "Blue Flare",
+			type = PokemonData.Types.FIRE,
+			power = "130",
+			pp = "5",
+			accuracy = "85",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "536",
+			name = "Fiery Dance",
+			type = PokemonData.Types.FIRE,
+			power = "80",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "537",
+			name = "Freeze Shock",
+			type = PokemonData.Types.ICE,
+			power = "140",
+			pp = "5",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "538",
+			name = "Ice Burn",
+			type = PokemonData.Types.ICE,
+			power = "140",
+			pp = "5",
+			accuracy = "90",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "539",
+			name = "Snarl",
+			type = PokemonData.Types.DARK,
+			power = "55",
+			pp = "15",
+			accuracy = "95",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "540",
+			name = "Icicle Crash",
+			type = PokemonData.Types.ICE,
+			power = "85",
+			pp = "10",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "541",
+			name = "V-Create",
+			type = PokemonData.Types.FIRE,
+			power = "180",
+			pp = "5",
+			accuracy = "95",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "542",
+			name = "Fusion Flare",
+			type = PokemonData.Types.FIRE,
+			power = "100",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "543",
+			name = "Fusion Bolt",
+			type = PokemonData.Types.ELECTRIC,
+			power = "100",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "544",
+			name = "Flying Press",
+			type = PokemonData.Types.FIGHTING,
+			power = "100",
+			pp = "10",
+			accuracy = "95",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "545",
+			name = "Mat Block",
+			type = PokemonData.Types.FIGHTING,
+			power = "0",
+			pp = "15",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+			priority = "+ 4",
+		},
+		{
+			id = "546",
+			name = "Belch",
+			type = PokemonData.Types.POISON,
+			power = "100",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "547",
+			name = "Rototiller",
+			type = PokemonData.Types.GRASS,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "548",
+			name = "Sticky Web",
+			type = PokemonData.Types.BUG,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "549",
+			name = "Fell Stinger",
+			type = PokemonData.Types.BUG,
+			power = "50",
+			pp = "25",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "550",
+			name = "Phantom Force",
+			type = PokemonData.Types.GHOST,
+			power = "90",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "551",
+			name = "Trick or Treat",
+			type = PokemonData.Types.GHOST,
+			power = "0",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "552",
+			name = "Noble Roar",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "30",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "553",
+			name = "Parabolic Charge",
+			type = PokemonData.Types.ELECTRIC,
+			power = "65",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "554",
+			name = "Forest's Curse",
+			type = PokemonData.Types.GRASS,
+			power = "0",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "555",
+			name = "Petal Blizzard",
+			type = PokemonData.Types.GRASS,
+			power = "90",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "556",
+			name = "Freeze-Dry",
+			type = PokemonData.Types.ICE,
+			power = "70",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "557",
 			name = "Disarming Voice",
 			type = PokemonData.Types.FAIRY,
 			power = "40",
@@ -6651,36 +6686,165 @@ local function KaizoXYZExtension()
 			category = MoveData.Categories.SPECIAL,
 		},
 		{
-			id = "356",
+			id = "558",
+			name = "Parting Shot",
+			type = PokemonData.Types.DARK,
+			power = "0",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "559",
+			name = "Topsy Turvy",
+			type = PokemonData.Types.DARK,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "560",
 			name = "Draining Kiss",
 			type = PokemonData.Types.FAIRY,
-			power = "50",
+			power = "60",
 			pp = "10",
 			accuracy = "100",
 			category = MoveData.Categories.SPECIAL,
 			iscontact = true,
 		},
 		{
-			id = "357",
+			id = "561",
+			name = "Crafty Shield",
+			type = PokemonData.Types.FAIRY,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "562",
+			name = "Grassy Terrain",
+			type = PokemonData.Types.GRASS,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "563",
+			name = "Misty Terrain",
+			type = PokemonData.Types.FAIRY,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "564",
+			name = "Psychic Terrain",
+			type = PokemonData.Types.PSYCHIC,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "565",
+			name = "Electric Terrain",
+			type = PokemonData.Types.ELECTRIC,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "566",
+			name = "Dazzling Gleam",
+			type = PokemonData.Types.FAIRY,
+			power = "80",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "567",
+			name = "Celebrate",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "40",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "568",
+			name = "Hold Hands",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "40",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "569",
+			name = "Baby-Doll Eyes",
+			type = PokemonData.Types.FAIRY,
+			power = "0",
+			pp = "30",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+			priority = "+ 1",
+		},
+		{
+			id = "570",
+			name = "Nuzzle",
+			type = PokemonData.Types.ELECTRIC,
+			power = "20",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "571",
+			name = "Hold Back",
+			type = PokemonData.Types.NORMAL,
+			power = "40",
+			pp = "40",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "572",
+			name = "Electrify",
+			type = PokemonData.Types.ELECTRIC,
+			power = "0",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "573",
 			name = "Play Rough",
 			type = PokemonData.Types.FAIRY,
 			power = "90",
 			pp = "10",
 			accuracy = "90",
-			category = MoveData.Categories.SPECIAL,
+			category = MoveData.Categories.PHYSICAL,
 			iscontact = true,
 		},
 		{
-			id = "358",
+			id = "574",
 			name = "Fairy Wind",
 			type = PokemonData.Types.FAIRY,
-			power = "40",
+			power = "60",
 			pp = "30",
 			accuracy = "100",
 			category = MoveData.Categories.SPECIAL,
 		},
 		{
-			id = "359",
+			id = "575",
 			name = "Moonblast",
 			type = PokemonData.Types.FAIRY,
 			power = "95",
@@ -6689,25 +6853,856 @@ local function KaizoXYZExtension()
 			category = MoveData.Categories.SPECIAL,
 		},
 		{
-			id = "360",
-			name = "Dazzling Gleam",
+			id = "576",
+			name = "Boomburst",
+			type = PokemonData.Types.NORMAL,
+			power = "140",
+			pp = "5",
+			accuracy = "90",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "577",
+			name = "Fairy Lock",
+			type = PokemonData.Types.FAIRY,
+			power = "0",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "578",
+			name = "King's Shield",
+			type = PokemonData.Types.STEEL,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+			priority = "+ 4",
+		},
+		{
+			id = "579",
+			name = "Play Nice",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "580",
+			name = "Confide",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "581",
+			name = "Diamond Storm",
+			type = PokemonData.Types.ROCK,
+			power = "100",
+			pp = "5",
+			accuracy = "95",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "582",
+			name = "Steam Eruption",
+			type = PokemonData.Types.WATER,
+			power = "110",
+			pp = "5",
+			accuracy = "95",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "583",
+			name = "Hyperspace Hole",
+			type = PokemonData.Types.PSYCHIC,
+			power = "80",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "584",
+			name = "Water Shuriken",
+			type = PokemonData.Types.WATER,
+			power = "25",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+			priority = "+ 1",
+		},
+		{
+			id = "585",
+			name = "Mystical Fire",
+			type = PokemonData.Types.FIRE,
+			power = "75",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "586",
+			name = "Spiky Shield",
+			type = PokemonData.Types.GRASS,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "587",
+			name = "Aromatic Mist",
+			type = PokemonData.Types.FAIRY,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "588",
+			name = "Eerie Impulse",
+			type = PokemonData.Types.ELECTRIC,
+			power = "0",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "589",
+			name = "Venom Drench",
+			type = PokemonData.Types.POISON,
+			power = "0",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "590",
+			name = "Geomancy",
+			type = PokemonData.Types.FAIRY,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "591",
+			name = "Magnetic Flux",
+			type = PokemonData.Types.ELECTRIC,
+			power = "0",
+			pp = "20",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "592",
+			name = "Happy Hour",
+			type = PokemonData.Types.NORMAL,
+			power = "0",
+			pp = "30",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "593",
+			name = "Infestation",
+			type = PokemonData.Types.BUG,
+			power = "20",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "594",
+			name = "Power-Up Punch",
+			type = PokemonData.Types.FIGHTING,
+			power = "50",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "595",
+			name = "Alluring Voice",
 			type = PokemonData.Types.FAIRY,
 			power = "80",
 			pp = "10",
 			accuracy = "100",
 			category = MoveData.Categories.SPECIAL,
 		},
+		{
+			id = "596",
+			name = "Strange Steam",
+			type = PokemonData.Types.FAIRY,
+			power = "90",
+			pp = "10",
+			accuracy = "95",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "597",
+			name = "Spirit Break",
+			type = PokemonData.Types.FAIRY,
+			power = "75",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "598",
+			name = "Fleur Cannon",
+			type = PokemonData.Types.FAIRY,
+			power = "130",
+			pp = "5",
+			accuracy = "90",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "599",
+			name = "Floral Healing",
+			type = PokemonData.Types.FAIRY,
+			power = "0",
+			pp = "10",
+			accuracy = "0",
+			category = MoveData.Categories.STATUS,
+		},
+		{
+			id = "600",
+			name = "Misty Explosion",
+			type = PokemonData.Types.FAIRY,
+			power = "250",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "601",
+			name = "Liquidation",
+			type = PokemonData.Types.WATER,
+			power = "85",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "602",
+			name = "Triple Axel",
+			type = PokemonData.Types.ICE,
+			power = "20",
+			pp = "10",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "603",
+			name = "Chroma Blades",
+			type = PokemonData.Types.FAIRY,
+			power = "20",
+			pp = "10",
+			accuracy = "95",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "604",
+			name = "Light Slash",
+			type = PokemonData.Types.FAIRY,
+			power = "70",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "605",
+			name = "Lunar Punch",
+			type = PokemonData.Types.FAIRY,
+			power = "75",
+			pp = "15",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "606",
+			name = "Moon Break",
+			type = PokemonData.Types.FAIRY,
+			power = "50",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "607",
+			name = "Dual Flick",
+			type = PokemonData.Types.FAIRY,
+			power = "50",
+			pp = "10",
+			accuracy = "90",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "608",
+			name = "Oblivion Wing",
+			type = PokemonData.Types.FLYING,
+			power = "80",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "609",
+			name = "Thousand Waves",
+			type = PokemonData.Types.GROUND,
+			power = "90",
+			pp = "10",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "610",
+			name = "Origin Pulse",
+			type = PokemonData.Types.WATER,
+			power = "110",
+			pp = "10",
+			accuracy = "85",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "611",
+			name = "Precipice Blades",
+			type = PokemonData.Types.GROUND,
+			power = "120",
+			pp = "10",
+			accuracy = "85",
+			category = MoveData.Categories.PHYSICAL,
+		},
+		{
+			id = "612",
+			name = "Dragon Ascent",
+			type = PokemonData.Types.FLYING,
+			power = "120",
+			pp = "5",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
+		{
+			id = "613",
+			name = "Light of Ruin",
+			type = PokemonData.Types.FAIRY,
+			power = "140",
+			pp = "5",
+			accuracy = "90",
+			category = MoveData.Categories.SPECIAL,
+		},
+		{
+			id = "614",
+			name = "Aqua Cutter",
+			type = PokemonData.Types.WATER,
+			power = "70",
+			pp = "20",
+			accuracy = "100",
+			category = MoveData.Categories.PHYSICAL,
+			iscontact = true,
+		},
 	}
 
-	self.Data.natDexTypes = {
+	self.Data.kaizoXYZAbilities = {
+		{
+			id = 78,
+			name = "Motor Drive",
+		},
+		{
+			id = 79,
+			name = "Steadfast",
+		},
+		{
+			id = 80,
+			name = "Snow Cloak",
+		},
+		{
+			id = 81,
+			name = "Gluttony",
+		},
+		{
+			id = 82,
+			name = "Anger Point",
+		},
+		{
+			id = 83,
+			name = "Unburden",
+		},
+		{
+			id = 84,
+			name = "Heatproof",
+		},
+		{
+			id = 85,
+			name = "Simple",
+		},
+		{
+			id = 86,
+			name = "Dry Skin",
+		},
+		{
+			id = 87,
+			name = "Iron Fist",
+		},
+		{
+			id = 88,
+			name = "Poison Heal",
+		},
+		{
+			id = 89,
+			name = "Adaptability",
+		},
+		{
+			id = 90,
+			name = "Skill Link",
+		},
+		{
+			id = 91,
+			name = "Hydration",
+		},
+		{
+			id = 92,
+			name = "Solar Power",
+		},
+		{
+			id = 93,
+			name = "Quick Feet",
+		},
+		{
+			id = 94,
+			name = "Normalize",
+		},
+		{
+			id = 95,
+			name = "Sniper",
+		},
+		{
+			id = 96,
+			name = "Magic Guard",
+		},
+		{
+			id = 97,
+			name = "No Guard",
+		},
+		{
+			id = 98,
+			name = "Stall",
+		},
+		{
+			id = 99,
+			name = "Technician",
+		},
+		{
+			id = 100,
+			name = "Mystic Guard",
+		},
+		{
+			id = 101,
+			name = "Klutz",
+		},
+		{
+			id = 102,
+			name = "Mold Breaker",
+		},
+		{
+			id = 103,
+			name = "Super Luck",
+		},
+		{
+			id = 104,
+			name = "Aftermath",
+		},
+		{
+			id = 105,
+			name = "Forewarn",
+		},
+		{
+			id = 106,
+			name = "Unaware",
+		},
+		{
+			id = 107,
+			name = "Tinted Lens",
+		},
+		{
+			id = 108,
+			name = "Filter",
+		},
+		{
+			id = 109,
+			name = "Slow Start",
+		},
+		{
+			id = 110,
+			name = "Scrappy",
+		},
+		{
+			id = 111,
+			name = "Storm Drain",
+		},
+		{
+			id = 112,
+			name = "Ice Body",
+		},
+		{
+			id = 113,
+			name = "Solid Rock",
+		},
+		{
+			id = 114,
+			name = "Snow Warning",
+		},
+		{
+			id = 115,
+			name = "Collector",
+		},
+		{
+			id = 116,
+			name = "Frisk",
+		},
+		{
+			id = 117,
+			name = "Reckless",
+		},
+		{
+			id = 118,
+			name = "Multitype",
+		},
+		{
+			id = 119,
+			name = "Flower Gift",
+		},
+		{
+			id = 120,
+			name = "Soul Heart",
+		},
+		{
+			id = 121,
+			name = "Moxie",
+		},
+		{
+			id = 122,
+			name = "Liquid Voice",
+		},
+		{
+			id = 123,
+			name = "Transistor",
+		},
+		{
+			id = 124,
+			name = "Dragon's Maw",
+		},
+		{
+			id = 125,
+			name = "Steelworker",
+		},
+		{
+			id = 126,
+			name = "Slush Rush",
+		},
+		{
+			id = 127,
+			name = "Stalwart",
+		},
+		{
+			id = 128,
+			name = "Stance Change",
+		},
+		{
+			id = 129,
+			name = "Sheer Force",
+		},
+		{
+			id = 130,
+			name = "Defiant",
+		},
+		{
+			id = 131,
+			name = "Competitive",
+		},
+		{
+			id = 132,
+			name = "Defeatist",
+		},
+		{
+			id = 133,
+			name = "Cursed Body",
+		},
+		{
+			id = 134,
+			name = "Healer",
+		},
+		{
+			id = 135,
+			name = "Friend Guard",
+		},
+		{
+			id = 136,
+			name = "Weak Armor",
+		},
+		{
+			id = 137,
+			name = "Heavy Metal",
+		},
+		{
+			id = 138,
+			name = "Light Metal",
+		},
+		{
+			id = 139,
+			name = "Multiscale",
+		},
+		{
+			id = 140,
+			name = "Toxic Boost",
+		},
+		{
+			id = 141,
+			name = "Flare Boost",
+		},
+		{
+			id = 142,
+			name = "Harvest",
+		},
+		{
+			id = 143,
+			name = "Telepathy",
+		},
+		{
+			id = 144,
+			name = "Overcoat",
+		},
+		{
+			id = 145,
+			name = "Poison Touch",
+		},
+		{
+			id = 146,
+			name = "Regenerator",
+		},
+		{
+			id = 147,
+			name = "Big Pecks",
+		},
+		{
+			id = 148,
+			name = "Sand Rush",
+		},
+		{
+			id = 149,
+			name = "Wonder Skin",
+		},
+		{
+			id = 150,
+			name = "Analytic",
+		},
+		{
+			id = 151,
+			name = "Imposter",
+		},
+		{
+			id = 152,
+			name = "Infiltrator",
+		},
+		{
+			id = 153,
+			name = "Justified",
+		},
+		{
+			id = 154,
+			name = "Rattled",
+		},
+		{
+			id = 155,
+			name = "Magic Bounce",
+		},
+		{
+			id = 156,
+			name = "Sap Sipper",
+		},
+		{
+			id = 157,
+			name = "Prankster",
+		},
+		{
+			id = 158,
+			name = "Sand Force",
+		},
+		{
+			id = 159,
+			name = "Iron Barbs",
+		},
+		{
+			id = 160,
+			name = "Zen Mode",
+		},
+		{
+			id = 161,
+			name = "Victory Star",
+		},
+		{
+			id = 162,
+			name = "Turboblaze",
+		},
+		{
+			id = 163,
+			name = "Teravolt",
+		},
+		{
+			id = 164,
+			name = "Aroma Veil",
+		},
+		{
+			id = 165,
+			name = "Protean",
+		},
+		{
+			id = 166,
+			name = "Fur Coat",
+		},
+		{
+			id = 167,
+			name = "Pure Mind",
+		},
+		{
+			id = 168,
+			name = "Intimidate",
+		},
+		{
+			id = 169,
+			name = "Soul Chill",
+		},
+		{
+			id = 170,
+			name = "Bulletproof",
+		},
+		{
+			id = 171,
+			name = "Strong Jaw",
+		},
+		{
+			id = 172,
+			name = "Refrigerate",
+		},
+		{
+			id = 173,
+			name = "Sweet Veil",
+		},
+		{
+			id = 174,
+			name = "Gale Wings",
+		},
+		{
+			id = 175,
+			name = "Mega Launcher",
+		},
+		{
+			id = 176,
+			name = "Aura Barrier",
+		},
+		{
+			id = 177,
+			name = "Symbiosis",
+		},
+		{
+			id = 178,
+			name = "Tough Claws",
+		},
+		{
+			id = 179,
+			name = "Pixilate",
+		},
+		{
+			id = 180,
+			name = "Aerilate",
+		},
+		{
+			id = 181,
+			name = "Gooey",
+		},
+		{
+			id = 182,
+			name = "Dark Aura",
+		},
+		{
+			id = 183,
+			name = "Fairy Aura",
+		},
+		{
+			id = 184,
+			name = "Aura Break",
+		},
+		{
+			id = 185,
+			name = "Primordial Sea",
+		},
+		{
+			id = 186,
+			name = "Desolate Land",
+		},
+		{
+			id = 187,
+			name = "Delta Stream",
+		},
+		{
+			id = 188,
+			name = "Electric Surge",
+		},
+		{
+			id = 189,
+			name = "Psychic Surge",
+		},
+		{
+			id = 190,
+			name = "Misty Surge",
+		},
+		{
+			id = 191,
+			name = "Grassy Surge",
+		},
+		{
+			id = 192,
+			name = "Neuroforce",
+		},
+		{
+			id = 193,
+			name = "Harmonics",
+		},
+		{
+			id = 194,
+			name = "Galvanize",
+		},
+		{
+			id = 195,
+			name = "Sharpness",
+		},
+	}
+
+	self.Data.kaizoXYZTypes = {
 		FAIRY = "fairy",
 	}
 
-	self.Data.natDexTypeCategories = {
+	self.Data.kaizoXYZTypeCategories = {
 		["fairy"] = MoveData.Categories.SPECIAL,
 	}
 
-	self.Data.natDexTypeEffectiveness = {
+	self.Data.kaizoXYZTypeEffectiveness = {
 		fairy = { fighting = 2, dark = 2, dragon = 2, poison = 0.5, steel = 0.5, fire = 0.5 },
 	}
 
@@ -6717,7 +7712,7 @@ local function KaizoXYZExtension()
 			return
 		end
 
-		for _, mon in ipairs(self.Data.natDexMons) do -- ipairs required for ordered lists
+		for _, mon in ipairs(self.Data.kaizoXYZMons) do -- ipairs required for ordered lists
 			-- Insert new mons at the end of the existing pokemon data table
 			table.insert(PokemonData.Pokemon, mon)
 		end
@@ -6729,8 +7724,20 @@ local function KaizoXYZExtension()
 			return
 		end
 
-		for _, move in ipairs(self.Data.natDexMoves) do
+		for _, move in ipairs(self.Data.kaizoXYZMoves) do
 			table.insert(MoveData.Moves, move)
+		end
+	end
+
+	function self.addNewAbilities()
+		-- Don't add new abilities if they've already been added
+		if AbilityData.Abilities[78] ~= nil then
+			return
+		end
+
+		for _, ability in ipairs(self.Data.kaizoXYZAbilities) do -- ipairs required for ordered lists
+			-- Insert new abilities at the end of the existing ability data table
+			table.insert(AbilityData.Abilities, ability)
 		end
 	end
 
@@ -6740,8 +7747,8 @@ local function KaizoXYZExtension()
 			return self.Paths.PokemonSprites.builtPath .. value .. self.Paths.PokemonSprites.fileType
 		end
 		Drawing.ImagePaths.PokemonIcon.shouldUseOverride = function(this, value)
-			-- Only use custom path if it's a new pokemon (gen4+)
-			return (tonumber(value) or 0) > 411
+			-- Only use custom path if it's a new pokemon (gen4+) or a mega
+			return (tonumber(value) or 0) > 411 or id == 12 or id == 18 or id == 65 or id == 80 or id == 94 or id == 127 or id == 130 or id == 142 or id == 181 or id == 208 or id == 212 or id == 214 or id == 229 or id == 322 or id == 331 or id == 338 or id == 340 or id == 347 or id == 355 or id == 357 or id == 359 or id == 376 or id == 378 or id == 384 or id == 385 or id == 394 or id == 397 or id == 400 or id == 404 or id == 405 or id == 406
 		end
 
 		-- New Pokemon types
@@ -6759,7 +7766,7 @@ local function KaizoXYZExtension()
 		if MiscData.EvolutionStones[99] ~= nil then
 			return
 		end
-		for id, item in pairs(self.Data.natDexEvoStones) do
+		for id, item in pairs(self.Data.kaizoXYZEvoStones) do
 			MiscData.EvolutionStones[id] = item
 		end
 	end
@@ -6769,13 +7776,13 @@ local function KaizoXYZExtension()
 		if PokemonData.Types.FAIRY ~= nil then
 			return
 		end
-		for id, item in pairs(self.Data.natDexTypes) do
+		for id, item in pairs(self.Data.kaizoXYZTypes) do
 			PokemonData.Types[id] = item
 		end
-		for id, item in pairs(self.Data.natDexTypeCategories) do
+		for id, item in pairs(self.Data.kaizoXYZTypeCategories) do
 			MoveData.TypeToCategory[id] = item
 		end
-		for id, item in pairs(self.Data.natDexTypeEffectiveness) do
+		for id, item in pairs(self.Data.kaizoXYZTypeEffectiveness) do
 			MoveData.TypeToEffectiveness[id] = item
 		end
 		if #CoverageCalcScreen.OrderedTypeKeys < 18 then
@@ -6790,7 +7797,7 @@ local function KaizoXYZExtension()
 		if PokemonData.Evolutions.SHINY ~= nil then
 			return
 		end
-		for id, item in pairs(self.Data.natDexEvoDetails) do
+		for id, item in pairs(self.Data.kaizoXYZEvoDetails) do
 			PokemonData.Evolutions[id] = item
 		end
 	end
@@ -6812,26 +7819,28 @@ local function KaizoXYZExtension()
 		end
 
 		local moveDesc = Resources.Game.MoveDescriptions
-		for id, name in pairs(self.Data.natDexMoveDescriptions) do
+		for id, name in pairs(self.Data.kaizoXYZMoveDescriptions) do
 			moveDesc[id] = name
 		end
 
+		local abilityDesc = Resources.Game.AbilityDescriptions
+		for id, name in pairs(self.Data.kaizoXYZAbilityDescriptions) do
+			abilityDesc[id] = name
+		end
+
 		local itemNames = Resources.Game.ItemNames
-		itemNames[89] = "Dubious Disc"
-		itemNames[90] = "Razor Claw"
-		itemNames[91] = "Razor Fang"
-		itemNames[92] = "Linking Cord"
-		itemNames[99] = "Shiny Stone"
+		itemNames[91] = "Magmarizer"
+		itemNames[92] = "Electirizer"
+		itemNames[99] = "Dusk Stone"
 		itemNames[100] = "Dusk Stone"
 		itemNames[101] = "Dawn Stone"
 		itemNames[102] = "Ice Stone"
-		itemNames[226] = "FairyFeather"
 
 		Resources.sanitizeTable(Resources.Data)
 	end
 
 	function self.addGameOverInfo()
-		GameOverScreen.Buttons.NatDexVersion = {
+		GameOverScreen.Buttons.KaizoXYZVersion = {
 		type = Constants.ButtonTypes.NO_BORDER,
 		-- The location and dimensions of the button {x,y,w,h}; shares space with Retry Battle button.
 		box = { Constants.SCREEN.WIDTH + 80, 7, 32, 16 },
@@ -6857,7 +7866,7 @@ local function KaizoXYZExtension()
 	end
 
 	function self.removeGameOverInfo()
-		GameOverScreen.Buttons.NatDexVersion = nil
+		GameOverScreen.Buttons.KaizoXYZVersion = nil
 	end
 
 	function self.updatePokeData()
@@ -6865,481 +7874,634 @@ local function KaizoXYZExtension()
 
 		PokemonData.Addresses.offsetExpYield = 0x1a
 		PokemonData.Addresses.sizeofExpYield = 2
-		PokemonData.Values.EggId = 1236
-		PokemonData.Values.GhostId = 1237
-		PokemonData.Values.DefaultBaseFriendship = 50
+		PokemonData.Values.EggId = 763
+		PokemonData.Values.GhostId = 764
+		PokemonData.Values.DefaultBaseFriendship = 255
 		PokemonData.TypeIndexMap[0x12] = PokemonData.Types.FAIRY
 
 		local mon = PokemonData.Pokemon
-		mon[  1].movelvls = { { 3, 6, 9, 12, 15, 15, 18, 21, 24, 27, 30, 33, 36, }, { 3, 6, 9, 12, 15, 15, 18, 21, 24, 27, 30, 33, 36, } }
-		mon[  2].movelvls = { { 9, 12, 15, 15, 20, 25, 30, 35, 40, 45, 50, }, { 9, 12, 15, 15, 20, 25, 30, 35, 40, 45, 50, } }
-		mon[  3].movelvls = { { 9, 12, 15, 15, 20, 25, 30, 37, 44, 51, 58, }, { 9, 12, 15, 15, 20, 25, 30, 37, 44, 51, 58, } }
-		mon[  4].movelvls = { { 4, 8, 12, 17, 20, 24, 28, 32, 36, 40, }, { 4, 8, 12, 17, 20, 24, 28, 32, 36, 40, } }
-		mon[  5].movelvls = { { 12, 19, 24, 30, 37, 48, 54, }, { 12, 19, 24, 30, 37, 48, 54, } }
-		mon[  6].movelvls = { { 12, 19, 24, 30, 39, 46, 54, 62, }, { 12, 19, 24, 30, 39, 46, 54, 62, } }
-		mon[  7].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, } }
-		mon[  8].movelvls = { { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, }, { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, } }
-		mon[  9].movelvls = { { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, }, { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, } }
-		mon[ 10].movelvls = { { 9, }, { 9, } }
-		mon[ 11].movelvls = { { }, { } }
-		mon[ 12].movelvls = { { 4, 8, 12, 12, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 12, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
-		mon[ 13].movelvls = { { 9, }, { 9, } }
-		mon[ 14].movelvls = { { }, { } }
-		mon[ 15].movelvls = { { 11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, }, { 11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, } }
+		mon[  1].movelvls = { { 7, 9, 13, 13, 15, 19, 21, 25, 27, 31, 33, 37, }, { 7, 9, 13, 13, 15, 19, 21, 25, 27, 31, 33, 37, } }
+		mon[  2].movelvls = { { 4, 7, 9, 13, 13, 15, 20, 23, 28, 31, 36, 39, 44, }, { 4, 7, 9, 13, 13, 15, 20, 23, 28, 31, 36, 39, 44, } }
+		mon[  3].movelvls = { { 4, 7, 9, 13, 13, 15, 20, 23, 28, 31, 32, 39, 45, 50, 53, }, { 94, 7, 9, 13, 13, 15, 20, 23, 28, 31, 32, 39, 45, 50, 53, } }
+		mon[  4].movelvls = { { 7, 10, 16, 19, 25, 28, 34, 37, 43, 46, }, { 7, 10, 16, 19, 25, 28, 34, 37, 43, 46, } }
+		mon[  5].movelvls = { { 7, 10, 16, 19, 25, 28, 34, 37, 43, 46, }, { 7, 10, 16, 19, 25, 28, 34, 37, 43, 46, } }
+		mon[  6].movelvls = { { 7, 10, 17, 21, 28, 32, 36, 41, 47, 56, 62, 71, 77, }, { 17, 10, 17, 21, 28, 32, 36, 41, 47, 56, 62, 71, 77, } }
+		mon[  7].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, } }
+		mon[  8].movelvls = { { 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, }, { 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, } }
+		mon[  9].movelvls = { { 4, 7, 10, 13, 16, 20, 24, 28, 32, 39, 46, 53, 60 }, { 4, 7, 10, 13, 16, 20, 24, 28, 32, 39, 46, 53, 60 } }
+		mon[ 10].movelvls = { { 15, }, { 15, } }
+		mon[ 11].movelvls = { { 7, }, { 7, } }
+		mon[ 12].movelvls = { { 10, 12, 12, 12, 16, 18, 22, 24, 28, 30, 34, 36, 40, 42, 46, }, { 10, 12, 12, 12, 16, 18, 22, 24, 28, 30, 34, 36, 40, 42, 46, } }
+		mon[ 13].movelvls = { { 15, }, { 15, } }
+		mon[ 14].movelvls = { { 7 }, { 7, } }
+		mon[ 15].movelvls = { { 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 45, }, { 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 45, } }
 		mon[ 16].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, } }
-		mon[ 17].movelvls = { { 5, 9, 13, 17, 22, 27, 32, 37, 42, 47, 52, 57, 62, }, { 5, 9, 13, 17, 22, 27, 32, 37, 42, 47, 52, 57, 62, } }
-		mon[ 18].movelvls = { { 5, 9, 13, 17, 22, 27, 32, 38, 44, 50, 56, 62, 68, }, { 5, 9, 13, 17, 22, 27, 32, 38, 44, 50, 56, 62, 68, } }
+		mon[ 17].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, } }
+		mon[ 18].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, } }
 		mon[ 19].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, } }
-		mon[ 20].movelvls = { { 4, 7, 10, 13, 16, 19, 24, 29, 34, 39, 44, }, { 4, 7, 10, 13, 16, 19, 24, 29, 34, 39, 44, } }
-		mon[ 21].movelvls = { { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, }, { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, } }
-		mon[ 22].movelvls = { { 4, 8, 11, 15, 18, 23, 27, 32, 36, 41, 45, }, { 4, 8, 11, 15, 18, 23, 27, 32, 36, 41, 45, } }
-		mon[ 23].movelvls = { { 4, 9, 12, 17, 20, 25, 25, 25, 28, 33, 36, 38, 41, 44, 49, }, { 4, 9, 12, 17, 20, 25, 25, 25, 28, 33, 36, 38, 41, 44, 49, } }
-		mon[ 24].movelvls = { { 12, 17, 20, 27, 27, 27, 32, 39, 44, 48, 51, 56, 63, }, { 12, 17, 20, 27, 27, 27, 32, 39, 44, 48, 51, 56, 63, } }
-		mon[ 25].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
-		mon[ 26].movelvls = { { 5, }, { 5, } }
-		mon[ 27].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, } }
-		mon[ 28].movelvls = { { 9, 12, 15, 18, 21, 26, 31, 36, 41, 46, 51, 56, 61, }, { 9, 12, 15, 18, 21, 26, 31, 36, 41, 46, 51, 56, 61, } }
-		mon[ 29].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[ 30].movelvls = { { 15, 22, 29, 36, 43, 50, 57, 64, 71, }, { 15, 22, 29, 36, 43, 50, 57, 64, 71, } }
-		mon[ 31].movelvls = { { }, { } }
-		mon[ 32].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[ 33].movelvls = { { 15, 22, 29, 36, 43, 50, 57, 64, 71, }, { 15, 22, 29, 36, 43, 50, 57, 64, 71, } }
-		mon[ 34].movelvls = { { }, { } }
-		mon[ 35].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } }
-		mon[ 36].movelvls = { { }, { } }
-		mon[ 37].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[ 38].movelvls = { { }, { } }
-		mon[ 39].movelvls = { { 4, 8, 12, 12, 12, 16, 20, 24, 28, 32, 36, 44, }, { 4, 8, 12, 12, 12, 16, 20, 24, 28, 32, 36, 44, } }
-		mon[ 40].movelvls = { { 5, }, { 5, } }
-		mon[ 41].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[ 42].movelvls = { { 15, 20, 27, 34, 41, 48, 55, 62, 69, }, { 15, 20, 27, 34, 41, 48, 55, 62, 69, } }
-		mon[ 43].movelvls = { { 4, 8, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, }, { 4, 8, 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, } }
-		mon[ 44].movelvls = { { 12, 14, 16, 18, 20, 26, 32, 38, 44, 50, }, { 12, 14, 16, 18, 20, 26, 32, 38, 44, 50, } }
-		mon[ 45].movelvls = { { }, { } }
+		mon[ 20].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 39, 44, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 39, 44, } }
+		mon[ 21].movelvls = { { 7, 9, 13, 17, 21, 25, 29, 33, 37, }, { 7, 9, 13, 17, 21, 25, 29, 33, 37, } }
+		mon[ 22].movelvls = { { 7, 9, 13, 17, 23, 29, 35, 41, 47, 53, }, { 7, 9, 13, 17, 23, 29, 35, 41, 47, 53, } }
+		mon[ 23].movelvls = { { 8, 9, 12, 17, 20, 25, 25, 25, 28, 33, 36, 38, 41, 44, 49, }, { 8, 9, 12, 17, 20, 25, 25, 25, 28, 33, 36, 38, 41, 44, 49, } }
+		mon[ 24].movelvls = { { 9, 12, 17, 20, 27, 27, 27, 32, 39, 44, 48, 51, 56, 63, }, { 9, 12, 17, 20, 27, 27, 27, 32, 39, 44, 48, 51, 56, 63, } }
+		mon[ 25].movelvls = { { 6, 9, 12, 15, 18, 21, 26, 31, 36, 41, 46, 50, 55, 60, }, { 6, 9, 12, 15, 18, 21, 26, 31, 36, 41, 46, 50, 55, 60, } }
+		mon[ 26].movelvls = { { 6, 9, 12, 15, 18, 21, 26, 31, 36, 41, 46, 50, 55, 60, }, { 6, 9, 12, 15, 18, 21, 26, 31, 36, 41, 46, 50, 55, 60, } }
+		mon[ 27].movelvls = { { 6, 7, 9, 11, 14, 17, 20, 22, 24, 28, 33, 38, 43, 48, 53, }, { 6, 7, 9, 11, 14, 17, 20, 22, 24, 28, 33, 38, 43, 48, 53, } }
+		mon[ 28].movelvls = { { 7, 9, 11, 14, 17, 20, 22, 24, 28, 33, 38, 43, 48, 53, }, { 7, 9, 11, 14, 17, 20, 22, 24, 28, 33, 38, 43, 48, 53, } }
+		mon[ 29].movelvls = { { 7, 9, 13, 19, 21, 25, 31, 33, 37, 43, 45, }, { 7, 9, 13, 19, 21, 25, 31, 33, 37, 43, 45, } }
+		mon[ 30].movelvls = { { 7, 9, 13, 19, 21, 25, 31, 33, 37, 43, 45, }, { 7, 9, 13, 19, 21, 25, 31, 33, 37, 43, 45, } }
+		mon[ 31].movelvls = { { 9, 11, 13, 19, 21, 25, 31, 33, 37, 43, 45, 49, 53, 60, }, { 9, 11, 13, 19, 21, 25, 31, 33, 37, 43, 45, 49, 53, 60, } }
+		mon[ 32].movelvls = { { 7, 9, 13, 19, 21, 25, 31, 33, 37, 43, 45, }, { 7, 9, 13, 19, 21, 25, 31, 33, 37, 43, 45, } }
+		mon[ 33].movelvls = { { 7, 9, 13, 19, 21, 25, 31, 33, 37, 43, 45, }, { 7, 9, 13, 19, 21, 25, 31, 33, 37, 43, 45, } }
+		mon[ 34].movelvls = { { 9, 11, 13, 19, 21, 25, 31, 33, 37, 43, 45, 49, 53, 60, }, { 9, 11, 13, 19, 21, 25, 31, 33, 37, 43, 45, 49, 53, 60, } }
+		mon[ 35].movelvls = { { 5, 9, 11, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 50, 55, 58, }, { 5, 9, 11, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 50, 55, 58, } }
+		mon[ 36].movelvls = { { 5, 9, 11, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 50, 55, 58, }, { 5, 9, 11, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 50, 55, 58, } }
+		mon[ 37].movelvls = { { 5, 9, 10, 12, 15, 18, 20, 23, 26, 28, 31, 34, 36, 39, 42, 44, 47, 50, }, { 5, 9, 10, 12, 15, 18, 20, 23, 26, 28, 31, 34, 36, 39, 42, 44, 47, 50, } }
+		mon[ 38].movelvls = { { 9, 10, 12, 15, 18, 20, 23, 26, 28, 31, 34, 36, 39, 42, 44, 47, 50, }, { 9, 10, 12, 15, 18, 20, 23, 26, 28, 31, 34, 36, 39, 42, 44, 47, 50, } }
+		mon[ 39].movelvls = { { 4, 9, 11, 15, 18, 21, 24, 28, 32, 35, 37, 40, 44, 49, }, { 4, 9, 11, 15, 18, 21, 24, 28, 32, 35, 37, 40, 44, 49, } }
+		mon[ 40].movelvls = { { 4, 9, 11, 15, 18, 21, 24, 28, 32, 35, 37, 40, 44, 49, }, { 4, 9, 11, 15, 18, 21, 24, 28, 32, 35, 37, 40, 44, 49, } }
+		mon[ 41].movelvls = { { 6, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, }, { 6, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, } }
+		mon[ 42].movelvls = { { 6, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, }, { 6, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, } }
+		mon[ 43].movelvls = { { 7, 9, 13, 14, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, }, { 7, 9, 13, 14, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, } }
+		mon[ 44].movelvls = { { 9, 13, 14, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, }, { 9, 13, 14, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, } }
+		mon[ 45].movelvls = { { 9, 13, 14, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, }, { 9, 13, 14, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, } }
 		mon[ 46].movelvls = { { 6, 6, 11, 17, 22, 27, 33, 38, 43, 49, 54, }, { 6, 6, 11, 17, 22, 27, 33, 38, 43, 49, 54, } }
 		mon[ 47].movelvls = { { 6, 6, 11, 17, 22, 29, 37, 44, 51, 59, 66, }, { 6, 6, 11, 17, 22, 29, 37, 44, 51, 59, 66, } }
 		mon[ 48].movelvls = { { 5, 11, 13, 17, 23, 25, 29, 35, 37, 41, 47, }, { 5, 11, 13, 17, 23, 25, 29, 35, 37, 41, 47, } }
-		mon[ 49].movelvls = { { 11, 13, 17, 23, 25, 29, 37, 41, 47, 55, }, { 11, 13, 17, 23, 25, 29, 37, 41, 47, 55, } }
-		mon[ 50].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
-		mon[ 51].movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, } }
-		mon[ 52].movelvls = { { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, } }
-		mon[ 53].movelvls = { { 12, 16, 20, 24, 31, 36, 42, 48, 54, }, { 12, 16, 20, 24, 31, 36, 42, 48, 54, } }
-		mon[ 54].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 34, 39, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 34, 39, } }
-		mon[ 55].movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 36, 40, 45, }, { 9, 12, 15, 18, 21, 24, 27, 30, 36, 40, 45, } }
-		mon[ 56].movelvls = { { 5, 8, 12, 17, 22, 26, 29, 33, 36, 40, 44, 48, }, { 5, 8, 12, 17, 22, 26, 29, 33, 36, 40, 44, 48, } }
-		mon[ 57].movelvls = { { 5, 8, 15, 17, 22, 26, 30, 35, 39, 44, 48, 53, 57, }, { 5, 8, 15, 17, 22, 26, 30, 35, 39, 44, 48, 53, 57, } }
-		mon[ 58].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } }
-		mon[ 59].movelvls = { { 5, }, { 5, } }
-		mon[ 60].movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, } }
-		mon[ 61].movelvls = { { 18, 24, 32, 40, 48, 56, 66, }, { 18, 24, 32, 40, 48, 56, 66, } }
-		mon[ 62].movelvls = { { }, { } }
+		mon[ 49].movelvls = { { 9, 11, 13, 17, 23, 25, 29, 37, 41, 47, 55, 59, 63, }, { 9, 11, 13, 17, 23, 25, 29, 37, 41, 47, 55, 59, 63, } }
+		mon[ 50].movelvls = { { 5, 9, 12, 15, 18, 23, 26, 29, 34, 37, 40, 45, }, { 5, 9, 12, 15, 18, 23, 26, 29, 34, 37, 40, 45, } }
+		mon[ 51].movelvls = { { 5, 9, 12, 15, 18, 23, 26, 29, 34, 37, 40, 45, 50, 57, }, { 5, 9, 12, 15, 18, 23, 26, 29, 34, 37, 40, 45, 50, 57, } }
+		mon[ 52].movelvls = { { 9, 14, 17, 22, 25, 30, 33, 38, 41, 46, 49, 56, }, { 9, 14, 17, 22, 25, 30, 33, 38, 41, 46, 49, 56, } }
+		mon[ 53].movelvls = { { 9, 14, 17, 22, 25, 30, 33, 38, 41, 46, 49, 56, 61, 65, }, { 9, 14, 17, 22, 25, 30, 33, 38, 41, 46, 49, 56, 61, 65, } }
+		mon[ 54].movelvls = { { 5, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, }, { 5, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, } }
+		mon[ 55].movelvls = { { 5, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, }, { 5, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, } }
+		mon[ 56].movelvls = { { 6, 9, 13, 17, 21, 25, 33, 37, 41, 45, 49, 53, }, { 6, 9, 13, 17, 21, 25, 33, 37, 41, 45, 49, 53, } }
+		mon[ 57].movelvls = { { 6, 9, 13, 17, 21, 25, 33, 37, 41, 45, 49, 53, 57, 62, }, { 6, 9, 13, 17, 21, 25, 33, 37, 41, 45, 49, 53, 57, 62, } }
+		mon[ 58].movelvls = { { 8, 10, 12, 17, 19, 21, 23, 28, 30, 32, 34, 39, 41, 43, 45, }, { 8, 10, 12, 17, 19, 21, 23, 28, 30, 32, 34, 39, 41, 43, 45, } }
+		mon[ 59].movelvls = { { 9, 15, 20, 26, 32, 40, 47, 55, 63, }, { 9, 15, 20, 26, 32, 40, 47, 55, 63, } }
+		mon[ 60].movelvls = { { 7, 11, 15, 18, 21, 25, 28, 31, 35, 38, 41, }, { 7, 11, 15, 18, 21, 25, 28, 31, 35, 38, 41, } }
+		mon[ 61].movelvls = { { 7, 11, 15, 18, 21, 27, 32, 37, 43, 48, 53, }, { 7, 11, 15, 18, 21, 27, 32, 37, 43, 48, 53, } }
+		mon[ 62].movelvls = { { 9, 13, 17, 21, 27, 32, 40, 47, 55, 63, }, { 9, 13, 17, 21, 27, 32, 40, 47, 55, 63, } }
 		mon[ 63].movelvls = { { }, { } }
-		mon[ 64].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } }
-		mon[ 65].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } }
-		mon[ 66].movelvls = { { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, 48, 52, } }
-		mon[ 67].movelvls = { { 12, 16, 20, 24, 31, 36, 42, 48, 54, 60, 66, }, { 12, 16, 20, 24, 31, 36, 42, 48, 54, 60, 66, } }
-		mon[ 68].movelvls = { { 12, 16, 20, 24, 31, 36, 42, 48, 54, 60, 66, }, { 12, 16, 20, 24, 31, 36, 42, 48, 54, 60, 66, } }
-		mon[ 69].movelvls = { { 7, 11, 13, 15, 17, 23, 27, 29, 35, 39, 41, 47, 52, }, { 7, 11, 13, 15, 17, 23, 27, 29, 35, 39, 41, 47, 52, } }
-		mon[ 70].movelvls = { { 13, 15, 17, 24, 29, 32, 39, 44, 47, 54, 58, }, { 13, 15, 17, 24, 29, 32, 39, 44, 47, 54, 58, } }
-		mon[ 71].movelvls = { { 44, }, { 44, } }
-		mon[ 72].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } }
-		mon[ 73].movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, } }
-		mon[ 74].movelvls = { { 6, 10, 12, 16, 18, 24, 28, 30, 34, 36, 40, 42, }, { 6, 10, 12, 16, 18, 24, 28, 30, 34, 36, 40, 42, } }
-		mon[ 75].movelvls = { { 10, 12, 16, 18, 24, 30, 34, 40, 44, 50, 54, }, { 10, 12, 16, 18, 24, 30, 34, 40, 44, 50, 54, } }
-		mon[ 76].movelvls = { { 16, 18, 22, 24, 30, 34, 40, 44, 50, 54, }, { 16, 18, 22, 24, 30, 34, 40, 44, 50, 54, } }
-		mon[ 77].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, 55, } }
-		mon[ 78].movelvls = { { 15, 20, 25, 30, 35, 43, 49, 56, 63, }, { 15, 20, 25, 30, 35, 43, 49, 56, 63, } }
-		mon[ 79].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, } }
-		mon[ 80].movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 41, 46, 51, } }
-		mon[ 81].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[ 82].movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, } }
-		mon[ 83].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } }
-		mon[ 84].movelvls = { { 5, 9, 14, 19, 23, 27, 30, 33, 36, 39, 43, }, { 5, 9, 14, 19, 23, 27, 30, 33, 36, 39, 43, } }
-		mon[ 85].movelvls = { { 12, 15, 19, 23, 26, 30, 34, 38, 43, 50, }, { 12, 15, 19, 23, 26, 30, 34, 38, 43, 50, } }
-		mon[ 86].movelvls = { { 3, 7, 11, 13, 17, 21, 23, 27, 31, 33, 37, 41, 43, 47, 51, 53, }, { 3, 7, 11, 13, 17, 21, 23, 27, 31, 33, 37, 41, 43, 47, 51, 53, } }
-		mon[ 87].movelvls = { { 13, 17, 21, 23, 27, 31, 33, 39, 45, 49, 55, 61, 65, }, { 13, 17, 21, 23, 27, 31, 33, 39, 45, 49, 55, 61, 65, } }
+		mon[ 64].movelvls = { { 16, 18, 21, 23, 26, 28, 31, 33, 36, 38, 41, 43, 46, }, { 16, 18, 21, 23, 26, 28, 31, 33, 36, 38, 41, 43, 46, } }
+		mon[ 65].movelvls = { { 16, 18, 21, 23, 26, 28, 31, 33, 36, 38, 41, 43, 46, }, { 16, 18, 21, 23, 26, 28, 31, 33, 36, 38, 41, 43, 46, } }
+		mon[ 66].movelvls = { { 7, 9, 13, 15, 19, 21, 25, 27, 31, 33, 37, 39, 43, 45, }, { 7, 9, 13, 15, 19, 21, 25, 27, 31, 33, 37, 39, 43, 45, } }
+		mon[ 67].movelvls = { { 7, 9, 13, 15, 19, 21, 25, 27, 33, 37, 43, 47, 53, 57, }, { 7, 9, 13, 15, 19, 21, 25, 27, 33, 37, 43, 47, 53, 57, } }
+		mon[ 68].movelvls = { { 7, 9, 13, 15, 19, 21, 25, 27, 33, 37, 43, 47, 53, 57, }, { 7, 9, 13, 15, 19, 21, 25, 27, 33, 37, 43, 47, 53, 57, } }
+		mon[ 69].movelvls = { { 7, 11, 13, 15, 17, 23, 27, 29, 35, 39, 41, 47, }, { 7, 11, 13, 15, 17, 23, 27, 29, 35, 39, 41, 47, } }
+		mon[ 70].movelvls = { { 7, 11, 13, 15, 17, 23, 27, 29, 35, 39, 41, 47, }, { 7, 11, 13, 15, 17, 23, 27, 29, 35, 39, 41, 47, } }
+		mon[ 71].movelvls = { { 7, 11, 13, 15, 17, 23, 27, 29, 35, 39, 41, 47, }, { 7, 11, 13, 15, 17, 23, 27, 29, 35, 39, 41, 47, } }
+		mon[ 72].movelvls = { { 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, }, { 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, } }
+		mon[ 73].movelvls = { { 7, 10, 13, 16, 19, 22, 25, 28, 32, 36, 40, 44, 48, 52, 56, }, { 7, 10, 13, 16, 19, 22, 25, 28, 32, 36, 40, 44, 48, 52, 56, } }
+		mon[ 74].movelvls = { { 6, 10, 12, 16, 18, 22, 24, 28, 30, 34, 36, 40, 42, }, { 6, 10, 12, 16, 18, 22, 24, 28, 30, 34, 36, 40, 42, } }
+		mon[ 75].movelvls = { { 6, 10, 12, 16, 18, 22, 24, 30, 34, 40, 44, 50, 54, }, { 6, 10, 12, 16, 18, 22, 24, 30, 34, 40, 44, 50, 54, } }
+		mon[ 76].movelvls = { { 6, 10, 12, 16, 18, 22, 24, 30, 34, 40, 44, 50, 54, 60, }, { 6, 10, 12, 16, 18, 22, 24, 30, 34, 40, 44, 50, 54, 60, } }
+		mon[ 77].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, } }
+		mon[ 78].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, } }
+		mon[ 79].movelvls = { { 6, 9, 14, 19, 23, 28, 32, 36, 41, 45, 49, 54, 58, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, } }
+		mon[ 80].movelvls = { { 6, 9, 14, 19, 23, 28, 32, 36, 37, 43, 49, 55, 62, 68, }, { 6, 9, 14, 19, 23, 28, 32, 36, 37, 43, 49, 55, 62, 68, } }
+		mon[ 81].movelvls = { { 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, }, { 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, } }
+		mon[ 82].movelvls = { { 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, 53, 59, 63, }, { 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49, 53, 59, 63, } }
+		mon[ 83].movelvls = { { 6, 9, 13, 19, 21, 25, 31, 33, 37, 43, 45, 49, 55, }, { 6, 9, 13, 19, 21, 25, 31, 33, 37, 43, 45, 49, 55, } }
+		mon[ 84].movelvls = { { 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, }, { 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, } }
+		mon[ 85].movelvls = { { 9, 13, 17, 21, 25, 29, 35, 41, 47, 53, 59, }, { 9, 13, 17, 21, 25, 29, 35, 41, 47, 53, 59, } }
+		mon[ 86].movelvls = { { 9, 11, 13, 17, 21, 23, 27, 31, 33, 37, 41, 43, 47, 51, 53, }, { 9, 11, 13, 17, 21, 23, 27, 31, 33, 37, 41, 43, 47, 51, 53, } }
+		mon[ 87].movelvls = { { 7, 11, 13, 17, 21, 23, 27, 31, 33, 34, 39, 45, 49, 55, 61, 65, }, { 7, 11, 13, 17, 21, 23, 27, 31, 33, 34, 39, 45, 49, 55, 61, 65, } }
 		mon[ 88].movelvls = { { 4, 7, 12, 15, 18, 21, 26, 29, 32, 37, 40, 43, 46, 48, }, { 4, 7, 12, 15, 18, 21, 26, 29, 32, 37, 40, 43, 46, 48, } }
-		mon[ 89].movelvls = { { 12, 15, 18, 21, 26, 29, 32, 37, 40, 46, 52, 57, }, { 12, 15, 18, 21, 26, 29, 32, 37, 40, 46, 52, 57, } }
-		mon[ 90].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } }
-		mon[ 91].movelvls = { { 5, }, { 5, } }
-		mon[ 92].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } }
-		mon[ 93].movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, } }
-		mon[ 94].movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, } }
-		mon[ 95].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } }
-		mon[ 96].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, } }
-		mon[ 97].movelvls = { { 13, 17, 21, 25, 32, 37, 42, 47, 51, 56, }, { 13, 17, 21, 25, 32, 37, 42, 47, 51, 56, } }
-		mon[ 98].movelvls = { { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, 48, } }
-		mon[ 99].movelvls = { { 12, 16, 20, 24, 31, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 31, 36, 42, 48, 54, 60, } }
-		mon[100].movelvls = { { 4, 6, 9, 11, 13, 16, 20, 22, 26, 29, 34, 37, 41, 46, 50, }, { 4, 6, 9, 11, 13, 16, 20, 22, 26, 29, 34, 37, 41, 46, 50, } }
-		mon[101].movelvls = { { 9, 11, 13, 16, 20, 22, 26, 29, 36, 41, 47, 54, 58, }, { 9, 11, 13, 16, 20, 22, 26, 29, 36, 41, 47, 54, 58, } }
-		mon[102].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[103].movelvls = { { }, { } }
-		mon[104].movelvls = { { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 29, 32, 36, 40, 44, 48, } }
-		mon[105].movelvls = { { 12, 16, 20, 24, 31, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 31, 36, 42, 48, 54, 60, } }
-		mon[106].movelvls = { { 4, 8, 12, 16, 21, 24, 28, 32, 36, 40, 44, 50, }, { 4, 8, 12, 16, 21, 24, 28, 32, 36, 40, 44, 50, } }
-		mon[107].movelvls = { { 4, 8, 12, 16, 21, 24, 24, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 21, 24, 24, 24, 28, 32, 36, 40, 44, } }
-		mon[108].movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, } }
-		mon[109].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[110].movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 62, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 62, } }
-		mon[111].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } }
-		mon[112].movelvls = { { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, }, { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, } }
-		mon[113].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[114].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } }
-		mon[115].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[116].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[117].movelvls = { { 15, 20, 25, 30, 37, 44, 51, 58, 65, }, { 15, 20, 25, 30, 37, 44, 51, 58, 65, } }
-		mon[118].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } }
-		mon[119].movelvls = { { 15, 20, 25, 30, 37, 44, 51, 58, }, { 15, 20, 25, 30, 37, 44, 51, 58, } }
-		mon[120].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } }
-		mon[121].movelvls = { { }, { } }
-		mon[122].movelvls = { { 12, 16, 20, 24, 28, 32, 36, 36, 36, 40, 44, 48, 52, }, { 12, 16, 20, 24, 28, 32, 36, 36, 36, 40, 44, 48, 52, } }
-		mon[123].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
-		mon[124].movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, } }
-		mon[125].movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, } }
-		mon[126].movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, } }
-		mon[127].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[128].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } }
-		mon[129].movelvls = { { 15, 25, }, { 15, 25, } }
-		mon[130].movelvls = { { 4, 8, 12, 16, 21, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 21, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[131].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, } }
+		mon[ 89].movelvls = { { 4, 7, 12, 15, 18, 21, 26, 29, 32, 37, 40, 46, 52, 57, }, { 4, 7, 12, 15, 18, 21, 26, 29, 32, 37, 40, 46, 52, 57, } }
+		mon[ 90].movelvls = { { 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, 61, }, { 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, 61, } }
+		mon[ 91].movelvls = { { 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, 61, }, { 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, 61, } }
+		mon[ 92].movelvls = { { 5, 8, 12, 15, 19, 22, 26, 33, 36, 40, 43, 47, }, { 5, 8, 12, 15, 19, 22, 26, 33, 36, 40, 43, 47, } }
+		mon[ 93].movelvls = { { 5, 8, 12, 15, 19, 22, 25, 28, 33, 44, 50, 55, 61, }, { 5, 8, 12, 15, 19, 22, 25, 28, 33, 44, 50, 55, 61, } }
+		mon[ 94].movelvls = { { 5, 8, 12, 15, 19, 22, 25, 28, 33, 44, 50, 55, 61, }, { 5, 8, 12, 15, 19, 22, 25, 28, 33, 44, 50, 55, 61, } }
+		mon[ 95].movelvls = { { 4, 7, 10, 13, 16, 19, 20, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, }, { 4, 7, 10, 13, 16, 19, 20, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, } }
+		mon[ 96].movelvls = { { 7, 9, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, }, { 7, 9, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, } }
+		mon[ 97].movelvls = { { 7, 9, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, }, { 7, 9, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, } }
+		mon[ 98].movelvls = { { 5, 9, 11, 15, 19, 21, 25, 29, 31, 35, 39, 41, 45, }, { 5, 9, 11, 15, 19, 21, 25, 29, 31, 35, 39, 41, 45, } }
+		mon[ 99].movelvls = { { 5, 9, 11, 15, 19, 21, 25, 32, 37, 44, 51, 56, 63, }, { 5, 9, 11, 15, 19, 21, 25, 32, 37, 44, 51, 56, 63, } }
+		mon[100].movelvls = { { 4, 6, 9, 11, 13, 16, 20, 22, 26, 29, 34, 37, 41, 46, 48, }, { 4, 6, 9, 11, 13, 16, 20, 22, 26, 29, 34, 37, 41, 46, 48, } }
+		mon[101].movelvls = { { 4, 6, 9, 11, 13, 16, 20, 22, 26, 29, 36, 41, 47, 54, 58, }, { 4, 6, 9, 11, 13, 16, 20, 22, 26, 29, 36, 41, 47, 54, 58, } }
+		mon[102].movelvls = { { 7, 11, 17, 19, 21, 23, 27, 33, 37, 43, 47, 50, }, { 7, 11, 17, 19, 21, 23, 27, 33, 37, 43, 47, 50, } }
+		mon[103].movelvls = { { 7, 11, 17, 19, 21, 23, 27, 33, 37, 43, 47, 50, }, { 7, 11, 17, 19, 21, 23, 27, 33, 37, 43, 47, 50, } }
+		mon[104].movelvls = { { 5, 7, 11, 13, 17, 21, 23, 27, 31, 33, 37, 41, 43, 47, }, { 5, 7, 11, 13, 17, 21, 23, 27, 31, 33, 37, 41, 43, 47, } }
+		mon[105].movelvls = { { 5, 7, 11, 13, 17, 21, 23, 27, 31, 33, 37, 41, 43, 49, 53, 59, }, { 5, 7, 11, 13, 17, 21, 23, 27, 31, 33, 37, 41, 43, 49, 53, 59, } }
+		mon[106].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, } }
+		mon[107].movelvls = { { 6, 11, 16, 16, 21, 26, 31, 36, 36, 36, 41, 46, 50, 56, 61, 66, }, { 6, 11, 16, 16, 21, 26, 31, 36, 36, 36, 41, 46, 50, 56, 61, 66, } }
+		mon[108].movelvls = { { 7, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, }, { 7, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, } }
+		mon[109].movelvls = { { 4, 7, 12, 15, 18, 23, 26, 29, 34, 37, 40, 42, 45, }, { 4, 7, 12, 15, 18, 23, 26, 29, 34, 37, 40, 42, 45, } }
+		mon[110].movelvls = { { 4, 7, 12, 15, 18, 23, 26, 29, 34, 40, 46, 51, 57, }, { 4, 7, 12, 15, 18, 23, 26, 29, 34, 40, 46, 51, 57, } }
+		mon[111].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, } }
+		mon[112].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 42, 48, 55, 62, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 42, 48, 55, 62, } }
+		mon[113].movelvls = { { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 42, 46, 50, 54, }, { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 42, 46, 50, 54, } }
+		mon[114].movelvls = { { 4, 7, 10, 14, 17, 20, 23, 27, 30, 33, 36, 38, 41, 44, 46, 48, 50, }, { 4, 7, 10, 14, 17, 20, 23, 27, 30, 33, 36, 38, 41, 44, 46, 48, 50, } }
+		mon[115].movelvls = { { 7, 10, 13, 19, 22, 25, 31, 34, 37, 43, 46, 49, 52, }, { 7, 10, 13, 19, 22, 25, 31, 34, 37, 43, 46, 49, 52, } }
+		mon[116].movelvls = { { 5, 9, 13, 17, 21, 26, 31, 36, 41, 46, 52, }, { 5, 9, 13, 17, 21, 26, 31, 36, 41, 46, 52, } }
+		mon[117].movelvls = { { 5, 9, 13, 17, 21, 26, 31, 38, 45, 52, 60, }, { 5, 9, 13, 17, 21, 26, 31, 38, 45, 52, 60, } }
+		mon[118].movelvls = { { 5, 8, 13, 16, 21, 24, 29, 32, 37, 40, 45, }, { 5, 8, 13, 16, 21, 24, 29, 32, 37, 40, 45, } }
+		mon[119].movelvls = { { 5, 8, 13, 16, 21, 24, 29, 32, 40, 46, 54, }, { 5, 8, 13, 16, 21, 24, 29, 32, 40, 46, 54, } }
+		mon[120].movelvls = { { 4, 7, 10, 13, 16, 18, 22, 24, 28, 31, 35, 37, 40, 42, 46, 49, 53, }, { 4, 7, 10, 13, 16, 18, 22, 24, 28, 31, 35, 37, 40, 42, 46, 49, 53, } }
+		mon[121].movelvls = { { 4, 7, 10, 13, 16, 18, 22, 24, 28, 31, 35, 37, 40, 42, 46, 49, 53, }, { 4, 7, 10, 13, 16, 18, 22, 24, 28, 31, 35, 37, 40, 42, 46, 49, 53, } }
+		mon[122].movelvls = { { 4, 8, 11, 15, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, }, { 4, 8, 11, 15, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, 50, } }
+		mon[123].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 50, 57, 61, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 50, 57, 61, } }
+		mon[124].movelvls = { { 5, 8, 11, 15, 18, 21, 25, 28, 33, 39, 44, 49, 55, 60, }, { 5, 8, 11, 15, 18, 21, 25, 28, 33, 39, 44, 49, 55, 60, } }
+		mon[125].movelvls = { { 8, 12, 15, 19, 22, 26, 29, 36, 42, 49, 55, }, { 8, 12, 15, 19, 22, 26, 29, 36, 42, 49, 55, } }
+		mon[126].movelvls = { { 8, 12, 15, 19, 22, 26, 29, 36, 42, 49, 55, }, { 8, 12, 15, 19, 22, 26, 29, 36, 42, 49, 55, } }
+		mon[127].movelvls = { { 4, 8, 11, 15, 18, 22, 26, 29, 33, 36, 40, 43, 47, 50, }, { 4, 8, 11, 15, 18, 22, 26, 29, 33, 36, 40, 43, 47, 50, } }
+		mon[128].movelvls = { { 3, 5, 8, 11, 15, 19, 24, 29, 35, 41, 48, 55, 63, }, { 3, 5, 8, 11, 15, 19, 24, 29, 35, 41, 48, 55, 63, } }
+		mon[129].movelvls = { { 15, 30, }, { 15, 30, } }
+		mon[130].movelvls = { { 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } }
+		mon[131].movelvls = { { 4, 9, 13, 18, 23, 27, 32, 37, 42, 47, 52, 57, 62, }, { 4, 9, 13, 18, 23, 27, 32, 37, 42, 47, 52, 57, 62, } }
 		mon[132].movelvls = { { }, { } }
-		mon[133].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[134].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[135].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[136].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[137].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } }
-		mon[138].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, 55, 60, } }
-		mon[139].movelvls = { { 15, 20, 25, 30, 35, 43, 49, 56, 63, 70, }, { 15, 20, 25, 30, 35, 43, 49, 56, 63, 70, } }
-		mon[140].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 41, 45, 50, 55, 60, } }
-		mon[141].movelvls = { { 15, 20, 25, 30, 35, 43, 49, 56, 63, 70, }, { 15, 20, 25, 30, 35, 43, 49, 56, 63, 70, } }
-		mon[142].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } }
-		mon[143].movelvls = { { 12, 16, 20, 20, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, }, { 12, 16, 20, 20, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, } }
-		mon[144].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } }
-		mon[145].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } }
-		mon[146].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } }
-		mon[147].movelvls = { { 5, 10, 15, 20, 25, 31, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 31, 35, 40, 45, 50, 55, 60, } }
-		mon[148].movelvls = { { 15, 20, 25, 33, 39, 46, 53, 60, 67, 74, }, { 15, 20, 25, 33, 39, 46, 53, 60, 67, 74, } }
-		mon[149].movelvls = { { 15, 20, 25, 33, 39, 41, 46, 53, 62, 80, }, { 15, 20, 25, 33, 39, 41, 46, 53, 62, 80, } }
-		mon[150].movelvls = { { 8, 16, 24, 32, 40, 48, 56, 56, 64, 72, 80, 88, }, { 8, 16, 24, 32, 40, 48, 56, 56, 64, 72, 80, 88, } }
+		mon[133].movelvls = { { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 50, 55, }, { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 50, 55, } }
+		mon[134].movelvls = { { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 50, 55, }, { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 50, 55, } }
+		mon[135].movelvls = { { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 50, 55, }, { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 50, 55, } }
+		mon[136].movelvls = { { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 50, 55, }, { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 50, 55, } }
+		mon[137].movelvls = { { 7, 12, 18, 23, 29, 34, 40, 45, 50, 56, 62, }, { 7, 12, 18, 23, 29, 34, 40, 45, 50, 56, 62, } }
+		mon[138].movelvls = { { 7, 10, 16, 19, 25, 28, 34, 37, 43, 46, 50, 55, }, { 7, 10, 16, 19, 25, 28, 34, 37, 43, 46, 50, 55, } }
+		mon[139].movelvls = { { 7, 10, 16, 19, 25, 28, 34, 37, 40, 48, 56, 67, 75, }, { 17, 10, 16, 19, 25, 28, 34, 37, 40, 48, 56, 67, 75, } }
+		mon[140].movelvls = { { 6, 11, 16, 21, 26, 31, 36, 41, 46, 50, }, { 6, 11, 16, 21, 26, 31, 36, 41, 46, 50, } }
+		mon[141].movelvls = { { 6, 11, 16, 21, 26, 31, 36, 40, 45, 54, 63, 72, }, { 6, 11, 16, 21, 26, 31, 36, 40, 45, 54, 63, 72, } }
+		mon[142].movelvls = { { 9, 17, 25, 33, 41, 49, 57, 65, 73, 81, }, { 9, 17, 25, 33, 41, 49, 57, 65, 73, 81, } }
+		mon[143].movelvls = { { 4, 9, 12, 17, 20, 25, 28, 33, 36, 41, 44, 49, 50, 57, }, { 4, 9, 12, 17, 20, 25, 28, 33, 36, 41, 44, 49, 50, 57, } }
+		mon[144].movelvls = { { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, 92, }, { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, 92, } }
+		mon[145].movelvls = { { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, 92, }, { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, 92, } }
+		mon[146].movelvls = { { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, 92, }, { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, 92, } }
+		mon[147].movelvls = { { 5, 11, 15, 21, 25, 31, 35, 41, 45, 51, 55, 61, }, { 5, 11, 15, 21, 25, 31, 35, 41, 45, 51, 55, 61, } }
+		mon[148].movelvls = { { 5, 11, 15, 21, 25, 33, 39, 47, 53, 61, 67, 75, }, { 5, 11, 15, 21, 25, 33, 39, 47, 53, 61, 67, 75, } }
+		mon[149].movelvls = { { 5, 11, 15, 21, 25, 33, 39, 47, 53, 55, 61, 67, 75, 81, }, { 5, 11, 15, 21, 25, 33, 39, 47, 53, 55, 61, 67, 75, 81, } }
+		mon[150].movelvls = { { 8, 15, 22, 29, 36, 43, 50, 57, 64, 70, 79, 86, 93, 100, }, { 8, 15, 22, 29, 36, 43, 50, 57, 64, 70, 79, 86, 93, 100, } }
 		mon[151].movelvls = { { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, }, { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, } }
 		mon[152].movelvls = { { 6, 9, 12, 17, 20, 23, 28, 31, 34, 39, 42, 45, }, { 6, 9, 12, 17, 20, 23, 28, 31, 34, 39, 42, 45, } }
-		mon[153].movelvls = { { 12, 18, 22, 26, 32, 36, 40, 46, 50, 54, }, { 12, 18, 22, 26, 32, 36, 40, 46, 50, 54, } }
-		mon[154].movelvls = { { 12, 18, 22, 26, 34, 40, 46, 54, 60, 65, }, { 12, 18, 22, 26, 34, 40, 46, 54, 60, 65, } }
-		mon[155].movelvls = { { 6, 10, 13, 19, 22, 28, 31, 37, 40, 46, 49, 55, 58, 64, }, { 6, 10, 13, 19, 22, 28, 31, 37, 40, 46, 49, 55, 58, 64, } }
-		mon[156].movelvls = { { 10, 13, 20, 24, 31, 35, 42, 46, 53, 57, 64, 68, 75, }, { 10, 13, 20, 24, 31, 35, 42, 46, 53, 57, 64, 68, 75, } }
-		mon[157].movelvls = { { 13, 20, 24, 31, 35, 43, 48, 56, 61, 74, }, { 13, 20, 24, 31, 35, 43, 48, 56, 61, 74, } }
-		mon[158].movelvls = { { 6, 9, 13, 19, 22, 27, 30, 33, 37, 41, 45, 50, }, { 6, 9, 13, 19, 22, 27, 30, 33, 37, 41, 45, 50, } }
-		mon[159].movelvls = { { 13, 15, 21, 24, 30, 34, 37, 42, 47, 50, 55, }, { 13, 15, 21, 24, 30, 34, 37, 42, 47, 50, 55, } }
-		mon[160].movelvls = { { 13, 15, 21, 24, 32, 37, 44, 51, 59, 65, 70, }, { 13, 15, 21, 24, 32, 37, 44, 51, 59, 65, 70, } }
+		mon[153].movelvls = { { 6, 9, 12, 18, 22, 26, 32, 36, 40, 46, 50, 54, }, { 6, 9, 12, 18, 22, 26, 32, 36, 40, 46, 50, 54, } }
+		mon[154].movelvls = { { 6, 9, 12, 18, 22, 26, 32, 36, 40, 46, 54, 60, 66, 70, }, { 6, 9, 12, 18, 22, 26, 32, 36, 40, 46, 54, 60, 66, 70, } }
+		mon[155].movelvls = { { 6, 10, 13, 19, 22, 28, 31, 37, 40, 46, 49, 55, 58, }, { 6, 10, 13, 19, 22, 28, 31, 37, 40, 46, 49, 55, 58, } }
+		mon[156].movelvls = { { 6, 10, 13, 20, 24, 31, 35, 42, 46, 53, 57, 64, 68, }, { 6, 10, 13, 20, 24, 31, 35, 42, 46, 53, 57, 64, 68, } }
+		mon[157].movelvls = { { 6, 10, 13, 20, 24, 31, 35, 43, 48, 56, 61, 69, 74, }, { 6, 10, 13, 20, 24, 31, 35, 43, 48, 56, 61, 69, 74, } }
+		mon[158].movelvls = { { 6, 8, 13, 15, 20, 22, 27, 29, 34, 36, 41, 43, 48, 50, }, { 6, 8, 13, 15, 20, 22, 27, 29, 34, 36, 41, 43, 48, 50, } }
+		mon[159].movelvls = { { 6, 8, 13, 15, 21, 24, 30, 33, 39, 42, 48, 51, 57, 60, }, { 6, 8, 13, 15, 21, 24, 30, 33, 39, 42, 48, 51, 57, 60, } }
+		mon[160].movelvls = { { 6, 8, 13, 15, 21, 24, 30, 32, 37, 45, 50, 58, 63, 71, 76, }, { 6, 8, 13, 15, 21, 24, 30, 32, 37, 45, 50, 58, 63, 71, 76, } }
 		mon[161].movelvls = { { 4, 7, 13, 16, 19, 25, 28, 31, 36, 39, 42, 47, }, { 4, 7, 13, 16, 19, 25, 28, 31, 36, 39, 42, 47, } }
-		mon[162].movelvls = { { 13, 17, 21, 28, 32, 36, 42, 46, 50, 56, }, { 13, 17, 21, 28, 32, 36, 42, 46, 50, 56, } }
-		mon[163].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, } }
-		mon[164].movelvls = { { 9, 12, 18, 23, 28, 33, 38, 43, 48, 53, }, { 9, 12, 18, 23, 28, 33, 38, 43, 48, 53, } }
-		mon[165].movelvls = { { 5, 8, 12, 12, 12, 15, 19, 22, 26, 29, 33, 36, 40, }, { 5, 8, 12, 12, 12, 15, 19, 22, 26, 29, 33, 36, 40, } }
-		mon[166].movelvls = { { 5, 8, 12, 12, 12, 15, 20, 24, 29, 33, 38, 42, 47, }, { 5, 8, 12, 12, 12, 15, 20, 24, 29, 33, 38, 42, 47, } }
-		mon[167].movelvls = { { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 44, 47, 51, }, { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 44, 47, 51, } }
-		mon[168].movelvls = { { 8, 12, 15, 19, 23, 28, 31, 35, 41, 46, 50, 54, 59, }, { 8, 12, 15, 19, 23, 28, 31, 35, 41, 46, 50, 54, 59, } }
-		mon[169].movelvls = { { 15, 20, 27, 34, 41, 48, 55, 62, 69, }, { 15, 20, 27, 34, 41, 48, 55, 62, 69, } }
-		mon[170].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
-		mon[171].movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, } }
-		mon[172].movelvls = { { 4, 8, 12, 16, 20, }, { 4, 8, 12, 16, 20, } }
-		mon[173].movelvls = { { 4, 8, 12, 16, 20, }, { 4, 8, 12, 16, 20, } }
-		mon[174].movelvls = { { 4, 8, 12, 16, 20, }, { 4, 8, 12, 16, 20, } }
-		mon[175].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[176].movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[177].movelvls = { { 5, 10, 15, 20, 26, 30, 35, 35, 40, 45, }, { 5, 10, 15, 20, 26, 30, 35, 35, 40, 45, } }
-		mon[178].movelvls = { { 15, 20, 28, 34, 34, 41, 48, 55, }, { 15, 20, 28, 34, 34, 41, 48, 55, } }
+		mon[162].movelvls = { { 4, 7, 13, 17, 21, 28, 32, 36, 42, 46, 50, 56, }, { 4, 7, 13, 17, 21, 28, 32, 36, 42, 46, 50, 56, } }
+		mon[163].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, } }
+		mon[164].movelvls = { { 5, 9, 13, 17, 22, 27, 32, 37, 42, 47, 52, 57, 62, 67, }, { 5, 9, 13, 17, 22, 27, 32, 37, 42, 47, 52, 57, 62, 67, } }
+		mon[165].movelvls = { { 6, 9, 14, 14, 14, 17, 22, 25, 30, 33, 38, 41, }, { 6, 9, 14, 14, 14, 17, 22, 25, 30, 33, 38, 41, } }
+		mon[166].movelvls = { { 6, 9, 14, 14, 14, 17, 24, 29, 36, 41, 48, 53, }, { 6, 9, 14, 14, 14, 17, 24, 29, 36, 41, 48, 53, } }
+		mon[167].movelvls = { { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, 50, }, { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, 50, } }
+		mon[168].movelvls = { { 5, 8, 12, 15, 19, 23, 28, 32, 37, 41, 46, 50, 55, 58, }, { 5, 8, 12, 15, 19, 23, 28, 32, 37, 41, 46, 50, 55, 58, } }
+		mon[169].movelvls = { { 5, 7, 11, 13, 17, 19, 24, 27, 32, 35, 40, 43, 48, 51, }, { 5, 7, 11, 13, 17, 19, 24, 27, 32, 35, 40, 43, 48, 51, } }
+		mon[170].movelvls = { { 6, 9, 12, 17, 20, 23, 28, 31, 34, 39, 42, 45, 47, 50, }, { 6, 9, 12, 17, 20, 23, 28, 31, 34, 39, 42, 45, 47, 50, } }
+		mon[171].movelvls = { { 6, 9, 12, 17, 20, 23, 27, 27, 27, 29, 33, 37, 43, 47, 51, 54, 58, }, { 6, 9, 12, 17, 20, 23, 27, 27, 27, 29, 33, 37, 43, 47, 51, 54, 58, } }
+		mon[172].movelvls = { { 6, 8, 11, }, { 6, 8, 11, } }
+		mon[173].movelvls = { { 4, 8, 13, 17, }, { 4, 8, 13, 17, } }
+		mon[174].movelvls = { { 4, 9, 14, }, { 4, 9, 14, } }
+		mon[175].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, } }
+		mon[176].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, } }
+		mon[177].movelvls = { { 6, 9, 12, 17, 20, 23, 28, 33, 36, 39, 44, 47, 47, 50, }, { 6, 9, 12, 17, 20, 23, 28, 33, 36, 39, 44, 47, 47, 50, } }
+		mon[178].movelvls = { { 6, 9, 12, 17, 20, 23, 25, 29, 35, 39, 43, 49, 53, 53, 57, }, { 6, 9, 12, 17, 20, 23, 25, 29, 35, 39, 43, 49, 53, 53, 57, } }
 		mon[179].movelvls = { { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, }, { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, 46, } }
-		mon[180].movelvls = { { 6, 9, 11, 16, 20, 25, 29, 34, 38, 43, 47, 52, 56, }, { 6, 9, 11, 16, 20, 25, 29, 34, 38, 43, 47, 52, 56, } }
-		mon[181].movelvls = { { 11, 16, 20, 25, 29, 35, 40, 46, 51, 57, 62, }, { 11, 16, 20, 25, 29, 35, 40, 46, 51, 57, 62, } }
-		mon[182].movelvls = { { }, { } }
-		mon[183].movelvls = { { 6, 9, 12, 15, 19, 21, 24, 27, 30, 33, 36, }, { 6, 9, 12, 15, 19, 21, 24, 27, 30, 33, 36, } }
-		mon[184].movelvls = { { 6, 9, 12, 15, 21, 25, 30, 35, 40, 45, 50, }, { 6, 9, 12, 15, 21, 25, 30, 35, 40, 45, 50, } }
-		mon[185].movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } }
-		mon[186].movelvls = { { }, { } }
-		mon[187].movelvls = { { 4, 6, 8, 10, 10, 10, 12, 15, 19, 22, 24, 27, 29, 32, 35, 38, }, { 4, 6, 8, 10, 10, 10, 12, 15, 19, 22, 24, 27, 29, 32, 35, 38, } }
-		mon[188].movelvls = { { 8, 10, 12, 12, 12, 15, 20, 24, 28, 31, 34, 37, 41, 44, }, { 8, 10, 12, 12, 12, 15, 20, 24, 28, 31, 34, 37, 41, 44, } }
-		mon[189].movelvls = { { 8, 10, 12, 12, 12, 15, 20, 24, 30, 35, 39, 43, 49, 55, }, { 8, 10, 12, 12, 12, 15, 20, 24, 30, 35, 39, 43, 49, 55, } }
+		mon[180].movelvls = { { 4, 8, 11, 16, 20, 25, 29, 34, 38, 43, 47, 52, 56, }, { 4, 8, 11, 16, 20, 25, 29, 34, 38, 43, 47, 52, 56, } }
+		mon[181].movelvls = { { 4, 8, 11, 16, 20, 25, 29, 34, 39, 44, 49, 53, 58, 63, 68, }, { 4, 8, 11, 16, 20, 25, 29, 34, 39, 44, 49, 53, 58, 63, 68, } }
+		mon[182].movelvls = { { 9, 13, 13, 13, 19, 23, 27, 31, 35, 39, 43, 47, 51,  }, { 9, 13, 13, 13, 19, 23, 27, 31, 35, 39, 43, 47, 51, } }
+		mon[183].movelvls = { { 2, 5, 7, 10, 13, 16, 20, 23, 28, 31, 37, 40, 47, }, { 2, 5, 7, 10, 13, 16, 20, 23, 28, 31, 37, 40, 47, } }
+		mon[184].movelvls = { { 2, 5, 7, 10, 10, 13, 16, 21, 25, 31, 35, 42, 46, 55, }, { 2, 5, 7, 10, 10, 13, 16, 21, 25, 31, 35, 42, 46, 55, } }
+		mon[185].movelvls = { { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, }, { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, } }
+		mon[186].movelvls = { { 9, 13, 17, 21, 27, 32, 40, 47, 55, 63, }, { 9, 13, 17, 21, 27, 32, 40, 47, 55, 63, } }
+		mon[187].movelvls = { { 4, 6, 8, 10, 12, 14, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, }, { 4, 6, 8, 10, 12, 14, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, } }
+		mon[188].movelvls = { { 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, }, { 4, 6, 8, 10, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, } }
+		mon[189].movelvls = { { 4, 6, 8, 10, 12, 14, 16, 20, 24, 29, 34, 39, 44, 49, 54, 59, 64, 69, }, { 4, 6, 8, 10, 12, 14, 16, 20, 24, 29, 34, 39, 44, 49, 54, 59, 64, 69, } }
 		mon[190].movelvls = { { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, }, { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, } }
-		mon[191].movelvls = { { 7, 10, 16, 19, 22, 25, 28, 31, 34, 36, 39, }, { 7, 10, 16, 19, 22, 25, 28, 31, 34, 36, 39, } }
-		mon[192].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 39, 43, 50, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 39, 43, 50, } }
+		mon[191].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, } }
+		mon[192].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 50, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 50, } }
 		mon[193].movelvls = { { 6, 11, 14, 17, 22, 27, 30, 33, 38, 43, 46, 49, 54, 57, }, { 6, 11, 14, 17, 22, 27, 30, 33, 38, 43, 46, 49, 54, 57, } }
-		mon[194].movelvls = { { 4, 8, 12, 12, 16, 21, 24, 28, 32, 36, 40, }, { 4, 8, 12, 12, 16, 21, 24, 28, 32, 36, 40, } }
-		mon[195].movelvls = { { 12, 12, 16, 23, 28, 34, 40, 46, 52, }, { 12, 12, 16, 23, 28, 34, 40, 46, 52, } }
-		mon[196].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[197].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[198].movelvls = { { 5, 11, 15, 21, 25, 31, 35, 40, 50, 55, 60, }, { 5, 11, 15, 21, 25, 31, 35, 40, 50, 55, 60, } }
-		mon[199].movelvls = { { 9, 12, 15, 18, 21, 27, 30, 33, 36, 39, 42, 45, }, { 9, 12, 15, 18, 21, 27, 30, 33, 36, 39, 42, 45, } }
-		mon[200].movelvls = { { 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, }, { 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, } }
+		mon[194].movelvls = { { 5, 9, 15, 19, 23, 29, 33, 37, 43, 43, 47, }, { 5, 9, 15, 19, 23, 29, 33, 37, 43, 43, 47, } }
+		mon[195].movelvls = { { 5, 9, 15, 19, 24, 31, 36, 41, 48, 48, 53, }, { 5, 9, 15, 19, 24, 31, 36, 41, 48, 48, 53, } }
+		mon[196].movelvls = { { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 49, 53, }, { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 49, 53, } }
+		mon[197].movelvls = { { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 49, 53, }, { 5, 9, 13, 17, 20, 25, 29, 33, 37, 41, 45, 49, 53, } }
+		mon[198].movelvls = { { 5, 11, 15, 21, 25, 31, 35, 41, 45, 50, 55, 61, 65, }, { 5, 11, 15, 21, 25, 31, 35, 41, 45, 50, 55, 61, 65, } }
+		mon[199].movelvls = { { 6, 9, 14, 19, 23, 28, 32, 36, 39, 43, 49, 55, 62, 68, }, { 6, 9, 14, 19, 23, 28, 32, 36, 39, 43, 49, 55, 62, 68, } }
+		mon[200].movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, } }
 		mon[201].movelvls = { { }, { } }
-		mon[202].movelvls = { { }, { } }
+		mon[202].movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55 }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, } }
 		mon[203].movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, } }
 		mon[204].movelvls = { { 6, 9, 12, 17, 20, 23, 28, 31, 34, 39, 42, 45, }, { 6, 9, 12, 17, 20, 23, 28, 31, 34, 39, 42, 45, } }
-		mon[205].movelvls = { { 12, 17, 20, 23, 28, 32, 36, 42, 46, 50, }, { 12, 17, 20, 23, 28, 32, 36, 42, 46, 50, } }
-		mon[206].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[207].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 27, 30, 35, 40, 45, 50, }, { 4, 7, 10, 13, 16, 19, 22, 27, 30, 35, 40, 45, 50, } }
-		mon[208].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, } }
+		mon[205].movelvls = { { 12, 17, 20, 23, 28, 32, 36, 42, 46, 50, 56, 60, 64, 70, }, { 12, 17, 20, 23, 28, 32, 36, 42, 46, 50, 56, 60, 64, 70, } }
+		mon[206].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, } }
+		mon[207].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 27, 30, 35, 40, 45, 50, 55, }, { 4, 7, 10, 13, 16, 19, 22, 27, 30, 35, 40, 45, 50, 55, } }
+		mon[208].movelvls = { { 4, 7, 10, 13, 16, 19, 20, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, }, { 4, 7, 10, 13, 16, 19, 20, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, } }
 		mon[209].movelvls = { { 7, 13, 19, 25, 31, 37, 43, 49, }, { 7, 13, 19, 25, 31, 37, 43, 49, } }
-		mon[210].movelvls = { { 7, 13, 19, 27, 35, 43, 51, 59, }, { 7, 13, 19, 27, 35, 43, 51, 59, } }
-		mon[211].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 40, 44, 48, 52, 56, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 40, 44, 48, 52, 56, } }
-		mon[212].movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
-		mon[213].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 35, 40, 45, 50, 55, 60, 65, }, { 5, 10, 15, 20, 25, 30, 35, 35, 40, 45, 50, 55, 60, 65, } }
-		mon[214].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } }
-		mon[215].movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, } }
-		mon[216].movelvls = { { 8, 13, 17, 22, 25, 29, 33, 37, 37, 41, }, { 8, 13, 17, 22, 25, 29, 33, 37, 37, 41, } }
-		mon[217].movelvls = { { 8, 13, 17, 22, 25, 29, 35, 41, 41, 48, 56, 64, }, { 8, 13, 17, 22, 25, 29, 35, 41, 41, 48, 56, 64, } }
-		mon[218].movelvls = { { 6, 8, 13, 20, 22, 27, 29, 34, 36, 41, 43, 48, 50, }, { 6, 8, 13, 20, 22, 27, 29, 34, 36, 41, 43, 48, 50, } }
-		mon[219].movelvls = { { 13, 20, 22, 27, 29, 34, 36, 43, 47, 54, }, { 13, 20, 22, 27, 29, 34, 36, 43, 47, 54, } }
-		mon[220].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } }
-		mon[221].movelvls = { { 15, 20, 25, 30, 37, 44, 51, 58, 65, }, { 15, 20, 25, 30, 37, 44, 51, 58, 65, } }
-		mon[222].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[223].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
-		mon[224].movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, } }
-		mon[225].movelvls = { { 25, }, { 25, } }
-		mon[226].movelvls = { { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } }
-		mon[227].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
+		mon[210].movelvls = { { 7, 13, 19, 27, 35, 43, 51, 59, 67, }, { 7, 13, 19, 27, 35, 43, 51, 59, 67, } }
+		mon[211].movelvls = { { 9, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 60, }, { 9, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 60, } }
+		mon[212].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 50, 57, 61, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 50, 57, 61, } }
+		mon[213].movelvls = { { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 42, 45, 45, 49, 53, }, { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 42, 45, 45, 49, 53, } }
+		mon[214].movelvls = { { 7, 10, 16, 19, 25, 28, 31, 34, 37, 43, 46, 50, 55, 61, }, { 7, 10, 16, 19, 25, 28, 31, 34, 37, 43, 46, 50, 55, 61, } }
+		mon[215].movelvls = { { 8, 10, 14, 16, 20, 22, 25, 28, 32, 35, 40, 44, 47, }, { 8, 10, 14, 16, 20, 22, 25, 28, 32, 35, 40, 44, 47, } }
+		mon[216].movelvls = { { 8, 15, 22, 25, 29, 36, 43, 43, 50, 57, }, { 8, 15, 22, 25, 29, 36, 43, 43, 50, 57, } }
+		mon[217].movelvls = { { 8, 15, 22, 25, 29, 38, 47, 49, 58, 67, }, { 8, 15, 22, 25, 29, 38, 47, 49, 58, 67, } }
+		mon[218].movelvls = { { 6, 8, 13, 15, 20, 22, 27, 29, 34, 36, 41, 43, 48, 50, }, { 6, 8, 13, 15, 20, 22, 27, 29, 34, 36, 41, 43, 48, 50, } }
+		mon[219].movelvls = { { 6, 8, 13, 15, 20, 22, 27, 29, 34, 36, 38, 43, 47, 54, 58, }, { 6, 8, 13, 15, 20, 22, 27, 29, 34, 36, 38, 43, 47, 54, 58, } }
+		mon[220].movelvls = { { 5, 8, 11, 14, 18, 21, 24, 28, 35, 37, 40, 44, 48, }, { 5, 8, 11, 14, 18, 21, 24, 28, 35, 37, 40, 44, 48, } }
+		mon[221].movelvls = { { 5, 8, 11, 14, 18, 21, 24, 28, 33, 37, 41, 46, 52, 58, }, { 5, 8, 11, 14, 18, 21, 24, 28, 33, 37, 41, 46, 52, 58, } }
+		mon[222].movelvls = { { 4, 8, 10, 13, 17, 20, 23, 27, 29, 31, 35, 38, 41, 45, 47, 50, }, {  4, 8, 10, 13, 17, 20, 23, 27, 29, 31, 35, 38, 41, 45, 47, 50, } }
+		mon[223].movelvls = { { 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, }, { 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, } }
+		mon[224].movelvls = { { 6, 10, 14, 18, 22, 25, 28, 34, 40, 46, 52, 58, 64, }, { 6, 10, 14, 18, 22, 25, 28, 34, 40, 46, 52, 58, 64, } }
+		mon[225].movelvls = { { }, { } }
+		mon[226].movelvls = { { 3, 7, 11, 14, 16, 19, 23, 27, 32, 36, 39, 46, 49, }, { 3, 7, 11, 14, 16, 19, 23, 27, 32, 36, 39, 46, 49, } }
+		mon[227].movelvls = { { 6, 9, 12, 17, 20, 23, 28, 31, 34, 39, 42, 45, 50, 53, }, { 6, 9, 12, 17, 20, 23, 28, 31, 34, 39, 42, 45, 50, 53, } }
 		mon[228].movelvls = { { 4, 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, }, { 4, 8, 13, 16, 20, 25, 28, 32, 37, 40, 44, 49, 52, 56, } }
-		mon[229].movelvls = { { 13, 16, 20, 26, 30, 35, 41, 45, 50, 56, 62, }, { 13, 16, 20, 26, 30, 35, 41, 45, 50, 56, 62, } }
-		mon[230].movelvls = { { 15, 20, 25, 30, 37, 44, 51, 58, 65, 72, }, { 15, 20, 25, 30, 37, 44, 51, 58, 65, 72, } }
+		mon[229].movelvls = { { 4, 8, 13, 16, 20, 26, 30, 35, 41, 45, 50, 56, 60, 65, }, { 4, 8, 13, 16, 20, 26, 30, 35, 41, 45, 50, 56, 60, 65, } }
+		mon[230].movelvls = { { 5, 9, 13, 17, 21, 26, 31, 38, 45, 52, 60, 65, }, { 5, 9, 13, 17, 21, 26, 31, 38, 45, 52, 60, 65, } }
 		mon[231].movelvls = { { 6, 10, 15, 19, 24, 28, 33, 37, 42, }, { 6, 10, 15, 19, 24, 28, 33, 37, 42, } }
 		mon[232].movelvls = { { 6, 10, 15, 19, 24, 30, 37, 43, 50, }, { 6, 10, 15, 19, 24, 30, 37, 43, 50, } }
-		mon[233].movelvls = { { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } }
-		mon[234].movelvls = { { 3, 7, 10, 13, 16, 21, 23, 27, 32, 37, 49, 55, }, { 3, 7, 10, 13, 16, 21, 23, 27, 32, 37, 49, 55, } }
-		mon[235].movelvls = { { }, { } }
+		mon[233].movelvls = { { 7, 12, 18, 23, 29, 34, 40, 45, 50, 56, 62, 67, }, { 7, 12, 18, 23, 29, 34, 40, 45, 50, 56, 62, 67, } }
+		mon[234].movelvls = { { 3, 7, 10, 13, 16, 21, 23, 27, 33, 38, 43, 49, 50, 55, }, { 3, 7, 10, 13, 16, 21, 23, 27, 33, 38, 43, 49, 50, 55, } }
+		mon[235].movelvls = { { 11, 21, 31, 41, 51, 61, 71, 81, 91, }, { 11, 21, 31, 41, 51, 61, 71, 81, 91, } }
 		mon[236].movelvls = { { }, { } }
-		mon[237].movelvls = { { 4, 8, 12, 16, 21, 21, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 21, 21, 24, 28, 32, 36, 40, 44, } }
-		mon[238].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } }
-		mon[239].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } }
-		mon[240].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } }
-		mon[241].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[242].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[243].movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, } }
-		mon[244].movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, } }
-		mon[245].movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, } }
-		mon[246].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 31, 33, 36, 39, 42, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 31, 33, 36, 39, 42, } }
-		mon[247].movelvls = { { 9, 12, 15, 18, 21, 24, 27, 33, 37, 42, 47, 52, }, { 9, 12, 15, 18, 21, 24, 27, 33, 37, 42, 47, 52, } }
-		mon[248].movelvls = { { 9, 12, 15, 18, 21, 24, 27, 33, 37, 42, 47, 52, 59, }, { 9, 12, 15, 18, 21, 24, 27, 33, 37, 42, 47, 52, 59, } }
-		mon[249].movelvls = { { 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, }, { 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, } }
-		mon[250].movelvls = { { 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, 99, }, { 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, 99, } }
-		mon[251].movelvls = { { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, }, { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, } }
-		mon[277].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, } }
-		mon[278].movelvls = { { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[279].movelvls = { { 5, 12, 15, 20, 25, 30, 35, 42, 49, 56, }, { 5, 12, 15, 20, 25, 30, 35, 42, 49, 56, } }
-		mon[280].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, } }
-		mon[281].movelvls = { { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[282].movelvls = { { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, 63, }, { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, 63, } }
-		mon[283].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, } }
-		mon[284].movelvls = { { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 9, 12, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[285].movelvls = { { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, 63, }, { 9, 12, 15, 20, 25, 30, 35, 42, 49, 56, 63, } }
-		mon[286].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 36, 40, 44, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 36, 40, 44, } }
-		mon[287].movelvls = { { 13, 13, 16, 20, 24, 28, 36, 44, 48, 52, 56, }, { 13, 13, 16, 20, 24, 28, 36, 44, 48, 52, 56, } }
-		mon[288].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, } }
-		mon[289].movelvls = { { 9, 12, 15, 18, 23, 28, 33, 38, 43, 48, }, { 9, 12, 15, 18, 23, 28, 33, 38, 43, 48, } }
+		mon[237].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, } }
+		mon[238].movelvls = { { 5, 8, 11, 15, 18, 21, 25, 28, 33, 39, 44, 49, 55, 60, }, { 5, 8, 11, 15, 18, 21, 25, 28, 33, 39, 44, 49, 55, 60, } }
+		mon[239].movelvls = { { 8, 12, 15, 19, 22, 26, 29, 36, 42, 49, 55, }, { 8, 12, 15, 19, 22, 26, 29, 36, 42, 49, 55, } }
+		mon[240].movelvls = { { 8, 12, 15, 19, 22, 26, 29, 36, 42, 49, 55, }, { 8, 12, 15, 19, 22, 26, 29, 36, 42, 49, 55, } }
+		mon[241].movelvls = { { 3, 5, 8, 11, 15, 19, 24, 29, 35, 41, 48, 50, }, { 3, 5, 8, 11, 15, 19, 24, 29, 35, 41, 48, 50, } }
+		mon[242].movelvls = { { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 42, 46, 50, 54, }, { 5, 9, 12, 16, 20, 23, 27, 31, 34, 38, 42, 46, 50, 54, } }
+		mon[243].movelvls = { { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, }, { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, } }
+		mon[244].movelvls = { { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, }, { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, } }
+		mon[245].movelvls = { { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, }, { 8, 15, 22, 29, 36, 43, 50, 57, 64, 71, 78, 85, } }
+		mon[246].movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, } }
+		mon[247].movelvls = { { 5, 10, 14, 19, 23, 28, 34, 41, 47, 54, 60, 67, }, { 5, 10, 14, 18, 23, 28, 34, 41, 47, 54, 60, 67, } }
+		mon[248].movelvls = { { 5, 10, 14, 19, 23, 28, 34, 41, 47, 54, 63, 73, 82, }, { 5, 10, 14, 19, 23, 28, 34, 41, 47, 54, 63, 73, 82, } }
+		mon[249].movelvls = { { 9, 15, 23, 29, 37, 43, 50, 57, 65, 71, 79, 85, 93, 99, }, { 9, 15, 23, 29, 37, 43, 50, 57, 65, 71, 79, 85, 93, 99, } }
+		mon[250].movelvls = { { 9, 15, 23, 29, 37, 43, 50, 57, 65, 71, 79, 85, 93, 99, }, { 9, 15, 23, 29, 37, 43, 50, 57, 65, 71, 79, 85, 93, 99, } }
+		mon[251].movelvls = { { 10, 19, 28, 37, 46, 55, 64, 73, 82, 91, }, { 10, 19, 28, 37, 46, 55, 64, 73, 82, 91, } }
+		mon[277].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, } }
+		mon[278].movelvls = { { 5, 9, 13, 16, 18, 23, 28, 33, 38, 43, 48, 53, 58, 63, }, { 5, 9, 13, 16, 18, 23, 28, 33, 38, 43, 48, 53, 58, 63, } }
+		mon[279].movelvls = { { 5, 9, 13, 16, 18, 23, 28, 33, 36, 39, 45, 51, 57, 63, 69, }, { 5, 9, 13, 16, 18, 23, 28, 33, 36, 39, 45, 51, 57, 63, 69, } }
+		mon[280].movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, } }
+		mon[281].movelvls = { { 5, 10, 14, 16, 20, 25, 31, 36, 42, 47, 53, 58, }, { 5, 10, 14, 16, 20, 25, 31, 36, 42, 47, 53, 58, } }
+		mon[282].movelvls = { { 5, 10, 14, 16, 20, 25, 31, 36, 40, 44, 50, 57, 63, }, { 5, 10, 14, 16, 20, 25, 31, 36, 40, 44, 50, 57, 63, } }
+		mon[283].movelvls = { { 4, 9, 12, 17, 20, 25, 28, 33, 36, 41, 44, }, { 4, 9, 12, 17, 20, 25, 28, 33, 36, 41, 44, } }
+		mon[284].movelvls = { { 4, 9, 12, 16, 18, 22, 28, 32, 38, 42, 48, 52, }, { 4, 9, 12, 16, 18, 22, 28, 32, 38, 42, 48, 52, } }
+		mon[285].movelvls = { { 4, 9, 12, 16, 18, 22, 28, 32, 39, 44, 51, 56, 63, }, { 4, 9, 12, 16, 18, 22, 28, 32, 39, 44, 51, 56, 63, } }
+		mon[286].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, } }
+		mon[287].movelvls = { { 4, 7, 10, 13, 16, 18, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 7, 10, 13, 16, 18, 20, 24, 28, 32, 36, 40, 44, 48, } }
+		mon[288].movelvls = { { 5, 7, 11, 12, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, }, { 5, 7, 11, 12, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, } }
+		mon[289].movelvls = { { 5, 7, 11, 13, 17, 19, 24, 27, 32, 35, 40, 43, 48, }, { 5, 7, 11, 13, 17, 19, 24, 27, 32, 35, 40, 43, 48, } }
 		mon[290].movelvls = { { 5, 15, }, { 5, 15, } }
-		mon[291].movelvls = { { }, { } }
-		mon[292].movelvls = { { 12, 15, 17, 20, 22, 25, 27, 30, 32, 35, 37, 40, }, { 12, 15, 17, 20, 22, 25, 27, 30, 32, 35, 37, 40, } }
-		mon[293].movelvls = { { }, { } }
-		mon[294].movelvls = { { 12, 15, 17, 20, 22, 25, 27, 30, 32, 35, 37, 40, }, { 12, 15, 17, 20, 22, 25, 27, 30, 32, 35, 37, 40, } }
-		mon[295].movelvls = { { 3, 6, 9, 12, 16, 20, 24, 28, 33, 38, 43, }, { 3, 6, 9, 12, 16, 20, 24, 28, 33, 38, 43, } }
-		mon[296].movelvls = { { 9, 12, 18, 24, 30, 36, 50, 57, 64, }, { 9, 12, 18, 24, 30, 36, 50, 57, 64, } }
-		mon[297].movelvls = { { }, { } }
-		mon[298].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, } }
-		mon[299].movelvls = { { 9, 12, 18, 24, 30, 36, 43, 50, 57, }, { 9, 12, 18, 24, 30, 36, 43, 50, 57, } }
-		mon[300].movelvls = { { }, { } }
-		mon[301].movelvls = { { 5, 10, 15, 21, 25, 30, 35, 40, }, { 5, 10, 15, 21, 25, 30, 35, 40, } }
-		mon[302].movelvls = { { 15, 23, 29, 36, 43, 50, 57, 64, }, { 15, 23, 29, 36, 43, 50, 57, 64, } }
-		mon[303].movelvls = { { 15, 23, 29, 36, 43, 50, 57, 64, }, { 15, 23, 29, 36, 43, 50, 57, 64, } }
-		mon[304].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, } }
+		mon[291].movelvls = { { 7, }, { 7, } }
+		mon[292].movelvls = { { 10, 12, 15, 17, 20, 22, 25, 27, 30, 32, 35, 37, 40, }, { 10, 12, 15, 17, 20, 22, 25, 27, 30, 32, 35, 37, 40, } }
+		mon[293].movelvls = { { 7, }, { 7, } }
+		mon[294].movelvls = { { 10, 12, 15, 17, 20, 22, 25, 27, 30, 32, 35, 37, 40, }, { 10, 12, 15, 17, 20, 22, 25, 27, 30, 32, 35, 37, 40, } }
+		mon[295].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, } }
+		mon[296].movelvls = { { 3, 6, 9, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 3, 6, 9, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
+		mon[297].movelvls = { { 3, 6, 9, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 3, 6, 9, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
+		mon[298].movelvls = { { 3, 9, 15, 21, 27, 33, }, { 3, 9, 15, 21, 27, 33,} }
+		mon[299].movelvls = { { 3, 6, 9, 12, 14, 16, 20, 24, 28, 32, 36, }, { 3, 6, 9, 12, 14, 16, 20, 24, 28, 32, 36, } }
+		mon[300].movelvls = { { 5, 8, 10, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 50, }, { 5, 8, 10, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 50, } }
+		mon[301].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, } }
+		mon[302].movelvls = { { 5, 9, 13, 17, 20, 20, 20, 23, 29, 35, 41, 47, }, { 5, 9, 13, 17, 20, 20, 20, 23, 29, 35, 41, 47, } }
+		mon[303].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, } }
+		mon[304].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, } }
 		mon[305].movelvls = { { 5, 9, 13, 17, 21, 27, 33, 39, 45, 51, 57, }, { 5, 9, 13, 17, 21, 27, 33, 39, 45, 51, 57, } }
-		mon[306].movelvls = { { 5, 8, 12, 15, 19, 26, 29, 33, 36, 40, }, { 5, 8, 12, 15, 19, 26, 29, 33, 36, 40, } }
-		mon[307].movelvls = { { 12, 15, 19, 22, 28, 33, 39, 44, 50, 55, }, { 12, 15, 19, 22, 28, 33, 39, 44, 50, 55, } }
+		mon[306].movelvls = { { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, }, { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, } }
+		mon[307].movelvls = { { 5, 8, 12, 15, 19, 22, 22, 28, 33, 39, 44, 50, }, { 5, 8, 12, 15, 19, 22, 22, 28, 33, 39, 44, 50, } }
 		mon[308].movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, 55, } }
-		mon[309].movelvls = { { 5, 10, 15, 20, 26, 30, 35, 40, 45, }, { 5, 10, 15, 20, 26, 30, 35, 40, 45, } }
-		mon[310].movelvls = { { 15, 20, 28, 28, 28, 34, 41, 48, 55, 62, }, { 15, 20, 28, 28, 28, 34, 41, 48, 55, 62, } }
-		mon[311].movelvls = { { 6, 9, 14, 17, 22, 25, 25, 35, 38, }, { 6, 9, 14, 17, 22, 25, 25, 35, 38, } }
-		mon[312].movelvls = { { 17, 22, 22, 26, 32, 38, 44, 52, }, { 17, 22, 22, 26, 32, 38, 44, 52, } }
-		mon[313].movelvls = { { 3, 6, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, }, { 3, 6, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, } }
-		mon[314].movelvls = { { 15, 18, 21, 24, 27, 30, 33, 36, 39, 44, 49, 54, }, { 15, 18, 21, 24, 27, 30, 33, 36, 39, 44, 49, 54, } }
-		mon[315].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 31, 34, 37, 40, 43, 46, }, { 4, 7, 10, 13, 16, 19, 22, 25, 31, 34, 37, 40, 43, 46, } }
-		mon[316].movelvls = { { }, { } }
+		mon[309].movelvls = { { 5, 8, 12, 15, 22, 26, 29, 33, 36, 40, 43, }, { 5, 8, 12, 15, 22, 26, 29, 33, 36, 40, 43, } }
+		mon[310].movelvls = { { 5, 8, 12, 15, 22, 25, 28, 33, 33, 33, 39, 44, 50, 55, }, { 5, 8, 12, 15, 22, 25, 28, 33, 33, 33, 39, 44, 50, 55, } }
+		mon[311].movelvls = { { 6, 9, 14, 17, 22, 25, 25, 30, 35, 38, }, { 6, 9, 14, 17, 22, 25, 25, 30, 35, 38, } }
+		mon[312].movelvls = { { 6, 9, 14, 17, 22, 22, 26, 32, 38, 42, 48, 52, 58, }, { 6, 9, 14, 17, 22, 22, 26, 32, 38, 42, 48, 52, 58, } }
+		mon[313].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 29, 33, 37, 41, 45, 49, 53, }, { 4, 7, 10, 13, 16, 19, 22, 25, 29, 33, 37, 41, 45, 49, 53, } }
+		mon[314].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 29, 33, 37, 44, 51, 58, 65, }, { 4, 7, 10, 13, 16, 19, 22, 25, 29, 33, 37, 44, 51, 58, 65, } }
+		mon[315].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, } }
+		mon[316].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, } }
 		mon[317].movelvls = { { 4, 7, 10, 13, 16, 18, 21, 25, 30, 33, 38, 42, 46, 50, }, { 4, 7, 10, 13, 16, 18, 21, 25, 30, 33, 38, 42, 46, 50, } }
-		mon[318].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 36, 39, 42, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 36, 39, 42, } }
-		mon[319].movelvls = { { 9, 12, 15, 18, 21, 24, 27, 30, 33, 38, 38, 43, 48, }, { 9, 12, 15, 18, 21, 24, 27, 30, 33, 38, 38, 43, 48, } }
+		mon[318].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, } }
+		mon[319].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 34, 36, 40, 46, 52, 58, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 34, 36, 40, 46, 52, 58, } }
 		mon[320].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 43, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 43, } }
-		mon[321].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, } }
-		mon[322].movelvls = { { 3, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, }, { 3, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, } }
-		mon[323].movelvls = { { 6, 6, 12, 18, 24, 31, 36, 42, 48, }, { 6, 6, 12, 18, 24, 31, 36, 42, 48, } }
-		mon[324].movelvls = { { 12, 18, 24, 33, 40, 48, 56, }, { 12, 18, 24, 33, 40, 48, 56, } }
-		mon[325].movelvls = { { 4, 7, 13, 17, 20, 22, 26, 31, 34, 37, 40, 42, 46, 49, }, { 4, 7, 13, 17, 20, 22, 26, 31, 34, 37, 40, 42, 46, 49, } }
-		mon[326].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[327].movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, 58, 64, } }
-		mon[328].movelvls = { { 15, 25, }, { 15, 25, } }
-		mon[329].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, } }
-		mon[330].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
-		mon[331].movelvls = { { 12, 16, 20, 24, 28, 34, 40, 46, 52, }, { 12, 16, 20, 24, 28, 34, 40, 46, 52, } }
-		mon[332].movelvls = { { 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, } }
-		mon[333].movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 62, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, 62, } }
-		mon[334].movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 52, 60, 68, }, { 12, 16, 20, 24, 28, 32, 38, 44, 52, 60, 68, } }
+		mon[321].movelvls = { { 4, 7, 10, 13, 15, 18, 22, 25, 27, 30, 34, 38, 40, 42, 45, 47, 50, }, { 4, 7, 10, 13, 15, 18, 22, 25, 27, 30, 34, 38, 40, 42, 45, 47, 50, } }
+		mon[322].movelvls = { { 4, 6, 9, 11, 14, 19, 24, 30, 34, 40, 44, 48, 52, 56, 60, 64, 68, 72, }, { 4, 6, 9, 11, 14, 19, 24, 30, 34, 40, 44, 48, 52, 56, 60, 64, 68, 72, } }
+		mon[323].movelvls = { { 6, 6, 9, 13, 15, 17, 20, 25, 28, 32, 35, 39, 44, }, { 6, 6, 9, 13, 15, 17, 20, 25, 28, 32, 35, 39, 44, } }
+		mon[324].movelvls = { { 6, 6, 9, 13, 15, 17, 20, 25, 25, 28, 30, 34, 39, 45, 52, }, { 6, 6, 9, 13, 15, 17, 20, 25, 25, 28, 30, 34, 39, 45, 52, } }
+		mon[325].movelvls = { { 4, 7, 9, 14, 17, 22, 27, 31, 37, 40, 46, 50, 55, }, { 4, 7, 9, 14, 17, 22, 27, 31, 37, 40, 46, 50, 55, } }
+		mon[326].movelvls = { { 5, 7, 10, 14, 17, 20, 23, 26, 31, 34, 37, 39, 43, 48, }, { 5, 7, 10, 14, 17, 20, 23, 26, 31, 34, 37, 39, 43, 48, } }
+		mon[327].movelvls = { { 5, 7, 10, 14, 17, 20, 23, 26, 30, 32, 36, 40, 43, 48, 54, }, { 5, 7, 10, 14, 17, 20, 23, 26, 30, 32, 36, 40, 43, 48, 54, } }
+		mon[328].movelvls = { { 15, 30, }, { 15, 30, } }
+		mon[329].movelvls = { { 4, 9, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 60, }, { 4, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 60, } }
+		mon[330].movelvls = { { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, }, { 4, 8, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, } }
+		mon[331].movelvls = { { 4, 8, 11, 15, 18, 22, 25, 29, 34, 39, 43, 47, 51, 56, 62, }, { 4, 8, 11, 15, 18, 22, 25, 29, 34, 39, 43, 47, 51, 56, 62, } }
+		mon[332].movelvls = { { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, }, { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, } }
+		mon[333].movelvls = { { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, }, { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, } }
+		mon[334].movelvls = { { 5, 9, 14, 20, 25, 30, 34, 40, 45, 50, 54, 59, 63, 67, 71, }, { 5, 9, 14, 20, 25, 30, 34, 40, 45, 50, 54, 59, 63, 67, 71, } }
 		mon[335].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, } }
-		mon[336].movelvls = { { 10, 13, 16, 19, 22, 26, 30, 34, 38, 42, 46, 50, 54, 60, }, { 10, 13, 16, 19, 22, 26, 30, 34, 38, 42, 46, 50, 54, 60, } }
-		mon[337].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
-		mon[338].movelvls = { { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, }, { 12, 16, 20, 24, 30, 36, 42, 48, 54, 60, } }
+		mon[336].movelvls = { { 4, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 60, }, { 4, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 60, } }
+		mon[337].movelvls = { { 4, 7, 10, 13, 16, 19, 24, 29, 34, 39, 44, 49, }, { 4, 7, 10, 13, 16, 19, 24, 29, 34, 39, 44, 49, } }
+		mon[338].movelvls = { { 8, 9, 13, 17, 21, 24, 29, 34, 39, 44, 50, 56, 62, 70, }, { 8, 9, 13, 17, 21, 24, 29, 34, 39, 44, 50, 56, 62, 70, } }
 		mon[339].movelvls = { { 5, 8, 12, 15, 19, 22, 26, 29, 31, 40, 43, 47, }, { 5, 8, 12, 15, 19, 22, 26, 29, 31, 40, 43, 47, } }
-		mon[340].movelvls = { { 12, 15, 19, 22, 26, 29, 31, 39, 46, }, { 12, 15, 19, 22, 26, 29, 31, 39, 46, } }
-		mon[341].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 33, 36, 40, 44, 48, 52, }, { 4, 8, 12, 16, 20, 24, 28, 33, 36, 40, 44, 48, 52, } }
-		mon[342].movelvls = { { 12, 16, 20, 24, 28, 35, 40, 46, 52, 58, 64, }, { 12, 16, 20, 24, 28, 35, 40, 46, 52, 58, 64, } }
-		mon[343].movelvls = { { 12, 16, 20, 24, 28, 35, 40, 48, 56, 64, 72, }, { 12, 16, 20, 24, 28, 35, 40, 48, 56, 64, 72, } }
+		mon[340].movelvls = { { 5, 9, 14, 18, 23, 28, 34, 40, 44, 50, 55, 59, 63, 68, }, { 15, 9, 14, 18, 23, 28, 34, 40, 44, 50, 55, 59, 63, 68, } }
+		mon[341].movelvls = { { 5, 9, 13, 17, 21, 26, 31, 31, 36, 41, 46, }, { 5, 9, 13, 17, 21, 26, 31, 31, 36, 41, 46, } }
+		mon[342].movelvls = { { 5, 9, 13, 17, 21, 26, 31, 31, 38, 43, 48, 55, }, { 5, 9, 13, 17, 21, 26, 31, 31, 38, 43, 48, 55, } }
+		mon[343].movelvls = { { 7, 9, 14, 19, 24, 28, 33, 38, 44, 50, 55, 61, 68, }, { 7, 9, 14, 19, 24, 28, 33, 38, 44, 50, 55, 61, 68, } }
 		mon[344].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 26, 30, 34, 38, 42, 46, 50, 54, }, { 4, 7, 10, 13, 16, 19, 22, 26, 30, 34, 38, 42, 46, 50, 54, } }
-		mon[345].movelvls = { { 10, 13, 16, 19, 22, 26, 30, 35, 38, 44, 49, 54, }, { 10, 13, 16, 19, 22, 26, 30, 35, 38, 44, 49, 54, } }
-		mon[346].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } }
-		mon[347].movelvls = { { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, }, { 15, 20, 25, 30, 35, 40, 47, 54, 61, 68, } }
-		mon[348].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } }
-		mon[349].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, } }
-		mon[350].movelvls = { { 3, 6, 9, 12, 15, }, { 3, 6, 9, 12, 15, } }
-		mon[351].movelvls = { { 7, 10, 14, 18, 22, 29, 29, 33, 38, 40, 44, 50, }, { 7, 10, 14, 18, 22, 29, 29, 33, 38, 40, 44, 50, } }
-		mon[352].movelvls = { { 18, 22, 26, 29, 35, 35, 42, 46, 52, 60, }, { 18, 22, 26, 29, 35, 35, 42, 46, 52, 60, } }
+		mon[345].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 26, 30, 32, 35, 38, 44, 49, 54, 59, }, { 4, 7, 10, 13, 16, 19, 22, 26, 30, 32, 35, 38, 44, 49, 54, 59, } }
+		mon[346].movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 46, 50, } }
+		mon[347].movelvls = { { 5, 10, 14, 19, 23, 28, 32, 37, 41, 47, 52, 57, 62, 70, }, { 5, 10, 14, 19, 23, 28, 32, 37, 41, 47, 52, 57, 62, 70, } }
+		mon[348].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 55, 60, 66, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 55, 60, 66, } }
+		mon[349].movelvls = { { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 55, 60, 66, }, { 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 55, 60, 66, } }
+		mon[350].movelvls = { { 2, 5, 7, 9, 13, 16, 20, 23, }, { 2, 5, 7, 9, 13, 16, 20, 23, } }
+		mon[351].movelvls = { { 7, 9, 14, 15, 18, 21, 26, 29, 33, 38, 40, 44, 50, }, { 7, 9, 14, 15, 18, 21, 26, 29, 33, 38, 40, 44, 50, } }
+		mon[352].movelvls = { { 7, 10, 14, 14, 18, 21, 26, 29, 32, 35, 35, 42, 46, 52, 60, }, { 7, 10, 14, 14, 18, 21, 26, 29, 32, 35, 35, 42, 46, 52, 60, } }
 		mon[353].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 26, 31, 34, 37, 40, 43, 46, 49, }, { 4, 7, 10, 13, 16, 19, 22, 26, 31, 34, 37, 40, 43, 46, 49, } }
 		mon[354].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 26, 31, 34, 37, 40, 43, 46, 49, }, { 4, 7, 10, 13, 16, 19, 22, 26, 31, 34, 37, 40, 43, 46, 49, } }
-		mon[355].movelvls = { { 4, 8, 12, 16, 16, 16, 20, 24, 28, 32, 36, 40, 44, 48, }, { 4, 8, 12, 16, 16, 16, 20, 24, 28, 32, 36, 40, 44, 48, } }
-		mon[356].movelvls = { { 9, 12, 15, 17, 20, 23, 25, 28, 31, 33, 36, 39, 41, 44, }, { 9, 12, 15, 17, 20, 23, 25, 28, 31, 33, 36, 39, 41, 44, } }
-		mon[357].movelvls = { { 12, 15, 17, 20, 23, 25, 28, 31, 33, 36, 47, 53, 53, }, { 12, 15, 17, 20, 23, 25, 28, 31, 33, 36, 47, 53, 53, } }
-		mon[358].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
-		mon[359].movelvls = { { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, }, { 12, 16, 20, 24, 28, 32, 38, 44, 50, 56, } }
-		mon[360].movelvls = { { }, { } }
-		mon[361].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, } }
-		mon[362].movelvls = { { 12, 16, 20, 24, 28, 32, 36, 42, 48, }, { 12, 16, 20, 24, 28, 32, 36, 42, 48, } }
-		mon[363].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, } }
+		mon[355].movelvls = { { 5, 9, 14, 19, 24, 30, 35, 40, 44, 49, 53, 58, 63, 70, 77, }, { 5, 9, 14, 19, 24, 30, 35, 40, 44, 49, 53, 58, 63, 70, 77, } }
+		mon[356].movelvls = { { 4, 7, 9, 12, 15, 17, 20, 23, 25, 28, 31, 33, 36, 39, 41, 44, }, { 4, 7, 9, 12, 15, 17, 20, 23, 25, 28, 31, 33, 36, 39, 41, 44, } }
+		mon[357].movelvls = { { 4, 7, 9, 14, 18, 21, 25, 30, 34, 40, 44, 48, 53, 58, 63, 70, }, { 4, 7, 9, 14, 18, 21, 25, 30, 34, 40, 44, 48, 53, 58, 63, 70, } }
+		mon[358].movelvls = { { 3, 5, 7, 11, 14, 17, 20, 23, 26, 30, 34, 38, 42, 46, }, { 3, 5, 7, 11, 14, 17, 20, 23, 26, 30, 34, 38, 42, 46, } }
+		mon[359].movelvls = { { 3, 7, 9, 13, 17, 22, 27, 33, 37, 44, 50, 55, 61, 66, 71, 77, 82, }, { 3, 7, 9, 13, 17, 22, 27, 33, 37, 44, 50, 55, 61, 66, 71, 77, 82, } }
+		mon[360].movelvls = { { 9, 15, 15, 15, }, { 9, 15, 15, 15, } }
+		mon[361].movelvls = { { 6, 9, 14, 17, 22, 25, 30, 33, 38, 41, 46, 49, 54, }, { 6, 9, 14, 17, 22, 25, 30, 33, 38, 41, 46, 49, 54, } }
+		mon[362].movelvls = { { 6, 9, 14, 17, 22, 25, 30, 33, 37, 40, 45, 52, 57, 64, }, { 6, 9, 14, 17, 22, 25, 30, 33, 37, 40, 45, 52, 57, 64, } }
+		mon[363].movelvls = { { 4, 9, 11, 14, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 50, }, { 4, 9, 11, 14, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 50, } }
 		mon[364].movelvls = { { 6, 9, 14, 17, 22, 25, 30, 33, 38, }, { 6, 9, 14, 17, 22, 25, 30, 33, 38, } }
-		mon[365].movelvls = { { 14, 17, 23, 27, 33, 37, 43, }, { 14, 17, 23, 27, 33, 37, 43, } }
-		mon[366].movelvls = { { 17, 23, 27, 33, 39, 45, 52, 63, }, { 17, 23, 27, 33, 39, 45, 52, 63, } }
+		mon[365].movelvls = { { 6, 9, 14, 17, 23, 27, 33, 37, 43, }, { 6, 9, 14, 17, 23, 27, 33, 37, 43, } }
+		mon[366].movelvls = { { 6, 9, 14, 17, 23, 27, 33, 36, 39, 47, 53, 61, }, { 6, 9, 14, 17, 23, 27, 33, 36, 39, 47, 53, 61, } }
 		mon[367].movelvls = { { 5, 8, 10, 12, 17, 20, 25, 28, 28, 28, 33, 36, 41, 44, 49, }, { 5, 8, 10, 12, 17, 20, 25, 28, 28, 28, 33, 36, 41, 44, 49, } }
-		mon[368].movelvls = { { 12, 17, 20, 25, 30, 30, 30, 37, 42, 49, }, { 12, 17, 20, 25, 30, 30, 30, 37, 42, 49, } }
-		mon[369].movelvls = { { 6, 10, 16, 21, 30, 36, 41, 46, 50, 56, }, { 6, 10, 16, 21, 30, 36, 41, 46, 50, 56, } }
-		mon[370].movelvls = { { 5, 10, 15, 15, 21, 25, 30, 35, 40, 45, }, { 5, 10, 15, 15, 21, 25, 30, 35, 40, 45, } }
-		mon[371].movelvls = { { 15, 15, 23, 29, 36, 43, 50, 57, }, { 15, 15, 23, 29, 36, 43, 50, 57, } }
-		mon[372].movelvls = { { 15, 15, 23, 29, 36, 45, 54, 63, 72, 81, }, { 15, 15, 23, 29, 36, 45, 54, 63, 72, 81, } }
-		mon[373].movelvls = { { 50, }, { 50, } }
-		mon[374].movelvls = { { 5, 9, 11, 14, 16, 19, 23, 26, 29, 34, 39, 45, 50, }, { 5, 9, 11, 14, 16, 19, 23, 26, 29, 34, 39, 45, 50, } }
-		mon[375].movelvls = { { 5, 9, 11, 14, 16, 19, 23, 26, 29, 34, 39, 45, 50, }, { 5, 9, 11, 14, 16, 19, 23, 26, 29, 34, 39, 45, 50, } }
-		mon[376].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[377].movelvls = { { 4, 7, 10, 16, 19, 22, 26, 30, 34, 38, 42, 48, }, { 4, 7, 10, 16, 19, 22, 26, 30, 34, 38, 42, 48, } }
-		mon[378].movelvls = { { 16, 19, 22, 26, 30, 34, 40, 46, 53, }, { 16, 19, 22, 26, 30, 34, 40, 46, 53, } }
-		mon[379].movelvls = { { 4, 6, 9, 11, 14, 19, 21, 24, 29, 31, 34, 39, 41, 44, 46, }, { 4, 6, 9, 11, 14, 19, 21, 24, 29, 31, 34, 39, 41, 44, 46, } }
+		mon[368].movelvls = { { 5, 8, 10, 12, 17, 20, 25, 26, 30, 30, 30, 37, 42, 49, 54, 61, }, { 5, 8, 10, 12, 17, 20, 25, 26, 30, 30, 30, 37, 42, 49, 54, 61, } }
+		mon[369].movelvls = { { 6, 10, 16, 21, 26, 30, 36, 41, 46, 50, 56, 61, }, { 6, 10, 16, 21, 26, 30, 36, 41, 46, 50, 56, 61, } }
+		mon[370].movelvls = { { 4, 9, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, }, { 4, 9, 11, 15, 18, 22, 25, 29, 32, 36, 39, 43, } }
+		mon[371].movelvls = { { 4, 9, 11, 15, 18, 20, 23, 27, 32, 36, 41, 45, 50, }, { 4, 9, 11, 15, 18, 20, 23, 27, 32, 36, 41, 45, 50, } }
+		mon[372].movelvls = { { 4, 9, 11, 15, 18, 20, 23, 27, 32, 36, 40, 42, 47, 53, 58, 64, }, { 4, 9, 11, 15, 18, 20, 23, 27, 32, 36, 40, 42, 47, 53, 58, 64, } }
+		mon[373].movelvls = { { }, { } }
+		mon[374].movelvls = { { 5, 9, 11, 16, 21, 26, 30, 35, 40, 44, 48, 51, 57, 63, 70, }, { 5, 9, 11, 16, 21, 26, 30, 35, 40, 44, 48, 51, 57, 63, 70, } }
+		mon[375].movelvls = { { 5, 9, 11, 16, 21, 26, 30, 35, 40, 44, 48, 51, 57, 63, 70, }, { 5, 9, 11, 16, 21, 26, 30, 35, 40, 44, 48, 51, 57, 63, 70, } }
+		mon[376].movelvls = { { 4, 9, 13, 16, 20, 25, 30, 34, 40, 44, 48, 55, 60, 66, 70, 75, }, { 4, 9, 13, 16, 20, 25, 30, 34, 40, 44, 48, 55, 60, 66, 70, 75, } }
+		mon[377].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 26, 30, 34, 38, 42, 46, 50, 54, }, { 4, 7, 10, 13, 16, 19, 22, 26, 30, 34, 38, 42, 46, 50, 54, } }
+		mon[378].movelvls = { { 4, 9, 13, 16, 20, 24, 28, 32, 37, 41, 47, 53, 60, 66, 71, }, { 4, 9, 13, 16, 20, 24, 28, 32, 37, 41, 47, 53, 60, 66, 71, } }
+		mon[379].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, } }
 		mon[380].movelvls = { { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, 50, }, { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, 50, } }
-		mon[381].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, } }
-		mon[382].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 33, 36, 40, 44, 48, 52, 56, 60, }, { 4, 8, 12, 16, 20, 24, 28, 33, 36, 40, 44, 48, 52, 56, 60, } }
-		mon[383].movelvls = { { 12, 16, 20, 24, 28, 35, 40, 46, 52, 58, 64, 70, 76, }, { 12, 16, 20, 24, 28, 35, 40, 46, 52, 58, 64, 70, 76, } }
-		mon[384].movelvls = { { 12, 16, 20, 24, 28, 35, 40, 48, 56, 64, 72, 80, 88, }, { 12, 16, 20, 24, 28, 35, 40, 48, 56, 64, 72, 80, 88, } }
-		mon[385].movelvls = { { 10, 10, 10, 15, 20, 20, 20, 25, 35, 35, 35, 45, }, { 10, 10, 10, 15, 20, 20, 20, 25, 35, 35, 35, 45, } }
+		mon[381].movelvls = { { 6, 10, 15, 21, 26, 31, 35, 41, 46, 50, 56, }, { 6, 10, 15, 21, 26, 31, 35, 41, 46, 50, 56, } }
+		mon[382].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, } }
+		mon[383].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 35, 39, 43, 47, 51, 55, }, { 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 35, 39, 43, 47, 51, 55, } }
+		mon[384].movelvls = { { 9, 13, 18, 23, 28, 33, 38, 43, 48, 53, 58, 63, 68, 73, 78, 83, }, { 9, 13, 18, 23, 28, 33, 38, 43, 48, 53, 58, 63, 68, 73, 78, 83, } }
+		mon[385].movelvls = { { 10, 10, 10, 15, 20, 20, 20, 25, 35, 35, 35, 45, 50, 55, 60, }, { 10, 10, 10, 15, 20, 20, 20, 25, 35, 35, 35, 45, 50, 55, 60, } }
 		mon[386].movelvls = { { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, }, { 5, 8, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, } }
 		mon[387].movelvls = { { 5, 9, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, }, { 5, 9, 12, 15, 19, 22, 26, 29, 33, 36, 40, 43, 47, } }
-		mon[388].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 41, 41, 41, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 41, 41, 41, 44, } }
-		mon[389].movelvls = { { 12, 16, 20, 24, 28, 32, 36, 43, 43, 43, 48, }, { 12, 16, 20, 24, 28, 32, 36, 43, 43, 43, 48, } }
-		mon[390].movelvls = { { 4, 8, 12, 16, 20, 24, 28, 32, 36, 41, 44, }, { 4, 8, 12, 16, 20, 24, 28, 32, 36, 41, 44, } }
-		mon[391].movelvls = { { 12, 16, 20, 24, 28, 32, 36, 43, 48, }, { 12, 16, 20, 24, 28, 32, 36, 43, 48, } }
-		mon[392].movelvls = { { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, }, { 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, } }
-		mon[393].movelvls = { { 9, 12, 15, 18, 23, 28, 33, 38, 43, 48, 53, }, { 9, 12, 15, 18, 23, 28, 33, 38, 43, 48, 53, } }
-		mon[394].movelvls = { { 9, 12, 15, 18, 23, 28, 35, 42, 49, 56, 63, }, { 9, 12, 15, 18, 23, 28, 35, 42, 49, 56, 63, } }
-		mon[395].movelvls = { { 5, 10, 15, 20, 25, 31, 35, 40, 45, 50, 55, }, { 5, 10, 15, 20, 25, 31, 35, 40, 45, 50, 55, } }
-		mon[396].movelvls = { { 15, 20, 25, 33, 39, 46, 53, 60, 67, }, { 15, 20, 25, 33, 39, 46, 53, 60, 67, } }
-		mon[397].movelvls = { { 15, 20, 25, 33, 39, 46, 55, 73, }, { 15, 20, 25, 33, 39, 46, 55, 73, } }
+		mon[388].movelvls = { { 5, 9, 13, 17, 21, 26, 31, 36, 41, 46, 46, 46, 52, }, { 5, 9, 13, 17, 21, 26, 31, 36, 41, 46, 46, 46, 52, } }
+		mon[389].movelvls = { { 5, 9, 13, 17, 21, 26, 31, 36, 44, 52, 52, 52, 61, }, { 5, 9, 13, 17, 21, 26, 31, 36, 44, 52, 52, 52, 61, } }
+		mon[390].movelvls = { { 4, 7, 10, 13, 17, 21, 25, 29, 34, 39, 44, 49, 55, }, { 4, 7, 10, 13, 17, 21, 25, 29, 34, 39, 44, 49, 55, } }
+		mon[391].movelvls = { { 4, 7, 10, 13, 17, 21, 25, 29, 39, 46, 53, 61, 66, }, { 4, 7, 10, 13, 17, 21, 25, 29, 39, 46, 53, 61, 66, } }
+		mon[392].movelvls = { { 4, 6, 9, 11, 14, 17, 19, 22, 24, 27, 29, 32, 34, 37, 39, 42, }, { 4, 6, 9, 11, 14, 17, 19, 22, 24, 27, 29, 32, 34, 37, 39, 42, } }
+		mon[393].movelvls = { { 4, 6, 9, 11, 14, 17, 19, 23, 26, 30, 33, 37, 40, 44, 47, 51, }, { 4, 6, 9, 11, 14, 17, 19, 23, 26, 30, 33, 37, 40, 44, 47, 51, } }
+		mon[394].movelvls = { { 9, 14, 18, 23, 28, 33, 37, 41, 46, 50, 55, 60, 66, 70, 77, }, { 9, 14, 18, 23, 28, 33, 37, 41, 46, 50, 55, 60, 66, 70, 77, } }
+		mon[395].movelvls = { { 4, 7, 10, 13, 17, 21, 25, 29, 34, 39, 44, 49, }, { 4, 7, 10, 13, 17, 21, 25, 29, 34, 39, 44, 49, } }
+		mon[396].movelvls = { { 4, 7, 10, 13, 17, 21, 25, 29, 29, 35, 42, 49, 56, }, { 4, 7, 10, 13, 17, 21, 25, 29, 29, 35, 42, 49, 56, } }
+		mon[397].movelvls = { { 9, 14, 20, 24, 31, 38, 44, 50, 55, 60, 66, 70, 75, 82, }, { 9, 14, 20, 24, 31, 38, 44, 50, 55, 60, 66, 70, 75, 82, } }
 		mon[398].movelvls = { { }, { } }
-		mon[399].movelvls = { { 6, 12, 18, 26, 34, 42, 50, 58, 66, 74, }, { 6, 12, 18, 26, 34, 42, 50, 58, 66, 74, } }
-		mon[400].movelvls = { { 6, 12, 16, 26, 34, 42, 52, 62, 72, 82, }, { 6, 12, 16, 26, 34, 42, 52, 62, 72, 82, } }
-		mon[401].movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, } }
-		mon[402].movelvls = { { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, }, { 6, 12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, } }
-		mon[403].movelvls = { { 6, 12, 18, 24, 24, 30, 36, 36, 42, 48, 54, 60, 66, 72, 78, }, { 6, 12, 18, 24, 24, 30, 36, 36, 42, 48, 54, 60, 66, 72, 78, } }
-		mon[404].movelvls = { { 9, 18, 27, 36, 45, 54, 72, 81, 90, }, { 9, 18, 27, 36, 45, 54, 72, 81, 90, } }
-		mon[405].movelvls = { { 9, 18, 27, 36, 45, 54, 72, 81, 90, }, { 9, 18, 27, 36, 45, 54, 72, 81, 90, } }
-		mon[406].movelvls = { { 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, }, { 9, 18, 27, 36, 45, 54, 63, 72, 81, 90, } }
-		mon[407].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } }
-		mon[408].movelvls = { { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, }, { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, } }
-		mon[409].movelvls = { { 7, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, }, { 7, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84, 91, 98, } }
+		mon[399].movelvls = { { 10, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, }, { 10, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, } }
+		mon[400].movelvls = { { 20, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 20, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } }
+		mon[401].movelvls = { { 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } }
+		mon[402].movelvls = { { 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } }
+		mon[403].movelvls = { { 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, }, { 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, } }
+		mon[404].movelvls = { { 5, 15, 20, 30, 35, 45, 50, 60, 65, 75, 80, 90, }, { 5, 15, 20, 30, 35, 45, 50, 60, 65, 75, 80, 90, } }
+		mon[405].movelvls = { { 5, 15, 20, 30, 35, 45, 50, 60, 65, 75, 80, 90, }, { 5, 15, 20, 30, 35, 45, 50, 60, 65, 75, 80, 90, } }
+		mon[406].movelvls = { { 5, 15, 20, 30, 35, 45, 50, 60, 65, 75, 80, 90, }, { 5, 15, 20, 30, 35, 45, 50, 60, 65, 75, 80, 90, } }
+		mon[407].movelvls = { { 4, 9, 14, 18, 23, 28, 33, 38, 43, 48, 53, 60, 66, 72, 77, 84, }, { 4, 9, 14, 18, 23, 28, 33, 38, 43, 48, 53, 60, 66, 72, 77, 84, } }
+		mon[408].movelvls = { { 4, 9, 14, 18, 23, 28, 33, 38, 43, 48, 53, 60, 66, 72, 77, 84, }, { 4, 9, 14, 18, 23, 28, 33, 38, 43, 48, 53, 60, 66, 72, 77, 84, } }
+		mon[409].movelvls = { { 10, 15, 17, 20, 25, 35, 40, 45, 50, 55, 60, 65, 70, }, { 10, 15, 17, 20, 25, 35, 40, 45, 50, 55, 60, 65, 70, } }
 		mon[410].movelvls = { { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, }, { 7, 13, 19, 25, 31, 37, 43, 49, 55, 61, 67, 73, } }
-		mon[411].movelvls = { { 13, 16, 19, 22, 27, 32, 37, 42, 47, }, { 13, 16, 19, 22, 27, 32, 37, 42, 47, } }
+		mon[411].movelvls = { { 4, 7, 10, 13, 16, 19, 22, 27, 32, 37, 42, 47, 52, 57, }, { 4, 7, 10, 13, 16, 19, 22, 27, 32, 37, 42, 47, 52, 57, } }
 
-		mon[ 12].bst = 395
-		mon[ 15].bst = 395
-		mon[ 18].bst = 479
+		mon[ 12].bst = 495
+		mon[ 15].bst = 495
+		mon[ 18].bst = 519
 		mon[ 24].bst = 448
 		mon[ 25].bst = 320
-		mon[ 26].bst = 485
+		mon[ 26].bst = 500
 		mon[ 31].bst = 505
 		mon[ 34].bst = 505
-		mon[ 36].bst = 483
-		mon[ 40].bst = 435
+		mon[ 36].bst = 500
+		mon[ 40].bst = 480
 		mon[ 45].bst = 490
+		mon[ 49].bst = 495
 		mon[ 51].bst = 425
+		mon[ 53].bst = 470
 		mon[ 62].bst = 510
-		mon[ 65].bst = 500
+		mon[ 65].bst = 540
 		mon[ 71].bst = 490
 		mon[ 76].bst = 495
+		mon[ 80].bst = 530
 		mon[ 83].bst = 377
 		mon[ 85].bst = 470
+		mon[ 94].bst = 530
 		mon[101].bst = 490
 		mon[103].bst = 530
+		mon[127].bst = 550
+		mon[130].bst = 580
+		mon[142].bst = 555
 		mon[164].bst = 452
 		mon[168].bst = 400
-		mon[181].bst = 510
+		mon[181].bst = 540
 		mon[182].bst = 490
-		mon[184].bst = 420
+		mon[184].bst = 480
 		mon[189].bst = 460
-		mon[211].bst = 440
+		mon[202].bst = 450
+		mon[203].bst = 480
+		mon[206].bst = 450
+		mon[208].bst = 530
+		mon[211].bst = 450
+		mon[212].bst = 530
+		mon[214].bst = 550
 		mon[219].bst = 430
 		mon[222].bst = 410
 		mon[226].bst = 485
+		mon[227].bst = 500
+		mon[229].bst = 540
+		mon[234].bst = 480
 		mon[292].bst = 395
-		mon[305].bst = 455
-		mon[310].bst = 440
-		mon[312].bst = 454
-		mon[316].bst = 400
-		mon[348].bst = 460
-		mon[349].bst = 460
+		mon[302].bst = 495
+		mon[305].bst = 480
+		mon[307].bst = 480
+		mon[310].bst = 480
+		mon[312].bst = 495
+		mon[316].bst = 450
+		mon[322].bst = 480
+		mon[331].bst = 510
+		mon[334].bst = 550
+		mon[338].bst = 525
+		mon[340].bst = 520
+		mon[347].bst = 550
+		mon[348].bst = 500
+		mon[349].bst = 500
+		mon[357].bst = 510
+		mon[359].bst = 530
 		mon[372].bst = 490
+		mon[376].bst = 550
+		mon[378].bst = 525
+		mon[384].bst = 600
+		mon[385].bst = 500
 		mon[386].bst = 430
 		mon[387].bst = 430
+		mon[394].bst = 548
+		mon[397].bst = 700
+		mon[400].bst = 700
+		mon[404].bst = 770
+		mon[405].bst = 770
+		mon[406].bst = 780
 		mon[411].bst = 455
 
-		mon[ 57].evolution = "43"
-		mon[ 61].evolution = PE.WATER_ROCK
-		mon[ 64].evolution = PE.LINKING_CORD
-		mon[ 67].evolution = PE.LINKING_CORD
-		mon[ 75].evolution = PE.LINKING_CORD
-		mon[ 79].evolution = PE.ROCK37
+		mon[  2].evolution = "30"
+		mon[  5].evolution = "30"
+		mon[  8].evolution = "30"
+		mon[ 16].evolution = "14"
+		mon[ 17].evolution = "22"
+		mon[ 19].evolution = "14"
+		mon[ 21].evolution = "14"
+		mon[ 23].evolution = "14"
+		mon[ 27].evolution = "16"
+		mon[ 29].evolution = "14"
+		mon[ 32].evolution = "14"
+		mon[ 41].evolution = "14"
+		mon[ 43].evolution = "14"
+		mon[ 46].evolution = "12"
+		mon[ 48].evolution = "12"
+		mon[ 50].evolution = "14"
+		mon[ 52].evolution = "16"
+		mon[ 54].evolution = "18"
+		mon[ 56].evolution = "16"
+		mon[ 60].evolution = "14"
+		mon[ 61].evolution = PE.WATER
+		mon[ 64].evolution = "30"
+		mon[ 66].evolution = "18"
+		mon[ 67].evolution = "30"
+		mon[ 69].evolution = "14"
+		mon[ 72].evolution = "18"
+		mon[ 74].evolution = "14"
+		mon[ 75].evolution = "30"
+		mon[ 77].evolution = "18"
+		mon[ 79].evolution = "18"
+		mon[ 81].evolution = "18"
 		mon[ 82].evolution = PE.THUNDER
-		mon[ 93].evolution = PE.LINKING_CORD
-		mon[ 95].evolution = PE.METAL_COAT
-		mon[108].evolution = "33"
-		mon[112].evolution = PE.KINGS_ROCK
-		mon[114].evolution = "38"
-		mon[117].evolution = PE.DRAGON_SCALE
-		mon[123].evolution = PE.COAT_ROCK
-		mon[125].evolution = PE.THUNDER
-		mon[126].evolution = PE.FIRE
-		mon[133].evolution = PE.EEVEE_STONES_NATDEX
+		mon[ 84].evolution = "18"
+		mon[ 86].evolution = "18"
+		mon[ 88].evolution = "14"
+		mon[ 92].evolution = "18"
+		mon[ 93].evolution = "30"
+		mon[ 95].evolution = "30"
+		mon[ 96].evolution = "20"
+		mon[ 98].evolution = "18"
+		mon[100].evolution = "18"
+		mon[104].evolution = "16"
+		mon[108].evolution = "18"
+		mon[109].evolution = "14"
+		mon[111].evolution = "22"
+		mon[112].evolution = "30"
+		mon[114].evolution = "18"
+		mon[116].evolution = "16"
+		mon[117].evolution = "30"
+		mon[118].evolution = "16"
+		mon[123].evolution = "22"
+		mon[125].evolution = PE.ELECTIRIZER
+		mon[126].evolution = PE.MAGMARIZER
+		mon[129].evolution = "10"
+		mon[133].evolution = PE.EEVEE_STONES_KAIZOXYZ
 		mon[137].evolution = PE.UPGRADE
+		mon[138].evolution = "18"
+		mon[140].evolution = "18"
+		mon[147].evolution = "22"
+		mon[148].evolution = "45"
+		mon[152].evolution = "16"
+		mon[153].evolution = "30"
+		mon[155].evolution = "16"
+		mon[156].evolution = "30"
+		mon[158].evolution = "16"
+		mon[159].evolution = "30"
+		mon[161].evolution = "14"
+		mon[163].evolution = "14"
+		mon[165].evolution = "14"
+		mon[167].evolution = "10"
+		mon[170].evolution = "18"
 		mon[176].evolution = PE.SHINY
-		mon[190].evolution = "32"
-		mon[193].evolution = "33"
+		mon[177].evolution = "16"
+		mon[179].evolution = "14"
+		mon[180].evolution = "22"
+		mon[183].evolution = "18"
+		mon[187].evolution = "16"
+		mon[188].evolution = "22"
+		mon[190].evolution = "16"
+		mon[193].evolution = "16"
+		mon[194].evolution = "16"
 		mon[198].evolution = PE.DUSK
 		mon[200].evolution = PE.DUSK
-		mon[203].evolution = "32"
-		mon[206].evolution = "32"
-		mon[207].evolution = PE.RAZOR_FANG
-		mon[215].evolution = PE.RAZOR_CLAW
-		mon[217].evolution = PE.MOON
-		mon[221].evolution = "45"
+		mon[204].evolution = "12"
+		mon[207].evolution = "16"
+		mon[209].evolution = "16"
+		mon[215].evolution = "16"
+		mon[216].evolution = "18"
+		mon[218].evolution = "16"
+		mon[220].evolution = "16"
+		mon[221].evolution = "22"
+		mon[223].evolution = "16"
+		mon[228].evolution = "16"
+		mon[231].evolution = "14"
 		mon[233].evolution = PE.DUBIOUS_DISC
-		mon[234].evolution = "41"
-		mon[320].evolution = PE.THUNDER
-		mon[328].evolution = PE.WATER
-		mon[346].evolution = PE.DAWN42
-		mon[362].evolution = PE.DUSK
+		mon[236].evolution = PE.FRIEND
+		mon[238].evolution = PE.FRIEND
+		mon[239].evolution = PE.FRIEND
+		mon[240].evolution = PE.FRIEND
+		mon[246].evolution = PE.FRIEND
+		mon[247].evolution = "30"
+		mon[277].evolution = "16"
+		mon[278].evolution = "30"
+		mon[281].evolution = "30"
+		mon[284].evolution = "30"
+		mon[286].evolution = "14"
+		mon[288].evolution = PE.FRIEND
+		mon[295].evolution = "14"
+		mon[298].evolution = "14"
+		mon[301].evolution = "12"
+		mon[304].evolution = "14"
+		mon[306].evolution = "14"
+		mon[309].evolution = PE.FRIEND
+		mon[311].evolution = PE.FRIEND
+		mon[313].evolution = "22"
+		mon[318].evolution = PE.FRIEND
+		mon[320].evolution = "16"
+		mon[323].evolution = "16"
+		mon[326].evolution = "18"
+		mon[328].evolution = PE.FRIEND
+		mon[330].evolution = "16"
+		mon[332].evolution = "14"
+		mon[333].evolution = "40"
+		mon[335].evolution = "16"
+		mon[337].evolution = "18"
+		mon[339].evolution = "16"
+		mon[341].evolution = "18"
+		mon[342].evolution = "30"
+		mon[344].evolution = "16"
+		mon[346].evolution = PE.FRIEND
+		mon[350].evolution = PE.FRIEND
+		mon[351].evolution = PE.FRIEND
+		mon[356].evolution = "16"
+		mon[358].evolution = "14"
+		mon[360].evolution = PE.FRIEND
+		mon[361].evolution = "18"
+		mon[362].evolution = "30"
 		mon[363].evolution = PE.SHINY
-		mon[373].evolution = PE.DEEPSEA
-		mon[393].evolution = PE.DAWN30
-		-- workaround for self.Data.natDexMons not updating evo data
-		mon[440].evolution = PE.FEMALE21
+		mon[364].evolution = "18"
+		mon[365].evolution = "30"
+		mon[367].evolution = "14"
+		mon[370].evolution = "14"
+		mon[371].evolution = "30"
+		mon[373].evolution = PE.WATER
+		mon[377].evolution = "16"
+		mon[382].evolution = "16"
+		mon[383].evolution = "30"
+		mon[388].evolution = "18"
+		mon[390].evolution = "18"
+		mon[392].evolution = PE.FRIEND
+		mon[393].evolution = "22"
+		mon[395].evolution = "22"
+		mon[396].evolution = "45"
+		mon[398].evolution = "20"
+		mon[399].evolution = "40"
+		-- workaround for self.Data.kaizoXYZMons not updating evo data
+		--[[ mon[440].evolution = PE.FEMALE21
 		mon[465].evolution = PE.SHINY
 		mon[550].evolution = PE.LINKING_CORD
 		mon[558].evolution = PE.LINKING_CORD
@@ -7352,24 +8514,7 @@ local function KaizoXYZExtension()
 		mon[707].evolution = PE.LINKING_CORD
 		mon[709].evolution = PE.LINKING_CORD
 		mon[733].evolution = PE.LINKING_CORD
-		mon[735].evolution = PE.LINKING_CORD
-		mon[764].evolution = PE.ICE
-		mon[782].evolution = PE.FEMALE33
-		mon[865].evolution = PE.SUN_LEAF_DAWN
-		mon[893].evolution = PE.SHINY
-		mon[909].evolution = PE.METAL_COAT
-		mon[916].evolution = PE.WATER_DUSK
-		mon[960].evolution = PE.MOON_SUN
-		mon[999].evolution = PE.ICE
-		mon[1104].evolution = PE.ICE
-		mon[1106].evolution = PE.ICE
-		mon[1113].evolution = PE.LINKING_CORD
-		mon[1122].evolution = PE.WATER_ROCK
-		mon[1134].evolution = PE.ICE
-		mon[1144].evolution = PE.RAZOR_CLAW
-		mon[1196].evolution = PE.LINKING_CORD
-		mon[1197].evolution = PE.LINKING_CORD
-		mon[1198].evolution = PE.LINKING_CORD
+		mon[735].evolution = PE.LINKING_CORD ]]
 	end
 
 	function self.updateMoveData()
@@ -7400,6 +8545,149 @@ local function KaizoXYZExtension()
 		MoveData.Moves[204].type = PokemonData.Types.FAIRY -- Charm
 		MoveData.Moves[236].type = PokemonData.Types.FAIRY -- Moonlight
 
+		MoveData.Moves[19].power = "90"
+		MoveData.Moves[22].power = "45"
+		MoveData.Moves[26].power = "100"
+		MoveData.Moves[33].power = "50"
+		MoveData.Moves[37].power = "120"
+		MoveData.Moves[42].power = "25"
+		MoveData.Moves[53].power = "90"
+		MoveData.Moves[56].power = "110"
+		MoveData.Moves[57].power = "90"
+		MoveData.Moves[58].power = "90"
+		MoveData.Moves[59].power = "110"
+		MoveData.Moves[80].power = "120"
+		MoveData.Moves[83].power = "35"
+		MoveData.Moves[85].power = "90"
+		MoveData.Moves[87].power = "110"
+		MoveData.Moves[91].power = "80"
+		MoveData.Moves[122].power = "30"
+		MoveData.Moves[123].power = "30"
+		MoveData.Moves[126].power = "110"
+		MoveData.Moves[130].power = "130"
+		MoveData.Moves[136].power = "130"
+		MoveData.Moves[141].power = "80"
+		MoveData.Moves[145].power = "40"
+		MoveData.Moves[152].power = "100"
+		MoveData.Moves[167].power = "20"
+		MoveData.Moves[168].power = "60"
+		MoveData.Moves[173].power = "50"
+		MoveData.Moves[192].power = "120"
+		MoveData.Moves[200].power = "120"
+		MoveData.Moves[202].power = "75"
+		MoveData.Moves[210].power = "40"
+		MoveData.Moves[248].power = "120"
+		MoveData.Moves[249].power = "40"
+		MoveData.Moves[250].power = "35"
+		MoveData.Moves[253].power = "90"
+		MoveData.Moves[257].power = "95"
+		MoveData.Moves[265].power = "70"
+		MoveData.Moves[282].power = "65"
+		MoveData.Moves[291].power = "80"
+		MoveData.Moves[309].power = "90"
+		MoveData.Moves[314].power = "60"
+		MoveData.Moves[315].power = "130"
+		MoveData.Moves[317].power = "60"
+		MoveData.Moves[328].power = "35"
+		MoveData.Moves[330].power = "90"
+		MoveData.Moves[331].power = "25"
+		MoveData.Moves[333].power = "25"
+		MoveData.Moves[343].power = "60"
+		MoveData.Moves[348].power = "90"
+		MoveData.Moves[353].power = "140"
+		MoveData.Moves[354].power = "130"
+
+		MoveData.Moves[14].pp = "20"
+		MoveData.Moves[66].pp = "20"
+		MoveData.Moves[72].pp = "15"
+		MoveData.Moves[74].pp = "20"
+		MoveData.Moves[80].pp = "10"
+		MoveData.Moves[105].pp = "10"
+		MoveData.Moves[107].pp = "10"
+		MoveData.Moves[112].pp = "20"
+		MoveData.Moves[128].pp = "15"
+		MoveData.Moves[130].pp = "10"
+		MoveData.Moves[141].pp = "10"
+		MoveData.Moves[151].pp = "20"
+		MoveData.Moves[168].pp = "25"
+		MoveData.Moves[200].pp = "10"
+		MoveData.Moves[202].pp = "10"
+		MoveData.Moves[248].pp = "15"
+		MoveData.Moves[254].pp = "20"
+		MoveData.Moves[326].pp = "20"
+
+		MoveData.Moves[42].accuracy = "95"
+		MoveData.Moves[50].accuracy = "100"
+		MoveData.Moves[83].accuracy = "85"
+		MoveData.Moves[92].accuracy = "90"
+		MoveData.Moves[128].accuracy = "85"
+		MoveData.Moves[137].accuracy = "100"
+		MoveData.Moves[139].accuracy = "90"
+		MoveData.Moves[148].accuracy = "100"
+		MoveData.Moves[149].accuracy = "100"
+		MoveData.Moves[152].accuracy = "90"
+		MoveData.Moves[184].accuracy = "100"
+		MoveData.Moves[198].accuracy = "90"
+		MoveData.Moves[207].accuracy = "85"
+		MoveData.Moves[248].accuracy = "100"
+		MoveData.Moves[250].accuracy = "85"
+		MoveData.Moves[261].accuracy = "85"
+		MoveData.Moves[309].accuracy = "90"
+		MoveData.Moves[317].accuracy = "95"
+		MoveData.Moves[328].accuracy = "85"
+		MoveData.Moves[350].accuracy = "90"
+		MoveData.Moves[353].accuracy = "100"
+
+		MoveData.Moves[7].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[8].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[9].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[13].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[16].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[22].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[44].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[49].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[51].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[63].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[75].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[101].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[124].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[127].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[128].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[129].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[152].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[161].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[172].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[173].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[177].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[185].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[188].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[189].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[200].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[209].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[221].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[237].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[242].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[246].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[247].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[251].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[282].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[299].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[301].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[302].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[304].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[311].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[314].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[318].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[324].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[331].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[333].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[337].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[341].category = MoveData.Categories.SPECIAL
+		MoveData.Moves[344].category = MoveData.Categories.PHYSICAL
+		MoveData.Moves[348].category = MoveData.Categories.PHYSICAL
+
+		MoveData.Moves[245].priority = "+ 2"
+
 		MoveData.TypeToEffectiveness["fighting"] = {
 			normal = 2, ice = 2, poison = 0.5, flying = 0.5, psychic = 0.5, bug = 0.5, rock = 2, ghost = 0, dark = 2, steel = 2, fairy = 0.5
 		}
@@ -7426,7 +8714,10 @@ local function KaizoXYZExtension()
 	function self.updateAbilityData()
 		local abilities = AbilityData.Abilities
 		abilities[14].name = "Compound Eyes"
+		abilities[22].name = "Download"
 		abilities[31].name = "Lightning Rod"
+		abilities[76].name = "Air Lock"
+		abilities[77].name = "Tangled Feet"
 	end
 
 	function self.updateResources()
@@ -7478,13 +8769,23 @@ local function KaizoXYZExtension()
 
 		local abilNames = Resources.Game.AbilityNames
 		abilNames[14] = "Compound Eyes"
+		abilNames[22] = "Download"
 		abilNames[31] = "Lightning Rod"
+		abilNames[76] = "Air Lock"
+		abilNames[77] = "Tangled Feet"
 
 		local abilDesc = Resources.Game.AbilityDescriptions
 		abilDesc[14].NameKey = "Compound Eyes"
+		abilDesc[22].NameKey = "Download"
 		abilDesc[31].NameKey = "Lightning Rod"
-		abilDesc[43].Description = "Immune to sound-based moves. These moves are: Grass Whistle, Growl, Heal Bell, Hyper Voice, Metal Sound, Perish Song, Roar, Screech, Sing, Snore, Supersonic, Uproar, Disarming Voice"
-		abilDesc[76].Description = "Immune to sound-based moves. These moves are: Grass Whistle, Growl, Heal Bell, Hyper Voice, Metal Sound, Perish Song, Roar, Screech, Sing, Snore, Supersonic, Uproar, Disarming Voice"
+		abilDesc[76].NameKey = "Air Lock"
+		abilDesc[77].NameKey = "Tangled Feet"
+		abilDesc[22].Description = "+1 Attack if the enemy has lower Defense, +1 Sp. Attack if the target has lower Sp. Defense."
+		abilDesc[31].Description = "All single-target Electric moves are redirected to this Pokémon and raise its Sp. Attack."
+		abilDesc[37].Description = "Raises this Pokémon's Attack by 20%."
+		abilDesc[74].Description = "Raises this Pokémon's Attack by 20%."
+		abilDesc[76].Description = "Negates all effects of weather, but does not end the weather."
+		abilDesc[77].Description = "Doubles evasiveness if this Pokémon is confused."
 	end
 
 	function self.updateProgramAddresses()
@@ -7817,7 +9118,7 @@ local function KaizoXYZExtension()
 		end
 	end
 
-	function self.overrideTryLoadRevoData()
+	--[[ function self.overrideTryLoadRevoData()
 		if PokemonRevoData.RevoData then return end
 		PokemonRevoData.RevoData = {
 			[1] = {
@@ -9504,7 +10805,7 @@ local function KaizoXYZExtension()
 				{ id = 1059, perc = 5.51, }, { id = 922, perc = 5.26, }, { id = 1050, perc = 5.09, }, { id = 745, perc = 5.06, }, { id = 827, perc = 4.92, }, { id = 1084, perc = 4.71, }, { id = 1012, perc = 4.70, }, { id = 912, perc = 4.46, }, { id = 502, perc = 4.37, }, { id = 831, perc = 3.97, }, { id = 880, perc = 3.90, }, { id = 454, perc = 3.68, }, { id = 889, perc = 3.62, }, { id = 1004, perc = 3.41, }, { id = 1195, perc = 3.03, }, { id = 1142, perc = 2.95, }, { id = 706, perc = 2.83, }, { id = 749, perc = 2.80, }, { id = 936, perc = 2.76, }, { id = 451, perc = 2.69, }, { id = 962, perc = 2.67, }, { id = 634, perc = 2.65, }, { id = 1148, perc = 2.57, }, { id = 927, perc = 2.56, }, { id = 806, perc = 2.55, }, { id = 1226, perc = 2.51, }, { id = 94, perc = 2.44, }, { id = 1038, perc = 2.33, },
 			}
 		}
-	end
+	end ]]
 
 	local idInternalToNat = {
 		[277] = 252, [278] = 253, [279] = 254, [280] = 255, [281] = 256, [282] = 257, [283] = 258, [284] = 259,
@@ -9555,55 +10856,7 @@ local function KaizoXYZExtension()
 		[725] = 700, [726] = 701, [727] = 702, [728] = 703, [729] = 704, [730] = 705, [731] = 706, [732] = 707, [733] = 708, [734] = 709,
 		[735] = 710, [736] = 711, [737] = 712, [738] = 713, [739] = 714, [740] = 715, [741] = 716, [742] = 717, [743] = 718, [744] = 719,
 		[745] = 720, [746] = 721, [747] = 722, [748] = 723, [749] = 724, [750] = 725, [751] = 726, [752] = 727, [753] = 728, [754] = 729,
-		[755] = 730, [756] = 731, [757] = 732, [758] = 733, [759] = 734, [760] = 735, [761] = 736, [762] = 737, [763] = 738, [764] = 739,
-		[765] = 740, [766] = 741, [767] = 742, [768] = 743, [769] = 744, [770] = 745, [771] = 746, [772] = 747, [773] = 748, [774] = 749,
-		[775] = 750, [776] = 751, [777] = 752, [778] = 753, [779] = 754, [780] = 755, [781] = 756, [782] = 757, [783] = 758, [784] = 759,
-		[785] = 760, [786] = 761, [787] = 762, [788] = 763, [789] = 764, [790] = 765, [791] = 766, [792] = 767, [793] = 768, [794] = 769,
-		[795] = 770, [796] = 771, [797] = 772, [798] = 773, [799] = 774, [800] = 775, [801] = 776, [802] = 777, [803] = 778, [804] = 779,
-		[805] = 780, [806] = 781, [807] = 782, [808] = 783, [809] = 784, [810] = 785, [811] = 786, [812] = 787, [813] = 788, [814] = 789,
-		[815] = 790, [816] = 791, [817] = 792, [818] = 793, [819] = 794, [820] = 795, [821] = 796, [822] = 797, [823] = 798, [824] = 799,
-		[825] = 800, [826] = 801, [827] = 802, [828] = 803, [829] = 804, [830] = 805, [831] = 806, [832] = 807, [833] = 808, [834] = 809,
-		[835] = 810, [836] = 811, [837] = 812, [838] = 813, [839] = 814, [840] = 815, [841] = 816, [842] = 817, [843] = 818, [844] = 819,
-		[845] = 820, [846] = 821, [847] = 822, [848] = 823, [849] = 824, [850] = 825, [851] = 826, [852] = 827, [853] = 828, [854] = 829,
-		[855] = 830, [856] = 831, [857] = 832, [858] = 833, [859] = 834, [860] = 835, [861] = 836, [862] = 837, [863] = 838, [864] = 839,
-		[865] = 840, [866] = 841, [867] = 842, [868] = 843, [869] = 844, [870] = 845, [871] = 846, [872] = 847, [873] = 848, [874] = 849,
-		[875] = 850, [876] = 851, [877] = 852, [878] = 853, [879] = 854, [880] = 855, [881] = 856, [882] = 857, [883] = 858, [884] = 859,
-		[885] = 860, [886] = 861, [887] = 862, [888] = 863, [889] = 864, [890] = 865, [891] = 866, [892] = 867, [893] = 868, [894] = 869,
-		[895] = 870, [896] = 871, [897] = 872, [898] = 873, [899] = 874, [900] = 875, [901] = 876, [902] = 877, [903] = 878, [904] = 879,
-		[905] = 880, [906] = 881, [907] = 882, [908] = 883, [909] = 884, [910] = 885, [911] = 886, [912] = 887, [913] = 888, [914] = 889,
-		[915] = 890, [916] = 891, [917] = 892, [918] = 893, [919] = 894, [920] = 895, [921] = 896, [922] = 897, [923] = 898, [924] = 899,
-		[925] = 900, [926] = 901, [927] = 902, [928] = 903, [929] = 904, [930] = 905, [931] = 906, [932] = 907, [933] = 908, [934] = 909,
-		[935] = 910, [936] = 911, [937] = 912, [938] = 913, [939] = 914, [940] = 915, [941] = 916, [942] = 917, [943] = 918, [944] = 919,
-		[945] = 920, [946] = 921, [947] = 922, [948] = 923, [949] = 924, [950] = 925, [951] = 926, [952] = 927, [953] = 928, [954] = 929,
-		[955] = 930, [956] = 931, [957] = 932, [958] = 933, [959] = 934, [960] = 935, [961] = 936, [962] = 937, [963] = 938, [964] = 939,
-		[965] = 940, [966] = 941, [967] = 942, [968] = 943, [969] = 944, [970] = 945, [971] = 946, [972] = 947, [973] = 948, [974] = 949,
-		[975] = 950, [976] = 951, [977] = 952, [978] = 953, [979] = 954, [980] = 955, [981] = 956, [982] = 957, [983] = 958, [984] = 959,
-		[985] = 960, [986] = 961, [987] = 962, [988] = 963, [989] = 964, [990] = 965, [991] = 966, [992] = 967, [993] = 968, [994] = 969,
-		[995] = 970, [996] = 971, [997] = 972, [998] = 973, [999] = 974, [1000] = 975, [1001] = 976, [1002] = 977, [1003] = 978, [1004] = 979,
-		[1005] = 980, [1006] = 981, [1007] = 982, [1008] = 983, [1009] = 984, [1010] = 985, [1011] = 986, [1012] = 987, [1013] = 988, [1014] = 989,
-		[1015] = 990, [1016] = 991, [1017] = 992, [1018] = 993, [1019] = 994, [1020] = 995, [1021] = 996, [1022] = 997, [1023] = 998, [1024] = 999,
-		[1025] = 1000, [1026] = 1001, [1027] = 1002, [1028] = 1003, [1029] = 1004, [1030] = 1005, [1031] = 1006, [1032] = 1007, [1033] = 1008, [1034] = 1009,
-		[1035] = 1010, [1036] = 1011, [1037] = 1012, [1038] = 1013, [1039] = 1014, [1040] = 1015, [1041] = 1016, [1042] = 1017, [1043] = 1018, [1044] = 1019,
-		[1045] = 1020, [1046] = 1021, [1047] = 1022, [1048] = 1023, [1049] = 1024, [1050] = 1025, [1051] = 1026, [1052] = 1027, [1053] = 1028, [1054] = 1029,
-		[1055] = 1030, [1056] = 1031, [1057] = 1032, [1058] = 1033, [1059] = 1034, [1060] = 1035, [1061] = 1036, [1062] = 1037, [1063] = 1038, [1064] = 1039,
-		[1065] = 1040, [1066] = 1041, [1067] = 1042, [1068] = 1043, [1069] = 1044, [1070] = 1045, [1071] = 1046, [1072] = 1047, [1073] = 1048, [1074] = 1049,
-		[1075] = 1050, [1076] = 1051, [1077] = 1052, [1078] = 1053, [1079] = 1054, [1080] = 1055, [1081] = 1056, [1082] = 1057, [1083] = 1058, [1084] = 1059,
-		[1085] = 1060, [1086] = 1061, [1087] = 1062, [1088] = 1063, [1089] = 1064, [1090] = 1065, [1091] = 1066, [1092] = 1067, [1093] = 1068, [1094] = 1069,
-		[1095] = 1070, [1096] = 1071, [1097] = 1072, [1098] = 1073, [1099] = 1074, [1100] = 1075, [1101] = 1076, [1102] = 1077, [1103] = 1078, [1104] = 1079,
-		[1105] = 1080, [1106] = 1081, [1107] = 1082, [1108] = 1083, [1109] = 1084, [1110] = 1085, [1111] = 1086, [1112] = 1087, [1113] = 1088, [1114] = 1089,
-		[1115] = 1090, [1116] = 1091, [1117] = 1092, [1118] = 1093, [1119] = 1094, [1120] = 1095, [1121] = 1096, [1122] = 1097, [1123] = 1098, [1124] = 1099,
-		[1125] = 1100, [1126] = 1101, [1127] = 1102, [1128] = 1103, [1129] = 1104, [1130] = 1105, [1131] = 1106, [1132] = 1107, [1133] = 1108, [1134] = 1109,
-		[1135] = 1110, [1136] = 1111, [1137] = 1112, [1138] = 1113, [1139] = 1114, [1140] = 1115, [1141] = 1116, [1142] = 1117, [1143] = 1118, [1144] = 1119,
-		[1145] = 1120, [1146] = 1121, [1147] = 1122, [1148] = 1123, [1149] = 1124, [1150] = 1125, [1151] = 1126, [1152] = 1127, [1153] = 1128, [1154] = 1129,
-		[1155] = 1130, [1156] = 1131, [1157] = 1132, [1158] = 1133, [1159] = 1134, [1160] = 1135, [1161] = 1136, [1162] = 1137, [1163] = 1138, [1164] = 1139,
-		[1165] = 1140, [1166] = 1141, [1167] = 1142, [1168] = 1143, [1169] = 1144, [1170] = 1145, [1171] = 1146, [1172] = 1147, [1173] = 1148, [1174] = 1149,
-		[1175] = 1150, [1176] = 1151, [1177] = 1152, [1178] = 1153, [1179] = 1154, [1180] = 1155, [1181] = 1156, [1182] = 1157, [1183] = 1158, [1184] = 1159,
-		[1185] = 1160, [1186] = 1161, [1187] = 1162, [1188] = 1163, [1189] = 1164, [1190] = 1165, [1191] = 1166, [1192] = 1167, [1193] = 1168, [1194] = 1169,
-		[1195] = 1170, [1196] = 1171, [1197] = 1172, [1198] = 1173, [1199] = 1174, [1200] = 1175, [1201] = 1176, [1202] = 1177, [1203] = 1178, [1204] = 1179,
-		[1205] = 1180, [1206] = 1181, [1207] = 1182, [1208] = 1183, [1209] = 1184, [1210] = 1185, [1211] = 1186, [1212] = 1187, [1213] = 1188, [1214] = 1189,
-		[1215] = 1190, [1216] = 1191, [1217] = 1192, [1218] = 1193, [1219] = 1194, [1220] = 1195, [1221] = 1196, [1222] = 1197, [1223] = 1198, [1224] = 1199,
-		[1225] = 1200, [1226] = 1201, [1227] = 1202, [1228] = 1203, [1229] = 1204, [1230] = 1205, [1231] = 1206, [1232] = 1207, [1233] = 1208, [1234] = 1209,
-		[1235] = 1210,
+		[755] = 730, [756] = 731, [757] = 732, [758] = 733, [759] = 734, [760] = 735, [761] = 736, [762] = 737, 
 	}
 	local idNatToInternal = {
 		[252] = 277, [253] = 278, [254] = 279, [255] = 280, [256] = 281, [257] = 282, [258] = 283, [259] = 284,
@@ -9654,55 +10907,7 @@ local function KaizoXYZExtension()
 		[700] = 725, [701] = 726, [702] = 727, [703] = 728, [704] = 729, [705] = 730, [706] = 731, [707] = 732, [708] = 733, [709] = 734,
 		[710] = 735, [711] = 736, [712] = 737, [713] = 738, [714] = 739, [715] = 740, [716] = 741, [717] = 742, [718] = 743, [719] = 744,
 		[720] = 745, [721] = 746, [722] = 747, [723] = 748, [724] = 749, [725] = 750, [726] = 751, [727] = 752, [728] = 753, [729] = 754,
-		[730] = 755, [731] = 756, [732] = 757, [733] = 758, [734] = 759, [735] = 760, [736] = 761, [737] = 762, [738] = 763, [739] = 764,
-		[740] = 765, [741] = 766, [742] = 767, [743] = 768, [744] = 769, [745] = 770, [746] = 771, [747] = 772, [748] = 773, [749] = 774,
-		[750] = 775, [751] = 776, [752] = 777, [753] = 778, [754] = 779, [755] = 780, [756] = 781, [757] = 782, [758] = 783, [759] = 784,
-		[760] = 785, [761] = 786, [762] = 787, [763] = 788, [764] = 789, [765] = 790, [766] = 791, [767] = 792, [768] = 793, [769] = 794,
-		[770] = 795, [771] = 796, [772] = 797, [773] = 798, [774] = 799, [775] = 800, [776] = 801, [777] = 802, [778] = 803, [779] = 804,
-		[780] = 805, [781] = 806, [782] = 807, [783] = 808, [784] = 809, [785] = 810, [786] = 811, [787] = 812, [788] = 813, [789] = 814,
-		[790] = 815, [791] = 816, [792] = 817, [793] = 818, [794] = 819, [795] = 820, [796] = 821, [797] = 822, [798] = 823, [799] = 824,
-		[800] = 825, [801] = 826, [802] = 827, [803] = 828, [804] = 829, [805] = 830, [806] = 831, [807] = 832, [808] = 833, [809] = 834,
-		[810] = 835, [811] = 836, [812] = 837, [813] = 838, [814] = 839, [815] = 840, [816] = 841, [817] = 842, [818] = 843, [819] = 844,
-		[820] = 845, [821] = 846, [822] = 847, [823] = 848, [824] = 849, [825] = 850, [826] = 851, [827] = 852, [828] = 853, [829] = 854,
-		[830] = 855, [831] = 856, [832] = 857, [833] = 858, [834] = 859, [835] = 860, [836] = 861, [837] = 862, [838] = 863, [839] = 864,
-		[840] = 865, [841] = 866, [842] = 867, [843] = 868, [844] = 869, [845] = 870, [846] = 871, [847] = 872, [848] = 873, [849] = 874,
-		[850] = 875, [851] = 876, [852] = 877, [853] = 878, [854] = 879, [855] = 880, [856] = 881, [857] = 882, [858] = 883, [859] = 884,
-		[860] = 885, [861] = 886, [862] = 887, [863] = 888, [864] = 889, [865] = 890, [866] = 891, [867] = 892, [868] = 893, [869] = 894,
-		[870] = 895, [871] = 896, [872] = 897, [873] = 898, [874] = 899, [875] = 900, [876] = 901, [877] = 902, [878] = 903, [879] = 904,
-		[880] = 905, [881] = 906, [882] = 907, [883] = 908, [884] = 909, [885] = 910, [886] = 911, [887] = 912, [888] = 913, [889] = 914,
-		[890] = 915, [891] = 916, [892] = 917, [893] = 918, [894] = 919, [895] = 920, [896] = 921, [897] = 922, [898] = 923, [899] = 924,
-		[900] = 925, [901] = 926, [902] = 927, [903] = 928, [904] = 929, [905] = 930, [906] = 931, [907] = 932, [908] = 933, [909] = 934,
-		[910] = 935, [911] = 936, [912] = 937, [913] = 938, [914] = 939, [915] = 940, [916] = 941, [917] = 942, [918] = 943, [919] = 944,
-		[920] = 945, [921] = 946, [922] = 947, [923] = 948, [924] = 949, [925] = 950, [926] = 951, [927] = 952, [928] = 953, [929] = 954,
-		[930] = 955, [931] = 956, [932] = 957, [933] = 958, [934] = 959, [935] = 960, [936] = 961, [937] = 962, [938] = 963, [939] = 964,
-		[940] = 965, [941] = 966, [942] = 967, [943] = 968, [944] = 969, [945] = 970, [946] = 971, [947] = 972, [948] = 973, [949] = 974,
-		[950] = 975, [951] = 976, [952] = 977, [953] = 978, [954] = 979, [955] = 980, [956] = 981, [957] = 982, [958] = 983, [959] = 984,
-		[960] = 985, [961] = 986, [962] = 987, [963] = 988, [964] = 989, [965] = 990, [966] = 991, [967] = 992, [968] = 993, [969] = 994,
-		[970] = 995, [971] = 996, [972] = 997, [973] = 998, [974] = 999, [975] = 1000, [976] = 1001, [977] = 1002, [978] = 1003, [979] = 1004,
-		[980] = 1005, [981] = 1006, [982] = 1007, [983] = 1008, [984] = 1009, [985] = 1010, [986] = 1011, [987] = 1012, [988] = 1013, [989] = 1014,
-		[990] = 1015, [991] = 1016, [992] = 1017, [993] = 1018, [994] = 1019, [995] = 1020, [996] = 1021, [997] = 1022, [998] = 1023, [999] = 1024,
-		[1000] = 1025, [1001] = 1026, [1002] = 1027, [1003] = 1028, [1004] = 1029, [1005] = 1030, [1006] = 1031, [1007] = 1032, [1008] = 1033, [1009] = 1034,
-		[1010] = 1035, [1011] = 1036, [1012] = 1037, [1013] = 1038, [1014] = 1039, [1015] = 1040, [1016] = 1041, [1017] = 1042, [1018] = 1043, [1019] = 1044,
-		[1020] = 1045, [1021] = 1046, [1022] = 1047, [1023] = 1048, [1024] = 1049, [1025] = 1050, [1026] = 1051, [1027] = 1052, [1028] = 1053, [1029] = 1054,
-		[1030] = 1055, [1031] = 1056, [1032] = 1057, [1033] = 1058, [1034] = 1059, [1035] = 1060, [1036] = 1061, [1037] = 1062, [1038] = 1063, [1039] = 1064,
-		[1040] = 1065, [1041] = 1066, [1042] = 1067, [1043] = 1068, [1044] = 1069, [1045] = 1070, [1046] = 1071, [1047] = 1072, [1048] = 1073, [1049] = 1074,
-		[1050] = 1075, [1051] = 1076, [1052] = 1077, [1053] = 1078, [1054] = 1079, [1055] = 1080, [1056] = 1081, [1057] = 1082, [1058] = 1083, [1059] = 1084,
-		[1060] = 1085, [1061] = 1086, [1062] = 1087, [1063] = 1088, [1064] = 1089, [1065] = 1090, [1066] = 1091, [1067] = 1092, [1068] = 1093, [1069] = 1094,
-		[1070] = 1095, [1071] = 1096, [1072] = 1097, [1073] = 1098, [1074] = 1099, [1075] = 1100, [1076] = 1101, [1077] = 1102, [1078] = 1103, [1079] = 1104,
-		[1080] = 1105, [1081] = 1106, [1082] = 1107, [1083] = 1108, [1084] = 1109, [1085] = 1110, [1086] = 1111, [1087] = 1112, [1088] = 1113, [1089] = 1114,
-		[1090] = 1115, [1091] = 1116, [1092] = 1117, [1093] = 1118, [1094] = 1119, [1095] = 1120, [1096] = 1121, [1097] = 1122, [1098] = 1123, [1099] = 1124,
-		[1100] = 1125, [1101] = 1126, [1102] = 1127, [1103] = 1128, [1104] = 1129, [1105] = 1130, [1106] = 1131, [1107] = 1132, [1108] = 1133, [1109] = 1134,
-		[1110] = 1135, [1111] = 1136, [1112] = 1137, [1113] = 1138, [1114] = 1139, [1115] = 1140, [1116] = 1141, [1117] = 1142, [1118] = 1143, [1119] = 1144,
-		[1120] = 1145, [1121] = 1146, [1122] = 1147, [1123] = 1148, [1124] = 1149, [1125] = 1150, [1126] = 1151, [1127] = 1152, [1128] = 1153, [1129] = 1154,
-		[1130] = 1155, [1131] = 1156, [1132] = 1157, [1133] = 1158, [1134] = 1159, [1135] = 1160, [1136] = 1161, [1137] = 1162, [1138] = 1163, [1139] = 1164,
-		[1140] = 1165, [1141] = 1166, [1142] = 1167, [1143] = 1168, [1144] = 1169, [1145] = 1170, [1146] = 1171, [1147] = 1172, [1148] = 1173, [1149] = 1174,
-		[1150] = 1175, [1151] = 1176, [1152] = 1177, [1153] = 1178, [1154] = 1179, [1155] = 1180, [1156] = 1181, [1157] = 1182, [1158] = 1183, [1159] = 1184,
-		[1160] = 1185, [1161] = 1186, [1162] = 1187, [1163] = 1188, [1164] = 1189, [1165] = 1190, [1166] = 1191, [1167] = 1192, [1168] = 1193, [1169] = 1194,
-		[1170] = 1195, [1171] = 1196, [1172] = 1197, [1173] = 1198, [1174] = 1199, [1175] = 1200, [1176] = 1201, [1177] = 1202, [1178] = 1203, [1179] = 1204,
-		[1180] = 1205, [1181] = 1206, [1182] = 1207, [1183] = 1208, [1184] = 1209, [1185] = 1210, [1186] = 1211, [1187] = 1212, [1188] = 1213, [1189] = 1214,
-		[1190] = 1215, [1191] = 1216, [1192] = 1217, [1193] = 1218, [1194] = 1219, [1195] = 1220, [1196] = 1221, [1197] = 1222, [1198] = 1223, [1199] = 1224,
-		[1200] = 1225, [1201] = 1226, [1202] = 1227, [1203] = 1228, [1204] = 1229, [1205] = 1230, [1206] = 1231, [1207] = 1232, [1208] = 1233, [1209] = 1234,
-		[1210] = 1235,
+		[730] = 755, [731] = 756, [732] = 757, [733] = 758, [734] = 759, [735] = 760, [736] = 761, [737] = 762,
 	}
 
 	function self.overrideDexMapInternalToNational(pokemonID)
@@ -9715,4 +10920,4 @@ local function KaizoXYZExtension()
 
 	return self
 end
-return NatDexExtension
+return KaizoXYZExtension

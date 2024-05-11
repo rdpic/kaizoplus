@@ -2993,11 +2993,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (attacker->ability == ABILITY_SLOW_START && gDisableStructs[battlerIdAtk].slowStartTimer != 0)
         attack = (50 * attack) / 100;
     if (attacker->ability == ABILITY_RECKLESS && (gBattleMoves[move].effect == EFFECT_RECOIL || gBattleMoves[move].effect == EFFECT_DOUBLE_EDGE || gBattleMoves[move].effect == EFFECT_HEAD_SMASH))
-        gBattleMovePower = (120 * gBattleMovePower) / 100;
+        gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (attacker->ability == ABILITY_MULTITYPE)
         gBattleMovePower = (110 * gBattleMovePower) / 100;
     if (attacker->ability == ABILITY_FLOWER_GIFT && gBattleWeather & B_WEATHER_SUN)
-        gBattleMovePower = (150 * gBattleMovePower) / 100;
+        spAttack = (150 * spAttack) / 100;
+    if (defender->ability == ABILITY_FLOWER_GIFT && gBattleWeather & B_WEATHER_SUN)
+        spDefense = (150 * spDefense) / 100;
     if (attacker->ability == ABILITY_TRANSISTOR && type == TYPE_ELECTRIC)
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (attacker->ability == ABILITY_DRAGONS_MAW && type == TYPE_DRAGON)
