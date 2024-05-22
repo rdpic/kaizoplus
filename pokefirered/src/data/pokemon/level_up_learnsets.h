@@ -7,10 +7,9 @@ static const struct LevelUpMove sNoneLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sBulbasaurLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_PAYBACK),
-    LEVEL_UP_MOVE(1, MOVE_WAKE_UP_SLAP),
-    LEVEL_UP_MOVE(1, MOVE_CLOSE_COMBAT),
-    LEVEL_UP_MOVE(1, MOVE_ROOST),
+    LEVEL_UP_MOVE(1, MOVE_TACKLE),
+    LEVEL_UP_MOVE(1, MOVE_GROWL),
+    LEVEL_UP_MOVE(1, MOVE_VINE_WHIP),
     LEVEL_UP_MOVE(7, MOVE_LEECH_SEED),
     LEVEL_UP_MOVE(9, MOVE_VINE_WHIP),
     LEVEL_UP_MOVE(13, MOVE_POISON_POWDER),
@@ -70,10 +69,10 @@ static const struct LevelUpMove sVenusaurLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sCharmanderLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_FREEZE_DRY),
-    LEVEL_UP_MOVE(1, MOVE_POWER_GEM),
-    LEVEL_UP_MOVE(1, MOVE_THUNDERBOLT),
-    LEVEL_UP_MOVE(1, MOVE_FLAMETHROWER),
+    LEVEL_UP_MOVE(1, MOVE_SCRATCH),
+    LEVEL_UP_MOVE(1, MOVE_LEER),
+    LEVEL_UP_MOVE(1, MOVE_EMBER),
+    LEVEL_UP_MOVE(1, MOVE_DRAGON_BREATH),
     LEVEL_UP_MOVE(7, MOVE_EMBER),
     LEVEL_UP_MOVE(10, MOVE_SMOKESCREEN),
     LEVEL_UP_MOVE(16, MOVE_DRAGON_RAGE),

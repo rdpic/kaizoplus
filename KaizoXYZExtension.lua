@@ -2,7 +2,7 @@ local function KaizoXYZExtension()
 	local self = {
 		version = "1.0.0",
 		name = "Kaizo XYZ",
-		author = "Kuroe, Cyan, UTDZac",
+		author = "Kuroe",
 		description = "Extension that allows for compatibility with the Fire Red Kaizo XYZ ROM hack.",
 		github = "rdpic/kaizoplus", -- Replace "MyUsername" and "ExtensionRepo" to match your GitHub repo url, if any
 
@@ -37,7 +37,7 @@ local function KaizoXYZExtension()
 	-- Returns true if the loaded game rom is a Kaizo XYZ game rom
 	function self.checkIfKaizoXYZROM()
 		local kaizoXYZMonCount = Memory.read32(self.monCountAddress)
-		return (kaizoXYZMonCount == 762)
+		return (kaizoXYZMonCount == 737)
     end
 
 	function self.buildExtensionPaths()
@@ -101,6 +101,8 @@ local function KaizoXYZExtension()
 		self.updatePokeData()
 		self.updateMoveData()
 		self.updateAbilityData()
+		self.updateAddresses()
+		self.updateOffsets()
 
 		-- Rebuild the Tracker's data objects
 		PokemonData.buildData(true)
@@ -1580,7 +1582,7 @@ local function KaizoXYZExtension()
 		},
 		[87] = {
 			NameKey = "Iron Fist",
-			Description = "Boosts the power of punching moves by 50%.",
+			Description = "Boosts the power of punching moves by 50%. These moves are: Bullet Punch, Comet Punch, Dizzy Punch, Drain Punch, Dynamic Punch, Fire Punch, Focus Punch, Hammer Arm, Ice Punch, Lunar Punch, Mach Punch, Mega Punch, Meteor Mash, Power-Up Punch, Shadow Punch, Sky Uppercut, Thunder Punch.",
 		},
 		[88] = {
 			NameKey = "Poison Heal",
@@ -1700,7 +1702,7 @@ local function KaizoXYZExtension()
 		},
 		[117] = {
 			NameKey = "Reckless",
-			Description = "Boosts the damage of recoil moves by 50%.",
+			Description = "Boosts the damage of recoil moves by 50%. These moves are: Brave Bird, Double Edge, Flare Blitz, Head Charge, Head Smash, Light of Ruin, Struggle, Submission, Take Down, Volt Tackle, Wild Charge, Wood Hammer.",
 		},
 		[118] = {
 			NameKey = "Multitype",
@@ -1720,7 +1722,7 @@ local function KaizoXYZExtension()
 		},
 		[122] = {
 			NameKey = "Liquid Voice",
-			Description = "Converts this Pokémon's sound moves to Water-type.",
+			Description = "Converts this Pokémon's sound moves to Water-type. These moves are: Snore, Uproar, Hyper Voice, Bug Buzz, Chatter, Roar of Time, Round, Echoed Voice, Relic Song, Snarl, Disarming Voice, Boomburst, Alluring Voice.",
 		},
 		[123] = {
 			NameKey = "Transistor",
@@ -1808,7 +1810,7 @@ local function KaizoXYZExtension()
 		},
 		[144] = {
 			NameKey = "Overcoat",
-			Description = "This Pokémon is immune to weather damage and powder moves.",
+			Description = "This Pokémon is immune to weather damage and powder moves. These moves are: Cotton Spore, Poison Powder, Rage Powder, Sleep Powder, Spore, Stun Spore.",
 		},
 		[145] = {
 			NameKey = "Poison Touch",
@@ -1912,11 +1914,11 @@ local function KaizoXYZExtension()
 		},
 		[170] = {
 			NameKey = "Bulletproof",
-			Description = "This Pokémon is immune to ballistic moves.",
+			Description = "This Pokémon is immune to ballistic moves. These moves are: Acid Spray, Aura Sphere, Barrage, Bullet Seed, Egg Bomb, Electro Ball, Energy Ball, Focus Blast, Gyro Ball, Ice Ball, Magnet Bomb, Mist Ball, Mud Bomb, Octazooka, Rock Blast, Rock Wrecker, Searing Shot, Seed Bomb, Shadow Ball, Sludge Bomb, Weather Ball, Zap Cannon.",
 		},
 		[171] = {
 			NameKey = "Strong Jaw",
-			Description = "Boosts the power of biting moves by 50%.",
+			Description = "Boosts the power of biting moves by 50%. These moves are: Bite, Crunch, Fire Fang, Thunder Fang, Ice Fang, Hyper Fang, Poison Fang.",
 		},
 		[172] = {
 			NameKey = "Refrigerate",
@@ -1932,7 +1934,7 @@ local function KaizoXYZExtension()
 		},
 		[175] = {
 			NameKey = "Mega Launcher",
-			Description = "Boosts the power of pulse moves by 50%.",
+			Description = "Boosts the power of pulse moves by 50%. These moves are: Aura Sphere, Dark Pulse, Dragon Pulse, Water Pulse, Origin Pulse.",
 		},
 		[176] = {
 			NameKey = "Aura Barrier",
@@ -2004,7 +2006,7 @@ local function KaizoXYZExtension()
 		},
 		[193] = {
 			NameKey = "Harmonics",
-			Description = "Boosts the power of sound moves by 50%.",
+			Description = "Boosts the power of sound moves by 50%. These moves are: Snore, Uproar, Hyper Voice, Bug Buzz, Chatter, Roar of Time, Round, Echoed Voice, Relic Song, Snarl, Disarming Voice, Boomburst, Alluring Voice.",
 		},
 		[194] = {
 			NameKey = "Galvanize",
@@ -2012,7 +2014,7 @@ local function KaizoXYZExtension()
 		},
 		[195] = {
 			NameKey = "Sharpness",
-			Description = "Boosts the power of slicing moves by 50%.",
+			Description = "Boosts the power of slicing moves by 50%. These moves are: Aerial Ace, Air Cutter, Air Slash, Aqua Cutter, Chroma Blades, Cross Poison, Cut, Fury Cutter, Leaf Blade, Light Slash, Night Slash, Psycho Cut, Razor Leaf, Razor Shell, Sacred Sword, Secret Sword, Slash, X-Scissor.",
 		},
 
 	}
@@ -7685,7 +7687,7 @@ local function KaizoXYZExtension()
 		end
 		Drawing.ImagePaths.PokemonIcon.shouldUseOverride = function(this, value)
 			-- Only use custom path if it's a new pokemon (gen4+) or a mega
-			return (tonumber(value) or 0) > 411 or id == 12 or id == 18 or id == 65 or id == 80 or id == 94 or id == 127 or id == 130 or id == 142 or id == 181 or id == 208 or id == 212 or id == 214 or id == 229 or id == 322 or id == 331 or id == 338 or id == 340 or id == 347 or id == 355 or id == 357 or id == 359 or id == 376 or id == 378 or id == 384 or id == 385 or id == 394 or id == 397 or id == 400 or id == 404 or id == 405 or id == 406
+			return (tonumber(value) or 0) > 411 or (tonumber(value) or 0) == 15 or (tonumber(value) or 0) == 18 or (tonumber(value) or 0) == 65 or (tonumber(value) or 0) == 80 or (tonumber(value) or 0) == 94 or (tonumber(value) or 0) == 127 or (tonumber(value) or 0) == 130 or (tonumber(value) or 0) == 142 or (tonumber(value) or 0) == 181 or (tonumber(value) or 0) == 208 or (tonumber(value) or 0) == 212 or (tonumber(value) or 0) == 214 or (tonumber(value) or 0) == 229 or (tonumber(value) or 0) == 322 or (tonumber(value) or 0) == 331 or (tonumber(value) or 0) == 338 or (tonumber(value) or 0) == 340 or (tonumber(value) or 0) == 347 or (tonumber(value) or 0) == 355 or (tonumber(value) or 0) == 357 or (tonumber(value) or 0) == 359 or (tonumber(value) or 0) == 376 or (tonumber(value) or 0) == 378 or (tonumber(value) or 0) == 384 or (tonumber(value) or 0) == 385 or (tonumber(value) or 0) == 394 or (tonumber(value) or 0) == 397 or (tonumber(value) or 0) == 400 or (tonumber(value) or 0) == 404 or (tonumber(value) or 0) == 405 or (tonumber(value) or 0) == 406
 		end
 
 		-- New Pokemon types
@@ -10381,6 +10383,174 @@ local function KaizoXYZExtension()
 			}
 		}
 	end ]]
+
+	function self.updateAddresses()
+		local GS = GameSettings
+		GS.pstats = 0x020242ec -- gPlayerParty
+		GS.estats = 0x2024094 -- gEnemyPartyCount + 0x2
+		GS.gPlayerPartyCount = 0x02024091
+		GS.sEvoStructPtr = 0x2039b38 -- gPlayerFacingPosition + 0x1c
+		GS.gBattleScriptingBattler = 0x02023ffc -- gBattleScripting
+		GS.gTrainerBattleOpponent_A = 0x020387c6
+		GS.sMonSummaryScreen = 0x203b258 -- gBattlePartyCurrentOrder + 0x64
+		GS.gMoveResultFlags = 0x02023dce
+		GS.gBattleCommunication = 0x02023eaa
+		GS.gBattleOutcome = 0x02023eb2
+		GS.gBattleStructPtr = 0x0202402c -- gBattleStruct
+		GS.gBattleWeather = 0x02023f54
+		GS.gMoveToLearn = 0x02024066
+		GS.gMapHeader = 0x02036f14
+		GS.gSpecialVar_Result = 0x020371e8
+		GS.sSpecialFlags = 0x020371f8
+		GS.gSpecialVar_ItemId = 0x0203ae48
+		GS.sBattlerAbilities = 0x2039b48 -- gPlayerFacingPosition + 0x2c
+		GS.sStartMenuWindowId = 0x203acf8 -- gHasHallOfFameRecords + 0x9c
+		-- sSaveDialogDelay not found in map file
+		GS.gBattleMoves = 0x08273a40
+		GS.gBaseStats = 0x08286ee0 -- gSpeciesInfo
+		GS.gExperienceTables = 0x08279fd0
+		GS.sTMHMMoves = 0x84a7d64 -- gServerScript_ClientCanceledCard + 0x1220
+		GS.FriendshipRequiredToEvo = 0x8049a6e -- GetEvolutionTargetSpecies + 0x13e
+		GS.Task_EvolutionScene = 0x80d9aed -- TradeEvolutionScene + 0x39d
+		GS.BattleIntroDrawPartySummaryScreens = 0x801336d -- FaintClearSetData + 0x775
+		GS.BattleIntroOpponentSendsOutMonAnimation = 0x80135cd -- FaintClearSetData + 0x9d5
+		GS.HandleTurnActionSelectionState = 0x8014169 -- UpdatePartyOwnerOnSwitch_NonMulti + 0xd5
+		GS.ReturnFromBattleToOverworld = 0x8015c69 -- GetWhoStrikesFirst + 0xe81
+		GS.BattleScript_RanAwayUsingMonAbility = 0x81f2ea3
+		GS.BattleScript_FocusPunchSetUp = 0x81f35e8
+		GS.BattleScript_LearnMoveLoop = 0x081f2fab -- BattleScript_TryLearnMoveLoop
+		GS.BattleScript_LearnMoveReturn = 0x081f2ffd
+		GS.BattleScript_MoveUsedIsFrozen = 0x81f3646
+		GS.BattleScript_MoveUsedIsFrozen2 = 0x81f3649 -- BattleScript_MoveUsedIsFrozen + 0x6
+		GS.BattleScript_MoveUsedIsFrozen3 = 0x81f364b -- BattleScript_MoveUsedIsFrozen + 0x8
+		GS.BattleScript_MoveUsedUnfroze = 0x81f3655
+		GS.BattleScript_MoveUsedUnfroze2 = 0x81f365a -- BattleScript_MoveUsedUnfroze + 0xa
+		GS.BattleScript_MoveUsedIsConfused = 0x81f36e2
+		GS.BattleScript_MoveUsedIsConfused2 = 0x81f36eb -- BattleScript_MoveUsedIsConfused + 0xc
+		GS.BattleScript_MoveUsedIsConfusedNoMore = 0x81f3725
+		GS.BattleScript_MoveUsedIsInLove = 0x81f3753
+		GS.BattleScript_MoveUsedIsInLove2 = 0x81f375c -- BattleScript_MoveUsedIsInLove + 0xc
+		GS.BattleScript_SnatchedMove = 0x81f358f
+		GS.BattleScript_MoveUsedWokeUp = 0x81f3607
+		GS.DrizzleActivates = 0x081f3899 -- BattleScript_DrizzleActivates
+		GS.SpeedBoostActivates = 0x81f38b4 -- BattleScript_SpeedBoostActivates + 0x7
+		GS.IntimidateAbilityFail = 0x81f3995 -- BattleScript_IntimidateActivates + 0x61
+		GS.IntimidateActivationAnimLoop = 0x81f397d -- BattleScript_IntimidateActivates + 0x49
+		GS.TraceActivates = 0x81f38c6 -- BattleScript_TraceActivates + 0x6
+		GS.PerishSongNotAffected = 0x81f1232 -- BattleScript_PerishSongNotAffected + 0x3
+		GS.SandstreamActivates = 0x081f38e8 -- BattleScript_SandstreamActivates
+		GS.ShedSkinActivates = 0x81f38ff -- BattleScript_ShedSkinActivates + 0x3
+		GS.DroughtActivates = 0x081f39c2 -- BattleScript_DroughtActivates
+		GS.AbilityNoStatLoss = 0x81f3a83 -- BattleScript_AbilityNoStatLoss + 0x6
+		GS.AbilityNoSpecificStatLoss = 0x81f3b12 -- BattleScript_AbilityNoSpecificStatLoss + 0x6
+		GS.SturdyPreventsOHKO = 0x81f39f0 -- BattleScript_SturdyPreventsOHKO + 0x6
+		GS.ObliviousPreventsAttraction = 0x081f3abe -- BattleScript_ObliviousPreventsAttraction
+		GS.ColorChangeActivates = 0x81f3b37 -- BattleScript_ColorChangeActivates + 0x3
+		GS.FlashFireBoost = 0x81f3a5d -- BattleScript_FlashFireBoost + 0x9
+		GS.OwnTempoPrevents = 0x081f3ae4 -- BattleScript_OwnTempoPrevents
+		GS.AbilityPreventsPhasingOut = 0x81f3a70 -- BattleScript_AbilityPreventsPhasingOut + 0x6
+		GS.RoughSkinActivates = 0x81f3b50 -- BattleScript_RoughSkinActivates + 0x10
+		GS.CuteCharmActivates = 0x81f3b69 -- BattleScript_CuteCharmActivates + 0x9
+		GS.StickyHoldActivates = 0x081f3b21 -- BattleScript_StickyHoldActivates
+		GS.AbsorbUpdateHp = 0x81f0354 -- BattleScript_AbsorbUpdateHp + 0x14
+		GS.TookAttack = 0x81f39dd -- BattleScript_TookAttack + 0x7
+		GS.MoveHPDrain = 0x81f3a25 -- BattleScript_MoveHPDrain + 0x14
+		GS.MonMadeMoveUseless = 0x81f3a40 -- BattleScript_MonMadeMoveUseless + 0x7
+		GS.PRLZPrevention = 0x81f3aae -- BattleScript_PRLZPrevention + 0x8
+		GS.PSNPrevention = 0x81f3aba -- BattleScript_PSNPrevention + 0x8
+		GS.BRNPrevention = 0x81f3aa2 -- BattleScript_BRNPrevention + 0x8
+		GS.FlinchPrevention = 0x81f3ad7 -- BattleScript_FlinchPrevention + 0x6
+		GS.CantMakeAsleep = 0x81f02e4 -- BattleScript_CantMakeAsleep + 0x8
+		GS.PrintAbilityMadeIneffective = 0x081f1c73 -- BattleScript_PrintAbilityMadeIneffective
+		GS.RainDishActivates = 0x81f38d2 -- BattleScript_RainDishActivates + 0x3
+		GS.MoveUsedLoafingAround = 0x81f3ba8 -- BattleScript_MoveUsedLoafingAround + 0x5
+		GS.RestCantSleep = 0x81f07f0 -- BattleScript_RestCantSleep + 0x8
+		GS.MoveEffectSleep = 0x81f37d3 -- BattleScript_MoveEffectSleep + 0x7
+		GS.MoveEffectParalysis = 0x81f381c -- BattleScript_MoveEffectParalysis + 0x7
+		GS.MoveEffectPoison = 0x81f37ef -- BattleScript_MoveEffectPoison + 0x7
+		GS.MoveEffectBurn = 0x81f37fe -- BattleScript_MoveEffectBurn + 0x7
+		GS.DampStopsExplosion = 0x81f3a03 -- BattleScript_DampStopsExplosion + 0x6
+		GS.SoundproofProtected = 0x81f3aff -- BattleScript_SoundproofProtected + 0x8
+		GS.EffectHealBell = 0x81f0f6d -- BattleScript_EffectHealBell + 0x29
+		GS.LeechSeedTurnPrintAndUpdateHp = 0x81f3136 -- BattleScript_LeechSeedTurnPrintAndUpdateHp + 0x12
+	end
+
+	function self.updateOffsets()
+		GameSettings.EncryptionKeyOffset = 0xb50
+		Program.Addresses.sizeofBaseStatsPokemon = 0x24
+		Program.Addresses.sizeofBattleMove = 0x14
+		PokemonData.Addresses = {
+			offsetBaseStats = 0x0,
+			offsetTypes = 0x6,
+			offsetExpYield = 0x9,
+			offsetGenderRatio = 0x12,
+			offsetBaseFriendship = 0x14,
+			offsetAbilities = 0x18,
+			sizeofExpYield = 2,
+		}
+		function MoveData.readMoveInfoFromMemory(moveId)
+			local addr = GameSettings.gBattleMoves + (moveId * Program.Addresses.sizeofBattleMove)
+			local moveData = Memory.readdword(addr + 0x2)
+			-- Optional move flags for the Physical/Special split rom patch (in vanilla, this value is 0)
+			local moveFlags = Memory.readbyte(addr + 0x10)
+		
+			local movePower = Utils.getbits(moveData, 0, 9)
+			local moveType = Utils.getbits(moveData, 9, 5)
+			local moveAccuracy = Utils.getbits(moveData, 14, 7)
+			local movePP = Utils.getbits(moveData, 24, 8)
+			local moveCategory = Utils.getbits(moveFlags, 0, 2)
+		
+			return {
+				power = tostring(movePower),
+				type = PokemonData.TypeIndexMap[moveType],
+				accuracy = tostring(moveAccuracy),
+				pp = tostring(movePP),
+				category = MoveData.Categories[moveCategory + 1], -- For physical/special split; nil if not applicable
+			}
+		end
+		function PokemonData.buildData(forced)
+			for id, pokemon in ipairs(PokemonData.Pokemon) do
+				pokemon.pokemonID = id
+		
+				if id < 252 or id > 276 then -- Skip fake Pokemon
+					local addrOffset = GameSettings.gBaseStats + (id * Program.Addresses.sizeofBaseStatsPokemon)
+		
+					-- BST (6 bytes)
+					local baseHPAttack = Memory.readword(addrOffset + PokemonData.Addresses.offsetBaseStats)
+					local baseDefenseSpeed = Memory.readword(addrOffset + PokemonData.Addresses.offsetBaseStats + 2)
+					local baseSpASpD = Memory.readword(addrOffset + PokemonData.Addresses.offsetBaseStats + 4)
+					pokemon.bstCalculated = Utils.getbits(baseHPAttack, 0, 8) + Utils.getbits(baseHPAttack, 8, 8)
+						+ Utils.getbits(baseDefenseSpeed, 0, 8) + Utils.getbits(baseDefenseSpeed, 8, 8)
+						+ Utils.getbits(baseSpASpD, 0, 8) + Utils.getbits(baseSpASpD, 8, 8)
+		
+					-- Types (2 bytes)
+					local typesData = Memory.readword(addrOffset + PokemonData.Addresses.offsetTypes)
+					local typeOne = Utils.getbits(typesData, 0, 8)
+					local typeTwo = Utils.getbits(typesData, 8, 8)
+					pokemon.types = {
+						PokemonData.TypeIndexMap[typeOne],
+						typeOne ~= typeTwo and PokemonData.TypeIndexMap[typeTwo] or PokemonData.Types.EMPTY,
+					}
+		
+					-- Exp Yield
+					if PokemonData.Addresses.sizeofExpYield == 2 then
+						pokemon.expYield = Memory.readword(addrOffset + PokemonData.Addresses.offsetExpYield)
+					else
+						pokemon.expYield = Memory.readbyte(addrOffset + PokemonData.Addresses.offsetExpYield)
+					end
+		
+					-- Base Friendship (1 byte)
+					pokemon.friendshipBase = Memory.readbyte(addrOffset + PokemonData.Addresses.offsetBaseFriendship)
+		
+					-- Abilities (2 bytes)
+					pokemon.abilities = {
+						Memory.readword(addrOffset + PokemonData.Addresses.offsetAbilities),
+						Memory.readword(addrOffset + PokemonData.Addresses.offsetAbilities + 2),
+					}
+				end
+			end
+		end
+	end
 
 	return self
 end
