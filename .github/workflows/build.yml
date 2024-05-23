@@ -42,6 +42,7 @@ jobs:
 
       - name: Generate Offsets
         run: |
+          chmod +x offgen.sh
           ./offgen.sh
           cp ../upr.jar dist
         working-directory: ./pokefirered
