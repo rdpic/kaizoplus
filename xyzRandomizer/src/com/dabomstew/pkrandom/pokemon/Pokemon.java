@@ -76,6 +76,9 @@ public class Pokemon implements Comparable<Pokemon> {
     // Must not rely on the state of this flag being preserved between calls.
     public boolean temporaryFlag;
 
+    private static final int MAX_BST = 600;
+    private static final Random random = new Random();
+
     public Pokemon() {
         shuffledStatsOrder = Arrays.asList(0, 1, 2, 3, 4, 5);
     }
@@ -168,14 +171,30 @@ public class Pokemon implements Comparable<Pokemon> {
         spdef = (int) Math.min(255, Math.max(1, Math.round(evolvesFrom.spdef * bstRatio)));
     }
 
-    public void assignNewStatsForEvolution(Pokemon evolvesFrom, Random random) {
+    public void assignNewStatsForEvolution(Pokemon evolvesFrom) {
+        int bst = evolvesFrom.bst();
+        int minBstIncrease = 0;
+        int maxPossibleIncrease = MAX_BST - bst;
 
-        double ourBST = bst();
-        double theirBST = evolvesFrom.bst();
+        if (bst <= 300) {
+            minBstIncrease = 125;
+        } else if (bst <= 400) {
+            minBstIncrease = 80;
+        } else if (bst <= 500) {
+            minBstIncrease = 40;
+        } else {
+            minBstIncrease = 10;
+        }
 
-        double bstDiff = ourBST - theirBST;
+        int additionalBstIncrease = random.nextInt(maxPossibleIncrease - minBstIncrease + 1);
 
-        // Make weightings
+        int finalBstIncrease = minBstIncrease + additionalBstIncrease;
+        int newBst = bst + finalBstIncrease;
+        if (newBst > MAX_BST) {
+            newBst = MAX_BST;
+        }
+
+        double bstDiff = newBst - bst;
         double hpW = random.nextDouble(), atkW = random.nextDouble(), defW = random.nextDouble();
         double spaW = random.nextDouble(), spdW = random.nextDouble(), speW = random.nextDouble();
 

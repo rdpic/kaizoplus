@@ -99,7 +99,6 @@ public class Gen1Pokemon extends Pokemon {
         special = (int) Math.min(255, Math.max(1, Math.round(evolvesFrom.special * bstRatio)));
     }
 
-    @Override
     public void assignNewStatsForEvolution(Pokemon evolvesFrom, Random random) {
         double ourBST = bst();
         double theirBST = evolvesFrom.bst();

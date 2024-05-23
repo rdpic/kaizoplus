@@ -59,7 +59,7 @@ public class Gen3Constants {
 
     public static final String rseMapLabelsPointerPrefix = "C078288030BC01BC00470000";
 
-    public static final String pokedexOrderPointerPrefix = "0448814208D0481C0004000C05E00000";
+    public static final String pokedexOrderPointerPrefix = "F5D10548814209D0481C0004000C06E0";
 
     public static final String rsFrontSpritesPointerPrefix = "05E0";
 
@@ -122,7 +122,7 @@ public class Gen3Constants {
 
     public static final int itemDataDescriptionOffset = 0x14;
 
-    public static final String deoxysObeyCode = "CD21490088420FD0";
+    public static final String deoxysObeyCode = "CD214900884211D0";
 
     public static final int mewObeyOffsetFromDeoxysObey = 0x16;
 
@@ -170,7 +170,7 @@ public class Gen3Constants {
 
     public static final int evolutionMethodCount = 15;
 
-    public static final int airLockIndex = 77, highestAbilityIndex = 77;
+    public static final int airLockIndex = 76, highestAbilityIndex = 195;
 
     public static final int emMeteorFallsStevenIndex = 804;
 

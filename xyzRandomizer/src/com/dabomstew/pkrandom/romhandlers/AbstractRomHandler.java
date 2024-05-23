@@ -258,14 +258,14 @@ public abstract class AbstractRomHandler implements RomHandler {
         if (evolutionSanity) {
             if (assignEvoStatsRandomly) {
                 copyUpEvolutionsHelper(pk -> pk.randomizeStatsWithinBST(AbstractRomHandler.this.random),
-                        (evFrom, evTo, toMonIsFinalEvo) -> evTo.assignNewStatsForEvolution(evFrom, this.random),
-                        (evFrom, evTo, toMonIsFinalEvo) -> evTo.assignNewStatsForEvolution(evFrom, this.random),
+                        (evFrom, evTo, toMonIsFinalEvo) -> evTo.assignNewStatsForEvolution(evFrom),
+                        (evFrom, evTo, toMonIsFinalEvo) -> evTo.assignNewStatsForEvolution(evFrom),
                         true
                 );
             } else {
                 copyUpEvolutionsHelper(pk -> pk.randomizeStatsWithinBST(AbstractRomHandler.this.random),
                         (evFrom, evTo, toMonIsFinalEvo) -> evTo.copyRandomizedStatsUpEvolution(evFrom),
-                        (evFrom, evTo, toMonIsFinalEvo) -> evTo.assignNewStatsForEvolution(evFrom, this.random),
+                        (evFrom, evTo, toMonIsFinalEvo) -> evTo.assignNewStatsForEvolution(evFrom),
                         true
                 );
             }
@@ -289,7 +289,7 @@ public abstract class AbstractRomHandler implements RomHandler {
             List<MegaEvolution> allMegaEvos = getMegaEvolutions();
             for (MegaEvolution megaEvo: allMegaEvos) {
                 if (megaEvo.from.megaEvolutionsFrom.size() > 1 || assignEvoStatsRandomly) {
-                    megaEvo.to.assignNewStatsForEvolution(megaEvo.from, this.random);
+                    megaEvo.to.assignNewStatsForEvolution(megaEvo.from);
                 } else {
                     megaEvo.to.copyRandomizedStatsUpEvolution(megaEvo.from);
                 }

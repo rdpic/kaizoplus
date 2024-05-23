@@ -14,6 +14,7 @@ PalletTown_PlayersHouse_1F_EventScript_Mom::
 	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN
 	setflag FLAG_DONT_TRANSITION_MUSIC
 	setflag FLAG_SYS_B_DASH
+	setflag FLAG_BEAT_RIVAL_IN_OAKS_LAB
 	giveitem_msg PalletTown_PlayersHouse_1F_Text_Potion, ITEM_POTION, 1
 	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6, 12
 	waitmovement 0
