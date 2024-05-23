@@ -1742,9 +1742,10 @@ static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/trainer_class_lookups.h"
 #include "data/pokemon/cry_ids.h"
 #include "data/pokemon/experience_tables.h"
-#include "data/pokemon/level_up_learnsets.h"
 #include "data/pokemon/species_info.h"
+#include "data/pokemon/level_up_learnsets.h"
 #include "data/pokemon/evolution.h"
+#include "data/pokemon/level_up_learnsets_pointers.h"
 
 static const s8 sPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT] =
 {
@@ -7067,9 +7068,8 @@ u8 *MonSpritesGfxManager_GetSpritePtr(u8 spriteNum)
 
 const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species)
 {
-    const struct LevelUpMove *learnset = gSpeciesInfo[SanitizeSpeciesId(species)].levelUpLearnset;
-    if (learnset == NULL)
-        return gSpeciesInfo[SPECIES_NONE].levelUpLearnset;
+    const struct LevelUpMove *learnset = gLevelUpLearnsets[SanitizeSpeciesId(species)];
+
     return learnset;
 }
 
