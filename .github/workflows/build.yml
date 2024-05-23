@@ -33,6 +33,7 @@ jobs:
 
       - name: Build ROM
         run: make -j${nproc} all syms
+        working-directory: ./pokefirered
 
       - name: Download JAR
         uses: actions/download-artifact@v4
