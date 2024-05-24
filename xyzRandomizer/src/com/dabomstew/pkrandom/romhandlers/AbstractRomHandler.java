@@ -107,7 +107,7 @@ public abstract class AbstractRomHandler implements RomHandler {
             }
 
             if (restrictions.allow_gen3 && allPokemon.size() > Gen3Constants.pokemonCount) {
-                addPokesFromRange(mainPokemonList, allPokemon, Species.treecko, Species.deoxys);
+                addPokesFromRange(mainPokemonList, allPokemon, Species.treecko, Species.ceruledge);
             }
 
             if (restrictions.allow_gen4 && allPokemon.size() > Gen4Constants.pokemonCount) {

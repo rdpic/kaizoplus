@@ -40,17 +40,9 @@ public enum Effectiveness {
     // Returns a map where the key is a type and the value is the effectiveness against
     // a pokemon with the two types in a given gen. It does not account for abilities.
     public static Map<Type, Effectiveness> against(Type primaryType, Type secondaryType, int gen, boolean effectivenessUpdated) {
-        if (gen >= 2 && gen <= 5) {
-            if (effectivenessUpdated) {
-                return against(primaryType, secondaryType, gen6PlusTable, Type.GEN2THROUGH5);
-            } else {
-                return against(primaryType, secondaryType, gen2Through5Table, Type.GEN2THROUGH5);
-            }
-        }
-        if (gen >= 6) {
-            return against(primaryType, secondaryType, gen6PlusTable, Type.GEN6PLUS);
-        }
-        return null;
+
+        return against(primaryType, secondaryType, gen6PlusTable, Type.GEN6PLUS);
+
     }
 
     private static Map<Type, Effectiveness> against(Type primaryType, Type secondaryType, Effectiveness[][] effectivenesses, List<Type> allTypes) {
@@ -67,13 +59,8 @@ public enum Effectiveness {
 
     public static List<Type> notVeryEffective(Type attackingType, int generation, boolean effectivenessUpdated) {
         Effectiveness[][] effectivenesses;
-        if (generation == 1) {
-            effectivenesses = effectivenessUpdated ? gen2Through5Table : gen1Table;
-        } else if (generation >= 2 && generation <= 5) {
-            effectivenesses = effectivenessUpdated ? gen6PlusTable : gen2Through5Table;
-        } else {
-            effectivenesses = gen6PlusTable;
-        }
+        effectivenesses = gen6PlusTable;
+
         List<Type> allTypes = Type.getAllTypes(generation);
 
         return allTypes

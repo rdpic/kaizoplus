@@ -47,7 +47,7 @@ public class Gen3Constants {
     public static final int romNameOffset = 0xA0, romCodeOffset = 0xAC, romVersionOffset = 0xBC,
             headerChecksumOffset = 0xBD;
 
-    public static final int pokemonCount = 386;
+    public static final int pokemonCount = 737;
 
     public static final String wildPokemonPointerPrefix = "0348048009E00000FFFF0000";
 
@@ -166,9 +166,9 @@ public class Gen3Constants {
 
     public static final String perfectOddsBranchLocator = "FE2E2FD90020";
 
-    public static final int unhackedMaxPokedex = 411, unhackedRealPokedex = 386, hoennPokesStart = 252;
+    public static final int unhackedMaxPokedex = 762, unhackedRealPokedex = 737, hoennPokesStart = 252;
 
-    public static final int evolutionMethodCount = 15;
+    public static final int evolutionMethodCount = 20;
 
     public static final int airLockIndex = 76, highestAbilityIndex = 195;
 
