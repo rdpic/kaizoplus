@@ -12,7 +12,7 @@ from typing import Iterable
 from urllib.request import urlopen
 
 parser = ArgumentParser(description=DESCRIPTION)
-parser.add_argument('--map', default='pokefirered/pokefirered.map')
+parser.add_argument('--map', default='pokefirered/pokefirered_rev1.map')
 args = parser.parse_args()
 
 with open(args.map) as f:

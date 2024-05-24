@@ -142,11 +142,11 @@ const struct StaticPokemon gStaticPokemon[][5] = {
     {{"CeladonCity_GameCorner_PrizeRoom_EventScript_Porygon", 3, "CeladonCity_GameCorner_PrizeRoom_EventScript_GivePorygon", 0x3, " // Porygon"}, {"CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon", 91, NULL, 0x0, NULL}},
 };
 
-const struct StaticPokemon gRoamingPokemon[][9] = {
+/* const struct StaticPokemon gRoamingPokemon[][9] = {
     {{"gEmptyDataRoamers_Start", 0x24, "CreateInitialRoamerMon", 0x33, " // Raikou"}, {"sRoamerPairs", 0x8, "CreateInitialRoamerMon", 0x47, NULL}},
     {{"gEmptyDataRoamers_Start", 0x1C, "CreateInitialRoamerMon", 0x33, " // Entei"}, {"sRoamerPairs", 0x0, "CreateInitialRoamerMon", 0x47, NULL}},
     {{"gEmptyDataRoamers_Start", 0x20, "CreateInitialRoamerMon", 0x33, " // Suicune"}, {"sRoamerPairs", 0x4, "CreateInitialRoamerMon", 0x47, NULL}},
-};
+}; */
 
 const struct TMText gTMTexts[] = {
     { 3,  7,  5,  3,  0x2A, "TM03 teaches [move].\\pUse it on a worthy POKéMON!"},
@@ -525,7 +525,7 @@ int main(int argc, char ** argv)
             print("%s\n", gStaticPokemon[i][j].comment);
         }
     }
-    for (int i = 0; i < len(gRoamingPokemon); i++) {
+    /* for (int i = 0; i < len(gRoamingPokemon); i++) {
         print("RoamingPokemon{}={Species=[");
         for (int j = 0; j < 5; j++) {
             if (gRoamingPokemon[i][j].speciesLabel == NULL) break;
@@ -552,7 +552,7 @@ int main(int argc, char ** argv)
                 print(", ");
             print("%s\n", gRoamingPokemon[i][j].comment);
         }
-    }
+    } */
 
     print("RoamingPokemonTweak=hardcoded_statics/roamers/fr_roamers_11\n"); // hardcoded
     print("FossilLevelOffsets=[0x%X, 0x%X, 0x%X]\n",
@@ -560,14 +560,14 @@ int main(int argc, char ** argv)
           ((sym_get("CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte") + 0x14) & 0x1FFFFFF),
           ((sym_get("CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto") + 0x14) & 0x1FFFFFF));
     print("GhostMarowakTweak=hardcoded_statics/fr_marowak_11\n"); // hardcoded
-    print("GhostMarowakSpeciesOffsets=[0x%X, 0x%X, 0x%X]\n",
-          ((sym_get("gEmptyDataMarowak_Start") + 0x24) & 0x1FFFFFF),
+    print("GhostMarowakSpeciesOffsets=[0x%X, 0x%X]\n",
+/*           ((sym_get("gEmptyDataMarowak_Start") + 0x24) & 0x1FFFFFF), */
           ((sym_get("PokemonTower_6F_EventScript_MarowakGhost") + 0x1a) & 0x1FFFFFF),
           ((sym_get("PokemonTower_6F_EventScript_DefeatedMarowakGhost") + 0x8) & 0x1FFFFFF));
-    print("GhostMarowakLevelOffsets=[0x%X, 0x%X]\n",
-          ((sym_get("gEmptyDataMarowak_Start") + 0x12) & 0x1FFFFFF),
+    print("GhostMarowakLevelOffsets=[0x%X]\n",
+/*           ((sym_get("gEmptyDataMarowak_Start") + 0x12) & 0x1FFFFFF), */
           ((sym_get("PokemonTower_6F_EventScript_MarowakGhost") + 0x1c) & 0x1FFFFFF));
-    print("GhostMarowakGenderOffset=0x%X\n", (sym_get("gEmptyDataMarowak_Start") + 0x4) & 0x1FFFFFF);
+/*     print("GhostMarowakGenderOffset=0x%X\n" , (sym_get("gEmptyDataMarowak_Start") + 0x4) & 0x1FFFFFF); */
     print("GhostMarowakOffset=25\n"); // hardcoded
 
     for (int i = 0; i < len(gTMTexts); i++) {
@@ -579,7 +579,7 @@ int main(int argc, char ** argv)
 
     print("SpecialMusicStatics=[%d,%d,%d,%d,%d,%d,%d]\n", 144, 145, 146, 150, 249, 250, 386); // hardcoded for now
     print("NewIndexToMusicTweak=musicfix/fr_musicfix_11\n"); // hardcoded
-    print("NewIndexToMusicPoolOffset=0x%X\n", (sym_get("gEmptyDataMusicFix_Start") + 0x40) & 0x1FFFFFF);
+/*     print("NewIndexToMusicPoolOffset=0x%X\n", (sym_get("gEmptyDataMusicFix_Start") + 0x40) & 0x1FFFFFF); */
 
     print("ShopItemOffsets=[");
     char buffer2[64];

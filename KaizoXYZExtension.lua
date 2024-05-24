@@ -7781,6 +7781,8 @@ local function KaizoXYZExtension()
 	function self.updatePokeData()
 		local PE = PokemonData.Evolutions
 		
+		PokemonData.Addresses.offsetExpYield = 0x1a
+		PokemonData.Addresses.sizeofExpYield = 2
 		PokemonData.Values.EggId = 763
 		PokemonData.Values.GhostId = 764
 		PokemonData.Values.DefaultBaseFriendship = 255
@@ -10406,80 +10408,80 @@ local function KaizoXYZExtension()
 		GS.sBattlerAbilities = 0x2039b48 -- gPlayerFacingPosition + 0x2c
 		GS.sStartMenuWindowId = 0x203acf8 -- gHasHallOfFameRecords + 0x9c
 		-- sSaveDialogDelay not found in map file
-		GS.gBattleMoves = 0x08273a40
-		GS.gBaseStats = 0x08286ee0 -- gSpeciesInfo
-		GS.gExperienceTables = 0x08279fd0
-		GS.sTMHMMoves = 0x84a7d64 -- gServerScript_ClientCanceledCard + 0x1220
-		GS.FriendshipRequiredToEvo = 0x8049a6e -- GetEvolutionTargetSpecies + 0x13e
-		GS.Task_EvolutionScene = 0x80d9aed -- TradeEvolutionScene + 0x39d
-		GS.BattleIntroDrawPartySummaryScreens = 0x801336d -- FaintClearSetData + 0x775
-		GS.BattleIntroOpponentSendsOutMonAnimation = 0x80135cd -- FaintClearSetData + 0x9d5
-		GS.HandleTurnActionSelectionState = 0x8014169 -- UpdatePartyOwnerOnSwitch_NonMulti + 0xd5
-		GS.ReturnFromBattleToOverworld = 0x8015c69 -- GetWhoStrikesFirst + 0xe81
-		GS.BattleScript_RanAwayUsingMonAbility = 0x81f2ea3
-		GS.BattleScript_FocusPunchSetUp = 0x81f35e8
-		GS.BattleScript_LearnMoveLoop = 0x081f2fab -- BattleScript_TryLearnMoveLoop
-		GS.BattleScript_LearnMoveReturn = 0x081f2ffd
-		GS.BattleScript_MoveUsedIsFrozen = 0x81f3646
-		GS.BattleScript_MoveUsedIsFrozen2 = 0x81f3649 -- BattleScript_MoveUsedIsFrozen + 0x6
-		GS.BattleScript_MoveUsedIsFrozen3 = 0x81f364b -- BattleScript_MoveUsedIsFrozen + 0x8
-		GS.BattleScript_MoveUsedUnfroze = 0x81f3655
-		GS.BattleScript_MoveUsedUnfroze2 = 0x81f365a -- BattleScript_MoveUsedUnfroze + 0xa
-		GS.BattleScript_MoveUsedIsConfused = 0x81f36e2
-		GS.BattleScript_MoveUsedIsConfused2 = 0x81f36eb -- BattleScript_MoveUsedIsConfused + 0xc
-		GS.BattleScript_MoveUsedIsConfusedNoMore = 0x81f3725
-		GS.BattleScript_MoveUsedIsInLove = 0x81f3753
-		GS.BattleScript_MoveUsedIsInLove2 = 0x81f375c -- BattleScript_MoveUsedIsInLove + 0xc
-		GS.BattleScript_SnatchedMove = 0x81f358f
-		GS.BattleScript_MoveUsedWokeUp = 0x81f3607
-		GS.DrizzleActivates = 0x081f3899 -- BattleScript_DrizzleActivates
-		GS.SpeedBoostActivates = 0x81f38b4 -- BattleScript_SpeedBoostActivates + 0x7
-		GS.IntimidateAbilityFail = 0x81f3995 -- BattleScript_IntimidateActivates + 0x61
-		GS.IntimidateActivationAnimLoop = 0x81f397d -- BattleScript_IntimidateActivates + 0x49
-		GS.TraceActivates = 0x81f38c6 -- BattleScript_TraceActivates + 0x6
-		GS.PerishSongNotAffected = 0x81f1232 -- BattleScript_PerishSongNotAffected + 0x3
-		GS.SandstreamActivates = 0x081f38e8 -- BattleScript_SandstreamActivates
-		GS.ShedSkinActivates = 0x81f38ff -- BattleScript_ShedSkinActivates + 0x3
-		GS.DroughtActivates = 0x081f39c2 -- BattleScript_DroughtActivates
-		GS.AbilityNoStatLoss = 0x81f3a83 -- BattleScript_AbilityNoStatLoss + 0x6
-		GS.AbilityNoSpecificStatLoss = 0x81f3b12 -- BattleScript_AbilityNoSpecificStatLoss + 0x6
-		GS.SturdyPreventsOHKO = 0x81f39f0 -- BattleScript_SturdyPreventsOHKO + 0x6
-		GS.ObliviousPreventsAttraction = 0x081f3abe -- BattleScript_ObliviousPreventsAttraction
-		GS.ColorChangeActivates = 0x81f3b37 -- BattleScript_ColorChangeActivates + 0x3
-		GS.FlashFireBoost = 0x81f3a5d -- BattleScript_FlashFireBoost + 0x9
-		GS.OwnTempoPrevents = 0x081f3ae4 -- BattleScript_OwnTempoPrevents
-		GS.AbilityPreventsPhasingOut = 0x81f3a70 -- BattleScript_AbilityPreventsPhasingOut + 0x6
-		GS.RoughSkinActivates = 0x81f3b50 -- BattleScript_RoughSkinActivates + 0x10
-		GS.CuteCharmActivates = 0x81f3b69 -- BattleScript_CuteCharmActivates + 0x9
-		GS.StickyHoldActivates = 0x081f3b21 -- BattleScript_StickyHoldActivates
-		GS.AbsorbUpdateHp = 0x81f0354 -- BattleScript_AbsorbUpdateHp + 0x14
-		GS.TookAttack = 0x81f39dd -- BattleScript_TookAttack + 0x7
-		GS.MoveHPDrain = 0x81f3a25 -- BattleScript_MoveHPDrain + 0x14
-		GS.MonMadeMoveUseless = 0x81f3a40 -- BattleScript_MonMadeMoveUseless + 0x7
-		GS.PRLZPrevention = 0x81f3aae -- BattleScript_PRLZPrevention + 0x8
-		GS.PSNPrevention = 0x81f3aba -- BattleScript_PSNPrevention + 0x8
-		GS.BRNPrevention = 0x81f3aa2 -- BattleScript_BRNPrevention + 0x8
-		GS.FlinchPrevention = 0x81f3ad7 -- BattleScript_FlinchPrevention + 0x6
-		GS.CantMakeAsleep = 0x81f02e4 -- BattleScript_CantMakeAsleep + 0x8
-		GS.PrintAbilityMadeIneffective = 0x081f1c73 -- BattleScript_PrintAbilityMadeIneffective
-		GS.RainDishActivates = 0x81f38d2 -- BattleScript_RainDishActivates + 0x3
-		GS.MoveUsedLoafingAround = 0x81f3ba8 -- BattleScript_MoveUsedLoafingAround + 0x5
-		GS.RestCantSleep = 0x81f07f0 -- BattleScript_RestCantSleep + 0x8
-		GS.MoveEffectSleep = 0x81f37d3 -- BattleScript_MoveEffectSleep + 0x7
-		GS.MoveEffectParalysis = 0x81f381c -- BattleScript_MoveEffectParalysis + 0x7
-		GS.MoveEffectPoison = 0x81f37ef -- BattleScript_MoveEffectPoison + 0x7
-		GS.MoveEffectBurn = 0x81f37fe -- BattleScript_MoveEffectBurn + 0x7
-		GS.DampStopsExplosion = 0x81f3a03 -- BattleScript_DampStopsExplosion + 0x6
-		GS.SoundproofProtected = 0x81f3aff -- BattleScript_SoundproofProtected + 0x8
-		GS.EffectHealBell = 0x81f0f6d -- BattleScript_EffectHealBell + 0x29
-		GS.LeechSeedTurnPrintAndUpdateHp = 0x81f3136 -- BattleScript_LeechSeedTurnPrintAndUpdateHp + 0x12
+		GS.gBattleMoves = 0x082738e8
+		GS.gBaseStats = 0x0827ab18 -- gSpeciesInfo
+		GS.gExperienceTables = 0x08279e78
+		GS.sTMHMMoves = 0x84a700c -- gServerScript_ClientCanceledCard + 0x1220
+		GS.FriendshipRequiredToEvo = 0x80499b2 -- GetEvolutionTargetSpecies + 0x13e
+		GS.Task_EvolutionScene = 0x80d9999 -- TradeEvolutionScene + 0x39d
+		GS.BattleIntroDrawPartySummaryScreens = 0x801334d -- FaintClearSetData + 0x775
+		GS.BattleIntroOpponentSendsOutMonAnimation = 0x80135ad -- FaintClearSetData + 0x9d5
+		GS.HandleTurnActionSelectionState = 0x8014149 -- UpdatePartyOwnerOnSwitch_NonMulti + 0xd5
+		GS.ReturnFromBattleToOverworld = 0x8015c49 -- GetWhoStrikesFirst + 0xe81
+		GS.BattleScript_RanAwayUsingMonAbility = 0x81f2d4b
+		GS.BattleScript_FocusPunchSetUp = 0x81f3490
+		GS.BattleScript_LearnMoveLoop = 0x081f2e53 -- BattleScript_TryLearnMoveLoop
+		GS.BattleScript_LearnMoveReturn = 0x081f2ea5
+		GS.BattleScript_MoveUsedIsFrozen = 0x81f34ee
+		GS.BattleScript_MoveUsedIsFrozen2 = 0x81f34f1 -- BattleScript_MoveUsedIsFrozen + 0x6
+		GS.BattleScript_MoveUsedIsFrozen3 = 0x81f34f3 -- BattleScript_MoveUsedIsFrozen + 0x8
+		GS.BattleScript_MoveUsedUnfroze = 0x81f34fd
+		GS.BattleScript_MoveUsedUnfroze2 = 0x81f3502 -- BattleScript_MoveUsedUnfroze + 0xa
+		GS.BattleScript_MoveUsedIsConfused = 0x81f358a
+		GS.BattleScript_MoveUsedIsConfused2 = 0x81f3593 -- BattleScript_MoveUsedIsConfused + 0xc
+		GS.BattleScript_MoveUsedIsConfusedNoMore = 0x81f35cd
+		GS.BattleScript_MoveUsedIsInLove = 0x81f35fb
+		GS.BattleScript_MoveUsedIsInLove2 = 0x81f3604 -- BattleScript_MoveUsedIsInLove + 0xc
+		GS.BattleScript_SnatchedMove = 0x81f3437
+		GS.BattleScript_MoveUsedWokeUp = 0x81f34af
+		GS.DrizzleActivates = 0x081f3741 -- BattleScript_DrizzleActivates
+		GS.SpeedBoostActivates = 0x81f375c -- BattleScript_SpeedBoostActivates + 0x7
+		GS.IntimidateAbilityFail = 0x81f383d -- BattleScript_IntimidateActivates + 0x61
+		GS.IntimidateActivationAnimLoop = 0x81f3825 -- BattleScript_IntimidateActivates + 0x49
+		GS.TraceActivates = 0x81f376e -- BattleScript_TraceActivates + 0x6
+		GS.PerishSongNotAffected = 0x81f10da -- BattleScript_PerishSongNotAffected + 0x3
+		GS.SandstreamActivates = 0x081f3790 -- BattleScript_SandstreamActivates
+		GS.ShedSkinActivates = 0x81f37a7 -- BattleScript_ShedSkinActivates + 0x3
+		GS.DroughtActivates = 0x081f386a -- BattleScript_DroughtActivates
+		GS.AbilityNoStatLoss = 0x81f392b -- BattleScript_AbilityNoStatLoss + 0x6
+		GS.AbilityNoSpecificStatLoss = 0x81f39ba -- BattleScript_AbilityNoSpecificStatLoss + 0x6
+		GS.SturdyPreventsOHKO = 0x81f3898 -- BattleScript_SturdyPreventsOHKO + 0x6
+		GS.ObliviousPreventsAttraction = 0x081f3966 -- BattleScript_ObliviousPreventsAttraction
+		GS.ColorChangeActivates = 0x81f39df -- BattleScript_ColorChangeActivates + 0x3
+		GS.FlashFireBoost = 0x81f3905 -- BattleScript_FlashFireBoost + 0x9
+		GS.OwnTempoPrevents = 0x081f398c -- BattleScript_OwnTempoPrevents
+		GS.AbilityPreventsPhasingOut = 0x81f3918 -- BattleScript_AbilityPreventsPhasingOut + 0x6
+		GS.RoughSkinActivates = 0x81f39f8 -- BattleScript_RoughSkinActivates + 0x10
+		GS.CuteCharmActivates = 0x81f3a11 -- BattleScript_CuteCharmActivates + 0x9
+		GS.StickyHoldActivates = 0x081f39c9 -- BattleScript_StickyHoldActivates
+		GS.AbsorbUpdateHp = 0x81f01fc -- BattleScript_AbsorbUpdateHp + 0x14
+		GS.TookAttack = 0x81f3885 -- BattleScript_TookAttack + 0x7
+		GS.MoveHPDrain = 0x81f38cd -- BattleScript_MoveHPDrain + 0x14
+		GS.MonMadeMoveUseless = 0x81f38e8 -- BattleScript_MonMadeMoveUseless + 0x7
+		GS.PRLZPrevention = 0x81f3956 -- BattleScript_PRLZPrevention + 0x8
+		GS.PSNPrevention = 0x81f3962 -- BattleScript_PSNPrevention + 0x8
+		GS.BRNPrevention = 0x81f394a -- BattleScript_BRNPrevention + 0x8
+		GS.FlinchPrevention = 0x81f397f -- BattleScript_FlinchPrevention + 0x6
+		GS.CantMakeAsleep = 0x81f018c -- BattleScript_CantMakeAsleep + 0x8
+		GS.PrintAbilityMadeIneffective = 0x081f1b1b -- BattleScript_PrintAbilityMadeIneffective
+		GS.RainDishActivates = 0x81f377a -- BattleScript_RainDishActivates + 0x3
+		GS.MoveUsedLoafingAround = 0x81f3a50 -- BattleScript_MoveUsedLoafingAround + 0x5
+		GS.RestCantSleep = 0x81f0698 -- BattleScript_RestCantSleep + 0x8
+		GS.MoveEffectSleep = 0x81f367b -- BattleScript_MoveEffectSleep + 0x7
+		GS.MoveEffectParalysis = 0x81f36c4 -- BattleScript_MoveEffectParalysis + 0x7
+		GS.MoveEffectPoison = 0x81f3697 -- BattleScript_MoveEffectPoison + 0x7
+		GS.MoveEffectBurn = 0x81f36a6 -- BattleScript_MoveEffectBurn + 0x7
+		GS.DampStopsExplosion = 0x81f38ab -- BattleScript_DampStopsExplosion + 0x6
+		GS.SoundproofProtected = 0x81f39a7 -- BattleScript_SoundproofProtected + 0x8
+		GS.EffectHealBell = 0x81f0e15 -- BattleScript_EffectHealBell + 0x29
+		GS.LeechSeedTurnPrintAndUpdateHp = 0x81f2fde -- BattleScript_LeechSeedTurnPrintAndUpdateHp + 0x12
 	end
 
 	function self.updateOffsets()
 		GameSettings.EncryptionKeyOffset = 0xb50
-		Program.Addresses.sizeofBaseStatsPokemon = 0x24
+		Program.Addresses.sizeofBaseStatsPokemon = 0x1c
 		Program.Addresses.sizeofBattleMove = 0x14
-		PokemonData.Addresses = {
+		--[[ PokemonData.Addresses = {
 			offsetBaseStats = 0x0,
 			offsetTypes = 0x6,
 			offsetExpYield = 0x9,
@@ -10487,7 +10489,7 @@ local function KaizoXYZExtension()
 			offsetBaseFriendship = 0x14,
 			offsetAbilities = 0x18,
 			sizeofExpYield = 2,
-		}
+		} ]]
 		function MoveData.readMoveInfoFromMemory(moveId)
 			local addr = GameSettings.gBattleMoves + (moveId * Program.Addresses.sizeofBattleMove)
 			local moveData = Memory.readdword(addr + 0x2)
@@ -10543,9 +10545,10 @@ local function KaizoXYZExtension()
 					pokemon.friendshipBase = Memory.readbyte(addrOffset + PokemonData.Addresses.offsetBaseFriendship)
 		
 					-- Abilities (2 bytes)
+					local abilitiesData = Memory.readword(addrOffset + PokemonData.Addresses.offsetAbilities)
 					pokemon.abilities = {
-						Memory.readword(addrOffset + PokemonData.Addresses.offsetAbilities),
-						Memory.readword(addrOffset + PokemonData.Addresses.offsetAbilities + 2),
+						Utils.getbits(abilitiesData, 0, 8),
+						Utils.getbits(abilitiesData, 8, 8),
 					}
 				end
 			end

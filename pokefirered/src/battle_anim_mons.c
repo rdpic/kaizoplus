@@ -169,10 +169,10 @@ static u8 GetBattlerYDelta(u8 battlerId, u16 species)
                 coordSpecies = letter + SPECIES_UNOWN_B - 1;
             ret = gMonBackPicCoords[coordSpecies].y_offset;
         }
-        else if (species == SPECIES_CASTFORM)
+        /* else if (species == SPECIES_CASTFORM)
         {
             ret = sCastformBackSpriteYCoords[gBattleMonForms[battlerId]];
-        }
+        } */
         else if (species > NUM_SPECIES)
         {
             ret = gMonBackPicCoords[0].y_offset;
@@ -198,10 +198,10 @@ static u8 GetBattlerYDelta(u8 battlerId, u16 species)
                 coordSpecies = letter + SPECIES_UNOWN_B - 1;
             ret = gMonFrontPicCoords[coordSpecies].y_offset;
         }
-        else if (species == SPECIES_CASTFORM)
+        /* else if (species == SPECIES_CASTFORM)
         {
             ret = gCastformFrontSpriteCoords[gBattleMonForms[battlerId]].y_offset;
-        }
+        } */
         else if (species > NUM_SPECIES)
         {
             ret = gMonFrontPicCoords[0].y_offset;
@@ -220,9 +220,9 @@ static u8 GetBattlerElevation(u8 battlerId, u16 species)
 
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
     {
-        if (species == SPECIES_CASTFORM)
+        /* if (species == SPECIES_CASTFORM)
             ret = sCastformElevations[gBattleMonForms[battlerId]];
-        else if (species > NUM_SPECIES)
+        else  */if (species > NUM_SPECIES)
             ret = gEnemyMonElevation[0];
         else
             ret = gEnemyMonElevation[species];
@@ -2050,10 +2050,10 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
                 unownSpecies = letter + SPECIES_UNOWN_B - 1;
             coords = &gMonFrontPicCoords[unownSpecies];
         }
-        else if (species == SPECIES_CASTFORM)
+       /*  else if (species == SPECIES_CASTFORM)
         {
             coords = &gCastformFrontSpriteCoords[gBattleMonForms[battlerId]];
-        }
+        } */
         else if (species > NUM_SPECIES)
         {
             coords = &gMonFrontPicCoords[0];
